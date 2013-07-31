@@ -1,0 +1,1 @@
+<?php require(__MJAX_WADMIN_THEME_CORE_VIEW__ . '/_meta.tpl.php'); ?>

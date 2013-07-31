@@ -1,0 +1,3 @@
+FRAMWORK_REPO=https://github.com/mlconsulting/mlc_framework;
+APP_REPOS=app1;app2;
+PACKAGE_REPOS=package1;package2;
