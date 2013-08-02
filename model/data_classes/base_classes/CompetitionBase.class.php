@@ -62,6 +62,10 @@ class CompetitionBase extends BaseEntity {
         $xmlStr .= $this->idOrg;
         $xmlStr .= "</idOrg>";
         
+        $xmlStr .= "<namespace>";
+        $xmlStr .= $this->namespace;
+        $xmlStr .= "</namespace>";
+        
         if($blnReclusive){
            //Finish FK Rel stuff
         }
@@ -98,8 +102,25 @@ class CompetitionBase extends BaseEntity {
 	}
      //Get children
     
+    public function GetSessionArr(){
+       return Session::LoadCollByIdCompetition($this->idCompetition);
+    }
+	
 
     //Load by foregin key
+    
+    public static function LoadCollByIdOrg($intIdOrg){
+        $sql = sprintf("SELECT * FROM Competition WHERE idOrg = %s;", $intIdOrg);
+		$result = MLCDBDriver::Query($sql);
+		$coll = new BaseEntityCollection();
+		while($data = mysql_fetch_assoc($result)){
+			$objCompetition = new Competition();
+			$objCompetition->materilize($data);
+			$coll->addItem($objCompetition);
+		}
+		return $coll;
+    }
+
     
     
       public function LoadByTag($strTag){
@@ -117,6 +138,11 @@ class CompetitionBase extends BaseEntity {
     	}
        
          
+            
+             if(array_key_exists('idcompetition', $arrData)){
+                $this->intIdCompetition = $arrData['idcompetition'];
+             }
+        
     }
         
         
@@ -131,7 +157,7 @@ class CompetitionBase extends BaseEntity {
         		return Competition::Load($mixData);
         	}elseif(
         		(is_object($mixData)) && 
-        		(get_class($mixData) == 'Competition)
+        		(get_class($mixData) == 'Competition')
         	){
         		if(!$blnReturnId){
         			return $mixData;
@@ -140,7 +166,7 @@ class CompetitionBase extends BaseEntity {
         	}elseif(is_null($mixData)){
         		return null;
         	}else{
-        		throw new Exception(__FUNCTION__ . '->Parse - Parameter 1 must be either an intiger or a class type "Competition"');
+        		throw new Exception(__FUNCTION__ . ' - Parameter 1 must be either an intiger or a class type "Competition"');
         	}        	
         }
         public static function LoadSingleByField( $strField, $mixValue, $strCompairison = '='){
@@ -196,6 +222,9 @@ class CompetitionBase extends BaseEntity {
             
                                  
                  $arrReturn['idOrg'] = $this->idOrg;
+            
+                                 
+                 $arrReturn['namespace'] = $this->namespace;
             
             return $arrReturn;
         }
@@ -266,6 +295,14 @@ class CompetitionBase extends BaseEntity {
 	        		return null;
 	        	break;
 	        	
+	   			case('Namespace'): 
+	   			case('namespace'): 
+	   				if(array_key_exists('namespace', $this->arrDBFields)){
+	        			return $this->arrDBFields['namespace'];
+	        		}
+	        		return null;
+	        	break;
+	        	
 	        	defualt:
 	        		throw new Exception('No property with name "' . $strName . '" exists in class ". get_class($this) . "');
 	        	break;
@@ -309,6 +346,11 @@ class CompetitionBase extends BaseEntity {
 	   			case('IdOrg'): 
 	   			case('idOrg'): 
 	        		$this->arrDBFields['idOrg'] = $strValue;
+	        	break;
+	        	
+	   			case('Namespace'): 
+	   			case('namespace'): 
+	        		$this->arrDBFields['namespace'] = $strValue;
 	        	break;
 	        	
 	        	defualt:

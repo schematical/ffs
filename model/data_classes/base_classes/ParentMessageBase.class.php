@@ -1,8 +1,8 @@
 <?php
-class AssignmentBase extends BaseEntity {
+class ParentMessageBase extends BaseEntity {
 	const DB_CONN = 'DB_1';
-    const TABLE_NAME = 'Assignment';
-    const P_KEY = 'idAssignment';
+    const TABLE_NAME = 'ParentMessage';
+    const P_KEY = 'idParentMessage';
     
     public function __construct(){
         $this->table = DB_PREFIX . self::TABLE_NAME;
@@ -11,20 +11,20 @@ class AssignmentBase extends BaseEntity {
     }
  
 	public static function LoadById($intId){
-		$sql = sprintf("SELECT * FROM %s WHERE idAssignment = %s;", self::TABLE_NAME, $intId);
+		$sql = sprintf("SELECT * FROM %s WHERE idParentMessage = %s;", self::TABLE_NAME, $intId);
 		$result = MLCDBDriver::Query($sql, self::DB_CONN);
 		while($data = mysql_fetch_assoc($result)){
-			$tObj = new Assignment();
+			$tObj = new ParentMessage();
 			$tObj->materilize($data);
 			return $tObj;
 		}
 	}
 	public static function LoadAll(){
 		$sql = sprintf("SELECT * FROM %s;", self::TABLE_NAME);
-		$result = MLCDBDriver::Query($sql, Assignment::DB_CONN);
+		$result = MLCDBDriver::Query($sql, ParentMessage::DB_CONN);
 		$coll = new BaseEntityCollection();
 		while($data = mysql_fetch_assoc($result)){
-			$tObj = new Assignment();
+			$tObj = new ParentMessage();
 			$tObj->materilize($data);
 			$coll->addItem($tObj);
 		}
@@ -32,44 +32,40 @@ class AssignmentBase extends BaseEntity {
 	}
 	public function ToXml($blnReclusive = false){
         $xmlStr = "";
-        $xmlStr .= "<Assignment>";
+        $xmlStr .= "<ParentMessage>";
         
-        $xmlStr .= "<idAssignment>";
-        $xmlStr .= $this->idAssignment;
-        $xmlStr .= "</idAssignment>";
+        $xmlStr .= "<idParentMessage>";
+        $xmlStr .= $this->idParentMessage;
+        $xmlStr .= "</idParentMessage>";
         
-        $xmlStr .= "<idDevice>";
-        $xmlStr .= $this->idDevice;
-        $xmlStr .= "</idDevice>";
+        $xmlStr .= "<idAthelete>";
+        $xmlStr .= $this->idAthelete;
+        $xmlStr .= "</idAthelete>";
         
-        $xmlStr .= "<idSession>";
-        $xmlStr .= $this->idSession;
-        $xmlStr .= "</idSession>";
+        $xmlStr .= "<atheleteName>";
+        $xmlStr .= $this->atheleteName;
+        $xmlStr .= "</atheleteName>";
         
-        $xmlStr .= "<event>";
-        $xmlStr .= $this->event;
-        $xmlStr .= "</event>";
-        
-        $xmlStr .= "<apartatus>";
-        $xmlStr .= $this->apartatus;
-        $xmlStr .= "</apartatus>";
+        $xmlStr .= "<message>";
+        $xmlStr .= $this->message;
+        $xmlStr .= "</message>";
         
         $xmlStr .= "<creDate>";
         $xmlStr .= $this->creDate;
         $xmlStr .= "</creDate>";
         
+        $xmlStr .= "<dispDate>";
+        $xmlStr .= $this->dispDate;
+        $xmlStr .= "</dispDate>";
+        
         $xmlStr .= "<idUser>";
         $xmlStr .= $this->idUser;
         $xmlStr .= "</idUser>";
         
-        $xmlStr .= "<revokeDate>";
-        $xmlStr .= $this->revokeDate;
-        $xmlStr .= "</revokeDate>";
-        
         if($blnReclusive){
            //Finish FK Rel stuff
         }
-        $xmlStr .= "</Assignment>";
+        $xmlStr .= "</ParentMessage>";
         return $xmlStr;
         
     }
@@ -79,7 +75,7 @@ class AssignmentBase extends BaseEntity {
 		$result = MLCDBDriver::Query($sql, self::DB_CONN);
 		$coll = new BaseEntityCollection();
 		while($data = mysql_fetch_assoc($result)){
-			$tObj = new Assignment();
+			$tObj = new ParentMessage();
 			$tObj->materilize($data);
 			$coll->addItem($tObj);
 		}
@@ -105,27 +101,14 @@ class AssignmentBase extends BaseEntity {
 
     //Load by foregin key
     
-    public static function LoadCollByIdDevice($intIdDevice){
-        $sql = sprintf("SELECT * FROM Assignment WHERE idDevice = %s;", $intIdDevice);
+    public static function LoadCollByIdAthelete($intIdAthelete){
+        $sql = sprintf("SELECT * FROM ParentMessage WHERE idAthelete = %s;", $intIdAthelete);
 		$result = MLCDBDriver::Query($sql);
 		$coll = new BaseEntityCollection();
 		while($data = mysql_fetch_assoc($result)){
-			$objAssignment = new Assignment();
-			$objAssignment->materilize($data);
-			$coll->addItem($objAssignment);
-		}
-		return $coll;
-    }
-
-    
-    public static function LoadCollByIdSession($intIdSession){
-        $sql = sprintf("SELECT * FROM Assignment WHERE idSession = %s;", $intIdSession);
-		$result = MLCDBDriver::Query($sql);
-		$coll = new BaseEntityCollection();
-		while($data = mysql_fetch_assoc($result)){
-			$objAssignment = new Assignment();
-			$objAssignment->materilize($data);
-			$coll->addItem($objAssignment);
+			$objParentMessage = new ParentMessage();
+			$objParentMessage->materilize($data);
+			$coll->addItem($objParentMessage);
 		}
 		return $coll;
     }
@@ -158,19 +141,19 @@ class AssignmentBase extends BaseEntity {
         		if($blnReturnId){
         			return $mixData;
         		}
-        		return Assignment::Load($mixData);
+        		return ParentMessage::Load($mixData);
         	}elseif(
         		(is_object($mixData)) && 
-        		(get_class($mixData) == 'Assignment')
+        		(get_class($mixData) == 'ParentMessage')
         	){
         		if(!$blnReturnId){
         			return $mixData;
         		}
-        		return $mixData->intIdAssignment;
+        		return $mixData->intIdParentMessage;
         	}elseif(is_null($mixData)){
         		return null;
         	}else{
-        		throw new Exception(__FUNCTION__ . ' - Parameter 1 must be either an intiger or a class type "Assignment"');
+        		throw new Exception(__FUNCTION__ . ' - Parameter 1 must be either an intiger or a class type "ParentMessage"');
         	}        	
         }
         public static function LoadSingleByField( $strField, $mixValue, $strCompairison = '='){
@@ -194,7 +177,7 @@ class AssignmentBase extends BaseEntity {
 			$coll = new BaseEntityCollection();
 			while($data = mysql_fetch_assoc($result)){
 				
-				$tObj = new Assignment();
+				$tObj = new ParentMessage();
 				$tObj->materilize($data);
 				$coll->addItem($tObj);
 			}
@@ -204,31 +187,28 @@ class AssignmentBase extends BaseEntity {
 		}
         public function __toArray(){
         	$arrReturn = array();
-            $arrReturn['_ClassName'] = "Assignment %>";
+            $arrReturn['_ClassName'] = "ParentMessage %>";
             
                                  
-                 $arrReturn['idAssignment'] = $this->idAssignment;
+                 $arrReturn['idParentMessage'] = $this->idParentMessage;
             
                                  
-                 $arrReturn['idDevice'] = $this->idDevice;
+                 $arrReturn['idAthelete'] = $this->idAthelete;
             
                                  
-                 $arrReturn['idSession'] = $this->idSession;
+                 $arrReturn['atheleteName'] = $this->atheleteName;
             
                                  
-                 $arrReturn['event'] = $this->event;
-            
-                                 
-                 $arrReturn['apartatus'] = $this->apartatus;
+                 $arrReturn['message'] = $this->message;
             
                                  
                  $arrReturn['creDate'] = $this->creDate;
             
                                  
-                 $arrReturn['idUser'] = $this->idUser;
+                 $arrReturn['dispDate'] = $this->dispDate;
             
                                  
-                 $arrReturn['revokeDate'] = $this->revokeDate;
+                 $arrReturn['idUser'] = $this->idUser;
             
             return $arrReturn;
         }
@@ -243,42 +223,34 @@ class AssignmentBase extends BaseEntity {
         public function __get($strName){
 	        switch($strName){
 	        	
-	   			case('IdAssignment'): 
-	   			case('idAssignment'): 
-	   				if(array_key_exists('idAssignment', $this->arrDBFields)){
-	        			return $this->arrDBFields['idAssignment'];
+	   			case('IdParentMessage'): 
+	   			case('idParentMessage'): 
+	   				if(array_key_exists('idParentMessage', $this->arrDBFields)){
+	        			return $this->arrDBFields['idParentMessage'];
 	        		}
 	        		return null;
 	        	break;
 	        	
-	   			case('IdDevice'): 
-	   			case('idDevice'): 
-	   				if(array_key_exists('idDevice', $this->arrDBFields)){
-	        			return $this->arrDBFields['idDevice'];
+	   			case('IdAthelete'): 
+	   			case('idAthelete'): 
+	   				if(array_key_exists('idAthelete', $this->arrDBFields)){
+	        			return $this->arrDBFields['idAthelete'];
 	        		}
 	        		return null;
 	        	break;
 	        	
-	   			case('IdSession'): 
-	   			case('idSession'): 
-	   				if(array_key_exists('idSession', $this->arrDBFields)){
-	        			return $this->arrDBFields['idSession'];
+	   			case('AtheleteName'): 
+	   			case('atheleteName'): 
+	   				if(array_key_exists('atheleteName', $this->arrDBFields)){
+	        			return $this->arrDBFields['atheleteName'];
 	        		}
 	        		return null;
 	        	break;
 	        	
-	   			case('Event'): 
-	   			case('event'): 
-	   				if(array_key_exists('event', $this->arrDBFields)){
-	        			return $this->arrDBFields['event'];
-	        		}
-	        		return null;
-	        	break;
-	        	
-	   			case('Apartatus'): 
-	   			case('apartatus'): 
-	   				if(array_key_exists('apartatus', $this->arrDBFields)){
-	        			return $this->arrDBFields['apartatus'];
+	   			case('Message'): 
+	   			case('message'): 
+	   				if(array_key_exists('message', $this->arrDBFields)){
+	        			return $this->arrDBFields['message'];
 	        		}
 	        		return null;
 	        	break;
@@ -291,18 +263,18 @@ class AssignmentBase extends BaseEntity {
 	        		return null;
 	        	break;
 	        	
-	   			case('IdUser'): 
-	   			case('idUser'): 
-	   				if(array_key_exists('idUser', $this->arrDBFields)){
-	        			return $this->arrDBFields['idUser'];
+	   			case('DispDate'): 
+	   			case('dispDate'): 
+	   				if(array_key_exists('dispDate', $this->arrDBFields)){
+	        			return $this->arrDBFields['dispDate'];
 	        		}
 	        		return null;
 	        	break;
 	        	
-	   			case('RevokeDate'): 
-	   			case('revokeDate'): 
-	   				if(array_key_exists('revokeDate', $this->arrDBFields)){
-	        			return $this->arrDBFields['revokeDate'];
+	   			case('IdUser'): 
+	   			case('idUser'): 
+	   				if(array_key_exists('idUser', $this->arrDBFields)){
+	        			return $this->arrDBFields['idUser'];
 	        		}
 	        		return null;
 	        	break;
@@ -317,29 +289,24 @@ class AssignmentBase extends BaseEntity {
 	   		$this->modified = 1;
 	   		switch($strName){
 	   			
-	   			case('IdAssignment'): 
-	   			case('idAssignment'): 
-	        		$this->arrDBFields['idAssignment'] = $strValue;
+	   			case('IdParentMessage'): 
+	   			case('idParentMessage'): 
+	        		$this->arrDBFields['idParentMessage'] = $strValue;
 	        	break;
 	        	
-	   			case('IdDevice'): 
-	   			case('idDevice'): 
-	        		$this->arrDBFields['idDevice'] = $strValue;
+	   			case('IdAthelete'): 
+	   			case('idAthelete'): 
+	        		$this->arrDBFields['idAthelete'] = $strValue;
 	        	break;
 	        	
-	   			case('IdSession'): 
-	   			case('idSession'): 
-	        		$this->arrDBFields['idSession'] = $strValue;
+	   			case('AtheleteName'): 
+	   			case('atheleteName'): 
+	        		$this->arrDBFields['atheleteName'] = $strValue;
 	        	break;
 	        	
-	   			case('Event'): 
-	   			case('event'): 
-	        		$this->arrDBFields['event'] = $strValue;
-	        	break;
-	        	
-	   			case('Apartatus'): 
-	   			case('apartatus'): 
-	        		$this->arrDBFields['apartatus'] = $strValue;
+	   			case('Message'): 
+	   			case('message'): 
+	        		$this->arrDBFields['message'] = $strValue;
 	        	break;
 	        	
 	   			case('CreDate'): 
@@ -347,14 +314,14 @@ class AssignmentBase extends BaseEntity {
 	        		$this->arrDBFields['creDate'] = $strValue;
 	        	break;
 	        	
+	   			case('DispDate'): 
+	   			case('dispDate'): 
+	        		$this->arrDBFields['dispDate'] = $strValue;
+	        	break;
+	        	
 	   			case('IdUser'): 
 	   			case('idUser'): 
 	        		$this->arrDBFields['idUser'] = $strValue;
-	        	break;
-	        	
-	   			case('RevokeDate'): 
-	   			case('revokeDate'): 
-	        		$this->arrDBFields['revokeDate'] = $strValue;
 	        	break;
 	        	
 	        	defualt:

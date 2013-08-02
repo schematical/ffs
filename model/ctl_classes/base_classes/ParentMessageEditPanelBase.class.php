@@ -1,30 +1,25 @@
 <?php
-class AssignmentEditPanelBase extends MJaxPanel{
-	protected $objAssignment = null;
+class ParentMessageEditPanelBase extends MJaxPanel{
+	protected $objParentMessage = null;
     
     	
-    	public $intIdAssignment = null;
+    	public $intIdParentMessage = null;
    		
     	
 	
     	
     	
-    	public $intIdDevice = null;
+    	public $intIdAthelete = null;
    		
 	
     	
     	
-    	public $intIdSession = null;
+    	public $strAtheleteName = null;
    		
 	
     	
     	
-    	public $strEvent = null;
-   		
-	
-    	
-    	
-    	public $strApartatus = null;
+    	public $strMessage = null;
    		
 	
     	
@@ -34,18 +29,16 @@ class AssignmentEditPanelBase extends MJaxPanel{
 	
     	
     	
+    	public $dttDispDate = null;
+   		
+	
+    	
+    	
     	public $intIdUser = null;
    		
 	
-    	
-    	
-    	public $dttRevokeDate = null;
-   		
 	
-	
-   		public $lnkViewParentAssignment = null;
-	
-   		public $lnkViewParentAssignment = null;
+   		public $lnkViewParentParentMessage = null;
 	
 	
 	//Regular controls
@@ -53,11 +46,11 @@ class AssignmentEditPanelBase extends MJaxPanel{
 	public $btnSave = null;
 	public $btnDelete = null;
 
-	public function __construct($objParentControl, $objAssignment = null){
+	public function __construct($objParentControl, $objParentMessage = null){
 		parent::__construct($objParentControl);
-		$this->objAssignment = $objAssignment;
+		$this->objParentMessage = $objParentMessage;
 		
-		$this->strTemplate = __VIEW_ACTIVE_APP_DIR__  . '/www/ctl_panels/AssignmentEditPanelBase.tpl.php';
+		$this->strTemplate = __VIEW_ACTIVE_APP_DIR__  . '/www/ctl_panels/ParentMessageEditPanelBase.tpl.php';
 		
 		$this->CreateFieldControls();
 		$this->CreateContentControls();
@@ -74,7 +67,7 @@ class AssignmentEditPanelBase extends MJaxPanel{
 		$this->btnDelete->Text = 'Delete';
 		$this->btnDelete->AddAction(new MJaxClickEvent(), new MJaxServerControlAction($this, 'btnDelete_click'));
 		$this->btnDelete->AddCssClass('btn btn-large');
-		if(is_null($this->objAssignment)){
+		if(is_null($this->objParentMessage)){
 			$this->btnDelete->Style->Display = 'none';
 
 		}
@@ -91,15 +84,10 @@ class AssignmentEditPanelBase extends MJaxPanel{
 	     
 	  	
             
-	  		
-  		
-	     
-	  	
-            
-                $this->strEvent = new MJaxTextBox($this);
-                $this->strEvent->Name = 'event';
-                $this->strEvent->AddCssClass('input-large');
-                //varchar(64)
+                $this->strAtheleteName = new MJaxTextBox($this);
+                $this->strAtheleteName->Name = 'atheleteName';
+                $this->strAtheleteName->AddCssClass('input-large');
+                //varchar(255)
                 
             
 	  		
@@ -107,10 +95,12 @@ class AssignmentEditPanelBase extends MJaxPanel{
 	     
 	  	
             
-                $this->strApartatus = new MJaxTextBox($this);
-                $this->strApartatus->Name = 'apartatus';
-                $this->strApartatus->AddCssClass('input-large');
-                //varchar(64)
+                $this->strMessage = new MJaxTextBox($this);
+                $this->strMessage->Name = 'message';
+                $this->strMessage->AddCssClass('input-large');
+                //longtext
+                
+                    $this->strMessage->TextMode = MJaxTextMode::MultiLine;
                 
             
 	  		
@@ -133,6 +123,8 @@ class AssignmentEditPanelBase extends MJaxPanel{
                 //Is special field!!!!!
                 
                 
+                    $this->dttDispDate = new MJaxJQueryDateSelectPanel($this);
+                
             
   		
 	     
@@ -141,32 +133,21 @@ class AssignmentEditPanelBase extends MJaxPanel{
 	  		
                 //Is special field!!!!!
                 
-                
-                    $this->dttRevokeDate = new MJaxJQueryDateSelectPanel($this);
                 
             
   		
 	  
-	  if(!is_null($this->objAssignment)){
+	  if(!is_null($this->objParentMessage)){
 	     
 	  	
   		
-  			$this->intIdAssignment = $this->objAssignment->idAssignment;
-  		
-  		
-	     
-	  	
-            
-	  		    $this->intIdDevice->Text = $this->objAssignment->idDevice;
-            
-            
-  		
+  			$this->intIdParentMessage = $this->objParentMessage->idParentMessage;
   		
   		
 	     
 	  	
             
-	  		    $this->intIdSession->Text = $this->objAssignment->idSession;
+	  		    $this->intIdAthelete->Text = $this->objParentMessage->idAthelete;
             
             
   		
@@ -175,7 +156,7 @@ class AssignmentEditPanelBase extends MJaxPanel{
 	     
 	  	
             
-	  		    $this->strEvent->Text = $this->objAssignment->event;
+	  		    $this->strAtheleteName->Text = $this->objParentMessage->atheleteName;
             
             
   		
@@ -184,7 +165,7 @@ class AssignmentEditPanelBase extends MJaxPanel{
 	     
 	  	
             
-	  		    $this->strApartatus->Text = $this->objAssignment->apartatus;
+	  		    $this->strMessage->Text = $this->objParentMessage->message;
             
             
   		
@@ -210,6 +191,8 @@ class AssignmentEditPanelBase extends MJaxPanel{
                 //Is special field!!!!!
                 
                 
+                    $this->dttDispDate->Value = $this->objParentMessage->dispDate;
+                
             
   		
   		
@@ -220,8 +203,6 @@ class AssignmentEditPanelBase extends MJaxPanel{
             
                 //Is special field!!!!!
                 
-                
-                    $this->dttRevokeDate->Value = $this->objAssignment->revokeDate;
                 
             
   		
@@ -231,18 +212,12 @@ class AssignmentEditPanelBase extends MJaxPanel{
 	  }
 	}
 	public function CreateReferenceControls(){
-        if(!is_null($this->objAssignment)){
+        if(!is_null($this->objParentMessage)){
           
-            if(!is_null($this->objAssignment->idDevice)){
-                $this->lnkViewParentAssignment = new MJaxLinkButton($this);
-                $this->lnkViewParentAssignment->Text = 'View Device';
-                $this->lnkViewParentAssignment->Href = __ENTITY_MODEL_DIR__ . '/Device/' . $this->objAssignment->idDevice;
-            }
-          
-            if(!is_null($this->objAssignment->idSession)){
-                $this->lnkViewParentAssignment = new MJaxLinkButton($this);
-                $this->lnkViewParentAssignment->Text = 'View Session';
-                $this->lnkViewParentAssignment->Href = __ENTITY_MODEL_DIR__ . '/Session/' . $this->objAssignment->idSession;
+            if(!is_null($this->objParentMessage->idAthelete)){
+                $this->lnkViewParentParentMessage = new MJaxLinkButton($this);
+                $this->lnkViewParentParentMessage->Text = 'View Athelete';
+                $this->lnkViewParentParentMessage->Href = __ENTITY_MODEL_DIR__ . '/Athelete/' . $this->objParentMessage->idAthelete;
             }
           
 
@@ -252,9 +227,9 @@ class AssignmentEditPanelBase extends MJaxPanel{
 	}
 	
 	public function btnSave_click(){
-		if(is_null($this->objAssignment)){
+		if(is_null($this->objParentMessage)){
 			//Create a new one
-			$this->objAssignment = new Assignment();
+			$this->objParentMessage = new ParentMessage();
 		}
 
   		  
@@ -267,19 +242,14 @@ class AssignmentEditPanelBase extends MJaxPanel{
 		  
             
                 
-                
-            
-		  
-            
-                
-                    $this->objAssignment->event = $this->strEvent->Text;
+                    $this->objParentMessage->atheleteName = $this->strAtheleteName->Text;
                 
                 
             
 		  
             
                 
-                    $this->objAssignment->apartatus = $this->strApartatus->Text;
+                    $this->objParentMessage->message = $this->strMessage->Text;
                 
                 
             
@@ -301,8 +271,6 @@ class AssignmentEditPanelBase extends MJaxPanel{
                     //Is special field!!!!!
                     
                     
-                        $this->objAssignment->idUser = MLCAuthDriver::IdUser();
-                    
                 
             
 		  
@@ -312,16 +280,18 @@ class AssignmentEditPanelBase extends MJaxPanel{
                     //Is special field!!!!!
                     
                     
+                        $this->objParentMessage->idUser = MLCAuthDriver::IdUser();
+                    
                 
             
 		
-		$this->objAssignment->Save();
+		$this->objParentMessage->Save();
   	}
   	public function btnDelete_click(){
-  		$this->objAssignment->Delete();
+  		$this->objParentMessage->Delete();
   	}
   	public function IsNew(){
-  		return is_null($this->objAssignment);
+  		return is_null($this->objParentMessage);
   	}
   	
 }

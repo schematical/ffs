@@ -7,14 +7,12 @@ define('__MODEL_APP_CONTROL__', __MODEL_MDE_APP_DIR__ . '/ctl_classes');
 define('__MODEL_APP_API__', __MODEL_MDE_APP_DIR__ . '/api_classes');
 define('__MODEL_APP_ENTITY_MODEL__', __MODEL_MDE_APP_DIR__ . '/entity_model');
 if(!defined('SKIP_DATALAYER')){
-	require_once(__MODEL_APP_DATALAYER_DIR__ . '/base_classes/Conn.inc.php');
+	require_once(__MODEL_APP_DATALAYER_DIR__ . '/base_classes/DataConn.inc.php');
 	require_once(__MODEL_APP_CONTROL__ . '/base_classes/ControlConn.inc.php');
 
 }
 require_once(__MODEL_MDE_APP_DIR__ . '/_enum.inc.php');
 
-define('__SVN_USERNAME__', 'mlconsulting');
-define('__SVN_PASSWORD__', 'Monkey11');
 define('__HIGHRISE_URL__', 'https://mattleaconsulting.highrisehq.com');
 define('__HIGHRISE_API_KEY__', '69138c143576fae6de2ab9d14b9138a8');
 define('__MAILCHIMP_API_KEY__', 'b6fa18adb1025581fa6afac3892bc084-us6');
@@ -29,6 +27,10 @@ define('__GOOGLE_API_SECRET__', 'K4Z7CoP_c1sITYi7x9L3XcCt');
 MLCApplicationBase::$arrClassFiles['MLCApiHome'] = __MODEL_MDE_APP_DIR__ . '/api_custom/MLCApiHome.class.php';
 MLCApplicationBase::$arrClassFiles['MLCApiFunnel'] = __MODEL_MDE_APP_DIR__ . '/api_custom/MLCApiFunnel.class.php';
 MLCApplicationBase::$arrClassFiles['FFSForm'] = __MODEL_MDE_APP_DIR__ . '/FFSForm.class.php';
+MLCApplicationBase::$arrClassFiles['FFSRewriteHandeler'] = __MODEL_MDE_APP_DIR__ . '/FFSRewriteHandeler.class.php';
+//CTL
+MLCApplicationBase::$arrClassFiles['FFSGymLandingHeaderPanel'] = __CTL_MDE_APP_DIR__ . '/_panels/FFSGymLandingHeaderPanel.class.php';
+MLCApplicationBase::$arrClassFiles['FFSParentMessageManagePanel'] = __CTL_MDE_APP_DIR__ . '/_panels/FFSParentMessageManagePanel.class.php';
 
 
 
@@ -50,11 +52,12 @@ MLCApplication::InitPackage('MJax');
 MLCApplication::InitPackage('MJaxBootstrap');
 MLCApplication::InitPackage('MLCAuth');
 
-//MLCApplication::$objRewriteHandeler = new MDERewriteHandeler();
+MLCApplication::$objRewriteHandeler = new FFSRewriteHandeler();
 
 MLCApplication::InitPackage('MLCDataLayer');
 MLCApplication::InitPackage('MJaxTracking');
 MLCApplication::InitPackage('MJaxWAdminTheme');
+MLCApplication::InitPackage('MJaxJQueryUI');
 MLCApplication::InitPackage('MLCSalesTools');
 //_dv(MLCApplicationBase::$arrClassFiles['MLCApiMDEPackage']);
 if(class_exists('MLCAuthDriver')){

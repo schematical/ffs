@@ -38,7 +38,11 @@ class SessionEditPanelBase extends MJaxPanel{
    		
 	
 	
+   		public $lnkViewParentSession = null;
 	
+	
+  		public $lnkViewChildResult = null;
+  	
 	//Regular controls
 	
 	public $btnSave = null;
@@ -59,13 +63,15 @@ class SessionEditPanelBase extends MJaxPanel{
 		$this->btnSave = new MJaxButton($this);
 		$this->btnSave->Text = 'Save';
 		$this->btnSave->AddAction(new MJaxClickEvent(), new MJaxServerControlAction($this, 'btnSave_click'));
-		
+		$this->btnSave->AddCssClass('btn btn-large');
 		
 		$this->btnDelete = new MJaxButton($this);
 		$this->btnDelete->Text = 'Delete';
 		$this->btnDelete->AddAction(new MJaxClickEvent(), new MJaxServerControlAction($this, 'btnDelete_click'));
+		$this->btnDelete->AddCssClass('btn btn-large');
 		if(is_null($this->objSession)){
 			$this->btnDelete->Style->Display = 'none';
+
 		}
 	
 	}
@@ -74,39 +80,67 @@ class SessionEditPanelBase extends MJaxPanel{
 	  	
 	     
 	  	
-	  		$this->dttStartDate = new MJaxTextBox($this);
-	  		$this->dttStartDate->Name = 'startDate';
-	  		$this->dttStartDate->AddCssClass('input-large');
+            
+	  		
+                //Is special field!!!!!
+                
+                
+                    $this->dttStartDate = new MJaxJQueryDateSelectPanel($this);
+                
+            
   		
 	     
 	  	
-	  		$this->dttEndDate = new MJaxTextBox($this);
-	  		$this->dttEndDate->Name = 'endDate';
-	  		$this->dttEndDate->AddCssClass('input-large');
+            
+	  		
+                //Is special field!!!!!
+                
+                
+                    $this->dttEndDate = new MJaxJQueryDateSelectPanel($this);
+                
+            
   		
 	     
 	  	
-	  		$this->intIdCompetition = new MJaxTextBox($this);
-	  		$this->intIdCompetition->Name = 'idCompetition';
-	  		$this->intIdCompetition->AddCssClass('input-large');
+            
+	  		
   		
 	     
 	  	
-	  		$this->strName = new MJaxTextBox($this);
-	  		$this->strName->Name = 'name';
-	  		$this->strName->AddCssClass('input-large');
+            
+                $this->strName = new MJaxTextBox($this);
+                $this->strName->Name = 'name';
+                $this->strName->AddCssClass('input-large');
+                //varchar(64)
+                
+            
+	  		
   		
 	     
 	  	
-	  		$this->strNotes = new MJaxTextBox($this);
-	  		$this->strNotes->Name = 'notes';
-	  		$this->strNotes->AddCssClass('input-large');
+            
+                $this->strNotes = new MJaxTextBox($this);
+                $this->strNotes->Name = 'notes';
+                $this->strNotes->AddCssClass('input-large');
+                //longtext
+                
+                    $this->strNotes->TextMode = MJaxTextMode::MultiLine;
+                
+            
+	  		
   		
 	     
 	  	
-	  		$this->strData = new MJaxTextBox($this);
-	  		$this->strData->Name = 'data';
-	  		$this->strData->AddCssClass('input-large');
+            
+                $this->strData = new MJaxTextBox($this);
+                $this->strData->Name = 'data';
+                $this->strData->AddCssClass('input-large');
+                //longtext
+                
+                    $this->strData->TextMode = MJaxTextMode::MultiLine;
+                
+            
+	  		
   		
 	  
 	  if(!is_null($this->objSession)){
@@ -119,8 +153,12 @@ class SessionEditPanelBase extends MJaxPanel{
 	     
 	  	
             
-	  		    $this->dttStartDate->Text = $this->objSession->startDate;
             
+                //Is special field!!!!!
+                
+                
+                    $this->dttStartDate->Value = $this->objSession->startDate;
+                
             
   		
   		
@@ -128,8 +166,12 @@ class SessionEditPanelBase extends MJaxPanel{
 	     
 	  	
             
-	  		    $this->dttEndDate->Text = $this->objSession->endDate;
             
+                //Is special field!!!!!
+                
+                
+                    $this->dttEndDate->Value = $this->objSession->endDate;
+                
             
   		
   		
@@ -174,10 +216,25 @@ class SessionEditPanelBase extends MJaxPanel{
 	  }
 	}
 	public function CreateReferenceControls(){
-	  
-	 // if(!is_null($this->objSession->i)){
-	   
-	 // }
+        if(!is_null($this->objSession)){
+          
+            if(!is_null($this->objSession->idCompetition)){
+                $this->lnkViewParentSession = new MJaxLinkButton($this);
+                $this->lnkViewParentSession->Text = 'View Competition';
+                $this->lnkViewParentSession->Href = __ENTITY_MODEL_DIR__ . '/Competition/' . $this->objSession->idCompetition;
+            }
+          
+
+	   }
+
+           
+
+            $this->lnkViewChildResult = new MJaxLinkButton($this);
+            $this->lnkViewChildResult->Text = 'View Results';
+            //I should really fix this
+            //$this->lnkViewChildResult->Href = __ENTITY_MODEL_DIR__ . '/Session/' . $this->objSession->idSession . '/Results';
+
+          
 	}
 	
 	public function btnSave_click(){
@@ -187,31 +244,51 @@ class SessionEditPanelBase extends MJaxPanel{
 		}
 
   		  
-  		
+            
 		  
-  		
-      	$this->objSession->startDate = $this->dttStartDate->Text;
-		
+            
+                
+                
+                    //Is special field!!!!!
+                    
+                    
+                
+            
 		  
-  		
-      	$this->objSession->endDate = $this->dttEndDate->Text;
-		
+            
+                
+                
+                    //Is special field!!!!!
+                    
+                    
+                
+            
 		  
-  		
-      	$this->objSession->idCompetition = $this->intIdCompetition->Text;
-		
+            
+                
+                
+            
 		  
-  		
-      	$this->objSession->name = $this->strName->Text;
-		
+            
+                
+                    $this->objSession->name = $this->strName->Text;
+                
+                
+            
 		  
-  		
-      	$this->objSession->notes = $this->strNotes->Text;
-		
+            
+                
+                    $this->objSession->notes = $this->strNotes->Text;
+                
+                
+            
 		  
-  		
-      	$this->objSession->data = $this->strData->Text;
-		
+            
+                
+                    $this->objSession->data = $this->strData->Text;
+                
+                
+            
 		
 		$this->objSession->Save();
   	}

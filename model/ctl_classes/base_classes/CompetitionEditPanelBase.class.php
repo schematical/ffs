@@ -37,8 +37,17 @@ class CompetitionEditPanelBase extends MJaxPanel{
     	public $intIdOrg = null;
    		
 	
+    	
+    	
+    	public $strNamespace = null;
+   		
 	
 	
+   		public $lnkViewParentCompetition = null;
+	
+	
+  		public $lnkViewChildSession = null;
+  	
 	//Regular controls
 	
 	public $btnSave = null;
@@ -59,13 +68,15 @@ class CompetitionEditPanelBase extends MJaxPanel{
 		$this->btnSave = new MJaxButton($this);
 		$this->btnSave->Text = 'Save';
 		$this->btnSave->AddAction(new MJaxClickEvent(), new MJaxServerControlAction($this, 'btnSave_click'));
-		
+		$this->btnSave->AddCssClass('btn btn-large');
 		
 		$this->btnDelete = new MJaxButton($this);
 		$this->btnDelete->Text = 'Delete';
 		$this->btnDelete->AddAction(new MJaxClickEvent(), new MJaxServerControlAction($this, 'btnDelete_click'));
+		$this->btnDelete->AddCssClass('btn btn-large');
 		if(is_null($this->objCompetition)){
 			$this->btnDelete->Style->Display = 'none';
+
 		}
 	
 	}
@@ -74,39 +85,76 @@ class CompetitionEditPanelBase extends MJaxPanel{
 	  	
 	     
 	  	
-	  		$this->strName = new MJaxTextBox($this);
-	  		$this->strName->Name = 'name';
-	  		$this->strName->AddCssClass('input-large');
+            
+                $this->strName = new MJaxTextBox($this);
+                $this->strName->Name = 'name';
+                $this->strName->AddCssClass('input-large');
+                //varchar(128)
+                
+            
+	  		
   		
 	     
 	  	
-	  		$this->strLongDesc = new MJaxTextBox($this);
-	  		$this->strLongDesc->Name = 'longDesc';
-	  		$this->strLongDesc->AddCssClass('input-large');
+            
+                $this->strLongDesc = new MJaxTextBox($this);
+                $this->strLongDesc->Name = 'longDesc';
+                $this->strLongDesc->AddCssClass('input-large');
+                //longtext
+                
+                    $this->strLongDesc->TextMode = MJaxTextMode::MultiLine;
+                
+            
+	  		
   		
 	     
 	  	
-	  		$this->dttCreDate = new MJaxTextBox($this);
-	  		$this->dttCreDate->Name = 'creDate';
-	  		$this->dttCreDate->AddCssClass('input-large');
+            
+	  		
+                //Is special field!!!!!
+                
+                    //Do nothing this is a creDate
+                
+                
+            
   		
 	     
 	  	
-	  		$this->dttStartDate = new MJaxTextBox($this);
-	  		$this->dttStartDate->Name = 'startDate';
-	  		$this->dttStartDate->AddCssClass('input-large');
+            
+	  		
+                //Is special field!!!!!
+                
+                
+                    $this->dttStartDate = new MJaxJQueryDateSelectPanel($this);
+                
+            
   		
 	     
 	  	
-	  		$this->dttEndDate = new MJaxTextBox($this);
-	  		$this->dttEndDate->Name = 'endDate';
-	  		$this->dttEndDate->AddCssClass('input-large');
+            
+	  		
+                //Is special field!!!!!
+                
+                
+                    $this->dttEndDate = new MJaxJQueryDateSelectPanel($this);
+                
+            
   		
 	     
 	  	
-	  		$this->intIdOrg = new MJaxTextBox($this);
-	  		$this->intIdOrg->Name = 'idOrg';
-	  		$this->intIdOrg->AddCssClass('input-large');
+            
+	  		
+  		
+	     
+	  	
+            
+                $this->strNamespace = new MJaxTextBox($this);
+                $this->strNamespace->Name = 'namespace';
+                $this->strNamespace->AddCssClass('input-large');
+                //varchar(45)
+                
+            
+	  		
   		
 	  
 	  if(!is_null($this->objCompetition)){
@@ -138,6 +186,7 @@ class CompetitionEditPanelBase extends MJaxPanel{
 	  	
             
             
+                //Is special field!!!!!
                 
                     //Do nothing this is a creDate
                 
@@ -149,8 +198,12 @@ class CompetitionEditPanelBase extends MJaxPanel{
 	     
 	  	
             
-	  		    $this->dttStartDate->Text = $this->objCompetition->startDate;
             
+                //Is special field!!!!!
+                
+                
+                    $this->dttStartDate->Value = $this->objCompetition->startDate;
+                
             
   		
   		
@@ -158,8 +211,12 @@ class CompetitionEditPanelBase extends MJaxPanel{
 	     
 	  	
             
-	  		    $this->dttEndDate->Text = $this->objCompetition->endDate;
             
+                //Is special field!!!!!
+                
+                
+                    $this->dttEndDate->Value = $this->objCompetition->endDate;
+                
             
   		
   		
@@ -173,14 +230,38 @@ class CompetitionEditPanelBase extends MJaxPanel{
   		
   		
   		
+	     
+	  	
+            
+	  		    $this->strNamespace->Text = $this->objCompetition->namespace;
+            
+            
+  		
+  		
+  		
 	  
 	  }
 	}
 	public function CreateReferenceControls(){
-	  
-	 // if(!is_null($this->objCompetition->i)){
-	   
-	 // }
+        if(!is_null($this->objCompetition)){
+          
+            if(!is_null($this->objCompetition->idOrg)){
+                $this->lnkViewParentCompetition = new MJaxLinkButton($this);
+                $this->lnkViewParentCompetition->Text = 'View Org';
+                $this->lnkViewParentCompetition->Href = __ENTITY_MODEL_DIR__ . '/Org/' . $this->objCompetition->idOrg;
+            }
+          
+
+	   }
+
+           
+
+            $this->lnkViewChildSession = new MJaxLinkButton($this);
+            $this->lnkViewChildSession->Text = 'View Sessions';
+            //I should really fix this
+            //$this->lnkViewChildSession->Href = __ENTITY_MODEL_DIR__ . '/Competition/' . $this->objCompetition->idCompetition . '/Sessions';
+
+          
 	}
 	
 	public function btnSave_click(){
@@ -190,31 +271,62 @@ class CompetitionEditPanelBase extends MJaxPanel{
 		}
 
   		  
-  		
+            
 		  
-  		
-      	$this->objCompetition->name = $this->strName->Text;
-		
+            
+                
+                    $this->objCompetition->name = $this->strName->Text;
+                
+                
+            
 		  
-  		
-      	$this->objCompetition->longDesc = $this->strLongDesc->Text;
-		
+            
+                
+                    $this->objCompetition->longDesc = $this->strLongDesc->Text;
+                
+                
+            
 		  
-  		
-      	$this->objCompetition->creDate = $this->dttCreDate->Text;
-		
+            
+                
+                
+                    //Is special field!!!!!
+                    
+                        //Do nothing this is a creDate
+                    
+                    
+                
+            
 		  
-  		
-      	$this->objCompetition->startDate = $this->dttStartDate->Text;
-		
+            
+                
+                
+                    //Is special field!!!!!
+                    
+                    
+                
+            
 		  
-  		
-      	$this->objCompetition->endDate = $this->dttEndDate->Text;
-		
+            
+                
+                
+                    //Is special field!!!!!
+                    
+                    
+                
+            
 		  
-  		
-      	$this->objCompetition->idOrg = $this->intIdOrg->Text;
-		
+            
+                
+                
+            
+		  
+            
+                
+                    $this->objCompetition->namespace = $this->strNamespace->Text;
+                
+                
+            
 		
 		$this->objCompetition->Save();
   	}

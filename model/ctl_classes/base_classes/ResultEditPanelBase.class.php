@@ -38,6 +38,10 @@ class ResultEditPanelBase extends MJaxPanel{
    		
 	
 	
+   		public $lnkViewParentResult = null;
+	
+   		public $lnkViewParentResult = null;
+	
 	
 	//Regular controls
 	
@@ -59,13 +63,15 @@ class ResultEditPanelBase extends MJaxPanel{
 		$this->btnSave = new MJaxButton($this);
 		$this->btnSave->Text = 'Save';
 		$this->btnSave->AddAction(new MJaxClickEvent(), new MJaxServerControlAction($this, 'btnSave_click'));
-		
+		$this->btnSave->AddCssClass('btn btn-large');
 		
 		$this->btnDelete = new MJaxButton($this);
 		$this->btnDelete->Text = 'Delete';
 		$this->btnDelete->AddAction(new MJaxClickEvent(), new MJaxServerControlAction($this, 'btnDelete_click'));
+		$this->btnDelete->AddCssClass('btn btn-large');
 		if(is_null($this->objResult)){
 			$this->btnDelete->Style->Display = 'none';
+
 		}
 	
 	}
@@ -74,39 +80,57 @@ class ResultEditPanelBase extends MJaxPanel{
 	  	
 	     
 	  	
-	  		$this->intIdSession = new MJaxTextBox($this);
-	  		$this->intIdSession->Name = 'idSession';
-	  		$this->intIdSession->AddCssClass('input-large');
+            
+	  		
   		
 	     
 	  	
-	  		$this->intIdAthelete = new MJaxTextBox($this);
-	  		$this->intIdAthelete->Name = 'idAthelete';
-	  		$this->intIdAthelete->AddCssClass('input-large');
+            
+	  		
   		
 	     
 	  	
-	  		$this->strScore = new MJaxTextBox($this);
-	  		$this->strScore->Name = 'score';
-	  		$this->strScore->AddCssClass('input-large');
+            
+                $this->strScore = new MJaxTextBox($this);
+                $this->strScore->Name = 'score';
+                $this->strScore->AddCssClass('input-large');
+                //varchar(64)
+                
+            
+	  		
   		
 	     
 	  	
-	  		$this->strJudge = new MJaxTextBox($this);
-	  		$this->strJudge->Name = 'judge';
-	  		$this->strJudge->AddCssClass('input-large');
+            
+                $this->strJudge = new MJaxTextBox($this);
+                $this->strJudge->Name = 'judge';
+                $this->strJudge->AddCssClass('input-large');
+                //varchar(64)
+                
+            
+	  		
   		
 	     
 	  	
-	  		$this->intFlag = new MJaxTextBox($this);
-	  		$this->intFlag->Name = 'flag';
-	  		$this->intFlag->AddCssClass('input-large');
+            
+                $this->intFlag = new MJaxTextBox($this);
+                $this->intFlag->Name = 'flag';
+                $this->intFlag->AddCssClass('input-large');
+                //tinyint(4)
+                
+            
+	  		
   		
 	     
 	  	
-	  		$this->dttCreDate = new MJaxTextBox($this);
-	  		$this->dttCreDate->Name = 'creDate';
-	  		$this->dttCreDate->AddCssClass('input-large');
+            
+	  		
+                //Is special field!!!!!
+                
+                    //Do nothing this is a creDate
+                
+                
+            
   		
 	  
 	  if(!is_null($this->objResult)){
@@ -165,6 +189,7 @@ class ResultEditPanelBase extends MJaxPanel{
 	  	
             
             
+                //Is special field!!!!!
                 
                     //Do nothing this is a creDate
                 
@@ -177,10 +202,24 @@ class ResultEditPanelBase extends MJaxPanel{
 	  }
 	}
 	public function CreateReferenceControls(){
-	  
-	 // if(!is_null($this->objResult->i)){
-	   
-	 // }
+        if(!is_null($this->objResult)){
+          
+            if(!is_null($this->objResult->idSession)){
+                $this->lnkViewParentResult = new MJaxLinkButton($this);
+                $this->lnkViewParentResult->Text = 'View Session';
+                $this->lnkViewParentResult->Href = __ENTITY_MODEL_DIR__ . '/Session/' . $this->objResult->idSession;
+            }
+          
+            if(!is_null($this->objResult->idAthelete)){
+                $this->lnkViewParentResult = new MJaxLinkButton($this);
+                $this->lnkViewParentResult->Text = 'View Athelete';
+                $this->lnkViewParentResult->Href = __ENTITY_MODEL_DIR__ . '/Athelete/' . $this->objResult->idAthelete;
+            }
+          
+
+	   }
+
+           
 	}
 	
 	public function btnSave_click(){
@@ -190,31 +229,49 @@ class ResultEditPanelBase extends MJaxPanel{
 		}
 
   		  
-  		
+            
 		  
-  		
-      	$this->objResult->idSession = $this->intIdSession->Text;
-		
+            
+                
+                
+            
 		  
-  		
-      	$this->objResult->idAthelete = $this->intIdAthelete->Text;
-		
+            
+                
+                
+            
 		  
-  		
-      	$this->objResult->score = $this->strScore->Text;
-		
+            
+                
+                    $this->objResult->score = $this->strScore->Text;
+                
+                
+            
 		  
-  		
-      	$this->objResult->judge = $this->strJudge->Text;
-		
+            
+                
+                    $this->objResult->judge = $this->strJudge->Text;
+                
+                
+            
 		  
-  		
-      	$this->objResult->flag = $this->intFlag->Text;
-		
+            
+                
+                    $this->objResult->flag = $this->intFlag->Text;
+                
+                
+            
 		  
-  		
-      	$this->objResult->creDate = $this->dttCreDate->Text;
-		
+            
+                
+                
+                    //Is special field!!!!!
+                    
+                        //Do nothing this is a creDate
+                    
+                    
+                
+            
 		
 		$this->objResult->Save();
   	}

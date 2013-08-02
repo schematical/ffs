@@ -13,6 +13,8 @@ MLCApplicationBase::$arrClassFiles['Enrollment'] = __MODEL_APP_DATALAYER_DIR__ .
 
 MLCApplicationBase::$arrClassFiles['Org'] = __MODEL_APP_DATALAYER_DIR__ . '/Org.class.php';
 
+MLCApplicationBase::$arrClassFiles['ParentMessage'] = __MODEL_APP_DATALAYER_DIR__ . '/ParentMessage.class.php';
+
 MLCApplicationBase::$arrClassFiles['Result'] = __MODEL_APP_DATALAYER_DIR__ . '/Result.class.php';
 
 MLCApplicationBase::$arrClassFiles['Session'] = __MODEL_APP_DATALAYER_DIR__ . '/Session.class.php';

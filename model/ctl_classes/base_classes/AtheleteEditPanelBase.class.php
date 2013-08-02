@@ -28,7 +28,11 @@ class AtheleteEditPanelBase extends MJaxPanel{
    		
 	
 	
+   		public $lnkViewParentAthelete = null;
 	
+	
+  		public $lnkViewChildResult = null;
+  	
 	//Regular controls
 	
 	public $btnSave = null;
@@ -49,13 +53,15 @@ class AtheleteEditPanelBase extends MJaxPanel{
 		$this->btnSave = new MJaxButton($this);
 		$this->btnSave->Text = 'Save';
 		$this->btnSave->AddAction(new MJaxClickEvent(), new MJaxServerControlAction($this, 'btnSave_click'));
-		
+		$this->btnSave->AddCssClass('btn btn-large');
 		
 		$this->btnDelete = new MJaxButton($this);
 		$this->btnDelete->Text = 'Delete';
 		$this->btnDelete->AddAction(new MJaxClickEvent(), new MJaxServerControlAction($this, 'btnDelete_click'));
+		$this->btnDelete->AddCssClass('btn btn-large');
 		if(is_null($this->objAthelete)){
 			$this->btnDelete->Style->Display = 'none';
+
 		}
 	
 	}
@@ -64,27 +70,41 @@ class AtheleteEditPanelBase extends MJaxPanel{
 	  	
 	     
 	  	
-	  		$this->intIdOrg = new MJaxTextBox($this);
-	  		$this->intIdOrg->Name = 'idOrg';
-	  		$this->intIdOrg->AddCssClass('input-large');
+            
+	  		
   		
 	     
 	  	
-	  		$this->strFirstName = new MJaxTextBox($this);
-	  		$this->strFirstName->Name = 'firstName';
-	  		$this->strFirstName->AddCssClass('input-large');
+            
+                $this->strFirstName = new MJaxTextBox($this);
+                $this->strFirstName->Name = 'firstName';
+                $this->strFirstName->AddCssClass('input-large');
+                //varchar(64)
+                
+            
+	  		
   		
 	     
 	  	
-	  		$this->strLastName = new MJaxTextBox($this);
-	  		$this->strLastName->Name = 'lastName';
-	  		$this->strLastName->AddCssClass('input-large');
+            
+                $this->strLastName = new MJaxTextBox($this);
+                $this->strLastName->Name = 'lastName';
+                $this->strLastName->AddCssClass('input-large');
+                //varchar(64)
+                
+            
+	  		
   		
 	     
 	  	
-	  		$this->dttBirthDate = new MJaxTextBox($this);
-	  		$this->dttBirthDate->Name = 'birthDate';
-	  		$this->dttBirthDate->AddCssClass('input-large');
+            
+	  		
+                //Is special field!!!!!
+                
+                
+                    $this->dttBirthDate = new MJaxJQueryDateSelectPanel($this);
+                
+            
   		
 	  
 	  if(!is_null($this->objAthelete)){
@@ -124,8 +144,12 @@ class AtheleteEditPanelBase extends MJaxPanel{
 	     
 	  	
             
-	  		    $this->dttBirthDate->Text = $this->objAthelete->birthDate;
             
+                //Is special field!!!!!
+                
+                
+                    $this->dttBirthDate->Value = $this->objAthelete->birthDate;
+                
             
   		
   		
@@ -134,10 +158,25 @@ class AtheleteEditPanelBase extends MJaxPanel{
 	  }
 	}
 	public function CreateReferenceControls(){
-	  
-	 // if(!is_null($this->objAthelete->i)){
-	   
-	 // }
+        if(!is_null($this->objAthelete)){
+          
+            if(!is_null($this->objAthelete->idOrg)){
+                $this->lnkViewParentAthelete = new MJaxLinkButton($this);
+                $this->lnkViewParentAthelete->Text = 'View Org';
+                $this->lnkViewParentAthelete->Href = __ENTITY_MODEL_DIR__ . '/Org/' . $this->objAthelete->idOrg;
+            }
+          
+
+	   }
+
+           
+
+            $this->lnkViewChildResult = new MJaxLinkButton($this);
+            $this->lnkViewChildResult->Text = 'View Results';
+            //I should really fix this
+            //$this->lnkViewChildResult->Href = __ENTITY_MODEL_DIR__ . '/Athelete/' . $this->objAthelete->idAthelete . '/Results';
+
+          
 	}
 	
 	public function btnSave_click(){
@@ -147,23 +186,35 @@ class AtheleteEditPanelBase extends MJaxPanel{
 		}
 
   		  
-  		
+            
 		  
-  		
-      	$this->objAthelete->idOrg = $this->intIdOrg->Text;
-		
+            
+                
+                
+            
 		  
-  		
-      	$this->objAthelete->firstName = $this->strFirstName->Text;
-		
+            
+                
+                    $this->objAthelete->firstName = $this->strFirstName->Text;
+                
+                
+            
 		  
-  		
-      	$this->objAthelete->lastName = $this->strLastName->Text;
-		
+            
+                
+                    $this->objAthelete->lastName = $this->strLastName->Text;
+                
+                
+            
 		  
-  		
-      	$this->objAthelete->birthDate = $this->dttBirthDate->Text;
-		
+            
+                
+                
+                    //Is special field!!!!!
+                    
+                    
+                
+            
 		
 		$this->objAthelete->Save();
   	}

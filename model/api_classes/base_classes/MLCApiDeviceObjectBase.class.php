@@ -6,6 +6,11 @@ class MLCApiDeviceObjectBase extends MLCApiObjectBase{
     		switch($strName){
 				
 				
+		     	case('assignments'):
+		       		$arrAssignments = Assignment::LoadCollByIdDevice($this->GetEntity()->idDevice)->GetCollection();
+		       		return new MLCApiResponse($arrAssignments);
+		    	break;
+				
 				default:
 					return parent::__call($strName, $arrArguments);
 				

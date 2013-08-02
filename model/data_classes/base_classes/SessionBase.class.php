@@ -98,8 +98,25 @@ class SessionBase extends BaseEntity {
 	}
      //Get children
     
+    public function GetResultArr(){
+       return Result::LoadCollByIdSession($this->idSession);
+    }
+	
 
     //Load by foregin key
+    
+    public static function LoadCollByIdCompetition($intIdCompetition){
+        $sql = sprintf("SELECT * FROM Session WHERE idCompetition = %s;", $intIdCompetition);
+		$result = MLCDBDriver::Query($sql);
+		$coll = new BaseEntityCollection();
+		while($data = mysql_fetch_assoc($result)){
+			$objSession = new Session();
+			$objSession->materilize($data);
+			$coll->addItem($objSession);
+		}
+		return $coll;
+    }
+
     
     
       public function LoadByTag($strTag){
@@ -117,6 +134,11 @@ class SessionBase extends BaseEntity {
     	}
        
          
+            
+             if(array_key_exists('idsession', $arrData)){
+                $this->intIdSession = $arrData['idsession'];
+             }
+        
     }
         
         
@@ -131,7 +153,7 @@ class SessionBase extends BaseEntity {
         		return Session::Load($mixData);
         	}elseif(
         		(is_object($mixData)) && 
-        		(get_class($mixData) == 'Session)
+        		(get_class($mixData) == 'Session')
         	){
         		if(!$blnReturnId){
         			return $mixData;
@@ -140,7 +162,7 @@ class SessionBase extends BaseEntity {
         	}elseif(is_null($mixData)){
         		return null;
         	}else{
-        		throw new Exception(__FUNCTION__ . '->Parse - Parameter 1 must be either an intiger or a class type "Session"');
+        		throw new Exception(__FUNCTION__ . ' - Parameter 1 must be either an intiger or a class type "Session"');
         	}        	
         }
         public static function LoadSingleByField( $strField, $mixValue, $strCompairison = '='){

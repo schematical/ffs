@@ -29,6 +29,8 @@ class DeviceEditPanelBase extends MJaxPanel{
 	
 	
 	
+  		public $lnkViewChildAssignment = null;
+  	
 	//Regular controls
 	
 	public $btnSave = null;
@@ -49,13 +51,15 @@ class DeviceEditPanelBase extends MJaxPanel{
 		$this->btnSave = new MJaxButton($this);
 		$this->btnSave->Text = 'Save';
 		$this->btnSave->AddAction(new MJaxClickEvent(), new MJaxServerControlAction($this, 'btnSave_click'));
-		
+		$this->btnSave->AddCssClass('btn btn-large');
 		
 		$this->btnDelete = new MJaxButton($this);
 		$this->btnDelete->Text = 'Delete';
 		$this->btnDelete->AddAction(new MJaxClickEvent(), new MJaxServerControlAction($this, 'btnDelete_click'));
+		$this->btnDelete->AddCssClass('btn btn-large');
 		if(is_null($this->objDevice)){
 			$this->btnDelete->Style->Display = 'none';
+
 		}
 	
 	}
@@ -64,27 +68,47 @@ class DeviceEditPanelBase extends MJaxPanel{
 	  	
 	     
 	  	
-	  		$this->strName = new MJaxTextBox($this);
-	  		$this->strName->Name = 'name';
-	  		$this->strName->AddCssClass('input-large');
+            
+                $this->strName = new MJaxTextBox($this);
+                $this->strName->Name = 'name';
+                $this->strName->AddCssClass('input-large');
+                //varchar(64)
+                
+            
+	  		
   		
 	     
 	  	
-	  		$this->strToken = new MJaxTextBox($this);
-	  		$this->strToken->Name = 'token';
-	  		$this->strToken->AddCssClass('input-large');
+            
+                $this->strToken = new MJaxTextBox($this);
+                $this->strToken->Name = 'token';
+                $this->strToken->AddCssClass('input-large');
+                //varchar(128)
+                
+            
+	  		
   		
 	     
 	  	
-	  		$this->dttCreDate = new MJaxTextBox($this);
-	  		$this->dttCreDate->Name = 'creDate';
-	  		$this->dttCreDate->AddCssClass('input-large');
+            
+	  		
+                //Is special field!!!!!
+                
+                    //Do nothing this is a creDate
+                
+                
+            
   		
 	     
 	  	
-	  		$this->strInviteEmail = new MJaxTextBox($this);
-	  		$this->strInviteEmail->Name = 'inviteEmail';
-	  		$this->strInviteEmail->AddCssClass('input-large');
+            
+                $this->strInviteEmail = new MJaxTextBox($this);
+                $this->strInviteEmail->Name = 'inviteEmail';
+                $this->strInviteEmail->AddCssClass('input-large');
+                //varchar(45)
+                
+            
+	  		
   		
 	  
 	  if(!is_null($this->objDevice)){
@@ -116,6 +140,7 @@ class DeviceEditPanelBase extends MJaxPanel{
 	  	
             
             
+                //Is special field!!!!!
                 
                     //Do nothing this is a creDate
                 
@@ -137,10 +162,19 @@ class DeviceEditPanelBase extends MJaxPanel{
 	  }
 	}
 	public function CreateReferenceControls(){
-	  
-	 // if(!is_null($this->objDevice->i)){
-	   
-	 // }
+        if(!is_null($this->objDevice)){
+          
+
+	   }
+
+           
+
+            $this->lnkViewChildAssignment = new MJaxLinkButton($this);
+            $this->lnkViewChildAssignment->Text = 'View Assignments';
+            //I should really fix this
+            //$this->lnkViewChildAssignment->Href = __ENTITY_MODEL_DIR__ . '/Device/' . $this->objDevice->idDevice . '/Assignments';
+
+          
 	}
 	
 	public function btnSave_click(){
@@ -150,23 +184,39 @@ class DeviceEditPanelBase extends MJaxPanel{
 		}
 
   		  
-  		
+            
 		  
-  		
-      	$this->objDevice->name = $this->strName->Text;
-		
+            
+                
+                    $this->objDevice->name = $this->strName->Text;
+                
+                
+            
 		  
-  		
-      	$this->objDevice->token = $this->strToken->Text;
-		
+            
+                
+                    $this->objDevice->token = $this->strToken->Text;
+                
+                
+            
 		  
-  		
-      	$this->objDevice->creDate = $this->dttCreDate->Text;
-		
+            
+                
+                
+                    //Is special field!!!!!
+                    
+                        //Do nothing this is a creDate
+                    
+                    
+                
+            
 		  
-  		
-      	$this->objDevice->inviteEmail = $this->strInviteEmail->Text;
-		
+            
+                
+                    $this->objDevice->inviteEmail = $this->strInviteEmail->Text;
+                
+                
+            
 		
 		$this->objDevice->Save();
   	}

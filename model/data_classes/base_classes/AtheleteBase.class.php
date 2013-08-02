@@ -64,6 +64,7 @@ class AtheleteBase extends BaseEntity {
    
 	public static function Query($strExtra, $blnReturnSingle = false){
 		$sql = sprintf("SELECT * FROM %s %s;", self::TABLE_NAME,  $strExtra);
+        //die($sql);
 		$result = MLCDBDriver::Query($sql, self::DB_CONN);
 		$coll = new BaseEntityCollection();
 		while($data = mysql_fetch_assoc($result)){
@@ -90,8 +91,25 @@ class AtheleteBase extends BaseEntity {
 	}
      //Get children
     
+    public function GetResultArr(){
+       return Result::LoadCollByIdAthelete($this->idAthelete);
+    }
+	
 
     //Load by foregin key
+    
+    public static function LoadCollByIdOrg($intIdOrg){
+        $sql = sprintf("SELECT * FROM Athelete WHERE idOrg = %s;", $intIdOrg);
+		$result = MLCDBDriver::Query($sql);
+		$coll = new BaseEntityCollection();
+		while($data = mysql_fetch_assoc($result)){
+			$objAthelete = new Athelete();
+			$objAthelete->materilize($data);
+			$coll->addItem($objAthelete);
+		}
+		return $coll;
+    }
+
     
     
       public function LoadByTag($strTag){
@@ -109,6 +127,11 @@ class AtheleteBase extends BaseEntity {
     	}
        
          
+            
+             if(array_key_exists('idathelete', $arrData)){
+                $this->intIdAthelete = $arrData['idathelete'];
+             }
+        
     }
         
         
@@ -123,7 +146,7 @@ class AtheleteBase extends BaseEntity {
         		return Athelete::Load($mixData);
         	}elseif(
         		(is_object($mixData)) && 
-        		(get_class($mixData) == 'Athelete)
+        		(get_class($mixData) == 'Athelete')
         	){
         		if(!$blnReturnId){
         			return $mixData;
@@ -132,7 +155,7 @@ class AtheleteBase extends BaseEntity {
         	}elseif(is_null($mixData)){
         		return null;
         	}else{
-        		throw new Exception(__FUNCTION__ . '->Parse - Parameter 1 must be either an intiger or a class type "Athelete"');
+        		throw new Exception(__FUNCTION__ . ' - Parameter 1 must be either an intiger or a class type "Athelete"');
         	}        	
         }
         public static function LoadSingleByField( $strField, $mixValue, $strCompairison = '='){

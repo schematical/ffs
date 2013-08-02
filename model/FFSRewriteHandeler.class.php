@@ -3,6 +3,24 @@ class FFSRewriteHandeler extends MLCRewriteHandelerBase{
     public function Handel($strUri){
         $arrParts = explode('/', $strUri);
         if(count($arrParts) > 1){
+            $strFirstNamespace = explode('.', $arrParts[1])[0];
+
+            $objCompetition = Competition::LoadSingleByField('namespace', $strFirstNamespace);
+
+            if(!is_null($objCompetition)){
+                //Assume it is a parent
+                return MLCApplication::$strCtlFile = __CTL_ACTIVE_APP_DIR__ . '/parent/index.php';
+            }
+
+        }
+        parent::Handel($strUri);
+
+
+
+    }
+    /*public function Handel($strUri){
+        $arrParts = explode('/', $strUri);
+        if(count($arrParts) > 1){
             $objUser = AuthAccount::LoadSingleByField('shortDesc', $arrParts[1]);
 
             if(!is_null($objUser)){
@@ -62,5 +80,10 @@ class FFSRewriteHandeler extends MLCRewriteHandelerBase{
 
 
 
+    }*/
+    public static function ConvertToNamespace($strText){
+        $strText = strtolower($strText);
+        $strText = preg_replace('/[^a-z0-9]/', "", $strText);
+        return $strText;
     }
 }

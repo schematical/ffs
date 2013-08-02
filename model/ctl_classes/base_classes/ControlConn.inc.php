@@ -13,6 +13,8 @@ MLCApplicationBase::$arrClassFiles['EnrollmentEditPanel'] = __MODEL_APP_CONTROL_
 
 MLCApplicationBase::$arrClassFiles['OrgEditPanel'] = __MODEL_APP_CONTROL__ . '/OrgEditPanel.class.php';
 
+MLCApplicationBase::$arrClassFiles['ParentMessageEditPanel'] = __MODEL_APP_CONTROL__ . '/ParentMessageEditPanel.class.php';
+
 MLCApplicationBase::$arrClassFiles['ResultEditPanel'] = __MODEL_APP_CONTROL__ . '/ResultEditPanel.class.php';
 
 MLCApplicationBase::$arrClassFiles['SessionEditPanel'] = __MODEL_APP_CONTROL__ . '/SessionEditPanel.class.php';
@@ -36,6 +38,8 @@ MLCApplicationBase::$arrClassFiles['DeviceListPanel'] = __MODEL_APP_CONTROL__ . 
 MLCApplicationBase::$arrClassFiles['EnrollmentListPanel'] = __MODEL_APP_CONTROL__ . '/EnrollmentListPanel.class.php';
 
 MLCApplicationBase::$arrClassFiles['OrgListPanel'] = __MODEL_APP_CONTROL__ . '/OrgListPanel.class.php';
+
+MLCApplicationBase::$arrClassFiles['ParentMessageListPanel'] = __MODEL_APP_CONTROL__ . '/ParentMessageListPanel.class.php';
 
 MLCApplicationBase::$arrClassFiles['ResultListPanel'] = __MODEL_APP_CONTROL__ . '/ResultListPanel.class.php';
 

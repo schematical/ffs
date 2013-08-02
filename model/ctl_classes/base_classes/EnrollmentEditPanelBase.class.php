@@ -53,6 +53,12 @@ class EnrollmentEditPanelBase extends MJaxPanel{
    		
 	
 	
+   		public $lnkViewParentEnrollment = null;
+	
+   		public $lnkViewParentEnrollment = null;
+	
+   		public $lnkViewParentEnrollment = null;
+	
 	
 	//Regular controls
 	
@@ -74,13 +80,15 @@ class EnrollmentEditPanelBase extends MJaxPanel{
 		$this->btnSave = new MJaxButton($this);
 		$this->btnSave->Text = 'Save';
 		$this->btnSave->AddAction(new MJaxClickEvent(), new MJaxServerControlAction($this, 'btnSave_click'));
-		
+		$this->btnSave->AddCssClass('btn btn-large');
 		
 		$this->btnDelete = new MJaxButton($this);
 		$this->btnDelete->Text = 'Delete';
 		$this->btnDelete->AddAction(new MJaxClickEvent(), new MJaxServerControlAction($this, 'btnDelete_click'));
+		$this->btnDelete->AddCssClass('btn btn-large');
 		if(is_null($this->objEnrollment)){
 			$this->btnDelete->Style->Display = 'none';
+
 		}
 	
 	}
@@ -89,57 +97,84 @@ class EnrollmentEditPanelBase extends MJaxPanel{
 	  	
 	     
 	  	
-	  		$this->intIdAthelete = new MJaxTextBox($this);
-	  		$this->intIdAthelete->Name = 'idAthelete';
-	  		$this->intIdAthelete->AddCssClass('input-large');
+            
+	  		
   		
 	     
 	  	
-	  		$this->intIdCompetition = new MJaxTextBox($this);
-	  		$this->intIdCompetition->Name = 'idCompetition';
-	  		$this->intIdCompetition->AddCssClass('input-large');
+            
+	  		
   		
 	     
 	  	
-	  		$this->intIdSession = new MJaxTextBox($this);
-	  		$this->intIdSession->Name = 'idSession';
-	  		$this->intIdSession->AddCssClass('input-large');
+            
+	  		
   		
 	     
 	  	
-	  		$this->strFlight = new MJaxTextBox($this);
-	  		$this->strFlight->Name = 'flight';
-	  		$this->strFlight->AddCssClass('input-large');
+            
+                $this->strFlight = new MJaxTextBox($this);
+                $this->strFlight->Name = 'flight';
+                $this->strFlight->AddCssClass('input-large');
+                //varchar(64)
+                
+            
+	  		
   		
 	     
 	  	
-	  		$this->strDivision = new MJaxTextBox($this);
-	  		$this->strDivision->Name = 'division';
-	  		$this->strDivision->AddCssClass('input-large');
+            
+                $this->strDivision = new MJaxTextBox($this);
+                $this->strDivision->Name = 'division';
+                $this->strDivision->AddCssClass('input-large');
+                //varchar(64)
+                
+            
+	  		
   		
 	     
 	  	
-	  		$this->strAgeGroup = new MJaxTextBox($this);
-	  		$this->strAgeGroup->Name = 'ageGroup';
-	  		$this->strAgeGroup->AddCssClass('input-large');
+            
+                $this->strAgeGroup = new MJaxTextBox($this);
+                $this->strAgeGroup->Name = 'ageGroup';
+                $this->strAgeGroup->AddCssClass('input-large');
+                //varchar(64)
+                
+            
+	  		
   		
 	     
 	  	
-	  		$this->strMisc1 = new MJaxTextBox($this);
-	  		$this->strMisc1->Name = 'misc1';
-	  		$this->strMisc1->AddCssClass('input-large');
+            
+                $this->strMisc1 = new MJaxTextBox($this);
+                $this->strMisc1->Name = 'misc1';
+                $this->strMisc1->AddCssClass('input-large');
+                //varchar(64)
+                
+            
+	  		
   		
 	     
 	  	
-	  		$this->strMisc2 = new MJaxTextBox($this);
-	  		$this->strMisc2->Name = 'misc2';
-	  		$this->strMisc2->AddCssClass('input-large');
+            
+                $this->strMisc2 = new MJaxTextBox($this);
+                $this->strMisc2->Name = 'misc2';
+                $this->strMisc2->AddCssClass('input-large');
+                //varchar(64)
+                
+            
+	  		
   		
 	     
 	  	
-	  		$this->strMisc3 = new MJaxTextBox($this);
-	  		$this->strMisc3->Name = 'misc3';
-	  		$this->strMisc3->AddCssClass('input-large');
+            
+                $this->strMisc3 = new MJaxTextBox($this);
+                $this->strMisc3->Name = 'misc3';
+                $this->strMisc3->AddCssClass('input-large');
+                //varchar(45)
+                
+            
+	  		
   		
 	  
 	  if(!is_null($this->objEnrollment)){
@@ -234,10 +269,30 @@ class EnrollmentEditPanelBase extends MJaxPanel{
 	  }
 	}
 	public function CreateReferenceControls(){
-	  
-	 // if(!is_null($this->objEnrollment->i)){
-	   
-	 // }
+        if(!is_null($this->objEnrollment)){
+          
+            if(!is_null($this->objEnrollment->idAthelete)){
+                $this->lnkViewParentEnrollment = new MJaxLinkButton($this);
+                $this->lnkViewParentEnrollment->Text = 'View Athelete';
+                $this->lnkViewParentEnrollment->Href = __ENTITY_MODEL_DIR__ . '/Athelete/' . $this->objEnrollment->idAthelete;
+            }
+          
+            if(!is_null($this->objEnrollment->idCompetition)){
+                $this->lnkViewParentEnrollment = new MJaxLinkButton($this);
+                $this->lnkViewParentEnrollment->Text = 'View Competition';
+                $this->lnkViewParentEnrollment->Href = __ENTITY_MODEL_DIR__ . '/Competition/' . $this->objEnrollment->idCompetition;
+            }
+          
+            if(!is_null($this->objEnrollment->idSession)){
+                $this->lnkViewParentEnrollment = new MJaxLinkButton($this);
+                $this->lnkViewParentEnrollment->Text = 'View Session';
+                $this->lnkViewParentEnrollment->Href = __ENTITY_MODEL_DIR__ . '/Session/' . $this->objEnrollment->idSession;
+            }
+          
+
+	   }
+
+           
 	}
 	
 	public function btnSave_click(){
@@ -247,43 +302,64 @@ class EnrollmentEditPanelBase extends MJaxPanel{
 		}
 
   		  
-  		
+            
 		  
-  		
-      	$this->objEnrollment->idAthelete = $this->intIdAthelete->Text;
-		
+            
+                
+                
+            
 		  
-  		
-      	$this->objEnrollment->idCompetition = $this->intIdCompetition->Text;
-		
+            
+                
+                
+            
 		  
-  		
-      	$this->objEnrollment->idSession = $this->intIdSession->Text;
-		
+            
+                
+                
+            
 		  
-  		
-      	$this->objEnrollment->flight = $this->strFlight->Text;
-		
+            
+                
+                    $this->objEnrollment->flight = $this->strFlight->Text;
+                
+                
+            
 		  
-  		
-      	$this->objEnrollment->division = $this->strDivision->Text;
-		
+            
+                
+                    $this->objEnrollment->division = $this->strDivision->Text;
+                
+                
+            
 		  
-  		
-      	$this->objEnrollment->ageGroup = $this->strAgeGroup->Text;
-		
+            
+                
+                    $this->objEnrollment->ageGroup = $this->strAgeGroup->Text;
+                
+                
+            
 		  
-  		
-      	$this->objEnrollment->misc1 = $this->strMisc1->Text;
-		
+            
+                
+                    $this->objEnrollment->misc1 = $this->strMisc1->Text;
+                
+                
+            
 		  
-  		
-      	$this->objEnrollment->misc2 = $this->strMisc2->Text;
-		
+            
+                
+                    $this->objEnrollment->misc2 = $this->strMisc2->Text;
+                
+                
+            
 		  
-  		
-      	$this->objEnrollment->misc3 = $this->strMisc3->Text;
-		
+            
+                
+                    $this->objEnrollment->misc3 = $this->strMisc3->Text;
+                
+                
+            
 		
 		$this->objEnrollment->Save();
   	}

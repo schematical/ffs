@@ -6,22 +6,28 @@
 
             
                 
-                    <div class="control-group">
-                      <label class="control-label" for="name">name</label>
-                      <div class="controls">
-                         <?php $_CONTROL->strName->Render(); ?>
-                      </div>
-                    </div>
+                    <?php if(!is_null($_CONTROL->strName)){ ?>
+                        <div class="control-group">
+                          <label class="control-label" for="name">name</label>
+                          <div class="controls">
+                             <?php $_CONTROL->strName->Render(); ?>
+                          </div>
+                        </div>
+
+                    <?php } ?>
                 
 
             
                 
-                    <div class="control-group">
-                      <label class="control-label" for="name">token</label>
-                      <div class="controls">
-                         <?php $_CONTROL->strToken->Render(); ?>
-                      </div>
-                    </div>
+                    <?php if(!is_null($_CONTROL->strToken)){ ?>
+                        <div class="control-group">
+                          <label class="control-label" for="name">token</label>
+                          <div class="controls">
+                             <?php $_CONTROL->strToken->Render(); ?>
+                          </div>
+                        </div>
+
+                    <?php } ?>
                 
 
             
@@ -29,12 +35,15 @@
 
             
                 
-                    <div class="control-group">
-                      <label class="control-label" for="name">inviteEmail</label>
-                      <div class="controls">
-                         <?php $_CONTROL->strInviteEmail->Render(); ?>
-                      </div>
-                    </div>
+                    <?php if(!is_null($_CONTROL->strInviteEmail)){ ?>
+                        <div class="control-group">
+                          <label class="control-label" for="name">inviteEmail</label>
+                          <div class="controls">
+                             <?php $_CONTROL->strInviteEmail->Render(); ?>
+                          </div>
+                        </div>
+
+                    <?php } ?>
                 
 
             

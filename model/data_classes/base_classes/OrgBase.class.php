@@ -86,6 +86,10 @@ class OrgBase extends BaseEntity {
 	}
      //Get children
     
+    public function GetCompetitionArr(){
+       return Competition::LoadCollByIdOrg($this->idOrg);
+    }
+	
 
     //Load by foregin key
     
@@ -105,6 +109,11 @@ class OrgBase extends BaseEntity {
     	}
        
          
+            
+             if(array_key_exists('idorg', $arrData)){
+                $this->intIdOrg = $arrData['idorg'];
+             }
+        
     }
         
         
@@ -119,7 +128,7 @@ class OrgBase extends BaseEntity {
         		return Org::Load($mixData);
         	}elseif(
         		(is_object($mixData)) && 
-        		(get_class($mixData) == 'Org)
+        		(get_class($mixData) == 'Org')
         	){
         		if(!$blnReturnId){
         			return $mixData;
@@ -128,7 +137,7 @@ class OrgBase extends BaseEntity {
         	}elseif(is_null($mixData)){
         		return null;
         	}else{
-        		throw new Exception(__FUNCTION__ . '->Parse - Parameter 1 must be either an intiger or a class type "Org"');
+        		throw new Exception(__FUNCTION__ . ' - Parameter 1 must be either an intiger or a class type "Org"');
         	}        	
         }
         public static function LoadSingleByField( $strField, $mixValue, $strCompairison = '='){

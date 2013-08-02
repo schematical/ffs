@@ -24,7 +24,7 @@ if(defined('SERVER_ENV')){
 		case('local'):			
 			define('DB_1', serialize(array(
 				'host'=>'localhost',
-				'db_name'=>'mde',
+				'db_name'=>'ffs',
 				'user'=>'root',
 				'pass'=>'learnlearn'
 			)));
@@ -34,12 +34,12 @@ if(defined('SERVER_ENV')){
 				'user'=>'root',
 				'pass'=>'learnlearn'
 			)));
-            define('DB_2', serialize(array(
+            /*define('DB_2', serialize(array(
                 'host'=>'localhost',
                 'db_name'=>'ffs',
                 'user'=>'root',
                 'pass'=>'learnlearn'
-            )));
+            )));*/
 			define('MLC_DISPLAY_EXCEPTIONS', '1');
 		break;
        /* case('beta'):

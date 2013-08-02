@@ -5,6 +5,17 @@ class MLCApiCompetitionObjectBase extends MLCApiObjectBase{
 	public function  __call($strName, $arrArguments) {
     		switch($strName){
 				
+		       	case('Competition'):
+					//Load 
+					$objOrg = $this->GetEntity()->IdOrg;
+					return new MLCApiOrgObject($objIdOrg);
+			    break;
+			    
+				
+		     	case('sessions'):
+		       		$arrSessions = Session::LoadCollByIdCompetition($this->GetEntity()->idCompetition)->GetCollection();
+		       		return new MLCApiResponse($arrSessions);
+		    	break;
 				
 				default:
 					return parent::__call($strName, $arrArguments);

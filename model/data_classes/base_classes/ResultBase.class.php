@@ -101,6 +101,32 @@ class ResultBase extends BaseEntity {
 
     //Load by foregin key
     
+    public static function LoadCollByIdSession($intIdSession){
+        $sql = sprintf("SELECT * FROM Result WHERE idSession = %s;", $intIdSession);
+		$result = MLCDBDriver::Query($sql);
+		$coll = new BaseEntityCollection();
+		while($data = mysql_fetch_assoc($result)){
+			$objResult = new Result();
+			$objResult->materilize($data);
+			$coll->addItem($objResult);
+		}
+		return $coll;
+    }
+
+    
+    public static function LoadCollByIdAthelete($intIdAthelete){
+        $sql = sprintf("SELECT * FROM Result WHERE idAthelete = %s;", $intIdAthelete);
+		$result = MLCDBDriver::Query($sql);
+		$coll = new BaseEntityCollection();
+		while($data = mysql_fetch_assoc($result)){
+			$objResult = new Result();
+			$objResult->materilize($data);
+			$coll->addItem($objResult);
+		}
+		return $coll;
+    }
+
+    
     
       public function LoadByTag($strTag){
 	  	return MLCTagDriver::LoadTaggedEntites($strTag, get_class($this));
@@ -131,7 +157,7 @@ class ResultBase extends BaseEntity {
         		return Result::Load($mixData);
         	}elseif(
         		(is_object($mixData)) && 
-        		(get_class($mixData) == 'Result)
+        		(get_class($mixData) == 'Result')
         	){
         		if(!$blnReturnId){
         			return $mixData;
@@ -140,7 +166,7 @@ class ResultBase extends BaseEntity {
         	}elseif(is_null($mixData)){
         		return null;
         	}else{
-        		throw new Exception(__FUNCTION__ . '->Parse - Parameter 1 must be either an intiger or a class type "Result"');
+        		throw new Exception(__FUNCTION__ . ' - Parameter 1 must be either an intiger or a class type "Result"');
         	}        	
         }
         public static function LoadSingleByField( $strField, $mixValue, $strCompairison = '='){

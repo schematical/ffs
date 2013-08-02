@@ -28,6 +28,10 @@ class MLCApiHomeBase extends MLCApiClassBase{
         return new MLCApiOrg();
     }
     
+    public function ParentMessage(){
+        return new MLCApiParentMessage();
+    }
+    
     public function Result(){
         return new MLCApiResult();
     }
@@ -55,6 +59,9 @@ MLCApplicationBase::$arrClassFiles['MLCApiEnrollmentObject'] = __MODEL_APP_API__
 
 MLCApplicationBase::$arrClassFiles['MLCApiOrg'] = __MODEL_APP_API__ . '/MLCApiOrg.class.php';
 MLCApplicationBase::$arrClassFiles['MLCApiOrgObject'] = __MODEL_APP_API__ . '/MLCApiOrgObject.class.php';
+
+MLCApplicationBase::$arrClassFiles['MLCApiParentMessage'] = __MODEL_APP_API__ . '/MLCApiParentMessage.class.php';
+MLCApplicationBase::$arrClassFiles['MLCApiParentMessageObject'] = __MODEL_APP_API__ . '/MLCApiParentMessageObject.class.php';
 
 MLCApplicationBase::$arrClassFiles['MLCApiResult'] = __MODEL_APP_API__ . '/MLCApiResult.class.php';
 MLCApplicationBase::$arrClassFiles['MLCApiResultObject'] = __MODEL_APP_API__ . '/MLCApiResultObject.class.php';

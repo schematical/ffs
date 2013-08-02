@@ -1,17 +1,11 @@
 <?php
-class MLCApiResultObjectBase extends MLCApiObjectBase{
+class MLCApiParentMessageObjectBase extends MLCApiObjectBase{
    
-    protected $strClassName = 'Result';
+    protected $strClassName = 'ParentMessage';
 	public function  __call($strName, $arrArguments) {
     		switch($strName){
 				
-		       	case('Result'):
-					//Load 
-					$objSession = $this->GetEntity()->IdSession;
-					return new MLCApiSessionObject($objIdSession);
-			    break;
-			    
-		       	case('Result'):
+		       	case('ParentMessage'):
 					//Load 
 					$objAthelete = $this->GetEntity()->IdAthelete;
 					return new MLCApiAtheleteObject($objIdAthelete);

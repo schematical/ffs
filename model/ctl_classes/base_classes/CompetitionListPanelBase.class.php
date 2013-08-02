@@ -48,6 +48,11 @@ class CompetitionListPanelBase extends MJaxTable{
 	    	$this->AddColumn('idOrg','idOrg');
 	   		
 		
+	    	
+	    	
+	    	$this->AddColumn('namespace','namespace');
+	   		
+		
 	}
 	public function objRow_click($strFomrId, $strControlId, $strActionParameter){
 

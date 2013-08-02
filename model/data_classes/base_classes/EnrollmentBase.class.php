@@ -113,6 +113,45 @@ class EnrollmentBase extends BaseEntity {
 
     //Load by foregin key
     
+    public static function LoadCollByIdAthelete($intIdAthelete){
+        $sql = sprintf("SELECT * FROM Enrollment WHERE idAthelete = %s;", $intIdAthelete);
+		$result = MLCDBDriver::Query($sql);
+		$coll = new BaseEntityCollection();
+		while($data = mysql_fetch_assoc($result)){
+			$objEnrollment = new Enrollment();
+			$objEnrollment->materilize($data);
+			$coll->addItem($objEnrollment);
+		}
+		return $coll;
+    }
+
+    
+    public static function LoadCollByIdCompetition($intIdCompetition){
+        $sql = sprintf("SELECT * FROM Enrollment WHERE idCompetition = %s;", $intIdCompetition);
+		$result = MLCDBDriver::Query($sql);
+		$coll = new BaseEntityCollection();
+		while($data = mysql_fetch_assoc($result)){
+			$objEnrollment = new Enrollment();
+			$objEnrollment->materilize($data);
+			$coll->addItem($objEnrollment);
+		}
+		return $coll;
+    }
+
+    
+    public static function LoadCollByIdSession($intIdSession){
+        $sql = sprintf("SELECT * FROM Enrollment WHERE idSession = %s;", $intIdSession);
+		$result = MLCDBDriver::Query($sql);
+		$coll = new BaseEntityCollection();
+		while($data = mysql_fetch_assoc($result)){
+			$objEnrollment = new Enrollment();
+			$objEnrollment->materilize($data);
+			$coll->addItem($objEnrollment);
+		}
+		return $coll;
+    }
+
+    
     
       public function LoadByTag($strTag){
 	  	return MLCTagDriver::LoadTaggedEntites($strTag, get_class($this));
@@ -143,7 +182,7 @@ class EnrollmentBase extends BaseEntity {
         		return Enrollment::Load($mixData);
         	}elseif(
         		(is_object($mixData)) && 
-        		(get_class($mixData) == 'Enrollment)
+        		(get_class($mixData) == 'Enrollment')
         	){
         		if(!$blnReturnId){
         			return $mixData;
@@ -152,7 +191,7 @@ class EnrollmentBase extends BaseEntity {
         	}elseif(is_null($mixData)){
         		return null;
         	}else{
-        		throw new Exception(__FUNCTION__ . '->Parse - Parameter 1 must be either an intiger or a class type "Enrollment"');
+        		throw new Exception(__FUNCTION__ . ' - Parameter 1 must be either an intiger or a class type "Enrollment"');
         	}        	
         }
         public static function LoadSingleByField( $strField, $mixValue, $strCompairison = '='){

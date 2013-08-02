@@ -90,6 +90,10 @@ class DeviceBase extends BaseEntity {
 	}
      //Get children
     
+    public function GetAssignmentArr(){
+       return Assignment::LoadCollByIdDevice($this->idDevice);
+    }
+	
 
     //Load by foregin key
     
@@ -109,6 +113,11 @@ class DeviceBase extends BaseEntity {
     	}
        
          
+            
+             if(array_key_exists('iddevice', $arrData)){
+                $this->intIdDevice = $arrData['iddevice'];
+             }
+        
     }
         
         
@@ -123,7 +132,7 @@ class DeviceBase extends BaseEntity {
         		return Device::Load($mixData);
         	}elseif(
         		(is_object($mixData)) && 
-        		(get_class($mixData) == 'Device)
+        		(get_class($mixData) == 'Device')
         	){
         		if(!$blnReturnId){
         			return $mixData;
@@ -132,7 +141,7 @@ class DeviceBase extends BaseEntity {
         	}elseif(is_null($mixData)){
         		return null;
         	}else{
-        		throw new Exception(__FUNCTION__ . '->Parse - Parameter 1 must be either an intiger or a class type "Device"');
+        		throw new Exception(__FUNCTION__ . ' - Parameter 1 must be either an intiger or a class type "Device"');
         	}        	
         }
         public static function LoadSingleByField( $strField, $mixValue, $strCompairison = '='){
