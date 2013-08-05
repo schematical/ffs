@@ -25,6 +25,10 @@
         $this->lnkInviteFamily->AddAction($this, 'lnkIndividual_click');
     }
     public function InitInviteFamilyFields(){
+        if(!is_null($this->lnkInviteFamily)){
+            $this->lnkInviteFamily->Remove();
+            $this->lnkInviteFamily = null;
+        }
 
     }
     public function pnlParentMessage_save($objParentMessage){

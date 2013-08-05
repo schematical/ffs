@@ -31,6 +31,7 @@ MLCApplicationBase::$arrClassFiles['FFSRewriteHandeler'] = __MODEL_MDE_APP_DIR__
 //CTL
 MLCApplicationBase::$arrClassFiles['FFSGymLandingHeaderPanel'] = __CTL_MDE_APP_DIR__ . '/_panels/FFSGymLandingHeaderPanel.class.php';
 MLCApplicationBase::$arrClassFiles['FFSParentMessageManagePanel'] = __CTL_MDE_APP_DIR__ . '/_panels/FFSParentMessageManagePanel.class.php';
+MLCApplicationBase::$arrClassFiles['FFSOrgHomeNavPanel'] = __CTL_MDE_APP_DIR__ . '/_panels/FFSOrgHomeNavPanel.class.php';
 
 
 

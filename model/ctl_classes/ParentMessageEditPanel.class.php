@@ -4,6 +4,11 @@ class ParentMessageEditPanel extends ParentMessageEditPanelBase {
 
     public function __construct($objParentControl, $objParentMessage = null){
 		parent::__construct($objParentControl, $objParentMessage);
+        $this->strAtheleteName->AddCssClass('input-mlarge span3 offset1');
+        $this->strAtheleteName->Style->Padding = '24Px';
+        $this->btnSave->Style->Padding = '9Px';
+        $this->btnSave->AddCssClass('ParentMessageEditPanel_btnSave');
+
         if(!is_null($this->objParentMessage)){
             if(is_null($this->objParentMessage->QueDate)){
                 //Message has not been created yet

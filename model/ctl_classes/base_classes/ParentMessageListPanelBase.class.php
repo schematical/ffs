@@ -48,6 +48,31 @@ class ParentMessageListPanelBase extends MJaxTable{
 	    	$this->AddColumn('idUser','idUser');
 	   		
 		
+	    	
+	    	
+	    	$this->AddColumn('queDate','queDate');
+	   		
+		
+	    	
+	    	
+	    	$this->AddColumn('inviteData','inviteData');
+	   		
+		
+	    	
+	    	
+	    	$this->AddColumn('inviteType','inviteType');
+	   		
+		
+	    	
+	    	
+	    	$this->AddColumn('inviteToken','inviteToken');
+	   		
+		
+	    	
+	    	
+	    	$this->AddColumn('inviteViewDate','inviteViewDate');
+	   		
+		
 	}
 	public function objRow_click($strFomrId, $strControlId, $strActionParameter){
 

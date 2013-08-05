@@ -12,6 +12,7 @@ class index extends FFSForm
     public $lnkFamily = null;
     public $pnlMaster = null;
     public $pnlStripe = null;
+    public $intMessageCt = null;
 
 
     public function Form_Create()
@@ -35,8 +36,16 @@ class index extends FFSForm
         $this->pnlMaster = new FFSParentMessageManagePanel($this);
 
         $this->pnlStripe = new MJaxStripePaymentPanel($this);
-        $this->pnlStripe->MakeTwoCol();
-        $this->pnlStripe->AddCssClass('mjax-bs-animate-hiden');
+        $this->pnlStripe->Template = __VIEW_ACTIVE_APP_DIR__ . '/www/_panels/MJaxStripePaymentPanel.tpl.php';
+        $this->pnlStripe->UseAddress = false;
+        $this->pnlStripe->AddCssClass('row margin-bottom-25 mjax-bs-animate-hiden');
+
+        $this->pnlStripe->txtCardNum->AddCssClass('input-mlarge span4 offset1');
+        $this->pnlStripe->txtCvc->AddCssClass('input-mlarge span3');
+        $this->pnlStripe->lstExpMonth->AddCssClass('input-mlarge span2');
+        $this->pnlStripe->lstExpYear->AddCssClass('input-mlarge span2');
+        $this->pnlStripe->lnkSubmit->AddCssClass('span10 offset1');
+
         $this->pnlStripe->AddAction(
             new MJaxStripePaymentSuccessEvent(),
             new MJaxServerControlAction(
@@ -49,12 +58,16 @@ class index extends FFSForm
 
     public function lnkIndividual_click()
     {
+        $this->intMessageCt = 1;
         $this->AnimateOpen(
             $this->pnlMaster
         );
+        $this->pnlMaster->InitInviteFamilyLink();
     }
     public function lnkFamily_click()
     {
+        $this->intMessageCt = 5;
+        $this->pnlMaster->InitInviteFamilyFields();
         $this->AnimateOpen(
             $this->pnlMaster
         );
@@ -65,6 +78,10 @@ class index extends FFSForm
         );
     }
     public function pnlStripe_success(){
+        $arrCustomerData = $this->pnlStripe->CreateStripeCustomer();
+        //MLCStripeDriver::
+        //Create ParentMessages with no QueDate
+        FFSApplication::CreateParentMessageTokens($this->intMessageCt);
         $this->blnForceRenderFormState = true;
         $this->blnSkipMainWindowRender = false;
         $this->strTemplate = __VIEW_ACTIVE_APP_DIR__ . '/www/parent/index_thankYou.tpl.php';

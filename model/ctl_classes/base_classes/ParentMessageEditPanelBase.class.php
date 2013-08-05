@@ -37,6 +37,31 @@ class ParentMessageEditPanelBase extends MJaxPanel{
     	public $intIdUser = null;
    		
 	
+    	
+    	
+    	public $dttQueDate = null;
+   		
+	
+    	
+    	
+    	public $strInviteData = null;
+   		
+	
+    	
+    	
+    	public $strInviteType = null;
+   		
+	
+    	
+    	
+    	public $strInviteToken = null;
+   		
+	
+    	
+    	
+    	public $dttInviteViewDate = null;
+   		
+	
 	
    		public $lnkViewParentParentMessage = null;
 	
@@ -136,6 +161,61 @@ class ParentMessageEditPanelBase extends MJaxPanel{
                 
             
   		
+	     
+	  	
+            
+	  		
+                //Is special field!!!!!
+                
+                
+                    $this->dttQueDate = new MJaxJQueryDateSelectPanel($this);
+                
+            
+  		
+	     
+	  	
+            
+                $this->strInviteData = new MJaxTextBox($this);
+                $this->strInviteData->Name = 'inviteData';
+                $this->strInviteData->AddCssClass('input-large');
+                //varchar(256)
+                
+            
+	  		
+  		
+	     
+	  	
+            
+                $this->strInviteType = new MJaxTextBox($this);
+                $this->strInviteType->Name = 'inviteType';
+                $this->strInviteType->AddCssClass('input-large');
+                //varchar(16)
+                
+            
+	  		
+  		
+	     
+	  	
+            
+                $this->strInviteToken = new MJaxTextBox($this);
+                $this->strInviteToken->Name = 'inviteToken';
+                $this->strInviteToken->AddCssClass('input-large');
+                //varchar(256)
+                
+            
+	  		
+  		
+	     
+	  	
+            
+	  		
+                //Is special field!!!!!
+                
+                
+                    $this->dttInviteViewDate = new MJaxJQueryDateSelectPanel($this);
+                
+            
+  		
 	  
 	  if(!is_null($this->objParentMessage)){
 	     
@@ -203,6 +283,59 @@ class ParentMessageEditPanelBase extends MJaxPanel{
             
                 //Is special field!!!!!
                 
+                
+            
+  		
+  		
+  		
+	     
+	  	
+            
+            
+                //Is special field!!!!!
+                
+                
+                    $this->dttQueDate->Value = $this->objParentMessage->queDate;
+                
+            
+  		
+  		
+  		
+	     
+	  	
+            
+	  		    $this->strInviteData->Text = $this->objParentMessage->inviteData;
+            
+            
+  		
+  		
+  		
+	     
+	  	
+            
+	  		    $this->strInviteType->Text = $this->objParentMessage->inviteType;
+            
+            
+  		
+  		
+  		
+	     
+	  	
+            
+	  		    $this->strInviteToken->Text = $this->objParentMessage->inviteToken;
+            
+            
+  		
+  		
+  		
+	     
+	  	
+            
+            
+                //Is special field!!!!!
+                
+                
+                    $this->dttInviteViewDate->Value = $this->objParentMessage->inviteViewDate;
                 
             
   		
@@ -281,6 +414,45 @@ class ParentMessageEditPanelBase extends MJaxPanel{
                     
                     
                         $this->objParentMessage->idUser = MLCAuthDriver::IdUser();
+                    
+                
+            
+		  
+            
+                
+                
+                    //Is special field!!!!!
+                    
+                    
+                
+            
+		  
+            
+                
+                    $this->objParentMessage->inviteData = $this->strInviteData->Text;
+                
+                
+            
+		  
+            
+                
+                    $this->objParentMessage->inviteType = $this->strInviteType->Text;
+                
+                
+            
+		  
+            
+                
+                    $this->objParentMessage->inviteToken = $this->strInviteToken->Text;
+                
+                
+            
+		  
+            
+                
+                
+                    //Is special field!!!!!
+                    
                     
                 
             

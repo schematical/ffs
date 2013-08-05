@@ -1,8 +1,8 @@
 
 <div class='row-fluid'>
-    <div class='offset1 span3'>
+    <!--div class='offset1 span3'-->
          <?php $_CONTROL->strAtheleteName->Render(); ?>
-    </div>
+    <!--/div-->
     <?php $_CONTROL->strMessage->Render(); ?>
     <?php $_CONTROL->btnSave->Render(); ?>
 

@@ -62,6 +62,26 @@ class ParentMessageBase extends BaseEntity {
         $xmlStr .= $this->idUser;
         $xmlStr .= "</idUser>";
         
+        $xmlStr .= "<queDate>";
+        $xmlStr .= $this->queDate;
+        $xmlStr .= "</queDate>";
+        
+        $xmlStr .= "<inviteData>";
+        $xmlStr .= $this->inviteData;
+        $xmlStr .= "</inviteData>";
+        
+        $xmlStr .= "<inviteType>";
+        $xmlStr .= $this->inviteType;
+        $xmlStr .= "</inviteType>";
+        
+        $xmlStr .= "<inviteToken>";
+        $xmlStr .= $this->inviteToken;
+        $xmlStr .= "</inviteToken>";
+        
+        $xmlStr .= "<inviteViewDate>";
+        $xmlStr .= $this->inviteViewDate;
+        $xmlStr .= "</inviteViewDate>";
+        
         if($blnReclusive){
            //Finish FK Rel stuff
         }
@@ -210,6 +230,21 @@ class ParentMessageBase extends BaseEntity {
                                  
                  $arrReturn['idUser'] = $this->idUser;
             
+                                 
+                 $arrReturn['queDate'] = $this->queDate;
+            
+                                 
+                 $arrReturn['inviteData'] = $this->inviteData;
+            
+                                 
+                 $arrReturn['inviteType'] = $this->inviteType;
+            
+                                 
+                 $arrReturn['inviteToken'] = $this->inviteToken;
+            
+                                 
+                 $arrReturn['inviteViewDate'] = $this->inviteViewDate;
+            
             return $arrReturn;
         }
         public function __toJson($blnPosponeEncode = false){
@@ -279,6 +314,46 @@ class ParentMessageBase extends BaseEntity {
 	        		return null;
 	        	break;
 	        	
+	   			case('QueDate'): 
+	   			case('queDate'): 
+	   				if(array_key_exists('queDate', $this->arrDBFields)){
+	        			return $this->arrDBFields['queDate'];
+	        		}
+	        		return null;
+	        	break;
+	        	
+	   			case('InviteData'): 
+	   			case('inviteData'): 
+	   				if(array_key_exists('inviteData', $this->arrDBFields)){
+	        			return $this->arrDBFields['inviteData'];
+	        		}
+	        		return null;
+	        	break;
+	        	
+	   			case('InviteType'): 
+	   			case('inviteType'): 
+	   				if(array_key_exists('inviteType', $this->arrDBFields)){
+	        			return $this->arrDBFields['inviteType'];
+	        		}
+	        		return null;
+	        	break;
+	        	
+	   			case('InviteToken'): 
+	   			case('inviteToken'): 
+	   				if(array_key_exists('inviteToken', $this->arrDBFields)){
+	        			return $this->arrDBFields['inviteToken'];
+	        		}
+	        		return null;
+	        	break;
+	        	
+	   			case('InviteViewDate'): 
+	   			case('inviteViewDate'): 
+	   				if(array_key_exists('inviteViewDate', $this->arrDBFields)){
+	        			return $this->arrDBFields['inviteViewDate'];
+	        		}
+	        		return null;
+	        	break;
+	        	
 	        	defualt:
 	        		throw new Exception('No property with name "' . $strName . '" exists in class ". get_class($this) . "');
 	        	break;
@@ -322,6 +397,31 @@ class ParentMessageBase extends BaseEntity {
 	   			case('IdUser'): 
 	   			case('idUser'): 
 	        		$this->arrDBFields['idUser'] = $strValue;
+	        	break;
+	        	
+	   			case('QueDate'): 
+	   			case('queDate'): 
+	        		$this->arrDBFields['queDate'] = $strValue;
+	        	break;
+	        	
+	   			case('InviteData'): 
+	   			case('inviteData'): 
+	        		$this->arrDBFields['inviteData'] = $strValue;
+	        	break;
+	        	
+	   			case('InviteType'): 
+	   			case('inviteType'): 
+	        		$this->arrDBFields['inviteType'] = $strValue;
+	        	break;
+	        	
+	   			case('InviteToken'): 
+	   			case('inviteToken'): 
+	        		$this->arrDBFields['inviteToken'] = $strValue;
+	        	break;
+	        	
+	   			case('InviteViewDate'): 
+	   			case('inviteViewDate'): 
+	        		$this->arrDBFields['inviteViewDate'] = $strValue;
 	        	break;
 	        	
 	        	defualt:
