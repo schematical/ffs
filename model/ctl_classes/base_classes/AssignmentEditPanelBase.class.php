@@ -43,9 +43,9 @@ class AssignmentEditPanelBase extends MJaxPanel{
    		
 	
 	
-   		public $lnkViewParentAssignment = null;
+   		//public $lnkViewParentAssignment = null;
 	
-   		public $lnkViewParentAssignment = null;
+   		//public $lnkViewParentAssignment = null;
 	
 	
 	//Regular controls

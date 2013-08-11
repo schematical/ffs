@@ -62,6 +62,10 @@ class SessionBase extends BaseEntity {
         $xmlStr .= $this->data;
         $xmlStr .= "</data>";
         
+        $xmlStr .= "<equipmentSet>";
+        $xmlStr .= $this->equipmentSet;
+        $xmlStr .= "</equipmentSet>";
+        
         if($blnReclusive){
            //Finish FK Rel stuff
         }
@@ -72,6 +76,7 @@ class SessionBase extends BaseEntity {
    
 	public static function Query($strExtra, $blnReturnSingle = false){
 		$sql = sprintf("SELECT * FROM %s %s;", self::TABLE_NAME,  $strExtra);
+        //die($sql);
 		$result = MLCDBDriver::Query($sql, self::DB_CONN);
 		$coll = new BaseEntityCollection();
 		while($data = mysql_fetch_assoc($result)){
@@ -219,6 +224,9 @@ class SessionBase extends BaseEntity {
                                  
                  $arrReturn['data'] = $this->data;
             
+                                 
+                 $arrReturn['equipmentSet'] = $this->equipmentSet;
+            
             return $arrReturn;
         }
         public function __toJson($blnPosponeEncode = false){
@@ -288,7 +296,29 @@ class SessionBase extends BaseEntity {
 	        		return null;
 	        	break;
 	        	
-	        	defualt:
+	   			case('EquipmentSet'): 
+	   			case('equipmentSet'): 
+	   				if(array_key_exists('equipmentSet', $this->arrDBFields)){
+	        			return $this->arrDBFields['equipmentSet'];
+	        		}
+	        		return null;
+	        	break;
+	        	
+	        	
+                case('IdCompetitionObject'):
+                case('idCompetitionObject'):
+	   				if(
+	   				    (array_key_exists('idCompetition', $this->arrDBFields)) &&
+	   				    (!is_null($this->arrDBFields['idCompetition']))
+                    ){
+	        			return Competition::LoadById(
+	        			    $this->arrDBFields['idCompetition']
+                        );
+	        		}
+	        		return null;
+	        	break;
+	        	
+	        	default:
 	        		throw new Exception('No property with name "' . $strName . '" exists in class ". get_class($this) . "');
 	        	break;
 	        }
@@ -333,7 +363,12 @@ class SessionBase extends BaseEntity {
 	        		$this->arrDBFields['data'] = $strValue;
 	        	break;
 	        	
-	        	defualt:
+	   			case('EquipmentSet'): 
+	   			case('equipmentSet'): 
+	        		$this->arrDBFields['equipmentSet'] = $strValue;
+	        	break;
+	        	
+	        	default:
 	        		throw new Exception('No property with name "' . $strName . '" exists in class ". get_class($this) . "');
 	        	break;
 	        }

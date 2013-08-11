@@ -1,5 +1,6 @@
 <?php class FFSParentMessageManagePanel extends MJaxPanel{
     public $pnlParentMessage = null;
+    public $pnlParentMessageInvite = null;
     public $lnkInviteFamily = null;
     public function __construct($objParentControl, $strControlId = null){
         parent::__construct($objParentControl, $strControlId);
@@ -15,6 +16,7 @@
         $this->pnlParentMessage->strMessage->AddCssClass('span4');
         $this->pnlParentMessage->strMessage->Attr('placeholder','Message');
         $this->pnlParentMessage->btnSave->AddCssClass('span4');
+        $this->pnlParentMessage->AllowSave = false;
 
 
     }
@@ -30,10 +32,13 @@
             $this->lnkInviteFamily = null;
         }
 
+        $this->pnlParentMessageInvite = new FFSParentMessageInvitePanel($this);
+        $this->blnModified = true;
+
     }
     public function pnlParentMessage_save($objParentMessage){
         //Display payment form
-        $this->objForm->DispStripe();
+        $this->objForm->pnlParentMessage_send();
 
     }
     public function _searchAthelete($objRoute){

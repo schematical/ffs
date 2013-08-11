@@ -3,6 +3,7 @@ require_once(__MODEL_APP_CONTROL__ . "/base_classes/CompetitionEditPanelBase.cla
 class CompetitionEditPanel extends CompetitionEditPanelBase {
     public $txtOrgName = null;
     public $btnContinue = null;
+    public $objOrg = null;
     public function __construct($objParentControl, $objCompetion = null){
         parent::__construct($objParentControl, $objCompetion);
 
@@ -34,13 +35,14 @@ class CompetitionEditPanel extends CompetitionEditPanelBase {
         parent::btnSave_click();
 
         //Create new Org
-        $objOrg = new Org();
-        $objOrg->Name = $this->txtOrgName->Text;
-        $objOrg->Namespace = FFSRewriteHandeler::ConvertToNamespace(
+        $this->objOrg = new Org();
+        $this->objOrg->Name = $this->txtOrgName->Text;
+        $this->objOrg->Namespace = FFSRewriteHandeler::ConvertToNamespace(
             $this->txtOrgName->Text
         );
-        $objOrg->CreDate = MLCDateTime::Now();
-        $this->objCompetition->IdOrg = $objOrg->IdOrg;
+        $this->objOrg->CreDate = MLCDateTime::Now();
+        $this->objOrg->Save();
+        $this->objCompetition->IdOrg = $this->objOrg->IdOrg;
         $this->objCompetition->Save();
         return;
     }

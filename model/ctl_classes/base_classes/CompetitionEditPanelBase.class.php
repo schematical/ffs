@@ -43,7 +43,7 @@ class CompetitionEditPanelBase extends MJaxPanel{
    		
 	
 	
-   		public $lnkViewParentCompetition = null;
+   		//public $lnkViewParentCompetition = null;
 	
 	
   		public $lnkViewChildSession = null;

@@ -62,8 +62,20 @@ class ParentMessageEditPanelBase extends MJaxPanel{
     	public $dttInviteViewDate = null;
    		
 	
+    	
+    	
+    	public $intIdCompetition = null;
+   		
 	
-   		public $lnkViewParentParentMessage = null;
+    	
+    	
+    	public $dttApproveDate = null;
+   		
+	
+	
+   		//public $lnkViewParentParentMessage = null;
+	
+   		//public $lnkViewParentParentMessage = null;
 	
 	
 	//Regular controls
@@ -216,6 +228,22 @@ class ParentMessageEditPanelBase extends MJaxPanel{
                 
             
   		
+	     
+	  	
+            
+	  		
+  		
+	     
+	  	
+            
+	  		
+                //Is special field!!!!!
+                
+                
+                    $this->dttApproveDate = new MJaxJQueryDateSelectPanel($this);
+                
+            
+  		
 	  
 	  if(!is_null($this->objParentMessage)){
 	     
@@ -341,6 +369,28 @@ class ParentMessageEditPanelBase extends MJaxPanel{
   		
   		
   		
+	     
+	  	
+            
+	  		    $this->intIdCompetition->Text = $this->objParentMessage->idCompetition;
+            
+            
+  		
+  		
+  		
+	     
+	  	
+            
+            
+                //Is special field!!!!!
+                
+                
+                    $this->dttApproveDate->Value = $this->objParentMessage->approveDate;
+                
+            
+  		
+  		
+  		
 	  
 	  }
 	}
@@ -351,6 +401,12 @@ class ParentMessageEditPanelBase extends MJaxPanel{
                 $this->lnkViewParentParentMessage = new MJaxLinkButton($this);
                 $this->lnkViewParentParentMessage->Text = 'View Athelete';
                 $this->lnkViewParentParentMessage->Href = __ENTITY_MODEL_DIR__ . '/Athelete/' . $this->objParentMessage->idAthelete;
+            }
+          
+            if(!is_null($this->objParentMessage->idCompetition)){
+                $this->lnkViewParentParentMessage = new MJaxLinkButton($this);
+                $this->lnkViewParentParentMessage->Text = 'View Competition';
+                $this->lnkViewParentParentMessage->Href = __ENTITY_MODEL_DIR__ . '/Competition/' . $this->objParentMessage->idCompetition;
             }
           
 
@@ -444,6 +500,20 @@ class ParentMessageEditPanelBase extends MJaxPanel{
             
                 
                     $this->objParentMessage->inviteToken = $this->strInviteToken->Text;
+                
+                
+            
+		  
+            
+                
+                
+                    //Is special field!!!!!
+                    
+                    
+                
+            
+		  
+            
                 
                 
             

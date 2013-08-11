@@ -1,17 +1,17 @@
 <?php
 
-define('__MODEL_APP_DATALAYER_DIR__', __MODEL_MDE_APP_DIR__ . '/data_classes');
+define('__MODEL_APP_DATALAYER_DIR__', __MODEL_FFS_APP_DIR__ . '/data_classes');
 
-define('__MODEL_APP_CONTROL__', __MODEL_MDE_APP_DIR__ . '/ctl_classes');
+define('__MODEL_APP_CONTROL__', __MODEL_FFS_APP_DIR__ . '/ctl_classes');
 
-define('__MODEL_APP_API__', __MODEL_MDE_APP_DIR__ . '/api_classes');
-define('__MODEL_APP_ENTITY_MODEL__', __MODEL_MDE_APP_DIR__ . '/entity_model');
+define('__MODEL_APP_API__', __MODEL_FFS_APP_DIR__ . '/api_classes');
+define('__MODEL_APP_ENTITY_MODEL__', __MODEL_FFS_APP_DIR__ . '/entity_model');
 if(!defined('SKIP_DATALAYER')){
 	require_once(__MODEL_APP_DATALAYER_DIR__ . '/base_classes/DataConn.inc.php');
 	require_once(__MODEL_APP_CONTROL__ . '/base_classes/ControlConn.inc.php');
 
 }
-require_once(__MODEL_MDE_APP_DIR__ . '/_enum.inc.php');
+require_once(__MODEL_FFS_APP_DIR__ . '/_enum.inc.php');
 
 define('__HIGHRISE_URL__', 'https://mattleaconsulting.highrisehq.com');
 define('__HIGHRISE_API_KEY__', '69138c143576fae6de2ab9d14b9138a8');
@@ -24,14 +24,27 @@ define('__GIT_API_KEY__','f6ecb159e135dd9c5b81');
 define('__GIT_API_SECRET__','e862e0c0da8930ca18f69cbe8c33cf834fdbc88a');
 define('__GOOGLE_API_KEY__', '957059295923-5k84s277agjcbgjaiqn9094d4kk8ajms.apps.googleusercontent.com');
 define('__GOOGLE_API_SECRET__', 'K4Z7CoP_c1sITYi7x9L3XcCt');
-MLCApplicationBase::$arrClassFiles['MLCApiHome'] = __MODEL_MDE_APP_DIR__ . '/api_custom/MLCApiHome.class.php';
-MLCApplicationBase::$arrClassFiles['MLCApiFunnel'] = __MODEL_MDE_APP_DIR__ . '/api_custom/MLCApiFunnel.class.php';
-MLCApplicationBase::$arrClassFiles['FFSForm'] = __MODEL_MDE_APP_DIR__ . '/FFSForm.class.php';
-MLCApplicationBase::$arrClassFiles['FFSRewriteHandeler'] = __MODEL_MDE_APP_DIR__ . '/FFSRewriteHandeler.class.php';
+MLCApplicationBase::$arrClassFiles['MLCApiHome'] = __MODEL_FFS_APP_DIR__ . '/api_custom/MLCApiHome.class.php';
+MLCApplicationBase::$arrClassFiles['MLCApiFunnel'] = __MODEL_FFS_APP_DIR__ . '/api_custom/MLCApiFunnel.class.php';
+MLCApplicationBase::$arrClassFiles['FFSForm'] = __MODEL_FFS_APP_DIR__ . '/FFSForm.class.php';
+MLCApplicationBase::$arrClassFiles['FFSRewriteHandeler'] = __MODEL_FFS_APP_DIR__ . '/FFSRewriteHandeler.class.php';
+MLCApplicationBase::$arrClassFiles['FFSApplication'] = __MODEL_FFS_APP_DIR__ . '/FFSApplication.class.php';
 //CTL
-MLCApplicationBase::$arrClassFiles['FFSGymLandingHeaderPanel'] = __CTL_MDE_APP_DIR__ . '/_panels/FFSGymLandingHeaderPanel.class.php';
-MLCApplicationBase::$arrClassFiles['FFSParentMessageManagePanel'] = __CTL_MDE_APP_DIR__ . '/_panels/FFSParentMessageManagePanel.class.php';
-MLCApplicationBase::$arrClassFiles['FFSOrgHomeNavPanel'] = __CTL_MDE_APP_DIR__ . '/_panels/FFSOrgHomeNavPanel.class.php';
+MLCApplicationBase::$arrClassFiles['FFSGymLandingHeaderPanel'] = __CTL_FFS_APP_DIR__ . '/_panels/FFSGymLandingHeaderPanel.class.php';
+MLCApplicationBase::$arrClassFiles['FFSParentMessageManagePanel'] = __CTL_FFS_APP_DIR__ . '/_panels/FFSParentMessageManagePanel.class.php';
+MLCApplicationBase::$arrClassFiles['FFSOrgHomeNavPanel'] = __CTL_FFS_APP_DIR__ . '/_panels/FFSOrgHomeNavPanel.class.php';
+MLCApplicationBase::$arrClassFiles['FFSParentMessageInvitePanel'] = __CTL_FFS_APP_DIR__ . '/_panels/FFSParentMessageInvitePanel.class.php';
+MLCApplicationBase::$arrClassFiles['FFSScoreDisplayPanel'] = __CTL_FFS_APP_DIR__ . '/_panels/FFSScoreDisplayPanel.class.php';
+MLCApplicationBase::$arrClassFiles['FFSOrgCompActivePanel'] = __CTL_FFS_APP_DIR__ . '/_panels/FFSOrgCompActivePanel.class.php';
+MLCApplicationBase::$arrClassFiles['FFSPTFImportPanel'] = __CTL_FFS_APP_DIR__ . '/_panels/FFSPTFImportPanel.class.php';
+MLCApplicationBase::$arrClassFiles['FFSAdPanel'] = __CTL_FFS_APP_DIR__ . '/_panels/FFSAdPanel.class.php';
+
+
+
+//Proscore stuff
+MLCApplicationBase::$arrClassFiles['Proscore'] = __MODEL_FFS_APP_DIR__ . '/proscore/Proscore.class.php';
+MLCApplicationBase::$arrClassFiles['ProscoreData'] = __MODEL_FFS_APP_DIR__ . '/proscore/ProscoreData.class.php';
+
 
 
 
@@ -52,15 +65,16 @@ switch(SERVER_ENV){
 MLCApplication::InitPackage('MJax');
 MLCApplication::InitPackage('MJaxBootstrap');
 MLCApplication::InitPackage('MLCAuth');
-
-MLCApplication::$objRewriteHandeler = new FFSRewriteHandeler();
+if(!defined('SKIP_DATALAYER')){
+    MLCApplication::$objRewriteHandeler = new FFSRewriteHandeler();
+}
 
 MLCApplication::InitPackage('MLCDataLayer');
 MLCApplication::InitPackage('MJaxTracking');
 MLCApplication::InitPackage('MJaxWAdminTheme');
 MLCApplication::InitPackage('MJaxJQueryUI');
 MLCApplication::InitPackage('MLCSalesTools');
-//_dv(MLCApplicationBase::$arrClassFiles['MLCApiMDEPackage']);
+//_dv(MLCApplicationBase::$arrClassFiles['MLCApiFFSPackage']);
 if(class_exists('MLCAuthDriver')){
     MLCAuthDriver::SetCookieDomain('ffs.com');
 }

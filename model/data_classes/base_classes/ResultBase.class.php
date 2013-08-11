@@ -62,6 +62,14 @@ class ResultBase extends BaseEntity {
         $xmlStr .= $this->creDate;
         $xmlStr .= "</creDate>";
         
+        $xmlStr .= "<event>";
+        $xmlStr .= $this->event;
+        $xmlStr .= "</event>";
+        
+        $xmlStr .= "<dispDate>";
+        $xmlStr .= $this->dispDate;
+        $xmlStr .= "</dispDate>";
+        
         if($blnReclusive){
            //Finish FK Rel stuff
         }
@@ -223,6 +231,12 @@ class ResultBase extends BaseEntity {
                                  
                  $arrReturn['creDate'] = $this->creDate;
             
+                                 
+                 $arrReturn['event'] = $this->event;
+            
+                                 
+                 $arrReturn['dispDate'] = $this->dispDate;
+            
             return $arrReturn;
         }
         public function __toJson($blnPosponeEncode = false){
@@ -292,7 +306,50 @@ class ResultBase extends BaseEntity {
 	        		return null;
 	        	break;
 	        	
-	        	defualt:
+	   			case('Event'): 
+	   			case('event'): 
+	   				if(array_key_exists('event', $this->arrDBFields)){
+	        			return $this->arrDBFields['event'];
+	        		}
+	        		return null;
+	        	break;
+	        	
+	   			case('DispDate'): 
+	   			case('dispDate'): 
+	   				if(array_key_exists('dispDate', $this->arrDBFields)){
+	        			return $this->arrDBFields['dispDate'];
+	        		}
+	        		return null;
+	        	break;
+	        	
+	        	
+                case('IdSessionObject'):
+                case('idAtheleteObject'):
+	   				if(
+	   				    (array_key_exists('idSession', $this->arrDBFields)) &&
+	   				    (!is_null($this->arrDBFields['idSession']))
+                    ){
+	        			return Session::LoadById(
+	        			    $this->arrDBFields['idSession']
+                        );
+	        		}
+	        		return null;
+	        	break;
+	        	
+                case('IdAtheleteObject'):
+                case('idAtheleteObject'):
+	   				if(
+	   				    (array_key_exists('idAthelete', $this->arrDBFields)) &&
+	   				    (!is_null($this->arrDBFields['idAthelete']))
+                    ){
+	        			return Athelete::LoadById(
+	        			    $this->arrDBFields['idAthelete']
+                        );
+	        		}
+	        		return null;
+	        	break;
+	        	
+	        	default:
 	        		throw new Exception('No property with name "' . $strName . '" exists in class ". get_class($this) . "');
 	        	break;
 	        }
@@ -337,7 +394,17 @@ class ResultBase extends BaseEntity {
 	        		$this->arrDBFields['creDate'] = $strValue;
 	        	break;
 	        	
-	        	defualt:
+	   			case('Event'): 
+	   			case('event'): 
+	        		$this->arrDBFields['event'] = $strValue;
+	        	break;
+	        	
+	   			case('DispDate'): 
+	   			case('dispDate'): 
+	        		$this->arrDBFields['dispDate'] = $strValue;
+	        	break;
+	        	
+	        	default:
 	        		throw new Exception('No property with name "' . $strName . '" exists in class ". get_class($this) . "');
 	        	break;
 	        }

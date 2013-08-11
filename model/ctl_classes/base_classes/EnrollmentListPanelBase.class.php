@@ -63,6 +63,26 @@ class EnrollmentListPanelBase extends MJaxTable{
 	    	$this->AddColumn('misc3','misc3');
 	   		
 		
+	    	
+	    	
+	    	$this->AddColumn('misc4','misc4');
+	   		
+		
+	    	
+	    	
+	    	$this->AddColumn('misc5','misc5');
+	   		
+		
+	    	
+	    	
+	    	$this->AddColumn('creDate','creDate');
+	   		
+		
+	    	
+	    	
+	    	$this->AddColumn('level','level');
+	   		
+		
 	}
 	public function objRow_click($strFomrId, $strControlId, $strActionParameter){
 

@@ -8,7 +8,7 @@
 
 require_once ('_config.inc.php');
 MLCApplication::InitPackage('MLCStripe');
-class Signup extends MLCForm {
+class Signup extends FFSForm {
 
   	protected $pnlSignUp = null;
 

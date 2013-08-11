@@ -1,10 +1,10 @@
-<h1>Create Your Account</h1>
+<h1>Login</h1>
 
 
 
 <div class="login-fields">
 
-    <p>Create your free account:</p>
+   <!-- <p>Login:</p>-->
     <div id='<?php echo $_CONTROL->txtEmail->ControlId; ?>_holder'  class="field">
         <label for="email">Email Address:</label>
         <?php $_CONTROL->txtEmail->Render(); ?>

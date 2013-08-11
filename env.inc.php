@@ -3,7 +3,8 @@
 if(!defined('SERVER_ENV')){
 
 	switch($_SERVER['SERVER_NAME']){
-		case('local.ffs.com'):
+        case('local.tumblescore.com'):
+        case('local.ffs.com'):
 			define('SERVER_ENV', 'local');
 			define('MLC_APPLICATION_NAME', 'ffs');
 		break;
@@ -19,7 +20,7 @@ if(!defined('SERVER_ENV')){
 	}
 }
 if(defined('SERVER_ENV')){
-    define('MLC_APPLICATION_PREFIX', 'MDE');
+    define('MLC_APPLICATION_PREFIX', 'FFS');
 	switch(SERVER_ENV){
 		case('local'):			
 			define('DB_1', serialize(array(
@@ -103,8 +104,8 @@ if(defined('SERVER_ENV')){
     if(array_key_exists('SERVER_NAME', $_SERVER)){
         define('HIGHRISE_REDIRECT_URL', 'http://' . $_SERVER['SERVER_NAME'] . '/launch/highrise.php');
     }
-    define('MDE_AWS_S3_CACHE_TIME', 3600);
-    define('MDE_GIT_CACHE_TIME', 3600);
+    define('FFS_AWS_S3_CACHE_TIME', 3600);
+    define('FFS_GIT_CACHE_TIME', 3600);
     define('__GIT_TMP_DIR__', '/var/www/fake_git');
 
 	if(true){//Cant do live yet

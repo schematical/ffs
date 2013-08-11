@@ -48,6 +48,16 @@ class ResultListPanelBase extends MJaxTable{
 	    	$this->AddColumn('creDate','creDate');
 	   		
 		
+	    	
+	    	
+	    	$this->AddColumn('event','event');
+	   		
+		
+	    	
+	    	
+	    	$this->AddColumn('dispDate','dispDate');
+	   		
+		
 	}
 	public function objRow_click($strFomrId, $strControlId, $strActionParameter){
 

@@ -11,6 +11,12 @@ class MLCApiParentMessageObjectBase extends MLCApiObjectBase{
 					return new MLCApiAtheleteObject($objIdAthelete);
 			    break;
 			    
+		       	case('ParentMessage'):
+					//Load 
+					$objCompetition = $this->GetEntity()->IdCompetition;
+					return new MLCApiCompetitionObject($objIdCompetition);
+			    break;
+			    
 				
 				default:
 					return parent::__call($strName, $arrArguments);

@@ -54,6 +54,26 @@ class AtheleteBase extends BaseEntity {
         $xmlStr .= $this->birthDate;
         $xmlStr .= "</birthDate>";
         
+        $xmlStr .= "<memType>";
+        $xmlStr .= $this->memType;
+        $xmlStr .= "</memType>";
+        
+        $xmlStr .= "<memId>";
+        $xmlStr .= $this->memId;
+        $xmlStr .= "</memId>";
+        
+        $xmlStr .= "<PsData>";
+        $xmlStr .= $this->PsData;
+        $xmlStr .= "</PsData>";
+        
+        $xmlStr .= "<creDate>";
+        $xmlStr .= $this->creDate;
+        $xmlStr .= "</creDate>";
+        
+        $xmlStr .= "<level>";
+        $xmlStr .= $this->level;
+        $xmlStr .= "</level>";
+        
         if($blnReclusive){
            //Finish FK Rel stuff
         }
@@ -205,6 +225,21 @@ class AtheleteBase extends BaseEntity {
                                  
                  $arrReturn['birthDate'] = $this->birthDate;
             
+                                 
+                 $arrReturn['memType'] = $this->memType;
+            
+                                 
+                 $arrReturn['memId'] = $this->memId;
+            
+                                 
+                 $arrReturn['PsData'] = $this->PsData;
+            
+                                 
+                 $arrReturn['creDate'] = $this->creDate;
+            
+                                 
+                 $arrReturn['level'] = $this->level;
+            
             return $arrReturn;
         }
         public function __toJson($blnPosponeEncode = false){
@@ -258,7 +293,61 @@ class AtheleteBase extends BaseEntity {
 	        		return null;
 	        	break;
 	        	
-	        	defualt:
+	   			case('MemType'): 
+	   			case('memType'): 
+	   				if(array_key_exists('memType', $this->arrDBFields)){
+	        			return $this->arrDBFields['memType'];
+	        		}
+	        		return null;
+	        	break;
+	        	
+	   			case('MemId'): 
+	   			case('memId'): 
+	   				if(array_key_exists('memId', $this->arrDBFields)){
+	        			return $this->arrDBFields['memId'];
+	        		}
+	        		return null;
+	        	break;
+	        	
+	   			case('PsData'): 
+	   			case('PsData'): 
+	   				if(array_key_exists('PsData', $this->arrDBFields)){
+	        			return $this->arrDBFields['PsData'];
+	        		}
+	        		return null;
+	        	break;
+	        	
+	   			case('CreDate'): 
+	   			case('creDate'): 
+	   				if(array_key_exists('creDate', $this->arrDBFields)){
+	        			return $this->arrDBFields['creDate'];
+	        		}
+	        		return null;
+	        	break;
+	        	
+	   			case('Level'): 
+	   			case('level'): 
+	   				if(array_key_exists('level', $this->arrDBFields)){
+	        			return $this->arrDBFields['level'];
+	        		}
+	        		return null;
+	        	break;
+	        	
+	        	
+                case('IdOrgObject'):
+                case('idOrgObject'):
+	   				if(
+	   				    (array_key_exists('idOrg', $this->arrDBFields)) &&
+	   				    (!is_null($this->arrDBFields['idOrg']))
+                    ){
+	        			return Org::LoadById(
+	        			    $this->arrDBFields['idOrg']
+                        );
+	        		}
+	        		return null;
+	        	break;
+	        	
+	        	default:
 	        		throw new Exception('No property with name "' . $strName . '" exists in class ". get_class($this) . "');
 	        	break;
 	        }
@@ -293,7 +382,32 @@ class AtheleteBase extends BaseEntity {
 	        		$this->arrDBFields['birthDate'] = $strValue;
 	        	break;
 	        	
-	        	defualt:
+	   			case('MemType'): 
+	   			case('memType'): 
+	        		$this->arrDBFields['memType'] = $strValue;
+	        	break;
+	        	
+	   			case('MemId'): 
+	   			case('memId'): 
+	        		$this->arrDBFields['memId'] = $strValue;
+	        	break;
+	        	
+	   			case('PsData'): 
+	   			case('PsData'): 
+	        		$this->arrDBFields['PsData'] = $strValue;
+	        	break;
+	        	
+	   			case('CreDate'): 
+	   			case('creDate'): 
+	        		$this->arrDBFields['creDate'] = $strValue;
+	        	break;
+	        	
+	   			case('Level'): 
+	   			case('level'): 
+	        		$this->arrDBFields['level'] = $strValue;
+	        	break;
+	        	
+	        	default:
 	        		throw new Exception('No property with name "' . $strName . '" exists in class ". get_class($this) . "');
 	        	break;
 	        }

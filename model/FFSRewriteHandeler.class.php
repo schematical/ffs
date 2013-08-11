@@ -2,14 +2,42 @@
 class FFSRewriteHandeler extends MLCRewriteHandelerBase{
     public function Handel($strUri){
         $arrParts = explode('/', $strUri);
-        if(count($arrParts) > 1){
-            $strFirstNamespace = explode('.', $arrParts[1])[0];
+        $arrFileNameParts = explode('.', $arrParts[count($arrParts) - 1]);
+        if(count($arrFileNameParts) > 1){
+            $strSufix = '.' . $arrFileNameParts[1];
+        }else{
+            $strSufix = '';
+        }
+        $arrParts[count($arrParts) - 1] = $arrFileNameParts[0];
 
-            $objCompetition = Competition::LoadSingleByField('namespace', $strFirstNamespace);
+        if(count($arrParts) > 1){
+            $objCompetition = Competition::LoadSingleByField('namespace', $arrParts[1]);
 
             if(!is_null($objCompetition)){
+                FFSForm::$objCompetition = $objCompetition;
+                FFSForm::$objOrg = Org::LoadById($objCompetition->IdOrg);
+                $arrEndUri = array();
+                for($i = 3; $i < count($arrParts); $i++){
+                    $arrEndUri[] = $arrParts[$i];
+                }
+                if(count($arrEndUri) == 0){
+                    $strEndUri = 'index.php' . $strSufix;
+                }else{
+
+                    $strEndUri = implode('/', $arrEndUri);
+
+                    $strEndUri .= '.php';//$strSufix;
+                }
+                if(count($arrParts) > 2){
+                    $strSubFolder = $arrParts[2];
+                }else{
+                    $strSubFolder = 'parent';
+                }
+                FFSForm::$strSection = $strSubFolder;
+
                 //Assume it is a parent
-                return MLCApplication::$strCtlFile = __CTL_ACTIVE_APP_DIR__ . '/parent/index.php';
+                MLCApplication::$strCtlFile = __CTL_ACTIVE_APP_DIR__ . '/' . $strSubFolder . '/' . $strEndUri;
+                return;
             }
 
         }

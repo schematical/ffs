@@ -1,3 +1,3 @@
 <?php
-MDEAuthDriver::EndSession();
+MLCAuthDriver::EndSession();
 header('location: /index.php');

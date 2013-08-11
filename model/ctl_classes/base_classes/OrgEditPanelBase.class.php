@@ -22,6 +22,21 @@ class OrgEditPanelBase extends MJaxPanel{
     	public $dttCreDate = null;
    		
 	
+    	
+    	
+    	public $strPsData = null;
+   		
+	
+    	
+    	
+    	public $intIdImportAuthUser = null;
+   		
+	
+    	
+    	
+    	public $strClubNum = null;
+   		
+	
 	
 	
   		public $lnkViewChildCompetition = null;
@@ -94,6 +109,41 @@ class OrgEditPanelBase extends MJaxPanel{
                 
             
   		
+	     
+	  	
+            
+                $this->strPsData = new MJaxTextBox($this);
+                $this->strPsData->Name = 'psData';
+                $this->strPsData->AddCssClass('input-large');
+                //longtext
+                
+                    $this->strPsData->TextMode = MJaxTextMode::MultiLine;
+                
+            
+	  		
+  		
+	     
+	  	
+            
+                $this->intIdImportAuthUser = new MJaxTextBox($this);
+                $this->intIdImportAuthUser->Name = 'idImportAuthUser';
+                $this->intIdImportAuthUser->AddCssClass('input-large');
+                //int(11)
+                
+            
+	  		
+  		
+	     
+	  	
+            
+                $this->strClubNum = new MJaxTextBox($this);
+                $this->strClubNum->Name = 'clubNum';
+                $this->strClubNum->AddCssClass('input-large');
+                //varchar(64)
+                
+            
+	  		
+  		
 	  
 	  if(!is_null($this->objOrg)){
 	     
@@ -129,6 +179,33 @@ class OrgEditPanelBase extends MJaxPanel{
                     //Do nothing this is a creDate
                 
                 
+            
+  		
+  		
+  		
+	     
+	  	
+            
+	  		    $this->strPsData->Text = $this->objOrg->psData;
+            
+            
+  		
+  		
+  		
+	     
+	  	
+            
+	  		    $this->intIdImportAuthUser->Text = $this->objOrg->idImportAuthUser;
+            
+            
+  		
+  		
+  		
+	     
+	  	
+            
+	  		    $this->strClubNum->Text = $this->objOrg->clubNum;
+            
             
   		
   		
@@ -183,6 +260,27 @@ class OrgEditPanelBase extends MJaxPanel{
                         //Do nothing this is a creDate
                     
                     
+                
+            
+		  
+            
+                
+                    $this->objOrg->psData = $this->strPsData->Text;
+                
+                
+            
+		  
+            
+                
+                    $this->objOrg->idImportAuthUser = $this->intIdImportAuthUser->Text;
+                
+                
+            
+		  
+            
+                
+                    $this->objOrg->clubNum = $this->strClubNum->Text;
+                
                 
             
 		

@@ -37,10 +37,20 @@ class ResultEditPanelBase extends MJaxPanel{
     	public $dttCreDate = null;
    		
 	
+    	
+    	
+    	public $strEvent = null;
+   		
 	
-   		public $lnkViewParentResult = null;
+    	
+    	
+    	public $dttDispDate = null;
+   		
 	
-   		public $lnkViewParentResult = null;
+	
+   		//public $lnkViewParentResult = null;
+	
+   		//public $lnkViewParentResult = null;
 	
 	
 	//Regular controls
@@ -116,7 +126,7 @@ class ResultEditPanelBase extends MJaxPanel{
                 $this->intFlag = new MJaxTextBox($this);
                 $this->intFlag->Name = 'flag';
                 $this->intFlag->AddCssClass('input-large');
-                //tinyint(4)
+                //tinyint(1)
                 
             
 	  		
@@ -129,6 +139,28 @@ class ResultEditPanelBase extends MJaxPanel{
                 
                     //Do nothing this is a creDate
                 
+                
+            
+  		
+	     
+	  	
+            
+                $this->strEvent = new MJaxTextBox($this);
+                $this->strEvent->Name = 'event';
+                $this->strEvent->AddCssClass('input-large');
+                //varchar(64)
+                
+            
+	  		
+  		
+	     
+	  	
+            
+	  		
+                //Is special field!!!!!
+                
+                
+                    $this->dttDispDate = new MJaxJQueryDateSelectPanel($this);
                 
             
   		
@@ -193,6 +225,28 @@ class ResultEditPanelBase extends MJaxPanel{
                 
                     //Do nothing this is a creDate
                 
+                
+            
+  		
+  		
+  		
+	     
+	  	
+            
+	  		    $this->strEvent->Text = $this->objResult->event;
+            
+            
+  		
+  		
+  		
+	     
+	  	
+            
+            
+                //Is special field!!!!!
+                
+                
+                    $this->dttDispDate->Value = $this->objResult->dispDate;
                 
             
   		
@@ -268,6 +322,22 @@ class ResultEditPanelBase extends MJaxPanel{
                     //Is special field!!!!!
                     
                         //Do nothing this is a creDate
+                    
+                    
+                
+            
+		  
+            
+                
+                    $this->objResult->event = $this->strEvent->Text;
+                
+                
+            
+		  
+            
+                
+                
+                    //Is special field!!!!!
                     
                     
                 

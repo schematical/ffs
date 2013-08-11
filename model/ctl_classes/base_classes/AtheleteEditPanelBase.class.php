@@ -27,8 +27,33 @@ class AtheleteEditPanelBase extends MJaxPanel{
     	public $dttBirthDate = null;
    		
 	
+    	
+    	
+    	public $strMemType = null;
+   		
 	
-   		public $lnkViewParentAthelete = null;
+    	
+    	
+    	public $strMemId = null;
+   		
+	
+    	
+    	
+    	public $strPsData = null;
+   		
+	
+    	
+    	
+    	public $dttCreDate = null;
+   		
+	
+    	
+    	
+    	public $strLevel = null;
+   		
+	
+	
+   		//public $lnkViewParentAthelete = null;
 	
 	
   		public $lnkViewChildResult = null;
@@ -106,6 +131,63 @@ class AtheleteEditPanelBase extends MJaxPanel{
                 
             
   		
+	     
+	  	
+            
+                $this->strMemType = new MJaxTextBox($this);
+                $this->strMemType->Name = 'memType';
+                $this->strMemType->AddCssClass('input-large');
+                //varchar(16)
+                
+            
+	  		
+  		
+	     
+	  	
+            
+                $this->strMemId = new MJaxTextBox($this);
+                $this->strMemId->Name = 'memId';
+                $this->strMemId->AddCssClass('input-large');
+                //varchar(128)
+                
+            
+	  		
+  		
+	     
+	  	
+            
+                $this->strPsData = new MJaxTextBox($this);
+                $this->strPsData->Name = 'PsData';
+                $this->strPsData->AddCssClass('input-large');
+                //longtext
+                
+                    $this->strPsData->TextMode = MJaxTextMode::MultiLine;
+                
+            
+	  		
+  		
+	     
+	  	
+            
+	  		
+                //Is special field!!!!!
+                
+                    //Do nothing this is a creDate
+                
+                
+            
+  		
+	     
+	  	
+            
+                $this->strLevel = new MJaxTextBox($this);
+                $this->strLevel->Name = 'level';
+                $this->strLevel->AddCssClass('input-large');
+                //varchar(32)
+                
+            
+	  		
+  		
 	  
 	  if(!is_null($this->objAthelete)){
 	     
@@ -150,6 +232,55 @@ class AtheleteEditPanelBase extends MJaxPanel{
                 
                     $this->dttBirthDate->Value = $this->objAthelete->birthDate;
                 
+            
+  		
+  		
+  		
+	     
+	  	
+            
+	  		    $this->strMemType->Text = $this->objAthelete->memType;
+            
+            
+  		
+  		
+  		
+	     
+	  	
+            
+	  		    $this->strMemId->Text = $this->objAthelete->memId;
+            
+            
+  		
+  		
+  		
+	     
+	  	
+            
+	  		    $this->strPsData->Text = $this->objAthelete->PsData;
+            
+            
+  		
+  		
+  		
+	     
+	  	
+            
+            
+                //Is special field!!!!!
+                
+                    //Do nothing this is a creDate
+                
+                
+            
+  		
+  		
+  		
+	     
+	  	
+            
+	  		    $this->strLevel->Text = $this->objAthelete->level;
+            
             
   		
   		
@@ -213,6 +344,45 @@ class AtheleteEditPanelBase extends MJaxPanel{
                     //Is special field!!!!!
                     
                     
+                
+            
+		  
+            
+                
+                    $this->objAthelete->memType = $this->strMemType->Text;
+                
+                
+            
+		  
+            
+                
+                    $this->objAthelete->memId = $this->strMemId->Text;
+                
+                
+            
+		  
+            
+                
+                    $this->objAthelete->PsData = $this->strPsData->Text;
+                
+                
+            
+		  
+            
+                
+                
+                    //Is special field!!!!!
+                    
+                        //Do nothing this is a creDate
+                    
+                    
+                
+            
+		  
+            
+                
+                    $this->objAthelete->level = $this->strLevel->Text;
+                
                 
             
 		

@@ -48,6 +48,6 @@ MLCApplicationBase::$arrClassFiles['SessionListPanel'] = __MODEL_APP_CONTROL__ .
 
 
 //Special panels
-MLCApplicationBase::$arrClassFiles['MDESimpleReportPanel'] = __MODEL_APP_CONTROL__ . '/MDESimpleReportPanel.class.php';
+MLCApplicationBase::$arrClassFiles['FFSSimpleReportPanel'] = __MODEL_APP_CONTROL__ . '/FFSSimpleReportPanel.class.php';
 
 ?>

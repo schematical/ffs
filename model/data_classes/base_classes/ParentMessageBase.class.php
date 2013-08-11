@@ -82,6 +82,14 @@ class ParentMessageBase extends BaseEntity {
         $xmlStr .= $this->inviteViewDate;
         $xmlStr .= "</inviteViewDate>";
         
+        $xmlStr .= "<idCompetition>";
+        $xmlStr .= $this->idCompetition;
+        $xmlStr .= "</idCompetition>";
+        
+        $xmlStr .= "<approveDate>";
+        $xmlStr .= $this->approveDate;
+        $xmlStr .= "</approveDate>";
+        
         if($blnReclusive){
            //Finish FK Rel stuff
         }
@@ -123,6 +131,19 @@ class ParentMessageBase extends BaseEntity {
     
     public static function LoadCollByIdAthelete($intIdAthelete){
         $sql = sprintf("SELECT * FROM ParentMessage WHERE idAthelete = %s;", $intIdAthelete);
+		$result = MLCDBDriver::Query($sql);
+		$coll = new BaseEntityCollection();
+		while($data = mysql_fetch_assoc($result)){
+			$objParentMessage = new ParentMessage();
+			$objParentMessage->materilize($data);
+			$coll->addItem($objParentMessage);
+		}
+		return $coll;
+    }
+
+    
+    public static function LoadCollByIdCompetition($intIdCompetition){
+        $sql = sprintf("SELECT * FROM ParentMessage WHERE idCompetition = %s;", $intIdCompetition);
 		$result = MLCDBDriver::Query($sql);
 		$coll = new BaseEntityCollection();
 		while($data = mysql_fetch_assoc($result)){
@@ -245,6 +266,12 @@ class ParentMessageBase extends BaseEntity {
                                  
                  $arrReturn['inviteViewDate'] = $this->inviteViewDate;
             
+                                 
+                 $arrReturn['idCompetition'] = $this->idCompetition;
+            
+                                 
+                 $arrReturn['approveDate'] = $this->approveDate;
+            
             return $arrReturn;
         }
         public function __toJson($blnPosponeEncode = false){
@@ -354,7 +381,50 @@ class ParentMessageBase extends BaseEntity {
 	        		return null;
 	        	break;
 	        	
-	        	defualt:
+	   			case('IdCompetition'): 
+	   			case('idCompetition'): 
+	   				if(array_key_exists('idCompetition', $this->arrDBFields)){
+	        			return $this->arrDBFields['idCompetition'];
+	        		}
+	        		return null;
+	        	break;
+	        	
+	   			case('ApproveDate'): 
+	   			case('approveDate'): 
+	   				if(array_key_exists('approveDate', $this->arrDBFields)){
+	        			return $this->arrDBFields['approveDate'];
+	        		}
+	        		return null;
+	        	break;
+	        	
+	        	
+                case('IdAtheleteObject'):
+                case('idCompetitionObject'):
+	   				if(
+	   				    (array_key_exists('idAthelete', $this->arrDBFields)) &&
+	   				    (!is_null($this->arrDBFields['idAthelete']))
+                    ){
+	        			return Athelete::LoadById(
+	        			    $this->arrDBFields['idAthelete']
+                        );
+	        		}
+	        		return null;
+	        	break;
+	        	
+                case('IdCompetitionObject'):
+                case('idCompetitionObject'):
+	   				if(
+	   				    (array_key_exists('idCompetition', $this->arrDBFields)) &&
+	   				    (!is_null($this->arrDBFields['idCompetition']))
+                    ){
+	        			return Competition::LoadById(
+	        			    $this->arrDBFields['idCompetition']
+                        );
+	        		}
+	        		return null;
+	        	break;
+	        	
+	        	default:
 	        		throw new Exception('No property with name "' . $strName . '" exists in class ". get_class($this) . "');
 	        	break;
 	        }
@@ -424,7 +494,17 @@ class ParentMessageBase extends BaseEntity {
 	        		$this->arrDBFields['inviteViewDate'] = $strValue;
 	        	break;
 	        	
-	        	defualt:
+	   			case('IdCompetition'): 
+	   			case('idCompetition'): 
+	        		$this->arrDBFields['idCompetition'] = $strValue;
+	        	break;
+	        	
+	   			case('ApproveDate'): 
+	   			case('approveDate'): 
+	        		$this->arrDBFields['approveDate'] = $strValue;
+	        	break;
+	        	
+	        	default:
 	        		throw new Exception('No property with name "' . $strName . '" exists in class ". get_class($this) . "');
 	        	break;
 	        }

@@ -74,6 +74,22 @@ class EnrollmentBase extends BaseEntity {
         $xmlStr .= $this->misc3;
         $xmlStr .= "</misc3>";
         
+        $xmlStr .= "<misc4>";
+        $xmlStr .= $this->misc4;
+        $xmlStr .= "</misc4>";
+        
+        $xmlStr .= "<misc5>";
+        $xmlStr .= $this->misc5;
+        $xmlStr .= "</misc5>";
+        
+        $xmlStr .= "<creDate>";
+        $xmlStr .= $this->creDate;
+        $xmlStr .= "</creDate>";
+        
+        $xmlStr .= "<level>";
+        $xmlStr .= $this->level;
+        $xmlStr .= "</level>";
+        
         if($blnReclusive){
            //Finish FK Rel stuff
         }
@@ -257,6 +273,18 @@ class EnrollmentBase extends BaseEntity {
                                  
                  $arrReturn['misc3'] = $this->misc3;
             
+                                 
+                 $arrReturn['misc4'] = $this->misc4;
+            
+                                 
+                 $arrReturn['misc5'] = $this->misc5;
+            
+                                 
+                 $arrReturn['creDate'] = $this->creDate;
+            
+                                 
+                 $arrReturn['level'] = $this->level;
+            
             return $arrReturn;
         }
         public function __toJson($blnPosponeEncode = false){
@@ -350,7 +378,79 @@ class EnrollmentBase extends BaseEntity {
 	        		return null;
 	        	break;
 	        	
-	        	defualt:
+	   			case('Misc4'): 
+	   			case('misc4'): 
+	   				if(array_key_exists('misc4', $this->arrDBFields)){
+	        			return $this->arrDBFields['misc4'];
+	        		}
+	        		return null;
+	        	break;
+	        	
+	   			case('Misc5'): 
+	   			case('misc5'): 
+	   				if(array_key_exists('misc5', $this->arrDBFields)){
+	        			return $this->arrDBFields['misc5'];
+	        		}
+	        		return null;
+	        	break;
+	        	
+	   			case('CreDate'): 
+	   			case('creDate'): 
+	   				if(array_key_exists('creDate', $this->arrDBFields)){
+	        			return $this->arrDBFields['creDate'];
+	        		}
+	        		return null;
+	        	break;
+	        	
+	   			case('Level'): 
+	   			case('level'): 
+	   				if(array_key_exists('level', $this->arrDBFields)){
+	        			return $this->arrDBFields['level'];
+	        		}
+	        		return null;
+	        	break;
+	        	
+	        	
+                case('IdAtheleteObject'):
+                case('idSessionObject'):
+	   				if(
+	   				    (array_key_exists('idAthelete', $this->arrDBFields)) &&
+	   				    (!is_null($this->arrDBFields['idAthelete']))
+                    ){
+	        			return Athelete::LoadById(
+	        			    $this->arrDBFields['idAthelete']
+                        );
+	        		}
+	        		return null;
+	        	break;
+	        	
+                case('IdCompetitionObject'):
+                case('idSessionObject'):
+	   				if(
+	   				    (array_key_exists('idCompetition', $this->arrDBFields)) &&
+	   				    (!is_null($this->arrDBFields['idCompetition']))
+                    ){
+	        			return Competition::LoadById(
+	        			    $this->arrDBFields['idCompetition']
+                        );
+	        		}
+	        		return null;
+	        	break;
+	        	
+                case('IdSessionObject'):
+                case('idSessionObject'):
+	   				if(
+	   				    (array_key_exists('idSession', $this->arrDBFields)) &&
+	   				    (!is_null($this->arrDBFields['idSession']))
+                    ){
+	        			return Session::LoadById(
+	        			    $this->arrDBFields['idSession']
+                        );
+	        		}
+	        		return null;
+	        	break;
+	        	
+	        	default:
 	        		throw new Exception('No property with name "' . $strName . '" exists in class ". get_class($this) . "');
 	        	break;
 	        }
@@ -410,7 +510,27 @@ class EnrollmentBase extends BaseEntity {
 	        		$this->arrDBFields['misc3'] = $strValue;
 	        	break;
 	        	
-	        	defualt:
+	   			case('Misc4'): 
+	   			case('misc4'): 
+	        		$this->arrDBFields['misc4'] = $strValue;
+	        	break;
+	        	
+	   			case('Misc5'): 
+	   			case('misc5'): 
+	        		$this->arrDBFields['misc5'] = $strValue;
+	        	break;
+	        	
+	   			case('CreDate'): 
+	   			case('creDate'): 
+	        		$this->arrDBFields['creDate'] = $strValue;
+	        	break;
+	        	
+	   			case('Level'): 
+	   			case('level'): 
+	        		$this->arrDBFields['level'] = $strValue;
+	        	break;
+	        	
+	        	default:
 	        		throw new Exception('No property with name "' . $strName . '" exists in class ". get_class($this) . "');
 	        	break;
 	        }

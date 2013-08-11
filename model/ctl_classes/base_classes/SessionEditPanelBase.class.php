@@ -37,8 +37,13 @@ class SessionEditPanelBase extends MJaxPanel{
     	public $strData = null;
    		
 	
+    	
+    	
+    	public $strEquipmentSet = null;
+   		
 	
-   		public $lnkViewParentSession = null;
+	
+   		//public $lnkViewParentSession = null;
 	
 	
   		public $lnkViewChildResult = null;
@@ -142,6 +147,17 @@ class SessionEditPanelBase extends MJaxPanel{
             
 	  		
   		
+	     
+	  	
+            
+                $this->strEquipmentSet = new MJaxTextBox($this);
+                $this->strEquipmentSet->Name = 'equipmentSet';
+                $this->strEquipmentSet->AddCssClass('input-large');
+                //varchar(45)
+                
+            
+	  		
+  		
 	  
 	  if(!is_null($this->objSession)){
 	     
@@ -207,6 +223,15 @@ class SessionEditPanelBase extends MJaxPanel{
 	  	
             
 	  		    $this->strData->Text = $this->objSession->data;
+            
+            
+  		
+  		
+  		
+	     
+	  	
+            
+	  		    $this->strEquipmentSet->Text = $this->objSession->equipmentSet;
             
             
   		
@@ -286,6 +311,13 @@ class SessionEditPanelBase extends MJaxPanel{
             
                 
                     $this->objSession->data = $this->strData->Text;
+                
+                
+            
+		  
+            
+                
+                    $this->objSession->equipmentSet = $this->strEquipmentSet->Text;
                 
                 
             

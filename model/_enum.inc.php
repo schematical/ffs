@@ -1,13 +1,31 @@
 <?php
-abstract class MDECookie{
-	const LAST_BUILD = 'mde-last-build';
-    const GIT_REPO = 'git';
-    const UTMA = '__utma';
+abstract class FFSRoll{
+    const ORG_MANAGER = 'org_manager';
 }
-abstract class MDEStripePlan{
-	const NONE = null;
-	const BUILD = 1;
-    const LAUNCH = 2;
-    const SCALE = 3;
+abstract class FFSInviteType{
+    const EMAIL = 'EMAIL';
 }
-
+abstract class FFSMemType{
+    const USAG = 'USAG';
+}
+abstract class FFSSection{
+    const PARENT = 'parent';
+    const ORG = 'org';
+    const COACH = 'coach';
+}
+abstract class FFSEventData{
+    public $WOMENS_ARTISTIC_GYMNASTICS = array(
+        'Vault' => 'Vault',
+        'Floor' => 'Floor',
+        'Beam' => 'Beam',
+        'Bars' => 'Bars'
+    );
+    public $MENS_ARTISTIC_GYMNASTICS = array(
+        'Vault' => 'Vault',
+        'Floor' => 'Floor',
+        'HighBar' => 'High Bar',
+        'Rings' => 'Rings',
+        'Parallel Bars' => 'Parallel Bars',
+        'PommelHorse' => 'Pommel Horse'
+    );
+}

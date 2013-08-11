@@ -50,6 +50,18 @@ class OrgBase extends BaseEntity {
         $xmlStr .= $this->creDate;
         $xmlStr .= "</creDate>";
         
+        $xmlStr .= "<psData>";
+        $xmlStr .= $this->psData;
+        $xmlStr .= "</psData>";
+        
+        $xmlStr .= "<idImportAuthUser>";
+        $xmlStr .= $this->idImportAuthUser;
+        $xmlStr .= "</idImportAuthUser>";
+        
+        $xmlStr .= "<clubNum>";
+        $xmlStr .= $this->clubNum;
+        $xmlStr .= "</clubNum>";
+        
         if($blnReclusive){
            //Finish FK Rel stuff
         }
@@ -185,6 +197,15 @@ class OrgBase extends BaseEntity {
                                  
                  $arrReturn['creDate'] = $this->creDate;
             
+                                 
+                 $arrReturn['psData'] = $this->psData;
+            
+                                 
+                 $arrReturn['idImportAuthUser'] = $this->idImportAuthUser;
+            
+                                 
+                 $arrReturn['clubNum'] = $this->clubNum;
+            
             return $arrReturn;
         }
         public function __toJson($blnPosponeEncode = false){
@@ -230,7 +251,32 @@ class OrgBase extends BaseEntity {
 	        		return null;
 	        	break;
 	        	
-	        	defualt:
+	   			case('PsData'): 
+	   			case('psData'): 
+	   				if(array_key_exists('psData', $this->arrDBFields)){
+	        			return $this->arrDBFields['psData'];
+	        		}
+	        		return null;
+	        	break;
+	        	
+	   			case('IdImportAuthUser'): 
+	   			case('idImportAuthUser'): 
+	   				if(array_key_exists('idImportAuthUser', $this->arrDBFields)){
+	        			return $this->arrDBFields['idImportAuthUser'];
+	        		}
+	        		return null;
+	        	break;
+	        	
+	   			case('ClubNum'): 
+	   			case('clubNum'): 
+	   				if(array_key_exists('clubNum', $this->arrDBFields)){
+	        			return $this->arrDBFields['clubNum'];
+	        		}
+	        		return null;
+	        	break;
+	        	
+	        	
+	        	default:
 	        		throw new Exception('No property with name "' . $strName . '" exists in class ". get_class($this) . "');
 	        	break;
 	        }
@@ -260,7 +306,22 @@ class OrgBase extends BaseEntity {
 	        		$this->arrDBFields['creDate'] = $strValue;
 	        	break;
 	        	
-	        	defualt:
+	   			case('PsData'): 
+	   			case('psData'): 
+	        		$this->arrDBFields['psData'] = $strValue;
+	        	break;
+	        	
+	   			case('IdImportAuthUser'): 
+	   			case('idImportAuthUser'): 
+	        		$this->arrDBFields['idImportAuthUser'] = $strValue;
+	        	break;
+	        	
+	   			case('ClubNum'): 
+	   			case('clubNum'): 
+	        		$this->arrDBFields['clubNum'] = $strValue;
+	        	break;
+	        	
+	        	default:
 	        		throw new Exception('No property with name "' . $strName . '" exists in class ". get_class($this) . "');
 	        	break;
 	        }

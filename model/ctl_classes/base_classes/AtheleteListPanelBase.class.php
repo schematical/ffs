@@ -38,6 +38,31 @@ class AtheleteListPanelBase extends MJaxTable{
 	    	$this->AddColumn('birthDate','birthDate');
 	   		
 		
+	    	
+	    	
+	    	$this->AddColumn('memType','memType');
+	   		
+		
+	    	
+	    	
+	    	$this->AddColumn('memId','memId');
+	   		
+		
+	    	
+	    	
+	    	$this->AddColumn('PsData','PsData');
+	   		
+		
+	    	
+	    	
+	    	$this->AddColumn('creDate','creDate');
+	   		
+		
+	    	
+	    	
+	    	$this->AddColumn('level','level');
+	   		
+		
 	}
 	public function objRow_click($strFomrId, $strControlId, $strActionParameter){
 

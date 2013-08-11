@@ -307,7 +307,34 @@ class AssignmentBase extends BaseEntity {
 	        		return null;
 	        	break;
 	        	
-	        	defualt:
+	        	
+                case('IdDeviceObject'):
+                case('idSessionObject'):
+	   				if(
+	   				    (array_key_exists('idDevice', $this->arrDBFields)) &&
+	   				    (!is_null($this->arrDBFields['idDevice']))
+                    ){
+	        			return Device::LoadById(
+	        			    $this->arrDBFields['idDevice']
+                        );
+	        		}
+	        		return null;
+	        	break;
+	        	
+                case('IdSessionObject'):
+                case('idSessionObject'):
+	   				if(
+	   				    (array_key_exists('idSession', $this->arrDBFields)) &&
+	   				    (!is_null($this->arrDBFields['idSession']))
+                    ){
+	        			return Session::LoadById(
+	        			    $this->arrDBFields['idSession']
+                        );
+	        		}
+	        		return null;
+	        	break;
+	        	
+	        	default:
 	        		throw new Exception('No property with name "' . $strName . '" exists in class ". get_class($this) . "');
 	        	break;
 	        }
@@ -357,7 +384,7 @@ class AssignmentBase extends BaseEntity {
 	        		$this->arrDBFields['revokeDate'] = $strValue;
 	        	break;
 	        	
-	        	defualt:
+	        	default:
 	        		throw new Exception('No property with name "' . $strName . '" exists in class ". get_class($this) . "');
 	        	break;
 	        }

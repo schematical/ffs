@@ -52,12 +52,32 @@ class EnrollmentEditPanelBase extends MJaxPanel{
     	public $strMisc3 = null;
    		
 	
+    	
+    	
+    	public $strMisc4 = null;
+   		
 	
-   		public $lnkViewParentEnrollment = null;
+    	
+    	
+    	public $strMisc5 = null;
+   		
 	
-   		public $lnkViewParentEnrollment = null;
+    	
+    	
+    	public $dttCreDate = null;
+   		
 	
-   		public $lnkViewParentEnrollment = null;
+    	
+    	
+    	public $strLevel = null;
+   		
+	
+	
+   		//public $lnkViewParentEnrollment = null;
+	
+   		//public $lnkViewParentEnrollment = null;
+	
+   		//public $lnkViewParentEnrollment = null;
 	
 	
 	//Regular controls
@@ -171,6 +191,50 @@ class EnrollmentEditPanelBase extends MJaxPanel{
                 $this->strMisc3 = new MJaxTextBox($this);
                 $this->strMisc3->Name = 'misc3';
                 $this->strMisc3->AddCssClass('input-large');
+                //varchar(64)
+                
+            
+	  		
+  		
+	     
+	  	
+            
+                $this->strMisc4 = new MJaxTextBox($this);
+                $this->strMisc4->Name = 'misc4';
+                $this->strMisc4->AddCssClass('input-large');
+                //varchar(64)
+                
+            
+	  		
+  		
+	     
+	  	
+            
+                $this->strMisc5 = new MJaxTextBox($this);
+                $this->strMisc5->Name = 'misc5';
+                $this->strMisc5->AddCssClass('input-large');
+                //varchar(64)
+                
+            
+	  		
+  		
+	     
+	  	
+            
+	  		
+                //Is special field!!!!!
+                
+                    //Do nothing this is a creDate
+                
+                
+            
+  		
+	     
+	  	
+            
+                $this->strLevel = new MJaxTextBox($this);
+                $this->strLevel->Name = 'level';
+                $this->strLevel->AddCssClass('input-large');
                 //varchar(45)
                 
             
@@ -260,6 +324,46 @@ class EnrollmentEditPanelBase extends MJaxPanel{
 	  	
             
 	  		    $this->strMisc3->Text = $this->objEnrollment->misc3;
+            
+            
+  		
+  		
+  		
+	     
+	  	
+            
+	  		    $this->strMisc4->Text = $this->objEnrollment->misc4;
+            
+            
+  		
+  		
+  		
+	     
+	  	
+            
+	  		    $this->strMisc5->Text = $this->objEnrollment->misc5;
+            
+            
+  		
+  		
+  		
+	     
+	  	
+            
+            
+                //Is special field!!!!!
+                
+                    //Do nothing this is a creDate
+                
+                
+            
+  		
+  		
+  		
+	     
+	  	
+            
+	  		    $this->strLevel->Text = $this->objEnrollment->level;
             
             
   		
@@ -357,6 +461,38 @@ class EnrollmentEditPanelBase extends MJaxPanel{
             
                 
                     $this->objEnrollment->misc3 = $this->strMisc3->Text;
+                
+                
+            
+		  
+            
+                
+                    $this->objEnrollment->misc4 = $this->strMisc4->Text;
+                
+                
+            
+		  
+            
+                
+                    $this->objEnrollment->misc5 = $this->strMisc5->Text;
+                
+                
+            
+		  
+            
+                
+                
+                    //Is special field!!!!!
+                    
+                        //Do nothing this is a creDate
+                    
+                    
+                
+            
+		  
+            
+                
+                    $this->objEnrollment->level = $this->strLevel->Text;
                 
                 
             

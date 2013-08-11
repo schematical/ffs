@@ -6,7 +6,7 @@
 * - About extends AboutBase
 */
 
-class Signin extends MLCForm {
+class Signin extends FFSForm {
     public $pnlLogin = null;
     public function Form_Create(){
         parent::Form_Create();

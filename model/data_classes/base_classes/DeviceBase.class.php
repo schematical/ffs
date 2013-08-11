@@ -245,7 +245,8 @@ class DeviceBase extends BaseEntity {
 	        		return null;
 	        	break;
 	        	
-	        	defualt:
+	        	
+	        	default:
 	        		throw new Exception('No property with name "' . $strName . '" exists in class ". get_class($this) . "');
 	        	break;
 	        }
@@ -280,7 +281,7 @@ class DeviceBase extends BaseEntity {
 	        		$this->arrDBFields['inviteEmail'] = $strValue;
 	        	break;
 	        	
-	        	defualt:
+	        	default:
 	        		throw new Exception('No property with name "' . $strName . '" exists in class ". get_class($this) . "');
 	        	break;
 	        }

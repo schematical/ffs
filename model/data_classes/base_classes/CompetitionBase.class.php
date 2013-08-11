@@ -303,7 +303,21 @@ class CompetitionBase extends BaseEntity {
 	        		return null;
 	        	break;
 	        	
-	        	defualt:
+	        	
+                case('IdOrgObject'):
+                case('idOrgObject'):
+	   				if(
+	   				    (array_key_exists('idOrg', $this->arrDBFields)) &&
+	   				    (!is_null($this->arrDBFields['idOrg']))
+                    ){
+	        			return Org::LoadById(
+	        			    $this->arrDBFields['idOrg']
+                        );
+	        		}
+	        		return null;
+	        	break;
+	        	
+	        	default:
 	        		throw new Exception('No property with name "' . $strName . '" exists in class ". get_class($this) . "');
 	        	break;
 	        }
@@ -353,7 +367,7 @@ class CompetitionBase extends BaseEntity {
 	        		$this->arrDBFields['namespace'] = $strValue;
 	        	break;
 	        	
-	        	defualt:
+	        	default:
 	        		throw new Exception('No property with name "' . $strName . '" exists in class ". get_class($this) . "');
 	        	break;
 	        }

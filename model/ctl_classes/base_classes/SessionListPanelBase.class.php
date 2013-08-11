@@ -48,6 +48,11 @@ class SessionListPanelBase extends MJaxTable{
 	    	$this->AddColumn('data','data');
 	   		
 		
+	    	
+	    	
+	    	$this->AddColumn('equipmentSet','equipmentSet');
+	   		
+		
 	}
 	public function objRow_click($strFomrId, $strControlId, $strActionParameter){
 

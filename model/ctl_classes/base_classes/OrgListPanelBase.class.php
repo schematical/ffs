@@ -33,6 +33,21 @@ class OrgListPanelBase extends MJaxTable{
 	    	$this->AddColumn('creDate','creDate');
 	   		
 		
+	    	
+	    	
+	    	$this->AddColumn('psData','psData');
+	   		
+		
+	    	
+	    	
+	    	$this->AddColumn('idImportAuthUser','idImportAuthUser');
+	   		
+		
+	    	
+	    	
+	    	$this->AddColumn('clubNum','clubNum');
+	   		
+		
 	}
 	public function objRow_click($strFomrId, $strControlId, $strActionParameter){
 
