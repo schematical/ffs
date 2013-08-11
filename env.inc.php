@@ -11,12 +11,12 @@ if(!defined('SERVER_ENV')){
         /*case('beta.schematical.com'):
             define('SERVER_ENV', 'beta');
             define('MLC_APPLICATION_NAME', 'mde');
-        break;
-        case('schematical.com'):
-        case('www.schematical.com'):
-            define('SERVER_ENV', 'prod');
-            define('MLC_APPLICATION_NAME', 'mde');
         break;*/
+        case('tumblescore.com'):
+        case('www.tumblescore.com'):
+            define('SERVER_ENV', 'prod');
+            define('MLC_APPLICATION_NAME', 'ffs');
+        break;
 	}
 }
 if(defined('SERVER_ENV')){
@@ -43,31 +43,23 @@ if(defined('SERVER_ENV')){
             )));*/
 			define('MLC_DISPLAY_EXCEPTIONS', '1');
 		break;
-       /* case('beta'):
-            if(array_key_exists('debug', $_GET)){
-                define('MLC_DISPLAY_EXCEPTIONS', '1');
-            }
+
         case('prod'):
             define('DB_1', serialize(array(
                 'host'=>'lab.cv7i1bpkvj0w.us-east-1.rds.amazonaws.com',
-                'db_name'=>'mde',
+                'db_name'=>'ffs',
                 'user'=>'evillabs',
                 'pass'=>'gaM3rPuPu'
             )));
             define('DB_0', serialize(array(
                 'host'=>'lab.cv7i1bpkvj0w.us-east-1.rds.amazonaws.com',
-                'db_name'=>'util',
-                'user'=>'evillabs',
-                'pass'=>'gaM3rPuPu'
-            )));
-            define('DB_2', serialize(array(
-                'host'=>'lab.cv7i1bpkvj0w.us-east-1.rds.amazonaws.com',
-                'db_name'=>'pressme',
+                'db_name'=>'ffs',
                 'user'=>'evillabs',
                 'pass'=>'gaM3rPuPu'
             )));
 
-        break;*/
+
+        break;
 	}
     define('POSTMARKAPP_API_KEY', 'e2e62665-0392-40e7-ac3f-a1dfb5c9349c');
     define('POSTMARKAPP_MAIL_FROM_ADDRESS', 'mlea@schematical.com');

@@ -4,7 +4,7 @@
     <list default="true" id="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" name="Default" comment="" />
     <ignored path="FFS.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/a.dummy" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1375988235509" ignored="false" />
+    <file path="/a.dummy" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1376226046566" ignored="false" />
     <file path="/index.php" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1376160154340" ignored="false" />
     <file path="$PROJECT_DIR$/../MLCPackages/mlc_packages/private_packages/MLCWAdminTheme/package.inc.php" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1375057879420" ignored="false" />
     <file path="$PROJECT_DIR$/../MLCPackages/mlc_packages/private_packages/MJaxWAdminTheme/package.inc.php" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1375634585436" ignored="false" />
@@ -189,6 +189,20 @@
     <file path="/FFSPTFImportPanel.tpl.php" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1376160406094" ignored="false" />
     <file path="/_events.inc.php" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1376145663390" ignored="false" />
     <file path="/FFSProfitStatPanel.class.php" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1376159717969" ignored="false" />
+    <file path="$PROJECT_DIR$/../MLCOfficial/mde_codebase/apps/ffs/env.inc.php" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1376226032456" ignored="false" />
+    <file path="$USER_HOME$/dumps/local.util.8.11.13/util_AuthUserSettingTypeCd_tpcd.sql" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1376226055527" ignored="false" />
+    <file path="$USER_HOME$/dumps/local.util.8.11.13/util_AuthAccountTypeCd_tpcd.sql" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1376226055527" ignored="false" />
+    <file path="$USER_HOME$/dumps/local.util.8.11.13/util_MLCLocation.sql" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1376226055527" ignored="false" />
+    <file path="$USER_HOME$/dumps/local.util.8.11.13/util_AuthUserTypeCd_tpcd.sql" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1376226055527" ignored="false" />
+    <file path="$USER_HOME$/dumps/local.util.8.11.13/util_AuthAccount.sql" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1376226055527" ignored="false" />
+    <file path="$USER_HOME$/dumps/local.util.8.11.13/util_MLCBatch.sql" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1376226055527" ignored="false" />
+    <file path="$USER_HOME$/dumps/local.util.8.11.13/util_TrackingEvent.sql" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1376226055527" ignored="false" />
+    <file path="$USER_HOME$/dumps/local.util.8.11.13/util_StripeData.sql" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1376226055527" ignored="false" />
+    <file path="$USER_HOME$/dumps/local.util.8.11.13/util_AuthSession.sql" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1376226055527" ignored="false" />
+    <file path="$USER_HOME$/dumps/local.util.8.11.13/util_MLCNotification.sql" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1376226055527" ignored="false" />
+    <file path="$USER_HOME$/dumps/local.util.8.11.13/util_AuthUserSetting.sql" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1376226055527" ignored="false" />
+    <file path="$USER_HOME$/dumps/local.util.8.11.13/util_AuthRoll.sql" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1376226055528" ignored="false" />
+    <file path="$USER_HOME$/dumps/local.util.8.11.13/util_AuthUser.sql" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1376226055528" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -283,7 +297,7 @@
       <file leaf-file-name="env.inc.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/env.inc.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="31" selection-start="101" selection-end="101" vertical-scroll-proportion="0.13537906">
+            <state line="13" column="16" selection-start="374" selection-end="374" vertical-scroll-proportion="0.35198557">
               <folding />
             </state>
           </provider>
@@ -329,7 +343,7 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="-1302" />
+    <option name="x" value="64" />
     <option name="y" value="764" />
     <option name="width" value="1303" />
     <option name="height" value="773" />
@@ -543,7 +557,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../MDE_app" />
+    <property name="last_opened_file_path" value="$USER_HOME$/dumps" />
   </component>
   <component name="PublishConfig">
     <servers>
@@ -614,7 +628,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1302" y="764" width="1303" height="773" extended-state="6" />
+    <frame x="64" y="764" width="1303" height="773" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -805,7 +819,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/env.inc.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="31" selection-start="101" selection-end="101" vertical-scroll-proportion="0.13537906">
+        <state line="13" column="16" selection-start="374" selection-end="374" vertical-scroll-proportion="0.35198557">
           <folding />
         </state>
       </provider>
