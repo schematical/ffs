@@ -38,7 +38,7 @@ MLCApplicationBase::$arrClassFiles['FFSScoreDisplayPanel'] = __CTL_FFS_APP_DIR__
 MLCApplicationBase::$arrClassFiles['FFSOrgCompActivePanel'] = __CTL_FFS_APP_DIR__ . '/_panels/FFSOrgCompActivePanel.class.php';
 MLCApplicationBase::$arrClassFiles['FFSPTFImportPanel'] = __CTL_FFS_APP_DIR__ . '/_panels/FFSPTFImportPanel.class.php';
 MLCApplicationBase::$arrClassFiles['FFSAdPanel'] = __CTL_FFS_APP_DIR__ . '/_panels/FFSAdPanel.class.php';
-
+MLCApplicationBase::$arrClassFiles['FFSDeviceAssignmentPanel'] = __CTL_FFS_APP_DIR__ . '/_panels/FFSDeviceAssignmentPanel.class.php';
 
 
 //Proscore stuff
@@ -74,6 +74,8 @@ MLCApplication::InitPackage('MJaxTracking');
 MLCApplication::InitPackage('MJaxWAdminTheme');
 MLCApplication::InitPackage('MJaxJQueryUI');
 MLCApplication::InitPackage('MLCSalesTools');
+MLCApplication::InitPackage('MLCEntityModel');
+require_once(__CTL_FFS_APP_DIR__ . '/_events.inc.php');
 //_dv(MLCApplicationBase::$arrClassFiles['MLCApiFFSPackage']);
 if(class_exists('MLCAuthDriver')){
     MLCAuthDriver::SetCookieDomain('ffs.com');

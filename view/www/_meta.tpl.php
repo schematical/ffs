@@ -4,14 +4,62 @@
         .margin-bottom-25{
             margin-bottom: 25Px;
         }
-        .row-fluid input, .row-fluid select{
+        .row-fluid input, .row-fluid textarea{
             padding: 20Px;
             font-size: 16Pt;
             line-height: 30Px;
             width:90%;
         }
+        .row-fluid select{
+
+            font-size: 16Pt;
+            line-height: 30Px;
+            width:90%;
+            height: 38Px
+        }
+
+        .row-fluid .input-prepend .add-on:first-child{
+            padding: 20Px;
+            font-size: 14Pt;
+        }
+        .row-fluid label{
+            font-size: 17Pt;
+            margin-top: 14Px;
+        }
+        .ffs-header-img-holder{
+            border:thin grey solid;
+            margin-bottom:10Px;
+            position: relative;
+
+            -webkit-border-radius: 12px;
+            -moz-border-radius: 12px;
+            border-radius: 12px;
+            overflow:hidden;
+        }
+        .ffs-header-img-holder img{
+            width:100%;
+        }
+
+        .ffs-header-info-holder{
+            width:100%;
+            height:100%;
+            position: absolute;
+            top:-450Px;
+            left:0Px;
+            background-color: rgba(0, 0, 0, 0.9);
+            color:white;
+            padding:10Px;
+        }
+        .ffs-header-info-holder p{
+            font-size:14Pt;
+            margin-right:17Px;
+        }
         @media (min-width: 1200px) {
             .ParentMessageEditPanel_btnSave{
+                margin-top:-10Px;
+                padding:7Px;
+            }
+            .ffs-header-img-holder{
                 margin-top:-10Px;
                 padding:7Px;
             }
@@ -71,3 +119,9 @@
         });
     </script>
 <?php } ?>
+<script src='<?php echo __ASSETS_JS__; ?>/FFS.js'></script>
+<script>
+    $(function(){
+        FFS.InitHeaderImgs();
+    });
+</script>

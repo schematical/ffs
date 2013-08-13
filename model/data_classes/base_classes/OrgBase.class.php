@@ -98,8 +98,8 @@ class OrgBase extends BaseEntity {
 	}
      //Get children
     
-    public function GetCompetitionArr(){
-       return Competition::LoadCollByIdOrg($this->idOrg);
+    public function GetDeviceArr(){
+       return Device::LoadCollByIdOrg($this->idOrg);
     }
 	
 

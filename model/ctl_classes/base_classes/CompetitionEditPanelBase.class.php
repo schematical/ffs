@@ -43,7 +43,7 @@ class CompetitionEditPanelBase extends MJaxPanel{
    		
 	
 	
-   		//public $lnkViewParentCompetition = null;
+   		public $lnkViewParentIdOrg = null;
 	
 	
   		public $lnkViewChildSession = null;
@@ -158,97 +158,104 @@ class CompetitionEditPanelBase extends MJaxPanel{
   		
 	  
 	  if(!is_null($this->objCompetition)){
-	     
-	  	
-  		
-  			$this->intIdCompetition = $this->objCompetition->idCompetition;
-  		
-  		
-	     
-	  	
-            
-	  		    $this->strName->Text = $this->objCompetition->name;
-            
-            
-  		
-  		
-  		
-	     
-	  	
-            
-	  		    $this->strLongDesc->Text = $this->objCompetition->longDesc;
-            
-            
-  		
-  		
-  		
-	     
-	  	
-            
-            
-                //Is special field!!!!!
-                
-                    //Do nothing this is a creDate
-                
-                
-            
-  		
-  		
-  		
-	     
-	  	
-            
-            
-                //Is special field!!!!!
-                
-                
-                    $this->dttStartDate->Value = $this->objCompetition->startDate;
-                
-            
-  		
-  		
-  		
-	     
-	  	
-            
-            
-                //Is special field!!!!!
-                
-                
-                    $this->dttEndDate->Value = $this->objCompetition->endDate;
-                
-            
-  		
-  		
-  		
-	     
-	  	
-            
-	  		    $this->intIdOrg->Text = $this->objCompetition->idOrg;
-            
-            
-  		
-  		
-  		
-	     
-	  	
-            
-	  		    $this->strNamespace->Text = $this->objCompetition->namespace;
-            
-            
-  		
-  		
-  		
-	  
+            $this->SetCompetition($this->objCompetition);
 	  }
+  }
+  public function SetCompetition($objCompetition){
+      $this->objCompetition = $objCompetition;
+      $this->blnModified = true;
+      if(!is_null($this->objCompetition)){
+          
+            
+            
+                //PKey
+                $this->intIdCompetition = $this->objCompetition->idCompetition;
+            
+
+          
+            
+                
+                    $this->strName->Text = $this->objCompetition->name;
+                
+                
+            
+            
+
+          
+            
+                
+                    $this->strLongDesc->Text = $this->objCompetition->longDesc;
+                
+                
+            
+            
+
+          
+            
+                
+                
+                    //Is special field!!!!!
+                    
+                        //Do nothing this is a creDate
+                    
+                    
+                
+            
+            
+
+          
+            
+                
+                
+                    //Is special field!!!!!
+                    
+                    
+                        $this->dttStartDate->Value = $this->objCompetition->startDate;
+                    
+                
+            
+            
+
+          
+            
+                
+                
+                    //Is special field!!!!!
+                    
+                    
+                        $this->dttEndDate->Value = $this->objCompetition->endDate;
+                    
+                
+            
+            
+
+          
+            
+                
+                
+            
+            
+
+          
+            
+                
+                    $this->strNamespace->Text = $this->objCompetition->namespace;
+                
+                
+            
+            
+
+          
+      }
+
 	}
 	public function CreateReferenceControls(){
         if(!is_null($this->objCompetition)){
           
             if(!is_null($this->objCompetition->idOrg)){
-                $this->lnkViewParentCompetition = new MJaxLinkButton($this);
-                $this->lnkViewParentCompetition->Text = 'View Org';
-                $this->lnkViewParentCompetition->Href = __ENTITY_MODEL_DIR__ . '/Org/' . $this->objCompetition->idOrg;
+                $this->lnkViewParentIdOrg = new MJaxLinkButton($this);
+                $this->lnkViewParentIdOrg->Text = 'View Org';
+                $this->lnkViewParentIdOrg->Href = __ENTITY_MODEL_DIR__ . '/Org/' . $this->objCompetition->idOrg;
             }
           
 

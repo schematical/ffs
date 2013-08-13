@@ -43,9 +43,9 @@ class AssignmentEditPanelBase extends MJaxPanel{
    		
 	
 	
-   		//public $lnkViewParentAssignment = null;
+   		public $lnkViewParentIdDevice = null;
 	
-   		//public $lnkViewParentAssignment = null;
+   		public $lnkViewParentIdSession = null;
 	
 	
 	//Regular controls
@@ -148,101 +148,106 @@ class AssignmentEditPanelBase extends MJaxPanel{
   		
 	  
 	  if(!is_null($this->objAssignment)){
-	     
-	  	
-  		
-  			$this->intIdAssignment = $this->objAssignment->idAssignment;
-  		
-  		
-	     
-	  	
-            
-	  		    $this->intIdDevice->Text = $this->objAssignment->idDevice;
-            
-            
-  		
-  		
-  		
-	     
-	  	
-            
-	  		    $this->intIdSession->Text = $this->objAssignment->idSession;
-            
-            
-  		
-  		
-  		
-	     
-	  	
-            
-	  		    $this->strEvent->Text = $this->objAssignment->event;
-            
-            
-  		
-  		
-  		
-	     
-	  	
-            
-	  		    $this->strApartatus->Text = $this->objAssignment->apartatus;
-            
-            
-  		
-  		
-  		
-	     
-	  	
-            
-            
-                //Is special field!!!!!
-                
-                    //Do nothing this is a creDate
-                
-                
-            
-  		
-  		
-  		
-	     
-	  	
-            
-            
-                //Is special field!!!!!
-                
-                
-            
-  		
-  		
-  		
-	     
-	  	
-            
-            
-                //Is special field!!!!!
-                
-                
-                    $this->dttRevokeDate->Value = $this->objAssignment->revokeDate;
-                
-            
-  		
-  		
-  		
-	  
+            $this->SetAssignment($this->objAssignment);
 	  }
+  }
+  public function SetAssignment($objAssignment){
+      $this->objAssignment = $objAssignment;
+      $this->blnModified = true;
+      if(!is_null($this->objAssignment)){
+          
+            
+            
+                //PKey
+                $this->intIdAssignment = $this->objAssignment->idAssignment;
+            
+
+          
+            
+                
+                
+            
+            
+
+          
+            
+                
+                
+            
+            
+
+          
+            
+                
+                    $this->strEvent->Text = $this->objAssignment->event;
+                
+                
+            
+            
+
+          
+            
+                
+                    $this->strApartatus->Text = $this->objAssignment->apartatus;
+                
+                
+            
+            
+
+          
+            
+                
+                
+                    //Is special field!!!!!
+                    
+                        //Do nothing this is a creDate
+                    
+                    
+                
+            
+            
+
+          
+            
+                
+                
+                    //Is special field!!!!!
+                    
+                    
+                
+            
+            
+
+          
+            
+                
+                
+                    //Is special field!!!!!
+                    
+                    
+                        $this->dttRevokeDate->Value = $this->objAssignment->revokeDate;
+                    
+                
+            
+            
+
+          
+      }
+
 	}
 	public function CreateReferenceControls(){
         if(!is_null($this->objAssignment)){
           
             if(!is_null($this->objAssignment->idDevice)){
-                $this->lnkViewParentAssignment = new MJaxLinkButton($this);
-                $this->lnkViewParentAssignment->Text = 'View Device';
-                $this->lnkViewParentAssignment->Href = __ENTITY_MODEL_DIR__ . '/Device/' . $this->objAssignment->idDevice;
+                $this->lnkViewParentIdDevice = new MJaxLinkButton($this);
+                $this->lnkViewParentIdDevice->Text = 'View Device';
+                $this->lnkViewParentIdDevice->Href = __ENTITY_MODEL_DIR__ . '/Device/' . $this->objAssignment->idDevice;
             }
           
             if(!is_null($this->objAssignment->idSession)){
-                $this->lnkViewParentAssignment = new MJaxLinkButton($this);
-                $this->lnkViewParentAssignment->Text = 'View Session';
-                $this->lnkViewParentAssignment->Href = __ENTITY_MODEL_DIR__ . '/Session/' . $this->objAssignment->idSession;
+                $this->lnkViewParentIdSession = new MJaxLinkButton($this);
+                $this->lnkViewParentIdSession->Text = 'View Session';
+                $this->lnkViewParentIdSession->Href = __ENTITY_MODEL_DIR__ . '/Session/' . $this->objAssignment->idSession;
             }
           
 

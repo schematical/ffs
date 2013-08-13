@@ -73,6 +73,7 @@ class fullScreen extends MJaxGentaForm {
     public function UpdateMessageDisp(){
         $this->intCt += 5;
         $arrMessage = FFSApplication::GetQuedMessages();
+
         if(count($arrMessage) == 0){
             $this->pnlMessage->Text = sprintf(
                 '<p> Go to <b>%s/%s</b> to post a message to your athlete</p>',
@@ -88,7 +89,7 @@ class fullScreen extends MJaxGentaForm {
         }
         //_dv($objMessage);
         $this->pnlMessage->Text = sprintf(
-            '<h5>%s: </h5><p>%s</p>',
+            '<h5>To <b>%s: </b></h5><p>%s</p>',
             $objMessage->AtheleteName,
             $objMessage->Message
         );

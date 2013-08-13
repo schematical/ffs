@@ -73,11 +73,11 @@ class EnrollmentEditPanelBase extends MJaxPanel{
    		
 	
 	
-   		//public $lnkViewParentEnrollment = null;
+   		public $lnkViewParentIdAthelete = null;
 	
-   		//public $lnkViewParentEnrollment = null;
+   		public $lnkViewParentIdCompetition = null;
 	
-   		//public $lnkViewParentEnrollment = null;
+   		public $lnkViewParentIdSession = null;
 	
 	
 	//Regular controls
@@ -242,155 +242,158 @@ class EnrollmentEditPanelBase extends MJaxPanel{
   		
 	  
 	  if(!is_null($this->objEnrollment)){
-	     
-	  	
-  		
-  			$this->intIdEnrollment = $this->objEnrollment->idEnrollment;
-  		
-  		
-	     
-	  	
-            
-	  		    $this->intIdAthelete->Text = $this->objEnrollment->idAthelete;
-            
-            
-  		
-  		
-  		
-	     
-	  	
-            
-	  		    $this->intIdCompetition->Text = $this->objEnrollment->idCompetition;
-            
-            
-  		
-  		
-  		
-	     
-	  	
-            
-	  		    $this->intIdSession->Text = $this->objEnrollment->idSession;
-            
-            
-  		
-  		
-  		
-	     
-	  	
-            
-	  		    $this->strFlight->Text = $this->objEnrollment->flight;
-            
-            
-  		
-  		
-  		
-	     
-	  	
-            
-	  		    $this->strDivision->Text = $this->objEnrollment->division;
-            
-            
-  		
-  		
-  		
-	     
-	  	
-            
-	  		    $this->strAgeGroup->Text = $this->objEnrollment->ageGroup;
-            
-            
-  		
-  		
-  		
-	     
-	  	
-            
-	  		    $this->strMisc1->Text = $this->objEnrollment->misc1;
-            
-            
-  		
-  		
-  		
-	     
-	  	
-            
-	  		    $this->strMisc2->Text = $this->objEnrollment->misc2;
-            
-            
-  		
-  		
-  		
-	     
-	  	
-            
-	  		    $this->strMisc3->Text = $this->objEnrollment->misc3;
-            
-            
-  		
-  		
-  		
-	     
-	  	
-            
-	  		    $this->strMisc4->Text = $this->objEnrollment->misc4;
-            
-            
-  		
-  		
-  		
-	     
-	  	
-            
-	  		    $this->strMisc5->Text = $this->objEnrollment->misc5;
-            
-            
-  		
-  		
-  		
-	     
-	  	
-            
-            
-                //Is special field!!!!!
-                
-                    //Do nothing this is a creDate
-                
-                
-            
-  		
-  		
-  		
-	     
-	  	
-            
-	  		    $this->strLevel->Text = $this->objEnrollment->level;
-            
-            
-  		
-  		
-  		
-	  
+            $this->SetEnrollment($this->objEnrollment);
 	  }
+  }
+  public function SetEnrollment($objEnrollment){
+      $this->objEnrollment = $objEnrollment;
+      $this->blnModified = true;
+      if(!is_null($this->objEnrollment)){
+          
+            
+            
+                //PKey
+                $this->intIdEnrollment = $this->objEnrollment->idEnrollment;
+            
+
+          
+            
+                
+                
+            
+            
+
+          
+            
+                
+                
+            
+            
+
+          
+            
+                
+                
+            
+            
+
+          
+            
+                
+                    $this->strFlight->Text = $this->objEnrollment->flight;
+                
+                
+            
+            
+
+          
+            
+                
+                    $this->strDivision->Text = $this->objEnrollment->division;
+                
+                
+            
+            
+
+          
+            
+                
+                    $this->strAgeGroup->Text = $this->objEnrollment->ageGroup;
+                
+                
+            
+            
+
+          
+            
+                
+                    $this->strMisc1->Text = $this->objEnrollment->misc1;
+                
+                
+            
+            
+
+          
+            
+                
+                    $this->strMisc2->Text = $this->objEnrollment->misc2;
+                
+                
+            
+            
+
+          
+            
+                
+                    $this->strMisc3->Text = $this->objEnrollment->misc3;
+                
+                
+            
+            
+
+          
+            
+                
+                    $this->strMisc4->Text = $this->objEnrollment->misc4;
+                
+                
+            
+            
+
+          
+            
+                
+                    $this->strMisc5->Text = $this->objEnrollment->misc5;
+                
+                
+            
+            
+
+          
+            
+                
+                
+                    //Is special field!!!!!
+                    
+                        //Do nothing this is a creDate
+                    
+                    
+                
+            
+            
+
+          
+            
+                
+                    $this->strLevel->Text = $this->objEnrollment->level;
+                
+                
+            
+            
+
+          
+      }
+
 	}
 	public function CreateReferenceControls(){
         if(!is_null($this->objEnrollment)){
           
             if(!is_null($this->objEnrollment->idAthelete)){
-                $this->lnkViewParentEnrollment = new MJaxLinkButton($this);
-                $this->lnkViewParentEnrollment->Text = 'View Athelete';
-                $this->lnkViewParentEnrollment->Href = __ENTITY_MODEL_DIR__ . '/Athelete/' . $this->objEnrollment->idAthelete;
+                $this->lnkViewParentIdAthelete = new MJaxLinkButton($this);
+                $this->lnkViewParentIdAthelete->Text = 'View Athelete';
+                $this->lnkViewParentIdAthelete->Href = __ENTITY_MODEL_DIR__ . '/Athelete/' . $this->objEnrollment->idAthelete;
             }
           
             if(!is_null($this->objEnrollment->idCompetition)){
-                $this->lnkViewParentEnrollment = new MJaxLinkButton($this);
-                $this->lnkViewParentEnrollment->Text = 'View Competition';
-                $this->lnkViewParentEnrollment->Href = __ENTITY_MODEL_DIR__ . '/Competition/' . $this->objEnrollment->idCompetition;
+                $this->lnkViewParentIdCompetition = new MJaxLinkButton($this);
+                $this->lnkViewParentIdCompetition->Text = 'View Competition';
+                $this->lnkViewParentIdCompetition->Href = __ENTITY_MODEL_DIR__ . '/Competition/' . $this->objEnrollment->idCompetition;
             }
           
             if(!is_null($this->objEnrollment->idSession)){
-                $this->lnkViewParentEnrollment = new MJaxLinkButton($this);
-                $this->lnkViewParentEnrollment->Text = 'View Session';
-                $this->lnkViewParentEnrollment->Href = __ENTITY_MODEL_DIR__ . '/Session/' . $this->objEnrollment->idSession;
+                $this->lnkViewParentIdSession = new MJaxLinkButton($this);
+                $this->lnkViewParentIdSession->Text = 'View Session';
+                $this->lnkViewParentIdSession->Href = __ENTITY_MODEL_DIR__ . '/Session/' . $this->objEnrollment->idSession;
             }
           
 

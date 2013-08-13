@@ -16,11 +16,15 @@ class FFSPTFImportPanel extends MJaxPanel{
 
     }
     public function uplImport_upload(){
-        //_dv($this->uplImport->FileData);
+
+        if(strtolower(pathinfo($this->uplImport->FileData['name'], PATHINFO_EXTENSION)) != 'ptf'){
+            return $this->uplImport->Alert("Invalid file. Must have .ptf extension");
+        }
         $strLocation = $this->uplImport->FileData['tmp_name'];
 
         FFSApplication::ImportPTF($strLocation);
-        $this->objForm->HideAlert();
+        //_dv("Import Done");
+        $this->objForm->TriggerControlEvent($this->ControlId, 'ffs-ptf-import');
     }
     
 }

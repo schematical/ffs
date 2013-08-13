@@ -53,7 +53,7 @@ class AtheleteEditPanelBase extends MJaxPanel{
    		
 	
 	
-   		//public $lnkViewParentAthelete = null;
+   		public $lnkViewParentIdOrg = null;
 	
 	
   		public $lnkViewChildResult = null;
@@ -190,111 +190,118 @@ class AtheleteEditPanelBase extends MJaxPanel{
   		
 	  
 	  if(!is_null($this->objAthelete)){
-	     
-	  	
-  		
-  			$this->intIdAthelete = $this->objAthelete->idAthelete;
-  		
-  		
-	     
-	  	
-            
-	  		    $this->intIdOrg->Text = $this->objAthelete->idOrg;
-            
-            
-  		
-  		
-  		
-	     
-	  	
-            
-	  		    $this->strFirstName->Text = $this->objAthelete->firstName;
-            
-            
-  		
-  		
-  		
-	     
-	  	
-            
-	  		    $this->strLastName->Text = $this->objAthelete->lastName;
-            
-            
-  		
-  		
-  		
-	     
-	  	
-            
-            
-                //Is special field!!!!!
-                
-                
-                    $this->dttBirthDate->Value = $this->objAthelete->birthDate;
-                
-            
-  		
-  		
-  		
-	     
-	  	
-            
-	  		    $this->strMemType->Text = $this->objAthelete->memType;
-            
-            
-  		
-  		
-  		
-	     
-	  	
-            
-	  		    $this->strMemId->Text = $this->objAthelete->memId;
-            
-            
-  		
-  		
-  		
-	     
-	  	
-            
-	  		    $this->strPsData->Text = $this->objAthelete->PsData;
-            
-            
-  		
-  		
-  		
-	     
-	  	
-            
-            
-                //Is special field!!!!!
-                
-                    //Do nothing this is a creDate
-                
-                
-            
-  		
-  		
-  		
-	     
-	  	
-            
-	  		    $this->strLevel->Text = $this->objAthelete->level;
-            
-            
-  		
-  		
-  		
-	  
+            $this->SetAthelete($this->objAthelete);
 	  }
+  }
+  public function SetAthelete($objAthelete){
+      $this->objAthelete = $objAthelete;
+      $this->blnModified = true;
+      if(!is_null($this->objAthelete)){
+          
+            
+            
+                //PKey
+                $this->intIdAthelete = $this->objAthelete->idAthelete;
+            
+
+          
+            
+                
+                
+            
+            
+
+          
+            
+                
+                    $this->strFirstName->Text = $this->objAthelete->firstName;
+                
+                
+            
+            
+
+          
+            
+                
+                    $this->strLastName->Text = $this->objAthelete->lastName;
+                
+                
+            
+            
+
+          
+            
+                
+                
+                    //Is special field!!!!!
+                    
+                    
+                        $this->dttBirthDate->Value = $this->objAthelete->birthDate;
+                    
+                
+            
+            
+
+          
+            
+                
+                    $this->strMemType->Text = $this->objAthelete->memType;
+                
+                
+            
+            
+
+          
+            
+                
+                    $this->strMemId->Text = $this->objAthelete->memId;
+                
+                
+            
+            
+
+          
+            
+                
+                    $this->strPsData->Text = $this->objAthelete->PsData;
+                
+                
+            
+            
+
+          
+            
+                
+                
+                    //Is special field!!!!!
+                    
+                        //Do nothing this is a creDate
+                    
+                    
+                
+            
+            
+
+          
+            
+                
+                    $this->strLevel->Text = $this->objAthelete->level;
+                
+                
+            
+            
+
+          
+      }
+
 	}
 	public function CreateReferenceControls(){
         if(!is_null($this->objAthelete)){
           
             if(!is_null($this->objAthelete->idOrg)){
-                $this->lnkViewParentAthelete = new MJaxLinkButton($this);
-                $this->lnkViewParentAthelete->Text = 'View Org';
-                $this->lnkViewParentAthelete->Href = __ENTITY_MODEL_DIR__ . '/Org/' . $this->objAthelete->idOrg;
+                $this->lnkViewParentIdOrg = new MJaxLinkButton($this);
+                $this->lnkViewParentIdOrg->Text = 'View Org';
+                $this->lnkViewParentIdOrg->Href = __ENTITY_MODEL_DIR__ . '/Org/' . $this->objAthelete->idOrg;
             }
           
 

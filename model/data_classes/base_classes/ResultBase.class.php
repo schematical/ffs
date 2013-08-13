@@ -111,7 +111,7 @@ class ResultBase extends BaseEntity {
     
     public static function LoadCollByIdSession($intIdSession){
         $sql = sprintf("SELECT * FROM Result WHERE idSession = %s;", $intIdSession);
-		$result = MLCDBDriver::Query($sql);
+		$result = MLCDBDriver::Query($sql, self::DB_CONN);
 		$coll = new BaseEntityCollection();
 		while($data = mysql_fetch_assoc($result)){
 			$objResult = new Result();
@@ -124,7 +124,7 @@ class ResultBase extends BaseEntity {
     
     public static function LoadCollByIdAthelete($intIdAthelete){
         $sql = sprintf("SELECT * FROM Result WHERE idAthelete = %s;", $intIdAthelete);
-		$result = MLCDBDriver::Query($sql);
+		$result = MLCDBDriver::Query($sql, self::DB_CONN);
 		$coll = new BaseEntityCollection();
 		while($data = mysql_fetch_assoc($result)){
 			$objResult = new Result();

@@ -107,7 +107,7 @@ class AssignmentBase extends BaseEntity {
     
     public static function LoadCollByIdDevice($intIdDevice){
         $sql = sprintf("SELECT * FROM Assignment WHERE idDevice = %s;", $intIdDevice);
-		$result = MLCDBDriver::Query($sql);
+		$result = MLCDBDriver::Query($sql, self::DB_CONN);
 		$coll = new BaseEntityCollection();
 		while($data = mysql_fetch_assoc($result)){
 			$objAssignment = new Assignment();
@@ -120,7 +120,7 @@ class AssignmentBase extends BaseEntity {
     
     public static function LoadCollByIdSession($intIdSession){
         $sql = sprintf("SELECT * FROM Assignment WHERE idSession = %s;", $intIdSession);
-		$result = MLCDBDriver::Query($sql);
+		$result = MLCDBDriver::Query($sql, self::DB_CONN);
 		$coll = new BaseEntityCollection();
 		while($data = mysql_fetch_assoc($result)){
 			$objAssignment = new Assignment();

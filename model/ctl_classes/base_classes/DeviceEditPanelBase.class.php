@@ -27,6 +27,13 @@ class DeviceEditPanelBase extends MJaxPanel{
     	public $strInviteEmail = null;
    		
 	
+    	
+    	
+    	public $intIdOrg = null;
+   		
+	
+	
+   		public $lnkViewParentIdOrg = null;
 	
 	
   		public $lnkViewChildAssignment = null;
@@ -110,59 +117,86 @@ class DeviceEditPanelBase extends MJaxPanel{
             
 	  		
   		
+	     
+	  	
+            
+	  		
+  		
 	  
 	  if(!is_null($this->objDevice)){
-	     
-	  	
-  		
-  			$this->intIdDevice = $this->objDevice->idDevice;
-  		
-  		
-	     
-	  	
-            
-	  		    $this->strName->Text = $this->objDevice->name;
-            
-            
-  		
-  		
-  		
-	     
-	  	
-            
-	  		    $this->strToken->Text = $this->objDevice->token;
-            
-            
-  		
-  		
-  		
-	     
-	  	
-            
-            
-                //Is special field!!!!!
-                
-                    //Do nothing this is a creDate
-                
-                
-            
-  		
-  		
-  		
-	     
-	  	
-            
-	  		    $this->strInviteEmail->Text = $this->objDevice->inviteEmail;
-            
-            
-  		
-  		
-  		
-	  
+            $this->SetDevice($this->objDevice);
 	  }
+  }
+  public function SetDevice($objDevice){
+      $this->objDevice = $objDevice;
+      $this->blnModified = true;
+      if(!is_null($this->objDevice)){
+          
+            
+            
+                //PKey
+                $this->intIdDevice = $this->objDevice->idDevice;
+            
+
+          
+            
+                
+                    $this->strName->Text = $this->objDevice->name;
+                
+                
+            
+            
+
+          
+            
+                
+                    $this->strToken->Text = $this->objDevice->token;
+                
+                
+            
+            
+
+          
+            
+                
+                
+                    //Is special field!!!!!
+                    
+                        //Do nothing this is a creDate
+                    
+                    
+                
+            
+            
+
+          
+            
+                
+                    $this->strInviteEmail->Text = $this->objDevice->inviteEmail;
+                
+                
+            
+            
+
+          
+            
+                
+                
+            
+            
+
+          
+      }
+
 	}
 	public function CreateReferenceControls(){
         if(!is_null($this->objDevice)){
+          
+            if(!is_null($this->objDevice->idOrg)){
+                $this->lnkViewParentIdOrg = new MJaxLinkButton($this);
+                $this->lnkViewParentIdOrg->Text = 'View Org';
+                $this->lnkViewParentIdOrg->Href = __ENTITY_MODEL_DIR__ . '/Org/' . $this->objDevice->idOrg;
+            }
           
 
 	   }
@@ -214,6 +248,11 @@ class DeviceEditPanelBase extends MJaxPanel{
             
                 
                     $this->objDevice->inviteEmail = $this->strInviteEmail->Text;
+                
+                
+            
+		  
+            
                 
                 
             

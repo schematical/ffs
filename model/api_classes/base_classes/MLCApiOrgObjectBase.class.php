@@ -6,9 +6,9 @@ class MLCApiOrgObjectBase extends MLCApiObjectBase{
     		switch($strName){
 				
 				
-		     	case('competitions'):
-		       		$arrCompetitions = Competition::LoadCollByIdOrg($this->GetEntity()->idOrg)->GetCollection();
-		       		return new MLCApiResponse($arrCompetitions);
+		     	case('devices'):
+		       		$arrDevices = Device::LoadCollByIdOrg($this->GetEntity()->idOrg)->GetCollection();
+		       		return new MLCApiResponse($arrDevices);
 		    	break;
 				
 				default:

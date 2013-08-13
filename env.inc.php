@@ -57,10 +57,9 @@ if(defined('SERVER_ENV')){
                 'user'=>'evillabs',
                 'pass'=>'gaM3rPuPu'
             )));
-
-
         break;
 	}
+
     define('POSTMARKAPP_API_KEY', 'e2e62665-0392-40e7-ac3f-a1dfb5c9349c');
     define('POSTMARKAPP_MAIL_FROM_ADDRESS', 'mlea@schematical.com');
     define('POSTMARKAPP_MAIL_FROM_NAME', 'Matt Lea');

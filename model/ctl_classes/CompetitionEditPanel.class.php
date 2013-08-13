@@ -21,6 +21,15 @@ class CompetitionEditPanel extends CompetitionEditPanelBase {
         $this->btnContinue->Text = 'Continue';
         $this->btnContinue->AddCssClass('btn btn-large btn-info');
     }
+    public function SetCompetition($objCompetition, $objOrg = null){
+        if(is_null($objOrg)){
+            $objOrg = $objCompetition->IdOrgObject;
+        }
+        if(!is_null($objOrg)){
+            $this->txtOrgName->Text = $objOrg->Name;
+        }
+        return parent::SetCompetition($objCompetition);
+    }
     public function strName_blur(){
         $this->strNamespace->Text = FFSRewriteHandeler::ConvertToNamespace(
             $this->strName->Text

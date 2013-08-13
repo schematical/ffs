@@ -66,6 +66,10 @@ class SessionBase extends BaseEntity {
         $xmlStr .= $this->equipmentSet;
         $xmlStr .= "</equipmentSet>";
         
+        $xmlStr .= "<eventData>";
+        $xmlStr .= $this->eventData;
+        $xmlStr .= "</eventData>";
+        
         if($blnReclusive){
            //Finish FK Rel stuff
         }
@@ -76,7 +80,6 @@ class SessionBase extends BaseEntity {
    
 	public static function Query($strExtra, $blnReturnSingle = false){
 		$sql = sprintf("SELECT * FROM %s %s;", self::TABLE_NAME,  $strExtra);
-        //die($sql);
 		$result = MLCDBDriver::Query($sql, self::DB_CONN);
 		$coll = new BaseEntityCollection();
 		while($data = mysql_fetch_assoc($result)){
@@ -112,7 +115,7 @@ class SessionBase extends BaseEntity {
     
     public static function LoadCollByIdCompetition($intIdCompetition){
         $sql = sprintf("SELECT * FROM Session WHERE idCompetition = %s;", $intIdCompetition);
-		$result = MLCDBDriver::Query($sql);
+		$result = MLCDBDriver::Query($sql, self::DB_CONN);
 		$coll = new BaseEntityCollection();
 		while($data = mysql_fetch_assoc($result)){
 			$objSession = new Session();
@@ -227,6 +230,9 @@ class SessionBase extends BaseEntity {
                                  
                  $arrReturn['equipmentSet'] = $this->equipmentSet;
             
+                                 
+                 $arrReturn['eventData'] = $this->eventData;
+            
             return $arrReturn;
         }
         public function __toJson($blnPosponeEncode = false){
@@ -304,6 +310,14 @@ class SessionBase extends BaseEntity {
 	        		return null;
 	        	break;
 	        	
+	   			case('EventData'): 
+	   			case('eventData'): 
+	   				if(array_key_exists('eventData', $this->arrDBFields)){
+	        			return $this->arrDBFields['eventData'];
+	        		}
+	        		return null;
+	        	break;
+	        	
 	        	
                 case('IdCompetitionObject'):
                 case('idCompetitionObject'):
@@ -366,6 +380,11 @@ class SessionBase extends BaseEntity {
 	   			case('EquipmentSet'): 
 	   			case('equipmentSet'): 
 	        		$this->arrDBFields['equipmentSet'] = $strValue;
+	        	break;
+	        	
+	   			case('EventData'): 
+	   			case('eventData'): 
+	        		$this->arrDBFields['eventData'] = $strValue;
 	        	break;
 	        	
 	        	default:

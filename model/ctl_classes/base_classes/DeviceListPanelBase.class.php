@@ -38,6 +38,11 @@ class DeviceListPanelBase extends MJaxTable{
 	    	$this->AddColumn('inviteEmail','inviteEmail');
 	   		
 		
+	    	
+	    	
+	    	$this->AddColumn('idOrg','idOrg');
+	   		
+		
 	}
 	public function objRow_click($strFomrId, $strControlId, $strActionParameter){
 

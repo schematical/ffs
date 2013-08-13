@@ -54,6 +54,10 @@ class DeviceBase extends BaseEntity {
         $xmlStr .= $this->inviteEmail;
         $xmlStr .= "</inviteEmail>";
         
+        $xmlStr .= "<idOrg>";
+        $xmlStr .= $this->idOrg;
+        $xmlStr .= "</idOrg>";
+        
         if($blnReclusive){
            //Finish FK Rel stuff
         }
@@ -96,6 +100,19 @@ class DeviceBase extends BaseEntity {
 	
 
     //Load by foregin key
+    
+    public static function LoadCollByIdOrg($intIdOrg){
+        $sql = sprintf("SELECT * FROM Device WHERE idOrg = %s;", $intIdOrg);
+		$result = MLCDBDriver::Query($sql, self::DB_CONN);
+		$coll = new BaseEntityCollection();
+		while($data = mysql_fetch_assoc($result)){
+			$objDevice = new Device();
+			$objDevice->materilize($data);
+			$coll->addItem($objDevice);
+		}
+		return $coll;
+    }
+
     
     
       public function LoadByTag($strTag){
@@ -192,6 +209,9 @@ class DeviceBase extends BaseEntity {
                                  
                  $arrReturn['inviteEmail'] = $this->inviteEmail;
             
+                                 
+                 $arrReturn['idOrg'] = $this->idOrg;
+            
             return $arrReturn;
         }
         public function __toJson($blnPosponeEncode = false){
@@ -245,6 +265,27 @@ class DeviceBase extends BaseEntity {
 	        		return null;
 	        	break;
 	        	
+	   			case('IdOrg'): 
+	   			case('idOrg'): 
+	   				if(array_key_exists('idOrg', $this->arrDBFields)){
+	        			return $this->arrDBFields['idOrg'];
+	        		}
+	        		return null;
+	        	break;
+	        	
+	        	
+                case('IdOrgObject'):
+                case('idOrgObject'):
+	   				if(
+	   				    (array_key_exists('idOrg', $this->arrDBFields)) &&
+	   				    (!is_null($this->arrDBFields['idOrg']))
+                    ){
+	        			return Org::LoadById(
+	        			    $this->arrDBFields['idOrg']
+                        );
+	        		}
+	        		return null;
+	        	break;
 	        	
 	        	default:
 	        		throw new Exception('No property with name "' . $strName . '" exists in class ". get_class($this) . "');
@@ -279,6 +320,11 @@ class DeviceBase extends BaseEntity {
 	   			case('InviteEmail'): 
 	   			case('inviteEmail'): 
 	        		$this->arrDBFields['inviteEmail'] = $strValue;
+	        	break;
+	        	
+	   			case('IdOrg'): 
+	   			case('idOrg'): 
+	        		$this->arrDBFields['idOrg'] = $strValue;
 	        	break;
 	        	
 	        	default:

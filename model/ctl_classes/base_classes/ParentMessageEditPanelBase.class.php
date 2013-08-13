@@ -73,9 +73,9 @@ class ParentMessageEditPanelBase extends MJaxPanel{
    		
 	
 	
-   		//public $lnkViewParentParentMessage = null;
+   		public $lnkViewParentIdAthelete = null;
 	
-   		//public $lnkViewParentParentMessage = null;
+   		public $lnkViewParentIdCompetition = null;
 	
 	
 	//Regular controls
@@ -246,167 +246,172 @@ class ParentMessageEditPanelBase extends MJaxPanel{
   		
 	  
 	  if(!is_null($this->objParentMessage)){
-	     
-	  	
-  		
-  			$this->intIdParentMessage = $this->objParentMessage->idParentMessage;
-  		
-  		
-	     
-	  	
-            
-	  		    $this->intIdAthelete->Text = $this->objParentMessage->idAthelete;
-            
-            
-  		
-  		
-  		
-	     
-	  	
-            
-	  		    $this->strAtheleteName->Text = $this->objParentMessage->atheleteName;
-            
-            
-  		
-  		
-  		
-	     
-	  	
-            
-	  		    $this->strMessage->Text = $this->objParentMessage->message;
-            
-            
-  		
-  		
-  		
-	     
-	  	
-            
-            
-                //Is special field!!!!!
-                
-                    //Do nothing this is a creDate
-                
-                
-            
-  		
-  		
-  		
-	     
-	  	
-            
-            
-                //Is special field!!!!!
-                
-                
-                    $this->dttDispDate->Value = $this->objParentMessage->dispDate;
-                
-            
-  		
-  		
-  		
-	     
-	  	
-            
-            
-                //Is special field!!!!!
-                
-                
-            
-  		
-  		
-  		
-	     
-	  	
-            
-            
-                //Is special field!!!!!
-                
-                
-                    $this->dttQueDate->Value = $this->objParentMessage->queDate;
-                
-            
-  		
-  		
-  		
-	     
-	  	
-            
-	  		    $this->strInviteData->Text = $this->objParentMessage->inviteData;
-            
-            
-  		
-  		
-  		
-	     
-	  	
-            
-	  		    $this->strInviteType->Text = $this->objParentMessage->inviteType;
-            
-            
-  		
-  		
-  		
-	     
-	  	
-            
-	  		    $this->strInviteToken->Text = $this->objParentMessage->inviteToken;
-            
-            
-  		
-  		
-  		
-	     
-	  	
-            
-            
-                //Is special field!!!!!
-                
-                
-                    $this->dttInviteViewDate->Value = $this->objParentMessage->inviteViewDate;
-                
-            
-  		
-  		
-  		
-	     
-	  	
-            
-	  		    $this->intIdCompetition->Text = $this->objParentMessage->idCompetition;
-            
-            
-  		
-  		
-  		
-	     
-	  	
-            
-            
-                //Is special field!!!!!
-                
-                
-                    $this->dttApproveDate->Value = $this->objParentMessage->approveDate;
-                
-            
-  		
-  		
-  		
-	  
+            $this->SetParentMessage($this->objParentMessage);
 	  }
+  }
+  public function SetParentMessage($objParentMessage){
+      $this->objParentMessage = $objParentMessage;
+      $this->blnModified = true;
+      if(!is_null($this->objParentMessage)){
+          
+            
+            
+                //PKey
+                $this->intIdParentMessage = $this->objParentMessage->idParentMessage;
+            
+
+          
+            
+                
+                
+            
+            
+
+          
+            
+                
+                    $this->strAtheleteName->Text = $this->objParentMessage->atheleteName;
+                
+                
+            
+            
+
+          
+            
+                
+                    $this->strMessage->Text = $this->objParentMessage->message;
+                
+                
+            
+            
+
+          
+            
+                
+                
+                    //Is special field!!!!!
+                    
+                        //Do nothing this is a creDate
+                    
+                    
+                
+            
+            
+
+          
+            
+                
+                
+                    //Is special field!!!!!
+                    
+                    
+                        $this->dttDispDate->Value = $this->objParentMessage->dispDate;
+                    
+                
+            
+            
+
+          
+            
+                
+                
+                    //Is special field!!!!!
+                    
+                    
+                
+            
+            
+
+          
+            
+                
+                
+                    //Is special field!!!!!
+                    
+                    
+                        $this->dttQueDate->Value = $this->objParentMessage->queDate;
+                    
+                
+            
+            
+
+          
+            
+                
+                    $this->strInviteData->Text = $this->objParentMessage->inviteData;
+                
+                
+            
+            
+
+          
+            
+                
+                    $this->strInviteType->Text = $this->objParentMessage->inviteType;
+                
+                
+            
+            
+
+          
+            
+                
+                    $this->strInviteToken->Text = $this->objParentMessage->inviteToken;
+                
+                
+            
+            
+
+          
+            
+                
+                
+                    //Is special field!!!!!
+                    
+                    
+                        $this->dttInviteViewDate->Value = $this->objParentMessage->inviteViewDate;
+                    
+                
+            
+            
+
+          
+            
+                
+                
+            
+            
+
+          
+            
+                
+                
+                    //Is special field!!!!!
+                    
+                    
+                        $this->dttApproveDate->Value = $this->objParentMessage->approveDate;
+                    
+                
+            
+            
+
+          
+      }
+
 	}
 	public function CreateReferenceControls(){
         if(!is_null($this->objParentMessage)){
           
             if(!is_null($this->objParentMessage->idAthelete)){
-                $this->lnkViewParentParentMessage = new MJaxLinkButton($this);
-                $this->lnkViewParentParentMessage->Text = 'View Athelete';
-                $this->lnkViewParentParentMessage->Href = __ENTITY_MODEL_DIR__ . '/Athelete/' . $this->objParentMessage->idAthelete;
+                $this->lnkViewParentIdAthelete = new MJaxLinkButton($this);
+                $this->lnkViewParentIdAthelete->Text = 'View Athelete';
+                $this->lnkViewParentIdAthelete->Href = __ENTITY_MODEL_DIR__ . '/Athelete/' . $this->objParentMessage->idAthelete;
             }
           
             if(!is_null($this->objParentMessage->idCompetition)){
-                $this->lnkViewParentParentMessage = new MJaxLinkButton($this);
-                $this->lnkViewParentParentMessage->Text = 'View Competition';
-                $this->lnkViewParentParentMessage->Href = __ENTITY_MODEL_DIR__ . '/Competition/' . $this->objParentMessage->idCompetition;
+                $this->lnkViewParentIdCompetition = new MJaxLinkButton($this);
+                $this->lnkViewParentIdCompetition->Text = 'View Competition';
+                $this->lnkViewParentIdCompetition->Href = __ENTITY_MODEL_DIR__ . '/Competition/' . $this->objParentMessage->idCompetition;
             }
           
 

@@ -1,6 +1,9 @@
 <?php
 class FFSRewriteHandeler extends MLCRewriteHandelerBase{
     public function Handel($strUri){
+        if($strUri == '/'){
+            return parent::Handel($strUri);
+        }
         $arrParts = explode('/', $strUri);
         $arrFileNameParts = explode('.', $arrParts[count($arrParts) - 1]);
         if(count($arrFileNameParts) > 1){
@@ -37,6 +40,7 @@ class FFSRewriteHandeler extends MLCRewriteHandelerBase{
 
                 //Assume it is a parent
                 MLCApplication::$strCtlFile = __CTL_ACTIVE_APP_DIR__ . '/' . $strSubFolder . '/' . $strEndUri;
+                //_dv(MLCApplication::$strCtlFile);
                 return;
             }
 

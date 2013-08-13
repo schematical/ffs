@@ -39,7 +39,7 @@ class OrgEditPanelBase extends MJaxPanel{
 	
 	
 	
-  		public $lnkViewChildCompetition = null;
+  		public $lnkViewChildDevice = null;
   	
 	//Regular controls
 	
@@ -146,72 +146,81 @@ class OrgEditPanelBase extends MJaxPanel{
   		
 	  
 	  if(!is_null($this->objOrg)){
-	     
-	  	
-  		
-  			$this->intIdOrg = $this->objOrg->idOrg;
-  		
-  		
-	     
-	  	
-            
-	  		    $this->strNamespace->Text = $this->objOrg->namespace;
-            
-            
-  		
-  		
-  		
-	     
-	  	
-            
-	  		    $this->strName->Text = $this->objOrg->name;
-            
-            
-  		
-  		
-  		
-	     
-	  	
-            
-            
-                //Is special field!!!!!
-                
-                    //Do nothing this is a creDate
-                
-                
-            
-  		
-  		
-  		
-	     
-	  	
-            
-	  		    $this->strPsData->Text = $this->objOrg->psData;
-            
-            
-  		
-  		
-  		
-	     
-	  	
-            
-	  		    $this->intIdImportAuthUser->Text = $this->objOrg->idImportAuthUser;
-            
-            
-  		
-  		
-  		
-	     
-	  	
-            
-	  		    $this->strClubNum->Text = $this->objOrg->clubNum;
-            
-            
-  		
-  		
-  		
-	  
+            $this->SetOrg($this->objOrg);
 	  }
+  }
+  public function SetOrg($objOrg){
+      $this->objOrg = $objOrg;
+      $this->blnModified = true;
+      if(!is_null($this->objOrg)){
+          
+            
+            
+                //PKey
+                $this->intIdOrg = $this->objOrg->idOrg;
+            
+
+          
+            
+                
+                    $this->strNamespace->Text = $this->objOrg->namespace;
+                
+                
+            
+            
+
+          
+            
+                
+                    $this->strName->Text = $this->objOrg->name;
+                
+                
+            
+            
+
+          
+            
+                
+                
+                    //Is special field!!!!!
+                    
+                        //Do nothing this is a creDate
+                    
+                    
+                
+            
+            
+
+          
+            
+                
+                    $this->strPsData->Text = $this->objOrg->psData;
+                
+                
+            
+            
+
+          
+            
+                
+                    $this->intIdImportAuthUser->Text = $this->objOrg->idImportAuthUser;
+                
+                
+            
+            
+
+          
+            
+                
+                    $this->strClubNum->Text = $this->objOrg->clubNum;
+                
+                
+            
+            
+
+          
+      }
+
 	}
 	public function CreateReferenceControls(){
         if(!is_null($this->objOrg)){
@@ -221,10 +230,10 @@ class OrgEditPanelBase extends MJaxPanel{
 
            
 
-            $this->lnkViewChildCompetition = new MJaxLinkButton($this);
-            $this->lnkViewChildCompetition->Text = 'View Competitions';
+            $this->lnkViewChildDevice = new MJaxLinkButton($this);
+            $this->lnkViewChildDevice->Text = 'View Devices';
             //I should really fix this
-            //$this->lnkViewChildCompetition->Href = __ENTITY_MODEL_DIR__ . '/Org/' . $this->objOrg->idOrg . '/Competitions';
+            //$this->lnkViewChildDevice->Href = __ENTITY_MODEL_DIR__ . '/Org/' . $this->objOrg->idOrg . '/Devices';
 
           
 	}

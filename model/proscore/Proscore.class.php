@@ -20,7 +20,7 @@ class Proscore{
         foreach($arrLines as $intIndex => $strData){
             $strData = str_replace("\n","", $strData);
             //echo "Parsing: ". $strData . ' - ' . strlen($strData) . "\n";
-            if(strlen($strData) == 0){
+            if(strlen($strData) < 2){
                 //End section
 
                 if(!is_null($strId)){
@@ -28,7 +28,7 @@ class Proscore{
                     if(!array_key_exists($strHeader, $objProscore->arrData)){
                         $objProscore->arrData[$strHeader] = array();
                     }
-                    $objProscore->arrData[$strHeader][$strId] = $objPSData;
+                    $objProscore->arrData[$strHeader][(int)$strId] = $objPSData;
                 }
                 $strId = null;
                 $strHeader = null;
@@ -38,10 +38,15 @@ class Proscore{
                 $intPos = strpos($strData, '-');
                 if($intPos !== false){
                     $strHeader = substr($strData, 1, $intPos - 1);
-                    $strId = ltrim(substr(
+                    $intLen =  strlen($strData) - ($intPos + 3);
+                    $strSubData = substr(
                         $strData,
                         $intPos + 1,
-                        strlen($strData) - ($intPos) -2),
+                       $intLen
+                    );
+                    //_dv($strData . ' - ' .$strSubData . ' - ' . $intLen);
+                    $strId = (int)ltrim(
+                        $strSubData,
                         '0'
                     );
                     //_dv($strId);
@@ -51,12 +56,14 @@ class Proscore{
                     //$strId = null;
                 }
             }else{
+                //This should be data
                 if(!is_null($strHeader)){
                     $arrParts = explode('=', $strData);
                     if(count($arrParts) == 2){
                         $arrSectionData[$arrParts[0]] = $arrParts[1];
                     }else{
-                       //die($strHeader);
+                       //die($strHeader . ' - ' . $strData);
+                        $arrSectionData[$arrParts[0]] = '';
                     }
                 }
             }
@@ -65,9 +72,68 @@ class Proscore{
         return $objProscore;
 
     }
+    public function ImportIndOrg($objPSData){
+        $objOrg = null;
+        if(strlen($objPSData->ClubNum) > 1){
+            $objOrg = Org::Query(
+                sprintf(
+                    'WHERE clubNum = %s',
+                    $objPSData->ClubNum
+                ),
+                true
+            );
+        }
+
+        if(!is_null(MLCAuthDriver::User())){
+            $objOrg = Org::Query(
+                sprintf(
+                    'WHERE name = "%s" AND idImportAuthUser = %s',
+                    $objPSData->__get('Official Name'),
+                    MLCAuthDriver::IdUser()
+                ),
+                true
+            );
+        }
+        if(is_null($objOrg)){
+            $objOrg = new Org();
+        }
+        $objOrg->Name = $objPSData->__get('Official Name');
+
+
+        $objOrg->IdImportAuthUser = MLCAuthDriver::IdUser();
+        $objOrg->PsData = $objPSData->__toJson();
+        $objOrg->CreDate = MLCDateTime::Now();
+        $objOrg->ClubNum = $objPSData->ClubNum;
+        $objOrg->Save();
+        $objPSData->DataEntity = $objOrg;
+        return $objOrg;
+    }
+    public function ImportHostOrg($objPSData){
+        $objOrg = Org::Query(
+            sprintf(
+                'WHERE  clubNum = %s',
+                $objPSData->ProNumber
+            ),
+            true
+        );
+        if(is_null($objOrg)){
+            $objOrg = new Org();
+        }
+        $objOrg->Name = $objPSData->__get('Facility');
+
+
+        //$objOrg->IdImportAuthUser = MLCAuthDriver::IdUser();
+        $objOrg->PsData = $objPSData->__toJson();
+        $objOrg->CreDate = MLCDateTime::Now();
+        $objOrg->ClubNum = $objPSData->ProNumber;
+        $objOrg->Save();
+        $objPSData->DataEntity = $objOrg;
+        return $objOrg;
+    }
     public function ImportCompetitions(){
         $arrReturn = array();
         foreach($this->arrData['Meets'] as $intId => $objPSData){
+            FFSForm::$objOrg = $this->ImportHostOrg($objPSData);
             $objCompetition = Competition::Query(
                 sprintf(
                     'WHERE name = "%s" AND idOrg = %s',
@@ -91,6 +157,8 @@ class Proscore{
             $objCompetition->Save();
             $objPSData->DataEntity = $objCompetition;
             $arrReturn[] = $objCompetition;
+            FFSForm::$objCompetition = $objCompetition;
+
 
             $this->ImportSessions();
         }
@@ -101,7 +169,13 @@ class Proscore{
         $arrReturn = array();
         //_dv($this->arrData['Meets']);
         foreach($this->arrData['Sessions'] as $intId => $objPSData){
-            $intIdCompetition = $this->arrData['Meets'][$objPSData->MeetID]->DataEntity->IdCompetition;
+            $intIndex = (int)$objPSData->MeetID;
+            if(!array_key_exists($intIndex, $this->arrData['Meets'])){
+                //_dv($intIndex);
+                //_dv(array_keys($this->arrData['Meets']));
+                throw new Exception("No Meet with ID: " . $intIndex);
+            }
+            $intIdCompetition = $this->arrData['Meets'][(int)$intIndex]->DataEntity->IdCompetition;
             $objSession = Session::Query(
                 sprintf(
                     'WHERE name = "%s" AND idCompetition = %s',
@@ -131,26 +205,7 @@ class Proscore{
         $arrReturn = array();
 
         foreach($this->arrData['Gyms'] as $intId => $objPSData){
-            $objOrg = Org::Query(
-                sprintf(
-                    'WHERE name = "%s" AND idImportAuthUser = %s',
-                    $objPSData->__get('Official Name'),
-                    MLCAuthDriver::IdUser()
-                ),
-                true
-            );
-            if(is_null($objOrg)){
-                $objOrg = new Org();
-            }
-            $objOrg->Name = $objPSData->__get('Official Name');
-
-
-            $objOrg->IdImportAuthUser = MLCAuthDriver::IdUser();
-            $objOrg->PsData = $objPSData->__toJson();
-            $objOrg->CreDate = MLCDateTime::Now();
-            $objOrg->ClubNum = $objPSData->ClubNum;
-            $objOrg->Save();
-            $objPSData->DataEntity = $objOrg;
+            $objOrg = $this->ImportIndOrg($objPSData);
 
             $arrReturn[] = $objOrg;
 
@@ -189,7 +244,7 @@ class Proscore{
             $objAthelete->MemType = FFSMemType::USAG;
             $objAthelete->MemId = $objPSData->USAG;
 
-            $objOrg = $this->arrData['Gyms'][$objPSData->Gym]->DataEntity;
+            $objOrg = $this->arrData['Gyms'][(int)$objPSData->Gym]->DataEntity;
             $objAthelete->IdOrg = $objOrg->IdOrg;
 
 
@@ -218,7 +273,7 @@ class Proscore{
         //Create an enrolment for the athelete
 
         //Find the Competition
-        $objCompetition = $this->arrData['Meets'][$objPSData->MeetID]->DataEntity;
+        $objCompetition = $this->arrData['Meets'][(int)$objPSData->MeetID]->DataEntity;
 
         $objSession = Session::Query(
             sprintf(
@@ -260,7 +315,7 @@ class Proscore{
                 $fltScore = $objPSData->__get(
                     'E' . $intEvent . 'S' . $intJudge
                 );
-
+                error_log("IMporting Result:" . 'E' . $intEvent . 'S' . $intJudge);
                 if(strlen($fltScore) != 0){
                     $strJudgeName = $strEventName . '-judge-' . $intJudge;
                     $objResult = Result::Query(

@@ -131,7 +131,7 @@ class ParentMessageBase extends BaseEntity {
     
     public static function LoadCollByIdAthelete($intIdAthelete){
         $sql = sprintf("SELECT * FROM ParentMessage WHERE idAthelete = %s;", $intIdAthelete);
-		$result = MLCDBDriver::Query($sql);
+		$result = MLCDBDriver::Query($sql, self::DB_CONN);
 		$coll = new BaseEntityCollection();
 		while($data = mysql_fetch_assoc($result)){
 			$objParentMessage = new ParentMessage();
@@ -144,7 +144,7 @@ class ParentMessageBase extends BaseEntity {
     
     public static function LoadCollByIdCompetition($intIdCompetition){
         $sql = sprintf("SELECT * FROM ParentMessage WHERE idCompetition = %s;", $intIdCompetition);
-		$result = MLCDBDriver::Query($sql);
+		$result = MLCDBDriver::Query($sql, self::DB_CONN);
 		$coll = new BaseEntityCollection();
 		while($data = mysql_fetch_assoc($result)){
 			$objParentMessage = new ParentMessage();

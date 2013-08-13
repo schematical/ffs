@@ -48,9 +48,9 @@ class ResultEditPanelBase extends MJaxPanel{
    		
 	
 	
-   		//public $lnkViewParentResult = null;
+   		public $lnkViewParentIdSession = null;
 	
-   		//public $lnkViewParentResult = null;
+   		public $lnkViewParentIdAthelete = null;
 	
 	
 	//Regular controls
@@ -166,108 +166,113 @@ class ResultEditPanelBase extends MJaxPanel{
   		
 	  
 	  if(!is_null($this->objResult)){
-	     
-	  	
-  		
-  			$this->intIdResult = $this->objResult->idResult;
-  		
-  		
-	     
-	  	
-            
-	  		    $this->intIdSession->Text = $this->objResult->idSession;
-            
-            
-  		
-  		
-  		
-	     
-	  	
-            
-	  		    $this->intIdAthelete->Text = $this->objResult->idAthelete;
-            
-            
-  		
-  		
-  		
-	     
-	  	
-            
-	  		    $this->strScore->Text = $this->objResult->score;
-            
-            
-  		
-  		
-  		
-	     
-	  	
-            
-	  		    $this->strJudge->Text = $this->objResult->judge;
-            
-            
-  		
-  		
-  		
-	     
-	  	
-            
-	  		    $this->intFlag->Text = $this->objResult->flag;
-            
-            
-  		
-  		
-  		
-	     
-	  	
-            
-            
-                //Is special field!!!!!
-                
-                    //Do nothing this is a creDate
-                
-                
-            
-  		
-  		
-  		
-	     
-	  	
-            
-	  		    $this->strEvent->Text = $this->objResult->event;
-            
-            
-  		
-  		
-  		
-	     
-	  	
-            
-            
-                //Is special field!!!!!
-                
-                
-                    $this->dttDispDate->Value = $this->objResult->dispDate;
-                
-            
-  		
-  		
-  		
-	  
+            $this->SetResult($this->objResult);
 	  }
+  }
+  public function SetResult($objResult){
+      $this->objResult = $objResult;
+      $this->blnModified = true;
+      if(!is_null($this->objResult)){
+          
+            
+            
+                //PKey
+                $this->intIdResult = $this->objResult->idResult;
+            
+
+          
+            
+                
+                
+            
+            
+
+          
+            
+                
+                
+            
+            
+
+          
+            
+                
+                    $this->strScore->Text = $this->objResult->score;
+                
+                
+            
+            
+
+          
+            
+                
+                    $this->strJudge->Text = $this->objResult->judge;
+                
+                
+            
+            
+
+          
+            
+                
+                    $this->intFlag->Text = $this->objResult->flag;
+                
+                
+            
+            
+
+          
+            
+                
+                
+                    //Is special field!!!!!
+                    
+                        //Do nothing this is a creDate
+                    
+                    
+                
+            
+            
+
+          
+            
+                
+                    $this->strEvent->Text = $this->objResult->event;
+                
+                
+            
+            
+
+          
+            
+                
+                
+                    //Is special field!!!!!
+                    
+                    
+                        $this->dttDispDate->Value = $this->objResult->dispDate;
+                    
+                
+            
+            
+
+          
+      }
+
 	}
 	public function CreateReferenceControls(){
         if(!is_null($this->objResult)){
           
             if(!is_null($this->objResult->idSession)){
-                $this->lnkViewParentResult = new MJaxLinkButton($this);
-                $this->lnkViewParentResult->Text = 'View Session';
-                $this->lnkViewParentResult->Href = __ENTITY_MODEL_DIR__ . '/Session/' . $this->objResult->idSession;
+                $this->lnkViewParentIdSession = new MJaxLinkButton($this);
+                $this->lnkViewParentIdSession->Text = 'View Session';
+                $this->lnkViewParentIdSession->Href = __ENTITY_MODEL_DIR__ . '/Session/' . $this->objResult->idSession;
             }
           
             if(!is_null($this->objResult->idAthelete)){
-                $this->lnkViewParentResult = new MJaxLinkButton($this);
-                $this->lnkViewParentResult->Text = 'View Athelete';
-                $this->lnkViewParentResult->Href = __ENTITY_MODEL_DIR__ . '/Athelete/' . $this->objResult->idAthelete;
+                $this->lnkViewParentIdAthelete = new MJaxLinkButton($this);
+                $this->lnkViewParentIdAthelete->Text = 'View Athelete';
+                $this->lnkViewParentIdAthelete->Href = __ENTITY_MODEL_DIR__ . '/Athelete/' . $this->objResult->idAthelete;
             }
           
 

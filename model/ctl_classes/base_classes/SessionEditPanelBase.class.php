@@ -42,8 +42,13 @@ class SessionEditPanelBase extends MJaxPanel{
     	public $strEquipmentSet = null;
    		
 	
+    	
+    	
+    	public $strEventData = null;
+   		
 	
-   		//public $lnkViewParentSession = null;
+	
+   		public $lnkViewParentIdCompetition = null;
 	
 	
   		public $lnkViewChildResult = null;
@@ -158,95 +163,124 @@ class SessionEditPanelBase extends MJaxPanel{
             
 	  		
   		
+	     
+	  	
+            
+                $this->strEventData = new MJaxTextBox($this);
+                $this->strEventData->Name = 'eventData';
+                $this->strEventData->AddCssClass('input-large');
+                //longtext
+                
+                    $this->strEventData->TextMode = MJaxTextMode::MultiLine;
+                
+            
+	  		
+  		
 	  
 	  if(!is_null($this->objSession)){
-	     
-	  	
-  		
-  			$this->intIdSession = $this->objSession->idSession;
-  		
-  		
-	     
-	  	
-            
-            
-                //Is special field!!!!!
-                
-                
-                    $this->dttStartDate->Value = $this->objSession->startDate;
-                
-            
-  		
-  		
-  		
-	     
-	  	
-            
-            
-                //Is special field!!!!!
-                
-                
-                    $this->dttEndDate->Value = $this->objSession->endDate;
-                
-            
-  		
-  		
-  		
-	     
-	  	
-            
-	  		    $this->intIdCompetition->Text = $this->objSession->idCompetition;
-            
-            
-  		
-  		
-  		
-	     
-	  	
-            
-	  		    $this->strName->Text = $this->objSession->name;
-            
-            
-  		
-  		
-  		
-	     
-	  	
-            
-	  		    $this->strNotes->Text = $this->objSession->notes;
-            
-            
-  		
-  		
-  		
-	     
-	  	
-            
-	  		    $this->strData->Text = $this->objSession->data;
-            
-            
-  		
-  		
-  		
-	     
-	  	
-            
-	  		    $this->strEquipmentSet->Text = $this->objSession->equipmentSet;
-            
-            
-  		
-  		
-  		
-	  
+            $this->SetSession($this->objSession);
 	  }
+  }
+  public function SetSession($objSession){
+      $this->objSession = $objSession;
+      $this->blnModified = true;
+      if(!is_null($this->objSession)){
+          
+            
+            
+                //PKey
+                $this->intIdSession = $this->objSession->idSession;
+            
+
+          
+            
+                
+                
+                    //Is special field!!!!!
+                    
+                    
+                        $this->dttStartDate->Value = $this->objSession->startDate;
+                    
+                
+            
+            
+
+          
+            
+                
+                
+                    //Is special field!!!!!
+                    
+                    
+                        $this->dttEndDate->Value = $this->objSession->endDate;
+                    
+                
+            
+            
+
+          
+            
+                
+                
+            
+            
+
+          
+            
+                
+                    $this->strName->Text = $this->objSession->name;
+                
+                
+            
+            
+
+          
+            
+                
+                    $this->strNotes->Text = $this->objSession->notes;
+                
+                
+            
+            
+
+          
+            
+                
+                    $this->strData->Text = $this->objSession->data;
+                
+                
+            
+            
+
+          
+            
+                
+                    $this->strEquipmentSet->Text = $this->objSession->equipmentSet;
+                
+                
+            
+            
+
+          
+            
+                
+                    $this->strEventData->Text = $this->objSession->eventData;
+                
+                
+            
+            
+
+          
+      }
+
 	}
 	public function CreateReferenceControls(){
         if(!is_null($this->objSession)){
           
             if(!is_null($this->objSession->idCompetition)){
-                $this->lnkViewParentSession = new MJaxLinkButton($this);
-                $this->lnkViewParentSession->Text = 'View Competition';
-                $this->lnkViewParentSession->Href = __ENTITY_MODEL_DIR__ . '/Competition/' . $this->objSession->idCompetition;
+                $this->lnkViewParentIdCompetition = new MJaxLinkButton($this);
+                $this->lnkViewParentIdCompetition->Text = 'View Competition';
+                $this->lnkViewParentIdCompetition->Href = __ENTITY_MODEL_DIR__ . '/Competition/' . $this->objSession->idCompetition;
             }
           
 
@@ -318,6 +352,13 @@ class SessionEditPanelBase extends MJaxPanel{
             
                 
                     $this->objSession->equipmentSet = $this->strEquipmentSet->Text;
+                
+                
+            
+		  
+            
+                
+                    $this->objSession->eventData = $this->strEventData->Text;
                 
                 
             

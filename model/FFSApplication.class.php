@@ -1,6 +1,46 @@
 <?php
 abstract class FFSApplication{
     public static $strMaxDispTime = '- 1 minute';
+    public static function GetDevicesByCompetiton($objCompetition = null){
+        $arrSessions = self::GetActiveSessions($objCompetition);
+
+        $arrReturn = array();
+        foreach($arrSessions as $objSession){
+            $arrAssignments = Assignment::LoadCollByIdSession($objSession->IdSession)->getCollection();
+
+            foreach($arrAssignments as $intIndex => $objAssignment){
+
+                if(!array_key_exists($objAssignment->IdDevice, $arrReturn)){
+                    $arrReturn[$objAssignment->IdDevice] = $objAssignment->IdDeviceObject;
+                }
+            }
+        }
+
+        return $arrReturn;
+    }
+    public static function GetAssignmentsByCompetiton($objCompetition = null){
+        if(is_null($objCompetition)){
+            $objCompetition = FFSForm::$objCompetition;
+        }
+        if(is_null($objCompetition)){
+            throw new Exception("Must pass in a valid competition");
+        }
+        $arrReturn = array();
+        //Load all sessions for a competition
+        $arrSessions = Session::LoadCollByIdCompetition(
+            $objCompetition->IdCompetition
+        )->GetCollection();
+        //Do a merge by id
+        foreach($arrSessions as $intIndex => $objSession){
+            $arrAssignments = Assignment::LoadCollByIdSession($objSession->IdSession)->GetCollection();
+            $arrReturn = array_merge($arrAssignments, $arrReturn);
+        }
+        return $arrReturn;
+    }
+
+    public static function GetOrgs(){
+        return MLCAuthDriver::GetRolls(FFSRoll::ORG_MANAGER);
+    }
     public static function ImportPTF($strLoc){
         $objProscore = Proscore::ImportFromFile($strLoc);
         /*foreach($objProscore->Data as $strKey => $arrDataObjects){
@@ -8,9 +48,17 @@ abstract class FFSApplication{
         }*/
         //_dv($objProscore->Data['Gyms']);
         //Create Competions
-        $objProscore->ImportCompetitions();
-        $objProscore->ImportOrgs();
-        $objProscore->ImportAtheletes();
+        //echo("h1\n");
+        $arrComp = $objProscore->ImportCompetitions();
+        //echo("h2\n");
+        //if(!is_null(MLCAuthDriver::User())){
+        $arrOrgs = $objProscore->ImportOrgs();
+        //echo("h3\n");
+        //}
+        $arrAtheltes = $objProscore->ImportAtheletes(
+            !is_null(MLCAuthDriver::User())
+        );
+        //echo("h4\n");
 
     }
     public static function QueMessage($mixAthelete, $strMessage, $objCompetition = null, $objParentMessage = null){
@@ -44,6 +92,16 @@ abstract class FFSApplication{
         $objParentMessage->Save();
         return $objParentMessage;
 
+    }
+    public static function InviteDevice($strEmail, $strName = null){
+        $objDevice = new Device();
+        $objDevice->InviteEmail = $strEmail;
+        $objDevice->IdOrg = FFSForm::$objOrg->IdOrg;
+        $objDevice->CreDate=  MLCDateTime::Now();
+        $objDevice->Token = rand(0,9999) .'-'. time();
+        $objDevice->Name = $strName;
+        $objDevice->Save();
+        return $objDevice;
     }
     public static function InviteMessage($strInviteData, $strInviteType, $objCompetition = null, $objParentMessage = null){
         if(is_null($objCompetition)){

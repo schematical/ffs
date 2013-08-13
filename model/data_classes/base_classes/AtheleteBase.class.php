@@ -119,7 +119,7 @@ class AtheleteBase extends BaseEntity {
     
     public static function LoadCollByIdOrg($intIdOrg){
         $sql = sprintf("SELECT * FROM Athelete WHERE idOrg = %s;", $intIdOrg);
-		$result = MLCDBDriver::Query($sql);
+		$result = MLCDBDriver::Query($sql, self::DB_CONN);
 		$coll = new BaseEntityCollection();
 		while($data = mysql_fetch_assoc($result)){
 			$objAthelete = new Athelete();

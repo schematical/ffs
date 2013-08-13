@@ -44,9 +44,11 @@ class message extends FFSForm
         $this->lnkFamily->AddAction($this, 'lnkFamily_click');
 
         $this->pnlMaster = new FFSParentMessageManagePanel($this);
+        $this->pnlMaster->InitInviteFamilyLink();
+        $this->pnlMaster->Attr('data-orig-height', 338);//156);
 
         $this->pnlSignup = new MLCShortSignUpPanel($this);
-        $this->pnlSignup->AddCssClass('row margin-bottom-25 mjax-bs-animate-hiden');
+        $this->pnlSignup->AddCssClass('row-fluid margin-bottom-25 mjax-bs-animate-hiden');
         $this->pnlSignup->AddAction(
             new MJaxAuthSignupEvent(),
             new MJaxServerControlAction(
@@ -58,12 +60,12 @@ class message extends FFSForm
         $this->pnlStripe = new MJaxStripePaymentPanel($this);
         $this->pnlStripe->Template = __VIEW_ACTIVE_APP_DIR__ . '/www/_panels/MJaxStripePaymentPanel.tpl.php';
         $this->pnlStripe->UseAddress = false;
-        $this->pnlStripe->AddCssClass('row margin-bottom-25 mjax-bs-animate-hiden');
+        $this->pnlStripe->AddCssClass('row-fluid margin-bottom-25 mjax-bs-animate-hiden');
 
-        $this->pnlStripe->txtCardNum->AddCssClass('input-mlarge span4 offset1');
-        $this->pnlStripe->txtCvc->AddCssClass('input-mlarge span3');
-        $this->pnlStripe->lstExpMonth->AddCssClass('input-mlarge span2');
-        $this->pnlStripe->lstExpYear->AddCssClass('input-mlarge span2');
+        $this->pnlStripe->txtCardNum->AddCssClass('span4 offset1');
+        $this->pnlStripe->txtCvc->AddCssClass(' span3');
+        $this->pnlStripe->lstExpMonth->AddCssClass('span2');
+        $this->pnlStripe->lstExpYear->AddCssClass('span2');
         $this->pnlStripe->lnkSubmit->AddCssClass('span10 offset1');
 
         $this->pnlStripe->AddAction(
@@ -82,7 +84,7 @@ class message extends FFSForm
         $this->AnimateOpen(
             $this->pnlMaster
         );
-        $this->pnlMaster->InitInviteFamilyLink();
+
     }
     public function lnkFamily_click()
     {
@@ -112,6 +114,7 @@ class message extends FFSForm
 
     }
     public function DispSignup(){
+        $this->pnlSignup->Alert('Your information', 'alert-info');
         $this->AnimateOpen(
             $this->pnlSignup
         );

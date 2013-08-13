@@ -27,7 +27,6 @@
 
 
                         <div class="control-group">
-
                             <div class="controls input-prepend">
                                 <span class="add-on mde-field-label">
                                     http://<?php echo $_SERVER['SERVER_NAME']; ?>/
@@ -88,7 +87,6 @@
                              <?php $_CONTROL->intIdOrg->Render(); ?>
                           </div>
                         </div>
-
                     <?php } ?>
                 
 

@@ -14,13 +14,13 @@ abstract class FFSSection{
     const COACH = 'coach';
 }
 abstract class FFSEventData{
-    public $WOMENS_ARTISTIC_GYMNASTICS = array(
+    public static $WOMENS_ARTISTIC_GYMNASTICS = array(
         'Vault' => 'Vault',
         'Floor' => 'Floor',
         'Beam' => 'Beam',
         'Bars' => 'Bars'
     );
-    public $MENS_ARTISTIC_GYMNASTICS = array(
+    public static $MENS_ARTISTIC_GYMNASTICS = array(
         'Vault' => 'Vault',
         'Floor' => 'Floor',
         'HighBar' => 'High Bar',

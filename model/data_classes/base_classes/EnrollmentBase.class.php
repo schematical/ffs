@@ -131,7 +131,7 @@ class EnrollmentBase extends BaseEntity {
     
     public static function LoadCollByIdAthelete($intIdAthelete){
         $sql = sprintf("SELECT * FROM Enrollment WHERE idAthelete = %s;", $intIdAthelete);
-		$result = MLCDBDriver::Query($sql);
+		$result = MLCDBDriver::Query($sql, self::DB_CONN);
 		$coll = new BaseEntityCollection();
 		while($data = mysql_fetch_assoc($result)){
 			$objEnrollment = new Enrollment();
@@ -144,7 +144,7 @@ class EnrollmentBase extends BaseEntity {
     
     public static function LoadCollByIdCompetition($intIdCompetition){
         $sql = sprintf("SELECT * FROM Enrollment WHERE idCompetition = %s;", $intIdCompetition);
-		$result = MLCDBDriver::Query($sql);
+		$result = MLCDBDriver::Query($sql, self::DB_CONN);
 		$coll = new BaseEntityCollection();
 		while($data = mysql_fetch_assoc($result)){
 			$objEnrollment = new Enrollment();
@@ -157,7 +157,7 @@ class EnrollmentBase extends BaseEntity {
     
     public static function LoadCollByIdSession($intIdSession){
         $sql = sprintf("SELECT * FROM Enrollment WHERE idSession = %s;", $intIdSession);
-		$result = MLCDBDriver::Query($sql);
+		$result = MLCDBDriver::Query($sql, self::DB_CONN);
 		$coll = new BaseEntityCollection();
 		while($data = mysql_fetch_assoc($result)){
 			$objEnrollment = new Enrollment();
