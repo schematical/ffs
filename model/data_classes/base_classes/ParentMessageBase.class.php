@@ -90,6 +90,10 @@ class ParentMessageBase extends BaseEntity {
         $xmlStr .= $this->approveDate;
         $xmlStr .= "</approveDate>";
         
+        $xmlStr .= "<idStripeData>";
+        $xmlStr .= $this->idStripeData;
+        $xmlStr .= "</idStripeData>";
+        
         if($blnReclusive){
            //Finish FK Rel stuff
         }
@@ -272,6 +276,9 @@ class ParentMessageBase extends BaseEntity {
                                  
                  $arrReturn['approveDate'] = $this->approveDate;
             
+                                 
+                 $arrReturn['idStripeData'] = $this->idStripeData;
+            
             return $arrReturn;
         }
         public function __toJson($blnPosponeEncode = false){
@@ -397,6 +404,14 @@ class ParentMessageBase extends BaseEntity {
 	        		return null;
 	        	break;
 	        	
+	   			case('IdStripeData'): 
+	   			case('idStripeData'): 
+	   				if(array_key_exists('idStripeData', $this->arrDBFields)){
+	        			return $this->arrDBFields['idStripeData'];
+	        		}
+	        		return null;
+	        	break;
+	        	
 	        	
                 case('IdAtheleteObject'):
                 case('idCompetitionObject'):
@@ -502,6 +517,11 @@ class ParentMessageBase extends BaseEntity {
 	   			case('ApproveDate'): 
 	   			case('approveDate'): 
 	        		$this->arrDBFields['approveDate'] = $strValue;
+	        	break;
+	        	
+	   			case('IdStripeData'): 
+	   			case('idStripeData'): 
+	        		$this->arrDBFields['idStripeData'] = $strValue;
 	        	break;
 	        	
 	        	default:

@@ -1,3 +1,5 @@
+<link href="<?php echo __MJAX_WADMIN_THEME_ASSET_URL__ . '/css'; ?>/pages/reports.css" rel="stylesheet">
+
 <div class='shortcuts '>
     <a href="/<?php echo $_CONTROL->objCompetition->Namespace; ?>/org/fullScreen.php" class="shortcut">
         <i class="shortcut-icon icon-fullscreen"></i>
@@ -8,7 +10,7 @@
         <span class="shortcut-label">Setup Wizzard</span>
     </a>
     <a href="/<?php echo $_CONTROL->objCompetition->Namespace; ?>/org/deviceManager" class="shortcut">
-        <i class="shortcut-icon icon-list-ol "></i>
+        <i class="shortcut-icon icon-tablet "></i>
         <span class="shortcut-label">Manage Devices</span>
     </a>
     <a href="javascript:MJax.BS.Alert('Coming Soon');" class="shortcut">
@@ -20,5 +22,22 @@
         <span class="shortcut-label">Reports</span>
     </a>
 </div>
+<hr>
+<div id="big_stats" class="cf">
+    <div class="stat">
+        <h4>Messages Sent</h4>
+        <span class="value">
+            <?php echo $_CONTROL->intMessagesSent; ?>
+        </span>
+    </div> <!-- .stat -->
+
+    <div class="stat">
+        <h4>Your Earnings</h4>
+        <span class="value">
+            $<?php echo $_CONTROL->fltDollarsRaised; ?>
+        </span>
+    </div> <!-- .stat -->
+</div>
+<hr/>
 <h3>Messages:</h3>
 <?php $_CONTROL->pnlMessages->Render(); ?>

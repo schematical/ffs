@@ -64,7 +64,17 @@ class FFSDeviceAssignmentPanel extends MJaxPanel{
             return $this->txtDeviceName->Alert("Could not find a device with this info");
         }
 
-
+        $objAssignment = Assignment::Query(
+            sprintf(
+                'WHERE idDevice = %s AND idSession = %s',
+                $objDevice->IdDevice,
+                $this->lstSession->SelectedValue
+            ),
+            true
+        );
+        if(!is_null($objAssignment)){
+            return $this->Alert("This device already has an assignment this session");
+        }
         //TODO: Put check to test for multiple devices assigned
         $objAssignment = new Assignment();
         $objAssignment->IdSession = $this->lstSession->SelectedValue;
@@ -72,6 +82,19 @@ class FFSDeviceAssignmentPanel extends MJaxPanel{
         $objAssignment->CreDate = MLCDateTime::Now();
         $objAssignment->Event = $this->lstEvent->SelectedValue;
         $objAssignment->Save();
+        MLCApplication::InitPackage('MLCPostmark');
+        $objEmail = MLCPostmarkDriver::ComposeFromTemplate(
+            __ASSETS_ACTIVE_APP_DIR__ . '/email/AssignmentInvite.email.php',
+            array(
+                'ASSIGNMENT' => $objAssignment
+            )
+        );
+        $objEmail->addTo(
+            $objDevice->InviteEmail
+        );
+        $objEmail->Subject('You have been invited to help at the ' . FFSForm::$objCompetition->Name);
+        $objEmail->Send();
+        $this->Alert("Invite Sent");
 
     }
     public function lstSession_change(){

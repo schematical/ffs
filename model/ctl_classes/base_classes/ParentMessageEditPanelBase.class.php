@@ -72,6 +72,11 @@ class ParentMessageEditPanelBase extends MJaxPanel{
     	public $dttApproveDate = null;
    		
 	
+    	
+    	
+    	public $intIdStripeData = null;
+   		
+	
 	
    		public $lnkViewParentIdAthelete = null;
 	
@@ -244,6 +249,17 @@ class ParentMessageEditPanelBase extends MJaxPanel{
                 
             
   		
+	     
+	  	
+            
+                $this->intIdStripeData = new MJaxTextBox($this);
+                $this->intIdStripeData->Name = 'idStripeData';
+                $this->intIdStripeData->AddCssClass('input-large');
+                //int(11)
+                
+            
+	  		
+  		
 	  
 	  if(!is_null($this->objParentMessage)){
             $this->SetParentMessage($this->objParentMessage);
@@ -396,6 +412,15 @@ class ParentMessageEditPanelBase extends MJaxPanel{
             
 
           
+            
+                
+                    $this->intIdStripeData->Text = $this->objParentMessage->idStripeData;
+                
+                
+            
+            
+
+          
       }
 
 	}
@@ -529,6 +554,13 @@ class ParentMessageEditPanelBase extends MJaxPanel{
                     //Is special field!!!!!
                     
                     
+                
+            
+		  
+            
+                
+                    $this->objParentMessage->idStripeData = $this->intIdStripeData->Text;
+                
                 
             
 		

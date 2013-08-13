@@ -17,6 +17,8 @@ class index extends FFSForm {
 
         foreach($arrCompitions as $intIndex => $objCompetition){
 
+
+
             $this->AddWidget(
                 $objCompetition->Name,
                 'icon-home',

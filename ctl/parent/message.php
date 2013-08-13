@@ -146,12 +146,12 @@ class message extends FFSForm
                     $intCost = 5;
                     break;
             }
-            $objCharge = MLCStripeDriver::ChargeUser(
+            $objStripeData = MLCStripeDriver::ChargeUser(
                 $intCost
             );
 
             //Create ParentMessages with no QueDate
-            $arrMessageTokens = FFSApplication::CreateParentMessageTokens($this->intMessageCt);
+            $arrMessageTokens = FFSApplication::CreateParentMessageTokens($this->intMessageCt, $objStripeData);
             $objMessageToken = $arrMessageTokens[0];
         }else{
             $objMessageToken = FFSApplication::GetAvailableMessageTokens();

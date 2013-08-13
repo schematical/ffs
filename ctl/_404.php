@@ -1,46 +1,114 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta content="en-us" http-equiv="Content-Language">
-        <meta charset="utf-8">
-        <meta name="description" content="">
-        <meta name="keywords" content="">
-        <title>Schematical 404</title>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Error Page :: Base Admin</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes"> 
+	    
+	<link href="/assets/MJaxWAdminTheme/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<link href="/assets/MJaxWAdminTheme/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
+	
+	<link href="/assets/MJaxWAdminTheme/css/font-awesome.min.css" rel="stylesheet">
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600" rel="stylesheet">
+    
+    <link href="/assets/MJaxWAdminTheme/css/ui-lightness/jquery-ui-1.10.0.custom.min.css" rel="stylesheet">
+    
+    <link href="/assets/MJaxWAdminTheme/css/base-admin-2.css" rel="stylesheet">
+    <link href="/assets/MJaxWAdminTheme/css/base-admin-2-responsive.css" rel="stylesheet">
+
+    <link href="/assets/MJaxWAdminTheme/css/custom.css" rel="stylesheet">
+
+</head>
+
+<body>
+	
+	<div class="navbar navbar-inverse navbar-fixed-top">
+	
+	<div class="navbar-inner">
+		
+		<div class="container">
+			
+			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+				<i class="icon-cog"></i>
+			</a>
+			
+			<a class="brand" href="/">
+                tumblescore.com <sup>alpha</sup>
+			</a>		
+			
+			<div class="nav-collapse">
+				<ul class="nav pull-right">
+					
+					<li class="">						
+						<a href="/" class="">
+							<i class="icon-chevron-left"></i>
+							Back to Dashboard
+						</a>
+						
+					</li>
+				</ul>
+				
+			</div><!--/.nav-collapse -->	
+	
+		</div> <!-- /container -->
+		
+	</div> <!-- /navbar-inner -->
+	
+</div> <!-- /navbar -->
 
 
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <link rel="stylesheet" type="text/css" href="//mde.schematical.com/assets/mde/css/font-awesome/css/font-awesome.css">
-        <link rel="stylesheet" href="//mde.schematical.com/assets/mde/css/style.css"></link>
-        <link rel="stylesheet" type="text/css" href="//mde.schematical.com/assets/MJaxBootstrap/css/bootstrap.min.css"/>
-        <link rel="stylesheet" type="text/css" href="//mde.schematical.com/assets/MJaxBootstrap/css/bootstrap-responsive.min.css"/>
+<div class="container">
+	
+	<div class="row">
+		
+		<div class="span12">
+			
+			<div class="error-container">
+				<h1>Oops!</h1>
+				
+				<h2>404 Not Found</h2>
+				
+				<div class="error-details">
+					Sorry, an error has occured, Requested page not found!
+					
+				</div> <!-- /error-details -->
+				
+				<div class="error-actions">
+					<a href="/" class="btn btn-large btn-primary">
+						<i class="icon-chevron-left"></i>
+						&nbsp;
+						Back to Dashboard						
+					</a>
+					
+					<a href="mail-to:mlea@schematical.com" class="btn btn-large">
+						<i class="icon-envelope"></i>
+						&nbsp;
+						Contact Support						
+					</a>
+					
+				</div> <!-- /error-actions -->
+							
+			</div> <!-- /error-container -->			
+			
+		</div> <!-- /span12 -->
+		
+	</div> <!-- /row -->
+	
+</div> <!-- /container -->
 
-    </head>
-    <body data-spy="scroll" data-target=".navbar">
-        <div id='mainWindow'>
-            <div id="wrap" class="container-fluid">
-                <!-- ABOVE THE FOLD -->
-                <div class='section section-dark'>
-                    <div id="home" class="row">
-                        <div class='span4 offset4'>
-                            <img src='/assets/mde/imgs/robot_1.png' />
-                            <h1>You have gotten lost</h1>
-                            <p>
-                                You seem to be looking for a page that does not exist, or we have not written yet.
-                            </p>
-                            <p>
-                                That is the fun part of rapid prototyping
-                            </p>
-                            <a class='btn btn-large' href='/'>
-                                Take me home!
-                            </a>
-                            <a class='btn btn-large' target='_blank' href='https://www.google.com/search?q=puppies&safe=on&tbm=isch'>
-                                Search for puppies!
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </body>
+
+
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="/assets/MJaxWAdminTheme/js/libs/jquery-1.8.3.min.js"></script>
+<script src="/assets/MJaxWAdminTheme/js/libs/jquery-ui-1.10.0.custom.min.js"></script>
+<script src="/assets/MJaxWAdminTheme/js/libs/bootstrap.min.js"></script>
+
+<script src="/assets/MJaxWAdminTheme/js/Application.js"></script>
+
+</body>
 </html>

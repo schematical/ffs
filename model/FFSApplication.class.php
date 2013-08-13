@@ -1,5 +1,7 @@
 <?php
 abstract class FFSApplication{
+    const ORG_INCOME_PERCENT = .5;
+
     public static $strMaxDispTime = '- 1 minute';
     public static function GetDevicesByCompetiton($objCompetition = null){
         $arrSessions = self::GetActiveSessions($objCompetition);
@@ -101,7 +103,17 @@ abstract class FFSApplication{
         $objDevice->Token = rand(0,9999) .'-'. time();
         $objDevice->Name = $strName;
         $objDevice->Save();
+
+
         return $objDevice;
+    }
+    public static function UnqueMessage($objParentMessage){
+        if(!is_null($objParentMessage)){
+            $objParentMessage->QueDate = null;
+            $objParentMessage->Save();
+        }
+        //Prob should send message to Sender
+
     }
     public static function InviteMessage($strInviteData, $strInviteType, $objCompetition = null, $objParentMessage = null){
         if(is_null($objCompetition)){
@@ -160,16 +172,42 @@ abstract class FFSApplication{
             !$blnAsArray
         );
     }
-    public static function CreateParentMessageTokens($intCt){
+    public static function CreateParentMessageTokens($intCt, $objStripeData = null){
         $arrParentMessage = array();
         for($i = 0; $i < $intCt; $i++){
             $objParentMessage = new ParentMessage();
             $objParentMessage->CreDate = MLCDateTime::Now();
             $objParentMessage->IdUser = MLCAuthDriver::IdUser();
+            if(!is_null($objStripeData)){
+                $objParentMessage->IdStripeData = $objStripeData->IdStripeData;
+            }
             $objParentMessage->Save();
             $arrParentMessage[] = $objParentMessage;
         }
         return $arrParentMessage;
+    }
+    public static function GetCompetitionIncomeTotal($objCompetition){
+        MLCApplication::InitPackage('MLCStripe');
+        $arrParentMessages = ParentMessage::LoadCollByIdCompetition($objCompetition->IdCompetition)->getCollection();
+        $arrStripeData = array();
+        foreach($arrParentMessages as $intIndex => $objParentMessage){
+            if(
+                (!is_null($objParentMessage->IdStripeData)) &&
+                (!array_key_exists($objParentMessage->IdStripeData, $arrStripeData))
+            ){
+                $arrStripeData[$objParentMessage->IdStripeData] = StripeData::LoadById($objParentMessage->IdStripeData);
+            }
+        }
+        $fltTotal = 0;
+        foreach($arrStripeData as $intIdStripeData => $objStripeData){
+            $arrData = json_decode($objStripeData->Data, true);
+            $fltTotal += $arrData['amount']/100;
+        }
+        return $fltTotal;
+    }
+    public static function GetCompetitionIncomeForOrg($objCompetition){
+        $fltTotal = self::GetCompetitionIncomeTotal($objCompetition);
+        return $fltTotal * self::ORG_INCOME_PERCENT;
     }
     public static function GetQuedMessages(){
         //Query

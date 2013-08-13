@@ -39,6 +39,7 @@ MLCApplicationBase::$arrClassFiles['FFSOrgCompActivePanel'] = __CTL_FFS_APP_DIR_
 MLCApplicationBase::$arrClassFiles['FFSPTFImportPanel'] = __CTL_FFS_APP_DIR__ . '/_panels/FFSPTFImportPanel.class.php';
 MLCApplicationBase::$arrClassFiles['FFSAdPanel'] = __CTL_FFS_APP_DIR__ . '/_panels/FFSAdPanel.class.php';
 MLCApplicationBase::$arrClassFiles['FFSDeviceAssignmentPanel'] = __CTL_FFS_APP_DIR__ . '/_panels/FFSDeviceAssignmentPanel.class.php';
+MLCApplicationBase::$arrClassFiles['FFSCompReportPanel'] = __CTL_FFS_APP_DIR__ . '/_panels/FFSCompReportPanel.class.php';
 
 
 //Proscore stuff

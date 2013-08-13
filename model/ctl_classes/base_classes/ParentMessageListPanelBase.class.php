@@ -83,6 +83,11 @@ class ParentMessageListPanelBase extends MJaxTable{
 	    	$this->AddColumn('approveDate','approveDate');
 	   		
 		
+	    	
+	    	
+	    	$this->AddColumn('idStripeData','idStripeData');
+	   		
+		
 	}
 	public function objRow_click($strFomrId, $strControlId, $strActionParameter){
 
