@@ -440,7 +440,7 @@ class ParentMessageBase extends BaseEntity {
 	        	break;
 	        	
 	        	default:
-	        		throw new Exception('No property with name "' . $strName . '" exists in class ". get_class($this) . "');
+	        		throw new Exception('No property with name "' . $strName . '" exists in class "'. get_class($this) . '"');
 	        	break;
 	        }
 	       

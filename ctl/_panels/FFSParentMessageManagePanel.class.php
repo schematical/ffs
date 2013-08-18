@@ -2,6 +2,7 @@
     public $pnlParentMessage = null;
     public $pnlParentMessageInvite = null;
     public $lnkInviteFamily = null;
+    public $txtUsername = null;
     public function __construct($objParentControl, $strControlId = null){
         parent::__construct($objParentControl, $strControlId);
 
@@ -19,14 +20,6 @@
         $this->pnlParentMessage->AllowSave = false;
 
 
-    }
-    public function InitInviteFamilyLink(){
-        $this->lnkInviteFamily = new MJaxLinkButton($this);
-        $this->lnkInviteFamily->Text = 'Add More';
-        $this->lnkInviteFamily->AddCssClass('btn btn-large span10 offset1');
-        $this->lnkInviteFamily->AddAction($this, 'lnkIndividual_click');
-    }
-    public function InitInviteFamilyFields(){
         if(!is_null($this->lnkInviteFamily)){
             $this->lnkInviteFamily->Remove();
             $this->lnkInviteFamily = null;
@@ -41,25 +34,5 @@
         $this->objForm->pnlParentMessage_send();
 
     }
-    public function _searchAthelete($objRoute){
-        $strSearch = $_POST['search'];
-        $arrAtheletes = Athelete::Query(
-            sprintf(
-                'WHERE firstName LIKE "%s%%" OR lastName LIKE "%s%%"',
-                $strSearch,
-                $strSearch
-            )
-        );
 
-        $arrAtheleteNames = array();
-        foreach($arrAtheletes as $intIndex => $objAthelete){
-            $arrAtheleteNames[] = $objAthelete->FirstName . ' ' . $objAthelete->LastName;
-        }
-        //$arrAtheleteNames = array('test', 'toast', 'boast');
-        die(
-            json_encode(
-                $arrAtheleteNames
-            )
-        );
-    }
 }

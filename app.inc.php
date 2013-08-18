@@ -27,8 +27,10 @@ define('__GOOGLE_API_SECRET__', 'K4Z7CoP_c1sITYi7x9L3XcCt');
 MLCApplicationBase::$arrClassFiles['MLCApiHome'] = __MODEL_FFS_APP_DIR__ . '/api_custom/MLCApiHome.class.php';
 MLCApplicationBase::$arrClassFiles['MLCApiFunnel'] = __MODEL_FFS_APP_DIR__ . '/api_custom/MLCApiFunnel.class.php';
 MLCApplicationBase::$arrClassFiles['FFSForm'] = __MODEL_FFS_APP_DIR__ . '/FFSForm.class.php';
+MLCApplicationBase::$arrClassFiles['FFSFeedForm'] = __MODEL_FFS_APP_DIR__ . '/FFSFeedForm.class.php';
 MLCApplicationBase::$arrClassFiles['FFSRewriteHandeler'] = __MODEL_FFS_APP_DIR__ . '/FFSRewriteHandeler.class.php';
 MLCApplicationBase::$arrClassFiles['FFSApplication'] = __MODEL_FFS_APP_DIR__ . '/FFSApplication.class.php';
+
 //CTL
 MLCApplicationBase::$arrClassFiles['FFSGymLandingHeaderPanel'] = __CTL_FFS_APP_DIR__ . '/_panels/FFSGymLandingHeaderPanel.class.php';
 MLCApplicationBase::$arrClassFiles['FFSParentMessageManagePanel'] = __CTL_FFS_APP_DIR__ . '/_panels/FFSParentMessageManagePanel.class.php';
@@ -40,6 +42,10 @@ MLCApplicationBase::$arrClassFiles['FFSPTFImportPanel'] = __CTL_FFS_APP_DIR__ . 
 MLCApplicationBase::$arrClassFiles['FFSAdPanel'] = __CTL_FFS_APP_DIR__ . '/_panels/FFSAdPanel.class.php';
 MLCApplicationBase::$arrClassFiles['FFSDeviceAssignmentPanel'] = __CTL_FFS_APP_DIR__ . '/_panels/FFSDeviceAssignmentPanel.class.php';
 MLCApplicationBase::$arrClassFiles['FFSCompReportPanel'] = __CTL_FFS_APP_DIR__ . '/_panels/FFSCompReportPanel.class.php';
+MLCApplicationBase::$arrClassFiles['FFSFeedDisplayPanel'] = __CTL_FFS_APP_DIR__ . '/_panels/FFSFeedDisplayPanel.class.php';
+MLCApplicationBase::$arrClassFiles['FFSParentMessageFeedDisplayPanel'] = __CTL_FFS_APP_DIR__ . '/_panels/FFSParentMessageFeedDisplayPanel.class.php';
+MLCApplicationBase::$arrClassFiles['FFSResultFeedDisplayPanel'] = __CTL_FFS_APP_DIR__ . '/_panels/FFSResultFeedDisplayPanel.class.php';
+MLCApplicationBase::$arrClassFiles['FFSSharePanel'] = __CTL_FFS_APP_DIR__ . '/_panels/FFSSharePanel.class.php';
 
 
 //Proscore stuff
@@ -76,6 +82,7 @@ MLCApplication::InitPackage('MJaxWAdminTheme');
 MLCApplication::InitPackage('MJaxJQueryUI');
 MLCApplication::InitPackage('MLCSalesTools');
 MLCApplication::InitPackage('MLCEntityModel');
+MLCApplication::InitPackage('MLCTwitter');
 require_once(__CTL_FFS_APP_DIR__ . '/_events.inc.php');
 //_dv(MLCApplicationBase::$arrClassFiles['MLCApiFFSPackage']);
 if(class_exists('MLCAuthDriver')){

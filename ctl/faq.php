@@ -9,6 +9,8 @@ class faq extends FFSForm {
         $this->strTemplate = __VIEW_ACTIVE_APP_DIR__ . '/www/faq.tpl.php';
 
     }
+
+
 }
 faq::Run('faq');
 ?>

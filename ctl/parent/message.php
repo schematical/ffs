@@ -6,15 +6,16 @@
  * - About extends AboutBase
  */
 MLCApplication::InitPackage('MLCStripe');
-class message extends FFSForm
-{
+class message extends FFSForm{
     public $lnkIndividual = null;
     public $lnkFamily = null;
     public $lnkUseTokens = null;
-    public $pnlMaster = null;
+    public $pnlParentMessage = null;
+    public $pnlParentMessageInvite = null;
     public $pnlSignup = null;
     public $pnlStripe = null;
     public $intMessageCt = null;
+    public $intCost = 0;
 
 
     public function Form_Create()
@@ -25,42 +26,25 @@ class message extends FFSForm
         }*/
         $this->strTemplate = __VIEW_ACTIVE_APP_DIR__ . '/www/parent/message.tpl.php';
 
-        $arrMessageTokens = FFSApplication::GetAvailableMessageTokens(true);
-        if(count($arrMessageTokens) > 0){
-            $this->lnkUseTokens  = new MJaxLinkButton($this);
-            $this->lnkUseTokens->Text = sprintf('<b>Available Messages:</b> %s - $0', count($arrMessageTokens));
-            $this->lnkUseTokens->AddCssClass('btn btn-large span10 offset1');
-            $this->lnkUseTokens->AddAction($this, 'lnkUseTokens_click');
+
+        $this->InitParentMessageEditPanel();
+        $this->InitParentMessageInvitePanel();
+        $this->InitPackageOptions();
+        if(is_null(MLCAuthDriver::User())){
+            $this->pnlSignup = new MLCShortSignUpPanel($this);
+            $this->pnlSignup->AddCssClass('row-fluid margin-bottom-25');// mjax-bs-animate-hiden');
+            $this->pnlSignup->AddAction(
+                new MJaxAuthSignupEvent(),
+                new MJaxServerControlAction(
+                    $this,
+                    'pnlSignup_success'
+                )
+            );
         }
-
-        $this->lnkIndividual = new MJaxLinkButton($this);
-        $this->lnkIndividual->Text = '<b>Individual: </b>1 message - $2';
-        $this->lnkIndividual->AddCssClass('btn btn-large span10 offset1');
-        $this->lnkIndividual->AddAction($this, 'lnkIndividual_click');
-
-        $this->lnkFamily = new MJaxLinkButton($this);
-        $this->lnkFamily->Text = '<b>Family Pack:</b> 5 messages - $5';
-        $this->lnkFamily->AddCssClass('btn btn-large btn-success span10 offset1');
-        $this->lnkFamily->AddAction($this, 'lnkFamily_click');
-
-        $this->pnlMaster = new FFSParentMessageManagePanel($this);
-        $this->pnlMaster->InitInviteFamilyLink();
-        $this->pnlMaster->Attr('data-orig-height', 338);//156);
-
-        $this->pnlSignup = new MLCShortSignUpPanel($this);
-        $this->pnlSignup->AddCssClass('row-fluid margin-bottom-25 mjax-bs-animate-hiden');
-        $this->pnlSignup->AddAction(
-            new MJaxAuthSignupEvent(),
-            new MJaxServerControlAction(
-                $this,
-                'pnlSignup_success'
-            )
-        );
-
         $this->pnlStripe = new MJaxStripePaymentPanel($this);
         $this->pnlStripe->Template = __VIEW_ACTIVE_APP_DIR__ . '/www/_panels/MJaxStripePaymentPanel.tpl.php';
         $this->pnlStripe->UseAddress = false;
-        $this->pnlStripe->AddCssClass('row-fluid margin-bottom-25 mjax-bs-animate-hiden');
+        $this->pnlStripe->AddCssClass('row-fluid margin-bottom-25');;// mjax-bs-animate-hiden');
 
         $this->pnlStripe->txtCardNum->AddCssClass('span4 offset1');
         $this->pnlStripe->txtCvc->AddCssClass(' span3');
@@ -77,31 +61,55 @@ class message extends FFSForm
         );
 
     }
+    public function InitParentMessageEditPanel(){
+        $this->pnlParentMessage = new ParentMessageEditPanel($this);
+        $this->pnlParentMessage->strAtheleteName->Attr('placeholder',"Athlete Name");
+        $this->pnlParentMessage->strAtheleteName->Typehead($this, '_searchAthelete');
+        $this->pnlParentMessage->strAtheleteName->AddCssClass('span10 offset1');
+
+
+        $this->pnlParentMessage->strAtheleteName->AddCssClass('input-large');
+        $this->pnlParentMessage->strMessage->AddCssClass('span10 offset1');
+        $this->pnlParentMessage->strMessage->Attr('placeholder','Message');
+        //$this->pnlParentMessage->btnSave->AddCssClass('span10 offset1');
+        $this->pnlParentMessage->AllowSave = false;
+    }
+    public function InitParentMessageInvitePanel(){
+        $this->pnlParentMessageInvite = new FFSParentMessageInvitePanel($this);
+    }
 
     public function lnkIndividual_click()
     {
-        $this->intMessageCt = 1;
-        $this->AnimateOpen(
-            $this->pnlMaster
-        );
+        $this->SelectPackage(1);
+
 
     }
     public function lnkFamily_click()
     {
-        $this->intMessageCt = 5;
-        $this->pnlMaster->InitInviteFamilyFields();
-        $this->AnimateOpen(
-            $this->pnlMaster
-        );
+        $this->SelectPackage(5);
+
     }
     public function lnkUseTokens_click(){
-        $this->intMessageCt = 0;
-        //$this->pnlMaster->InitInviteFamilyFields();
-        $this->AnimateOpen(
-            $this->pnlMaster
-        );
+        $this->SelectPackage(0);
+
     }
-    public function pnlParentMessage_send(){
+    public function SelectPackage($intMessageCt){
+        $this->intMessageCt = $intMessageCt;
+        switch($this->intMessageCt){
+            case(1):
+                $this->intCost = 2;
+                break;
+            case(5):
+                $this->intCost = 5;
+                break;
+        }
+        $this->pnlStripe->Alert(
+            sprintf(
+                '<h3>Total:  $%s</h3>',
+                $this->intCost
+            ),
+            'success'
+        );
         //_dv(MLCStripeDriver::UserCustomer());
         if(is_null(MLCAuthDriver::User())){
             $this->DispSignup();
@@ -132,22 +140,36 @@ class message extends FFSForm
         //_dv($objCustomerData);
 
     }
-    public function ProcessCharge(){
-        $strAtheleteName = $this->pnlMaster->pnlParentMessage->strAtheleteName->Text;
+    public function pnlParentMessage_save(){
+        if(!$this->Validate()){
+            return;
+        }
+        $this->ScrollTo('ffs-parent-message-packages');
+    }
+    public function Validate(){
+        $strAtheleteName = $this->pnlParentMessage->strAtheleteName->Text;
         if(strlen($strAtheleteName) < 2){
-            return $this->pnlMaster->pnlParentMessage->strAtheleteName->Alert("Must fill in your athelete's name");
+            $this->ScrollTo($this->pnlParentMessage->strAtheleteName);
+            $this->Alert("<div class='alert alert-error'>Must fill in your athlete's name</div>");
+            return false;
+        }
+        $strUsername = $this->pnlParentMessage->txtUsername->Text;
+        if(strlen($strUsername) < 2){
+            $this->ScrollTo($this->pnlParentMessage->txtUsername);
+            $this->Alert("<div class='alert alert-error'>Must fill in from name</div>");
+            return false;
+        }
+        return true;
+    }
+    public function ProcessCharge(){
+        $strAtheleteName = $this->pnlParentMessage->strAtheleteName->Text;
+        if(!$this->Validate()){
+            return;
         }
         if($this->intMessageCt > 0){
-            switch($this->intMessageCt){
-                case(1):
-                    $intCost = 2;
-                    break;
-                case(5):
-                    $intCost = 5;
-                    break;
-            }
+
             $objStripeData = MLCStripeDriver::ChargeUser(
-                $intCost
+                $this->intCost
             );
 
             //Create ParentMessages with no QueDate
@@ -162,7 +184,7 @@ class message extends FFSForm
 
         FFSApplication::QueMessage(
             $strAtheleteName,
-            $this->pnlMaster->pnlParentMessage->strMessage->Text,
+            $this->pnlParentMessage->strMessage->Text,
             self::$objCompetition,
             $objMessageToken
         );
@@ -170,6 +192,27 @@ class message extends FFSForm
         $this->blnSkipMainWindowRender = false;
         $this->strTemplate = __VIEW_ACTIVE_APP_DIR__ . '/www/parent/message_thankYou.tpl.php';
     }
+
+    public function InitPackageOptions(){
+        $arrMessageTokens = FFSApplication::GetAvailableMessageTokens(true);
+        if(count($arrMessageTokens) > 0){
+            $this->lnkUseTokens  = new MJaxLinkButton($this);
+            $this->lnkUseTokens->Text = sprintf('<b>Available Messages:</b> %s - $0', count($arrMessageTokens));
+            $this->lnkUseTokens->AddCssClass('btn btn-large span10 offset1');
+            $this->lnkUseTokens->AddAction($this, 'lnkUseTokens_click');
+        }
+
+        $this->lnkIndividual = new MJaxLinkButton($this);
+        $this->lnkIndividual->Text = 'Purchase Now';
+        $this->lnkIndividual->AddCssClass('btn');
+        $this->lnkIndividual->AddAction($this, 'lnkIndividual_click');
+
+        $this->lnkFamily = new MJaxLinkButton($this);
+        $this->lnkFamily->Text = 'Purchase Now';
+        $this->lnkFamily->AddCssClass('btn');
+        $this->lnkFamily->AddAction($this, 'lnkFamily_click');
+    }
+
 
 }
 

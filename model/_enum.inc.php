@@ -1,6 +1,7 @@
 <?php
 abstract class FFSRoll{
     const ORG_MANAGER = 'org_manager';
+    const FOLLOW = 'follow';
 }
 abstract class FFSInviteType{
     const EMAIL = 'EMAIL';
@@ -12,6 +13,14 @@ abstract class FFSSection{
     const PARENT = 'parent';
     const ORG = 'org';
     const COACH = 'coach';
+}
+abstract class FFSQS{
+    const IdAthelete = 'a';
+    const IdParentMessage = 'pm';
+    const IdResult = 'r';
+    const IdCompetition = 'c';
+    const IdSession  = 's';
+    const IdOrg = 'o';
 }
 abstract class FFSEventData{
     public static $WOMENS_ARTISTIC_GYMNASTICS = array(

@@ -3,6 +3,26 @@ abstract class FFSApplication{
     const ORG_INCOME_PERCENT = .5;
 
     public static $strMaxDispTime = '- 1 minute';
+    public static function SortChronologically($arrEntities, $strDateField = 'CreDate'){
+
+        $arrReturn = array();
+
+        foreach($arrEntities as $intIndex => $objEntity){
+
+            try{
+                $intTime = strtotime($objEntity->$strDateField);
+            }catch(Exception $e){
+                throw new Exception("Objects(" . get_class($objEntity) . ") passed in to this method must have a '" . $strDateField . "'");
+            }
+            while(array_key_exists($intTime, $arrReturn)){
+                $intTime += 1;
+            }
+
+            $arrReturn[$intTime] = $objEntity;
+        }
+        return array_values($arrReturn);
+
+    }
     public static function GetDevicesByCompetiton($objCompetition = null){
         $arrSessions = self::GetActiveSessions($objCompetition);
 
@@ -19,6 +39,19 @@ abstract class FFSApplication{
         }
 
         return $arrReturn;
+    }
+    public static function GetResultsBySessionGroupByAthelete($objSession){
+        $arrResults = Result::LoadCollByIdSession($objSession->IdSession)->getCollection();
+        //die("fuck");
+        $arrAtheleteResults = array();
+        foreach($arrResults as $intIndex => $objResult){
+            if(!array_key_exists($objResult->IdAthelete, $arrAtheleteResults)){
+                $arrAtheleteResults[$objResult->IdAthelete] = array();
+            }
+            $arrAtheleteResults[$objResult->IdAthelete][] = $objResult;
+        }
+        //_dk($arrAtheleteResults);
+        return $arrAtheleteResults;
     }
     public static function GetAssignmentsByCompetiton($objCompetition = null){
         if(is_null($objCompetition)){

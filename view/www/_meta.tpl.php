@@ -1,5 +1,7 @@
 <?php if($this instanceof MJaxWAdminForm){ ?>
     <?php require(__MJAX_WADMIN_THEME_CORE_VIEW__ . '/_meta.tpl.php'); ?>
+    <link href="<?php echo __MJAX_WADMIN_THEME_ASSET_URL__ . '/css'; ?>/pages/pricing.css" rel="stylesheet">
+    <link href="<?php echo __MJAX_WADMIN_THEME_ASSET_URL__ . '/css'; ?>/pages/plans.css" rel="stylesheet">
     <style>
         .margin-bottom-25{
             margin-bottom: 25Px;
@@ -54,6 +56,36 @@
             font-size:14Pt;
             margin-right:17Px;
         }
+        .ffs-feed-name{
+            font-size: 30Pt;
+        }
+        .ffs-result-feed-event{
+            font-size: 22Pt;
+            color:#777;
+        }
+        .ffs-result-feed-score{
+            font-size:36Pt;
+            float:right;
+        }
+        .ffs-parent-message-feed p{
+            max-width: 90%;
+            overflow: hidden;
+        }
+        .tabbable{
+            padding-top: 8px;
+            padding-bottom: 8px;
+            line-height: 20px;
+            border: 1px solid #ddd;
+            -webkit-border-radius: 4px 4px 0 0;
+            -moz-border-radius: 4px 4px 0 0;
+            border-radius: 4px 4px 0 0;
+            background-color: white;
+            margin-top: 20Px;
+        }
+        .nav-tabs{
+            margin-top: -46Px;
+            margin-left: -1Px;
+        }
         @media (min-width: 1200px) {
             .ParentMessageEditPanel_btnSave{
                 margin-top:-10Px;
@@ -64,6 +96,7 @@
                 padding:7Px;
             }
         }
+
     </style>
 <?php }else{ ?>
     <?php require(__MJAX_GENTA_THEME_CORE_VIEW__ . '/_meta.tpl.php'); ?>

@@ -23,6 +23,7 @@ class FFSForm extends MJaxWAdminForm{
             $this->InitAds();
         //}
     }
+
     public function SetUpNavMenu(){
         $this->AddHeaderNav('Home', 'icon-home')->Href = '/';
         switch(FFSForm::$strSection){
@@ -37,5 +38,26 @@ class FFSForm extends MJaxWAdminForm{
     }
     public function InitAds(){
         $this->pnlFooter = new FFSAdPanel($this);
+    }
+    public function _searchAthelete($objRoute){
+        $strSearch = $_POST['search'];
+        $arrAtheletes = Athelete::Query(
+            sprintf(
+                'WHERE firstName LIKE "%s%%" OR lastName LIKE "%s%%"',
+                $strSearch,
+                $strSearch
+            )
+        );
+
+        $arrAtheleteNames = array();
+        foreach($arrAtheletes as $intIndex => $objAthelete){
+            $arrAtheleteNames[] = $objAthelete->FirstName . ' ' . $objAthelete->LastName;
+        }
+        //$arrAtheleteNames = array('test', 'toast', 'boast');
+        die(
+            json_encode(
+                $arrAtheleteNames
+            )
+        );
     }
 }
