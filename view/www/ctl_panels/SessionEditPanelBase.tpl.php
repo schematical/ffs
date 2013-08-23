@@ -8,10 +8,10 @@
                 
                     <?php if(!is_null($_CONTROL->dttStartDate)){ ?>
                         <div class="control-group">
-                          <label class="control-label" for="name">startDate</label>
-                          <div class="controls">
+                          <label class="control-label" for="name">Start</label>
+
                              <?php $_CONTROL->dttStartDate->Render(); ?>
-                          </div>
+
                         </div>
 
                     <?php } ?>
@@ -21,10 +21,10 @@
                 
                     <?php if(!is_null($_CONTROL->dttEndDate)){ ?>
                         <div class="control-group">
-                          <label class="control-label" for="name">endDate</label>
-                          <div class="controls">
+                          <label class="control-label" for="name">End</label>
+
                              <?php $_CONTROL->dttEndDate->Render(); ?>
-                          </div>
+
                         </div>
 
                     <?php } ?>
@@ -47,7 +47,7 @@
                 
                     <?php if(!is_null($_CONTROL->strName)){ ?>
                         <div class="control-group">
-                          <label class="control-label" for="name">name</label>
+                          <label class="control-label" for="name">Session Name</label>
                           <div class="controls">
                              <?php $_CONTROL->strName->Render(); ?>
                           </div>
@@ -60,7 +60,7 @@
                 
                     <?php if(!is_null($_CONTROL->strNotes)){ ?>
                         <div class="control-group">
-                          <label class="control-label" for="name">notes</label>
+                          <label class="control-label" for="name">Notes</label>
                           <div class="controls">
                              <?php $_CONTROL->strNotes->Render(); ?>
                           </div>
@@ -76,6 +76,32 @@
                           <label class="control-label" for="name">data</label>
                           <div class="controls">
                              <?php $_CONTROL->strData->Render(); ?>
+                          </div>
+                        </div>
+
+                    <?php } ?>
+                
+
+            
+                
+                    <?php if(!is_null($_CONTROL->strEquipmentSet)){ ?>
+                        <div class="control-group">
+                          <label class="control-label" for="name">Equipment Set</label>
+                          <div class="controls">
+                             <?php $_CONTROL->strEquipmentSet->Render(); ?>
+                          </div>
+                        </div>
+
+                    <?php } ?>
+                
+
+            
+                
+                    <?php if(!is_null($_CONTROL->strEventData)){ ?>
+                        <div class="control-group">
+                          <label class="control-label" for="name">eventData</label>
+                          <div class="controls">
+                             <?php $_CONTROL->strEventData->Render(); ?>
                           </div>
                         </div>
 

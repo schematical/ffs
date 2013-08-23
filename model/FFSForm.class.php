@@ -13,6 +13,7 @@ class FFSForm extends MJaxWAdminForm{
                 //Do nothing
             }elseif(count($arrOrgs) == 1){
                 FFSForm::$objOrg = $arrOrgs[0];
+
             }else{
                 FFSForm::$objOrg = $arrOrgs[0];
             }
@@ -26,9 +27,11 @@ class FFSForm extends MJaxWAdminForm{
 
     public function SetUpNavMenu(){
         $this->AddHeaderNav('Home', 'icon-home')->Href = '/';
+
         switch(FFSForm::$strSection){
             case(FFSSection::ORG):
-                $this->AddHeaderNav('Add Meet', 'icon-plus-sign')->Href = '/org/editCompetiton.php';
+                $this->AddHeaderNav('Add Meet', 'icon-plus-sign')->Href = '/org/competition/editCompetition';
+
             break;
             case(FFSSection::PARENT):
                 //TODO - Add invite/share functionality

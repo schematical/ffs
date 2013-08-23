@@ -42,7 +42,11 @@ class FFSRewriteHandeler extends MLCRewriteHandelerBase{
                 MLCApplication::$strCtlFile = __CTL_ACTIVE_APP_DIR__ . '/' . $strSubFolder . '/' . $strEndUri;
                 //_dv(MLCApplication::$strCtlFile);
                 return;
+            }else{
+                FFSForm::$strSection = $arrParts[1];
+                //_dv(FFSForm::$strSection);
             }
+
 
         }
         parent::Handel($strUri);

@@ -1,28 +1,30 @@
 <?php
-class MLCApiOrgBase extends MLCApiClassBase{
-	protected $strClassName = 'Org';
-	
-	public function  __call($strName, $arrArguments) {
-       
-		$arrReturn = array();
-		if(is_numeric($strName){
+/**
+* Class and Function List:
+* Function list:
+* - __call()
+* - Query()
+* Classes list:
+* - MLCApiOrgBase extends MLCApiClassBase
+*/
+class MLCApiOrgBase extends MLCApiClassBase {
+    protected $strClassName = 'Org';
+    public function __call($strName, $arrArguments) {
+        $arrReturn = array();
+        if (is_numeric($strName) {
             $objOrg = Org::LoadById($strName);
-        }else{
+        } else {
             $objOrg = null;
         }
-
-      
-        if(!is_null($objOrg)){
-        	return new MLCApiOrgObject($objOrg);
-        }else{
+        if (!is_null($objOrg)) {
+            return new MLCApiOrgObject($objOrg);
+        } else {
             throw new MLCApiException("No Org found with the data you submitted");
         }
+    }
+    public function Query() {
+        //Will need to accept QS Pramaeters of facebook, twitter, google
         
-     }
-
-    	
-	public function Query(){
-	 	//Will need to accept QS Pramaeters of facebook, twitter, google
-	}
+    }
 }
 ?>
