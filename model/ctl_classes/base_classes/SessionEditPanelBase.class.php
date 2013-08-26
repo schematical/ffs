@@ -76,9 +76,12 @@ class SessionEditPanelBase extends MJaxPanel {
     }
     public function SetSession($objSession) {
         $this->objSession = $objSession;
+        $this->ActionParameter = $this->objSession;
         $this->blnModified = true;
         if (!is_null($this->objSession)) {
-            $this->btnDelete->Style->Display = 'inline';
+            if (!is_null($this->btnDelete)) {
+                $this->btnDelete->Style->Display = 'inline';
+            }
             //PKey
             $this->intIdSession = $this->objSession->idSession;
             //Is special field!!!!!
@@ -124,10 +127,15 @@ class SessionEditPanelBase extends MJaxPanel {
         $this->objSession->equipmentSet = $this->strEquipmentSet->Text;
         //Is special field!!!!!
         $this->objSession->Save();
+        //Experimental save event trigger
+        $this->ActionParameter = $this->objSession;
+        $this->objForm->TriggerControlEvent($this->strControlId, 'mjax-data-entity-save');
     }
     public function btnDelete_click() {
         $this->objSession->MarkDeleted();
         $this->SetSession(null);
+        //Experimental delete event trigger
+        $this->objForm->TriggerControlEvent($this->strControlId, 'mjax-data-entity-delete');
     }
     public function IsNew() {
         return is_null($this->objSession);

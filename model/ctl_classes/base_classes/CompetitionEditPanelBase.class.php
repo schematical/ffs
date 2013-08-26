@@ -75,9 +75,12 @@ class CompetitionEditPanelBase extends MJaxPanel {
     }
     public function SetCompetition($objCompetition) {
         $this->objCompetition = $objCompetition;
+        $this->ActionParameter = $this->objCompetition;
         $this->blnModified = true;
         if (!is_null($this->objCompetition)) {
-            $this->btnDelete->Style->Display = 'inline';
+            if (!is_null($this->btnDelete)) {
+                $this->btnDelete->Style->Display = 'inline';
+            }
             //PKey
             $this->intIdCompetition = $this->objCompetition->idCompetition;
             $this->strName->Text = $this->objCompetition->name;
@@ -122,10 +125,15 @@ class CompetitionEditPanelBase extends MJaxPanel {
         $this->objCompetition->endDate = $this->dttEndDate->GetValue();
         $this->objCompetition->namespace = $this->strNamespace->Text;
         $this->objCompetition->Save();
+        //Experimental save event trigger
+        $this->ActionParameter = $this->objCompetition;
+        $this->objForm->TriggerControlEvent($this->strControlId, 'mjax-data-entity-save');
     }
     public function btnDelete_click() {
         $this->objCompetition->MarkDeleted();
         $this->SetCompetition(null);
+        //Experimental delete event trigger
+        $this->objForm->TriggerControlEvent($this->strControlId, 'mjax-data-entity-delete');
     }
     public function IsNew() {
         return is_null($this->objCompetition);

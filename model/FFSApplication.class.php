@@ -23,7 +23,21 @@ abstract class FFSApplication{
         return array_values($arrReturn);
 
     }
-    public static function GetDevicesByCompetiton($objCompetition = null){
+    public static function GetDevicesByOrg($objOrg = null, $strSearch = null){
+        if(is_null($objOrg)){
+            $objOrg = FFSForm::$objOrg;
+        }
+        $arrDevices = Device::Query(
+            sprintf(
+                'WHERE idOrg = %s AND (name LIKE "%s%%" OR inviteEmail LIKE "%s%%")',
+                $objOrg->IdOrg,
+                $strSearch,
+                $strSearch
+            )
+        );
+        return $arrDevices;
+    }
+    public static function GetDevicesByCompetiton($objCompetition = null, $strSearch = null){
         $arrSessions = self::GetActiveSessions($objCompetition);
 
         $arrReturn = array();

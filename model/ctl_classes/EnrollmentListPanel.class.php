@@ -1,71 +1,58 @@
 <?php
-require_once(__MODEL_APP_CONTROL__ . "/base_classes/EnrollmentListPanelBase.class.php");
+/**
+* Class and Function List:
+* Function list:
+* - __construct()
+* Classes list:
+* - EnrollmentListPanel extends EnrollmentListPanelBase
+*/
+require_once (__MODEL_APP_CONTROL__ . "/base_classes/EnrollmentListPanelBase.class.php");
 class EnrollmentListPanel extends EnrollmentListPanelBase {
+    public function __construct($objParentControl, $arrEnrollments = array()) {
+        parent::__construct($objParentControl, $arrEnrollments);
+        $this->AddCssClass('table table-striped table-bordered table-condensed');
+    }
 
-    public function __construct($objParentControl, $arrEnrollments = array()){
+    public function SetupCols(){
+        
+            
+            //$this->AddColumn('idEnrollment','idEnrollment');
 
-		parent::__construct($objParentControl, $arrEnrollments = array());
-        $this->AddCssClass('table table-striped table-bordered');
+            $this->AddColumn('atheleteName','Athlete', $this, 'render_atheleteName');
 
-	}
-	/*
-	public function SetupCols(){
-        
+            //$this->AddColumn('idCompetition','idCompetition');
+            //$this->AddColumn('idSession','idSession');
+
+            $this->AddColumn('flight','Flight');
+
+            $this->AddColumn('division','Division');
+
             
-            $this->AddColumn('idEnrollment','idEnrollment');
+            $this->AddColumn('ageGroup','Age Group');
+
+            $this->AddColumn('level','Level');
             
-            
-        
-            
-            
-            $this->AddColumn('idAthelete','idAthelete');
-            
-        
-            
-            
-            $this->AddColumn('idCompetition','idCompetition');
-            
-        
-            
-            
-            $this->AddColumn('idSession','idSession');
-            
-        
+            if(false){
+                $this->AddColumn('misc1','misc1');
+                $this->AddColumn('misc2','misc2');
+                $this->AddColumn('misc3','misc3');
+                $this->AddColumn('misc4','misc4');
+                $this->AddColumn('misc5','misc5');
+
+            }
+            //$this->AddColumn('creDate','creDate');
             
             
-            $this->AddColumn('flight','flight');
-            
-        
-            
-            
-            $this->AddColumn('division','division');
-            
-        
-            
-            
-            $this->AddColumn('ageGroup','ageGroup');
-            
-        
-            
-            
-            $this->AddColumn('misc1','misc1');
-            
-        
-            
-            
-            $this->AddColumn('misc2','misc2');
-            
-        
-            
-            
-            $this->AddColumn('misc3','misc3');
+
             
         
     }
-    */
+    public function render_atheleteName($intIdAthelete){
+        $objAthelete = Athelete::LoadById($intIdAthelete);
+        $strReturn = $objAthelete->LastName . ', ' . $objAthelete->FirstName;
+        return $strReturn;
 
+    }
 
 }
-
-
 ?>

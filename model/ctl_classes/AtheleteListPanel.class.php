@@ -5,7 +5,7 @@ class AtheleteListPanel extends AtheleteListPanelBase {
     public function __construct($objParentControl, $arrAtheletes = array()){
 
 		parent::__construct($objParentControl, $arrAtheletes = array());
-        $this->AddCssClass('table table-striped table-bordered');
+        $this->AddCssClass('table table-striped table-bordered table-condensed');
 
 	}
 	/*

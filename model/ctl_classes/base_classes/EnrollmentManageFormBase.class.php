@@ -4,6 +4,8 @@
 * Function list:
 * - Form_Create()
 * - InitEditPanel()
+* - pnlEdit_save()
+* - pnlEdit_delete()
 * - InitList()
 * - lstEnrollment_editInit()
 * - lstEnrollment_editSave()
@@ -19,13 +21,22 @@ class EnrollmentManageFormBase extends FFSForm {
     }
     public function InitEditPanel($objEnrollment = null) {
         $this->pnlEdit = new EnrollmentEditPanel($this, $objEnrollment);
-        $this->AddWidget(((is_null($objEnrollment)) ? 'Create Enrollment' : 'Edit Enrollment') , 'icon-edit', $this->pnlEdit);
+        $this->pnlEdit->AddAction(new MJaxDataEntitySaveEvent() , new MJaxServerControlAction($this, 'pnlEdit_save'));
+        $this->pnlEdit->AddAction(new MJaxDataEntityDeleteEvent() , new MJaxServerControlAction($this, 'pnlEdit_delete'));
+        $wgtEnrollment = $this->AddWidget(((is_null($objEnrollment)) ? 'Create Enrollment' : 'Edit Enrollment') , 'icon-edit', $this->pnlEdit);
+        return $wgtEnrollment;
+    }
+    //Fake event holders for now
+    public function pnlEdit_save($strFormId, $strControlId, $objEnrollment) {
+    }
+    public function pnlEdit_delete($strFormId, $strControlId, $objEnrollment) {
     }
     public function InitList($arrEnrollments) {
         $this->lstEnrollments = new EnrollmentListPanel($this, $arrEnrollments);
         $this->lstEnrollments->AddAction(new MJaxTableEditInitEvent() , new MJaxServerControlAction($this, 'lstEnrollment_editInit'));
         $this->lstEnrollments->AddAction(new MJaxTableEditSaveEvent() , new MJaxServerControlAction($this, 'lstEnrollment_editSave'));
-        $this->AddWidget('Enrollments', 'icon-ul', $this->lstEnrollments);
+        $wgtEnrollment = $this->AddWidget('Enrollments', 'icon-ul', $this->lstEnrollments);
+        return $wgtEnrollment;
     }
     public function lstEnrollment_editInit() {
         //_dv($this->lstEnrollments->SelectedRow);

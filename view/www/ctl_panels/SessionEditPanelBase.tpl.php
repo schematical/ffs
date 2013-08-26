@@ -1,11 +1,22 @@
 
     <form action="/" id="validation-form" class="form-horizontal">
         <fieldset>
-            
-                
 
-            
-                
+
+
+
+                    <?php if(!is_null($_CONTROL->strName)){ ?>
+                        <div class="control-group">
+                            <label class="control-label" for="name">Session Name</label>
+                            <div class="controls">
+                                <?php $_CONTROL->strName->Render(); ?>
+                            </div>
+                        </div>
+
+                    <?php } ?>
+
+
+
                     <?php if(!is_null($_CONTROL->dttStartDate)){ ?>
                         <div class="control-group">
                           <label class="control-label" for="name">Start</label>
@@ -43,18 +54,7 @@
                     <?php } ?>
                 
 
-            
-                
-                    <?php if(!is_null($_CONTROL->strName)){ ?>
-                        <div class="control-group">
-                          <label class="control-label" for="name">Session Name</label>
-                          <div class="controls">
-                             <?php $_CONTROL->strName->Render(); ?>
-                          </div>
-                        </div>
 
-                    <?php } ?>
-                
 
             
                 
@@ -80,7 +80,16 @@
                         </div>
 
                     <?php } ?>
-                
+
+                    <?php if(!is_null($_CONTROL->lstEventSelector)){ ?>
+                        <div class="control-group">
+                            <label class="control-label" for="name">Events</label>
+                            <div class="controls">
+                                <?php $_CONTROL->lstEventSelector->Render(); ?>
+                            </div>
+                        </div>
+
+                    <?php } ?>
 
             
                 

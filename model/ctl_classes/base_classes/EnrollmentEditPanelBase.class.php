@@ -101,9 +101,12 @@ class EnrollmentEditPanelBase extends MJaxPanel {
     }
     public function SetEnrollment($objEnrollment) {
         $this->objEnrollment = $objEnrollment;
+        $this->ActionParameter = $this->objEnrollment;
         $this->blnModified = true;
         if (!is_null($this->objEnrollment)) {
-            $this->btnDelete->Style->Display = 'inline';
+            if (!is_null($this->btnDelete)) {
+                $this->btnDelete->Style->Display = 'inline';
+            }
             //PKey
             $this->intIdEnrollment = $this->objEnrollment->idEnrollment;
             $this->strFlight->Text = $this->objEnrollment->flight;
@@ -157,10 +160,15 @@ class EnrollmentEditPanelBase extends MJaxPanel {
         //Do nothing this is a creDate
         $this->objEnrollment->level = $this->strLevel->Text;
         $this->objEnrollment->Save();
+        //Experimental save event trigger
+        $this->ActionParameter = $this->objEnrollment;
+        $this->objForm->TriggerControlEvent($this->strControlId, 'mjax-data-entity-save');
     }
     public function btnDelete_click() {
         $this->objEnrollment->MarkDeleted();
         $this->SetEnrollment(null);
+        //Experimental delete event trigger
+        $this->objForm->TriggerControlEvent($this->strControlId, 'mjax-data-entity-delete');
     }
     public function IsNew() {
         return is_null($this->objEnrollment);

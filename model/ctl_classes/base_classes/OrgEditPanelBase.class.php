@@ -73,9 +73,12 @@ class OrgEditPanelBase extends MJaxPanel {
     }
     public function SetOrg($objOrg) {
         $this->objOrg = $objOrg;
+        $this->ActionParameter = $this->objOrg;
         $this->blnModified = true;
         if (!is_null($this->objOrg)) {
-            $this->btnDelete->Style->Display = 'inline';
+            if (!is_null($this->btnDelete)) {
+                $this->btnDelete->Style->Display = 'inline';
+            }
             //PKey
             $this->intIdOrg = $this->objOrg->idOrg;
             $this->strNamespace->Text = $this->objOrg->namespace;
@@ -111,10 +114,15 @@ class OrgEditPanelBase extends MJaxPanel {
         $this->objOrg->idImportAuthUser = $this->intIdImportAuthUser->Text;
         $this->objOrg->clubNum = $this->strClubNum->Text;
         $this->objOrg->Save();
+        //Experimental save event trigger
+        $this->ActionParameter = $this->objOrg;
+        $this->objForm->TriggerControlEvent($this->strControlId, 'mjax-data-entity-save');
     }
     public function btnDelete_click() {
         $this->objOrg->MarkDeleted();
         $this->SetOrg(null);
+        //Experimental delete event trigger
+        $this->objForm->TriggerControlEvent($this->strControlId, 'mjax-data-entity-delete');
     }
     public function IsNew() {
         return is_null($this->objOrg);

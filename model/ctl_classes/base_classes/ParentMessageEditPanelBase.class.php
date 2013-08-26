@@ -93,9 +93,12 @@ class ParentMessageEditPanelBase extends MJaxPanel {
     }
     public function SetParentMessage($objParentMessage) {
         $this->objParentMessage = $objParentMessage;
+        $this->ActionParameter = $this->objParentMessage;
         $this->blnModified = true;
         if (!is_null($this->objParentMessage)) {
-            $this->btnDelete->Style->Display = 'inline';
+            if (!is_null($this->btnDelete)) {
+                $this->btnDelete->Style->Display = 'inline';
+            }
             //PKey
             $this->intIdParentMessage = $this->objParentMessage->idParentMessage;
             $this->strAtheleteName->Text = $this->objParentMessage->atheleteName;
@@ -158,10 +161,15 @@ class ParentMessageEditPanelBase extends MJaxPanel {
         $this->objParentMessage->approveDate = $this->dttApproveDate->GetValue();
         //Is special field!!!!!
         $this->objParentMessage->Save();
+        //Experimental save event trigger
+        $this->ActionParameter = $this->objParentMessage;
+        $this->objForm->TriggerControlEvent($this->strControlId, 'mjax-data-entity-save');
     }
     public function btnDelete_click() {
         $this->objParentMessage->MarkDeleted();
         $this->SetParentMessage(null);
+        //Experimental delete event trigger
+        $this->objForm->TriggerControlEvent($this->strControlId, 'mjax-data-entity-delete');
     }
     public function IsNew() {
         return is_null($this->objParentMessage);

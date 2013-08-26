@@ -9,15 +9,25 @@ class FFSDeviceAssignmentPanel extends MJaxPanel{
     public function __construct($objParentControl, $objDevice = null){
         parent::__construct($objParentControl);
         $this->strTemplate = __VIEW_ACTIVE_APP_DIR__ . '/www/_panels/' . get_class($this) . '.tpl.php';
-        $this->txtDeviceName = new MJaxTextBox($this);
+        $this->txtDeviceName = new MJaxBSAutocompleteTextBox($this, $this, '_searchDevice');
         $this->txtDeviceName->Attr('placeholder',"Device");
-        $this->txtDeviceName->Typehead($this, '_searchDevice');
+
 
         $this->lstSession = new MJaxListBox($this);
         $arrSessions = FFSForm::$objCompetition->GetSessionArr()->getCollection();
-        foreach($arrSessions as $intIndex => $objSession){
-            $this->lstSession->AddItem($objSession->Name, $objSession->IdSession);
+        $intFormIdSession = -1000;
+        if(!is_null(FFSForm::$objSession)){
+            $intFormIdSession = FFSForm::$objSession->IdSession;
         }
+        foreach($arrSessions as $intIndex => $objSession){
+            $this->lstSession->AddItem(
+                $objSession->Name,
+                $objSession->IdSession,
+                ($objSession->IdSession == $intFormIdSession)
+
+            );
+        }
+
         $this->lstSession->AddAction(
             new MJaxChangeEvent(),
             new MJaxServerControlAction(
@@ -26,37 +36,28 @@ class FFSDeviceAssignmentPanel extends MJaxPanel{
             )
         );
         $this->lstEvent = new MJaxListBox($this);
+        $this->lstEvent->Style->Width = '80%';
         $this->lnkAddInput = new MJaxLinkButton($this);
         $this->lnkAddInput->Text = 'Add Input';
-        $this->lnkAddInput->AddCssClass('btn btn-large');
+        $this->lnkAddInput->AddCssClass('btn');
         $this->lnkAddInput->AddAction($this, 'lnkAddInput_click');
 
+        if(!is_null(FFSForm::$objSession)){
+            $this->RefreshEvents();
+        }
 
     }
     public function lnkAddInput_click(){
 
-        $strContactData = $this->txtDeviceName->Text;
-        if(filter_var($strContactData, FILTER_VALIDATE_EMAIL)){
+        $objDevice = null;
+        $strContactData = $this->txtDeviceName->Value;
+        if(is_numeric($strContactData)){
+            $objDevice = $strContactData;
+        }elseif(filter_var($strContactData, FILTER_VALIDATE_EMAIL)){
             //Load Device by email
-            $objDevice = Device::Query(
-                sprintf(
-                    'WHERE inviteEmail = "%s"',
-                    $strContactData
-                ),
-                true
-            );
-            if(is_null($objDevice)){
-                $objDevice = FFSApplication::InviteDevice($strContactData);
-            }
-        }else{
-            //Load Device by name
-            $objDevice = Device::Query(
-                sprintf(
-                    'WHERE inviteEmail = "%s"',
-                    $strContactData
-                ),
-                true
-            );
+
+            $objDevice = FFSApplication::InviteDevice($strContactData);
+
         }
         //_dv($objDevice);
         if(is_null($objDevice)){
@@ -98,25 +99,51 @@ class FFSDeviceAssignmentPanel extends MJaxPanel{
 
     }
     public function lstSession_change(){
+        $this->RefreshEvents();
+    }
+    public function RefreshEvents(){
         $this->lstEvent->RemoveAllItems();
         $objSession = Session::LoadById($this->lstSession->SelectedValue);
         //$objSession->Events(FFSEventData::$MENS_ARTISTIC_GYMNASTICS);
         $arrEvents = $objSession->Events();
+        //_dv($arrEvents);
         foreach($arrEvents as $strKey => $strEventName){
             $this->lstEvent->AddItem($strEventName, $strKey);
         }
     }
     public function _searchDevice($objRoute){
         $strSearch = $_POST['search'];
-        $arrDevices = FFSApplication::GetDevicesByCompetiton();
+        $arrDevices = FFSApplication::GetDevicesByOrg(
+            null,
+            $strSearch
+        );
         $arrDeviceNames = array();
         foreach($arrDevices as $intIndex => $objDevice){
             if(!is_null($objDevice->Name)){
-                $arrDeviceNames[] = $objDevice->Name;
+                $arrDeviceNames[] = array(
+                    'value'=>$objDevice->IdDevice,
+                    'text'=>$objDevice->Name
+                );
             }
         }
         foreach($arrDevices as $intIndex => $objDevice){
-            $arrDeviceNames[] = $objDevice->InviteEmail;
+            $arrDeviceNames[] = array(
+                'value'=>$objDevice->IdDevice,
+                'text'=>$objDevice->InviteEmail
+            );
+        }
+        if(count($arrDeviceNames) == 0){
+            if(filter_var($strSearch, FILTER_VALIDATE_EMAIL)){
+                $arrDeviceNames  = array(
+                    'value'=>$strSearch,
+                    'text'=>'Invite ' . $strSearch
+                );
+            }else{
+                $arrDeviceNames  = array(
+                    'value'=>-1,
+                    'text'=>'Invite by email'
+                );
+            }
         }
         die(
             json_encode(

@@ -4,6 +4,8 @@
 * Function list:
 * - Form_Create()
 * - InitEditPanel()
+* - pnlEdit_save()
+* - pnlEdit_delete()
 * - InitList()
 * - lstDevice_editInit()
 * - lstDevice_editSave()
@@ -19,13 +21,22 @@ class DeviceManageFormBase extends FFSForm {
     }
     public function InitEditPanel($objDevice = null) {
         $this->pnlEdit = new DeviceEditPanel($this, $objDevice);
-        $this->AddWidget(((is_null($objDevice)) ? 'Create Device' : 'Edit Device') , 'icon-edit', $this->pnlEdit);
+        $this->pnlEdit->AddAction(new MJaxDataEntitySaveEvent() , new MJaxServerControlAction($this, 'pnlEdit_save'));
+        $this->pnlEdit->AddAction(new MJaxDataEntityDeleteEvent() , new MJaxServerControlAction($this, 'pnlEdit_delete'));
+        $wgtDevice = $this->AddWidget(((is_null($objDevice)) ? 'Create Device' : 'Edit Device') , 'icon-edit', $this->pnlEdit);
+        return $wgtDevice;
+    }
+    //Fake event holders for now
+    public function pnlEdit_save($strFormId, $strControlId, $objDevice) {
+    }
+    public function pnlEdit_delete($strFormId, $strControlId, $objDevice) {
     }
     public function InitList($arrDevices) {
         $this->lstDevices = new DeviceListPanel($this, $arrDevices);
         $this->lstDevices->AddAction(new MJaxTableEditInitEvent() , new MJaxServerControlAction($this, 'lstDevice_editInit'));
         $this->lstDevices->AddAction(new MJaxTableEditSaveEvent() , new MJaxServerControlAction($this, 'lstDevice_editSave'));
-        $this->AddWidget('Devices', 'icon-ul', $this->lstDevices);
+        $wgtDevice = $this->AddWidget('Devices', 'icon-ul', $this->lstDevices);
+        return $wgtDevice;
     }
     public function lstDevice_editInit() {
         //_dv($this->lstDevices->SelectedRow);

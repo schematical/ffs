@@ -68,9 +68,12 @@ class DeviceEditPanelBase extends MJaxPanel {
     }
     public function SetDevice($objDevice) {
         $this->objDevice = $objDevice;
+        $this->ActionParameter = $this->objDevice;
         $this->blnModified = true;
         if (!is_null($this->objDevice)) {
-            $this->btnDelete->Style->Display = 'inline';
+            if (!is_null($this->btnDelete)) {
+                $this->btnDelete->Style->Display = 'inline';
+            }
             //PKey
             $this->intIdDevice = $this->objDevice->idDevice;
             $this->strName->Text = $this->objDevice->name;
@@ -107,10 +110,15 @@ class DeviceEditPanelBase extends MJaxPanel {
         //Do nothing this is a creDate
         $this->objDevice->inviteEmail = $this->strInviteEmail->Text;
         $this->objDevice->Save();
+        //Experimental save event trigger
+        $this->ActionParameter = $this->objDevice;
+        $this->objForm->TriggerControlEvent($this->strControlId, 'mjax-data-entity-save');
     }
     public function btnDelete_click() {
         $this->objDevice->MarkDeleted();
         $this->SetDevice(null);
+        //Experimental delete event trigger
+        $this->objForm->TriggerControlEvent($this->strControlId, 'mjax-data-entity-delete');
     }
     public function IsNew() {
         return is_null($this->objDevice);

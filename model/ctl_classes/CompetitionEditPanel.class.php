@@ -1,9 +1,12 @@
 <?php
 require_once(__MODEL_APP_CONTROL__ . "/base_classes/CompetitionEditPanelBase.class.php");
 class CompetitionEditPanel extends CompetitionEditPanelBase {
+
     public $txtOrgName = null;
     public $btnContinue = null;
     public $objOrg = null;
+
+
     public function __construct($objParentControl, $objCompetion = null){
         parent::__construct($objParentControl, $objCompetion);
 
@@ -12,7 +15,7 @@ class CompetitionEditPanel extends CompetitionEditPanelBase {
             new MJaxBlurEvent(),
             new MJaxServerControlAction($this, 'strName_blur')
         );
-        $this->txtOrgName = new MJaxTextBox($this);
+
 
         $this->btnSave->Remove();
         $this->btnSave = null;
@@ -21,11 +24,18 @@ class CompetitionEditPanel extends CompetitionEditPanelBase {
         $this->btnContinue->Text = 'Continue';
         $this->btnContinue->AddCssClass('btn btn-large btn-info');
     }
+
+    public function CreateFieldControls(){
+        $this->txtOrgName = new MJaxTextBox($this);
+        parent::CreateFieldControls();
+
+    }
     public function SetCompetition($objCompetition, $objOrg = null){
         if(is_null($objOrg)){
             $objOrg = $objCompetition->IdOrgObject;
         }
         if(!is_null($objOrg)){
+            //_dv($objOrg);
             $this->txtOrgName->Text = $objOrg->Name;
         }
         return parent::SetCompetition($objCompetition);
@@ -54,6 +64,9 @@ class CompetitionEditPanel extends CompetitionEditPanelBase {
         $this->objCompetition->IdOrg = $this->objOrg->IdOrg;
         $this->objCompetition->Save();
         return;
+    }
+    public function GetCompetition(){
+        return $this->objCompetition;
     }
 
 

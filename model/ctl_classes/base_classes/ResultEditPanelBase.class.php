@@ -77,9 +77,12 @@ class ResultEditPanelBase extends MJaxPanel {
     }
     public function SetResult($objResult) {
         $this->objResult = $objResult;
+        $this->ActionParameter = $this->objResult;
         $this->blnModified = true;
         if (!is_null($this->objResult)) {
-            $this->btnDelete->Style->Display = 'inline';
+            if (!is_null($this->btnDelete)) {
+                $this->btnDelete->Style->Display = 'inline';
+            }
             //PKey
             $this->intIdResult = $this->objResult->idResult;
             $this->strScore->Text = $this->objResult->score;
@@ -122,10 +125,15 @@ class ResultEditPanelBase extends MJaxPanel {
         //Is special field!!!!!
         $this->objResult->dispDate = $this->dttDispDate->GetValue();
         $this->objResult->Save();
+        //Experimental save event trigger
+        $this->ActionParameter = $this->objResult;
+        $this->objForm->TriggerControlEvent($this->strControlId, 'mjax-data-entity-save');
     }
     public function btnDelete_click() {
         $this->objResult->MarkDeleted();
         $this->SetResult(null);
+        //Experimental delete event trigger
+        $this->objForm->TriggerControlEvent($this->strControlId, 'mjax-data-entity-delete');
     }
     public function IsNew() {
         return is_null($this->objResult);

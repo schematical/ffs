@@ -1,5 +1,6 @@
 <?php
 class FFSForm extends MJaxWAdminForm{
+    public static $objSession = null;
     public static $objCompetition = null;
     public static $objOrg = null;
     public static $strSection = null;
@@ -18,7 +19,22 @@ class FFSForm extends MJaxWAdminForm{
                 FFSForm::$objOrg = $arrOrgs[0];
             }
         }
-
+        if(!is_null(self::$objCompetition)){
+            $intIdSession = MLCApplication::QS(FFSQS::IdSession);
+            if(
+                (!is_null($intIdSession)) &&
+                (is_numeric($intIdSession))
+            ){
+                FFSForm::$objSession = Session::Query(
+                    sprintf(
+                        'WHERE idSession = %s AND idCompetition = %s',
+                        $intIdSession,
+                        FFSForm::$objCompetition->IdCompetition
+                    ),
+                    true
+                );
+            }
+        }
         $this->SetUpNavMenu();
         //If not is paid account{
             $this->InitAds();
@@ -30,7 +46,27 @@ class FFSForm extends MJaxWAdminForm{
 
         switch(FFSForm::$strSection){
             case(FFSSection::ORG):
-                $this->AddHeaderNav('Add Meet', 'icon-plus-sign')->Href = '/org/competition/editCompetition';
+
+                if(is_null(FFSForm::$objCompetition)){
+                    $this->AddHeaderNav('Add Competition', 'icon-plus-sign')->Href = '/org/competition/editCompetition';
+                }else{
+                    $lnkManageSessions = $this->AddHeaderNav('Manage Sessions', 'icon-calendar');
+                    $lnkManageSessions->Href = '/' . FFSForm::$objCompetition->Namespace . '/org/competition/manageSessions';
+                    $arrSessions = Session::LoadCollByIdCompetition(FFSForm::$objCompetition->IdCompetition)->getCollection();
+                    foreach($arrSessions as $objSession){
+                        //_dv($lnkManageSessions);
+                        $lnkManageSessions->AddSubNavLink(
+                            $objSession->Name,
+                            '/' . FFSForm::$objCompetition->Namespace . '/org/competition/manageEnrollments?' . FFSQS::IdSession . '='. $objSession->IdSession
+                        );
+                    }
+                    $this->AddHeaderNav('Invite Gyms', 'icon-building')->Href = '/' . FFSForm::$objCompetition->Namespace . '/org/competition/manageGyms';
+                    $this->AddHeaderNav('Manage Atheletes', 'icon-user')->Href = '/' . FFSForm::$objCompetition->Namespace . '/org/competition/manageAtheletes';
+
+                    //Probablly don't allow untill meet starts
+                    $this->AddHeaderNav('Results', 'icon-trophy')->Href = '/' . FFSForm::$objCompetition->Namespace . '/org/competition/results';
+
+                }
 
             break;
             case(FFSSection::PARENT):

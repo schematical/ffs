@@ -8,37 +8,30 @@
                 
                     <?php if(!is_null($_CONTROL->strName)){ ?>
                         <div class="control-group">
-                          <label class="control-label" for="name">name</label>
+                          <label class="control-label" for="name">Name</label>
                           <div class="controls">
                              <?php $_CONTROL->strName->Render(); ?>
                           </div>
                         </div>
 
                     <?php } ?>
-                
 
-            
-                
-                    <?php if(!is_null($_CONTROL->strLongDesc)){ ?>
+
+            <?php if(!is_null($_CONTROL->strNamespace)){ ?>
+                <div class="control-group">
+                    <label class="control-label" for="name">Namespace</label>
+                    <div class="controls">
+                        <?php $_CONTROL->strNamespace->Render(); ?>
+                    </div>
+                </div>
+
+            <?php } ?>
+
+
+            <?php if(!is_null($_CONTROL->dttStartDate)){ ?>
                         <div class="control-group">
-                          <label class="control-label" for="name">longDesc</label>
-                          <div class="controls">
-                             <?php $_CONTROL->strLongDesc->Render(); ?>
-                          </div>
-                        </div>
-
-                    <?php } ?>
-                
-
-            
-                
-
-            
-                
-                    <?php if(!is_null($_CONTROL->dttStartDate)){ ?>
-                        <div class="control-group">
-                          <label class="control-label" for="name">startDate</label>
-                                                       <?php $_CONTROL->dttStartDate->Render(); ?>
+                          <label class="control-label" for="name">Start</label>
+                           <?php $_CONTROL->dttStartDate->Render(); ?>
 
                         </div>
 
@@ -49,10 +42,10 @@
                 
                     <?php if(!is_null($_CONTROL->dttEndDate)){ ?>
                         <div class="control-group">
-                          <label class="control-label" for="name">endDate</label>
-                          <div class="controls">
+                          <label class="control-label" for="name">End</label>
+
                              <?php $_CONTROL->dttEndDate->Render(); ?>
-                          </div>
+
                         </div>
 
                     <?php } ?>
@@ -72,23 +65,17 @@
                 
 
             
-                
-                    <?php if(!is_null($_CONTROL->strNamespace)){ ?>
-                        <div class="control-group">
-                          <label class="control-label" for="name">namespace</label>
-                          <div class="controls">
-                             <?php $_CONTROL->strNamespace->Render(); ?>
-                          </div>
-                        </div>
 
-                    <?php } ?>
-                
 
             
 
-            <div class="form-actions">
-                <?php $_CONTROL->btnSave->Render(); ?>&nbsp;&nbsp;
-                <?php $_CONTROL->btnDelete->Render(); ?>
+           <div class="form-actions">
+                <?php if(!is_null($_CONTROL->btnSave)){ ?>
+                    <?php $_CONTROL->btnSave->Render(); ?>&nbsp;&nbsp;
+                <?php } ?>
+                <?php if(!is_null($_CONTROL->btnDelete)){ ?>
+                    <?php $_CONTROL->btnDelete->Render(); ?>
+                <?php } ?>
             </div>
         </fieldset>
     </form>

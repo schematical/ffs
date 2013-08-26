@@ -1,18 +1,18 @@
 <?php
 /**
-* Class and Function List:
-* Function list:
-* - Form_Create()
-* - Query()
-* - InitList()
-* - lnkEdit_click()
-* - lstEnrollment_editInit()
-* - lstEnrollment_editSave()
-* Classes list:
-* - EnrollmentManageForm extends EnrollmentManageFormBase
-*/
+ * Class and Function List:
+ * Function list:
+ * - Form_Create()
+ * - Query()
+ * - InitList()
+ * - lnkEdit_click()
+ * - lstEnrollment_editInit()
+ * - lstEnrollment_editSave()
+ * Classes list:
+ * - EnrollmentManageForm extends EnrollmentManageFormBase
+ */
 class EnrollmentManageForm extends EnrollmentManageFormBase {
-    protected $blnInlineEdit = true;
+    protected $blnInlineEdit = false;
     public function Form_Create() {
         parent::Form_Create();
         $arrEnrollments = $this->Query();
@@ -54,7 +54,7 @@ class EnrollmentManageForm extends EnrollmentManageFormBase {
     }
     public function lstEnrollment_editInit() {
         //_dv($this->lstEnrollments->SelectedRow);
-        
+
     }
     public function lstEnrollment_editSave() {
         $objEnrollment = Enrollment::LoadById($this->lstEnrollments->SelectedRow->ActionParameter);

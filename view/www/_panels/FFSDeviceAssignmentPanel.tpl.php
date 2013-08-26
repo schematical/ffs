@@ -12,10 +12,33 @@
 
     <div class="tab-content">
         <div class="tab-pane active" id="input_scores">
-            <?php $_CONTROL->lstSession->Render(); ?>
-            <?php $_CONTROL->lstEvent->Render(); ?>
-            <?php $_CONTROL->txtDeviceName->Render(); ?>
-            <?php $_CONTROL->lnkAddInput->Render(); ?>
+            <div class='row'>
+                <div class='span3 offset1'>
+                    <label>
+                        Session
+                    </label>
+                    <?php $_CONTROL->lstSession->Render(); ?>
+                </div>
+                <div class='span2'>
+                    <label>
+                        Event
+                    </label>
+                    <?php $_CONTROL->lstEvent->Render(); ?>
+                </div>
+                <div class='span3'>
+                    <label>
+                        Device
+                    </label>
+                    <?php $_CONTROL->txtDeviceName->Render(); ?>
+                </div>
+                <div class='span2'>
+                    <label>
+                        &nbsp;
+                    </label>
+                    <?php $_CONTROL->lnkAddInput->Render(); ?>
+                </div>
+            </div>
+
 
         </div>
 

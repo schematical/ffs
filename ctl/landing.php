@@ -66,7 +66,7 @@ class landing extends FFSForm {
             FFSRoll::ORG_MANAGER,//Roll
             $this->pnlCompetition->objOrg//Entity
         );
-        $this->Redirect("/org/index");
+        $this->Redirect("/" . $this->pnlCompetition->GetCompetition()->Namespace . '/org/competition/editCompetition');
     }
 
 }

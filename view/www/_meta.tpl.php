@@ -2,6 +2,7 @@
     <?php require(__MJAX_WADMIN_THEME_CORE_VIEW__ . '/_meta.tpl.php'); ?>
     <link href="<?php echo __MJAX_WADMIN_THEME_ASSET_URL__ . '/css'; ?>/pages/pricing.css" rel="stylesheet">
     <link href="<?php echo __MJAX_WADMIN_THEME_ASSET_URL__ . '/css'; ?>/pages/plans.css" rel="stylesheet">
+
     <style>
         .margin-bottom-25{
             margin-bottom: 25Px;

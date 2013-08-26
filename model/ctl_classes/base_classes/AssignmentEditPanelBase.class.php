@@ -69,9 +69,12 @@ class AssignmentEditPanelBase extends MJaxPanel {
     }
     public function SetAssignment($objAssignment) {
         $this->objAssignment = $objAssignment;
+        $this->ActionParameter = $this->objAssignment;
         $this->blnModified = true;
         if (!is_null($this->objAssignment)) {
-            $this->btnDelete->Style->Display = 'inline';
+            if (!is_null($this->btnDelete)) {
+                $this->btnDelete->Style->Display = 'inline';
+            }
             //PKey
             $this->intIdAssignment = $this->objAssignment->idAssignment;
             $this->strEvent->Text = $this->objAssignment->event;
@@ -113,10 +116,15 @@ class AssignmentEditPanelBase extends MJaxPanel {
         //Is special field!!!!!
         $this->objAssignment->revokeDate = $this->dttRevokeDate->GetValue();
         $this->objAssignment->Save();
+        //Experimental save event trigger
+        $this->ActionParameter = $this->objAssignment;
+        $this->objForm->TriggerControlEvent($this->strControlId, 'mjax-data-entity-save');
     }
     public function btnDelete_click() {
         $this->objAssignment->MarkDeleted();
         $this->SetAssignment(null);
+        //Experimental delete event trigger
+        $this->objForm->TriggerControlEvent($this->strControlId, 'mjax-data-entity-delete');
     }
     public function IsNew() {
         return is_null($this->objAssignment);

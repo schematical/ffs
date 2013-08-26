@@ -4,6 +4,8 @@
 * Function list:
 * - Form_Create()
 * - InitEditPanel()
+* - pnlEdit_save()
+* - pnlEdit_delete()
 * - InitList()
 * - lstAssignment_editInit()
 * - lstAssignment_editSave()
@@ -19,13 +21,22 @@ class AssignmentManageFormBase extends FFSForm {
     }
     public function InitEditPanel($objAssignment = null) {
         $this->pnlEdit = new AssignmentEditPanel($this, $objAssignment);
-        $this->AddWidget(((is_null($objAssignment)) ? 'Create Assignment' : 'Edit Assignment') , 'icon-edit', $this->pnlEdit);
+        $this->pnlEdit->AddAction(new MJaxDataEntitySaveEvent() , new MJaxServerControlAction($this, 'pnlEdit_save'));
+        $this->pnlEdit->AddAction(new MJaxDataEntityDeleteEvent() , new MJaxServerControlAction($this, 'pnlEdit_delete'));
+        $wgtAssignment = $this->AddWidget(((is_null($objAssignment)) ? 'Create Assignment' : 'Edit Assignment') , 'icon-edit', $this->pnlEdit);
+        return $wgtAssignment;
+    }
+    //Fake event holders for now
+    public function pnlEdit_save($strFormId, $strControlId, $objAssignment) {
+    }
+    public function pnlEdit_delete($strFormId, $strControlId, $objAssignment) {
     }
     public function InitList($arrAssignments) {
         $this->lstAssignments = new AssignmentListPanel($this, $arrAssignments);
         $this->lstAssignments->AddAction(new MJaxTableEditInitEvent() , new MJaxServerControlAction($this, 'lstAssignment_editInit'));
         $this->lstAssignments->AddAction(new MJaxTableEditSaveEvent() , new MJaxServerControlAction($this, 'lstAssignment_editSave'));
-        $this->AddWidget('Assignments', 'icon-ul', $this->lstAssignments);
+        $wgtAssignment = $this->AddWidget('Assignments', 'icon-ul', $this->lstAssignments);
+        return $wgtAssignment;
     }
     public function lstAssignment_editInit() {
         //_dv($this->lstAssignments->SelectedRow);

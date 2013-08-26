@@ -83,9 +83,12 @@ class AtheleteEditPanelBase extends MJaxPanel {
     }
     public function SetAthelete($objAthelete) {
         $this->objAthelete = $objAthelete;
+        $this->ActionParameter = $this->objAthelete;
         $this->blnModified = true;
         if (!is_null($this->objAthelete)) {
-            $this->btnDelete->Style->Display = 'inline';
+            if (!is_null($this->btnDelete)) {
+                $this->btnDelete->Style->Display = 'inline';
+            }
             //PKey
             $this->intIdAthelete = $this->objAthelete->idAthelete;
             $this->strFirstName->Text = $this->objAthelete->firstName;
@@ -132,10 +135,15 @@ class AtheleteEditPanelBase extends MJaxPanel {
         //Do nothing this is a creDate
         $this->objAthelete->level = $this->strLevel->Text;
         $this->objAthelete->Save();
+        //Experimental save event trigger
+        $this->ActionParameter = $this->objAthelete;
+        $this->objForm->TriggerControlEvent($this->strControlId, 'mjax-data-entity-save');
     }
     public function btnDelete_click() {
         $this->objAthelete->MarkDeleted();
         $this->SetAthelete(null);
+        //Experimental delete event trigger
+        $this->objForm->TriggerControlEvent($this->strControlId, 'mjax-data-entity-delete');
     }
     public function IsNew() {
         return is_null($this->objAthelete);
