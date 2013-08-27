@@ -47,7 +47,11 @@ class EnrollmentListPanel extends EnrollmentListPanelBase {
             
         
     }
-    public function render_atheleteName($intIdAthelete){
+    public function render_atheleteName($intIdAthelete, $objRow){
+        $intIdAthelete = $objRow->GetData('_entity')->IdAthelete;
+        if(is_null($intIdAthelete)){
+           return 'Unknown';
+        }
         $objAthelete = Athelete::LoadById($intIdAthelete);
         $strReturn = $objAthelete->LastName . ', ' . $objAthelete->FirstName;
         return $strReturn;

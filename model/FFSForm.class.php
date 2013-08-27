@@ -40,7 +40,25 @@ class FFSForm extends MJaxWAdminForm{
             $this->InitAds();
         //}
     }
-
+    public function SearchForAtheletes($strSearch){
+        if(!is_numeric($strSearch)){
+            $arrAtheletes = Athelete::Query(
+                sprintf(
+                    'WHERE firstName LIKE "%s%%" or lastName LIKE "%s%%"',
+                    strtolower($strSearch),
+                    strtolower($strSearch)
+                )
+            );
+        }else{
+            $arrAtheletes = Athelete::Query(
+                sprintf(
+                    'WHERE idAthelete = %s OR memId = %s',
+                    strtolower($strSearch),
+                    strtolower($strSearch)
+                )
+            );
+        }
+    }
     public function SetUpNavMenu(){
         $this->AddHeaderNav('Home', 'icon-home')->Href = '/';
 

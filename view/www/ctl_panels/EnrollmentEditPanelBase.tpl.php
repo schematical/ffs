@@ -8,7 +8,7 @@
                 
                     <?php if(!is_null($_CONTROL->intIdAthelete)){ ?>
                         <div class="control-group">
-                          <label class="control-label" for="name">idAthelete</label>
+                          <label class="control-label" for="name">Athlete</label>
                           <div class="controls">
                              <?php $_CONTROL->intIdAthelete->Render(); ?>
                           </div>
@@ -47,7 +47,7 @@
                 
                     <?php if(!is_null($_CONTROL->strFlight)){ ?>
                         <div class="control-group">
-                          <label class="control-label" for="name">flight</label>
+                          <label class="control-label" for="name">Flight</label>
                           <div class="controls">
                              <?php $_CONTROL->strFlight->Render(); ?>
                           </div>
@@ -60,7 +60,7 @@
                 
                     <?php if(!is_null($_CONTROL->strDivision)){ ?>
                         <div class="control-group">
-                          <label class="control-label" for="name">division</label>
+                          <label class="control-label" for="name">Division</label>
                           <div class="controls">
                              <?php $_CONTROL->strDivision->Render(); ?>
                           </div>
@@ -73,7 +73,7 @@
                 
                     <?php if(!is_null($_CONTROL->strAgeGroup)){ ?>
                         <div class="control-group">
-                          <label class="control-label" for="name">ageGroup</label>
+                          <label class="control-label" for="name">Age Group</label>
                           <div class="controls">
                              <?php $_CONTROL->strAgeGroup->Render(); ?>
                           </div>
@@ -84,7 +84,7 @@
 
             
                 
-                    <?php if(!is_null($_CONTROL->strMisc1)){ ?>
+                    <?php /* if(!is_null($_CONTROL->strMisc1)){ ?>
                         <div class="control-group">
                           <label class="control-label" for="name">misc1</label>
                           <div class="controls">
@@ -118,7 +118,7 @@
                           </div>
                         </div>
 
-                    <?php } ?>
+                    <?php } */ ?>
                 
 
             

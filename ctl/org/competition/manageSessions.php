@@ -97,7 +97,9 @@ class SessionManageForm extends SessionManageFormBase
         //_dv($objSession);
 
         if(!is_null($this->lstSessions->SelectedRow)){
-
+            $this->lstSessions->SelectedRow->UpdateRow(
+                $objSession
+            );
         }else{
             $objSession->IdCompetition = FFSForm::$objCompetition->IdCompetition;
             $objSession->Save();

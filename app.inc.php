@@ -46,6 +46,7 @@ MLCApplicationBase::$arrClassFiles['FFSFeedDisplayPanel'] = __CTL_FFS_APP_DIR__ 
 MLCApplicationBase::$arrClassFiles['FFSParentMessageFeedDisplayPanel'] = __CTL_FFS_APP_DIR__ . '/_panels/FFSParentMessageFeedDisplayPanel.class.php';
 MLCApplicationBase::$arrClassFiles['FFSResultFeedDisplayPanel'] = __CTL_FFS_APP_DIR__ . '/_panels/FFSResultFeedDisplayPanel.class.php';
 MLCApplicationBase::$arrClassFiles['FFSSharePanel'] = __CTL_FFS_APP_DIR__ . '/_panels/FFSSharePanel.class.php';
+MLCApplicationBase::$arrClassFiles['FFSAtheleteSelectPanel'] = __CTL_FFS_APP_DIR__ . '/_panels/FFSAtheleteSelectPanel.class.php';
 
 
 //Proscore stuff

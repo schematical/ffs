@@ -84,6 +84,7 @@ class OrgBase extends BaseEntity {
     }
     public static function Query($strExtra, $blnReturnSingle = false) {
         $sql = sprintf("SELECT * FROM %s %s;", self::TABLE_NAME, $strExtra);
+
         $result = MLCDBDriver::Query($sql, self::DB_CONN);
         $coll = new BaseEntityCollection();
         while ($data = mysql_fetch_assoc($result)) {

@@ -238,8 +238,8 @@ class Proscore{
             }
             $objAthelete->FirstName = $objPSData->First_Name;
             $objAthelete->LastName = $objPSData->Last_Name;
-            $objAthelete->CreDate = MLCDateTime::Parse($objPSData->Birthday);
-            $objAthelete->Level = MLCDateTime::Parse($objPSData->Level);
+            $objAthelete->BirthDate = MLCDateTime::Parse($objPSData->Birthday);
+            $objAthelete->Level = $objPSData->Level;
 
             $objAthelete->MemType = FFSMemType::USAG;
             $objAthelete->MemId = $objPSData->USAG;

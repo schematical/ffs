@@ -23,6 +23,9 @@ abstract class FFSApplication{
         return array_values($arrReturn);
 
     }
+    public static function GetEnrollmentsBySession($objSession, $strSearch = null){
+
+    }
     public static function GetDevicesByOrg($objOrg = null, $strSearch = null){
         if(is_null($objOrg)){
             $objOrg = FFSForm::$objOrg;

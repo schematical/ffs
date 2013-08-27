@@ -26,7 +26,9 @@ class EnrollmentManageForm extends EnrollmentManageFormBase {
                 MLCApplication::QS(FFSQS::IdSession)
             );
         }
-
+        if(count($arrAndConditions) == 0){
+            $arrAndConditions[] = 0;
+        }
         $arrEnrollments = Enrollment::Query(
             sprintf(
                 'WHERE %s',
