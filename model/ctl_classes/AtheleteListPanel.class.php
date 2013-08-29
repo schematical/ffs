@@ -35,7 +35,11 @@ class AtheleteListPanel extends AtheleteListPanelBase {
         
     }
     public function render_orgName($strData, $objRow){
-        return Org::LoadById($objRow->GetData('_entity')->IdOrg)->Name;
+        $objOrg =  Org::LoadById($objRow->GetData('_entity')->IdOrg);
+        if(is_null($objOrg)){
+           return '';
+        }
+        return $objOrg->Name;
     }
     public function render_name($strData, $objRow){
         return $objRow->GetData('_entity')->__toString();

@@ -4,9 +4,11 @@ class FFSForm extends MJaxWAdminForm{
     public static $objCompetition = null;
     public static $objOrg = null;
     public static $strSection = null;
+    public $objJsonSearchDriver = null;
+
     public function Form_Create(){
         parent::Form_Create();
-
+        $this->objJsonSearchDriver = new FFSJsonSearchDriver();
         if(is_null(self::$objOrg)){
 
             $arrOrgs = MLCAuthDriver::GetRolls(FFSRoll::ORG_MANAGER);

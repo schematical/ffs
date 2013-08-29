@@ -4,6 +4,8 @@
 * Function list:
 * Classes list:
 */
+MLCApplicationBase::$arrClassFiles['FFSJsonSearchDriver'] = __MODEL_APP_CONTROL__ . '/FFSJsonSearchDriver.class.php';
+MLCApplicationBase::$arrClassFiles['FFSQSBase'] = __MODEL_APP_CONTROL__ . '/base_classes/FFSQSBase.class.php';
 //Edit Panels
 MLCApplicationBase::$arrClassFiles['AssignmentEditPanel'] = __MODEL_APP_CONTROL__ . '/AssignmentEditPanel.class.php';
 MLCApplicationBase::$arrClassFiles['AtheleteEditPanel'] = __MODEL_APP_CONTROL__ . '/AtheleteEditPanel.class.php';
@@ -14,7 +16,16 @@ MLCApplicationBase::$arrClassFiles['OrgEditPanel'] = __MODEL_APP_CONTROL__ . '/O
 MLCApplicationBase::$arrClassFiles['ParentMessageEditPanel'] = __MODEL_APP_CONTROL__ . '/ParentMessageEditPanel.class.php';
 MLCApplicationBase::$arrClassFiles['ResultEditPanel'] = __MODEL_APP_CONTROL__ . '/ResultEditPanel.class.php';
 MLCApplicationBase::$arrClassFiles['SessionEditPanel'] = __MODEL_APP_CONTROL__ . '/SessionEditPanel.class.php';
-//Display Panels
+//Select Panels
+MLCApplicationBase::$arrClassFiles['AssignmentSelectPanel'] = __MODEL_APP_CONTROL__ . '/AssignmentSelectPanel.class.php';
+MLCApplicationBase::$arrClassFiles['AtheleteSelectPanel'] = __MODEL_APP_CONTROL__ . '/AtheleteSelectPanel.class.php';
+MLCApplicationBase::$arrClassFiles['CompetitionSelectPanel'] = __MODEL_APP_CONTROL__ . '/CompetitionSelectPanel.class.php';
+MLCApplicationBase::$arrClassFiles['DeviceSelectPanel'] = __MODEL_APP_CONTROL__ . '/DeviceSelectPanel.class.php';
+MLCApplicationBase::$arrClassFiles['EnrollmentSelectPanel'] = __MODEL_APP_CONTROL__ . '/EnrollmentSelectPanel.class.php';
+MLCApplicationBase::$arrClassFiles['OrgSelectPanel'] = __MODEL_APP_CONTROL__ . '/OrgSelectPanel.class.php';
+MLCApplicationBase::$arrClassFiles['ParentMessageSelectPanel'] = __MODEL_APP_CONTROL__ . '/ParentMessageSelectPanel.class.php';
+MLCApplicationBase::$arrClassFiles['ResultSelectPanel'] = __MODEL_APP_CONTROL__ . '/ResultSelectPanel.class.php';
+MLCApplicationBase::$arrClassFiles['SessionSelectPanel'] = __MODEL_APP_CONTROL__ . '/SessionSelectPanel.class.php';
 //List Panels
 MLCApplicationBase::$arrClassFiles['AssignmentListPanel'] = __MODEL_APP_CONTROL__ . '/AssignmentListPanel.class.php';
 MLCApplicationBase::$arrClassFiles['AtheleteListPanel'] = __MODEL_APP_CONTROL__ . '/AtheleteListPanel.class.php';

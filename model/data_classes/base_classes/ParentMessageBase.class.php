@@ -17,6 +17,7 @@
 * - LoadSingleByField()
 * - LoadArrayByField()
 * - __toArray()
+* - __toString()
 * - __toJson()
 * - __get()
 * - __set()
@@ -229,6 +230,9 @@ class ParentMessageBase extends BaseEntity {
         $arrReturn['approveDate'] = $this->approveDate;
         $arrReturn['idStripeData'] = $this->idStripeData;
         return $arrReturn;
+    }
+    public function __toString() {
+        return 'ParentMessage(' . $this->getId() . ')';
     }
     public function __toJson($blnPosponeEncode = false) {
         $arrReturn = $this->__toArray();

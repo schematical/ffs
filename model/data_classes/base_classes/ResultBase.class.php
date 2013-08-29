@@ -17,6 +17,7 @@
 * - LoadSingleByField()
 * - LoadArrayByField()
 * - __toArray()
+* - __toString()
 * - __toJson()
 * - __get()
 * - __set()
@@ -205,6 +206,9 @@ class ResultBase extends BaseEntity {
         $arrReturn['event'] = $this->event;
         $arrReturn['dispDate'] = $this->dispDate;
         return $arrReturn;
+    }
+    public function __toString() {
+        return 'Result(' . $this->getId() . ')';
     }
     public function __toJson($blnPosponeEncode = false) {
         $arrReturn = $this->__toArray();

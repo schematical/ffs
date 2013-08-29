@@ -15,8 +15,11 @@ class EnrollmentManageForm extends EnrollmentManageFormBase {
     protected $blnInlineEdit = false;
     public function Form_Create() {
         parent::Form_Create();
+        $this->IntSelectPanel();
+
         $arrEnrollments = $this->Query();
         $this->InitList($arrEnrollments);
+
     }
     public function Query(){
         $arrAndConditions = array();

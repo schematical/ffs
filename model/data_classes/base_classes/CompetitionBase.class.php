@@ -17,6 +17,7 @@
 * - LoadSingleByField()
 * - LoadArrayByField()
 * - __toArray()
+* - __toString()
 * - __toJson()
 * - __get()
 * - __set()
@@ -196,6 +197,9 @@ class CompetitionBase extends BaseEntity {
         $arrReturn['idOrg'] = $this->idOrg;
         $arrReturn['namespace'] = $this->namespace;
         return $arrReturn;
+    }
+    public function __toString() {
+        return 'Competition(' . $this->getId() . ')';
     }
     public function __toJson($blnPosponeEncode = false) {
         $arrReturn = $this->__toArray();

@@ -45,12 +45,12 @@ class AssignmentListPanelBase extends MJaxTable {
     }
     public function SetupCols() {
         //$this->AddColumn('idAssignment','idAssignment');
-        $this->AddColumn('idDevice', 'idDevice', null, null, 'MJaxTextBox');
-        $this->AddColumn('idSession', 'idSession', null, null, 'MJaxTextBox');
-        $this->AddColumn('event', 'event', null, null, 'MJaxTextBox');
-        $this->AddColumn('apartatus', 'apartatus', null, null, 'MJaxTextBox');
-        $this->AddColumn('creDate', 'creDate', $this, 'RenderDate', 'MJaxBSDateTimePicker');
-        $this->AddColumn('revokeDate', 'revokeDate', $this, 'RenderDate', 'MJaxBSDateTimePicker');
+        $this->AddColumn('idDevice', ' Id Device', null, null, 'MJaxTextBox');
+        $this->AddColumn('idSession', ' Id Session', null, null, 'MJaxTextBox');
+        $this->AddColumn('event', ' Event', null, null, 'MJaxTextBox');
+        $this->AddColumn('apartatus', ' Apartatus', null, null, 'MJaxTextBox');
+        $this->AddColumn('creDate', ' Cre Date', $this, 'RenderDate', 'MJaxBSDateTimePicker');
+        $this->AddColumn('revokeDate', ' Revoke Date', $this, 'RenderDate', 'MJaxBSDateTimePicker');
     }
     /*
     Old stuff

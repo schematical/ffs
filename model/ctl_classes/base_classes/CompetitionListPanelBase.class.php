@@ -45,13 +45,13 @@ class CompetitionListPanelBase extends MJaxTable {
     }
     public function SetupCols() {
         //$this->AddColumn('idCompetition','idCompetition');
-        $this->AddColumn('name', 'name', null, null, 'MJaxTextBox');
-        $this->AddColumn('longDesc', 'longDesc', null, null, 'MJaxTextArea');
-        $this->AddColumn('creDate', 'creDate', $this, 'RenderDate', 'MJaxBSDateTimePicker');
-        $this->AddColumn('startDate', 'startDate', $this, 'RenderDate', 'MJaxBSDateTimePicker');
-        $this->AddColumn('endDate', 'endDate', $this, 'RenderDate', 'MJaxBSDateTimePicker');
-        $this->AddColumn('idOrg', 'idOrg', null, null, 'MJaxTextBox');
-        $this->AddColumn('namespace', 'namespace', null, null, 'MJaxTextBox');
+        $this->AddColumn('name', ' Name', null, null, 'MJaxTextBox');
+        $this->AddColumn('longDesc', ' Long Desc', null, null, 'MJaxTextArea');
+        $this->AddColumn('creDate', ' Cre Date', $this, 'RenderDate', 'MJaxBSDateTimePicker');
+        $this->AddColumn('startDate', ' Start Date', $this, 'RenderDate', 'MJaxBSDateTimePicker');
+        $this->AddColumn('endDate', ' End Date', $this, 'RenderDate', 'MJaxBSDateTimePicker');
+        $this->AddColumn('idOrg', ' Id Org', null, null, 'MJaxTextBox');
+        $this->AddColumn('namespace', ' Namespace', null, null, 'MJaxTextBox');
     }
     /*
     Old stuff

@@ -45,14 +45,14 @@ class AtheleteListPanelBase extends MJaxTable {
     }
     public function SetupCols() {
         //$this->AddColumn('idAthelete','idAthelete');
-        $this->AddColumn('idOrg', 'idOrg', null, null, 'MJaxTextBox');
-        $this->AddColumn('firstName', 'firstName', null, null, 'MJaxTextBox');
-        $this->AddColumn('lastName', 'lastName', null, null, 'MJaxTextBox');
-        $this->AddColumn('birthDate', 'birthDate', $this, 'RenderDate', 'MJaxBSDateTimePicker');
-        $this->AddColumn('memType', 'memType', null, null, 'MJaxTextBox');
-        $this->AddColumn('memId', 'memId', null, null, 'MJaxTextBox');
-        $this->AddColumn('creDate', 'creDate', $this, 'RenderDate', 'MJaxBSDateTimePicker');
-        $this->AddColumn('level', 'level', null, null, 'MJaxTextBox');
+        $this->AddColumn('idOrg', ' Id Org', null, null, 'MJaxTextBox');
+        $this->AddColumn('firstName', ' First Name', null, null, 'MJaxTextBox');
+        $this->AddColumn('lastName', ' Last Name', null, null, 'MJaxTextBox');
+        $this->AddColumn('birthDate', ' Birth Date', $this, 'RenderDate', 'MJaxBSDateTimePicker');
+        $this->AddColumn('memType', ' Mem Type', null, null, 'MJaxTextBox');
+        $this->AddColumn('memId', ' Mem Id', null, null, 'MJaxTextBox');
+        $this->AddColumn('creDate', ' Cre Date', $this, 'RenderDate', 'MJaxBSDateTimePicker');
+        $this->AddColumn('level', ' Level', null, null, 'MJaxTextBox');
     }
     /*
     Old stuff

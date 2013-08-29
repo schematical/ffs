@@ -17,6 +17,7 @@
 * - LoadSingleByField()
 * - LoadArrayByField()
 * - __toArray()
+* - __toString()
 * - __toJson()
 * - __get()
 * - __set()
@@ -201,6 +202,9 @@ class AssignmentBase extends BaseEntity {
         $arrReturn['idUser'] = $this->idUser;
         $arrReturn['revokeDate'] = $this->revokeDate;
         return $arrReturn;
+    }
+    public function __toString() {
+        return 'Assignment(' . $this->getId() . ')';
     }
     public function __toJson($blnPosponeEncode = false) {
         $arrReturn = $this->__toArray();

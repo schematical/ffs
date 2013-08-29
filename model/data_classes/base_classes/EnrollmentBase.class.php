@@ -18,6 +18,7 @@
 * - LoadSingleByField()
 * - LoadArrayByField()
 * - __toArray()
+* - __toString()
 * - __toJson()
 * - __get()
 * - __set()
@@ -237,6 +238,9 @@ class EnrollmentBase extends BaseEntity {
         $arrReturn['creDate'] = $this->creDate;
         $arrReturn['level'] = $this->level;
         return $arrReturn;
+    }
+    public function __toString() {
+        return 'Enrollment(' . $this->getId() . ')';
     }
     public function __toJson($blnPosponeEncode = false) {
         $arrReturn = $this->__toArray();

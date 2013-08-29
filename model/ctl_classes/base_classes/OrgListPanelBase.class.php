@@ -45,11 +45,11 @@ class OrgListPanelBase extends MJaxTable {
     }
     public function SetupCols() {
         //$this->AddColumn('idOrg','idOrg');
-        $this->AddColumn('namespace', 'namespace', null, null, 'MJaxTextBox');
-        $this->AddColumn('name', 'name', null, null, 'MJaxTextBox');
-        $this->AddColumn('creDate', 'creDate', $this, 'RenderDate', 'MJaxBSDateTimePicker');
-        $this->AddColumn('idImportAuthUser', 'idImportAuthUser', null, null, 'MJaxTextBox');
-        $this->AddColumn('clubNum', 'clubNum', null, null, 'MJaxTextBox');
+        $this->AddColumn('namespace', ' Namespace', null, null, 'MJaxTextBox');
+        $this->AddColumn('name', ' Name', null, null, 'MJaxTextBox');
+        $this->AddColumn('creDate', ' Cre Date', $this, 'RenderDate', 'MJaxBSDateTimePicker');
+        $this->AddColumn('idImportAuthUser', ' Id Import Auth User', null, null, 'MJaxTextBox');
+        $this->AddColumn('clubNum', ' Club Num', null, null, 'MJaxTextBox');
     }
     /*
     Old stuff

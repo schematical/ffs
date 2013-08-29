@@ -17,6 +17,7 @@
 * - LoadSingleByField()
 * - LoadArrayByField()
 * - __toArray()
+* - __toString()
 * - __toJson()
 * - __get()
 * - __set()
@@ -94,7 +95,6 @@ class AtheleteBase extends BaseEntity {
     }
     public static function Query($strExtra, $blnReturnSingle = false) {
         $sql = sprintf("SELECT * FROM %s %s;", self::TABLE_NAME, $strExtra);
-        error_log($sql);
         $result = MLCDBDriver::Query($sql, self::DB_CONN);
         $coll = new BaseEntityCollection();
         while ($data = mysql_fetch_assoc($result)) {
@@ -205,6 +205,9 @@ class AtheleteBase extends BaseEntity {
         $arrReturn['creDate'] = $this->creDate;
         $arrReturn['level'] = $this->level;
         return $arrReturn;
+    }
+    public function __toString() {
+        return 'Athelete(' . $this->getId() . ')';
     }
     public function __toJson($blnPosponeEncode = false) {
         $arrReturn = $this->__toArray();

@@ -45,17 +45,17 @@ class ParentMessageListPanelBase extends MJaxTable {
     }
     public function SetupCols() {
         //$this->AddColumn('idParentMessage','idParentMessage');
-        $this->AddColumn('idAthelete', 'idAthelete', null, null, 'MJaxTextBox');
-        $this->AddColumn('atheleteName', 'atheleteName', null, null, 'MJaxTextBox');
-        $this->AddColumn('message', 'message', null, null, 'MJaxTextArea');
-        $this->AddColumn('creDate', 'creDate', $this, 'RenderDate', 'MJaxBSDateTimePicker');
-        $this->AddColumn('dispDate', 'dispDate', $this, 'RenderDate', 'MJaxBSDateTimePicker');
-        $this->AddColumn('queDate', 'queDate', $this, 'RenderDate', 'MJaxBSDateTimePicker');
-        $this->AddColumn('inviteType', 'inviteType', null, null, 'MJaxTextBox');
-        $this->AddColumn('inviteToken', 'inviteToken', null, null, 'MJaxTextBox');
-        $this->AddColumn('inviteViewDate', 'inviteViewDate', $this, 'RenderDate', 'MJaxBSDateTimePicker');
-        $this->AddColumn('idCompetition', 'idCompetition', null, null, 'MJaxTextBox');
-        $this->AddColumn('approveDate', 'approveDate', $this, 'RenderDate', 'MJaxBSDateTimePicker');
+        $this->AddColumn('idAthelete', ' Id Athelete', null, null, 'MJaxTextBox');
+        $this->AddColumn('atheleteName', ' Athelete Name', null, null, 'MJaxTextBox');
+        $this->AddColumn('message', ' Message', null, null, 'MJaxTextArea');
+        $this->AddColumn('creDate', ' Cre Date', $this, 'RenderDate', 'MJaxBSDateTimePicker');
+        $this->AddColumn('dispDate', ' Disp Date', $this, 'RenderDate', 'MJaxBSDateTimePicker');
+        $this->AddColumn('queDate', ' Que Date', $this, 'RenderDate', 'MJaxBSDateTimePicker');
+        $this->AddColumn('inviteType', ' Invite Type', null, null, 'MJaxTextBox');
+        $this->AddColumn('inviteToken', ' Invite Token', null, null, 'MJaxTextBox');
+        $this->AddColumn('inviteViewDate', ' Invite View Date', $this, 'RenderDate', 'MJaxBSDateTimePicker');
+        $this->AddColumn('idCompetition', ' Id Competition', null, null, 'MJaxTextBox');
+        $this->AddColumn('approveDate', ' Approve Date', $this, 'RenderDate', 'MJaxBSDateTimePicker');
     }
     /*
     Old stuff

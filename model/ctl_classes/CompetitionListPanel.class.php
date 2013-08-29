@@ -4,7 +4,7 @@ class CompetitionListPanel extends CompetitionListPanelBase {
 
     public function __construct($objParentControl, $arrCompetitions = array()){
 
-		parent::__construct($objParentControl, $arrCompetitions = array());
+		parent::__construct($objParentControl, $arrCompetitions);
         $this->AddCssClass('table table-striped table-bordered');
 
 	}

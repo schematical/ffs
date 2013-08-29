@@ -17,6 +17,7 @@
 * - LoadSingleByField()
 * - LoadArrayByField()
 * - __toArray()
+* - __toString()
 * - __toJson()
 * - __get()
 * - __set()
@@ -188,6 +189,9 @@ class DeviceBase extends BaseEntity {
         $arrReturn['inviteEmail'] = $this->inviteEmail;
         $arrReturn['idOrg'] = $this->idOrg;
         return $arrReturn;
+    }
+    public function __toString() {
+        return 'Device(' . $this->getId() . ')';
     }
     public function __toJson($blnPosponeEncode = false) {
         $arrReturn = $this->__toArray();

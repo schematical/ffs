@@ -14,7 +14,7 @@ abstract class FFSSection{
     const ORG = 'org';
     const COACH = 'coach';
 }
-abstract class FFSQS{
+abstract class FFSQS extends FFSQSBase{
     const IdAthelete = 'a';
     const IdParentMessage = 'pm';
     const IdResult = 'r';

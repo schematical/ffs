@@ -45,14 +45,14 @@ class ResultListPanelBase extends MJaxTable {
     }
     public function SetupCols() {
         //$this->AddColumn('idResult','idResult');
-        $this->AddColumn('idSession', 'idSession', null, null, 'MJaxTextBox');
-        $this->AddColumn('idAthelete', 'idAthelete', null, null, 'MJaxTextBox');
-        $this->AddColumn('score', 'score', null, null, 'MJaxTextBox');
-        $this->AddColumn('judge', 'judge', null, null, 'MJaxTextBox');
-        $this->AddColumn('flag', 'flag', null, null, 'MJaxTextBox');
-        $this->AddColumn('creDate', 'creDate', $this, 'RenderDate', 'MJaxBSDateTimePicker');
-        $this->AddColumn('event', 'event', null, null, 'MJaxTextBox');
-        $this->AddColumn('dispDate', 'dispDate', $this, 'RenderDate', 'MJaxBSDateTimePicker');
+        $this->AddColumn('idSession', ' Id Session', null, null, 'MJaxTextBox');
+        $this->AddColumn('idAthelete', ' Id Athelete', null, null, 'MJaxTextBox');
+        $this->AddColumn('score', ' Score', null, null, 'MJaxTextBox');
+        $this->AddColumn('judge', ' Judge', null, null, 'MJaxTextBox');
+        $this->AddColumn('flag', ' Flag', null, null, 'MJaxTextBox');
+        $this->AddColumn('creDate', ' Cre Date', $this, 'RenderDate', 'MJaxBSDateTimePicker');
+        $this->AddColumn('event', ' Event', null, null, 'MJaxTextBox');
+        $this->AddColumn('dispDate', ' Disp Date', $this, 'RenderDate', 'MJaxBSDateTimePicker');
     }
     /*
     Old stuff

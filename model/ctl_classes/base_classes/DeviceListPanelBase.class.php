@@ -45,11 +45,11 @@ class DeviceListPanelBase extends MJaxTable {
     }
     public function SetupCols() {
         //$this->AddColumn('idDevice','idDevice');
-        $this->AddColumn('name', 'name', null, null, 'MJaxTextBox');
-        $this->AddColumn('token', 'token', null, null, 'MJaxTextBox');
-        $this->AddColumn('creDate', 'creDate', $this, 'RenderDate', 'MJaxBSDateTimePicker');
-        $this->AddColumn('inviteEmail', 'inviteEmail', null, null, 'MJaxTextBox');
-        $this->AddColumn('idOrg', 'idOrg', null, null, 'MJaxTextBox');
+        $this->AddColumn('name', ' Name', null, null, 'MJaxTextBox');
+        $this->AddColumn('token', ' Token', null, null, 'MJaxTextBox');
+        $this->AddColumn('creDate', ' Cre Date', $this, 'RenderDate', 'MJaxBSDateTimePicker');
+        $this->AddColumn('inviteEmail', ' Invite Email', null, null, 'MJaxTextBox');
+        $this->AddColumn('idOrg', ' Id Org', null, null, 'MJaxTextBox');
     }
     /*
     Old stuff

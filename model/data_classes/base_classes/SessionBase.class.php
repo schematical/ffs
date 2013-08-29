@@ -17,6 +17,7 @@
 * - LoadSingleByField()
 * - LoadArrayByField()
 * - __toArray()
+* - __toString()
 * - __toJson()
 * - __get()
 * - __set()
@@ -200,6 +201,9 @@ class SessionBase extends BaseEntity {
         $arrReturn['equipmentSet'] = $this->equipmentSet;
         $arrReturn['eventData'] = $this->eventData;
         return $arrReturn;
+    }
+    public function __toString() {
+        return 'Session(' . $this->getId() . ')';
     }
     public function __toJson($blnPosponeEncode = false) {
         $arrReturn = $this->__toArray();

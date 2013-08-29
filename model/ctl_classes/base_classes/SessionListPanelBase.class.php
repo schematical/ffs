@@ -45,12 +45,12 @@ class SessionListPanelBase extends MJaxTable {
     }
     public function SetupCols() {
         //$this->AddColumn('idSession','idSession');
-        $this->AddColumn('startDate', 'startDate', $this, 'RenderDate', 'MJaxBSDateTimePicker');
-        $this->AddColumn('endDate', 'endDate', $this, 'RenderDate', 'MJaxBSDateTimePicker');
-        $this->AddColumn('idCompetition', 'idCompetition', null, null, 'MJaxTextBox');
-        $this->AddColumn('name', 'name', null, null, 'MJaxTextBox');
-        $this->AddColumn('notes', 'notes', null, null, 'MJaxTextArea');
-        $this->AddColumn('equipmentSet', 'equipmentSet', null, null, 'MJaxTextBox');
+        $this->AddColumn('startDate', ' Start Date', $this, 'RenderDate', 'MJaxBSDateTimePicker');
+        $this->AddColumn('endDate', ' End Date', $this, 'RenderDate', 'MJaxBSDateTimePicker');
+        $this->AddColumn('idCompetition', ' Id Competition', null, null, 'MJaxTextBox');
+        $this->AddColumn('name', ' Name', null, null, 'MJaxTextBox');
+        $this->AddColumn('notes', ' Notes', null, null, 'MJaxTextArea');
+        $this->AddColumn('equipmentSet', ' Equipment Set', null, null, 'MJaxTextBox');
     }
     /*
     Old stuff
