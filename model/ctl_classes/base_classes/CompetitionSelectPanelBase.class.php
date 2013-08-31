@@ -3,7 +3,6 @@
 * Class and Function List:
 * Function list:
 * - __construct()
-* - ConnectTable()
 * - txtSearch_change()
 * - GetExtQuery()
 * - GetValue()
@@ -11,14 +10,9 @@
 * - CompetitionSelectPanelBase extends MJaxPanel
 */
 class CompetitionSelectPanelBase extends MJaxPanel {
-    /*
-     * NOTES: Consider adding advanced options
-     * --- Search by birthdate between X
-     * --- Level
-     * --- Etc
-    */
+    protected $arrSelectedCompetitions = array();
     public $txtSearch = null;
-    public $tblCompetitions = null;
+    //public $tblCompetitions = null;
     public $intIdCompetition = null;
     public $strName = null;
     public $strLongDesc = null;
@@ -36,11 +30,11 @@ class CompetitionSelectPanelBase extends MJaxPanel {
         $this->txtSearch->AddCssClass('input-large');
         $this->txtSearch->AddAction(new MJaxChangeEvent() , new MJaxServerControlAction($this, 'txtSearch_change'));
         $this->intIdCompetition = new MJaxTextBox($this);
-        $this->intIdCompetition->Attr('placeholder', "idCompetition");
+        $this->intIdCompetition->Attr('placeholder', " Competition");
         $this->strName = new MJaxTextBox($this);
-        $this->strName->Attr('placeholder', "name");
+        $this->strName->Attr('placeholder', " Name");
         $this->strLongDesc = new MJaxTextBox($this);
-        $this->strLongDesc->Attr('placeholder', "longDesc");
+        $this->strLongDesc->Attr('placeholder', " Long Desc");
         $this->txtStartDate_StartDate = new MJaxBSDateTimePicker($this);
         $this->txtStartDate_StartDate->DateOnly();
         $this->txtStartDate_EndDate = new MJaxBSDateTimePicker($this);
@@ -50,22 +44,30 @@ class CompetitionSelectPanelBase extends MJaxPanel {
         $this->txtEndDate_EndDate = new MJaxBSDateTimePicker($this);
         $this->txtEndDate_EndDate->DateOnly();
         $this->intIdOrg = new MJaxTextBox($this);
-        $this->intIdOrg->Attr('placeholder', "idOrg");
+        $this->intIdOrg->Attr('placeholder', " Org");
         $this->strNamespace = new MJaxTextBox($this);
-        $this->strNamespace->Attr('placeholder', "namespace");
-    }
-    public function ConnectTable($tblCompetitions) {
-        $this->tblCompetitions = $tblCompetitions;
-        //$this->tblCompetitions = new CompetitionListPanel($this);
-        $this->tblCompetitions->AddColumn('selected', '');
+        $this->strNamespace->Attr('placeholder', " Namespace");
     }
     public function txtSearch_change() {
         $objEntity = null;
         $arrParts = explode('_', $this->txtSearch->Value);
-        if (class_exists($arrParts[0])) {
-            $objEntity = call_user_func($arrParts[0] . '::LoadById', $arrParts[1]);
+        if (count($arrParts) < 2) {
+            //IDK
+            $this->arrSelectedCompetitions = array();
+            return;
+        }
+        try {
+            if (class_exists($arrParts[0])) {
+                $objEntity = call_user_func($arrParts[0] . '::LoadById', $arrParts[1]);
+            }
+        }
+        catch(Exception $e) {
+            error_log($e->getMessage());
         }
         $arrCompetitions = array();
+        if (is_null($objEntity)) {
+            return $arrCompetitions;
+        }
         switch (get_class($objEntity)) {
             case ('Competition'):
                 $arrCompetitions = array(
@@ -81,15 +83,8 @@ class CompetitionSelectPanelBase extends MJaxPanel {
                 array();
                 throw new Exception("Invalid entity type: " . get_class($objEntity));
         }
-        if (!is_null($this->tblCompetitions)) {
-            $this->tblCompetitions->RemoveAllChildControls();
-            $this->tblCompetitions->SetDataEntites($arrCompetitions);
-            foreach ($this->tblCompetitions->Rows as $intIndex => $objRow) {
-                $chkSelected = new MJaxCheckBox($this);
-                $chkSelected->Checked = true;
-                $objRow->AddData($chkSelected, 'selected');
-            }
-        }
+        $this->arrSelectedCompetitions = $arrCompetitions;
+        $this->TriggerEvent('mjax-bs-autocomplete-select');
     }
     public function GetExtQuery() {
         $arrAndConditions = array();
@@ -123,75 +118,6 @@ class CompetitionSelectPanelBase extends MJaxPanel {
         return $arrAndConditions;
     }
     public function GetValue() {
-        $arrCompetitions = array();
-        foreach ($this->tblCompetitions->Rows as $intIndex => $objRow) {
-            $chkSelected = $objRow->GetData('selected');
-            if ($chkSelected->Checked) {
-                $arrCompetitions[] = $objRow->GetData('_entity');
-            }
-        }
-        return $arrCompetitions;
+        return $this->arrSelectedCompetitions;
     }
-    /*
-    public function txtSearch_search($objRoute){
-        $strSearch = $_POST['search'];
-        $arrData = array();
-        $this->SearchOrg($strSearch, $arrData);
-        $this->SearchCompetitions($strSearch, $arrData);
-        die(
-            json_encode(
-                $arrData
-            )
-        );
-    }
-    public function SearchCompetitions($strSearch, &$arrData){
-        $arrAndConditions = $this->GetExtQuery();
-        if(is_numeric($strSearch)){
-            $arrAndConditions[] =  sprintf(
-                '(Competition.idCompetition)',
-                strtolower($strSearch)
-            );
-        }else{
-            $arrAndConditions[] = sprintf(
-                '(name LIKE "%s%%" or namespace LIKE "%s%%")',
-                strtolower($strSearch),
-                strtolower($strSearch)
-            );
-        }
-        $strQuery = ' WHERE ' . implode( ' AND ', $arrAndConditions);
-        $arrCompetitions = Competition::Query(
-            $strQuery
-        );
-        foreach($arrCompetitions as $strKey => $objCompetition){
-            //_dv($objCompetition-> getAllFields());
-            $arrData[] = array(
-                'value'=>'Competition_' . $objCompetition->GetId(),
-                'text'=>$objCompetition->__toString()
-            );
-        }
-        return $arrData;
-    }
-    public function SearchOrg($strSearch, &$arrData){
-        $arrAndConditions = array();
-        $strJoin = '';
-        if(is_numeric($strSearch)){
-        }else{
-            $arrAndConditions[] = sprintf(
-                '(name LIKE "%s%%") GROUP BY clubNum',
-                strtolower($strSearch)
-            );
-        }
-        $strQuery = $strJoin . ' WHERE ' . implode( ' AND ', $arrAndConditions);
-        $arrOrg = Org::Query(
-            $strQuery
-        );
-        foreach($arrOrg as $strKey => $objOrg){
-            $arrData[] = array(
-                'value'=>'Org_' . $objOrg->GetId(),
-                'text'=>'Gym:' . $objOrg->Name
-            );
-        }
-        return $arrData;
-    }
-    */
 }

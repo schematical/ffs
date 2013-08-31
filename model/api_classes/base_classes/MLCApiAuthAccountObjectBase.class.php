@@ -1,23 +1,21 @@
 <?php
-class MLCApiAuthAccountObjectBase extends MLCApiObjectBase{
-   
+/**
+* Class and Function List:
+* Function list:
+* - __call()
+* Classes list:
+* - MLCApiAuthAccountObjectBase extends MLCApiObjectBase
+*/
+class MLCApiAuthAccountObjectBase extends MLCApiObjectBase {
     protected $strClassName = 'AuthAccount';
-	public function  __call($strName, $arrArguments) {
-    		switch($strName){
-				
-				
-		     	case('mlclocations'):
-		       		$arrMLCLocations = MLCLocation::LoadCollByIdAccount($this->GetEntity()->idAccount)->GetCollection();
-		       		return new MLCApiResponse($arrMLCLocations);
-		    	break;
-				
-				default:
-					return parent::__call($strName, $arrArguments);
-				
-    		}
-	}
-    
-   
-   
-   	
+    public function __call($strName, $arrArguments) {
+        switch ($strName) {
+            case ('mlclocations'):
+                $arrMLCLocations = MLCLocation::LoadCollByIdAccount($this->GetEntity()->idAccount)->GetCollection();
+                return new MLCApiResponse($arrMLCLocations);
+            break;
+            default:
+                return parent::__call($strName, $arrArguments);
+        }
+    }
 }

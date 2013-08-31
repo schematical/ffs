@@ -9,6 +9,7 @@
 * - CreateReferenceControls()
 * - btnSave_click()
 * - btnDelete_click()
+* - btnDelete_confirm()
 * - IsNew()
 * Classes list:
 * - CompetitionEditPanelBase extends MJaxPanel
@@ -24,6 +25,8 @@ class CompetitionEditPanelBase extends MJaxPanel {
     public $intIdOrg = null;
     public $strNamespace = null;
     public $lnkViewParentIdOrg = null;
+    public $lnkViewChildEnrollment = null;
+    public $lnkViewChildParentMessage = null;
     public $lnkViewChildSession = null;
     //Regular controls
     public $btnSave = null;
@@ -104,6 +107,14 @@ class CompetitionEditPanelBase extends MJaxPanel {
                 $this->lnkViewParentIdOrg->Href = __ENTITY_MODEL_DIR__ . '/Org/' . $this->objCompetition->idOrg;
             }
         }
+        $this->lnkViewChildEnrollment = new MJaxLinkButton($this);
+        $this->lnkViewChildEnrollment->Text = 'View Enrollments';
+        //I should really fix this
+        //$this->lnkViewChildEnrollment->Href = __ENTITY_MODEL_DIR__ . '/Competition/' . $this->objCompetition->idCompetition . '/Enrollments';
+        $this->lnkViewChildParentMessage = new MJaxLinkButton($this);
+        $this->lnkViewChildParentMessage->Text = 'View ParentMessages';
+        //I should really fix this
+        //$this->lnkViewChildParentMessage->Href = __ENTITY_MODEL_DIR__ . '/Competition/' . $this->objCompetition->idCompetition . '/ParentMessages';
         $this->lnkViewChildSession = new MJaxLinkButton($this);
         $this->lnkViewChildSession->Text = 'View Sessions';
         //I should really fix this
@@ -130,6 +141,9 @@ class CompetitionEditPanelBase extends MJaxPanel {
         $this->objForm->TriggerControlEvent($this->strControlId, 'mjax-data-entity-save');
     }
     public function btnDelete_click() {
+        $this->Confirm('Are you sure you want to delete this?', 'btnDelete_confirm');
+    }
+    public function btnDelete_confirm() {
         $this->objCompetition->MarkDeleted();
         $this->SetCompetition(null);
         //Experimental delete event trigger

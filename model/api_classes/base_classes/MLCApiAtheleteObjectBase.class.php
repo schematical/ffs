@@ -15,6 +15,14 @@ class MLCApiAtheleteObjectBase extends MLCApiObjectBase {
                 $objOrg = $this->GetEntity()->IdOrg;
                 return new MLCApiOrgObject($objIdOrg);
             break;
+            case ('enrollments'):
+                $arrEnrollments = Enrollment::LoadCollByIdAthelete($this->GetEntity()->idAthelete)->GetCollection();
+                return new MLCApiResponse($arrEnrollments);
+            break;
+            case ('parentmessages'):
+                $arrParentMessages = ParentMessage::LoadCollByIdAthelete($this->GetEntity()->idAthelete)->GetCollection();
+                return new MLCApiResponse($arrParentMessages);
+            break;
             case ('results'):
                 $arrResults = Result::LoadCollByIdAthelete($this->GetEntity()->idAthelete)->GetCollection();
                 return new MLCApiResponse($arrResults);

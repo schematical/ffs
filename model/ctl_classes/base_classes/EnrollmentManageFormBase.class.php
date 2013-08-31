@@ -5,13 +5,11 @@
 * - Form_Create()
 * - Query()
 * - InitSelectPanel()
+* - pnlSelect_change()
 * - InitEditPanel()
 * - pnlEdit_save()
 * - pnlEdit_delete()
 * - InitList()
-* - lnkViewAthelete_click()
-* - lnkViewCompetition_click()
-* - lnkViewSession_click()
 * - lstEnrollment_editInit()
 * - lstEnrollment_editSave()
 * - lnkEdit_click()
@@ -90,13 +88,29 @@ class EnrollmentManageFormBase extends FFSForm {
     }
     public function InitSelectPanel() {
         $this->pnlSelect = new EnrollmentSelectPanel($this);
-        /*$this->pnlEdit->AddAction(
-                new MJaxDataEntitySaveEvent(),
-                new MJaxServerControlAction($this, 'pnlEdit_save')
-            );*/
+        $this->pnlSelect->AddAction(new MJaxBSAutocompleteSelectEvent() , new MJaxServerControlAction($this, 'pnlSelect_change'));
         $wgtEnrollment = $this->AddWidget('Select Enrollment', 'icon-select', $this->pnlSelect);
         $wgtEnrollment->AddCssClass('span6');
         return $wgtEnrollment;
+    }
+    public function pnlSelect_change($strFormId, $strControlId, $mixActionParameter) {
+        $arrEnrollments = $this->pnlSelect->GetValue();
+        if (count($arrEnrollments) == 1) {
+            $this->pnlEdit->SetEnrollment($arrEnrollments[0]);
+            foreach ($this->lstEnrollments as $objRow) {
+                if ($objRow->ActionParameter == $arrEnrollments[0]->IdEnrollment) {
+                    $this->lstEnrollments->SelectedRow = $objRow;
+                }
+            }
+            //$this->ScrollTo($this->pnlEdit);
+            
+        } //else{
+        $this->ScrollTo($this->lstEnrollments);
+        //}
+        $this->lstEnrollments->RemoveAllChildControls();
+        $this->lstEnrollments->SetDataEntites($arrEnrollments);
+        //TODO: Remeber to add check lists for assoc or relationship tables
+        
     }
     public function InitEditPanel($objEnrollment = null) {
         $this->pnlEdit = new EnrollmentEditPanel($this, $objEnrollment);
@@ -106,10 +120,17 @@ class EnrollmentManageFormBase extends FFSForm {
         $wgtEnrollment->AddCssClass('span6');
         return $wgtEnrollment;
     }
-    //Fake event holders for now
     public function pnlEdit_save($strFormId, $strControlId, $objEnrollment) {
+        $this->UpdateTable($objEnrollment);
+        if (!is_null($this->lstEnrollments->SelectedRow)) {
+            $this->ScrollTo($this->lstEnrollments->SelectedRow);
+        } else {
+            $this->pnlEdit->Alert('Saved!', 'info');
+        }
     }
     public function pnlEdit_delete($strFormId, $strControlId, $objEnrollment) {
+        $this->lstEnrollments->SelectedRow->Remove();
+        $this->lstEnrollments->SelectedRow = null;
     }
     public function InitList($arrEnrollments) {
         $this->lstEnrollments = new EnrollmentListPanel($this, $arrEnrollments);
@@ -123,32 +144,9 @@ class EnrollmentManageFormBase extends FFSForm {
             $this->lstEnrollments->InitRowControl('edit', 'Edit', $this, 'lnkEdit_click');
         }
         //
-        $this->lstEnrollments->InitRowControl('idAthelete', 'View Athelete', $this, 'lnkViewAthelete_click');
-        $this->lstEnrollments->InitRowControl('idCompetition', 'View Competition', $this, 'lnkViewCompetition_click');
-        $this->lstEnrollments->InitRowControl('idSession', 'View Session', $this, 'lnkViewSession_click');
         $wgtEnrollment = $this->AddWidget('Enrollments', 'icon-ul', $this->lstEnrollments);
-        if (!is_null($this->pnlSelect)) {
-            $this->pnlSelect->ConnectTable($this->lstEnrollments);
-        }
+        $wgtEnrollment->AddCssClass('span12');
         return $wgtEnrollment;
-    }
-    public function lnkViewAthelete_click($strFormId, $strControlId, $strActionParameter) {
-        $intIdAthelete = $this->arrControls[$strControlId]->ParentControl->GetData('_entity')->IdAthelete;
-        $this->Redirect('/data/editAthelete', array(
-            FFSQS::Athelete_IdAthelete => $intIdAthelete
-        ));
-    }
-    public function lnkViewCompetition_click($strFormId, $strControlId, $strActionParameter) {
-        $intIdCompetition = $this->arrControls[$strControlId]->ParentControl->GetData('_entity')->IdCompetition;
-        $this->Redirect('/data/editCompetition', array(
-            FFSQS::Competition_IdCompetition => $intIdCompetition
-        ));
-    }
-    public function lnkViewSession_click($strFormId, $strControlId, $strActionParameter) {
-        $intIdSession = $this->arrControls[$strControlId]->ParentControl->GetData('_entity')->IdSession;
-        $this->Redirect('/data/editSession', array(
-            FFSQS::Session_IdSession => $intIdSession
-        ));
     }
     public function lstEnrollment_editInit() {
         //_dv($this->lstEnrollments->SelectedRow);
@@ -172,7 +170,6 @@ class EnrollmentManageFormBase extends FFSForm {
         if (!is_null($this->lstEnrollments->SelectedRow)) {
             //This already exists
             $this->lstEnrollments->SelectedRow->UpdateEntity($objEnrollment);
-            $this->ScrollTo($this->lstEnrollments->SelectedRow);
             $this->lstEnrollments->SelectedRow = null;
         } else {
             $objRow = $this->lstEnrollments->AddRow($objEnrollment);

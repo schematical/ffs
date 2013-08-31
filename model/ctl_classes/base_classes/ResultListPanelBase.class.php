@@ -8,8 +8,8 @@
 * - RenderDate()
 * - RenderTime()
 * - SetupCols()
-* - InitRowClickEntityRelAction()
-* - objRow_click()
+* - render_idSession()
+* - render_idAthelete()
 * Classes list:
 * - ResultListPanelBase extends MJaxTable
 */
@@ -45,25 +45,39 @@ class ResultListPanelBase extends MJaxTable {
     }
     public function SetupCols() {
         //$this->AddColumn('idResult','idResult');
-        $this->AddColumn('idSession', ' Id Session', null, null, 'MJaxTextBox');
-        $this->AddColumn('idAthelete', ' Id Athelete', null, null, 'MJaxTextBox');
+        $this->AddColumn('idSession', ' Session', $this, 'render_idSession', 'MJaxTextBox');
+        $this->AddColumn('idAthelete', ' Athelete', $this, 'render_idAthelete', 'MJaxTextBox');
         $this->AddColumn('score', ' Score', null, null, 'MJaxTextBox');
         $this->AddColumn('judge', ' Judge', null, null, 'MJaxTextBox');
         $this->AddColumn('flag', ' Flag', null, null, 'MJaxTextBox');
-        $this->AddColumn('creDate', ' Cre Date', $this, 'RenderDate', 'MJaxBSDateTimePicker');
         $this->AddColumn('event', ' Event', null, null, 'MJaxTextBox');
         $this->AddColumn('dispDate', ' Disp Date', $this, 'RenderDate', 'MJaxBSDateTimePicker');
     }
-    /*
-    Old stuff
-    */
-    public function InitRowClickEntityRelAction() {
-        foreach ($this->Rows as $intIndex => $objRow) {
-            $objRow->AddAction($this, 'objRow_click');
+    public function render_idSession($intIdIdSession, $objRow, $objColumn) {
+        if (is_null($intIdIdSession)) {
+            return '';
         }
+        $objSession = Session::LoadById($intIdIdSession);
+        if (is_null($objSession)) {
+            return 'error';
+        }
+        $lnkView = new MJaxLinkButton($this);
+        $lnkView->Text = $objSession->__toString();
+        $lnkView->Href = '/data/editSession?' . FFSQS::Session_IdSession . '=' . $objSession->IdSession;
+        return $lnkView->Render(false);
     }
-    public function objRow_click($strFomrId, $strControlId, $strActionParameter) {
-        $this->objForm->Redirect(__ENTITY_MODEL_DIR__ . '/Result/' . $strActionParameter);
+    public function render_idAthelete($intIdIdAthelete, $objRow, $objColumn) {
+        if (is_null($intIdIdAthelete)) {
+            return '';
+        }
+        $objAthelete = Athelete::LoadById($intIdIdAthelete);
+        if (is_null($objAthelete)) {
+            return 'error';
+        }
+        $lnkView = new MJaxLinkButton($this);
+        $lnkView->Text = $objAthelete->__toString();
+        $lnkView->Href = '/data/editAthelete?' . FFSQS::Athelete_IdAthelete . '=' . $objAthelete->IdAthelete;
+        return $lnkView->Render(false);
     }
 }
 ?>

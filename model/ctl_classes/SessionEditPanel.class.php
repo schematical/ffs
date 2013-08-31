@@ -84,6 +84,7 @@ class SessionEditPanel extends SessionEditPanelBase
         parent::SetSession($objSession);
         if (
             (!is_null($this->intIdCompetition)) &&
+            (!is_null($this->objSession)) &&
             (!is_null($this->objSession->idCompetition))
         ) {
 
@@ -99,12 +100,14 @@ class SessionEditPanel extends SessionEditPanelBase
 
         if (
             (!is_null($this->strName)) &&
+            (!is_null($this->objSession)) &&
             (!is_null($this->objSession->name))
         ) {
             $this->strName->SetValue($this->strName->Text);
         }
         if (
             (!is_null($this->strEquipmentSet)) &&
+            (!is_null($this->objSession)) &&
             (!is_null($this->objSession->equipmentSet))
         ) {
             $this->strEquipmentSet->SetValue($this->strEquipmentSet->Text);

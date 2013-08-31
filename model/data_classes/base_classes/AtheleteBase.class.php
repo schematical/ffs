@@ -8,6 +8,8 @@
 * - ToXml()
 * - Query()
 * - QueryCount()
+* - GetEnrollmentArr()
+* - GetParentMessageArr()
 * - GetResultArr()
 * - LoadCollByIdOrg()
 * - LoadByTag()
@@ -119,6 +121,12 @@ class AtheleteBase extends BaseEntity {
         return mysql_num_rows($result);
     }
     //Get children
+    public function GetEnrollmentArr() {
+        return Enrollment::LoadCollByIdAthelete($this->idAthelete);
+    }
+    public function GetParentMessageArr() {
+        return ParentMessage::LoadCollByIdAthelete($this->idAthelete);
+    }
     public function GetResultArr() {
         return Result::LoadCollByIdAthelete($this->idAthelete);
     }
@@ -143,6 +151,12 @@ class AtheleteBase extends BaseEntity {
     public function ParseArray($arrData) {
         foreach ($arrData as $strKey => $mixVal) {
             $arrData[strtolower($strKey) ] = $mixVal;
+        }
+        if (array_key_exists('idathelete', $arrData)) {
+            $this->intIdAthelete = $arrData['idathelete'];
+        }
+        if (array_key_exists('idathelete', $arrData)) {
+            $this->intIdAthelete = $arrData['idathelete'];
         }
         if (array_key_exists('idathelete', $arrData)) {
             $this->intIdAthelete = $arrData['idathelete'];

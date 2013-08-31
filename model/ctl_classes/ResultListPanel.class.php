@@ -1,15 +1,19 @@
 <?php
-require_once(__MODEL_APP_CONTROL__ . "/base_classes/ResultListPanelBase.class.php");
+/**
+* Class and Function List:
+* Function list:
+* - __construct()
+* Classes list:
+* - ResultListPanel extends ResultListPanelBase
+*/
+require_once (__MODEL_APP_CONTROL__ . "/base_classes/ResultListPanelBase.class.php");
 class ResultListPanel extends ResultListPanelBase {
-
-    public function __construct($objParentControl, $arrResults = array()){
-
-		parent::__construct($objParentControl, $arrResults = array());
-        $this->AddCssClass('table table-striped table-bordered');
-
-	}
-	/*
-	public function SetupCols(){
+    public function __construct($objParentControl, $arrResults = array()) {
+        parent::__construct($objParentControl, $arrResults);
+        $this->AddCssClass('table table-striped table-bordered table-condensed');
+    }
+    /*
+    public function SetupCols(){
         
             
             $this->AddColumn('idResult','idResult');
@@ -46,11 +50,17 @@ class ResultListPanel extends ResultListPanelBase {
             $this->AddColumn('creDate','creDate');
             
         
+            
+            
+            $this->AddColumn('event','event');
+            
+        
+            
+            
+            $this->AddColumn('dispDate','dispDate');
+            
+        
     }
     */
-
-
 }
-
-
 ?>

@@ -1,28 +1,30 @@
 <?php
-class MLCApiAuthSessionBase extends MLCApiClassBase{
-	protected $strClassName = 'AuthSession';
-	
-	public function  __call($strName, $arrArguments) {
-       
-		$arrReturn = array();
-		if(is_numeric($strName){
+/**
+* Class and Function List:
+* Function list:
+* - __call()
+* - Query()
+* Classes list:
+* - MLCApiAuthSessionBase extends MLCApiClassBase
+*/
+class MLCApiAuthSessionBase extends MLCApiClassBase {
+    protected $strClassName = 'AuthSession';
+    public function __call($strName, $arrArguments) {
+        $arrReturn = array();
+        if (is_numeric($strName) {
             $objAuthSession = AuthSession::LoadById($strName);
-        }else{
+        } else {
             $objAuthSession = null;
         }
-
-      
-        if(!is_null($objAuthSession)){
-        	return new MLCApiAuthSessionObject($objAuthSession);
-        }else{
+        if (!is_null($objAuthSession)) {
+            return new MLCApiAuthSessionObject($objAuthSession);
+        } else {
             throw new MLCApiException("No AuthSession found with the data you submitted");
         }
+    }
+    public function Query() {
+        //Will need to accept QS Pramaeters of facebook, twitter, google
         
-     }
-
-    	
-	public function Query(){
-	 	//Will need to accept QS Pramaeters of facebook, twitter, google
-	}
+    }
 }
 ?>

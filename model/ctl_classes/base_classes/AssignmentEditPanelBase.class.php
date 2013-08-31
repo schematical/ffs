@@ -9,6 +9,7 @@
 * - CreateReferenceControls()
 * - btnSave_click()
 * - btnDelete_click()
+* - btnDelete_confirm()
 * - IsNew()
 * Classes list:
 * - AssignmentEditPanelBase extends MJaxPanel
@@ -121,6 +122,9 @@ class AssignmentEditPanelBase extends MJaxPanel {
         $this->objForm->TriggerControlEvent($this->strControlId, 'mjax-data-entity-save');
     }
     public function btnDelete_click() {
+        $this->Confirm('Are you sure you want to delete this?', 'btnDelete_confirm');
+    }
+    public function btnDelete_confirm() {
         $this->objAssignment->MarkDeleted();
         $this->SetAssignment(null);
         //Experimental delete event trigger

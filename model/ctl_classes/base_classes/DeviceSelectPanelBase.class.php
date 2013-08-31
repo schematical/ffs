@@ -3,7 +3,6 @@
 * Class and Function List:
 * Function list:
 * - __construct()
-* - ConnectTable()
 * - txtSearch_change()
 * - GetExtQuery()
 * - GetValue()
@@ -11,14 +10,9 @@
 * - DeviceSelectPanelBase extends MJaxPanel
 */
 class DeviceSelectPanelBase extends MJaxPanel {
-    /*
-     * NOTES: Consider adding advanced options
-     * --- Search by birthdate between X
-     * --- Level
-     * --- Etc
-    */
+    protected $arrSelectedDevices = array();
     public $txtSearch = null;
-    public $tblDevices = null;
+    //public $tblDevices = null;
     public $intIdDevice = null;
     public $strName = null;
     public $strToken = null;
@@ -32,28 +26,36 @@ class DeviceSelectPanelBase extends MJaxPanel {
         $this->txtSearch->AddCssClass('input-large');
         $this->txtSearch->AddAction(new MJaxChangeEvent() , new MJaxServerControlAction($this, 'txtSearch_change'));
         $this->intIdDevice = new MJaxTextBox($this);
-        $this->intIdDevice->Attr('placeholder', "idDevice");
+        $this->intIdDevice->Attr('placeholder', " Device");
         $this->strName = new MJaxTextBox($this);
-        $this->strName->Attr('placeholder', "name");
+        $this->strName->Attr('placeholder', " Name");
         $this->strToken = new MJaxTextBox($this);
-        $this->strToken->Attr('placeholder', "token");
+        $this->strToken->Attr('placeholder', " Token");
         $this->strInviteEmail = new MJaxTextBox($this);
-        $this->strInviteEmail->Attr('placeholder', "inviteEmail");
+        $this->strInviteEmail->Attr('placeholder', " Invite Email");
         $this->intIdOrg = new MJaxTextBox($this);
-        $this->intIdOrg->Attr('placeholder', "idOrg");
-    }
-    public function ConnectTable($tblDevices) {
-        $this->tblDevices = $tblDevices;
-        //$this->tblDevices = new DeviceListPanel($this);
-        $this->tblDevices->AddColumn('selected', '');
+        $this->intIdOrg->Attr('placeholder', " Org");
     }
     public function txtSearch_change() {
         $objEntity = null;
         $arrParts = explode('_', $this->txtSearch->Value);
-        if (class_exists($arrParts[0])) {
-            $objEntity = call_user_func($arrParts[0] . '::LoadById', $arrParts[1]);
+        if (count($arrParts) < 2) {
+            //IDK
+            $this->arrSelectedDevices = array();
+            return;
+        }
+        try {
+            if (class_exists($arrParts[0])) {
+                $objEntity = call_user_func($arrParts[0] . '::LoadById', $arrParts[1]);
+            }
+        }
+        catch(Exception $e) {
+            error_log($e->getMessage());
         }
         $arrDevices = array();
+        if (is_null($objEntity)) {
+            return $arrDevices;
+        }
         switch (get_class($objEntity)) {
             case ('Device'):
                 $arrDevices = array(
@@ -69,15 +71,8 @@ class DeviceSelectPanelBase extends MJaxPanel {
                 array();
                 throw new Exception("Invalid entity type: " . get_class($objEntity));
         }
-        if (!is_null($this->tblDevices)) {
-            $this->tblDevices->RemoveAllChildControls();
-            $this->tblDevices->SetDataEntites($arrDevices);
-            foreach ($this->tblDevices->Rows as $intIndex => $objRow) {
-                $chkSelected = new MJaxCheckBox($this);
-                $chkSelected->Checked = true;
-                $objRow->AddData($chkSelected, 'selected');
-            }
-        }
+        $this->arrSelectedDevices = $arrDevices;
+        $this->TriggerEvent('mjax-bs-autocomplete-select');
     }
     public function GetExtQuery() {
         $arrAndConditions = array();
@@ -95,75 +90,6 @@ class DeviceSelectPanelBase extends MJaxPanel {
         return $arrAndConditions;
     }
     public function GetValue() {
-        $arrDevices = array();
-        foreach ($this->tblDevices->Rows as $intIndex => $objRow) {
-            $chkSelected = $objRow->GetData('selected');
-            if ($chkSelected->Checked) {
-                $arrDevices[] = $objRow->GetData('_entity');
-            }
-        }
-        return $arrDevices;
+        return $this->arrSelectedDevices;
     }
-    /*
-    public function txtSearch_search($objRoute){
-        $strSearch = $_POST['search'];
-        $arrData = array();
-        $this->SearchOrg($strSearch, $arrData);
-        $this->SearchDevices($strSearch, $arrData);
-        die(
-            json_encode(
-                $arrData
-            )
-        );
-    }
-    public function SearchDevices($strSearch, &$arrData){
-        $arrAndConditions = $this->GetExtQuery();
-        if(is_numeric($strSearch)){
-            $arrAndConditions[] =  sprintf(
-                '(Device.idDevice)',
-                strtolower($strSearch)
-            );
-        }else{
-            $arrAndConditions[] = sprintf(
-                '(name LIKE "%s%%" or namespace LIKE "%s%%")',
-                strtolower($strSearch),
-                strtolower($strSearch)
-            );
-        }
-        $strQuery = ' WHERE ' . implode( ' AND ', $arrAndConditions);
-        $arrDevices = Device::Query(
-            $strQuery
-        );
-        foreach($arrDevices as $strKey => $objDevice){
-            //_dv($objDevice-> getAllFields());
-            $arrData[] = array(
-                'value'=>'Device_' . $objDevice->GetId(),
-                'text'=>$objDevice->__toString()
-            );
-        }
-        return $arrData;
-    }
-    public function SearchOrg($strSearch, &$arrData){
-        $arrAndConditions = array();
-        $strJoin = '';
-        if(is_numeric($strSearch)){
-        }else{
-            $arrAndConditions[] = sprintf(
-                '(name LIKE "%s%%") GROUP BY clubNum',
-                strtolower($strSearch)
-            );
-        }
-        $strQuery = $strJoin . ' WHERE ' . implode( ' AND ', $arrAndConditions);
-        $arrOrg = Org::Query(
-            $strQuery
-        );
-        foreach($arrOrg as $strKey => $objOrg){
-            $arrData[] = array(
-                'value'=>'Org_' . $objOrg->GetId(),
-                'text'=>'Gym:' . $objOrg->Name
-            );
-        }
-        return $arrData;
-    }
-    */
 }

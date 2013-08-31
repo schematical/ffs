@@ -9,6 +9,7 @@
 * - CreateReferenceControls()
 * - btnSave_click()
 * - btnDelete_click()
+* - btnDelete_confirm()
 * - IsNew()
 * Classes list:
 * - SessionEditPanelBase extends MJaxPanel
@@ -25,6 +26,8 @@ class SessionEditPanelBase extends MJaxPanel {
     public $strEquipmentSet = null;
     public $strEventData = null;
     public $lnkViewParentIdCompetition = null;
+    public $lnkViewChildAssignment = null;
+    public $lnkViewChildEnrollment = null;
     public $lnkViewChildResult = null;
     //Regular controls
     public $btnSave = null;
@@ -106,6 +109,14 @@ class SessionEditPanelBase extends MJaxPanel {
                 $this->lnkViewParentIdCompetition->Href = __ENTITY_MODEL_DIR__ . '/Competition/' . $this->objSession->idCompetition;
             }
         }
+        $this->lnkViewChildAssignment = new MJaxLinkButton($this);
+        $this->lnkViewChildAssignment->Text = 'View Assignments';
+        //I should really fix this
+        //$this->lnkViewChildAssignment->Href = __ENTITY_MODEL_DIR__ . '/Session/' . $this->objSession->idSession . '/Assignments';
+        $this->lnkViewChildEnrollment = new MJaxLinkButton($this);
+        $this->lnkViewChildEnrollment->Text = 'View Enrollments';
+        //I should really fix this
+        //$this->lnkViewChildEnrollment->Href = __ENTITY_MODEL_DIR__ . '/Session/' . $this->objSession->idSession . '/Enrollments';
         $this->lnkViewChildResult = new MJaxLinkButton($this);
         $this->lnkViewChildResult->Text = 'View Results';
         //I should really fix this
@@ -132,6 +143,9 @@ class SessionEditPanelBase extends MJaxPanel {
         $this->objForm->TriggerControlEvent($this->strControlId, 'mjax-data-entity-save');
     }
     public function btnDelete_click() {
+        $this->Confirm('Are you sure you want to delete this?', 'btnDelete_confirm');
+    }
+    public function btnDelete_confirm() {
         $this->objSession->MarkDeleted();
         $this->SetSession(null);
         //Experimental delete event trigger

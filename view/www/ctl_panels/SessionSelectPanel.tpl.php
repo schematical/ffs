@@ -22,7 +22,7 @@ $_CONTROL->txtSearch->Render(); ?>
                             
                                 <?php if (!is_null($_CONTROL->intIdSession)) { ?>
                                     <div class='controls'>
-                                        <label> Id Session</label>
+                                        <!--label> Session</label-->
                                         <?php $_CONTROL->intIdSession->Render(); ?>
                                      </div>
                                  <?php
@@ -63,7 +63,7 @@ $_CONTROL->txtSearch->Render(); ?>
                             
                                 <?php if (!is_null($_CONTROL->intIdCompetition)) { ?>
                                     <div class='controls'>
-                                        <label> Id Competition</label>
+                                        <!--label> Competition</label-->
                                         <?php $_CONTROL->intIdCompetition->Render(); ?>
                                      </div>
                                  <?php
@@ -76,7 +76,7 @@ $_CONTROL->txtSearch->Render(); ?>
                             
                                 <?php if (!is_null($_CONTROL->strName)) { ?>
                                     <div class='controls'>
-                                        <label> Name</label>
+                                        <!--label> Name</label-->
                                         <?php $_CONTROL->strName->Render(); ?>
                                      </div>
                                  <?php
@@ -89,7 +89,7 @@ $_CONTROL->txtSearch->Render(); ?>
                             
                                 <?php if (!is_null($_CONTROL->strNotes)) { ?>
                                     <div class='controls'>
-                                        <label> Notes</label>
+                                        <!--label> Notes</label-->
                                         <?php $_CONTROL->strNotes->Render(); ?>
                                      </div>
                                  <?php
@@ -107,7 +107,7 @@ $_CONTROL->txtSearch->Render(); ?>
                             
                                 <?php if (!is_null($_CONTROL->strEquipmentSet)) { ?>
                                     <div class='controls'>
-                                        <label> Equipment Set</label>
+                                        <!--label> Equipment Set</label-->
                                         <?php $_CONTROL->strEquipmentSet->Render(); ?>
                                      </div>
                                  <?php

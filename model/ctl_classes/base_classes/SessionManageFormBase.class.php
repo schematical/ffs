@@ -5,12 +5,11 @@
 * - Form_Create()
 * - Query()
 * - InitSelectPanel()
+* - pnlSelect_change()
 * - InitEditPanel()
 * - pnlEdit_save()
 * - pnlEdit_delete()
 * - InitList()
-* - lnkViewResults_click()
-* - lnkViewCompetition_click()
 * - lstSession_editInit()
 * - lstSession_editSave()
 * - lnkEdit_click()
@@ -53,13 +52,29 @@ class SessionManageFormBase extends FFSForm {
     }
     public function InitSelectPanel() {
         $this->pnlSelect = new SessionSelectPanel($this);
-        /*$this->pnlEdit->AddAction(
-                new MJaxDataEntitySaveEvent(),
-                new MJaxServerControlAction($this, 'pnlEdit_save')
-            );*/
+        $this->pnlSelect->AddAction(new MJaxBSAutocompleteSelectEvent() , new MJaxServerControlAction($this, 'pnlSelect_change'));
         $wgtSession = $this->AddWidget('Select Session', 'icon-select', $this->pnlSelect);
         $wgtSession->AddCssClass('span6');
         return $wgtSession;
+    }
+    public function pnlSelect_change($strFormId, $strControlId, $mixActionParameter) {
+        $arrSessions = $this->pnlSelect->GetValue();
+        if (count($arrSessions) == 1) {
+            $this->pnlEdit->SetSession($arrSessions[0]);
+            foreach ($this->lstSessions as $objRow) {
+                if ($objRow->ActionParameter == $arrSessions[0]->IdSession) {
+                    $this->lstSessions->SelectedRow = $objRow;
+                }
+            }
+            //$this->ScrollTo($this->pnlEdit);
+            
+        } //else{
+        $this->ScrollTo($this->lstSessions);
+        //}
+        $this->lstSessions->RemoveAllChildControls();
+        $this->lstSessions->SetDataEntites($arrSessions);
+        //TODO: Remeber to add check lists for assoc or relationship tables
+        
     }
     public function InitEditPanel($objSession = null) {
         $this->pnlEdit = new SessionEditPanel($this, $objSession);
@@ -69,10 +84,17 @@ class SessionManageFormBase extends FFSForm {
         $wgtSession->AddCssClass('span6');
         return $wgtSession;
     }
-    //Fake event holders for now
     public function pnlEdit_save($strFormId, $strControlId, $objSession) {
+        $this->UpdateTable($objSession);
+        if (!is_null($this->lstSessions->SelectedRow)) {
+            $this->ScrollTo($this->lstSessions->SelectedRow);
+        } else {
+            $this->pnlEdit->Alert('Saved!', 'info');
+        }
     }
     public function pnlEdit_delete($strFormId, $strControlId, $objSession) {
+        $this->lstSessions->SelectedRow->Remove();
+        $this->lstSessions->SelectedRow = null;
     }
     public function InitList($arrSessions) {
         $this->lstSessions = new SessionListPanel($this, $arrSessions);
@@ -86,24 +108,9 @@ class SessionManageFormBase extends FFSForm {
             $this->lstSessions->InitRowControl('edit', 'Edit', $this, 'lnkEdit_click');
         }
         //
-        $this->lstSessions->InitRowControl('view_Results', 'View Results', $this, 'lnkViewResults_click');
-        $this->lstSessions->InitRowControl('idCompetition', 'View Competition', $this, 'lnkViewCompetition_click');
         $wgtSession = $this->AddWidget('Sessions', 'icon-ul', $this->lstSessions);
-        if (!is_null($this->pnlSelect)) {
-            $this->pnlSelect->ConnectTable($this->lstSessions);
-        }
+        $wgtSession->AddCssClass('span12');
         return $wgtSession;
-    }
-    public function lnkViewResults_click($strFormId, $strControlId, $strActionParameter) {
-        $this->Redirect('/data/editResult', array(
-            FFSQS::Session_IdSession => $strActionParameter
-        ));
-    }
-    public function lnkViewCompetition_click($strFormId, $strControlId, $strActionParameter) {
-        $intIdCompetition = $this->arrControls[$strControlId]->ParentControl->GetData('_entity')->IdCompetition;
-        $this->Redirect('/data/editCompetition', array(
-            FFSQS::Competition_IdCompetition => $intIdCompetition
-        ));
     }
     public function lstSession_editInit() {
         //_dv($this->lstSessions->SelectedRow);
@@ -127,7 +134,6 @@ class SessionManageFormBase extends FFSForm {
         if (!is_null($this->lstSessions->SelectedRow)) {
             //This already exists
             $this->lstSessions->SelectedRow->UpdateEntity($objSession);
-            $this->ScrollTo($this->lstSessions->SelectedRow);
             $this->lstSessions->SelectedRow = null;
         } else {
             $objRow = $this->lstSessions->AddRow($objSession);

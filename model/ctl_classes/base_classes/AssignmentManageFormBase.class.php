@@ -5,12 +5,11 @@
 * - Form_Create()
 * - Query()
 * - InitSelectPanel()
+* - pnlSelect_change()
 * - InitEditPanel()
 * - pnlEdit_save()
 * - pnlEdit_delete()
 * - InitList()
-* - lnkViewDevice_click()
-* - lnkViewSession_click()
 * - lstAssignment_editInit()
 * - lstAssignment_editSave()
 * - lnkEdit_click()
@@ -57,13 +56,29 @@ class AssignmentManageFormBase extends FFSForm {
     }
     public function InitSelectPanel() {
         $this->pnlSelect = new AssignmentSelectPanel($this);
-        /*$this->pnlEdit->AddAction(
-                new MJaxDataEntitySaveEvent(),
-                new MJaxServerControlAction($this, 'pnlEdit_save')
-            );*/
+        $this->pnlSelect->AddAction(new MJaxBSAutocompleteSelectEvent() , new MJaxServerControlAction($this, 'pnlSelect_change'));
         $wgtAssignment = $this->AddWidget('Select Assignment', 'icon-select', $this->pnlSelect);
         $wgtAssignment->AddCssClass('span6');
         return $wgtAssignment;
+    }
+    public function pnlSelect_change($strFormId, $strControlId, $mixActionParameter) {
+        $arrAssignments = $this->pnlSelect->GetValue();
+        if (count($arrAssignments) == 1) {
+            $this->pnlEdit->SetAssignment($arrAssignments[0]);
+            foreach ($this->lstAssignments as $objRow) {
+                if ($objRow->ActionParameter == $arrAssignments[0]->IdAssignment) {
+                    $this->lstAssignments->SelectedRow = $objRow;
+                }
+            }
+            //$this->ScrollTo($this->pnlEdit);
+            
+        } //else{
+        $this->ScrollTo($this->lstAssignments);
+        //}
+        $this->lstAssignments->RemoveAllChildControls();
+        $this->lstAssignments->SetDataEntites($arrAssignments);
+        //TODO: Remeber to add check lists for assoc or relationship tables
+        
     }
     public function InitEditPanel($objAssignment = null) {
         $this->pnlEdit = new AssignmentEditPanel($this, $objAssignment);
@@ -73,10 +88,17 @@ class AssignmentManageFormBase extends FFSForm {
         $wgtAssignment->AddCssClass('span6');
         return $wgtAssignment;
     }
-    //Fake event holders for now
     public function pnlEdit_save($strFormId, $strControlId, $objAssignment) {
+        $this->UpdateTable($objAssignment);
+        if (!is_null($this->lstAssignments->SelectedRow)) {
+            $this->ScrollTo($this->lstAssignments->SelectedRow);
+        } else {
+            $this->pnlEdit->Alert('Saved!', 'info');
+        }
     }
     public function pnlEdit_delete($strFormId, $strControlId, $objAssignment) {
+        $this->lstAssignments->SelectedRow->Remove();
+        $this->lstAssignments->SelectedRow = null;
     }
     public function InitList($arrAssignments) {
         $this->lstAssignments = new AssignmentListPanel($this, $arrAssignments);
@@ -90,25 +112,9 @@ class AssignmentManageFormBase extends FFSForm {
             $this->lstAssignments->InitRowControl('edit', 'Edit', $this, 'lnkEdit_click');
         }
         //
-        $this->lstAssignments->InitRowControl('idDevice', 'View Device', $this, 'lnkViewDevice_click');
-        $this->lstAssignments->InitRowControl('idSession', 'View Session', $this, 'lnkViewSession_click');
         $wgtAssignment = $this->AddWidget('Assignments', 'icon-ul', $this->lstAssignments);
-        if (!is_null($this->pnlSelect)) {
-            $this->pnlSelect->ConnectTable($this->lstAssignments);
-        }
+        $wgtAssignment->AddCssClass('span12');
         return $wgtAssignment;
-    }
-    public function lnkViewDevice_click($strFormId, $strControlId, $strActionParameter) {
-        $intIdDevice = $this->arrControls[$strControlId]->ParentControl->GetData('_entity')->IdDevice;
-        $this->Redirect('/data/editDevice', array(
-            FFSQS::Device_IdDevice => $intIdDevice
-        ));
-    }
-    public function lnkViewSession_click($strFormId, $strControlId, $strActionParameter) {
-        $intIdSession = $this->arrControls[$strControlId]->ParentControl->GetData('_entity')->IdSession;
-        $this->Redirect('/data/editSession', array(
-            FFSQS::Session_IdSession => $intIdSession
-        ));
     }
     public function lstAssignment_editInit() {
         //_dv($this->lstAssignments->SelectedRow);
@@ -132,7 +138,6 @@ class AssignmentManageFormBase extends FFSForm {
         if (!is_null($this->lstAssignments->SelectedRow)) {
             //This already exists
             $this->lstAssignments->SelectedRow->UpdateEntity($objAssignment);
-            $this->ScrollTo($this->lstAssignments->SelectedRow);
             $this->lstAssignments->SelectedRow = null;
         } else {
             $objRow = $this->lstAssignments->AddRow($objAssignment);

@@ -8,6 +8,8 @@
 * - ToXml()
 * - Query()
 * - QueryCount()
+* - GetAssignmentArr()
+* - GetEnrollmentArr()
 * - GetResultArr()
 * - LoadCollByIdCompetition()
 * - LoadByTag()
@@ -116,6 +118,12 @@ class SessionBase extends BaseEntity {
         return mysql_num_rows($result);
     }
     //Get children
+    public function GetAssignmentArr() {
+        return Assignment::LoadCollByIdSession($this->idSession);
+    }
+    public function GetEnrollmentArr() {
+        return Enrollment::LoadCollByIdSession($this->idSession);
+    }
     public function GetResultArr() {
         return Result::LoadCollByIdSession($this->idSession);
     }
@@ -140,6 +148,12 @@ class SessionBase extends BaseEntity {
     public function ParseArray($arrData) {
         foreach ($arrData as $strKey => $mixVal) {
             $arrData[strtolower($strKey) ] = $mixVal;
+        }
+        if (array_key_exists('idsession', $arrData)) {
+            $this->intIdSession = $arrData['idsession'];
+        }
+        if (array_key_exists('idsession', $arrData)) {
+            $this->intIdSession = $arrData['idsession'];
         }
         if (array_key_exists('idsession', $arrData)) {
             $this->intIdSession = $arrData['idsession'];

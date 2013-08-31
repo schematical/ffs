@@ -9,6 +9,7 @@
 * - CreateReferenceControls()
 * - btnSave_click()
 * - btnDelete_click()
+* - btnDelete_confirm()
 * - IsNew()
 * Classes list:
 * - ParentMessageEditPanelBase extends MJaxPanel
@@ -166,6 +167,9 @@ class ParentMessageEditPanelBase extends MJaxPanel {
         $this->objForm->TriggerControlEvent($this->strControlId, 'mjax-data-entity-save');
     }
     public function btnDelete_click() {
+        $this->Confirm('Are you sure you want to delete this?', 'btnDelete_confirm');
+    }
+    public function btnDelete_confirm() {
         $this->objParentMessage->MarkDeleted();
         $this->SetParentMessage(null);
         //Experimental delete event trigger

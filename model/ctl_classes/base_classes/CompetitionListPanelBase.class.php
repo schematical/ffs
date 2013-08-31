@@ -8,8 +8,10 @@
 * - RenderDate()
 * - RenderTime()
 * - SetupCols()
-* - InitRowClickEntityRelAction()
-* - objRow_click()
+* - lnkViewEnrollments_click()
+* - lnkViewParentMessages_click()
+* - lnkViewSessions_click()
+* - render_idOrg()
 * Classes list:
 * - CompetitionListPanelBase extends MJaxTable
 */
@@ -47,22 +49,39 @@ class CompetitionListPanelBase extends MJaxTable {
         //$this->AddColumn('idCompetition','idCompetition');
         $this->AddColumn('name', ' Name', null, null, 'MJaxTextBox');
         $this->AddColumn('longDesc', ' Long Desc', null, null, 'MJaxTextArea');
-        $this->AddColumn('creDate', ' Cre Date', $this, 'RenderDate', 'MJaxBSDateTimePicker');
-        $this->AddColumn('startDate', ' Start Date', $this, 'RenderDate', 'MJaxBSDateTimePicker');
-        $this->AddColumn('endDate', ' End Date', $this, 'RenderDate', 'MJaxBSDateTimePicker');
-        $this->AddColumn('idOrg', ' Id Org', null, null, 'MJaxTextBox');
+        $this->AddColumn('idOrg', ' Org', $this, 'render_idOrg', 'MJaxTextBox');
         $this->AddColumn('namespace', ' Namespace', null, null, 'MJaxTextBox');
+        $this->InitRowControl('view_Enrollments', 'View Enrollments', $this, 'lnkViewEnrollments_click', 'btn btn-small');
+        $this->InitRowControl('view_ParentMessages', 'View ParentMessages', $this, 'lnkViewParentMessages_click', 'btn btn-small');
+        $this->InitRowControl('view_Sessions', 'View Sessions', $this, 'lnkViewSessions_click', 'btn btn-small');
     }
-    /*
-    Old stuff
-    */
-    public function InitRowClickEntityRelAction() {
-        foreach ($this->Rows as $intIndex => $objRow) {
-            $objRow->AddAction($this, 'objRow_click');
+    public function lnkViewEnrollments_click($strFormId, $strControlId, $strActionParameter) {
+        $this->objForm->Redirect('/data/editEnrollment', array(
+            FFSQS::Competition_IdCompetition => $strActionParameter
+        ));
+    }
+    public function lnkViewParentMessages_click($strFormId, $strControlId, $strActionParameter) {
+        $this->objForm->Redirect('/data/editParentMessage', array(
+            FFSQS::Competition_IdCompetition => $strActionParameter
+        ));
+    }
+    public function lnkViewSessions_click($strFormId, $strControlId, $strActionParameter) {
+        $this->objForm->Redirect('/data/editSession', array(
+            FFSQS::Competition_IdCompetition => $strActionParameter
+        ));
+    }
+    public function render_idOrg($intIdIdOrg, $objRow, $objColumn) {
+        if (is_null($intIdIdOrg)) {
+            return '';
         }
-    }
-    public function objRow_click($strFomrId, $strControlId, $strActionParameter) {
-        $this->objForm->Redirect(__ENTITY_MODEL_DIR__ . '/Competition/' . $strActionParameter);
+        $objOrg = Org::LoadById($intIdIdOrg);
+        if (is_null($objOrg)) {
+            return 'error';
+        }
+        $lnkView = new MJaxLinkButton($this);
+        $lnkView->Text = $objOrg->__toString();
+        $lnkView->Href = '/data/editOrg?' . FFSQS::Org_IdOrg . '=' . $objOrg->IdOrg;
+        return $lnkView->Render(false);
     }
 }
 ?>

@@ -8,6 +8,8 @@
 * - ToXml()
 * - Query()
 * - QueryCount()
+* - GetAtheleteArr()
+* - GetCompetitionArr()
 * - GetDeviceArr()
 * - LoadByTag()
 * - AddTag()
@@ -109,6 +111,12 @@ class OrgBase extends BaseEntity {
         return mysql_num_rows($result);
     }
     //Get children
+    public function GetAtheleteArr() {
+        return Athelete::LoadCollByIdOrg($this->idOrg);
+    }
+    public function GetCompetitionArr() {
+        return Competition::LoadCollByIdOrg($this->idOrg);
+    }
     public function GetDeviceArr() {
         return Device::LoadCollByIdOrg($this->idOrg);
     }
@@ -122,6 +130,12 @@ class OrgBase extends BaseEntity {
     public function ParseArray($arrData) {
         foreach ($arrData as $strKey => $mixVal) {
             $arrData[strtolower($strKey) ] = $mixVal;
+        }
+        if (array_key_exists('idorg', $arrData)) {
+            $this->intIdOrg = $arrData['idorg'];
+        }
+        if (array_key_exists('idorg', $arrData)) {
+            $this->intIdOrg = $arrData['idorg'];
         }
         if (array_key_exists('idorg', $arrData)) {
             $this->intIdOrg = $arrData['idorg'];

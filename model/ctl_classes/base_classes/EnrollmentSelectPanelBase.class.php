@@ -3,7 +3,6 @@
 * Class and Function List:
 * Function list:
 * - __construct()
-* - ConnectTable()
 * - txtSearch_change()
 * - GetExtQuery()
 * - GetValue()
@@ -11,14 +10,9 @@
 * - EnrollmentSelectPanelBase extends MJaxPanel
 */
 class EnrollmentSelectPanelBase extends MJaxPanel {
-    /*
-     * NOTES: Consider adding advanced options
-     * --- Search by birthdate between X
-     * --- Level
-     * --- Etc
-    */
+    protected $arrSelectedEnrollments = array();
     public $txtSearch = null;
-    public $tblEnrollments = null;
+    //public $tblEnrollments = null;
     public $intIdEnrollment = null;
     public $intIdAthelete = null;
     public $intIdCompetition = null;
@@ -40,44 +34,52 @@ class EnrollmentSelectPanelBase extends MJaxPanel {
         $this->txtSearch->AddCssClass('input-large');
         $this->txtSearch->AddAction(new MJaxChangeEvent() , new MJaxServerControlAction($this, 'txtSearch_change'));
         $this->intIdEnrollment = new MJaxTextBox($this);
-        $this->intIdEnrollment->Attr('placeholder', "idEnrollment");
+        $this->intIdEnrollment->Attr('placeholder', " Enrollment");
         $this->intIdAthelete = new MJaxTextBox($this);
-        $this->intIdAthelete->Attr('placeholder', "idAthelete");
+        $this->intIdAthelete->Attr('placeholder', " Athelete");
         $this->intIdCompetition = new MJaxTextBox($this);
-        $this->intIdCompetition->Attr('placeholder', "idCompetition");
+        $this->intIdCompetition->Attr('placeholder', " Competition");
         $this->intIdSession = new MJaxTextBox($this);
-        $this->intIdSession->Attr('placeholder', "idSession");
+        $this->intIdSession->Attr('placeholder', " Session");
         $this->strFlight = new MJaxTextBox($this);
-        $this->strFlight->Attr('placeholder', "flight");
+        $this->strFlight->Attr('placeholder', " Flight");
         $this->strDivision = new MJaxTextBox($this);
-        $this->strDivision->Attr('placeholder', "division");
+        $this->strDivision->Attr('placeholder', " Division");
         $this->strAgeGroup = new MJaxTextBox($this);
-        $this->strAgeGroup->Attr('placeholder', "ageGroup");
+        $this->strAgeGroup->Attr('placeholder', " Age Group");
         $this->strMisc1 = new MJaxTextBox($this);
-        $this->strMisc1->Attr('placeholder', "misc1");
+        $this->strMisc1->Attr('placeholder', " Misc 1");
         $this->strMisc2 = new MJaxTextBox($this);
-        $this->strMisc2->Attr('placeholder', "misc2");
+        $this->strMisc2->Attr('placeholder', " Misc 2");
         $this->strMisc3 = new MJaxTextBox($this);
-        $this->strMisc3->Attr('placeholder', "misc3");
+        $this->strMisc3->Attr('placeholder', " Misc 3");
         $this->strMisc4 = new MJaxTextBox($this);
-        $this->strMisc4->Attr('placeholder', "misc4");
+        $this->strMisc4->Attr('placeholder', " Misc 4");
         $this->strMisc5 = new MJaxTextBox($this);
-        $this->strMisc5->Attr('placeholder', "misc5");
+        $this->strMisc5->Attr('placeholder', " Misc 5");
         $this->strLevel = new MJaxTextBox($this);
-        $this->strLevel->Attr('placeholder', "level");
-    }
-    public function ConnectTable($tblEnrollments) {
-        $this->tblEnrollments = $tblEnrollments;
-        //$this->tblEnrollments = new EnrollmentListPanel($this);
-        $this->tblEnrollments->AddColumn('selected', '');
+        $this->strLevel->Attr('placeholder', " Level");
     }
     public function txtSearch_change() {
         $objEntity = null;
         $arrParts = explode('_', $this->txtSearch->Value);
-        if (class_exists($arrParts[0])) {
-            $objEntity = call_user_func($arrParts[0] . '::LoadById', $arrParts[1]);
+        if (count($arrParts) < 2) {
+            //IDK
+            $this->arrSelectedEnrollments = array();
+            return;
+        }
+        try {
+            if (class_exists($arrParts[0])) {
+                $objEntity = call_user_func($arrParts[0] . '::LoadById', $arrParts[1]);
+            }
+        }
+        catch(Exception $e) {
+            error_log($e->getMessage());
         }
         $arrEnrollments = array();
+        if (is_null($objEntity)) {
+            return $arrEnrollments;
+        }
         switch (get_class($objEntity)) {
             case ('Enrollment'):
                 $arrEnrollments = array(
@@ -103,15 +105,8 @@ class EnrollmentSelectPanelBase extends MJaxPanel {
                 array();
                 throw new Exception("Invalid entity type: " . get_class($objEntity));
         }
-        if (!is_null($this->tblEnrollments)) {
-            $this->tblEnrollments->RemoveAllChildControls();
-            $this->tblEnrollments->SetDataEntites($arrEnrollments);
-            foreach ($this->tblEnrollments->Rows as $intIndex => $objRow) {
-                $chkSelected = new MJaxCheckBox($this);
-                $chkSelected->Checked = true;
-                $objRow->AddData($chkSelected, 'selected');
-            }
-        }
+        $this->arrSelectedEnrollments = $arrEnrollments;
+        $this->TriggerEvent('mjax-bs-autocomplete-select');
     }
     public function GetExtQuery() {
         $arrAndConditions = array();
@@ -147,75 +142,6 @@ class EnrollmentSelectPanelBase extends MJaxPanel {
         return $arrAndConditions;
     }
     public function GetValue() {
-        $arrEnrollments = array();
-        foreach ($this->tblEnrollments->Rows as $intIndex => $objRow) {
-            $chkSelected = $objRow->GetData('selected');
-            if ($chkSelected->Checked) {
-                $arrEnrollments[] = $objRow->GetData('_entity');
-            }
-        }
-        return $arrEnrollments;
+        return $this->arrSelectedEnrollments;
     }
-    /*
-    public function txtSearch_search($objRoute){
-        $strSearch = $_POST['search'];
-        $arrData = array();
-        $this->SearchOrg($strSearch, $arrData);
-        $this->SearchEnrollments($strSearch, $arrData);
-        die(
-            json_encode(
-                $arrData
-            )
-        );
-    }
-    public function SearchEnrollments($strSearch, &$arrData){
-        $arrAndConditions = $this->GetExtQuery();
-        if(is_numeric($strSearch)){
-            $arrAndConditions[] =  sprintf(
-                '(Enrollment.idEnrollment)',
-                strtolower($strSearch)
-            );
-        }else{
-            $arrAndConditions[] = sprintf(
-                '(name LIKE "%s%%" or namespace LIKE "%s%%")',
-                strtolower($strSearch),
-                strtolower($strSearch)
-            );
-        }
-        $strQuery = ' WHERE ' . implode( ' AND ', $arrAndConditions);
-        $arrEnrollments = Enrollment::Query(
-            $strQuery
-        );
-        foreach($arrEnrollments as $strKey => $objEnrollment){
-            //_dv($objEnrollment-> getAllFields());
-            $arrData[] = array(
-                'value'=>'Enrollment_' . $objEnrollment->GetId(),
-                'text'=>$objEnrollment->__toString()
-            );
-        }
-        return $arrData;
-    }
-    public function SearchOrg($strSearch, &$arrData){
-        $arrAndConditions = array();
-        $strJoin = '';
-        if(is_numeric($strSearch)){
-        }else{
-            $arrAndConditions[] = sprintf(
-                '(name LIKE "%s%%") GROUP BY clubNum',
-                strtolower($strSearch)
-            );
-        }
-        $strQuery = $strJoin . ' WHERE ' . implode( ' AND ', $arrAndConditions);
-        $arrOrg = Org::Query(
-            $strQuery
-        );
-        foreach($arrOrg as $strKey => $objOrg){
-            $arrData[] = array(
-                'value'=>'Org_' . $objOrg->GetId(),
-                'text'=>'Gym:' . $objOrg->Name
-            );
-        }
-        return $arrData;
-    }
-    */
 }

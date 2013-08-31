@@ -41,26 +41,34 @@ class FFSForm extends MJaxWAdminForm{
         //If not is paid account{
             $this->InitAds();
         //}
+        $this->SetUpBreadcrumbs();
     }
-    public function SearchForAtheletes($strSearch){
-        if(!is_numeric($strSearch)){
-            $arrAtheletes = Athelete::Query(
-                sprintf(
-                    'WHERE firstName LIKE "%s%%" or lastName LIKE "%s%%"',
-                    strtolower($strSearch),
-                    strtolower($strSearch)
-                )
+    public function SetUpBreadcrumbs(){
+        if(!is_null(FFSForm::$objOrg)){
+            $lnkCrumb = $this->pnlBreadcrumb->AddCrumb(
+                FFSForm::$objOrg->Name,
+                '/'
             );
-        }else{
-            $arrAtheletes = Athelete::Query(
-                sprintf(
-                    'WHERE idAthelete = %s OR memId = %s',
-                    strtolower($strSearch),
-                    strtolower($strSearch)
-                )
-            );
+
+
+            if(!is_null(FFSForm::$objCompetition)){
+                $lnkCrumb = $this->pnlBreadcrumb->AddCrumb(
+                    FFSForm::$objCompetition->Name,
+                    '/' . FFSForm::$objCompetition->Namespace .'/org'
+                );
+
+                if(!is_null(FFSForm::$objSession)){
+                    $lnkCrumb = $this->pnlBreadcrumb->AddCrumb(
+                        FFSForm::$objSession->Name,
+                        '/' . FFSForm::$objCompetition->Namespace . '/org?' . FFSQS::IdSession . '=' . FFSForm::$objSession->IdSession
+                    );
+                }
+            }
         }
+
+
     }
+
     public function SetUpNavMenu(){
         $this->AddHeaderNav('Home', 'icon-home')->Href = '/';
 
@@ -68,7 +76,21 @@ class FFSForm extends MJaxWAdminForm{
             case(FFSSection::ORG):
 
                 if(is_null(FFSForm::$objCompetition)){
-                    $this->AddHeaderNav('Add Competition', 'icon-plus-sign')->Href = '/org/competition/editCompetition';
+                    $lnkManageCompetitions = $this->AddHeaderNav('Competitions', 'icon-flag');
+
+                    $arrCompetitions = FFSApplication::GetActiveCompetitions();
+                    foreach($arrCompetitions as $objCompetition){
+                        //_dv($lnkManageSessions);
+                        $lnkManageCompetitions->AddSubNavLink(
+                            $objCompetition->Name,
+                            '/' . $objCompetition->Namespace . '/org/competition/index'
+                        );
+                    }
+                    $lnkManageCompetitions->AddSubNavLink(
+                        '<i class="icon-plus-sign"></i>Add New Competition',
+                        '/org/competition/editCompetition'
+                    );
+
                 }else{
                     $lnkManageSessions = $this->AddHeaderNav('Manage Sessions', 'icon-calendar');
                     $lnkManageSessions->Href = '/' . FFSForm::$objCompetition->Namespace . '/org/competition/manageSessions';

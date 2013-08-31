@@ -8,6 +8,8 @@
 * - ToXml()
 * - Query()
 * - QueryCount()
+* - GetEnrollmentArr()
+* - GetParentMessageArr()
 * - GetSessionArr()
 * - LoadCollByIdOrg()
 * - LoadByTag()
@@ -113,6 +115,12 @@ class CompetitionBase extends BaseEntity {
         return mysql_num_rows($result);
     }
     //Get children
+    public function GetEnrollmentArr() {
+        return Enrollment::LoadCollByIdCompetition($this->idCompetition);
+    }
+    public function GetParentMessageArr() {
+        return ParentMessage::LoadCollByIdCompetition($this->idCompetition);
+    }
     public function GetSessionArr() {
         return Session::LoadCollByIdCompetition($this->idCompetition);
     }
@@ -137,6 +145,12 @@ class CompetitionBase extends BaseEntity {
     public function ParseArray($arrData) {
         foreach ($arrData as $strKey => $mixVal) {
             $arrData[strtolower($strKey) ] = $mixVal;
+        }
+        if (array_key_exists('idcompetition', $arrData)) {
+            $this->intIdCompetition = $arrData['idcompetition'];
+        }
+        if (array_key_exists('idcompetition', $arrData)) {
+            $this->intIdCompetition = $arrData['idcompetition'];
         }
         if (array_key_exists('idcompetition', $arrData)) {
             $this->intIdCompetition = $arrData['idcompetition'];

@@ -3,7 +3,6 @@
 * Class and Function List:
 * Function list:
 * - __construct()
-* - ConnectTable()
 * - txtSearch_change()
 * - GetExtQuery()
 * - GetValue()
@@ -11,14 +10,9 @@
 * - AtheleteSelectPanelBase extends MJaxPanel
 */
 class AtheleteSelectPanelBase extends MJaxPanel {
-    /*
-     * NOTES: Consider adding advanced options
-     * --- Search by birthdate between X
-     * --- Level
-     * --- Etc
-    */
+    protected $arrSelectedAtheletes = array();
     public $txtSearch = null;
-    public $tblAtheletes = null;
+    //public $tblAtheletes = null;
     public $intIdAthelete = null;
     public $intIdOrg = null;
     public $strFirstName = null;
@@ -37,38 +31,46 @@ class AtheleteSelectPanelBase extends MJaxPanel {
         $this->txtSearch->AddCssClass('input-large');
         $this->txtSearch->AddAction(new MJaxChangeEvent() , new MJaxServerControlAction($this, 'txtSearch_change'));
         $this->intIdAthelete = new MJaxTextBox($this);
-        $this->intIdAthelete->Attr('placeholder', "idAthelete");
+        $this->intIdAthelete->Attr('placeholder', " Athelete");
         $this->intIdOrg = new MJaxTextBox($this);
-        $this->intIdOrg->Attr('placeholder', "idOrg");
+        $this->intIdOrg->Attr('placeholder', " Org");
         $this->strFirstName = new MJaxTextBox($this);
-        $this->strFirstName->Attr('placeholder', "firstName");
+        $this->strFirstName->Attr('placeholder', " First Name");
         $this->strLastName = new MJaxTextBox($this);
-        $this->strLastName->Attr('placeholder', "lastName");
+        $this->strLastName->Attr('placeholder', " Last Name");
         $this->txtBirthDate_StartDate = new MJaxBSDateTimePicker($this);
         $this->txtBirthDate_StartDate->DateOnly();
         $this->txtBirthDate_EndDate = new MJaxBSDateTimePicker($this);
         $this->txtBirthDate_EndDate->DateOnly();
         $this->strMemType = new MJaxTextBox($this);
-        $this->strMemType->Attr('placeholder', "memType");
+        $this->strMemType->Attr('placeholder', " Mem Type");
         $this->strMemId = new MJaxTextBox($this);
-        $this->strMemId->Attr('placeholder', "memId");
+        $this->strMemId->Attr('placeholder', " Mem Id");
         $this->strPsData = new MJaxTextBox($this);
-        $this->strPsData->Attr('placeholder', "PsData");
+        $this->strPsData->Attr('placeholder', " Ps Data");
         $this->strLevel = new MJaxTextBox($this);
-        $this->strLevel->Attr('placeholder', "level");
-    }
-    public function ConnectTable($tblAtheletes) {
-        $this->tblAtheletes = $tblAtheletes;
-        //$this->tblAtheletes = new AtheleteListPanel($this);
-        $this->tblAtheletes->AddColumn('selected', '');
+        $this->strLevel->Attr('placeholder', " Level");
     }
     public function txtSearch_change() {
         $objEntity = null;
         $arrParts = explode('_', $this->txtSearch->Value);
-        if (class_exists($arrParts[0])) {
-            $objEntity = call_user_func($arrParts[0] . '::LoadById', $arrParts[1]);
+        if (count($arrParts) < 2) {
+            //IDK
+            $this->arrSelectedAtheletes = array();
+            return;
+        }
+        try {
+            if (class_exists($arrParts[0])) {
+                $objEntity = call_user_func($arrParts[0] . '::LoadById', $arrParts[1]);
+            }
+        }
+        catch(Exception $e) {
+            error_log($e->getMessage());
         }
         $arrAtheletes = array();
+        if (is_null($objEntity)) {
+            return $arrAtheletes;
+        }
         switch (get_class($objEntity)) {
             case ('Athelete'):
                 $arrAtheletes = array(
@@ -84,15 +86,8 @@ class AtheleteSelectPanelBase extends MJaxPanel {
                 array();
                 throw new Exception("Invalid entity type: " . get_class($objEntity));
         }
-        if (!is_null($this->tblAtheletes)) {
-            $this->tblAtheletes->RemoveAllChildControls();
-            $this->tblAtheletes->SetDataEntites($arrAtheletes);
-            foreach ($this->tblAtheletes->Rows as $intIndex => $objRow) {
-                $chkSelected = new MJaxCheckBox($this);
-                $chkSelected->Checked = true;
-                $objRow->AddData($chkSelected, 'selected');
-            }
-        }
+        $this->arrSelectedAtheletes = $arrAtheletes;
+        $this->TriggerEvent('mjax-bs-autocomplete-select');
     }
     public function GetExtQuery() {
         $arrAndConditions = array();
@@ -125,75 +120,6 @@ class AtheleteSelectPanelBase extends MJaxPanel {
         return $arrAndConditions;
     }
     public function GetValue() {
-        $arrAtheletes = array();
-        foreach ($this->tblAtheletes->Rows as $intIndex => $objRow) {
-            $chkSelected = $objRow->GetData('selected');
-            if ($chkSelected->Checked) {
-                $arrAtheletes[] = $objRow->GetData('_entity');
-            }
-        }
-        return $arrAtheletes;
+        return $this->arrSelectedAtheletes;
     }
-    /*
-    public function txtSearch_search($objRoute){
-        $strSearch = $_POST['search'];
-        $arrData = array();
-        $this->SearchOrg($strSearch, $arrData);
-        $this->SearchAtheletes($strSearch, $arrData);
-        die(
-            json_encode(
-                $arrData
-            )
-        );
-    }
-    public function SearchAtheletes($strSearch, &$arrData){
-        $arrAndConditions = $this->GetExtQuery();
-        if(is_numeric($strSearch)){
-            $arrAndConditions[] =  sprintf(
-                '(Athelete.idAthelete)',
-                strtolower($strSearch)
-            );
-        }else{
-            $arrAndConditions[] = sprintf(
-                '(name LIKE "%s%%" or namespace LIKE "%s%%")',
-                strtolower($strSearch),
-                strtolower($strSearch)
-            );
-        }
-        $strQuery = ' WHERE ' . implode( ' AND ', $arrAndConditions);
-        $arrAtheletes = Athelete::Query(
-            $strQuery
-        );
-        foreach($arrAtheletes as $strKey => $objAthelete){
-            //_dv($objAthelete-> getAllFields());
-            $arrData[] = array(
-                'value'=>'Athelete_' . $objAthelete->GetId(),
-                'text'=>$objAthelete->__toString()
-            );
-        }
-        return $arrData;
-    }
-    public function SearchOrg($strSearch, &$arrData){
-        $arrAndConditions = array();
-        $strJoin = '';
-        if(is_numeric($strSearch)){
-        }else{
-            $arrAndConditions[] = sprintf(
-                '(name LIKE "%s%%") GROUP BY clubNum',
-                strtolower($strSearch)
-            );
-        }
-        $strQuery = $strJoin . ' WHERE ' . implode( ' AND ', $arrAndConditions);
-        $arrOrg = Org::Query(
-            $strQuery
-        );
-        foreach($arrOrg as $strKey => $objOrg){
-            $arrData[] = array(
-                'value'=>'Org_' . $objOrg->GetId(),
-                'text'=>'Gym:' . $objOrg->Name
-            );
-        }
-        return $arrData;
-    }
-    */
 }

@@ -8,8 +8,10 @@
 * - RenderDate()
 * - RenderTime()
 * - SetupCols()
-* - InitRowClickEntityRelAction()
-* - objRow_click()
+* - lnkViewAssignments_click()
+* - lnkViewEnrollments_click()
+* - lnkViewResults_click()
+* - render_idCompetition()
 * Classes list:
 * - SessionListPanelBase extends MJaxTable
 */
@@ -45,23 +47,41 @@ class SessionListPanelBase extends MJaxTable {
     }
     public function SetupCols() {
         //$this->AddColumn('idSession','idSession');
-        $this->AddColumn('startDate', ' Start Date', $this, 'RenderDate', 'MJaxBSDateTimePicker');
-        $this->AddColumn('endDate', ' End Date', $this, 'RenderDate', 'MJaxBSDateTimePicker');
-        $this->AddColumn('idCompetition', ' Id Competition', null, null, 'MJaxTextBox');
+        $this->AddColumn('idCompetition', ' Competition', $this, 'render_idCompetition', 'MJaxTextBox');
         $this->AddColumn('name', ' Name', null, null, 'MJaxTextBox');
         $this->AddColumn('notes', ' Notes', null, null, 'MJaxTextArea');
         $this->AddColumn('equipmentSet', ' Equipment Set', null, null, 'MJaxTextBox');
+        $this->InitRowControl('view_Assignments', 'View Assignments', $this, 'lnkViewAssignments_click', 'btn btn-small');
+        $this->InitRowControl('view_Enrollments', 'View Enrollments', $this, 'lnkViewEnrollments_click', 'btn btn-small');
+        $this->InitRowControl('view_Results', 'View Results', $this, 'lnkViewResults_click', 'btn btn-small');
     }
-    /*
-    Old stuff
-    */
-    public function InitRowClickEntityRelAction() {
-        foreach ($this->Rows as $intIndex => $objRow) {
-            $objRow->AddAction($this, 'objRow_click');
+    public function lnkViewAssignments_click($strFormId, $strControlId, $strActionParameter) {
+        $this->objForm->Redirect('/data/editAssignment', array(
+            FFSQS::Session_IdSession => $strActionParameter
+        ));
+    }
+    public function lnkViewEnrollments_click($strFormId, $strControlId, $strActionParameter) {
+        $this->objForm->Redirect('/data/editEnrollment', array(
+            FFSQS::Session_IdSession => $strActionParameter
+        ));
+    }
+    public function lnkViewResults_click($strFormId, $strControlId, $strActionParameter) {
+        $this->objForm->Redirect('/data/editResult', array(
+            FFSQS::Session_IdSession => $strActionParameter
+        ));
+    }
+    public function render_idCompetition($intIdIdCompetition, $objRow, $objColumn) {
+        if (is_null($intIdIdCompetition)) {
+            return '';
         }
-    }
-    public function objRow_click($strFomrId, $strControlId, $strActionParameter) {
-        $this->objForm->Redirect(__ENTITY_MODEL_DIR__ . '/Session/' . $strActionParameter);
+        $objCompetition = Competition::LoadById($intIdIdCompetition);
+        if (is_null($objCompetition)) {
+            return 'error';
+        }
+        $lnkView = new MJaxLinkButton($this);
+        $lnkView->Text = $objCompetition->__toString();
+        $lnkView->Href = '/data/editCompetition?' . FFSQS::Competition_IdCompetition . '=' . $objCompetition->IdCompetition;
+        return $lnkView->Render(false);
     }
 }
 ?>

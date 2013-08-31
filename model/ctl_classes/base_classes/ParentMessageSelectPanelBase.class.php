@@ -3,7 +3,6 @@
 * Class and Function List:
 * Function list:
 * - __construct()
-* - ConnectTable()
 * - txtSearch_change()
 * - GetExtQuery()
 * - GetValue()
@@ -11,14 +10,9 @@
 * - ParentMessageSelectPanelBase extends MJaxPanel
 */
 class ParentMessageSelectPanelBase extends MJaxPanel {
-    /*
-     * NOTES: Consider adding advanced options
-     * --- Search by birthdate between X
-     * --- Level
-     * --- Etc
-    */
+    protected $arrSelectedParentMessages = array();
     public $txtSearch = null;
-    public $tblParentMessages = null;
+    //public $tblParentMessages = null;
     public $intIdParentMessage = null;
     public $intIdAthelete = null;
     public $strAtheleteName = null;
@@ -45,54 +39,62 @@ class ParentMessageSelectPanelBase extends MJaxPanel {
         $this->txtSearch->AddCssClass('input-large');
         $this->txtSearch->AddAction(new MJaxChangeEvent() , new MJaxServerControlAction($this, 'txtSearch_change'));
         $this->intIdParentMessage = new MJaxTextBox($this);
-        $this->intIdParentMessage->Attr('placeholder', "idParentMessage");
+        $this->intIdParentMessage->Attr('placeholder', " Parent Message");
         $this->intIdAthelete = new MJaxTextBox($this);
-        $this->intIdAthelete->Attr('placeholder', "idAthelete");
+        $this->intIdAthelete->Attr('placeholder', " Athelete");
         $this->strAtheleteName = new MJaxTextBox($this);
-        $this->strAtheleteName->Attr('placeholder', "atheleteName");
+        $this->strAtheleteName->Attr('placeholder', " Athelete Name");
         $this->strMessage = new MJaxTextBox($this);
-        $this->strMessage->Attr('placeholder', "message");
+        $this->strMessage->Attr('placeholder', " Message");
         $this->txtDispDate_StartDate = new MJaxBSDateTimePicker($this);
         $this->txtDispDate_StartDate->DateOnly();
         $this->txtDispDate_EndDate = new MJaxBSDateTimePicker($this);
         $this->txtDispDate_EndDate->DateOnly();
         $this->intIdUser = new MJaxTextBox($this);
-        $this->intIdUser->Attr('placeholder', "idUser");
+        $this->intIdUser->Attr('placeholder', " User");
         $this->txtQueDate_StartDate = new MJaxBSDateTimePicker($this);
         $this->txtQueDate_StartDate->DateOnly();
         $this->txtQueDate_EndDate = new MJaxBSDateTimePicker($this);
         $this->txtQueDate_EndDate->DateOnly();
         $this->strInviteData = new MJaxTextBox($this);
-        $this->strInviteData->Attr('placeholder', "inviteData");
+        $this->strInviteData->Attr('placeholder', " Invite Data");
         $this->strInviteType = new MJaxTextBox($this);
-        $this->strInviteType->Attr('placeholder', "inviteType");
+        $this->strInviteType->Attr('placeholder', " Invite Type");
         $this->strInviteToken = new MJaxTextBox($this);
-        $this->strInviteToken->Attr('placeholder', "inviteToken");
+        $this->strInviteToken->Attr('placeholder', " Invite Token");
         $this->txtInviteViewDate_StartDate = new MJaxBSDateTimePicker($this);
         $this->txtInviteViewDate_StartDate->DateOnly();
         $this->txtInviteViewDate_EndDate = new MJaxBSDateTimePicker($this);
         $this->txtInviteViewDate_EndDate->DateOnly();
         $this->intIdCompetition = new MJaxTextBox($this);
-        $this->intIdCompetition->Attr('placeholder', "idCompetition");
+        $this->intIdCompetition->Attr('placeholder', " Competition");
         $this->txtApproveDate_StartDate = new MJaxBSDateTimePicker($this);
         $this->txtApproveDate_StartDate->DateOnly();
         $this->txtApproveDate_EndDate = new MJaxBSDateTimePicker($this);
         $this->txtApproveDate_EndDate->DateOnly();
         $this->intIdStripeData = new MJaxTextBox($this);
-        $this->intIdStripeData->Attr('placeholder', "idStripeData");
-    }
-    public function ConnectTable($tblParentMessages) {
-        $this->tblParentMessages = $tblParentMessages;
-        //$this->tblParentMessages = new ParentMessageListPanel($this);
-        $this->tblParentMessages->AddColumn('selected', '');
+        $this->intIdStripeData->Attr('placeholder', " Stripe Data");
     }
     public function txtSearch_change() {
         $objEntity = null;
         $arrParts = explode('_', $this->txtSearch->Value);
-        if (class_exists($arrParts[0])) {
-            $objEntity = call_user_func($arrParts[0] . '::LoadById', $arrParts[1]);
+        if (count($arrParts) < 2) {
+            //IDK
+            $this->arrSelectedParentMessages = array();
+            return;
+        }
+        try {
+            if (class_exists($arrParts[0])) {
+                $objEntity = call_user_func($arrParts[0] . '::LoadById', $arrParts[1]);
+            }
+        }
+        catch(Exception $e) {
+            error_log($e->getMessage());
         }
         $arrParentMessages = array();
+        if (is_null($objEntity)) {
+            return $arrParentMessages;
+        }
         switch (get_class($objEntity)) {
             case ('ParentMessage'):
                 $arrParentMessages = array(
@@ -113,15 +115,8 @@ class ParentMessageSelectPanelBase extends MJaxPanel {
                 array();
                 throw new Exception("Invalid entity type: " . get_class($objEntity));
         }
-        if (!is_null($this->tblParentMessages)) {
-            $this->tblParentMessages->RemoveAllChildControls();
-            $this->tblParentMessages->SetDataEntites($arrParentMessages);
-            foreach ($this->tblParentMessages->Rows as $intIndex => $objRow) {
-                $chkSelected = new MJaxCheckBox($this);
-                $chkSelected->Checked = true;
-                $objRow->AddData($chkSelected, 'selected');
-            }
-        }
+        $this->arrSelectedParentMessages = $arrParentMessages;
+        $this->TriggerEvent('mjax-bs-autocomplete-select');
     }
     public function GetExtQuery() {
         $arrAndConditions = array();
@@ -177,75 +172,6 @@ class ParentMessageSelectPanelBase extends MJaxPanel {
         return $arrAndConditions;
     }
     public function GetValue() {
-        $arrParentMessages = array();
-        foreach ($this->tblParentMessages->Rows as $intIndex => $objRow) {
-            $chkSelected = $objRow->GetData('selected');
-            if ($chkSelected->Checked) {
-                $arrParentMessages[] = $objRow->GetData('_entity');
-            }
-        }
-        return $arrParentMessages;
+        return $this->arrSelectedParentMessages;
     }
-    /*
-    public function txtSearch_search($objRoute){
-        $strSearch = $_POST['search'];
-        $arrData = array();
-        $this->SearchOrg($strSearch, $arrData);
-        $this->SearchParentMessages($strSearch, $arrData);
-        die(
-            json_encode(
-                $arrData
-            )
-        );
-    }
-    public function SearchParentMessages($strSearch, &$arrData){
-        $arrAndConditions = $this->GetExtQuery();
-        if(is_numeric($strSearch)){
-            $arrAndConditions[] =  sprintf(
-                '(ParentMessage.idParentMessage)',
-                strtolower($strSearch)
-            );
-        }else{
-            $arrAndConditions[] = sprintf(
-                '(name LIKE "%s%%" or namespace LIKE "%s%%")',
-                strtolower($strSearch),
-                strtolower($strSearch)
-            );
-        }
-        $strQuery = ' WHERE ' . implode( ' AND ', $arrAndConditions);
-        $arrParentMessages = ParentMessage::Query(
-            $strQuery
-        );
-        foreach($arrParentMessages as $strKey => $objParentMessage){
-            //_dv($objParentMessage-> getAllFields());
-            $arrData[] = array(
-                'value'=>'ParentMessage_' . $objParentMessage->GetId(),
-                'text'=>$objParentMessage->__toString()
-            );
-        }
-        return $arrData;
-    }
-    public function SearchOrg($strSearch, &$arrData){
-        $arrAndConditions = array();
-        $strJoin = '';
-        if(is_numeric($strSearch)){
-        }else{
-            $arrAndConditions[] = sprintf(
-                '(name LIKE "%s%%") GROUP BY clubNum',
-                strtolower($strSearch)
-            );
-        }
-        $strQuery = $strJoin . ' WHERE ' . implode( ' AND ', $arrAndConditions);
-        $arrOrg = Org::Query(
-            $strQuery
-        );
-        foreach($arrOrg as $strKey => $objOrg){
-            $arrData[] = array(
-                'value'=>'Org_' . $objOrg->GetId(),
-                'text'=>'Gym:' . $objOrg->Name
-            );
-        }
-        return $arrData;
-    }
-    */
 }

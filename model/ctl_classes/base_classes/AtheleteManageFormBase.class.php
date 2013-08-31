@@ -5,12 +5,11 @@
 * - Form_Create()
 * - Query()
 * - InitSelectPanel()
+* - pnlSelect_change()
 * - InitEditPanel()
 * - pnlEdit_save()
 * - pnlEdit_delete()
 * - InitList()
-* - lnkViewResults_click()
-* - lnkViewOrg_click()
 * - lstAthelete_editInit()
 * - lstAthelete_editSave()
 * - lnkEdit_click()
@@ -65,13 +64,29 @@ class AtheleteManageFormBase extends FFSForm {
     }
     public function InitSelectPanel() {
         $this->pnlSelect = new AtheleteSelectPanel($this);
-        /*$this->pnlEdit->AddAction(
-                new MJaxDataEntitySaveEvent(),
-                new MJaxServerControlAction($this, 'pnlEdit_save')
-            );*/
+        $this->pnlSelect->AddAction(new MJaxBSAutocompleteSelectEvent() , new MJaxServerControlAction($this, 'pnlSelect_change'));
         $wgtAthelete = $this->AddWidget('Select Athelete', 'icon-select', $this->pnlSelect);
         $wgtAthelete->AddCssClass('span6');
         return $wgtAthelete;
+    }
+    public function pnlSelect_change($strFormId, $strControlId, $mixActionParameter) {
+        $arrAtheletes = $this->pnlSelect->GetValue();
+        if (count($arrAtheletes) == 1) {
+            $this->pnlEdit->SetAthelete($arrAtheletes[0]);
+            foreach ($this->lstAtheletes as $objRow) {
+                if ($objRow->ActionParameter == $arrAtheletes[0]->IdAthelete) {
+                    $this->lstAtheletes->SelectedRow = $objRow;
+                }
+            }
+            //$this->ScrollTo($this->pnlEdit);
+            
+        } //else{
+        $this->ScrollTo($this->lstAtheletes);
+        //}
+        $this->lstAtheletes->RemoveAllChildControls();
+        $this->lstAtheletes->SetDataEntites($arrAtheletes);
+        //TODO: Remeber to add check lists for assoc or relationship tables
+        
     }
     public function InitEditPanel($objAthelete = null) {
         $this->pnlEdit = new AtheleteEditPanel($this, $objAthelete);
@@ -81,10 +96,17 @@ class AtheleteManageFormBase extends FFSForm {
         $wgtAthelete->AddCssClass('span6');
         return $wgtAthelete;
     }
-    //Fake event holders for now
     public function pnlEdit_save($strFormId, $strControlId, $objAthelete) {
+        $this->UpdateTable($objAthelete);
+        if (!is_null($this->lstAtheletes->SelectedRow)) {
+            $this->ScrollTo($this->lstAtheletes->SelectedRow);
+        } else {
+            $this->pnlEdit->Alert('Saved!', 'info');
+        }
     }
     public function pnlEdit_delete($strFormId, $strControlId, $objAthelete) {
+        $this->lstAtheletes->SelectedRow->Remove();
+        $this->lstAtheletes->SelectedRow = null;
     }
     public function InitList($arrAtheletes) {
         $this->lstAtheletes = new AtheleteListPanel($this, $arrAtheletes);
@@ -98,24 +120,9 @@ class AtheleteManageFormBase extends FFSForm {
             $this->lstAtheletes->InitRowControl('edit', 'Edit', $this, 'lnkEdit_click');
         }
         //
-        $this->lstAtheletes->InitRowControl('view_Results', 'View Results', $this, 'lnkViewResults_click');
-        $this->lstAtheletes->InitRowControl('idOrg', 'View Org', $this, 'lnkViewOrg_click');
         $wgtAthelete = $this->AddWidget('Atheletes', 'icon-ul', $this->lstAtheletes);
-        if (!is_null($this->pnlSelect)) {
-            $this->pnlSelect->ConnectTable($this->lstAtheletes);
-        }
+        $wgtAthelete->AddCssClass('span12');
         return $wgtAthelete;
-    }
-    public function lnkViewResults_click($strFormId, $strControlId, $strActionParameter) {
-        $this->Redirect('/data/editResult', array(
-            FFSQS::Athelete_IdAthelete => $strActionParameter
-        ));
-    }
-    public function lnkViewOrg_click($strFormId, $strControlId, $strActionParameter) {
-        $intIdOrg = $this->arrControls[$strControlId]->ParentControl->GetData('_entity')->IdOrg;
-        $this->Redirect('/data/editOrg', array(
-            FFSQS::Org_IdOrg => $intIdOrg
-        ));
     }
     public function lstAthelete_editInit() {
         //_dv($this->lstAtheletes->SelectedRow);
@@ -139,7 +146,6 @@ class AtheleteManageFormBase extends FFSForm {
         if (!is_null($this->lstAtheletes->SelectedRow)) {
             //This already exists
             $this->lstAtheletes->SelectedRow->UpdateEntity($objAthelete);
-            $this->ScrollTo($this->lstAtheletes->SelectedRow);
             $this->lstAtheletes->SelectedRow = null;
         } else {
             $objRow = $this->lstAtheletes->AddRow($objAthelete);

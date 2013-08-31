@@ -345,7 +345,7 @@ abstract class FFSApplication{
         );
         return $arrSessions;
     }
-    public static function GetActiveCompetitons(){
+    public static function GetActiveCompetitions(){
         //Get user orgs by roll
         $arrRolls = MLCAuthDriver::GetRolls(FFSRoll::ORG_MANAGER);
         //_dv($arrRolls);

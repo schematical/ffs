@@ -8,8 +8,8 @@
 * - RenderDate()
 * - RenderTime()
 * - SetupCols()
-* - InitRowClickEntityRelAction()
-* - objRow_click()
+* - render_idDevice()
+* - render_idSession()
 * Classes list:
 * - AssignmentListPanelBase extends MJaxTable
 */
@@ -45,23 +45,37 @@ class AssignmentListPanelBase extends MJaxTable {
     }
     public function SetupCols() {
         //$this->AddColumn('idAssignment','idAssignment');
-        $this->AddColumn('idDevice', ' Id Device', null, null, 'MJaxTextBox');
-        $this->AddColumn('idSession', ' Id Session', null, null, 'MJaxTextBox');
+        $this->AddColumn('idDevice', ' Device', $this, 'render_idDevice', 'MJaxTextBox');
+        $this->AddColumn('idSession', ' Session', $this, 'render_idSession', 'MJaxTextBox');
         $this->AddColumn('event', ' Event', null, null, 'MJaxTextBox');
         $this->AddColumn('apartatus', ' Apartatus', null, null, 'MJaxTextBox');
-        $this->AddColumn('creDate', ' Cre Date', $this, 'RenderDate', 'MJaxBSDateTimePicker');
         $this->AddColumn('revokeDate', ' Revoke Date', $this, 'RenderDate', 'MJaxBSDateTimePicker');
     }
-    /*
-    Old stuff
-    */
-    public function InitRowClickEntityRelAction() {
-        foreach ($this->Rows as $intIndex => $objRow) {
-            $objRow->AddAction($this, 'objRow_click');
+    public function render_idDevice($intIdIdDevice, $objRow, $objColumn) {
+        if (is_null($intIdIdDevice)) {
+            return '';
         }
+        $objDevice = Device::LoadById($intIdIdDevice);
+        if (is_null($objDevice)) {
+            return 'error';
+        }
+        $lnkView = new MJaxLinkButton($this);
+        $lnkView->Text = $objDevice->__toString();
+        $lnkView->Href = '/data/editDevice?' . FFSQS::Device_IdDevice . '=' . $objDevice->IdDevice;
+        return $lnkView->Render(false);
     }
-    public function objRow_click($strFomrId, $strControlId, $strActionParameter) {
-        $this->objForm->Redirect(__ENTITY_MODEL_DIR__ . '/Assignment/' . $strActionParameter);
+    public function render_idSession($intIdIdSession, $objRow, $objColumn) {
+        if (is_null($intIdIdSession)) {
+            return '';
+        }
+        $objSession = Session::LoadById($intIdIdSession);
+        if (is_null($objSession)) {
+            return 'error';
+        }
+        $lnkView = new MJaxLinkButton($this);
+        $lnkView->Text = $objSession->__toString();
+        $lnkView->Href = '/data/editSession?' . FFSQS::Session_IdSession . '=' . $objSession->IdSession;
+        return $lnkView->Render(false);
     }
 }
 ?>

@@ -1,14 +1,23 @@
 <link href="<?php echo __MJAX_WADMIN_THEME_ASSET_URL__ . '/css'; ?>/pages/reports.css" rel="stylesheet">
 
 <div class='shortcuts '>
-    <a href="/<?php echo $_CONTROL->objCompetition->Namespace; ?>/org/fullScreen.php" class="shortcut">
-        <i class="shortcut-icon icon-fullscreen"></i>
-        <span class="shortcut-label">Full Screen Mode</span>
-    </a>
+
+
+
     <a href="/<?php echo $_CONTROL->objCompetition->Namespace; ?>/org/competition/manageSessions" class="shortcut">
         <i class="shortcut-icon icon-bar-chart "></i>
-        <span class="shortcut-label">Manage</span>
+        <span class="shortcut-label">Sessions</span>
     </a>
+    <a href="/<?php echo $_CONTROL->objCompetition->Namespace; ?>/org/competition/manageGyms" class="shortcut">
+        <i class="shortcut-icon icon-building "></i>
+        <span class="shortcut-label">Gyms</span>
+    </a>
+    <a href="/<?php echo $_CONTROL->objCompetition->Namespace; ?>/org/competition/manageAtheletes" class="shortcut">
+        <i class="shortcut-icon icon-group "></i>
+        <span class="shortcut-label">Atheletes</span>
+    </a>
+
+
     <a href="javascript:MJax.BS.Alert('Coming Soon');" class="shortcut">
         <i class="shortcut-icon icon-list-ol "></i>
         <span class="shortcut-label">Setup Wizzard</span>
@@ -24,6 +33,10 @@
     <a href="javascript:MJax.BS.Alert('Coming Soon');" class="shortcut">
         <i class="shortcut-icon icon-bar-chart "></i>
         <span class="shortcut-label">Reports</span>
+    </a>
+    <a href="/<?php echo $_CONTROL->objCompetition->Namespace; ?>/org/fullScreen.php" class="shortcut">
+        <i class="shortcut-icon icon-fullscreen"></i>
+        <span class="shortcut-label">Full Screen Mode</span>
     </a>
 </div>
 <hr>

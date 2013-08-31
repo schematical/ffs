@@ -5,12 +5,11 @@
 * - Form_Create()
 * - Query()
 * - InitSelectPanel()
+* - pnlSelect_change()
 * - InitEditPanel()
 * - pnlEdit_save()
 * - pnlEdit_delete()
 * - InitList()
-* - lnkViewAthelete_click()
-* - lnkViewCompetition_click()
 * - lstParentMessage_editInit()
 * - lstParentMessage_editSave()
 * - lnkEdit_click()
@@ -65,13 +64,29 @@ class ParentMessageManageFormBase extends FFSForm {
     }
     public function InitSelectPanel() {
         $this->pnlSelect = new ParentMessageSelectPanel($this);
-        /*$this->pnlEdit->AddAction(
-                new MJaxDataEntitySaveEvent(),
-                new MJaxServerControlAction($this, 'pnlEdit_save')
-            );*/
+        $this->pnlSelect->AddAction(new MJaxBSAutocompleteSelectEvent() , new MJaxServerControlAction($this, 'pnlSelect_change'));
         $wgtParentMessage = $this->AddWidget('Select ParentMessage', 'icon-select', $this->pnlSelect);
         $wgtParentMessage->AddCssClass('span6');
         return $wgtParentMessage;
+    }
+    public function pnlSelect_change($strFormId, $strControlId, $mixActionParameter) {
+        $arrParentMessages = $this->pnlSelect->GetValue();
+        if (count($arrParentMessages) == 1) {
+            $this->pnlEdit->SetParentMessage($arrParentMessages[0]);
+            foreach ($this->lstParentMessages as $objRow) {
+                if ($objRow->ActionParameter == $arrParentMessages[0]->IdParentMessage) {
+                    $this->lstParentMessages->SelectedRow = $objRow;
+                }
+            }
+            //$this->ScrollTo($this->pnlEdit);
+            
+        } //else{
+        $this->ScrollTo($this->lstParentMessages);
+        //}
+        $this->lstParentMessages->RemoveAllChildControls();
+        $this->lstParentMessages->SetDataEntites($arrParentMessages);
+        //TODO: Remeber to add check lists for assoc or relationship tables
+        
     }
     public function InitEditPanel($objParentMessage = null) {
         $this->pnlEdit = new ParentMessageEditPanel($this, $objParentMessage);
@@ -81,10 +96,17 @@ class ParentMessageManageFormBase extends FFSForm {
         $wgtParentMessage->AddCssClass('span6');
         return $wgtParentMessage;
     }
-    //Fake event holders for now
     public function pnlEdit_save($strFormId, $strControlId, $objParentMessage) {
+        $this->UpdateTable($objParentMessage);
+        if (!is_null($this->lstParentMessages->SelectedRow)) {
+            $this->ScrollTo($this->lstParentMessages->SelectedRow);
+        } else {
+            $this->pnlEdit->Alert('Saved!', 'info');
+        }
     }
     public function pnlEdit_delete($strFormId, $strControlId, $objParentMessage) {
+        $this->lstParentMessages->SelectedRow->Remove();
+        $this->lstParentMessages->SelectedRow = null;
     }
     public function InitList($arrParentMessages) {
         $this->lstParentMessages = new ParentMessageListPanel($this, $arrParentMessages);
@@ -98,25 +120,9 @@ class ParentMessageManageFormBase extends FFSForm {
             $this->lstParentMessages->InitRowControl('edit', 'Edit', $this, 'lnkEdit_click');
         }
         //
-        $this->lstParentMessages->InitRowControl('idAthelete', 'View Athelete', $this, 'lnkViewAthelete_click');
-        $this->lstParentMessages->InitRowControl('idCompetition', 'View Competition', $this, 'lnkViewCompetition_click');
         $wgtParentMessage = $this->AddWidget('ParentMessages', 'icon-ul', $this->lstParentMessages);
-        if (!is_null($this->pnlSelect)) {
-            $this->pnlSelect->ConnectTable($this->lstParentMessages);
-        }
+        $wgtParentMessage->AddCssClass('span12');
         return $wgtParentMessage;
-    }
-    public function lnkViewAthelete_click($strFormId, $strControlId, $strActionParameter) {
-        $intIdAthelete = $this->arrControls[$strControlId]->ParentControl->GetData('_entity')->IdAthelete;
-        $this->Redirect('/data/editAthelete', array(
-            FFSQS::Athelete_IdAthelete => $intIdAthelete
-        ));
-    }
-    public function lnkViewCompetition_click($strFormId, $strControlId, $strActionParameter) {
-        $intIdCompetition = $this->arrControls[$strControlId]->ParentControl->GetData('_entity')->IdCompetition;
-        $this->Redirect('/data/editCompetition', array(
-            FFSQS::Competition_IdCompetition => $intIdCompetition
-        ));
     }
     public function lstParentMessage_editInit() {
         //_dv($this->lstParentMessages->SelectedRow);
@@ -140,7 +146,6 @@ class ParentMessageManageFormBase extends FFSForm {
         if (!is_null($this->lstParentMessages->SelectedRow)) {
             //This already exists
             $this->lstParentMessages->SelectedRow->UpdateEntity($objParentMessage);
-            $this->ScrollTo($this->lstParentMessages->SelectedRow);
             $this->lstParentMessages->SelectedRow = null;
         } else {
             $objRow = $this->lstParentMessages->AddRow($objParentMessage);

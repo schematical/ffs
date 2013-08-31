@@ -14,7 +14,7 @@ class ControlIndex extends FFSForm {
         $this->tblEntities = new MJaxTable($this);
         $this->tblEntities->AddColumn('name', 'Name');
         $this->tblEntities->AddColumn('count', 'Count');
-        $this->tblEntities->AddColumn('manage', '');
+        $this->tblEntities->InitRowControl('manage', 'Manage', $this, 'lnkManage_click');
         //Assignment
         $arrData = array(
             'name' => "Assignment",
@@ -22,7 +22,6 @@ class ControlIndex extends FFSForm {
         );
         $objRow = $this->tblEntities->AddRow($arrData);
         $objRow->ActionParameter = "Assignment";
-        $this->tblEntities->InitRowControl('manage', 'Manage', $this, 'lnkManage_click');
         //Athelete
         $arrData = array(
             'name' => "Athelete",
@@ -30,7 +29,6 @@ class ControlIndex extends FFSForm {
         );
         $objRow = $this->tblEntities->AddRow($arrData);
         $objRow->ActionParameter = "Athelete";
-        $this->tblEntities->InitRowControl('manage', 'Manage', $this, 'lnkManage_click');
         //Competition
         $arrData = array(
             'name' => "Competition",
@@ -38,7 +36,6 @@ class ControlIndex extends FFSForm {
         );
         $objRow = $this->tblEntities->AddRow($arrData);
         $objRow->ActionParameter = "Competition";
-        $this->tblEntities->InitRowControl('manage', 'Manage', $this, 'lnkManage_click');
         //Device
         $arrData = array(
             'name' => "Device",
@@ -46,7 +43,6 @@ class ControlIndex extends FFSForm {
         );
         $objRow = $this->tblEntities->AddRow($arrData);
         $objRow->ActionParameter = "Device";
-        $this->tblEntities->InitRowControl('manage', 'Manage', $this, 'lnkManage_click');
         //Enrollment
         $arrData = array(
             'name' => "Enrollment",
@@ -54,7 +50,6 @@ class ControlIndex extends FFSForm {
         );
         $objRow = $this->tblEntities->AddRow($arrData);
         $objRow->ActionParameter = "Enrollment";
-        $this->tblEntities->InitRowControl('manage', 'Manage', $this, 'lnkManage_click');
         //Org
         $arrData = array(
             'name' => "Org",
@@ -62,7 +57,6 @@ class ControlIndex extends FFSForm {
         );
         $objRow = $this->tblEntities->AddRow($arrData);
         $objRow->ActionParameter = "Org";
-        $this->tblEntities->InitRowControl('manage', 'Manage', $this, 'lnkManage_click');
         //ParentMessage
         $arrData = array(
             'name' => "ParentMessage",
@@ -70,7 +64,6 @@ class ControlIndex extends FFSForm {
         );
         $objRow = $this->tblEntities->AddRow($arrData);
         $objRow->ActionParameter = "ParentMessage";
-        $this->tblEntities->InitRowControl('manage', 'Manage', $this, 'lnkManage_click');
         //Result
         $arrData = array(
             'name' => "Result",
@@ -78,7 +71,6 @@ class ControlIndex extends FFSForm {
         );
         $objRow = $this->tblEntities->AddRow($arrData);
         $objRow->ActionParameter = "Result";
-        $this->tblEntities->InitRowControl('manage', 'Manage', $this, 'lnkManage_click');
         //Session
         $arrData = array(
             'name' => "Session",
@@ -86,7 +78,7 @@ class ControlIndex extends FFSForm {
         );
         $objRow = $this->tblEntities->AddRow($arrData);
         $objRow->ActionParameter = "Session";
-        $this->tblEntities->InitRowControl('manage', 'Manage', $this, 'lnkManage_click');
+        $this->tblEntities->RefreshControls();
         $this->AddWidget('Entities', '', $this->tblEntities);
     }
     public function lnkManage_click($strFormId, $strControlId, $strActionParameter) {

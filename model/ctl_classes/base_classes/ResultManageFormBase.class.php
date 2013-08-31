@@ -5,12 +5,11 @@
 * - Form_Create()
 * - Query()
 * - InitSelectPanel()
+* - pnlSelect_change()
 * - InitEditPanel()
 * - pnlEdit_save()
 * - pnlEdit_delete()
 * - InitList()
-* - lnkViewSession_click()
-* - lnkViewAthelete_click()
 * - lstResult_editInit()
 * - lstResult_editSave()
 * - lnkEdit_click()
@@ -61,13 +60,29 @@ class ResultManageFormBase extends FFSForm {
     }
     public function InitSelectPanel() {
         $this->pnlSelect = new ResultSelectPanel($this);
-        /*$this->pnlEdit->AddAction(
-                new MJaxDataEntitySaveEvent(),
-                new MJaxServerControlAction($this, 'pnlEdit_save')
-            );*/
+        $this->pnlSelect->AddAction(new MJaxBSAutocompleteSelectEvent() , new MJaxServerControlAction($this, 'pnlSelect_change'));
         $wgtResult = $this->AddWidget('Select Result', 'icon-select', $this->pnlSelect);
         $wgtResult->AddCssClass('span6');
         return $wgtResult;
+    }
+    public function pnlSelect_change($strFormId, $strControlId, $mixActionParameter) {
+        $arrResults = $this->pnlSelect->GetValue();
+        if (count($arrResults) == 1) {
+            $this->pnlEdit->SetResult($arrResults[0]);
+            foreach ($this->lstResults as $objRow) {
+                if ($objRow->ActionParameter == $arrResults[0]->IdResult) {
+                    $this->lstResults->SelectedRow = $objRow;
+                }
+            }
+            //$this->ScrollTo($this->pnlEdit);
+            
+        } //else{
+        $this->ScrollTo($this->lstResults);
+        //}
+        $this->lstResults->RemoveAllChildControls();
+        $this->lstResults->SetDataEntites($arrResults);
+        //TODO: Remeber to add check lists for assoc or relationship tables
+        
     }
     public function InitEditPanel($objResult = null) {
         $this->pnlEdit = new ResultEditPanel($this, $objResult);
@@ -77,10 +92,17 @@ class ResultManageFormBase extends FFSForm {
         $wgtResult->AddCssClass('span6');
         return $wgtResult;
     }
-    //Fake event holders for now
     public function pnlEdit_save($strFormId, $strControlId, $objResult) {
+        $this->UpdateTable($objResult);
+        if (!is_null($this->lstResults->SelectedRow)) {
+            $this->ScrollTo($this->lstResults->SelectedRow);
+        } else {
+            $this->pnlEdit->Alert('Saved!', 'info');
+        }
     }
     public function pnlEdit_delete($strFormId, $strControlId, $objResult) {
+        $this->lstResults->SelectedRow->Remove();
+        $this->lstResults->SelectedRow = null;
     }
     public function InitList($arrResults) {
         $this->lstResults = new ResultListPanel($this, $arrResults);
@@ -94,25 +116,9 @@ class ResultManageFormBase extends FFSForm {
             $this->lstResults->InitRowControl('edit', 'Edit', $this, 'lnkEdit_click');
         }
         //
-        $this->lstResults->InitRowControl('idSession', 'View Session', $this, 'lnkViewSession_click');
-        $this->lstResults->InitRowControl('idAthelete', 'View Athelete', $this, 'lnkViewAthelete_click');
         $wgtResult = $this->AddWidget('Results', 'icon-ul', $this->lstResults);
-        if (!is_null($this->pnlSelect)) {
-            $this->pnlSelect->ConnectTable($this->lstResults);
-        }
+        $wgtResult->AddCssClass('span12');
         return $wgtResult;
-    }
-    public function lnkViewSession_click($strFormId, $strControlId, $strActionParameter) {
-        $intIdSession = $this->arrControls[$strControlId]->ParentControl->GetData('_entity')->IdSession;
-        $this->Redirect('/data/editSession', array(
-            FFSQS::Session_IdSession => $intIdSession
-        ));
-    }
-    public function lnkViewAthelete_click($strFormId, $strControlId, $strActionParameter) {
-        $intIdAthelete = $this->arrControls[$strControlId]->ParentControl->GetData('_entity')->IdAthelete;
-        $this->Redirect('/data/editAthelete', array(
-            FFSQS::Athelete_IdAthelete => $intIdAthelete
-        ));
     }
     public function lstResult_editInit() {
         //_dv($this->lstResults->SelectedRow);
@@ -136,7 +142,6 @@ class ResultManageFormBase extends FFSForm {
         if (!is_null($this->lstResults->SelectedRow)) {
             //This already exists
             $this->lstResults->SelectedRow->UpdateEntity($objResult);
-            $this->ScrollTo($this->lstResults->SelectedRow);
             $this->lstResults->SelectedRow = null;
         } else {
             $objRow = $this->lstResults->AddRow($objResult);

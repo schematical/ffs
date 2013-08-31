@@ -8,8 +8,8 @@
 * - RenderDate()
 * - RenderTime()
 * - SetupCols()
-* - InitRowClickEntityRelAction()
-* - objRow_click()
+* - render_idAthelete()
+* - render_idCompetition()
 * Classes list:
 * - ParentMessageListPanelBase extends MJaxTable
 */
@@ -45,28 +45,38 @@ class ParentMessageListPanelBase extends MJaxTable {
     }
     public function SetupCols() {
         //$this->AddColumn('idParentMessage','idParentMessage');
-        $this->AddColumn('idAthelete', ' Id Athelete', null, null, 'MJaxTextBox');
+        $this->AddColumn('idAthelete', ' Athelete', $this, 'render_idAthelete', 'MJaxTextBox');
         $this->AddColumn('atheleteName', ' Athelete Name', null, null, 'MJaxTextBox');
         $this->AddColumn('message', ' Message', null, null, 'MJaxTextArea');
-        $this->AddColumn('creDate', ' Cre Date', $this, 'RenderDate', 'MJaxBSDateTimePicker');
-        $this->AddColumn('dispDate', ' Disp Date', $this, 'RenderDate', 'MJaxBSDateTimePicker');
-        $this->AddColumn('queDate', ' Que Date', $this, 'RenderDate', 'MJaxBSDateTimePicker');
         $this->AddColumn('inviteType', ' Invite Type', null, null, 'MJaxTextBox');
         $this->AddColumn('inviteToken', ' Invite Token', null, null, 'MJaxTextBox');
-        $this->AddColumn('inviteViewDate', ' Invite View Date', $this, 'RenderDate', 'MJaxBSDateTimePicker');
-        $this->AddColumn('idCompetition', ' Id Competition', null, null, 'MJaxTextBox');
-        $this->AddColumn('approveDate', ' Approve Date', $this, 'RenderDate', 'MJaxBSDateTimePicker');
+        $this->AddColumn('idCompetition', ' Competition', $this, 'render_idCompetition', 'MJaxTextBox');
     }
-    /*
-    Old stuff
-    */
-    public function InitRowClickEntityRelAction() {
-        foreach ($this->Rows as $intIndex => $objRow) {
-            $objRow->AddAction($this, 'objRow_click');
+    public function render_idAthelete($intIdIdAthelete, $objRow, $objColumn) {
+        if (is_null($intIdIdAthelete)) {
+            return '';
         }
+        $objAthelete = Athelete::LoadById($intIdIdAthelete);
+        if (is_null($objAthelete)) {
+            return 'error';
+        }
+        $lnkView = new MJaxLinkButton($this);
+        $lnkView->Text = $objAthelete->__toString();
+        $lnkView->Href = '/data/editAthelete?' . FFSQS::Athelete_IdAthelete . '=' . $objAthelete->IdAthelete;
+        return $lnkView->Render(false);
     }
-    public function objRow_click($strFomrId, $strControlId, $strActionParameter) {
-        $this->objForm->Redirect(__ENTITY_MODEL_DIR__ . '/ParentMessage/' . $strActionParameter);
+    public function render_idCompetition($intIdIdCompetition, $objRow, $objColumn) {
+        if (is_null($intIdIdCompetition)) {
+            return '';
+        }
+        $objCompetition = Competition::LoadById($intIdIdCompetition);
+        if (is_null($objCompetition)) {
+            return 'error';
+        }
+        $lnkView = new MJaxLinkButton($this);
+        $lnkView->Text = $objCompetition->__toString();
+        $lnkView->Href = '/data/editCompetition?' . FFSQS::Competition_IdCompetition . '=' . $objCompetition->IdCompetition;
+        return $lnkView->Render(false);
     }
 }
 ?>

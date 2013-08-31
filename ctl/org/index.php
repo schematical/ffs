@@ -1,32 +1,16 @@
 <?php
-
-class index extends FFSForm {
-    public $pnlMessages = null;
-    //public $pnlNav = null;
-    public function Form_Create(){
-        parent::Form_Create();
-        if(is_null(MLCAuthDriver::User())){
-            $this->Redirect('/index.php');
-        }
-
-        //$this->pnlNav = new FFSOrgHomeNavPanel($this);
-        //$this->AddWidget('Welcome','icon-home', $this->pnlNav);
-
-
-        $arrCompitions = FFSApplication::GetActiveCompetitons();
-
-        foreach($arrCompitions as $intIndex => $objCompetition){
-
-
-
-            $this->AddWidget(
-                $objCompetition->Name,
-                'icon-home',
-                new FFSOrgCompActivePanel($this, $objCompetition)
-            );
-        }
-    }
-
+if(is_null(MLCAuthDriver::User())){
+    die(header('/'));
 }
-index::Run('index');
+if(!is_null(FFSForm::$objCompetition)){
+    $objRoll = MLCAuthDriver::GetRollByEntity(FFSForm::$objCompetition->IdOrgObject);
+    if(
+        (!is_null($objRoll)) &&
+        ($objRoll->Type == FFSRoll::ORG_MANAGER)
+    ){
+        require_once(__CTL_ACTIVE_APP_DIR__ . '/org/competition/index.php');
+        die();
+    }
+}
+require_once(__CTL_ACTIVE_APP_DIR__ . '/org/home.php');
 ?>

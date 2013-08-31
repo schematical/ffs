@@ -22,7 +22,7 @@ $_CONTROL->txtSearch->Render(); ?>
                             
                                 <?php if (!is_null($_CONTROL->intIdParentMessage)) { ?>
                                     <div class='controls'>
-                                        <label> Id Parent Message</label>
+                                        <!--label> Parent Message</label-->
                                         <?php $_CONTROL->intIdParentMessage->Render(); ?>
                                      </div>
                                  <?php
@@ -35,7 +35,7 @@ $_CONTROL->txtSearch->Render(); ?>
                             
                                 <?php if (!is_null($_CONTROL->intIdAthelete)) { ?>
                                     <div class='controls'>
-                                        <label> Id Athelete</label>
+                                        <!--label> Athelete</label-->
                                         <?php $_CONTROL->intIdAthelete->Render(); ?>
                                      </div>
                                  <?php
@@ -48,7 +48,7 @@ $_CONTROL->txtSearch->Render(); ?>
                             
                                 <?php if (!is_null($_CONTROL->strAtheleteName)) { ?>
                                     <div class='controls'>
-                                        <label> Athelete Name</label>
+                                        <!--label> Athelete Name</label-->
                                         <?php $_CONTROL->strAtheleteName->Render(); ?>
                                      </div>
                                  <?php
@@ -61,7 +61,7 @@ $_CONTROL->txtSearch->Render(); ?>
                             
                                 <?php if (!is_null($_CONTROL->strMessage)) { ?>
                                     <div class='controls'>
-                                        <label> Message</label>
+                                        <!--label> Message</label-->
                                         <?php $_CONTROL->strMessage->Render(); ?>
                                      </div>
                                  <?php
@@ -117,7 +117,7 @@ $_CONTROL->txtSearch->Render(); ?>
                             
                                 <?php if (!is_null($_CONTROL->strInviteType)) { ?>
                                     <div class='controls'>
-                                        <label> Invite Type</label>
+                                        <!--label> Invite Type</label-->
                                         <?php $_CONTROL->strInviteType->Render(); ?>
                                      </div>
                                  <?php
@@ -130,7 +130,7 @@ $_CONTROL->txtSearch->Render(); ?>
                             
                                 <?php if (!is_null($_CONTROL->strInviteToken)) { ?>
                                     <div class='controls'>
-                                        <label> Invite Token</label>
+                                        <!--label> Invite Token</label-->
                                         <?php $_CONTROL->strInviteToken->Render(); ?>
                                      </div>
                                  <?php
@@ -157,7 +157,7 @@ $_CONTROL->txtSearch->Render(); ?>
                             
                                 <?php if (!is_null($_CONTROL->intIdCompetition)) { ?>
                                     <div class='controls'>
-                                        <label> Id Competition</label>
+                                        <!--label> Competition</label-->
                                         <?php $_CONTROL->intIdCompetition->Render(); ?>
                                      </div>
                                  <?php

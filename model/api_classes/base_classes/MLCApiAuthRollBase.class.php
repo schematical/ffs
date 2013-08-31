@@ -1,28 +1,30 @@
 <?php
-class MLCApiAuthRollBase extends MLCApiClassBase{
-	protected $strClassName = 'AuthRoll';
-	
-	public function  __call($strName, $arrArguments) {
-       
-		$arrReturn = array();
-		if(is_numeric($strName){
+/**
+* Class and Function List:
+* Function list:
+* - __call()
+* - Query()
+* Classes list:
+* - MLCApiAuthRollBase extends MLCApiClassBase
+*/
+class MLCApiAuthRollBase extends MLCApiClassBase {
+    protected $strClassName = 'AuthRoll';
+    public function __call($strName, $arrArguments) {
+        $arrReturn = array();
+        if (is_numeric($strName) {
             $objAuthRoll = AuthRoll::LoadById($strName);
-        }else{
+        } else {
             $objAuthRoll = null;
         }
-
-      
-        if(!is_null($objAuthRoll)){
-        	return new MLCApiAuthRollObject($objAuthRoll);
-        }else{
+        if (!is_null($objAuthRoll)) {
+            return new MLCApiAuthRollObject($objAuthRoll);
+        } else {
             throw new MLCApiException("No AuthRoll found with the data you submitted");
         }
+    }
+    public function Query() {
+        //Will need to accept QS Pramaeters of facebook, twitter, google
         
-     }
-
-    	
-	public function Query(){
-	 	//Will need to accept QS Pramaeters of facebook, twitter, google
-	}
+    }
 }
 ?>

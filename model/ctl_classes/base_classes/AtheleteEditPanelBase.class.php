@@ -9,6 +9,7 @@
 * - CreateReferenceControls()
 * - btnSave_click()
 * - btnDelete_click()
+* - btnDelete_confirm()
 * - IsNew()
 * Classes list:
 * - AtheleteEditPanelBase extends MJaxPanel
@@ -26,6 +27,8 @@ class AtheleteEditPanelBase extends MJaxPanel {
     public $dttCreDate = null;
     public $strLevel = null;
     public $lnkViewParentIdOrg = null;
+    public $lnkViewChildEnrollment = null;
+    public $lnkViewChildParentMessage = null;
     public $lnkViewChildResult = null;
     //Regular controls
     public $btnSave = null;
@@ -113,6 +116,14 @@ class AtheleteEditPanelBase extends MJaxPanel {
                 $this->lnkViewParentIdOrg->Href = __ENTITY_MODEL_DIR__ . '/Org/' . $this->objAthelete->idOrg;
             }
         }
+        $this->lnkViewChildEnrollment = new MJaxLinkButton($this);
+        $this->lnkViewChildEnrollment->Text = 'View Enrollments';
+        //I should really fix this
+        //$this->lnkViewChildEnrollment->Href = __ENTITY_MODEL_DIR__ . '/Athelete/' . $this->objAthelete->idAthelete . '/Enrollments';
+        $this->lnkViewChildParentMessage = new MJaxLinkButton($this);
+        $this->lnkViewChildParentMessage->Text = 'View ParentMessages';
+        //I should really fix this
+        //$this->lnkViewChildParentMessage->Href = __ENTITY_MODEL_DIR__ . '/Athelete/' . $this->objAthelete->idAthelete . '/ParentMessages';
         $this->lnkViewChildResult = new MJaxLinkButton($this);
         $this->lnkViewChildResult->Text = 'View Results';
         //I should really fix this
@@ -140,6 +151,9 @@ class AtheleteEditPanelBase extends MJaxPanel {
         $this->objForm->TriggerControlEvent($this->strControlId, 'mjax-data-entity-save');
     }
     public function btnDelete_click() {
+        $this->Confirm('Are you sure you want to delete this?', 'btnDelete_confirm');
+    }
+    public function btnDelete_confirm() {
         $this->objAthelete->MarkDeleted();
         $this->SetAthelete(null);
         //Experimental delete event trigger

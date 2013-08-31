@@ -8,8 +8,8 @@
 * - RenderDate()
 * - RenderTime()
 * - SetupCols()
-* - InitRowClickEntityRelAction()
-* - objRow_click()
+* - lnkViewAssignments_click()
+* - render_idOrg()
 * Classes list:
 * - DeviceListPanelBase extends MJaxTable
 */
@@ -47,20 +47,27 @@ class DeviceListPanelBase extends MJaxTable {
         //$this->AddColumn('idDevice','idDevice');
         $this->AddColumn('name', ' Name', null, null, 'MJaxTextBox');
         $this->AddColumn('token', ' Token', null, null, 'MJaxTextBox');
-        $this->AddColumn('creDate', ' Cre Date', $this, 'RenderDate', 'MJaxBSDateTimePicker');
         $this->AddColumn('inviteEmail', ' Invite Email', null, null, 'MJaxTextBox');
-        $this->AddColumn('idOrg', ' Id Org', null, null, 'MJaxTextBox');
+        $this->AddColumn('idOrg', ' Org', $this, 'render_idOrg', 'MJaxTextBox');
+        $this->InitRowControl('view_Assignments', 'View Assignments', $this, 'lnkViewAssignments_click', 'btn btn-small');
     }
-    /*
-    Old stuff
-    */
-    public function InitRowClickEntityRelAction() {
-        foreach ($this->Rows as $intIndex => $objRow) {
-            $objRow->AddAction($this, 'objRow_click');
+    public function lnkViewAssignments_click($strFormId, $strControlId, $strActionParameter) {
+        $this->objForm->Redirect('/data/editAssignment', array(
+            FFSQS::Device_IdDevice => $strActionParameter
+        ));
+    }
+    public function render_idOrg($intIdIdOrg, $objRow, $objColumn) {
+        if (is_null($intIdIdOrg)) {
+            return '';
         }
-    }
-    public function objRow_click($strFomrId, $strControlId, $strActionParameter) {
-        $this->objForm->Redirect(__ENTITY_MODEL_DIR__ . '/Device/' . $strActionParameter);
+        $objOrg = Org::LoadById($intIdIdOrg);
+        if (is_null($objOrg)) {
+            return 'error';
+        }
+        $lnkView = new MJaxLinkButton($this);
+        $lnkView->Text = $objOrg->__toString();
+        $lnkView->Href = '/data/editOrg?' . FFSQS::Org_IdOrg . '=' . $objOrg->IdOrg;
+        return $lnkView->Render(false);
     }
 }
 ?>

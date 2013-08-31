@@ -8,8 +8,9 @@
 * - RenderDate()
 * - RenderTime()
 * - SetupCols()
-* - InitRowClickEntityRelAction()
-* - objRow_click()
+* - render_idAthelete()
+* - render_idCompetition()
+* - render_idSession()
 * Classes list:
 * - EnrollmentListPanelBase extends MJaxTable
 */
@@ -45,9 +46,9 @@ class EnrollmentListPanelBase extends MJaxTable {
     }
     public function SetupCols() {
         //$this->AddColumn('idEnrollment','idEnrollment');
-        $this->AddColumn('idAthelete', ' Id Athelete', null, null, 'MJaxTextBox');
-        $this->AddColumn('idCompetition', ' Id Competition', null, null, 'MJaxTextBox');
-        $this->AddColumn('idSession', ' Id Session', null, null, 'MJaxTextBox');
+        $this->AddColumn('idAthelete', ' Athelete', $this, 'render_idAthelete', 'MJaxTextBox');
+        $this->AddColumn('idCompetition', ' Competition', $this, 'render_idCompetition', 'MJaxTextBox');
+        $this->AddColumn('idSession', ' Session', $this, 'render_idSession', 'MJaxTextBox');
         $this->AddColumn('flight', ' Flight', null, null, 'MJaxTextBox');
         $this->AddColumn('division', ' Division', null, null, 'MJaxTextBox');
         $this->AddColumn('ageGroup', ' Age Group', null, null, 'MJaxTextBox');
@@ -56,19 +57,46 @@ class EnrollmentListPanelBase extends MJaxTable {
         $this->AddColumn('misc3', ' Misc 3', null, null, 'MJaxTextBox');
         $this->AddColumn('misc4', ' Misc 4', null, null, 'MJaxTextBox');
         $this->AddColumn('misc5', ' Misc 5', null, null, 'MJaxTextBox');
-        $this->AddColumn('creDate', ' Cre Date', $this, 'RenderDate', 'MJaxBSDateTimePicker');
         $this->AddColumn('level', ' Level', null, null, 'MJaxTextBox');
     }
-    /*
-    Old stuff
-    */
-    public function InitRowClickEntityRelAction() {
-        foreach ($this->Rows as $intIndex => $objRow) {
-            $objRow->AddAction($this, 'objRow_click');
+    public function render_idAthelete($intIdIdAthelete, $objRow, $objColumn) {
+        if (is_null($intIdIdAthelete)) {
+            return '';
         }
+        $objAthelete = Athelete::LoadById($intIdIdAthelete);
+        if (is_null($objAthelete)) {
+            return 'error';
+        }
+        $lnkView = new MJaxLinkButton($this);
+        $lnkView->Text = $objAthelete->__toString();
+        $lnkView->Href = '/data/editAthelete?' . FFSQS::Athelete_IdAthelete . '=' . $objAthelete->IdAthelete;
+        return $lnkView->Render(false);
     }
-    public function objRow_click($strFomrId, $strControlId, $strActionParameter) {
-        $this->objForm->Redirect(__ENTITY_MODEL_DIR__ . '/Enrollment/' . $strActionParameter);
+    public function render_idCompetition($intIdIdCompetition, $objRow, $objColumn) {
+        if (is_null($intIdIdCompetition)) {
+            return '';
+        }
+        $objCompetition = Competition::LoadById($intIdIdCompetition);
+        if (is_null($objCompetition)) {
+            return 'error';
+        }
+        $lnkView = new MJaxLinkButton($this);
+        $lnkView->Text = $objCompetition->__toString();
+        $lnkView->Href = '/data/editCompetition?' . FFSQS::Competition_IdCompetition . '=' . $objCompetition->IdCompetition;
+        return $lnkView->Render(false);
+    }
+    public function render_idSession($intIdIdSession, $objRow, $objColumn) {
+        if (is_null($intIdIdSession)) {
+            return '';
+        }
+        $objSession = Session::LoadById($intIdIdSession);
+        if (is_null($objSession)) {
+            return 'error';
+        }
+        $lnkView = new MJaxLinkButton($this);
+        $lnkView->Text = $objSession->__toString();
+        $lnkView->Href = '/data/editSession?' . FFSQS::Session_IdSession . '=' . $objSession->IdSession;
+        return $lnkView->Render(false);
     }
 }
 ?>

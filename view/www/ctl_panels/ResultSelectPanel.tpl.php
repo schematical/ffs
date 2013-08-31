@@ -22,7 +22,7 @@ $_CONTROL->txtSearch->Render(); ?>
                             
                                 <?php if (!is_null($_CONTROL->intIdResult)) { ?>
                                     <div class='controls'>
-                                        <label> Id Result</label>
+                                        <!--label> Result</label-->
                                         <?php $_CONTROL->intIdResult->Render(); ?>
                                      </div>
                                  <?php
@@ -35,7 +35,7 @@ $_CONTROL->txtSearch->Render(); ?>
                             
                                 <?php if (!is_null($_CONTROL->intIdSession)) { ?>
                                     <div class='controls'>
-                                        <label> Id Session</label>
+                                        <!--label> Session</label-->
                                         <?php $_CONTROL->intIdSession->Render(); ?>
                                      </div>
                                  <?php
@@ -48,7 +48,7 @@ $_CONTROL->txtSearch->Render(); ?>
                             
                                 <?php if (!is_null($_CONTROL->intIdAthelete)) { ?>
                                     <div class='controls'>
-                                        <label> Id Athelete</label>
+                                        <!--label> Athelete</label-->
                                         <?php $_CONTROL->intIdAthelete->Render(); ?>
                                      </div>
                                  <?php
@@ -61,7 +61,7 @@ $_CONTROL->txtSearch->Render(); ?>
                             
                                 <?php if (!is_null($_CONTROL->strScore)) { ?>
                                     <div class='controls'>
-                                        <label> Score</label>
+                                        <!--label> Score</label-->
                                         <?php $_CONTROL->strScore->Render(); ?>
                                      </div>
                                  <?php
@@ -74,7 +74,7 @@ $_CONTROL->txtSearch->Render(); ?>
                             
                                 <?php if (!is_null($_CONTROL->strJudge)) { ?>
                                     <div class='controls'>
-                                        <label> Judge</label>
+                                        <!--label> Judge</label-->
                                         <?php $_CONTROL->strJudge->Render(); ?>
                                      </div>
                                  <?php
@@ -87,7 +87,7 @@ $_CONTROL->txtSearch->Render(); ?>
                             
                                 <?php if (!is_null($_CONTROL->intFlag)) { ?>
                                     <div class='controls'>
-                                        <label> Flag</label>
+                                        <!--label> Flag</label-->
                                         <?php $_CONTROL->intFlag->Render(); ?>
                                      </div>
                                  <?php
@@ -105,7 +105,7 @@ $_CONTROL->txtSearch->Render(); ?>
                             
                                 <?php if (!is_null($_CONTROL->strEvent)) { ?>
                                     <div class='controls'>
-                                        <label> Event</label>
+                                        <!--label> Event</label-->
                                         <?php $_CONTROL->strEvent->Render(); ?>
                                      </div>
                                  <?php

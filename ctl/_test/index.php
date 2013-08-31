@@ -1,4 +1,11 @@
 <?php
+$arrResults = Result::LoadAll()->getCollection();
+foreach($arrResults as $intIndex => $objResult){
+    if(strlen($objResult->Score) <= 1){
+        echo 'DEleteing: ' . $objResult->IdResult . ' ' . $objResult->Score . "    <br/>\n";
+        $objResult->MarkDeleted();
+    }
+}
 MLCApplication::InitPackage('MLCCodegen');
 require_once(dirname(__FILE__) . '/Discussion.class.php');
 require_once(dirname(__FILE__) . '/Comment.class.php');

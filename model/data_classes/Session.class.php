@@ -13,6 +13,9 @@ class Session extends SessionBase {
             $this->Save();
         }
     }
+    public function __toString(){
+        return $this->Name;
+    }
 
 }
 

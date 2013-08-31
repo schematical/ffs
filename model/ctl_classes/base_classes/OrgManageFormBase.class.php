@@ -5,11 +5,11 @@
 * - Form_Create()
 * - Query()
 * - InitSelectPanel()
+* - pnlSelect_change()
 * - InitEditPanel()
 * - pnlEdit_save()
 * - pnlEdit_delete()
 * - InitList()
-* - lnkViewDevices_click()
 * - lstOrg_editInit()
 * - lstOrg_editSave()
 * - lnkEdit_click()
@@ -52,13 +52,29 @@ class OrgManageFormBase extends FFSForm {
     }
     public function InitSelectPanel() {
         $this->pnlSelect = new OrgSelectPanel($this);
-        /*$this->pnlEdit->AddAction(
-                new MJaxDataEntitySaveEvent(),
-                new MJaxServerControlAction($this, 'pnlEdit_save')
-            );*/
+        $this->pnlSelect->AddAction(new MJaxBSAutocompleteSelectEvent() , new MJaxServerControlAction($this, 'pnlSelect_change'));
         $wgtOrg = $this->AddWidget('Select Org', 'icon-select', $this->pnlSelect);
         $wgtOrg->AddCssClass('span6');
         return $wgtOrg;
+    }
+    public function pnlSelect_change($strFormId, $strControlId, $mixActionParameter) {
+        $arrOrgs = $this->pnlSelect->GetValue();
+        if (count($arrOrgs) == 1) {
+            $this->pnlEdit->SetOrg($arrOrgs[0]);
+            foreach ($this->lstOrgs as $objRow) {
+                if ($objRow->ActionParameter == $arrOrgs[0]->IdOrg) {
+                    $this->lstOrgs->SelectedRow = $objRow;
+                }
+            }
+            //$this->ScrollTo($this->pnlEdit);
+            
+        } //else{
+        $this->ScrollTo($this->lstOrgs);
+        //}
+        $this->lstOrgs->RemoveAllChildControls();
+        $this->lstOrgs->SetDataEntites($arrOrgs);
+        //TODO: Remeber to add check lists for assoc or relationship tables
+        
     }
     public function InitEditPanel($objOrg = null) {
         $this->pnlEdit = new OrgEditPanel($this, $objOrg);
@@ -68,10 +84,17 @@ class OrgManageFormBase extends FFSForm {
         $wgtOrg->AddCssClass('span6');
         return $wgtOrg;
     }
-    //Fake event holders for now
     public function pnlEdit_save($strFormId, $strControlId, $objOrg) {
+        $this->UpdateTable($objOrg);
+        if (!is_null($this->lstOrgs->SelectedRow)) {
+            $this->ScrollTo($this->lstOrgs->SelectedRow);
+        } else {
+            $this->pnlEdit->Alert('Saved!', 'info');
+        }
     }
     public function pnlEdit_delete($strFormId, $strControlId, $objOrg) {
+        $this->lstOrgs->SelectedRow->Remove();
+        $this->lstOrgs->SelectedRow = null;
     }
     public function InitList($arrOrgs) {
         $this->lstOrgs = new OrgListPanel($this, $arrOrgs);
@@ -85,17 +108,9 @@ class OrgManageFormBase extends FFSForm {
             $this->lstOrgs->InitRowControl('edit', 'Edit', $this, 'lnkEdit_click');
         }
         //
-        $this->lstOrgs->InitRowControl('view_Devices', 'View Devices', $this, 'lnkViewDevices_click');
         $wgtOrg = $this->AddWidget('Orgs', 'icon-ul', $this->lstOrgs);
-        if (!is_null($this->pnlSelect)) {
-            $this->pnlSelect->ConnectTable($this->lstOrgs);
-        }
+        $wgtOrg->AddCssClass('span12');
         return $wgtOrg;
-    }
-    public function lnkViewDevices_click($strFormId, $strControlId, $strActionParameter) {
-        $this->Redirect('/data/editDevice', array(
-            FFSQS::Org_IdOrg => $strActionParameter
-        ));
     }
     public function lstOrg_editInit() {
         //_dv($this->lstOrgs->SelectedRow);
@@ -119,7 +134,6 @@ class OrgManageFormBase extends FFSForm {
         if (!is_null($this->lstOrgs->SelectedRow)) {
             //This already exists
             $this->lstOrgs->SelectedRow->UpdateEntity($objOrg);
-            $this->ScrollTo($this->lstOrgs->SelectedRow);
             $this->lstOrgs->SelectedRow = null;
         } else {
             $objRow = $this->lstOrgs->AddRow($objOrg);

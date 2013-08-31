@@ -22,7 +22,7 @@ $_CONTROL->txtSearch->Render(); ?>
                             
                                 <?php if (!is_null($_CONTROL->intIdAthelete)) { ?>
                                     <div class='controls'>
-                                        <label> Id Athelete</label>
+                                        <!--label> Athelete</label-->
                                         <?php $_CONTROL->intIdAthelete->Render(); ?>
                                      </div>
                                  <?php
@@ -35,7 +35,7 @@ $_CONTROL->txtSearch->Render(); ?>
                             
                                 <?php if (!is_null($_CONTROL->intIdOrg)) { ?>
                                     <div class='controls'>
-                                        <label> Id Org</label>
+                                        <!--label> Org</label-->
                                         <?php $_CONTROL->intIdOrg->Render(); ?>
                                      </div>
                                  <?php
@@ -48,7 +48,7 @@ $_CONTROL->txtSearch->Render(); ?>
                             
                                 <?php if (!is_null($_CONTROL->strFirstName)) { ?>
                                     <div class='controls'>
-                                        <label> First Name</label>
+                                        <!--label> First Name</label-->
                                         <?php $_CONTROL->strFirstName->Render(); ?>
                                      </div>
                                  <?php
@@ -61,7 +61,7 @@ $_CONTROL->txtSearch->Render(); ?>
                             
                                 <?php if (!is_null($_CONTROL->strLastName)) { ?>
                                     <div class='controls'>
-                                        <label> Last Name</label>
+                                        <!--label> Last Name</label-->
                                         <?php $_CONTROL->strLastName->Render(); ?>
                                      </div>
                                  <?php
@@ -88,7 +88,7 @@ $_CONTROL->txtSearch->Render(); ?>
                             
                                 <?php if (!is_null($_CONTROL->strMemType)) { ?>
                                     <div class='controls'>
-                                        <label> Mem Type</label>
+                                        <!--label> Mem Type</label-->
                                         <?php $_CONTROL->strMemType->Render(); ?>
                                      </div>
                                  <?php
@@ -101,7 +101,7 @@ $_CONTROL->txtSearch->Render(); ?>
                             
                                 <?php if (!is_null($_CONTROL->strMemId)) { ?>
                                     <div class='controls'>
-                                        <label> Mem Id</label>
+                                        <!--label> Mem Id</label-->
                                         <?php $_CONTROL->strMemId->Render(); ?>
                                      </div>
                                  <?php
@@ -124,7 +124,7 @@ $_CONTROL->txtSearch->Render(); ?>
                             
                                 <?php if (!is_null($_CONTROL->strLevel)) { ?>
                                     <div class='controls'>
-                                        <label> Level</label>
+                                        <!--label> Level</label-->
                                         <?php $_CONTROL->strLevel->Render(); ?>
                                      </div>
                                  <?php

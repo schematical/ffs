@@ -25,6 +25,8 @@ class FFSOrgCompActivePanel extends MJaxPanel{
         );
 
         $this->pnlMessages = new ParentMessageListPanel($this, $arrParentMessages);
+        //$this->InitWizzard();
     }
+
     
 }

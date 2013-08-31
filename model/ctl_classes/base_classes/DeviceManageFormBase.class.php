@@ -5,12 +5,11 @@
 * - Form_Create()
 * - Query()
 * - InitSelectPanel()
+* - pnlSelect_change()
 * - InitEditPanel()
 * - pnlEdit_save()
 * - pnlEdit_delete()
 * - InitList()
-* - lnkViewAssignments_click()
-* - lnkViewOrg_click()
 * - lstDevice_editInit()
 * - lstDevice_editSave()
 * - lnkEdit_click()
@@ -57,13 +56,29 @@ class DeviceManageFormBase extends FFSForm {
     }
     public function InitSelectPanel() {
         $this->pnlSelect = new DeviceSelectPanel($this);
-        /*$this->pnlEdit->AddAction(
-                new MJaxDataEntitySaveEvent(),
-                new MJaxServerControlAction($this, 'pnlEdit_save')
-            );*/
+        $this->pnlSelect->AddAction(new MJaxBSAutocompleteSelectEvent() , new MJaxServerControlAction($this, 'pnlSelect_change'));
         $wgtDevice = $this->AddWidget('Select Device', 'icon-select', $this->pnlSelect);
         $wgtDevice->AddCssClass('span6');
         return $wgtDevice;
+    }
+    public function pnlSelect_change($strFormId, $strControlId, $mixActionParameter) {
+        $arrDevices = $this->pnlSelect->GetValue();
+        if (count($arrDevices) == 1) {
+            $this->pnlEdit->SetDevice($arrDevices[0]);
+            foreach ($this->lstDevices as $objRow) {
+                if ($objRow->ActionParameter == $arrDevices[0]->IdDevice) {
+                    $this->lstDevices->SelectedRow = $objRow;
+                }
+            }
+            //$this->ScrollTo($this->pnlEdit);
+            
+        } //else{
+        $this->ScrollTo($this->lstDevices);
+        //}
+        $this->lstDevices->RemoveAllChildControls();
+        $this->lstDevices->SetDataEntites($arrDevices);
+        //TODO: Remeber to add check lists for assoc or relationship tables
+        
     }
     public function InitEditPanel($objDevice = null) {
         $this->pnlEdit = new DeviceEditPanel($this, $objDevice);
@@ -73,10 +88,17 @@ class DeviceManageFormBase extends FFSForm {
         $wgtDevice->AddCssClass('span6');
         return $wgtDevice;
     }
-    //Fake event holders for now
     public function pnlEdit_save($strFormId, $strControlId, $objDevice) {
+        $this->UpdateTable($objDevice);
+        if (!is_null($this->lstDevices->SelectedRow)) {
+            $this->ScrollTo($this->lstDevices->SelectedRow);
+        } else {
+            $this->pnlEdit->Alert('Saved!', 'info');
+        }
     }
     public function pnlEdit_delete($strFormId, $strControlId, $objDevice) {
+        $this->lstDevices->SelectedRow->Remove();
+        $this->lstDevices->SelectedRow = null;
     }
     public function InitList($arrDevices) {
         $this->lstDevices = new DeviceListPanel($this, $arrDevices);
@@ -90,24 +112,9 @@ class DeviceManageFormBase extends FFSForm {
             $this->lstDevices->InitRowControl('edit', 'Edit', $this, 'lnkEdit_click');
         }
         //
-        $this->lstDevices->InitRowControl('view_Assignments', 'View Assignments', $this, 'lnkViewAssignments_click');
-        $this->lstDevices->InitRowControl('idOrg', 'View Org', $this, 'lnkViewOrg_click');
         $wgtDevice = $this->AddWidget('Devices', 'icon-ul', $this->lstDevices);
-        if (!is_null($this->pnlSelect)) {
-            $this->pnlSelect->ConnectTable($this->lstDevices);
-        }
+        $wgtDevice->AddCssClass('span12');
         return $wgtDevice;
-    }
-    public function lnkViewAssignments_click($strFormId, $strControlId, $strActionParameter) {
-        $this->Redirect('/data/editAssignment', array(
-            FFSQS::Device_IdDevice => $strActionParameter
-        ));
-    }
-    public function lnkViewOrg_click($strFormId, $strControlId, $strActionParameter) {
-        $intIdOrg = $this->arrControls[$strControlId]->ParentControl->GetData('_entity')->IdOrg;
-        $this->Redirect('/data/editOrg', array(
-            FFSQS::Org_IdOrg => $intIdOrg
-        ));
     }
     public function lstDevice_editInit() {
         //_dv($this->lstDevices->SelectedRow);
@@ -131,7 +138,6 @@ class DeviceManageFormBase extends FFSForm {
         if (!is_null($this->lstDevices->SelectedRow)) {
             //This already exists
             $this->lstDevices->SelectedRow->UpdateEntity($objDevice);
-            $this->ScrollTo($this->lstDevices->SelectedRow);
             $this->lstDevices->SelectedRow = null;
         } else {
             $objRow = $this->lstDevices->AddRow($objDevice);

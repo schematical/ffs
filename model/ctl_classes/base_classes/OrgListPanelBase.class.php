@@ -8,8 +8,9 @@
 * - RenderDate()
 * - RenderTime()
 * - SetupCols()
-* - InitRowClickEntityRelAction()
-* - objRow_click()
+* - lnkViewAtheletes_click()
+* - lnkViewCompetitions_click()
+* - lnkViewDevices_click()
 * Classes list:
 * - OrgListPanelBase extends MJaxTable
 */
@@ -47,20 +48,26 @@ class OrgListPanelBase extends MJaxTable {
         //$this->AddColumn('idOrg','idOrg');
         $this->AddColumn('namespace', ' Namespace', null, null, 'MJaxTextBox');
         $this->AddColumn('name', ' Name', null, null, 'MJaxTextBox');
-        $this->AddColumn('creDate', ' Cre Date', $this, 'RenderDate', 'MJaxBSDateTimePicker');
-        $this->AddColumn('idImportAuthUser', ' Id Import Auth User', null, null, 'MJaxTextBox');
+        $this->AddColumn('idImportAuthUser', ' Import Auth User', null, null, 'MJaxTextBox');
         $this->AddColumn('clubNum', ' Club Num', null, null, 'MJaxTextBox');
+        $this->InitRowControl('view_Atheletes', 'View Atheletes', $this, 'lnkViewAtheletes_click', 'btn btn-small');
+        $this->InitRowControl('view_Competitions', 'View Competitions', $this, 'lnkViewCompetitions_click', 'btn btn-small');
+        $this->InitRowControl('view_Devices', 'View Devices', $this, 'lnkViewDevices_click', 'btn btn-small');
     }
-    /*
-    Old stuff
-    */
-    public function InitRowClickEntityRelAction() {
-        foreach ($this->Rows as $intIndex => $objRow) {
-            $objRow->AddAction($this, 'objRow_click');
-        }
+    public function lnkViewAtheletes_click($strFormId, $strControlId, $strActionParameter) {
+        $this->objForm->Redirect('/data/editAthelete', array(
+            FFSQS::Org_IdOrg => $strActionParameter
+        ));
     }
-    public function objRow_click($strFomrId, $strControlId, $strActionParameter) {
-        $this->objForm->Redirect(__ENTITY_MODEL_DIR__ . '/Org/' . $strActionParameter);
+    public function lnkViewCompetitions_click($strFormId, $strControlId, $strActionParameter) {
+        $this->objForm->Redirect('/data/editCompetition', array(
+            FFSQS::Org_IdOrg => $strActionParameter
+        ));
+    }
+    public function lnkViewDevices_click($strFormId, $strControlId, $strActionParameter) {
+        $this->objForm->Redirect('/data/editDevice', array(
+            FFSQS::Org_IdOrg => $strActionParameter
+        ));
     }
 }
 ?>

@@ -9,6 +9,7 @@
 * - CreateReferenceControls()
 * - btnSave_click()
 * - btnDelete_click()
+* - btnDelete_confirm()
 * - IsNew()
 * Classes list:
 * - OrgEditPanelBase extends MJaxPanel
@@ -22,6 +23,8 @@ class OrgEditPanelBase extends MJaxPanel {
     public $strPsData = null;
     public $intIdImportAuthUser = null;
     public $strClubNum = null;
+    public $lnkViewChildAthelete = null;
+    public $lnkViewChildCompetition = null;
     public $lnkViewChildDevice = null;
     //Regular controls
     public $btnSave = null;
@@ -95,6 +98,14 @@ class OrgEditPanelBase extends MJaxPanel {
     public function CreateReferenceControls() {
         if (!is_null($this->objOrg)) {
         }
+        $this->lnkViewChildAthelete = new MJaxLinkButton($this);
+        $this->lnkViewChildAthelete->Text = 'View Atheletes';
+        //I should really fix this
+        //$this->lnkViewChildAthelete->Href = __ENTITY_MODEL_DIR__ . '/Org/' . $this->objOrg->idOrg . '/Atheletes';
+        $this->lnkViewChildCompetition = new MJaxLinkButton($this);
+        $this->lnkViewChildCompetition->Text = 'View Competitions';
+        //I should really fix this
+        //$this->lnkViewChildCompetition->Href = __ENTITY_MODEL_DIR__ . '/Org/' . $this->objOrg->idOrg . '/Competitions';
         $this->lnkViewChildDevice = new MJaxLinkButton($this);
         $this->lnkViewChildDevice->Text = 'View Devices';
         //I should really fix this
@@ -119,6 +130,9 @@ class OrgEditPanelBase extends MJaxPanel {
         $this->objForm->TriggerControlEvent($this->strControlId, 'mjax-data-entity-save');
     }
     public function btnDelete_click() {
+        $this->Confirm('Are you sure you want to delete this?', 'btnDelete_confirm');
+    }
+    public function btnDelete_confirm() {
         $this->objOrg->MarkDeleted();
         $this->SetOrg(null);
         //Experimental delete event trigger

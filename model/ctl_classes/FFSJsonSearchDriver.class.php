@@ -29,55 +29,38 @@ class FFSJsonSearchDriver {
                 'text' => $objAssignment->__toString()
             );
         }
+        /*---------------Load by parent field: Device----------------------*/
+        $arrOrConditions = array();
+        $arrOrConditions[] = sprintf('name LIKE "%s%%"', strtolower($strSearch));
+        if (count($arrOrConditions) > 0) {
+            $arrDevices = Device::Query('WHERE ' . implode(' OR ', $arrOrConditions));
+            foreach ($arrDevices as $objDevice) {
+                $arrData[] = array(
+                    'value' => 'Device_' . $objDevice->GetId() ,
+                    'text' => $objDevice->__toString()
+                );
+            }
+        }
+        /*---------------End load: Device----------------------*/
+        /*---------------Load by parent field: Session----------------------*/
+        $arrOrConditions = array();
+        $arrOrConditions[] = sprintf('name LIKE "%s%%"', strtolower($strSearch));
+        if (count($arrOrConditions) > 0) {
+            $arrSessions = Session::Query('WHERE ' . implode(' OR ', $arrOrConditions));
+            foreach ($arrSessions as $objSession) {
+                $arrData[] = array(
+                    'value' => 'Session_' . $objSession->GetId() ,
+                    'text' => $objSession->__toString()
+                );
+            }
+        }
+        /*---------------End load: Session----------------------*/
         if (count($arrData) == 0) {
             $arrData[] = array(
                 'value' => $strSearch,
                 'text' => $strSearch
             );
         }
-        /*
-              
-                    
-               
-                    
-                         $arrAndConditions[] = sprintf(
-                               'WHERE name LIKE "%s%%" or namespace LIKE "%s%%"',
-                               strtolower($strSearch),
-                               strtolower($strSearch)
-                         );
-                         foreach($arrDevices as $strKey => $objDevice){
-                             $arrData[$strKey] = array(
-                                    'value'=>$objDevice->GetId(),
-                                    'text'=>$objDevice->Name
-                             );
-                         }
-                    
-               
-                    
-                         $arrAndConditions[] = sprintf(
-                               'WHERE name LIKE "%s%%" or namespace LIKE "%s%%"',
-                               strtolower($strSearch),
-                               strtolower($strSearch)
-                         );
-                         foreach($arrSessions as $strKey => $objSession){
-                             $arrData[$strKey] = array(
-                                    'value'=>$objSession->GetId(),
-                                    'text'=>$objSession->Name
-                             );
-                         }
-                    
-               
-                    
-               
-                    
-               
-                    
-               
-                    
-               
-                    
-               
-        */
         die(json_encode($arrData));
     }
     public function _searchAthelete($objRoute) {
@@ -97,47 +80,26 @@ class FFSJsonSearchDriver {
                 'text' => $objAthelete->__toString()
             );
         }
+        /*---------------Load by parent field: Org----------------------*/
+        $arrOrConditions = array();
+        $arrOrConditions[] = sprintf('namespace LIKE "%s%%"', strtolower($strSearch));
+        $arrOrConditions[] = sprintf('name LIKE "%s%%"', strtolower($strSearch));
+        if (count($arrOrConditions) > 0) {
+            $arrOrgs = Org::Query('WHERE ' . implode(' OR ', $arrOrConditions));
+            foreach ($arrOrgs as $objOrg) {
+                $arrData[] = array(
+                    'value' => 'Org_' . $objOrg->GetId() ,
+                    'text' => $objOrg->__toString()
+                );
+            }
+        }
+        /*---------------End load: Org----------------------*/
         if (count($arrData) == 0) {
             $arrData[] = array(
                 'value' => $strSearch,
                 'text' => $strSearch
             );
         }
-        /*
-              
-                    
-               
-                    
-                         $arrAndConditions[] = sprintf(
-                               'WHERE name LIKE "%s%%" or namespace LIKE "%s%%"',
-                               strtolower($strSearch),
-                               strtolower($strSearch)
-                         );
-                         foreach($arrOrgs as $strKey => $objOrg){
-                             $arrData[$strKey] = array(
-                                    'value'=>$objOrg->GetId(),
-                                    'text'=>$objOrg->Name
-                             );
-                         }
-                    
-               
-                    
-               
-                    
-               
-                    
-               
-                    
-               
-                    
-               
-                    
-               
-                    
-               
-                    
-               
-        */
         die(json_encode($arrData));
     }
     public function _searchCompetition($objRoute) {
@@ -154,43 +116,26 @@ class FFSJsonSearchDriver {
                 'text' => $objCompetition->__toString()
             );
         }
+        /*---------------Load by parent field: Org----------------------*/
+        $arrOrConditions = array();
+        $arrOrConditions[] = sprintf('namespace LIKE "%s%%"', strtolower($strSearch));
+        $arrOrConditions[] = sprintf('name LIKE "%s%%"', strtolower($strSearch));
+        if (count($arrOrConditions) > 0) {
+            $arrOrgs = Org::Query('WHERE ' . implode(' OR ', $arrOrConditions));
+            foreach ($arrOrgs as $objOrg) {
+                $arrData[] = array(
+                    'value' => 'Org_' . $objOrg->GetId() ,
+                    'text' => $objOrg->__toString()
+                );
+            }
+        }
+        /*---------------End load: Org----------------------*/
         if (count($arrData) == 0) {
             $arrData[] = array(
                 'value' => $strSearch,
                 'text' => $strSearch
             );
         }
-        /*
-              
-                    
-               
-                    
-               
-                    
-               
-                    
-               
-                    
-               
-                    
-               
-                    
-                         $arrAndConditions[] = sprintf(
-                               'WHERE name LIKE "%s%%" or namespace LIKE "%s%%"',
-                               strtolower($strSearch),
-                               strtolower($strSearch)
-                         );
-                         foreach($arrOrgs as $strKey => $objOrg){
-                             $arrData[$strKey] = array(
-                                    'value'=>$objOrg->GetId(),
-                                    'text'=>$objOrg->Name
-                             );
-                         }
-                    
-               
-                    
-               
-        */
         die(json_encode($arrData));
     }
     public function _searchDevice($objRoute) {
@@ -208,39 +153,26 @@ class FFSJsonSearchDriver {
                 'text' => $objDevice->__toString()
             );
         }
+        /*---------------Load by parent field: Org----------------------*/
+        $arrOrConditions = array();
+        $arrOrConditions[] = sprintf('namespace LIKE "%s%%"', strtolower($strSearch));
+        $arrOrConditions[] = sprintf('name LIKE "%s%%"', strtolower($strSearch));
+        if (count($arrOrConditions) > 0) {
+            $arrOrgs = Org::Query('WHERE ' . implode(' OR ', $arrOrConditions));
+            foreach ($arrOrgs as $objOrg) {
+                $arrData[] = array(
+                    'value' => 'Org_' . $objOrg->GetId() ,
+                    'text' => $objOrg->__toString()
+                );
+            }
+        }
+        /*---------------End load: Org----------------------*/
         if (count($arrData) == 0) {
             $arrData[] = array(
                 'value' => $strSearch,
                 'text' => $strSearch
             );
         }
-        /*
-              
-                    
-               
-                    
-               
-                    
-               
-                    
-               
-                    
-               
-                    
-                         $arrAndConditions[] = sprintf(
-                               'WHERE name LIKE "%s%%" or namespace LIKE "%s%%"',
-                               strtolower($strSearch),
-                               strtolower($strSearch)
-                         );
-                         foreach($arrOrgs as $strKey => $objOrg){
-                             $arrData[$strKey] = array(
-                                    'value'=>$objOrg->GetId(),
-                                    'text'=>$objOrg->Name
-                             );
-                         }
-                    
-               
-        */
         die(json_encode($arrData));
     }
     public function _searchEnrollment($objRoute) {
@@ -264,79 +196,53 @@ class FFSJsonSearchDriver {
                 'text' => $objEnrollment->__toString()
             );
         }
+        /*---------------Load by parent field: Athelete----------------------*/
+        $arrOrConditions = array();
+        $arrOrConditions[] = sprintf('firstName LIKE "%s%%"', strtolower($strSearch));
+        $arrOrConditions[] = sprintf('lastName LIKE "%s%%"', strtolower($strSearch));
+        if (count($arrOrConditions) > 0) {
+            $arrAtheletes = Athelete::Query('WHERE ' . implode(' OR ', $arrOrConditions));
+            foreach ($arrAtheletes as $objAthelete) {
+                $arrData[] = array(
+                    'value' => 'Athelete_' . $objAthelete->GetId() ,
+                    'text' => $objAthelete->__toString()
+                );
+            }
+        }
+        /*---------------End load: Athelete----------------------*/
+        /*---------------Load by parent field: Competition----------------------*/
+        $arrOrConditions = array();
+        $arrOrConditions[] = sprintf('name LIKE "%s%%"', strtolower($strSearch));
+        $arrOrConditions[] = sprintf('namespace LIKE "%s%%"', strtolower($strSearch));
+        if (count($arrOrConditions) > 0) {
+            $arrCompetitions = Competition::Query('WHERE ' . implode(' OR ', $arrOrConditions));
+            foreach ($arrCompetitions as $objCompetition) {
+                $arrData[] = array(
+                    'value' => 'Competition_' . $objCompetition->GetId() ,
+                    'text' => $objCompetition->__toString()
+                );
+            }
+        }
+        /*---------------End load: Competition----------------------*/
+        /*---------------Load by parent field: Session----------------------*/
+        $arrOrConditions = array();
+        $arrOrConditions[] = sprintf('name LIKE "%s%%"', strtolower($strSearch));
+        if (count($arrOrConditions) > 0) {
+            $arrSessions = Session::Query('WHERE ' . implode(' OR ', $arrOrConditions));
+            foreach ($arrSessions as $objSession) {
+                $arrData[] = array(
+                    'value' => 'Session_' . $objSession->GetId() ,
+                    'text' => $objSession->__toString()
+                );
+            }
+        }
+        /*---------------End load: Session----------------------*/
         if (count($arrData) == 0) {
             $arrData[] = array(
                 'value' => $strSearch,
                 'text' => $strSearch
             );
         }
-        /*
-              
-                    
-               
-                    
-                         $arrAndConditions[] = sprintf(
-                               'WHERE name LIKE "%s%%" or namespace LIKE "%s%%"',
-                               strtolower($strSearch),
-                               strtolower($strSearch)
-                         );
-                         foreach($arrAtheletes as $strKey => $objAthelete){
-                             $arrData[$strKey] = array(
-                                    'value'=>$objAthelete->GetId(),
-                                    'text'=>$objAthelete->Name
-                             );
-                         }
-                    
-               
-                    
-                         $arrAndConditions[] = sprintf(
-                               'WHERE name LIKE "%s%%" or namespace LIKE "%s%%"',
-                               strtolower($strSearch),
-                               strtolower($strSearch)
-                         );
-                         foreach($arrCompetitions as $strKey => $objCompetition){
-                             $arrData[$strKey] = array(
-                                    'value'=>$objCompetition->GetId(),
-                                    'text'=>$objCompetition->Name
-                             );
-                         }
-                    
-               
-                    
-                         $arrAndConditions[] = sprintf(
-                               'WHERE name LIKE "%s%%" or namespace LIKE "%s%%"',
-                               strtolower($strSearch),
-                               strtolower($strSearch)
-                         );
-                         foreach($arrSessions as $strKey => $objSession){
-                             $arrData[$strKey] = array(
-                                    'value'=>$objSession->GetId(),
-                                    'text'=>$objSession->Name
-                             );
-                         }
-                    
-               
-                    
-               
-                    
-               
-                    
-               
-                    
-               
-                    
-               
-                    
-               
-                    
-               
-                    
-               
-                    
-               
-                    
-               
-        */
         die(json_encode($arrData));
     }
     public function _searchOrg($objRoute) {
@@ -360,23 +266,6 @@ class FFSJsonSearchDriver {
                 'text' => $strSearch
             );
         }
-        /*
-              
-                    
-               
-                    
-               
-                    
-               
-                    
-               
-                    
-               
-                    
-               
-                    
-               
-        */
         die(json_encode($arrData));
     }
     public function _searchParentMessage($objRoute) {
@@ -395,69 +284,40 @@ class FFSJsonSearchDriver {
                 'text' => $objParentMessage->__toString()
             );
         }
+        /*---------------Load by parent field: Athelete----------------------*/
+        $arrOrConditions = array();
+        $arrOrConditions[] = sprintf('firstName LIKE "%s%%"', strtolower($strSearch));
+        $arrOrConditions[] = sprintf('lastName LIKE "%s%%"', strtolower($strSearch));
+        if (count($arrOrConditions) > 0) {
+            $arrAtheletes = Athelete::Query('WHERE ' . implode(' OR ', $arrOrConditions));
+            foreach ($arrAtheletes as $objAthelete) {
+                $arrData[] = array(
+                    'value' => 'Athelete_' . $objAthelete->GetId() ,
+                    'text' => $objAthelete->__toString()
+                );
+            }
+        }
+        /*---------------End load: Athelete----------------------*/
+        /*---------------Load by parent field: Competition----------------------*/
+        $arrOrConditions = array();
+        $arrOrConditions[] = sprintf('name LIKE "%s%%"', strtolower($strSearch));
+        $arrOrConditions[] = sprintf('namespace LIKE "%s%%"', strtolower($strSearch));
+        if (count($arrOrConditions) > 0) {
+            $arrCompetitions = Competition::Query('WHERE ' . implode(' OR ', $arrOrConditions));
+            foreach ($arrCompetitions as $objCompetition) {
+                $arrData[] = array(
+                    'value' => 'Competition_' . $objCompetition->GetId() ,
+                    'text' => $objCompetition->__toString()
+                );
+            }
+        }
+        /*---------------End load: Competition----------------------*/
         if (count($arrData) == 0) {
             $arrData[] = array(
                 'value' => $strSearch,
                 'text' => $strSearch
             );
         }
-        /*
-              
-                    
-               
-                    
-                         $arrAndConditions[] = sprintf(
-                               'WHERE name LIKE "%s%%" or namespace LIKE "%s%%"',
-                               strtolower($strSearch),
-                               strtolower($strSearch)
-                         );
-                         foreach($arrAtheletes as $strKey => $objAthelete){
-                             $arrData[$strKey] = array(
-                                    'value'=>$objAthelete->GetId(),
-                                    'text'=>$objAthelete->Name
-                             );
-                         }
-                    
-               
-                    
-               
-                    
-               
-                    
-               
-                    
-               
-                    
-               
-                    
-               
-                    
-               
-                    
-               
-                    
-               
-                    
-               
-                    
-                         $arrAndConditions[] = sprintf(
-                               'WHERE name LIKE "%s%%" or namespace LIKE "%s%%"',
-                               strtolower($strSearch),
-                               strtolower($strSearch)
-                         );
-                         foreach($arrCompetitions as $strKey => $objCompetition){
-                             $arrData[$strKey] = array(
-                                    'value'=>$objCompetition->GetId(),
-                                    'text'=>$objCompetition->Name
-                             );
-                         }
-                    
-               
-                    
-               
-                    
-               
-        */
         die(json_encode($arrData));
     }
     public function _searchResult($objRoute) {
@@ -475,57 +335,39 @@ class FFSJsonSearchDriver {
                 'text' => $objResult->__toString()
             );
         }
+        /*---------------Load by parent field: Session----------------------*/
+        $arrOrConditions = array();
+        $arrOrConditions[] = sprintf('name LIKE "%s%%"', strtolower($strSearch));
+        if (count($arrOrConditions) > 0) {
+            $arrSessions = Session::Query('WHERE ' . implode(' OR ', $arrOrConditions));
+            foreach ($arrSessions as $objSession) {
+                $arrData[] = array(
+                    'value' => 'Session_' . $objSession->GetId() ,
+                    'text' => $objSession->__toString()
+                );
+            }
+        }
+        /*---------------End load: Session----------------------*/
+        /*---------------Load by parent field: Athelete----------------------*/
+        $arrOrConditions = array();
+        $arrOrConditions[] = sprintf('firstName LIKE "%s%%"', strtolower($strSearch));
+        $arrOrConditions[] = sprintf('lastName LIKE "%s%%"', strtolower($strSearch));
+        if (count($arrOrConditions) > 0) {
+            $arrAtheletes = Athelete::Query('WHERE ' . implode(' OR ', $arrOrConditions));
+            foreach ($arrAtheletes as $objAthelete) {
+                $arrData[] = array(
+                    'value' => 'Athelete_' . $objAthelete->GetId() ,
+                    'text' => $objAthelete->__toString()
+                );
+            }
+        }
+        /*---------------End load: Athelete----------------------*/
         if (count($arrData) == 0) {
             $arrData[] = array(
                 'value' => $strSearch,
                 'text' => $strSearch
             );
         }
-        /*
-              
-                    
-               
-                    
-                         $arrAndConditions[] = sprintf(
-                               'WHERE name LIKE "%s%%" or namespace LIKE "%s%%"',
-                               strtolower($strSearch),
-                               strtolower($strSearch)
-                         );
-                         foreach($arrSessions as $strKey => $objSession){
-                             $arrData[$strKey] = array(
-                                    'value'=>$objSession->GetId(),
-                                    'text'=>$objSession->Name
-                             );
-                         }
-                    
-               
-                    
-                         $arrAndConditions[] = sprintf(
-                               'WHERE name LIKE "%s%%" or namespace LIKE "%s%%"',
-                               strtolower($strSearch),
-                               strtolower($strSearch)
-                         );
-                         foreach($arrAtheletes as $strKey => $objAthelete){
-                             $arrData[$strKey] = array(
-                                    'value'=>$objAthelete->GetId(),
-                                    'text'=>$objAthelete->Name
-                             );
-                         }
-                    
-               
-                    
-               
-                    
-               
-                    
-               
-                    
-               
-                    
-               
-                    
-               
-        */
         die(json_encode($arrData));
     }
     public function _searchSession($objRoute) {
@@ -542,45 +384,26 @@ class FFSJsonSearchDriver {
                 'text' => $objSession->__toString()
             );
         }
+        /*---------------Load by parent field: Competition----------------------*/
+        $arrOrConditions = array();
+        $arrOrConditions[] = sprintf('name LIKE "%s%%"', strtolower($strSearch));
+        $arrOrConditions[] = sprintf('namespace LIKE "%s%%"', strtolower($strSearch));
+        if (count($arrOrConditions) > 0) {
+            $arrCompetitions = Competition::Query('WHERE ' . implode(' OR ', $arrOrConditions));
+            foreach ($arrCompetitions as $objCompetition) {
+                $arrData[] = array(
+                    'value' => 'Competition_' . $objCompetition->GetId() ,
+                    'text' => $objCompetition->__toString()
+                );
+            }
+        }
+        /*---------------End load: Competition----------------------*/
         if (count($arrData) == 0) {
             $arrData[] = array(
                 'value' => $strSearch,
                 'text' => $strSearch
             );
         }
-        /*
-              
-                    
-               
-                    
-               
-                    
-               
-                    
-                         $arrAndConditions[] = sprintf(
-                               'WHERE name LIKE "%s%%" or namespace LIKE "%s%%"',
-                               strtolower($strSearch),
-                               strtolower($strSearch)
-                         );
-                         foreach($arrCompetitions as $strKey => $objCompetition){
-                             $arrData[$strKey] = array(
-                                    'value'=>$objCompetition->GetId(),
-                                    'text'=>$objCompetition->Name
-                             );
-                         }
-                    
-               
-                    
-               
-                    
-               
-                    
-               
-                    
-               
-                    
-               
-        */
         die(json_encode($arrData));
     }
 }

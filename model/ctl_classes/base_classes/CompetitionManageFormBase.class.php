@@ -5,12 +5,11 @@
 * - Form_Create()
 * - Query()
 * - InitSelectPanel()
+* - pnlSelect_change()
 * - InitEditPanel()
 * - pnlEdit_save()
 * - pnlEdit_delete()
 * - InitList()
-* - lnkViewSessions_click()
-* - lnkViewOrg_click()
 * - lstCompetition_editInit()
 * - lstCompetition_editSave()
 * - lnkEdit_click()
@@ -53,13 +52,29 @@ class CompetitionManageFormBase extends FFSForm {
     }
     public function InitSelectPanel() {
         $this->pnlSelect = new CompetitionSelectPanel($this);
-        /*$this->pnlEdit->AddAction(
-                new MJaxDataEntitySaveEvent(),
-                new MJaxServerControlAction($this, 'pnlEdit_save')
-            );*/
+        $this->pnlSelect->AddAction(new MJaxBSAutocompleteSelectEvent() , new MJaxServerControlAction($this, 'pnlSelect_change'));
         $wgtCompetition = $this->AddWidget('Select Competition', 'icon-select', $this->pnlSelect);
         $wgtCompetition->AddCssClass('span6');
         return $wgtCompetition;
+    }
+    public function pnlSelect_change($strFormId, $strControlId, $mixActionParameter) {
+        $arrCompetitions = $this->pnlSelect->GetValue();
+        if (count($arrCompetitions) == 1) {
+            $this->pnlEdit->SetCompetition($arrCompetitions[0]);
+            foreach ($this->lstCompetitions as $objRow) {
+                if ($objRow->ActionParameter == $arrCompetitions[0]->IdCompetition) {
+                    $this->lstCompetitions->SelectedRow = $objRow;
+                }
+            }
+            //$this->ScrollTo($this->pnlEdit);
+            
+        } //else{
+        $this->ScrollTo($this->lstCompetitions);
+        //}
+        $this->lstCompetitions->RemoveAllChildControls();
+        $this->lstCompetitions->SetDataEntites($arrCompetitions);
+        //TODO: Remeber to add check lists for assoc or relationship tables
+        
     }
     public function InitEditPanel($objCompetition = null) {
         $this->pnlEdit = new CompetitionEditPanel($this, $objCompetition);
@@ -69,10 +84,17 @@ class CompetitionManageFormBase extends FFSForm {
         $wgtCompetition->AddCssClass('span6');
         return $wgtCompetition;
     }
-    //Fake event holders for now
     public function pnlEdit_save($strFormId, $strControlId, $objCompetition) {
+        $this->UpdateTable($objCompetition);
+        if (!is_null($this->lstCompetitions->SelectedRow)) {
+            $this->ScrollTo($this->lstCompetitions->SelectedRow);
+        } else {
+            $this->pnlEdit->Alert('Saved!', 'info');
+        }
     }
     public function pnlEdit_delete($strFormId, $strControlId, $objCompetition) {
+        $this->lstCompetitions->SelectedRow->Remove();
+        $this->lstCompetitions->SelectedRow = null;
     }
     public function InitList($arrCompetitions) {
         $this->lstCompetitions = new CompetitionListPanel($this, $arrCompetitions);
@@ -86,24 +108,9 @@ class CompetitionManageFormBase extends FFSForm {
             $this->lstCompetitions->InitRowControl('edit', 'Edit', $this, 'lnkEdit_click');
         }
         //
-        $this->lstCompetitions->InitRowControl('view_Sessions', 'View Sessions', $this, 'lnkViewSessions_click');
-        $this->lstCompetitions->InitRowControl('idOrg', 'View Org', $this, 'lnkViewOrg_click');
         $wgtCompetition = $this->AddWidget('Competitions', 'icon-ul', $this->lstCompetitions);
-        if (!is_null($this->pnlSelect)) {
-            $this->pnlSelect->ConnectTable($this->lstCompetitions);
-        }
+        $wgtCompetition->AddCssClass('span12');
         return $wgtCompetition;
-    }
-    public function lnkViewSessions_click($strFormId, $strControlId, $strActionParameter) {
-        $this->Redirect('/data/editSession', array(
-            FFSQS::Competition_IdCompetition => $strActionParameter
-        ));
-    }
-    public function lnkViewOrg_click($strFormId, $strControlId, $strActionParameter) {
-        $intIdOrg = $this->arrControls[$strControlId]->ParentControl->GetData('_entity')->IdOrg;
-        $this->Redirect('/data/editOrg', array(
-            FFSQS::Org_IdOrg => $intIdOrg
-        ));
     }
     public function lstCompetition_editInit() {
         //_dv($this->lstCompetitions->SelectedRow);
@@ -127,7 +134,6 @@ class CompetitionManageFormBase extends FFSForm {
         if (!is_null($this->lstCompetitions->SelectedRow)) {
             //This already exists
             $this->lstCompetitions->SelectedRow->UpdateEntity($objCompetition);
-            $this->ScrollTo($this->lstCompetitions->SelectedRow);
             $this->lstCompetitions->SelectedRow = null;
         } else {
             $objRow = $this->lstCompetitions->AddRow($objCompetition);
