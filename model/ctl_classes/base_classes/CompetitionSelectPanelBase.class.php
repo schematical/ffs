@@ -6,10 +6,13 @@
 * - txtSearch_change()
 * - GetExtQuery()
 * - GetValue()
+* - __get()
+* - __set()
 * Classes list:
 * - CompetitionSelectPanelBase extends MJaxPanel
 */
 class CompetitionSelectPanelBase extends MJaxPanel {
+    protected $blnDisplayAdvOptions = false;
     protected $arrSelectedCompetitions = array();
     public $txtSearch = null;
     //public $tblCompetitions = null;
@@ -22,6 +25,8 @@ class CompetitionSelectPanelBase extends MJaxPanel {
     public $txtEndDate_EndDate = null;
     public $intIdOrg = null;
     public $strNamespace = null;
+    public $txtSignupCutOffDate_StartDate = null;
+    public $txtSignupCutOffDate_EndDate = null;
     public function __construct($objParentControl, $strControlId = null) {
         parent::__construct($objParentControl, $strControlId);
         $this->strTemplate = __VIEW_ACTIVE_APP_DIR__ . '/www/ctl_panels/' . get_class($this) . '.tpl.php';
@@ -47,6 +52,10 @@ class CompetitionSelectPanelBase extends MJaxPanel {
         $this->intIdOrg->Attr('placeholder', " Org");
         $this->strNamespace = new MJaxTextBox($this);
         $this->strNamespace->Attr('placeholder', " Namespace");
+        $this->txtSignupCutOffDate_StartDate = new MJaxBSDateTimePicker($this);
+        $this->txtSignupCutOffDate_StartDate->DateOnly();
+        $this->txtSignupCutOffDate_EndDate = new MJaxBSDateTimePicker($this);
+        $this->txtSignupCutOffDate_EndDate->DateOnly();
     }
     public function txtSearch_change() {
         $objEntity = null;
@@ -115,9 +124,43 @@ class CompetitionSelectPanelBase extends MJaxPanel {
         if (!is_null($this->strNamespace->GetValue())) {
             $arrAndConditions[] = sprintf('namespace LIKE "%s%%"', $this->strNamespace->GetValue());
         }
+        //Is special field!!!!!
+        if (!is_null($this->txtSignupCutOffDate_StartDate->GetValue())) {
+            if (is_null($this->txtSignupCutOffDate_EndDate->GetValue())) {
+                $this->txtSignupCutOffDate_StartDate->Alert("Must have an end date to perform this function");
+            } else {
+                $arrAndConditions[] = sprintf('(signupCutOffDate > "%s" AND signupCutOffDate < "%s")', $this->txtSignupCutOffDate_StartDate->GetValue() , $this->txtSignupCutOffDate_EndDate->GetValue());
+            }
+        }
         return $arrAndConditions;
     }
     public function GetValue() {
         return $this->arrSelectedCompetitions;
+    }
+    /////////////////////////
+    // Public Properties: GET
+    /////////////////////////
+    public function __get($strName) {
+        switch ($strName) {
+            case "DisplayAdvOptions":
+                return $this->blnDisplayAdvOptions;
+            default:
+                return parent::__get($strName);
+                //throw new Exception("Not porperty exists with name '" . $strName . "' in class " . __CLASS__);
+                
+        }
+    }
+    /////////////////////////
+    // Public Properties: SET
+    /////////////////////////
+    public function __set($strName, $mixValue) {
+        switch ($strName) {
+            case "DisplayAdvOptions":
+                return $this->blnDisplayAdvOptions = $mixValue;
+            default:
+                return parent::__set($strName, $mixValue);
+                //throw new Exception("Not porperty exists with name '" . $strName . "' in class " . __CLASS__);
+                
+        }
     }
 }

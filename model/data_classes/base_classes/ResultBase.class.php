@@ -24,6 +24,29 @@
 * Classes list:
 * - ResultBase extends BaseEntity
 */
+/**
+ * Class Competition
+ * @property-read mixed $IdResult
+ * @property-write mixed $IdResult
+ * @property-read mixed $IdSession
+ * @property-write mixed $IdSession
+ * @property-read mixed $IdAthelete
+ * @property-write mixed $IdAthelete
+ * @property-read mixed $Score
+ * @property-write mixed $Score
+ * @property-read mixed $Judge
+ * @property-write mixed $Judge
+ * @property-read mixed $Flag
+ * @property-write mixed $Flag
+ * @property-read mixed $CreDate
+ * @property-write mixed $CreDate
+ * @property-read mixed $Event
+ * @property-write mixed $Event
+ * @property-read mixed $DispDate
+ * @property-write mixed $DispDate
+ * @property-read Result $IdSessionObject
+ * @property-read Result $IdAtheleteObject
+ */
 class ResultBase extends BaseEntity {
     const DB_CONN = 'DB_1';
     const TABLE_NAME = 'Result';

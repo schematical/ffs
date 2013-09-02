@@ -1,12 +1,16 @@
 <div class=''>
-    <?php
+    <div class='controls input-prepend '>
+        <span class='add-on'>Search Orgs</span>
+        <?php
 /**
 * Class and Function List:
 * Function list:
 * Classes list:
 */
 $_CONTROL->txtSearch->Render(); ?>
+    </div>
 </div>
+<?php if ($_CONTROL->DisplayAdvOptions) { ?>
 <div class="accordion" id="accordion2">
     <div class="accordion-group">
         <div class="accordion-heading">
@@ -26,7 +30,7 @@ $_CONTROL->txtSearch->Render(); ?>
                                         <?php $_CONTROL->intIdAthelete->Render(); ?>
                                      </div>
                                  <?php
-} ?>
+    } ?>
                             
                             
                         </div>
@@ -39,7 +43,7 @@ $_CONTROL->txtSearch->Render(); ?>
                                         <?php $_CONTROL->intIdOrg->Render(); ?>
                                      </div>
                                  <?php
-} ?>
+    } ?>
                             
                             
                         </div>
@@ -52,7 +56,7 @@ $_CONTROL->txtSearch->Render(); ?>
                                         <?php $_CONTROL->strFirstName->Render(); ?>
                                      </div>
                                  <?php
-} ?>
+    } ?>
                             
                             
                         </div>
@@ -65,7 +69,7 @@ $_CONTROL->txtSearch->Render(); ?>
                                         <?php $_CONTROL->strLastName->Render(); ?>
                                      </div>
                                  <?php
-} ?>
+    } ?>
                             
                             
                         </div>
@@ -75,12 +79,12 @@ $_CONTROL->txtSearch->Render(); ?>
                             
                                 <label> Birth Date Start</label>
                                 <?php if (!is_null($_CONTROL->txtBirthDate_StartDate)) {
-    $_CONTROL->txtBirthDate_StartDate->Render();
-} ?>
+        $_CONTROL->txtBirthDate_StartDate->Render();
+    } ?>
                                 <label> Birth Date End</label>
                                  <?php if (!is_null($_CONTROL->txtBirthDate_EndDate)) {
-    $_CONTROL->txtBirthDate_EndDate->Render();
-} ?>
+        $_CONTROL->txtBirthDate_EndDate->Render();
+    } ?>
                              
                         </div>
                     
@@ -92,7 +96,7 @@ $_CONTROL->txtSearch->Render(); ?>
                                         <?php $_CONTROL->strMemType->Render(); ?>
                                      </div>
                                  <?php
-} ?>
+    } ?>
                             
                             
                         </div>
@@ -105,7 +109,7 @@ $_CONTROL->txtSearch->Render(); ?>
                                         <?php $_CONTROL->strMemId->Render(); ?>
                                      </div>
                                  <?php
-} ?>
+    } ?>
                             
                             
                         </div>
@@ -128,7 +132,7 @@ $_CONTROL->txtSearch->Render(); ?>
                                         <?php $_CONTROL->strLevel->Render(); ?>
                                      </div>
                                  <?php
-} ?>
+    } ?>
                             
                             
                         </div>
@@ -138,3 +142,5 @@ $_CONTROL->txtSearch->Render(); ?>
         </div>
     </div>
 </div>
+<?php
+} ?>

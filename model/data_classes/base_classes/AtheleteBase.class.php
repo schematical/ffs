@@ -26,6 +26,30 @@
 * Classes list:
 * - AtheleteBase extends BaseEntity
 */
+/**
+ * Class Competition
+ * @property-read mixed $IdAthelete
+ * @property-write mixed $IdAthelete
+ * @property-read mixed $IdOrg
+ * @property-write mixed $IdOrg
+ * @property-read mixed $FirstName
+ * @property-write mixed $FirstName
+ * @property-read mixed $LastName
+ * @property-write mixed $LastName
+ * @property-read mixed $BirthDate
+ * @property-write mixed $BirthDate
+ * @property-read mixed $MemType
+ * @property-write mixed $MemType
+ * @property-read mixed $MemId
+ * @property-write mixed $MemId
+ * @property-read mixed $PsData
+ * @property-write mixed $PsData
+ * @property-read mixed $CreDate
+ * @property-write mixed $CreDate
+ * @property-read mixed $Level
+ * @property-write mixed $Level
+ * @property-read Athelete $IdOrgObject
+ */
 class AtheleteBase extends BaseEntity {
     const DB_CONN = 'DB_1';
     const TABLE_NAME = 'Athelete';

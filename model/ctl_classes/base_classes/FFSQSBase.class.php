@@ -35,6 +35,7 @@ class FFSQSBase {
     const Competition_EndDate = 'endDate';
     const Competition_IdOrg = 'idOrg';
     const Competition_Namespace = 'namespace';
+    const Competition_SignupCutOffDate = 'signupCutOffDate';
     const IdDevice = 'idDevice';
     const Device_IdDevice = 'idDevice';
     const Device_Name = 'name';
@@ -65,6 +66,13 @@ class FFSQSBase {
     const Org_PsData = 'psData';
     const Org_IdImportAuthUser = 'idImportAuthUser';
     const Org_ClubNum = 'clubNum';
+    const Org_ClubType = 'clubType';
+    const IdOrgCompetition = 'idOrgCompetition';
+    const OrgCompetition_IdOrgCompetition = 'idOrgCompetition';
+    const OrgCompetition_IdOrg = 'idOrg';
+    const OrgCompetition_IdCompetition = 'idCompetition';
+    const OrgCompetition_CreDate = 'creDate';
+    const OrgCompetition_IdAuthUser = 'idAuthUser';
     const IdParentMessage = 'idParentMessage';
     const ParentMessage_IdParentMessage = 'idParentMessage';
     const ParentMessage_IdAthelete = 'idAthelete';

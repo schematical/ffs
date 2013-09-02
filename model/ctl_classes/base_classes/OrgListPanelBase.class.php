@@ -11,6 +11,7 @@
 * - lnkViewAtheletes_click()
 * - lnkViewCompetitions_click()
 * - lnkViewDevices_click()
+* - lnkViewOrgCompetitions_click()
 * Classes list:
 * - OrgListPanelBase extends MJaxTable
 */
@@ -50,9 +51,11 @@ class OrgListPanelBase extends MJaxTable {
         $this->AddColumn('name', ' Name', null, null, 'MJaxTextBox');
         $this->AddColumn('idImportAuthUser', ' Import Auth User', null, null, 'MJaxTextBox');
         $this->AddColumn('clubNum', ' Club Num', null, null, 'MJaxTextBox');
+        $this->AddColumn('clubType', ' Club Type', null, null, 'MJaxTextBox');
         $this->InitRowControl('view_Atheletes', 'View Atheletes', $this, 'lnkViewAtheletes_click', 'btn btn-small');
         $this->InitRowControl('view_Competitions', 'View Competitions', $this, 'lnkViewCompetitions_click', 'btn btn-small');
         $this->InitRowControl('view_Devices', 'View Devices', $this, 'lnkViewDevices_click', 'btn btn-small');
+        $this->InitRowControl('view_OrgCompetitions', 'View OrgCompetitions', $this, 'lnkViewOrgCompetitions_click', 'btn btn-small');
     }
     public function lnkViewAtheletes_click($strFormId, $strControlId, $strActionParameter) {
         $this->objForm->Redirect('/data/editAthelete', array(
@@ -66,6 +69,11 @@ class OrgListPanelBase extends MJaxTable {
     }
     public function lnkViewDevices_click($strFormId, $strControlId, $strActionParameter) {
         $this->objForm->Redirect('/data/editDevice', array(
+            FFSQS::Org_IdOrg => $strActionParameter
+        ));
+    }
+    public function lnkViewOrgCompetitions_click($strFormId, $strControlId, $strActionParameter) {
+        $this->objForm->Redirect('/data/editOrgCompetition', array(
             FFSQS::Org_IdOrg => $strActionParameter
         ));
     }

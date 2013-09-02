@@ -365,4 +365,33 @@ abstract class FFSApplication{
 
         return $arrComp;
     }
+    public static function GetInvitedOrgsByCompetition(Competition $objCompetition = null){
+        if(is_null($objCompetition)){
+            $objCompetition = FFSForm::$objCompetition;
+        }
+        $arrOrgCompetitions = OrgCompetition::LoadCollByIdCompetition($objCompetition->IdCompetition)->getCollection();
+
+        $arrOrgs = array();
+        foreach($arrOrgCompetitions as $objOrgCompetition){
+            $arrOrgs[] = $objOrgCompetition->IdOrgObject;
+        }
+        return $arrOrgs;
+    }
+    public static function InviteOrgToCompetition(Org $objOrg, Competition $objCompetition){
+
+        $objOrgCompetition = OrgCompetition::Query(
+            sprintf(
+                'WHERE idOrg = %s AND idCompetition = %s',
+                $objOrg->IdOrg,
+                $objCompetition->IdCompetition
+            )
+        );
+        $objOrgCompetition = new OrgCompetition();
+        $objOrgCompetition->IdOrg = $objOrg->IdOrg;
+        $objOrgCompetition->IdCompetition = $objCompetition->IdCompetition;
+        $objOrgCompetition->CreDate = MLCDateTime::Now();
+        $objOrgCompetition->IdAuthUser = MLCAuthDriver::IdUser();
+        $objOrgCompetition->Save();
+        return $objOrgCompetition;
+    }
 }

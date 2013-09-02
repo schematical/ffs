@@ -23,9 +23,11 @@ class OrgEditPanelBase extends MJaxPanel {
     public $strPsData = null;
     public $intIdImportAuthUser = null;
     public $strClubNum = null;
+    public $strClubType = null;
     public $lnkViewChildAthelete = null;
     public $lnkViewChildCompetition = null;
     public $lnkViewChildDevice = null;
+    public $lnkViewChildOrgCompetition = null;
     //Regular controls
     public $btnSave = null;
     public $btnDelete = null;
@@ -70,6 +72,10 @@ class OrgEditPanelBase extends MJaxPanel {
         $this->strClubNum->Name = 'clubNum';
         $this->strClubNum->AddCssClass('input-large');
         //varchar(64)
+        $this->strClubType = new MJaxTextBox($this);
+        $this->strClubType->Name = 'clubType';
+        $this->strClubType->AddCssClass('input-large');
+        //varchar(45)
         if (!is_null($this->objOrg)) {
             $this->SetOrg($this->objOrg);
         }
@@ -91,6 +97,7 @@ class OrgEditPanelBase extends MJaxPanel {
             //Is special field!!!!!
             $this->intIdImportAuthUser->Text = $this->objOrg->idImportAuthUser;
             $this->strClubNum->Text = $this->objOrg->clubNum;
+            $this->strClubType->Text = $this->objOrg->clubType;
         } else {
             $this->btnDelete->Style->Display = 'none';
         }
@@ -110,6 +117,10 @@ class OrgEditPanelBase extends MJaxPanel {
         $this->lnkViewChildDevice->Text = 'View Devices';
         //I should really fix this
         //$this->lnkViewChildDevice->Href = __ENTITY_MODEL_DIR__ . '/Org/' . $this->objOrg->idOrg . '/Devices';
+        $this->lnkViewChildOrgCompetition = new MJaxLinkButton($this);
+        $this->lnkViewChildOrgCompetition->Text = 'View OrgCompetitions';
+        //I should really fix this
+        //$this->lnkViewChildOrgCompetition->Href = __ENTITY_MODEL_DIR__ . '/Org/' . $this->objOrg->idOrg . '/OrgCompetitions';
         
     }
     public function btnSave_click() {
@@ -124,6 +135,7 @@ class OrgEditPanelBase extends MJaxPanel {
         //Is special field!!!!!
         $this->objOrg->idImportAuthUser = $this->intIdImportAuthUser->Text;
         $this->objOrg->clubNum = $this->strClubNum->Text;
+        $this->objOrg->clubType = $this->strClubType->Text;
         $this->objOrg->Save();
         //Experimental save event trigger
         $this->ActionParameter = $this->objOrg;

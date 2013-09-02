@@ -9,6 +9,7 @@
 * - Query()
 * - QueryCount()
 * - GetEnrollmentArr()
+* - GetOrgCompetitionArr()
 * - GetParentMessageArr()
 * - GetSessionArr()
 * - LoadCollByIdOrg()
@@ -26,6 +27,28 @@
 * Classes list:
 * - CompetitionBase extends BaseEntity
 */
+/**
+ * Class Competition
+ * @property-read mixed $IdCompetition
+ * @property-write mixed $IdCompetition
+ * @property-read mixed $Name
+ * @property-write mixed $Name
+ * @property-read mixed $LongDesc
+ * @property-write mixed $LongDesc
+ * @property-read mixed $CreDate
+ * @property-write mixed $CreDate
+ * @property-read mixed $StartDate
+ * @property-write mixed $StartDate
+ * @property-read mixed $EndDate
+ * @property-write mixed $EndDate
+ * @property-read mixed $IdOrg
+ * @property-write mixed $IdOrg
+ * @property-read mixed $Namespace
+ * @property-write mixed $Namespace
+ * @property-read mixed $SignupCutOffDate
+ * @property-write mixed $SignupCutOffDate
+ * @property-read Competition $IdOrgObject
+ */
 class CompetitionBase extends BaseEntity {
     const DB_CONN = 'DB_1';
     const TABLE_NAME = 'Competition';
@@ -82,6 +105,9 @@ class CompetitionBase extends BaseEntity {
         $xmlStr.= "<namespace>";
         $xmlStr.= $this->namespace;
         $xmlStr.= "</namespace>";
+        $xmlStr.= "<signupCutOffDate>";
+        $xmlStr.= $this->signupCutOffDate;
+        $xmlStr.= "</signupCutOffDate>";
         if ($blnReclusive) {
             //Finish FK Rel stuff
             
@@ -118,6 +144,9 @@ class CompetitionBase extends BaseEntity {
     public function GetEnrollmentArr() {
         return Enrollment::LoadCollByIdCompetition($this->idCompetition);
     }
+    public function GetOrgCompetitionArr() {
+        return OrgCompetition::LoadCollByIdCompetition($this->idCompetition);
+    }
     public function GetParentMessageArr() {
         return ParentMessage::LoadCollByIdCompetition($this->idCompetition);
     }
@@ -145,6 +174,9 @@ class CompetitionBase extends BaseEntity {
     public function ParseArray($arrData) {
         foreach ($arrData as $strKey => $mixVal) {
             $arrData[strtolower($strKey) ] = $mixVal;
+        }
+        if (array_key_exists('idcompetition', $arrData)) {
+            $this->intIdCompetition = $arrData['idcompetition'];
         }
         if (array_key_exists('idcompetition', $arrData)) {
             $this->intIdCompetition = $arrData['idcompetition'];
@@ -210,6 +242,7 @@ class CompetitionBase extends BaseEntity {
         $arrReturn['endDate'] = $this->endDate;
         $arrReturn['idOrg'] = $this->idOrg;
         $arrReturn['namespace'] = $this->namespace;
+        $arrReturn['signupCutOffDate'] = $this->signupCutOffDate;
         return $arrReturn;
     }
     public function __toString() {
@@ -281,6 +314,13 @@ class CompetitionBase extends BaseEntity {
                 }
                 return null;
             break;
+            case ('SignupCutOffDate'):
+            case ('signupCutOffDate'):
+                if (array_key_exists('signupCutOffDate', $this->arrDBFields)) {
+                    return $this->arrDBFields['signupCutOffDate'];
+                }
+                return null;
+            break;
             case ('IdOrgObject'):
             case ('idOrgObject'):
                 if ((array_key_exists('idOrg', $this->arrDBFields)) && (!is_null($this->arrDBFields['idOrg']))) {
@@ -327,6 +367,10 @@ class CompetitionBase extends BaseEntity {
             case ('Namespace'):
             case ('namespace'):
                 $this->arrDBFields['namespace'] = $strValue;
+            break;
+            case ('SignupCutOffDate'):
+            case ('signupCutOffDate'):
+                $this->arrDBFields['signupCutOffDate'] = $strValue;
             break;
             default:
                 throw new MLCMissingPropertyException($this, $strName);

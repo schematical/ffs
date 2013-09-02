@@ -25,6 +25,40 @@
 * Classes list:
 * - EnrollmentBase extends BaseEntity
 */
+/**
+ * Class Competition
+ * @property-read mixed $IdEnrollment
+ * @property-write mixed $IdEnrollment
+ * @property-read mixed $IdAthelete
+ * @property-write mixed $IdAthelete
+ * @property-read mixed $IdCompetition
+ * @property-write mixed $IdCompetition
+ * @property-read mixed $IdSession
+ * @property-write mixed $IdSession
+ * @property-read mixed $Flight
+ * @property-write mixed $Flight
+ * @property-read mixed $Division
+ * @property-write mixed $Division
+ * @property-read mixed $AgeGroup
+ * @property-write mixed $AgeGroup
+ * @property-read mixed $Misc1
+ * @property-write mixed $Misc1
+ * @property-read mixed $Misc2
+ * @property-write mixed $Misc2
+ * @property-read mixed $Misc3
+ * @property-write mixed $Misc3
+ * @property-read mixed $Misc4
+ * @property-write mixed $Misc4
+ * @property-read mixed $Misc5
+ * @property-write mixed $Misc5
+ * @property-read mixed $CreDate
+ * @property-write mixed $CreDate
+ * @property-read mixed $Level
+ * @property-write mixed $Level
+ * @property-read Enrollment $IdAtheleteObject
+ * @property-read Enrollment $IdCompetitionObject
+ * @property-read Enrollment $IdSessionObject
+ */
 class EnrollmentBase extends BaseEntity {
     const DB_CONN = 'DB_1';
     const TABLE_NAME = 'Enrollment';

@@ -8,6 +8,7 @@
 * - _searchDevice()
 * - _searchEnrollment()
 * - _searchOrg()
+* - _searchOrgCompetition()
 * - _searchParentMessage()
 * - _searchResult()
 * - _searchSession()
@@ -252,6 +253,7 @@ class FFSJsonSearchDriver {
         $arrOrConditions[] = sprintf('namespace LIKE "%s%%"', strtolower($strSearch));
         $arrOrConditions[] = sprintf('name LIKE "%s%%"', strtolower($strSearch));
         $arrOrConditions[] = sprintf('clubNum LIKE "%s%%"', strtolower($strSearch));
+        $arrOrConditions[] = sprintf('clubType LIKE "%s%%"', strtolower($strSearch));
         $strQuery = ' WHERE ' . implode(' OR ', $arrOrConditions);
         $arrOrgs = Org::Query($strQuery);
         foreach ($arrOrgs as $strKey => $objOrg) {
@@ -260,6 +262,54 @@ class FFSJsonSearchDriver {
                 'text' => $objOrg->__toString()
             );
         }
+        if (count($arrData) == 0) {
+            $arrData[] = array(
+                'value' => $strSearch,
+                'text' => $strSearch
+            );
+        }
+        die(json_encode($arrData));
+    }
+    public function _searchOrgCompetition($objRoute) {
+        $strSearch = $_POST['search'];
+        $arrData = array();
+        $arrOrConditions = array();
+        $strQuery = ' WHERE ' . implode(' OR ', $arrOrConditions);
+        $arrOrgCompetitions = OrgCompetition::Query($strQuery);
+        foreach ($arrOrgCompetitions as $strKey => $objOrgCompetition) {
+            $arrData[$strKey] = array(
+                'value' => 'OrgCompetition_' . $objOrgCompetition->idOrgCompetition,
+                'text' => $objOrgCompetition->__toString()
+            );
+        }
+        /*---------------Load by parent field: Org----------------------*/
+        $arrOrConditions = array();
+        $arrOrConditions[] = sprintf('namespace LIKE "%s%%"', strtolower($strSearch));
+        $arrOrConditions[] = sprintf('name LIKE "%s%%"', strtolower($strSearch));
+        if (count($arrOrConditions) > 0) {
+            $arrOrgs = Org::Query('WHERE ' . implode(' OR ', $arrOrConditions));
+            foreach ($arrOrgs as $objOrg) {
+                $arrData[] = array(
+                    'value' => 'Org_' . $objOrg->GetId() ,
+                    'text' => $objOrg->__toString()
+                );
+            }
+        }
+        /*---------------End load: Org----------------------*/
+        /*---------------Load by parent field: Competition----------------------*/
+        $arrOrConditions = array();
+        $arrOrConditions[] = sprintf('name LIKE "%s%%"', strtolower($strSearch));
+        $arrOrConditions[] = sprintf('namespace LIKE "%s%%"', strtolower($strSearch));
+        if (count($arrOrConditions) > 0) {
+            $arrCompetitions = Competition::Query('WHERE ' . implode(' OR ', $arrOrConditions));
+            foreach ($arrCompetitions as $objCompetition) {
+                $arrData[] = array(
+                    'value' => 'Competition_' . $objCompetition->GetId() ,
+                    'text' => $objCompetition->__toString()
+                );
+            }
+        }
+        /*---------------End load: Competition----------------------*/
         if (count($arrData) == 0) {
             $arrData[] = array(
                 'value' => $strSearch,

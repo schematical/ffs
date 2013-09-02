@@ -1,12 +1,16 @@
 <div class=''>
-    <?php
+    <div class='controls input-prepend '>
+        <span class='add-on'>Search Orgs</span>
+        <?php
 /**
 * Class and Function List:
 * Function list:
 * Classes list:
 */
 $_CONTROL->txtSearch->Render(); ?>
+    </div>
 </div>
+<?php if ($_CONTROL->DisplayAdvOptions) { ?>
 <div class="accordion" id="accordion2">
     <div class="accordion-group">
         <div class="accordion-heading">
@@ -26,7 +30,7 @@ $_CONTROL->txtSearch->Render(); ?>
                                         <?php $_CONTROL->intIdOrg->Render(); ?>
                                      </div>
                                  <?php
-} ?>
+    } ?>
                             
                             
                         </div>
@@ -39,7 +43,7 @@ $_CONTROL->txtSearch->Render(); ?>
                                         <?php $_CONTROL->strNamespace->Render(); ?>
                                      </div>
                                  <?php
-} ?>
+    } ?>
                             
                             
                         </div>
@@ -52,7 +56,7 @@ $_CONTROL->txtSearch->Render(); ?>
                                         <?php $_CONTROL->strName->Render(); ?>
                                      </div>
                                  <?php
-} ?>
+    } ?>
                             
                             
                         </div>
@@ -75,7 +79,7 @@ $_CONTROL->txtSearch->Render(); ?>
                                         <?php $_CONTROL->intIdImportAuthUser->Render(); ?>
                                      </div>
                                  <?php
-} ?>
+    } ?>
                             
                             
                         </div>
@@ -88,7 +92,20 @@ $_CONTROL->txtSearch->Render(); ?>
                                         <?php $_CONTROL->strClubNum->Render(); ?>
                                      </div>
                                  <?php
-} ?>
+    } ?>
+                            
+                            
+                        </div>
+                    
+                        <div class='span3'>
+                            
+                                <?php if (!is_null($_CONTROL->strClubType)) { ?>
+                                    <div class='controls'>
+                                        <!--label> Club Type</label-->
+                                        <?php $_CONTROL->strClubType->Render(); ?>
+                                     </div>
+                                 <?php
+    } ?>
                             
                             
                         </div>
@@ -98,3 +115,5 @@ $_CONTROL->txtSearch->Render(); ?>
         </div>
     </div>
 </div>
+<?php
+} ?>

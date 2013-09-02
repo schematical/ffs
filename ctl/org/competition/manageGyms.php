@@ -15,18 +15,27 @@ class OrgManageForm extends OrgManageFormBase {
     public function Form_Create() {
         parent::Form_Create();
         $this->InitSelectPanel();
-        $arrOrgs = $this->Query();
+        $arrOrgs = FFSApplication::GetInvitedOrgsByCompetition();//$this->Query();
+
         $objOrg = null;
         if (count($arrOrgs) == 1) {
             $objOrg = $arrOrgs[0];
         }
-
+        $this->InitList($arrOrgs);
         $this->InitEditPanel($objOrg);
         //$this->InitInvitePanel();
-        $this->InitList($arrOrgs);
+
+        $this->InitWizzard();
 
 
 
+    }
+    public function InitSelectPanel() {
+        $this->pnlSelect = new FFSOrgInvitePanel($this);
+
+        $wgtOrg = $this->AddWidget('Select Org', 'icon-select', $this->pnlSelect);
+        $wgtOrg->AddCssClass('span12');
+        return $wgtOrg;
     }
     /*public function lnkEdit_click($strFormId, $strControlId, $strActionParameter) {
         parent::lnkEdit_click($strFormId, $strControlId, $strActionParameter);
@@ -74,10 +83,10 @@ class OrgManageForm extends OrgManageFormBase {
     }
 
     public function InitWizzard(){
-        if(is_null(MLCApplication::QS(FFSQS::UseWizzard))){
+        if(!is_null(MLCApplication::QS(FFSQS::UseWizzard))){
             $this->pnlEdit->Intro("Enter in your session info", "Start by entering in a sessions info such as a unique name, a start time and an end time. If you are running more than one sessions at a time use the <b>Equipment Set</b> field to denote which set of equipment this session is running on.");
 
-            $this->lstSessions->Intro("Here are your sessions", "Once you have entered in a session it should appear in the session list. Each row has the following buttons:
+            $this->lstOrgs->Intro("Here are your sessions", "Once you have entered in a session it should appear in the session list. Each row has the following buttons:
                 <ul>
                     <li>Edit - Allows you to edit a sessions data</li>
                     <li>Athletes - Allows you to control the enrollment of athletes into a session</li>
@@ -101,5 +110,7 @@ class OrgManageForm extends OrgManageFormBase {
 
         }
     }
+
+
 }
 OrgManageForm::Run('OrgManageForm');

@@ -43,6 +43,10 @@ class OrgManageFormBase extends FFSForm {
         if (!is_null($strClubNum)) {
             $arrAndConditions[] = sprintf('clubNum LIKE "%s%%"', $strClubNum);
         }
+        $strClubType = MLCApplication::QS(FFSQS::Org_ClubType);
+        if (!is_null($strClubType)) {
+            $arrAndConditions[] = sprintf('clubType LIKE "%s%%"', $strClubType);
+        }
         if (count($arrAndConditions) >= 1) {
             $arrOrgs = Org::Query('WHERE ' . implode(' AND ', $arrAndConditions));
         } else {

@@ -24,8 +24,10 @@ class CompetitionEditPanelBase extends MJaxPanel {
     public $dttEndDate = null;
     public $intIdOrg = null;
     public $strNamespace = null;
+    public $dttSignupCutOffDate = null;
     public $lnkViewParentIdOrg = null;
     public $lnkViewChildEnrollment = null;
+    public $lnkViewChildOrgCompetition = null;
     public $lnkViewChildParentMessage = null;
     public $lnkViewChildSession = null;
     //Regular controls
@@ -72,6 +74,8 @@ class CompetitionEditPanelBase extends MJaxPanel {
         $this->strNamespace->Name = 'namespace';
         $this->strNamespace->AddCssClass('input-large');
         //varchar(45)
+        //Is special field!!!!!
+        $this->dttSignupCutOffDate = new MJaxBSDateTimePicker($this);
         if (!is_null($this->objCompetition)) {
             $this->SetCompetition($this->objCompetition);
         }
@@ -95,6 +99,8 @@ class CompetitionEditPanelBase extends MJaxPanel {
             //Is special field!!!!!
             $this->dttEndDate->Value = $this->objCompetition->endDate;
             $this->strNamespace->Text = $this->objCompetition->namespace;
+            //Is special field!!!!!
+            $this->dttSignupCutOffDate->Value = $this->objCompetition->signupCutOffDate;
         } else {
             $this->btnDelete->Style->Display = 'none';
         }
@@ -111,6 +117,10 @@ class CompetitionEditPanelBase extends MJaxPanel {
         $this->lnkViewChildEnrollment->Text = 'View Enrollments';
         //I should really fix this
         //$this->lnkViewChildEnrollment->Href = __ENTITY_MODEL_DIR__ . '/Competition/' . $this->objCompetition->idCompetition . '/Enrollments';
+        $this->lnkViewChildOrgCompetition = new MJaxLinkButton($this);
+        $this->lnkViewChildOrgCompetition->Text = 'View OrgCompetitions';
+        //I should really fix this
+        //$this->lnkViewChildOrgCompetition->Href = __ENTITY_MODEL_DIR__ . '/Competition/' . $this->objCompetition->idCompetition . '/OrgCompetitions';
         $this->lnkViewChildParentMessage = new MJaxLinkButton($this);
         $this->lnkViewChildParentMessage->Text = 'View ParentMessages';
         //I should really fix this
@@ -135,6 +145,8 @@ class CompetitionEditPanelBase extends MJaxPanel {
         //Is special field!!!!!
         $this->objCompetition->endDate = $this->dttEndDate->GetValue();
         $this->objCompetition->namespace = $this->strNamespace->Text;
+        //Is special field!!!!!
+        $this->objCompetition->signupCutOffDate = $this->dttSignupCutOffDate->GetValue();
         $this->objCompetition->Save();
         //Experimental save event trigger
         $this->ActionParameter = $this->objCompetition;

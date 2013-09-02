@@ -1,12 +1,16 @@
 <div class=''>
-    <?php
+    <div class='controls input-prepend '>
+        <span class='add-on'>Search Orgs</span>
+        <?php
 /**
 * Class and Function List:
 * Function list:
 * Classes list:
 */
 $_CONTROL->txtSearch->Render(); ?>
+    </div>
 </div>
+<?php if ($_CONTROL->DisplayAdvOptions) { ?>
 <div class="accordion" id="accordion2">
     <div class="accordion-group">
         <div class="accordion-heading">
@@ -26,7 +30,7 @@ $_CONTROL->txtSearch->Render(); ?>
                                         <?php $_CONTROL->intIdParentMessage->Render(); ?>
                                      </div>
                                  <?php
-} ?>
+    } ?>
                             
                             
                         </div>
@@ -39,7 +43,7 @@ $_CONTROL->txtSearch->Render(); ?>
                                         <?php $_CONTROL->intIdAthelete->Render(); ?>
                                      </div>
                                  <?php
-} ?>
+    } ?>
                             
                             
                         </div>
@@ -52,7 +56,7 @@ $_CONTROL->txtSearch->Render(); ?>
                                         <?php $_CONTROL->strAtheleteName->Render(); ?>
                                      </div>
                                  <?php
-} ?>
+    } ?>
                             
                             
                         </div>
@@ -65,7 +69,7 @@ $_CONTROL->txtSearch->Render(); ?>
                                         <?php $_CONTROL->strMessage->Render(); ?>
                                      </div>
                                  <?php
-} ?>
+    } ?>
                             
                             
                         </div>
@@ -80,12 +84,12 @@ $_CONTROL->txtSearch->Render(); ?>
                             
                                 <label> Disp Date Start</label>
                                 <?php if (!is_null($_CONTROL->txtDispDate_StartDate)) {
-    $_CONTROL->txtDispDate_StartDate->Render();
-} ?>
+        $_CONTROL->txtDispDate_StartDate->Render();
+    } ?>
                                 <label> Disp Date End</label>
                                  <?php if (!is_null($_CONTROL->txtDispDate_EndDate)) {
-    $_CONTROL->txtDispDate_EndDate->Render();
-} ?>
+        $_CONTROL->txtDispDate_EndDate->Render();
+    } ?>
                              
                         </div>
                     
@@ -99,12 +103,12 @@ $_CONTROL->txtSearch->Render(); ?>
                             
                                 <label> Que Date Start</label>
                                 <?php if (!is_null($_CONTROL->txtQueDate_StartDate)) {
-    $_CONTROL->txtQueDate_StartDate->Render();
-} ?>
+        $_CONTROL->txtQueDate_StartDate->Render();
+    } ?>
                                 <label> Que Date End</label>
                                  <?php if (!is_null($_CONTROL->txtQueDate_EndDate)) {
-    $_CONTROL->txtQueDate_EndDate->Render();
-} ?>
+        $_CONTROL->txtQueDate_EndDate->Render();
+    } ?>
                              
                         </div>
                     
@@ -121,7 +125,7 @@ $_CONTROL->txtSearch->Render(); ?>
                                         <?php $_CONTROL->strInviteType->Render(); ?>
                                      </div>
                                  <?php
-} ?>
+    } ?>
                             
                             
                         </div>
@@ -134,7 +138,7 @@ $_CONTROL->txtSearch->Render(); ?>
                                         <?php $_CONTROL->strInviteToken->Render(); ?>
                                      </div>
                                  <?php
-} ?>
+    } ?>
                             
                             
                         </div>
@@ -144,12 +148,12 @@ $_CONTROL->txtSearch->Render(); ?>
                             
                                 <label> Invite View Date Start</label>
                                 <?php if (!is_null($_CONTROL->txtInviteViewDate_StartDate)) {
-    $_CONTROL->txtInviteViewDate_StartDate->Render();
-} ?>
+        $_CONTROL->txtInviteViewDate_StartDate->Render();
+    } ?>
                                 <label> Invite View Date End</label>
                                  <?php if (!is_null($_CONTROL->txtInviteViewDate_EndDate)) {
-    $_CONTROL->txtInviteViewDate_EndDate->Render();
-} ?>
+        $_CONTROL->txtInviteViewDate_EndDate->Render();
+    } ?>
                              
                         </div>
                     
@@ -161,7 +165,7 @@ $_CONTROL->txtSearch->Render(); ?>
                                         <?php $_CONTROL->intIdCompetition->Render(); ?>
                                      </div>
                                  <?php
-} ?>
+    } ?>
                             
                             
                         </div>
@@ -171,12 +175,12 @@ $_CONTROL->txtSearch->Render(); ?>
                             
                                 <label> Approve Date Start</label>
                                 <?php if (!is_null($_CONTROL->txtApproveDate_StartDate)) {
-    $_CONTROL->txtApproveDate_StartDate->Render();
-} ?>
+        $_CONTROL->txtApproveDate_StartDate->Render();
+    } ?>
                                 <label> Approve Date End</label>
                                  <?php if (!is_null($_CONTROL->txtApproveDate_EndDate)) {
-    $_CONTROL->txtApproveDate_EndDate->Render();
-} ?>
+        $_CONTROL->txtApproveDate_EndDate->Render();
+    } ?>
                              
                         </div>
                     
@@ -190,3 +194,5 @@ $_CONTROL->txtSearch->Render(); ?>
         </div>
     </div>
 </div>
+<?php
+} ?>

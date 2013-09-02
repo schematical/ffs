@@ -24,6 +24,22 @@
 * Classes list:
 * - DeviceBase extends BaseEntity
 */
+/**
+ * Class Competition
+ * @property-read mixed $IdDevice
+ * @property-write mixed $IdDevice
+ * @property-read mixed $Name
+ * @property-write mixed $Name
+ * @property-read mixed $Token
+ * @property-write mixed $Token
+ * @property-read mixed $CreDate
+ * @property-write mixed $CreDate
+ * @property-read mixed $InviteEmail
+ * @property-write mixed $InviteEmail
+ * @property-read mixed $IdOrg
+ * @property-write mixed $IdOrg
+ * @property-read Device $IdOrgObject
+ */
 class DeviceBase extends BaseEntity {
     const DB_CONN = 'DB_1';
     const TABLE_NAME = 'Device';

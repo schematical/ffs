@@ -8,10 +8,8 @@
 * - ToXml()
 * - Query()
 * - QueryCount()
-* - GetAtheleteArr()
-* - GetCompetitionArr()
-* - GetDeviceArr()
-* - GetOrgCompetitionArr()
+* - LoadCollByIdOrg()
+* - LoadCollByIdCompetition()
 * - LoadByTag()
 * - AddTag()
 * - ParseArray()
@@ -24,51 +22,47 @@
 * - __get()
 * - __set()
 * Classes list:
-* - OrgBase extends BaseEntity
+* - OrgCompetitionBase extends BaseEntity
 */
 /**
  * Class Competition
+ * @property-read mixed $IdOrgCompetition
+ * @property-write mixed $IdOrgCompetition
  * @property-read mixed $IdOrg
  * @property-write mixed $IdOrg
- * @property-read mixed $Namespace
- * @property-write mixed $Namespace
- * @property-read mixed $Name
- * @property-write mixed $Name
+ * @property-read mixed $IdCompetition
+ * @property-write mixed $IdCompetition
  * @property-read mixed $CreDate
  * @property-write mixed $CreDate
- * @property-read mixed $PsData
- * @property-write mixed $PsData
- * @property-read mixed $IdImportAuthUser
- * @property-write mixed $IdImportAuthUser
- * @property-read mixed $ClubNum
- * @property-write mixed $ClubNum
- * @property-read mixed $ClubType
- * @property-write mixed $ClubType
+ * @property-read mixed $IdAuthUser
+ * @property-write mixed $IdAuthUser
+ * @property-read OrgCompetition $IdOrgObject
+ * @property-read OrgCompetition $IdCompetitionObject
  */
-class OrgBase extends BaseEntity {
+class OrgCompetitionBase extends BaseEntity {
     const DB_CONN = 'DB_1';
-    const TABLE_NAME = 'Org';
-    const P_KEY = 'idOrg';
+    const TABLE_NAME = 'OrgCompetition';
+    const P_KEY = 'idOrgCompetition';
     public function __construct() {
         $this->table = DB_PREFIX . self::TABLE_NAME;
         $this->pKey = self::P_KEY;
         $this->strDBConn = self::DB_CONN;
     }
     public static function LoadById($intId) {
-        $sql = sprintf("SELECT * FROM %s WHERE idOrg = %s;", self::TABLE_NAME, $intId);
+        $sql = sprintf("SELECT * FROM %s WHERE idOrgCompetition = %s;", self::TABLE_NAME, $intId);
         $result = MLCDBDriver::Query($sql, self::DB_CONN);
         while ($data = mysql_fetch_assoc($result)) {
-            $tObj = new Org();
+            $tObj = new OrgCompetition();
             $tObj->materilize($data);
             return $tObj;
         }
     }
     public static function LoadAll() {
         $sql = sprintf("SELECT * FROM %s;", self::TABLE_NAME);
-        $result = MLCDBDriver::Query($sql, Org::DB_CONN);
+        $result = MLCDBDriver::Query($sql, OrgCompetition::DB_CONN);
         $coll = new BaseEntityCollection();
         while ($data = mysql_fetch_assoc($result)) {
-            $tObj = new Org();
+            $tObj = new OrgCompetition();
             $tObj->materilize($data);
             $coll->addItem($tObj);
         }
@@ -76,36 +70,27 @@ class OrgBase extends BaseEntity {
     }
     public function ToXml($blnReclusive = false) {
         $xmlStr = "";
-        $xmlStr.= "<Org>";
+        $xmlStr.= "<OrgCompetition>";
+        $xmlStr.= "<idOrgCompetition>";
+        $xmlStr.= $this->idOrgCompetition;
+        $xmlStr.= "</idOrgCompetition>";
         $xmlStr.= "<idOrg>";
         $xmlStr.= $this->idOrg;
         $xmlStr.= "</idOrg>";
-        $xmlStr.= "<namespace>";
-        $xmlStr.= $this->namespace;
-        $xmlStr.= "</namespace>";
-        $xmlStr.= "<name>";
-        $xmlStr.= $this->name;
-        $xmlStr.= "</name>";
+        $xmlStr.= "<idCompetition>";
+        $xmlStr.= $this->idCompetition;
+        $xmlStr.= "</idCompetition>";
         $xmlStr.= "<creDate>";
         $xmlStr.= $this->creDate;
         $xmlStr.= "</creDate>";
-        $xmlStr.= "<psData>";
-        $xmlStr.= $this->psData;
-        $xmlStr.= "</psData>";
-        $xmlStr.= "<idImportAuthUser>";
-        $xmlStr.= $this->idImportAuthUser;
-        $xmlStr.= "</idImportAuthUser>";
-        $xmlStr.= "<clubNum>";
-        $xmlStr.= $this->clubNum;
-        $xmlStr.= "</clubNum>";
-        $xmlStr.= "<clubType>";
-        $xmlStr.= $this->clubType;
-        $xmlStr.= "</clubType>";
+        $xmlStr.= "<idAuthUser>";
+        $xmlStr.= $this->idAuthUser;
+        $xmlStr.= "</idAuthUser>";
         if ($blnReclusive) {
             //Finish FK Rel stuff
             
         }
-        $xmlStr.= "</Org>";
+        $xmlStr.= "</OrgCompetition>";
         return $xmlStr;
     }
     public static function Query($strExtra, $blnReturnSingle = false) {
@@ -113,7 +98,7 @@ class OrgBase extends BaseEntity {
         $result = MLCDBDriver::Query($sql, self::DB_CONN);
         $coll = new BaseEntityCollection();
         while ($data = mysql_fetch_assoc($result)) {
-            $tObj = new Org();
+            $tObj = new OrgCompetition();
             $tObj->materilize($data);
             $coll->addItem($tObj);
         }
@@ -134,19 +119,29 @@ class OrgBase extends BaseEntity {
         return mysql_num_rows($result);
     }
     //Get children
-    public function GetAtheleteArr() {
-        return Athelete::LoadCollByIdOrg($this->idOrg);
-    }
-    public function GetCompetitionArr() {
-        return Competition::LoadCollByIdOrg($this->idOrg);
-    }
-    public function GetDeviceArr() {
-        return Device::LoadCollByIdOrg($this->idOrg);
-    }
-    public function GetOrgCompetitionArr() {
-        return OrgCompetition::LoadCollByIdOrg($this->idOrg);
-    }
     //Load by foregin key
+    public static function LoadCollByIdOrg($intIdOrg) {
+        $sql = sprintf("SELECT * FROM OrgCompetition WHERE idOrg = %s;", $intIdOrg);
+        $result = MLCDBDriver::Query($sql, self::DB_CONN);
+        $coll = new BaseEntityCollection();
+        while ($data = mysql_fetch_assoc($result)) {
+            $objOrgCompetition = new OrgCompetition();
+            $objOrgCompetition->materilize($data);
+            $coll->addItem($objOrgCompetition);
+        }
+        return $coll;
+    }
+    public static function LoadCollByIdCompetition($intIdCompetition) {
+        $sql = sprintf("SELECT * FROM OrgCompetition WHERE idCompetition = %s;", $intIdCompetition);
+        $result = MLCDBDriver::Query($sql, self::DB_CONN);
+        $coll = new BaseEntityCollection();
+        while ($data = mysql_fetch_assoc($result)) {
+            $objOrgCompetition = new OrgCompetition();
+            $objOrgCompetition->materilize($data);
+            $coll->addItem($objOrgCompetition);
+        }
+        return $coll;
+    }
     public function LoadByTag($strTag) {
         return MLCTagDriver::LoadTaggedEntites($strTag, get_class($this));
     }
@@ -157,34 +152,22 @@ class OrgBase extends BaseEntity {
         foreach ($arrData as $strKey => $mixVal) {
             $arrData[strtolower($strKey) ] = $mixVal;
         }
-        if (array_key_exists('idorg', $arrData)) {
-            $this->intIdOrg = $arrData['idorg'];
-        }
-        if (array_key_exists('idorg', $arrData)) {
-            $this->intIdOrg = $arrData['idorg'];
-        }
-        if (array_key_exists('idorg', $arrData)) {
-            $this->intIdOrg = $arrData['idorg'];
-        }
-        if (array_key_exists('idorg', $arrData)) {
-            $this->intIdOrg = $arrData['idorg'];
-        }
     }
     public static function Parse($mixData, $blnReturnId = false) {
         if (is_numeric($mixData)) {
             if ($blnReturnId) {
                 return $mixData;
             }
-            return Org::Load($mixData);
-        } elseif ((is_object($mixData)) && (get_class($mixData) == 'Org')) {
+            return OrgCompetition::Load($mixData);
+        } elseif ((is_object($mixData)) && (get_class($mixData) == 'OrgCompetition')) {
             if (!$blnReturnId) {
                 return $mixData;
             }
-            return $mixData->intIdOrg;
+            return $mixData->intIdOrgCompetition;
         } elseif (is_null($mixData)) {
             return null;
         } else {
-            throw new Exception(__FUNCTION__ . ' - Parameter 1 must be either an intiger or a class type "Org"');
+            throw new Exception(__FUNCTION__ . ' - Parameter 1 must be either an intiger or a class type "OrgCompetition"');
         }
     }
     public static function LoadSingleByField($strField, $mixValue, $strCompairison = '=') {
@@ -206,7 +189,7 @@ class OrgBase extends BaseEntity {
         $result = MLCDBDriver::query($sql, self::DB_CONN);
         $coll = new BaseEntityCollection();
         while ($data = mysql_fetch_assoc($result)) {
-            $tObj = new Org();
+            $tObj = new OrgCompetition();
             $tObj->materilize($data);
             $coll->addItem($tObj);
         }
@@ -215,19 +198,16 @@ class OrgBase extends BaseEntity {
     }
     public function __toArray() {
         $arrReturn = array();
-        $arrReturn['_ClassName'] = "Org %>";
+        $arrReturn['_ClassName'] = "OrgCompetition %>";
+        $arrReturn['idOrgCompetition'] = $this->idOrgCompetition;
         $arrReturn['idOrg'] = $this->idOrg;
-        $arrReturn['namespace'] = $this->namespace;
-        $arrReturn['name'] = $this->name;
+        $arrReturn['idCompetition'] = $this->idCompetition;
         $arrReturn['creDate'] = $this->creDate;
-        $arrReturn['psData'] = $this->psData;
-        $arrReturn['idImportAuthUser'] = $this->idImportAuthUser;
-        $arrReturn['clubNum'] = $this->clubNum;
-        $arrReturn['clubType'] = $this->clubType;
+        $arrReturn['idAuthUser'] = $this->idAuthUser;
         return $arrReturn;
     }
     public function __toString() {
-        return 'Org(' . $this->getId() . ')';
+        return 'OrgCompetition(' . $this->getId() . ')';
     }
     public function __toJson($blnPosponeEncode = false) {
         $arrReturn = $this->__toArray();
@@ -239,6 +219,13 @@ class OrgBase extends BaseEntity {
     }
     public function __get($strName) {
         switch ($strName) {
+            case ('IdOrgCompetition'):
+            case ('idOrgCompetition'):
+                if (array_key_exists('idOrgCompetition', $this->arrDBFields)) {
+                    return $this->arrDBFields['idOrgCompetition'];
+                }
+                return null;
+            break;
             case ('IdOrg'):
             case ('idOrg'):
                 if (array_key_exists('idOrg', $this->arrDBFields)) {
@@ -246,17 +233,10 @@ class OrgBase extends BaseEntity {
                 }
                 return null;
             break;
-            case ('Namespace'):
-            case ('namespace'):
-                if (array_key_exists('namespace', $this->arrDBFields)) {
-                    return $this->arrDBFields['namespace'];
-                }
-                return null;
-            break;
-            case ('Name'):
-            case ('name'):
-                if (array_key_exists('name', $this->arrDBFields)) {
-                    return $this->arrDBFields['name'];
+            case ('IdCompetition'):
+            case ('idCompetition'):
+                if (array_key_exists('idCompetition', $this->arrDBFields)) {
+                    return $this->arrDBFields['idCompetition'];
                 }
                 return null;
             break;
@@ -267,31 +247,24 @@ class OrgBase extends BaseEntity {
                 }
                 return null;
             break;
-            case ('PsData'):
-            case ('psData'):
-                if (array_key_exists('psData', $this->arrDBFields)) {
-                    return $this->arrDBFields['psData'];
+            case ('IdAuthUser'):
+            case ('idAuthUser'):
+                if (array_key_exists('idAuthUser', $this->arrDBFields)) {
+                    return $this->arrDBFields['idAuthUser'];
                 }
                 return null;
             break;
-            case ('IdImportAuthUser'):
-            case ('idImportAuthUser'):
-                if (array_key_exists('idImportAuthUser', $this->arrDBFields)) {
-                    return $this->arrDBFields['idImportAuthUser'];
+            case ('IdOrgObject'):
+            case ('idCompetitionObject'):
+                if ((array_key_exists('idOrg', $this->arrDBFields)) && (!is_null($this->arrDBFields['idOrg']))) {
+                    return Org::LoadById($this->arrDBFields['idOrg']);
                 }
                 return null;
             break;
-            case ('ClubNum'):
-            case ('clubNum'):
-                if (array_key_exists('clubNum', $this->arrDBFields)) {
-                    return $this->arrDBFields['clubNum'];
-                }
-                return null;
-            break;
-            case ('ClubType'):
-            case ('clubType'):
-                if (array_key_exists('clubType', $this->arrDBFields)) {
-                    return $this->arrDBFields['clubType'];
+            case ('IdCompetitionObject'):
+            case ('idCompetitionObject'):
+                if ((array_key_exists('idCompetition', $this->arrDBFields)) && (!is_null($this->arrDBFields['idCompetition']))) {
+                    return Competition::LoadById($this->arrDBFields['idCompetition']);
                 }
                 return null;
             break;
@@ -303,37 +276,25 @@ class OrgBase extends BaseEntity {
     public function __set($strName, $strValue) {
         $this->modified = 1;
         switch ($strName) {
+            case ('IdOrgCompetition'):
+            case ('idOrgCompetition'):
+                $this->arrDBFields['idOrgCompetition'] = $strValue;
+            break;
             case ('IdOrg'):
             case ('idOrg'):
                 $this->arrDBFields['idOrg'] = $strValue;
             break;
-            case ('Namespace'):
-            case ('namespace'):
-                $this->arrDBFields['namespace'] = $strValue;
-            break;
-            case ('Name'):
-            case ('name'):
-                $this->arrDBFields['name'] = $strValue;
+            case ('IdCompetition'):
+            case ('idCompetition'):
+                $this->arrDBFields['idCompetition'] = $strValue;
             break;
             case ('CreDate'):
             case ('creDate'):
                 $this->arrDBFields['creDate'] = $strValue;
             break;
-            case ('PsData'):
-            case ('psData'):
-                $this->arrDBFields['psData'] = $strValue;
-            break;
-            case ('IdImportAuthUser'):
-            case ('idImportAuthUser'):
-                $this->arrDBFields['idImportAuthUser'] = $strValue;
-            break;
-            case ('ClubNum'):
-            case ('clubNum'):
-                $this->arrDBFields['clubNum'] = $strValue;
-            break;
-            case ('ClubType'):
-            case ('clubType'):
-                $this->arrDBFields['clubType'] = $strValue;
+            case ('IdAuthUser'):
+            case ('idAuthUser'):
+                $this->arrDBFields['idAuthUser'] = $strValue;
             break;
             default:
                 throw new MLCMissingPropertyException($this, $strName);

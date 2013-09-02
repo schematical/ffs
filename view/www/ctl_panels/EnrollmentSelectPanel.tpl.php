@@ -1,12 +1,16 @@
 <div class=''>
-    <?php
+    <div class='controls input-prepend '>
+        <span class='add-on'>Search Orgs</span>
+        <?php
 /**
 * Class and Function List:
 * Function list:
 * Classes list:
 */
 $_CONTROL->txtSearch->Render(); ?>
+    </div>
 </div>
+<?php if ($_CONTROL->DisplayAdvOptions) { ?>
 <div class="accordion" id="accordion2">
     <div class="accordion-group">
         <div class="accordion-heading">
@@ -26,7 +30,7 @@ $_CONTROL->txtSearch->Render(); ?>
                                         <?php $_CONTROL->intIdEnrollment->Render(); ?>
                                      </div>
                                  <?php
-} ?>
+    } ?>
                             
                             
                         </div>
@@ -39,7 +43,7 @@ $_CONTROL->txtSearch->Render(); ?>
                                         <?php $_CONTROL->intIdAthelete->Render(); ?>
                                      </div>
                                  <?php
-} ?>
+    } ?>
                             
                             
                         </div>
@@ -52,7 +56,7 @@ $_CONTROL->txtSearch->Render(); ?>
                                         <?php $_CONTROL->intIdCompetition->Render(); ?>
                                      </div>
                                  <?php
-} ?>
+    } ?>
                             
                             
                         </div>
@@ -65,7 +69,7 @@ $_CONTROL->txtSearch->Render(); ?>
                                         <?php $_CONTROL->intIdSession->Render(); ?>
                                      </div>
                                  <?php
-} ?>
+    } ?>
                             
                             
                         </div>
@@ -78,7 +82,7 @@ $_CONTROL->txtSearch->Render(); ?>
                                         <?php $_CONTROL->strFlight->Render(); ?>
                                      </div>
                                  <?php
-} ?>
+    } ?>
                             
                             
                         </div>
@@ -91,7 +95,7 @@ $_CONTROL->txtSearch->Render(); ?>
                                         <?php $_CONTROL->strDivision->Render(); ?>
                                      </div>
                                  <?php
-} ?>
+    } ?>
                             
                             
                         </div>
@@ -104,7 +108,7 @@ $_CONTROL->txtSearch->Render(); ?>
                                         <?php $_CONTROL->strAgeGroup->Render(); ?>
                                      </div>
                                  <?php
-} ?>
+    } ?>
                             
                             
                         </div>
@@ -117,7 +121,7 @@ $_CONTROL->txtSearch->Render(); ?>
                                         <?php $_CONTROL->strMisc1->Render(); ?>
                                      </div>
                                  <?php
-} ?>
+    } ?>
                             
                             
                         </div>
@@ -130,7 +134,7 @@ $_CONTROL->txtSearch->Render(); ?>
                                         <?php $_CONTROL->strMisc2->Render(); ?>
                                      </div>
                                  <?php
-} ?>
+    } ?>
                             
                             
                         </div>
@@ -143,7 +147,7 @@ $_CONTROL->txtSearch->Render(); ?>
                                         <?php $_CONTROL->strMisc3->Render(); ?>
                                      </div>
                                  <?php
-} ?>
+    } ?>
                             
                             
                         </div>
@@ -156,7 +160,7 @@ $_CONTROL->txtSearch->Render(); ?>
                                         <?php $_CONTROL->strMisc4->Render(); ?>
                                      </div>
                                  <?php
-} ?>
+    } ?>
                             
                             
                         </div>
@@ -169,7 +173,7 @@ $_CONTROL->txtSearch->Render(); ?>
                                         <?php $_CONTROL->strMisc5->Render(); ?>
                                      </div>
                                  <?php
-} ?>
+    } ?>
                             
                             
                         </div>
@@ -187,7 +191,7 @@ $_CONTROL->txtSearch->Render(); ?>
                                         <?php $_CONTROL->strLevel->Render(); ?>
                                      </div>
                                  <?php
-} ?>
+    } ?>
                             
                             
                         </div>
@@ -197,3 +201,5 @@ $_CONTROL->txtSearch->Render(); ?>
         </div>
     </div>
 </div>
+<?php
+} ?>

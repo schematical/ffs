@@ -9,6 +9,7 @@
 * - Device()
 * - Enrollment()
 * - Org()
+* - OrgCompetition()
 * - ParentMessage()
 * - Result()
 * - Session()
@@ -37,6 +38,9 @@ class MLCApiHomeBase extends MLCApiClassBase {
     public function Org() {
         return new MLCApiOrg();
     }
+    public function OrgCompetition() {
+        return new MLCApiOrgCompetition();
+    }
     public function ParentMessage() {
         return new MLCApiParentMessage();
     }
@@ -59,6 +63,8 @@ MLCApplicationBase::$arrClassFiles['MLCApiEnrollment'] = __MODEL_APP_API__ . '/M
 MLCApplicationBase::$arrClassFiles['MLCApiEnrollmentObject'] = __MODEL_APP_API__ . '/MLCApiEnrollmentObject.class.php';
 MLCApplicationBase::$arrClassFiles['MLCApiOrg'] = __MODEL_APP_API__ . '/MLCApiOrg.class.php';
 MLCApplicationBase::$arrClassFiles['MLCApiOrgObject'] = __MODEL_APP_API__ . '/MLCApiOrgObject.class.php';
+MLCApplicationBase::$arrClassFiles['MLCApiOrgCompetition'] = __MODEL_APP_API__ . '/MLCApiOrgCompetition.class.php';
+MLCApplicationBase::$arrClassFiles['MLCApiOrgCompetitionObject'] = __MODEL_APP_API__ . '/MLCApiOrgCompetitionObject.class.php';
 MLCApplicationBase::$arrClassFiles['MLCApiParentMessage'] = __MODEL_APP_API__ . '/MLCApiParentMessage.class.php';
 MLCApplicationBase::$arrClassFiles['MLCApiParentMessageObject'] = __MODEL_APP_API__ . '/MLCApiParentMessageObject.class.php';
 MLCApplicationBase::$arrClassFiles['MLCApiResult'] = __MODEL_APP_API__ . '/MLCApiResult.class.php';

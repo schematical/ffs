@@ -3,80 +3,102 @@
         <fieldset>
             
                 
-
             
                 
-                    <?php if(!is_null($_CONTROL->strName)){ ?>
-                        <div class="control-group">
-                          <label class="control-label" for="name">Name</label>
+                    <?php
+/**
+* Class and Function List:
+* Function list:
+* Classes list:
+*/
+if (!is_null($_CONTROL->strName)) { ?>
+                        <div class="control-group pull-left">
+                          <label class="control-label" for="name"> Name</label>
                           <div class="controls">
                              <?php $_CONTROL->strName->Render(); ?>
                           </div>
                         </div>
-
-                    <?php } ?>
-
-
-            <?php if(!is_null($_CONTROL->strNamespace)){ ?>
-                <div class="control-group">
-                    <label class="control-label" for="name">Namespace</label>
-                    <div class="controls">
-                        <?php $_CONTROL->strNamespace->Render(); ?>
-                    </div>
-                </div>
-
-            <?php } ?>
-
-
-            <?php if(!is_null($_CONTROL->dttStartDate)){ ?>
-                        <div class="control-group">
-                          <label class="control-label" for="name">Start</label>
-                           <?php $_CONTROL->dttStartDate->Render(); ?>
-
-                        </div>
-
-                    <?php } ?>
+                    <?php
+} ?>
                 
-
             
                 
-                    <?php if(!is_null($_CONTROL->dttEndDate)){ ?>
-                        <div class="control-group">
-                          <label class="control-label" for="name">End</label>
-
+                    <?php if (!is_null($_CONTROL->strLongDesc)) { ?>
+                        <div class="control-group pull-left">
+                          <label class="control-label" for="name"> Long Desc</label>
+                          <div class="controls">
+                             <?php $_CONTROL->strLongDesc->Render(); ?>
+                          </div>
+                        </div>
+                    <?php
+} ?>
+                
+            
+                
+            
+                
+                    <?php if (!is_null($_CONTROL->dttStartDate)) { ?>
+                        <div class="control-group pull-left">
+                          <label class="control-label" for="name"> Start Date</label>
+                          <div class="controls">
+                             <?php $_CONTROL->dttStartDate->Render(); ?>
+                          </div>
+                        </div>
+                    <?php
+} ?>
+                
+            
+                
+                    <?php if (!is_null($_CONTROL->dttEndDate)) { ?>
+                        <div class="control-group pull-left">
+                          <label class="control-label" for="name"> End Date</label>
+                          <div class="controls">
                              <?php $_CONTROL->dttEndDate->Render(); ?>
-
+                          </div>
                         </div>
-
-                    <?php } ?>
+                    <?php
+} ?>
                 
-
             
                 
-                    <?php if(!is_null($_CONTROL->intIdOrg)){ ?>
-                        <div class="control-group">
-                          <label class="control-label" for="name">idOrg</label>
+                    <?php if (!is_null($_CONTROL->intIdOrg)) { ?>
+                        <div class="control-group pull-left">
+                          <label class="control-label" for="name"> Org</label>
                           <div class="controls">
                              <?php $_CONTROL->intIdOrg->Render(); ?>
                           </div>
                         </div>
-
-                    <?php } ?>
+                    <?php
+} ?>
                 
-
             
-
-
+                
+                    <?php if (!is_null($_CONTROL->strNamespace)) { ?>
+                        <div class="control-group pull-left">
+                          <label class="control-label" for="name"> Namespace</label>
+                          <div class="controls">
+                             <?php $_CONTROL->strNamespace->Render(); ?>
+                          </div>
+                        </div>
+                    <?php
+} ?>
+                
             
-
-           <div class="form-actions">
-                <?php if(!is_null($_CONTROL->btnSave)){ ?>
-                    <?php $_CONTROL->btnSave->Render(); ?>&nbsp;&nbsp;
-                <?php } ?>
-                <?php if(!is_null($_CONTROL->btnDelete)){ ?>
-                    <?php $_CONTROL->btnDelete->Render(); ?>
-                <?php } ?>
-            </div>
+                
+                    <?php if (!is_null($_CONTROL->dttSignupCutOffDate)) { ?>
+                        <div class="control-group pull-left">
+                          <label class="control-label" for="name"> Signup Cut Off Date</label>
+                          <div class="controls">
+                             <?php $_CONTROL->dttSignupCutOffDate->Render(); ?>
+                          </div>
+                        </div>
+                    <?php
+} ?>
+                
+            
         </fieldset>
+        <div class="form-actions">
+            <?php $_CONTROL->btnSave->Render(); ?>&nbsp;&nbsp;
+            <?php $_CONTROL->btnDelete->Render(); ?>
+        </div>
     </form>
-

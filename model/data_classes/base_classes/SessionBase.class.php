@@ -26,6 +26,28 @@
 * Classes list:
 * - SessionBase extends BaseEntity
 */
+/**
+ * Class Competition
+ * @property-read mixed $IdSession
+ * @property-write mixed $IdSession
+ * @property-read mixed $StartDate
+ * @property-write mixed $StartDate
+ * @property-read mixed $EndDate
+ * @property-write mixed $EndDate
+ * @property-read mixed $IdCompetition
+ * @property-write mixed $IdCompetition
+ * @property-read mixed $Name
+ * @property-write mixed $Name
+ * @property-read mixed $Notes
+ * @property-write mixed $Notes
+ * @property-read mixed $Data
+ * @property-write mixed $Data
+ * @property-read mixed $EquipmentSet
+ * @property-write mixed $EquipmentSet
+ * @property-read mixed $EventData
+ * @property-write mixed $EventData
+ * @property-read Session $IdCompetitionObject
+ */
 class SessionBase extends BaseEntity {
     const DB_CONN = 'DB_1';
     const TABLE_NAME = 'Session';

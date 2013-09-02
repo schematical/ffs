@@ -9,6 +9,7 @@
 * - RenderTime()
 * - SetupCols()
 * - lnkViewEnrollments_click()
+* - lnkViewOrgCompetitions_click()
 * - lnkViewParentMessages_click()
 * - lnkViewSessions_click()
 * - render_idOrg()
@@ -51,12 +52,19 @@ class CompetitionListPanelBase extends MJaxTable {
         $this->AddColumn('longDesc', ' Long Desc', null, null, 'MJaxTextArea');
         $this->AddColumn('idOrg', ' Org', $this, 'render_idOrg', 'MJaxTextBox');
         $this->AddColumn('namespace', ' Namespace', null, null, 'MJaxTextBox');
+        $this->AddColumn('signupCutOffDate', ' Signup Cut Off Date', $this, 'RenderDate', 'MJaxBSDateTimePicker');
         $this->InitRowControl('view_Enrollments', 'View Enrollments', $this, 'lnkViewEnrollments_click', 'btn btn-small');
+        $this->InitRowControl('view_OrgCompetitions', 'View OrgCompetitions', $this, 'lnkViewOrgCompetitions_click', 'btn btn-small');
         $this->InitRowControl('view_ParentMessages', 'View ParentMessages', $this, 'lnkViewParentMessages_click', 'btn btn-small');
         $this->InitRowControl('view_Sessions', 'View Sessions', $this, 'lnkViewSessions_click', 'btn btn-small');
     }
     public function lnkViewEnrollments_click($strFormId, $strControlId, $strActionParameter) {
         $this->objForm->Redirect('/data/editEnrollment', array(
+            FFSQS::Competition_IdCompetition => $strActionParameter
+        ));
+    }
+    public function lnkViewOrgCompetitions_click($strFormId, $strControlId, $strActionParameter) {
+        $this->objForm->Redirect('/data/editOrgCompetition', array(
             FFSQS::Competition_IdCompetition => $strActionParameter
         ));
     }

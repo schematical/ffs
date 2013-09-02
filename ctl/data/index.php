@@ -57,6 +57,13 @@ class ControlIndex extends FFSForm {
         );
         $objRow = $this->tblEntities->AddRow($arrData);
         $objRow->ActionParameter = "Org";
+        //OrgCompetition
+        $arrData = array(
+            'name' => "OrgCompetition",
+            'count' => OrgCompetition::QueryCount('WHERE 1')
+        );
+        $objRow = $this->tblEntities->AddRow($arrData);
+        $objRow->ActionParameter = "OrgCompetition";
         //ParentMessage
         $arrData = array(
             'name' => "ParentMessage",

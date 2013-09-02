@@ -6,10 +6,13 @@
 * - txtSearch_change()
 * - GetExtQuery()
 * - GetValue()
+* - __get()
+* - __set()
 * Classes list:
 * - ResultSelectPanelBase extends MJaxPanel
 */
 class ResultSelectPanelBase extends MJaxPanel {
+    protected $blnDisplayAdvOptions = false;
     protected $arrSelectedResults = array();
     public $txtSearch = null;
     //public $tblResults = null;
@@ -119,5 +122,31 @@ class ResultSelectPanelBase extends MJaxPanel {
     }
     public function GetValue() {
         return $this->arrSelectedResults;
+    }
+    /////////////////////////
+    // Public Properties: GET
+    /////////////////////////
+    public function __get($strName) {
+        switch ($strName) {
+            case "DisplayAdvOptions":
+                return $this->blnDisplayAdvOptions;
+            default:
+                return parent::__get($strName);
+                //throw new Exception("Not porperty exists with name '" . $strName . "' in class " . __CLASS__);
+                
+        }
+    }
+    /////////////////////////
+    // Public Properties: SET
+    /////////////////////////
+    public function __set($strName, $mixValue) {
+        switch ($strName) {
+            case "DisplayAdvOptions":
+                return $this->blnDisplayAdvOptions = $mixValue;
+            default:
+                return parent::__set($strName, $mixValue);
+                //throw new Exception("Not porperty exists with name '" . $strName . "' in class " . __CLASS__);
+                
+        }
     }
 }

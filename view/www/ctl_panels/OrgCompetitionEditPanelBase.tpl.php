@@ -11,49 +11,37 @@
 * Function list:
 * Classes list:
 */
-if (!is_null($_CONTROL->strName)) { ?>
-                        <div class="control-group pull-left">
-                          <label class="control-label" for="name"> Name</label>
-                          <div class="controls">
-                             <?php $_CONTROL->strName->Render(); ?>
-                          </div>
-                        </div>
-                    <?php
-} ?>
-                
-            
-                
-                    <?php if (!is_null($_CONTROL->strToken)) { ?>
-                        <div class="control-group pull-left">
-                          <label class="control-label" for="name"> Token</label>
-                          <div class="controls">
-                             <?php $_CONTROL->strToken->Render(); ?>
-                          </div>
-                        </div>
-                    <?php
-} ?>
-                
-            
-                
-            
-                
-                    <?php if (!is_null($_CONTROL->strInviteEmail)) { ?>
-                        <div class="control-group pull-left">
-                          <label class="control-label" for="name"> Invite Email</label>
-                          <div class="controls">
-                             <?php $_CONTROL->strInviteEmail->Render(); ?>
-                          </div>
-                        </div>
-                    <?php
-} ?>
-                
-            
-                
-                    <?php if (!is_null($_CONTROL->intIdOrg)) { ?>
+if (!is_null($_CONTROL->intIdOrg)) { ?>
                         <div class="control-group pull-left">
                           <label class="control-label" for="name"> Org</label>
                           <div class="controls">
                              <?php $_CONTROL->intIdOrg->Render(); ?>
+                          </div>
+                        </div>
+                    <?php
+} ?>
+                
+            
+                
+                    <?php if (!is_null($_CONTROL->intIdCompetition)) { ?>
+                        <div class="control-group pull-left">
+                          <label class="control-label" for="name"> Competition</label>
+                          <div class="controls">
+                             <?php $_CONTROL->intIdCompetition->Render(); ?>
+                          </div>
+                        </div>
+                    <?php
+} ?>
+                
+            
+                
+            
+                
+                    <?php if (!is_null($_CONTROL->intIdAuthUser)) { ?>
+                        <div class="control-group pull-left">
+                          <label class="control-label" for="name"> Auth User</label>
+                          <div class="controls">
+                             <?php $_CONTROL->intIdAuthUser->Render(); ?>
                           </div>
                         </div>
                     <?php

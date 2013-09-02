@@ -24,10 +24,10 @@ $_CONTROL->txtSearch->Render(); ?>
                     
                         <div class='span3'>
                             
-                                <?php if (!is_null($_CONTROL->intIdAssignment)) { ?>
+                                <?php if (!is_null($_CONTROL->intIdOrgCompetition)) { ?>
                                     <div class='controls'>
-                                        <!--label> Assignment</label-->
-                                        <?php $_CONTROL->intIdAssignment->Render(); ?>
+                                        <!--label> Org Competition</label-->
+                                        <?php $_CONTROL->intIdOrgCompetition->Render(); ?>
                                      </div>
                                  <?php
     } ?>
@@ -37,10 +37,10 @@ $_CONTROL->txtSearch->Render(); ?>
                     
                         <div class='span3'>
                             
-                                <?php if (!is_null($_CONTROL->intIdDevice)) { ?>
+                                <?php if (!is_null($_CONTROL->intIdOrg)) { ?>
                                     <div class='controls'>
-                                        <!--label> Device</label-->
-                                        <?php $_CONTROL->intIdDevice->Render(); ?>
+                                        <!--label> Org</label-->
+                                        <?php $_CONTROL->intIdOrg->Render(); ?>
                                      </div>
                                  <?php
     } ?>
@@ -50,36 +50,10 @@ $_CONTROL->txtSearch->Render(); ?>
                     
                         <div class='span3'>
                             
-                                <?php if (!is_null($_CONTROL->intIdSession)) { ?>
+                                <?php if (!is_null($_CONTROL->intIdCompetition)) { ?>
                                     <div class='controls'>
-                                        <!--label> Session</label-->
-                                        <?php $_CONTROL->intIdSession->Render(); ?>
-                                     </div>
-                                 <?php
-    } ?>
-                            
-                            
-                        </div>
-                    
-                        <div class='span3'>
-                            
-                                <?php if (!is_null($_CONTROL->strEvent)) { ?>
-                                    <div class='controls'>
-                                        <!--label> Event</label-->
-                                        <?php $_CONTROL->strEvent->Render(); ?>
-                                     </div>
-                                 <?php
-    } ?>
-                            
-                            
-                        </div>
-                    
-                        <div class='span3'>
-                            
-                                <?php if (!is_null($_CONTROL->strApartatus)) { ?>
-                                    <div class='controls'>
-                                        <!--label> Apartatus</label-->
-                                        <?php $_CONTROL->strApartatus->Render(); ?>
+                                        <!--label> Competition</label-->
+                                        <?php $_CONTROL->intIdCompetition->Render(); ?>
                                      </div>
                                  <?php
     } ?>
@@ -94,21 +68,15 @@ $_CONTROL->txtSearch->Render(); ?>
                     
                         <div class='span3'>
                             
-                            
-                        </div>
-                    
-                        <div class='span3'>
-                            
-                            
-                                <label> Revoke Date Start</label>
-                                <?php if (!is_null($_CONTROL->txtRevokeDate_StartDate)) {
-        $_CONTROL->txtRevokeDate_StartDate->Render();
+                                <?php if (!is_null($_CONTROL->intIdAuthUser)) { ?>
+                                    <div class='controls'>
+                                        <!--label> Auth User</label-->
+                                        <?php $_CONTROL->intIdAuthUser->Render(); ?>
+                                     </div>
+                                 <?php
     } ?>
-                                <label> Revoke Date End</label>
-                                 <?php if (!is_null($_CONTROL->txtRevokeDate_EndDate)) {
-        $_CONTROL->txtRevokeDate_EndDate->Render();
-    } ?>
-                             
+                            
+                            
                         </div>
                     
                 </div>

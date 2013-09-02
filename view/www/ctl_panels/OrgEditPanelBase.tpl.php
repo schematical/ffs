@@ -48,7 +48,17 @@ if (!is_null($_CONTROL->strNamespace)) { ?>
 } ?>
                 
             
-
+                
+                    <?php if (!is_null($_CONTROL->intIdImportAuthUser)) { ?>
+                        <div class="control-group pull-left">
+                          <label class="control-label" for="name"> Import Auth User</label>
+                          <div class="controls">
+                             <?php $_CONTROL->intIdImportAuthUser->Render(); ?>
+                          </div>
+                        </div>
+                    <?php
+} ?>
+                
             
                 
                     <?php if (!is_null($_CONTROL->strClubNum)) { ?>
@@ -62,9 +72,9 @@ if (!is_null($_CONTROL->strNamespace)) { ?>
 } ?>
                 
             
-            <div class="form-actions">
-                <?php $_CONTROL->btnSave->Render(); ?>&nbsp;&nbsp;
-                <?php $_CONTROL->btnDelete->Render(); ?>
-            </div>
         </fieldset>
+        <div class="form-actions">
+            <?php $_CONTROL->btnSave->Render(); ?>&nbsp;&nbsp;
+            <?php $_CONTROL->btnDelete->Render(); ?>
+        </div>
     </form>

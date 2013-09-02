@@ -6,10 +6,13 @@
 * - txtSearch_change()
 * - GetExtQuery()
 * - GetValue()
+* - __get()
+* - __set()
 * Classes list:
 * - OrgSelectPanelBase extends MJaxPanel
 */
 class OrgSelectPanelBase extends MJaxPanel {
+    protected $blnDisplayAdvOptions = false;
     protected $arrSelectedOrgs = array();
     public $txtSearch = null;
     //public $tblOrgs = null;
@@ -19,6 +22,7 @@ class OrgSelectPanelBase extends MJaxPanel {
     public $strPsData = null;
     public $intIdImportAuthUser = null;
     public $strClubNum = null;
+    public $strClubType = null;
     public function __construct($objParentControl, $strControlId = null) {
         parent::__construct($objParentControl, $strControlId);
         $this->strTemplate = __VIEW_ACTIVE_APP_DIR__ . '/www/ctl_panels/' . get_class($this) . '.tpl.php';
@@ -38,6 +42,8 @@ class OrgSelectPanelBase extends MJaxPanel {
         $this->intIdImportAuthUser->Attr('placeholder', " Import Auth User");
         $this->strClubNum = new MJaxTextBox($this);
         $this->strClubNum->Attr('placeholder', " Club Num");
+        $this->strClubType = new MJaxTextBox($this);
+        $this->strClubType->Attr('placeholder', " Club Type");
     }
     public function txtSearch_change() {
         $objEntity = null;
@@ -89,9 +95,38 @@ class OrgSelectPanelBase extends MJaxPanel {
         if (!is_null($this->strClubNum->GetValue())) {
             $arrAndConditions[] = sprintf('clubNum LIKE "%s%%"', $this->strClubNum->GetValue());
         }
+        if (!is_null($this->strClubType->GetValue())) {
+            $arrAndConditions[] = sprintf('clubType LIKE "%s%%"', $this->strClubType->GetValue());
+        }
         return $arrAndConditions;
     }
     public function GetValue() {
         return $this->arrSelectedOrgs;
+    }
+    /////////////////////////
+    // Public Properties: GET
+    /////////////////////////
+    public function __get($strName) {
+        switch ($strName) {
+            case "DisplayAdvOptions":
+                return $this->blnDisplayAdvOptions;
+            default:
+                return parent::__get($strName);
+                //throw new Exception("Not porperty exists with name '" . $strName . "' in class " . __CLASS__);
+                
+        }
+    }
+    /////////////////////////
+    // Public Properties: SET
+    /////////////////////////
+    public function __set($strName, $mixValue) {
+        switch ($strName) {
+            case "DisplayAdvOptions":
+                return $this->blnDisplayAdvOptions = $mixValue;
+            default:
+                return parent::__set($strName, $mixValue);
+                //throw new Exception("Not porperty exists with name '" . $strName . "' in class " . __CLASS__);
+                
+        }
     }
 }

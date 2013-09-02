@@ -1,12 +1,16 @@
 <div class=''>
-    <?php
+    <div class='controls input-prepend '>
+        <span class='add-on'>Search Orgs</span>
+        <?php
 /**
 * Class and Function List:
 * Function list:
 * Classes list:
 */
 $_CONTROL->txtSearch->Render(); ?>
+    </div>
 </div>
+<?php if ($_CONTROL->DisplayAdvOptions) { ?>
 <div class="accordion" id="accordion2">
     <div class="accordion-group">
         <div class="accordion-heading">
@@ -26,7 +30,7 @@ $_CONTROL->txtSearch->Render(); ?>
                                         <?php $_CONTROL->intIdSession->Render(); ?>
                                      </div>
                                  <?php
-} ?>
+    } ?>
                             
                             
                         </div>
@@ -36,12 +40,12 @@ $_CONTROL->txtSearch->Render(); ?>
                             
                                 <label> Start Date Start</label>
                                 <?php if (!is_null($_CONTROL->txtStartDate_StartDate)) {
-    $_CONTROL->txtStartDate_StartDate->Render();
-} ?>
+        $_CONTROL->txtStartDate_StartDate->Render();
+    } ?>
                                 <label> Start Date End</label>
                                  <?php if (!is_null($_CONTROL->txtStartDate_EndDate)) {
-    $_CONTROL->txtStartDate_EndDate->Render();
-} ?>
+        $_CONTROL->txtStartDate_EndDate->Render();
+    } ?>
                              
                         </div>
                     
@@ -50,12 +54,12 @@ $_CONTROL->txtSearch->Render(); ?>
                             
                                 <label> End Date Start</label>
                                 <?php if (!is_null($_CONTROL->txtEndDate_StartDate)) {
-    $_CONTROL->txtEndDate_StartDate->Render();
-} ?>
+        $_CONTROL->txtEndDate_StartDate->Render();
+    } ?>
                                 <label> End Date End</label>
                                  <?php if (!is_null($_CONTROL->txtEndDate_EndDate)) {
-    $_CONTROL->txtEndDate_EndDate->Render();
-} ?>
+        $_CONTROL->txtEndDate_EndDate->Render();
+    } ?>
                              
                         </div>
                     
@@ -67,7 +71,7 @@ $_CONTROL->txtSearch->Render(); ?>
                                         <?php $_CONTROL->intIdCompetition->Render(); ?>
                                      </div>
                                  <?php
-} ?>
+    } ?>
                             
                             
                         </div>
@@ -80,7 +84,7 @@ $_CONTROL->txtSearch->Render(); ?>
                                         <?php $_CONTROL->strName->Render(); ?>
                                      </div>
                                  <?php
-} ?>
+    } ?>
                             
                             
                         </div>
@@ -93,7 +97,7 @@ $_CONTROL->txtSearch->Render(); ?>
                                         <?php $_CONTROL->strNotes->Render(); ?>
                                      </div>
                                  <?php
-} ?>
+    } ?>
                             
                             
                         </div>
@@ -111,7 +115,7 @@ $_CONTROL->txtSearch->Render(); ?>
                                         <?php $_CONTROL->strEquipmentSet->Render(); ?>
                                      </div>
                                  <?php
-} ?>
+    } ?>
                             
                             
                         </div>
@@ -126,3 +130,5 @@ $_CONTROL->txtSearch->Render(); ?>
         </div>
     </div>
 </div>
+<?php
+} ?>

@@ -24,6 +24,27 @@
 * Classes list:
 * - AssignmentBase extends BaseEntity
 */
+/**
+ * Class Competition
+ * @property-read mixed $IdAssignment
+ * @property-write mixed $IdAssignment
+ * @property-read mixed $IdDevice
+ * @property-write mixed $IdDevice
+ * @property-read mixed $IdSession
+ * @property-write mixed $IdSession
+ * @property-read mixed $Event
+ * @property-write mixed $Event
+ * @property-read mixed $Apartatus
+ * @property-write mixed $Apartatus
+ * @property-read mixed $CreDate
+ * @property-write mixed $CreDate
+ * @property-read mixed $IdUser
+ * @property-write mixed $IdUser
+ * @property-read mixed $RevokeDate
+ * @property-write mixed $RevokeDate
+ * @property-read Assignment $IdDeviceObject
+ * @property-read Assignment $IdSessionObject
+ */
 class AssignmentBase extends BaseEntity {
     const DB_CONN = 'DB_1';
     const TABLE_NAME = 'Assignment';

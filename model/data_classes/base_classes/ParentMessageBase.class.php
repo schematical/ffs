@@ -24,6 +24,41 @@
 * Classes list:
 * - ParentMessageBase extends BaseEntity
 */
+/**
+ * Class Competition
+ * @property-read mixed $IdParentMessage
+ * @property-write mixed $IdParentMessage
+ * @property-read mixed $IdAthelete
+ * @property-write mixed $IdAthelete
+ * @property-read mixed $AtheleteName
+ * @property-write mixed $AtheleteName
+ * @property-read mixed $Message
+ * @property-write mixed $Message
+ * @property-read mixed $CreDate
+ * @property-write mixed $CreDate
+ * @property-read mixed $DispDate
+ * @property-write mixed $DispDate
+ * @property-read mixed $IdUser
+ * @property-write mixed $IdUser
+ * @property-read mixed $QueDate
+ * @property-write mixed $QueDate
+ * @property-read mixed $InviteData
+ * @property-write mixed $InviteData
+ * @property-read mixed $InviteType
+ * @property-write mixed $InviteType
+ * @property-read mixed $InviteToken
+ * @property-write mixed $InviteToken
+ * @property-read mixed $InviteViewDate
+ * @property-write mixed $InviteViewDate
+ * @property-read mixed $IdCompetition
+ * @property-write mixed $IdCompetition
+ * @property-read mixed $ApproveDate
+ * @property-write mixed $ApproveDate
+ * @property-read mixed $IdStripeData
+ * @property-write mixed $IdStripeData
+ * @property-read ParentMessage $IdAtheleteObject
+ * @property-read ParentMessage $IdCompetitionObject
+ */
 class ParentMessageBase extends BaseEntity {
     const DB_CONN = 'DB_1';
     const TABLE_NAME = 'ParentMessage';

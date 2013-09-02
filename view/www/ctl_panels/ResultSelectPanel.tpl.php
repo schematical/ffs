@@ -1,12 +1,16 @@
 <div class=''>
-    <?php
+    <div class='controls input-prepend '>
+        <span class='add-on'>Search Orgs</span>
+        <?php
 /**
 * Class and Function List:
 * Function list:
 * Classes list:
 */
 $_CONTROL->txtSearch->Render(); ?>
+    </div>
 </div>
+<?php if ($_CONTROL->DisplayAdvOptions) { ?>
 <div class="accordion" id="accordion2">
     <div class="accordion-group">
         <div class="accordion-heading">
@@ -26,7 +30,7 @@ $_CONTROL->txtSearch->Render(); ?>
                                         <?php $_CONTROL->intIdResult->Render(); ?>
                                      </div>
                                  <?php
-} ?>
+    } ?>
                             
                             
                         </div>
@@ -39,7 +43,7 @@ $_CONTROL->txtSearch->Render(); ?>
                                         <?php $_CONTROL->intIdSession->Render(); ?>
                                      </div>
                                  <?php
-} ?>
+    } ?>
                             
                             
                         </div>
@@ -52,7 +56,7 @@ $_CONTROL->txtSearch->Render(); ?>
                                         <?php $_CONTROL->intIdAthelete->Render(); ?>
                                      </div>
                                  <?php
-} ?>
+    } ?>
                             
                             
                         </div>
@@ -65,7 +69,7 @@ $_CONTROL->txtSearch->Render(); ?>
                                         <?php $_CONTROL->strScore->Render(); ?>
                                      </div>
                                  <?php
-} ?>
+    } ?>
                             
                             
                         </div>
@@ -78,7 +82,7 @@ $_CONTROL->txtSearch->Render(); ?>
                                         <?php $_CONTROL->strJudge->Render(); ?>
                                      </div>
                                  <?php
-} ?>
+    } ?>
                             
                             
                         </div>
@@ -91,7 +95,7 @@ $_CONTROL->txtSearch->Render(); ?>
                                         <?php $_CONTROL->intFlag->Render(); ?>
                                      </div>
                                  <?php
-} ?>
+    } ?>
                             
                             
                         </div>
@@ -109,7 +113,7 @@ $_CONTROL->txtSearch->Render(); ?>
                                         <?php $_CONTROL->strEvent->Render(); ?>
                                      </div>
                                  <?php
-} ?>
+    } ?>
                             
                             
                         </div>
@@ -119,12 +123,12 @@ $_CONTROL->txtSearch->Render(); ?>
                             
                                 <label> Disp Date Start</label>
                                 <?php if (!is_null($_CONTROL->txtDispDate_StartDate)) {
-    $_CONTROL->txtDispDate_StartDate->Render();
-} ?>
+        $_CONTROL->txtDispDate_StartDate->Render();
+    } ?>
                                 <label> Disp Date End</label>
                                  <?php if (!is_null($_CONTROL->txtDispDate_EndDate)) {
-    $_CONTROL->txtDispDate_EndDate->Render();
-} ?>
+        $_CONTROL->txtDispDate_EndDate->Render();
+    } ?>
                              
                         </div>
                     
@@ -133,3 +137,5 @@ $_CONTROL->txtSearch->Render(); ?>
         </div>
     </div>
 </div>
+<?php
+} ?>

@@ -19,6 +19,10 @@ class MLCApiCompetitionObjectBase extends MLCApiObjectBase {
                 $arrEnrollments = Enrollment::LoadCollByIdCompetition($this->GetEntity()->idCompetition)->GetCollection();
                 return new MLCApiResponse($arrEnrollments);
             break;
+            case ('orgcompetitions'):
+                $arrOrgCompetitions = OrgCompetition::LoadCollByIdCompetition($this->GetEntity()->idCompetition)->GetCollection();
+                return new MLCApiResponse($arrOrgCompetitions);
+            break;
             case ('parentmessages'):
                 $arrParentMessages = ParentMessage::LoadCollByIdCompetition($this->GetEntity()->idCompetition)->GetCollection();
                 return new MLCApiResponse($arrParentMessages);

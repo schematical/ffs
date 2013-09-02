@@ -22,6 +22,10 @@ class MLCApiOrgObjectBase extends MLCApiObjectBase {
                 $arrDevices = Device::LoadCollByIdOrg($this->GetEntity()->idOrg)->GetCollection();
                 return new MLCApiResponse($arrDevices);
             break;
+            case ('orgcompetitions'):
+                $arrOrgCompetitions = OrgCompetition::LoadCollByIdOrg($this->GetEntity()->idOrg)->GetCollection();
+                return new MLCApiResponse($arrOrgCompetitions);
+            break;
             default:
                 return parent::__call($strName, $arrArguments);
         }
