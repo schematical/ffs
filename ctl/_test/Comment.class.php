@@ -6,7 +6,11 @@ class Comment{
         $link = mysql_connect('localhost', 'root', 'learnlearn');
         mysql_select_db('andregagnon');
         mysql_set_charset('utf8');
-        $sql = sprintf("SELECT * FROM wp_ahq_forum_posts %s;", $strExtra);
+        $sql = sprintf(
+            "SELECT wp_ahq_forum_posts.*, %s  FROM wp_ahq_forum_posts JOIN wp_users ON wp_ahq_forum_posts.p_author_id = wp_users.ID %s;",
+            User::SELECT_EXT,
+            $strExtra
+        );
 
         $result =  mysql_query($sql);
         $arrReturn = array();
@@ -28,9 +32,9 @@ class Comment{
     }
     public function materilize($arrData){
         $this->arrData["body"] = $arrData['p_message'];//: "engineer rich networks",
-        $this->arrData["author_email"] = 'agagnon@themewich.com';//"author_email": "towski@entp.com",
+        $this->arrData["author_email"] = $arrData['email'];//"author_email": "towski@entp.com",
         $this->arrData["created_at"] = date('Y-m-dTh:i:s', $arrData['p_date']);// "2008-01-01T00:01:00Z",
-
+        User::ParseUser($arrData);
     }
     public function GetData(){
         return $this->arrData;

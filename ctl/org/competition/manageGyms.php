@@ -30,6 +30,24 @@ class OrgManageForm extends OrgManageFormBase {
 
 
     }
+    public function lnkEdit_click($strFormId, $strControlId, $strActionParameter) {
+        $objOrg = Org::LoadById($strActionParameter);
+        $arrRolls = MLCAuthDriver::GetRollByEntity($objOrg, FFSRoll::ORG_MANAGER);
+        if(
+            (MLCAuthDriver::User()->HasRoll($objOrg, FFSRoll::ORG_MANAGER)) ||
+            (
+                (count($arrRolls) == 0) &&
+                ($objOrg->IdImportAuthUser == MLCAuthDriver::IdUser())
+            )
+        ){
+            parent::lnkEdit_click($strFormId, $strControlId, $strActionParameter);
+        }else{
+            $this->Alert("You may not edit a Gym that you did not create");
+        }
+        /*$this->pnlEdit->SetOrg();
+        $this->lstOrgs->SelectedRow = $this->arrControls[$strControlId]->ParentControl;
+        $this->ScrollTo($this->pnlEdit);*/
+    }
     public function InitSelectPanel() {
         $this->pnlSelect = new FFSOrgInvitePanel($this);
 

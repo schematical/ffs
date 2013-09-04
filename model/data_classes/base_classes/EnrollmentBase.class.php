@@ -6,6 +6,8 @@
 * - LoadById()
 * - LoadAll()
 * - ToXml()
+* - Materilize()
+* - GetSQLSelectFieldsAsArr()
 * - Query()
 * - QueryCount()
 * - LoadCollByIdAthelete()
@@ -61,31 +63,21 @@
  */
 class EnrollmentBase extends BaseEntity {
     const DB_CONN = 'DB_1';
-    const TABLE_NAME = 'Enrollment';
+    const TABLE_NAME = 'Enrollment_rel';
     const P_KEY = 'idEnrollment';
+    protected $objIdAthelete = null;
+    protected $objIdCompetition = null;
+    protected $objIdSession = null;
     public function __construct() {
         $this->table = DB_PREFIX . self::TABLE_NAME;
         $this->pKey = self::P_KEY;
         $this->strDBConn = self::DB_CONN;
     }
     public static function LoadById($intId) {
-        $sql = sprintf("SELECT * FROM %s WHERE idEnrollment = %s;", self::TABLE_NAME, $intId);
-        $result = MLCDBDriver::Query($sql, self::DB_CONN);
-        while ($data = mysql_fetch_assoc($result)) {
-            $tObj = new Enrollment();
-            $tObj->materilize($data);
-            return $tObj;
-        }
+        return self::Query('WHERE Enrollment_rel.idEnrollment = ' . $intId, true);
     }
     public static function LoadAll() {
-        $sql = sprintf("SELECT * FROM %s;", self::TABLE_NAME);
-        $result = MLCDBDriver::Query($sql, Enrollment::DB_CONN);
-        $coll = new BaseEntityCollection();
-        while ($data = mysql_fetch_assoc($result)) {
-            $tObj = new Enrollment();
-            $tObj->materilize($data);
-            $coll->addItem($tObj);
-        }
+        $coll = new BaseEntityCollection(self::Query(''));
         return $coll;
     }
     public function ToXml($blnReclusive = false) {
@@ -140,16 +132,105 @@ class EnrollmentBase extends BaseEntity {
         $xmlStr.= "</Enrollment>";
         return $xmlStr;
     }
-    public static function Query($strExtra, $blnReturnSingle = false) {
-        $sql = sprintf("SELECT * FROM %s %s;", self::TABLE_NAME, $strExtra);
+    public function Materilize($arrData) {
+        if (isset($arrData) && (sizeof($arrData) > 1)) {
+            if (array_key_exists('Enrollment_rel.idEnrollment', $arrData)) {
+                //New Smart Way
+                $this->arrDBFields['idEnrollment'] = $arrData['Enrollment_rel.idEnrollment'];
+                $this->arrDBFields['idAthelete'] = $arrData['Enrollment_rel.idAthelete'];
+                $this->arrDBFields['idCompetition'] = $arrData['Enrollment_rel.idCompetition'];
+                $this->arrDBFields['idSession'] = $arrData['Enrollment_rel.idSession'];
+                $this->arrDBFields['flight'] = $arrData['Enrollment_rel.flight'];
+                $this->arrDBFields['division'] = $arrData['Enrollment_rel.division'];
+                $this->arrDBFields['ageGroup'] = $arrData['Enrollment_rel.ageGroup'];
+                $this->arrDBFields['misc1'] = $arrData['Enrollment_rel.misc1'];
+                $this->arrDBFields['misc2'] = $arrData['Enrollment_rel.misc2'];
+                $this->arrDBFields['misc3'] = $arrData['Enrollment_rel.misc3'];
+                $this->arrDBFields['misc4'] = $arrData['Enrollment_rel.misc4'];
+                $this->arrDBFields['misc5'] = $arrData['Enrollment_rel.misc5'];
+                $this->arrDBFields['creDate'] = $arrData['Enrollment_rel.creDate'];
+                $this->arrDBFields['level'] = $arrData['Enrollment_rel.level'];
+                //Foregin Key
+                if (array_key_exists('Athelete.idAthelete', $arrData)) {
+                    $this->objIdSession = new Athelete();
+                    $this->objIdSession->Materilize($arrData);
+                }
+                if (array_key_exists('Competition.idCompetition', $arrData)) {
+                    $this->objIdSession = new Competition();
+                    $this->objIdSession->Materilize($arrData);
+                }
+                if (array_key_exists('Session.idSession', $arrData)) {
+                    $this->objIdSession = new Session();
+                    $this->objIdSession->Materilize($arrData);
+                }
+            } else {
+                //Old ways
+                $this->arrDBFields = $arrData;
+            }
+            $this->loaded = true;
+            $this->setId($this->getField($this->getPKey()));
+        }
+        if (self::$blnUseCache) {
+            if (!array_key_exists(get_class($this) , self::$arrCachedData)) {
+                self::$arrCachedData[get_class($this) ] = array();
+            }
+            self::$arrCachedData[get_class($this) ][$this->getId() ] = $this;
+        }
+    }
+    public static function GetSQLSelectFieldsAsArr($blnLongSelect = false) {
+        $arrFields = array();
+        $arrFields[] = 'Enrollment_rel.idEnrollment ' . (($blnLongSelect) ? ' as "Enrollment_rel.idEnrollment"' : '');
+        $arrFields[] = 'Enrollment_rel.idAthelete ' . (($blnLongSelect) ? ' as "Enrollment_rel.idAthelete"' : '');
+        $arrFields[] = 'Enrollment_rel.idCompetition ' . (($blnLongSelect) ? ' as "Enrollment_rel.idCompetition"' : '');
+        $arrFields[] = 'Enrollment_rel.idSession ' . (($blnLongSelect) ? ' as "Enrollment_rel.idSession"' : '');
+        $arrFields[] = 'Enrollment_rel.flight ' . (($blnLongSelect) ? ' as "Enrollment_rel.flight"' : '');
+        $arrFields[] = 'Enrollment_rel.division ' . (($blnLongSelect) ? ' as "Enrollment_rel.division"' : '');
+        $arrFields[] = 'Enrollment_rel.ageGroup ' . (($blnLongSelect) ? ' as "Enrollment_rel.ageGroup"' : '');
+        $arrFields[] = 'Enrollment_rel.misc1 ' . (($blnLongSelect) ? ' as "Enrollment_rel.misc1"' : '');
+        $arrFields[] = 'Enrollment_rel.misc2 ' . (($blnLongSelect) ? ' as "Enrollment_rel.misc2"' : '');
+        $arrFields[] = 'Enrollment_rel.misc3 ' . (($blnLongSelect) ? ' as "Enrollment_rel.misc3"' : '');
+        $arrFields[] = 'Enrollment_rel.misc4 ' . (($blnLongSelect) ? ' as "Enrollment_rel.misc4"' : '');
+        $arrFields[] = 'Enrollment_rel.misc5 ' . (($blnLongSelect) ? ' as "Enrollment_rel.misc5"' : '');
+        $arrFields[] = 'Enrollment_rel.creDate ' . (($blnLongSelect) ? ' as "Enrollment_rel.creDate"' : '');
+        $arrFields[] = 'Enrollment_rel.level ' . (($blnLongSelect) ? ' as "Enrollment_rel.level"' : '');
+        return $arrFields;
+    }
+    public static function Query($strExtra, $blnReturnSingle = false, $arrJoins = null) {
+        $blnLongSelect = !is_null($arrJoins);
+        $arrFields = self::GetSQLSelectFieldsAsArr($blnLongSelect);
+        if ($blnLongSelect) {
+            foreach ($arrJoins as $strTable) {
+                if (class_exists($strTable)) {
+                    $arrFields = array_merge($arrFields, call_user_func($strTable . '::GetSQLSelectFieldsAsArr', true));
+                }
+            }
+        }
+        $strFields = implode(', ', $arrFields);
+        $strJoin = '';
+        if ($blnLongSelect) {
+            foreach ($arrJoins as $strTable) {
+                switch ($strTable) {
+                    case ('Athelete'):
+                        $strJoin.= ' JOIN Athelete ON Enrollment_rel.idAthelete = Athelete.idAthelete';
+                    break;
+                    case ('Competition'):
+                        $strJoin.= ' JOIN Competition ON Enrollment_rel.idCompetition = Competition.idCompetition';
+                    break;
+                    case ('Session'):
+                        $strJoin.= ' JOIN Session ON Enrollment_rel.idSession = Session.idSession';
+                    break;
+                }
+            }
+        }
+        $sql = sprintf("SELECT %s FROM Enrollment_rel %s %s;", $strFields, $strJoin, $strExtra);
         $result = MLCDBDriver::Query($sql, self::DB_CONN);
-        $coll = new BaseEntityCollection();
+        $arrReturn = array();
         while ($data = mysql_fetch_assoc($result)) {
             $tObj = new Enrollment();
-            $tObj->materilize($data);
-            $coll->addItem($tObj);
+            $tObj->Materilize($data);
+            $arrReturn[] = $tObj;
         }
-        $arrReturn = $coll->getCollection();
+        //$arrReturn = $coll->getCollection();
         if ($blnReturnSingle) {
             if (count($arrReturn) == 0) {
                 return null;
@@ -161,14 +242,14 @@ class EnrollmentBase extends BaseEntity {
         }
     }
     public static function QueryCount($strExtra = '') {
-        $sql = sprintf("SELECT * FROM %s %s;", self::TABLE_NAME, $strExtra);
+        $sql = sprintf("SELECT Enrollment_rel.* FROM Enrollment_rel %s;", $strExtra);
         $result = MLCDBDriver::Query($sql, self::DB_CONN);
         return mysql_num_rows($result);
     }
     //Get children
     //Load by foregin key
     public static function LoadCollByIdAthelete($intIdAthelete) {
-        $sql = sprintf("SELECT * FROM Enrollment WHERE idAthelete = %s;", $intIdAthelete);
+        $sql = sprintf("SELECT Enrollment_rel.* FROM Enrollment_rel WHERE idAthelete = %s;", $intIdAthelete);
         $result = MLCDBDriver::Query($sql, self::DB_CONN);
         $coll = new BaseEntityCollection();
         while ($data = mysql_fetch_assoc($result)) {
@@ -179,7 +260,7 @@ class EnrollmentBase extends BaseEntity {
         return $coll;
     }
     public static function LoadCollByIdCompetition($intIdCompetition) {
-        $sql = sprintf("SELECT * FROM Enrollment WHERE idCompetition = %s;", $intIdCompetition);
+        $sql = sprintf("SELECT Enrollment_rel.* FROM Enrollment_rel WHERE idCompetition = %s;", $intIdCompetition);
         $result = MLCDBDriver::Query($sql, self::DB_CONN);
         $coll = new BaseEntityCollection();
         while ($data = mysql_fetch_assoc($result)) {
@@ -190,7 +271,7 @@ class EnrollmentBase extends BaseEntity {
         return $coll;
     }
     public static function LoadCollByIdSession($intIdSession) {
-        $sql = sprintf("SELECT * FROM Enrollment WHERE idSession = %s;", $intIdSession);
+        $sql = sprintf("SELECT Enrollment_rel.* FROM Enrollment_rel WHERE idSession = %s;", $intIdSession);
         $result = MLCDBDriver::Query($sql, self::DB_CONN);
         $coll = new BaseEntityCollection();
         while ($data = mysql_fetch_assoc($result)) {
@@ -229,11 +310,14 @@ class EnrollmentBase extends BaseEntity {
         }
     }
     public static function LoadSingleByField($strField, $mixValue, $strCompairison = '=') {
-        $arrResults = self::LoadArrayByField($strField, $mixValue, $strCompairison);
-        if (count($arrResults)) {
-            return $arrResults[0];
+        if (is_numeric($mixValue)) {
+            $strValue = $mixValue;
+        } else {
+            $strValue = sprintf('"%s"', $mixValue);
         }
-        return null;
+        $strExtra = sprintf(' WHERE Enrollment_rel.%s %s %s', $strField, $strCompairison, $strValue);
+        $objEntity = self::Query($strExtra, true);
+        return $objEntity;
     }
     public static function LoadArrayByField($strField, $mixValue, $strCompairison = '=') {
         if (is_numeric($mixValue)) {
@@ -241,17 +325,8 @@ class EnrollmentBase extends BaseEntity {
         } else {
             $strValue = sprintf('"%s"', $mixValue);
         }
-        $strExtra = sprintf(' WHERE %s %s %s', $strField, $strCompairison, $strValue);
-        $sql = sprintf("SELECT * FROM %s %s;", self::TABLE_NAME, $strExtra);
-        //die($sql);
-        $result = MLCDBDriver::query($sql, self::DB_CONN);
-        $coll = new BaseEntityCollection();
-        while ($data = mysql_fetch_assoc($result)) {
-            $tObj = new Enrollment();
-            $tObj->materilize($data);
-            $coll->addItem($tObj);
-        }
-        $arrResults = $coll->getCollection();
+        $strExtra = sprintf(' WHERE Enrollment_rel.%s %s %s', $strField, $strCompairison, $strValue);
+        $arrResults = self::Query($strExtra);
         return $arrResults;
     }
     public function __toArray() {
@@ -385,23 +460,32 @@ class EnrollmentBase extends BaseEntity {
                 return null;
             break;
             case ('IdAtheleteObject'):
-            case ('idSessionObject'):
+                if (!is_null($this->objIdAthelete)) {
+                    return $this->objIdAthelete;
+                }
                 if ((array_key_exists('idAthelete', $this->arrDBFields)) && (!is_null($this->arrDBFields['idAthelete']))) {
-                    return Athelete::LoadById($this->arrDBFields['idAthelete']);
+                    $this->objIdAthelete = Athelete::LoadById($this->arrDBFields['idAthelete']);
+                    return $this->objIdAthelete;
                 }
                 return null;
             break;
             case ('IdCompetitionObject'):
-            case ('idSessionObject'):
+                if (!is_null($this->objIdCompetition)) {
+                    return $this->objIdCompetition;
+                }
                 if ((array_key_exists('idCompetition', $this->arrDBFields)) && (!is_null($this->arrDBFields['idCompetition']))) {
-                    return Competition::LoadById($this->arrDBFields['idCompetition']);
+                    $this->objIdCompetition = Competition::LoadById($this->arrDBFields['idCompetition']);
+                    return $this->objIdCompetition;
                 }
                 return null;
             break;
             case ('IdSessionObject'):
-            case ('idSessionObject'):
+                if (!is_null($this->objIdSession)) {
+                    return $this->objIdSession;
+                }
                 if ((array_key_exists('idSession', $this->arrDBFields)) && (!is_null($this->arrDBFields['idSession']))) {
-                    return Session::LoadById($this->arrDBFields['idSession']);
+                    $this->objIdSession = Session::LoadById($this->arrDBFields['idSession']);
+                    return $this->objIdSession;
                 }
                 return null;
             break;
@@ -420,14 +504,17 @@ class EnrollmentBase extends BaseEntity {
             case ('IdAthelete'):
             case ('idAthelete'):
                 $this->arrDBFields['idAthelete'] = $strValue;
+                $this->objAthelete = null;
             break;
             case ('IdCompetition'):
             case ('idCompetition'):
                 $this->arrDBFields['idCompetition'] = $strValue;
+                $this->objCompetition = null;
             break;
             case ('IdSession'):
             case ('idSession'):
                 $this->arrDBFields['idSession'] = $strValue;
+                $this->objSession = null;
             break;
             case ('Flight'):
             case ('flight'):
@@ -468,6 +555,18 @@ class EnrollmentBase extends BaseEntity {
             case ('Level'):
             case ('level'):
                 $this->arrDBFields['level'] = $strValue;
+            break;
+            case ('IdAtheleteObject'):
+                $this->arrDBFields['idAthelete'] = $strValue->idAthelete;
+                $this->objIdAthelete = $strValue;
+            break;
+            case ('IdCompetitionObject'):
+                $this->arrDBFields['idCompetition'] = $strValue->idCompetition;
+                $this->objIdCompetition = $strValue;
+            break;
+            case ('IdSessionObject'):
+                $this->arrDBFields['idSession'] = $strValue->idSession;
+                $this->objIdSession = $strValue;
             break;
             default:
                 throw new MLCMissingPropertyException($this, $strName);

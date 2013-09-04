@@ -9,18 +9,8 @@ class FFSForm extends MJaxWAdminForm{
     public function Form_Create(){
         parent::Form_Create();
         $this->objJsonSearchDriver = new FFSJsonSearchDriver();
-        if(is_null(self::$objOrg)){
+        FFSApplication::Init();
 
-            $arrOrgs = MLCAuthDriver::GetRolls(FFSRoll::ORG_MANAGER);
-            if(count($arrOrgs) == 0){
-                //Do nothing
-            }elseif(count($arrOrgs) == 1){
-                FFSForm::$objOrg = $arrOrgs[0];
-
-            }else{
-                FFSForm::$objOrg = $arrOrgs[0];
-            }
-        }
         if(!is_null(self::$objCompetition)){
             $intIdSession = MLCApplication::QS(FFSQS::IdSession);
             if(
@@ -42,6 +32,10 @@ class FFSForm extends MJaxWAdminForm{
             $this->InitAds();
         //}
         $this->SetUpBreadcrumbs();
+    }
+    public function TriggerControlEvent($strControlId, $strEvent){
+        FFSApplication::Init();
+        parent::TriggerControlEvent($strControlId, $strEvent);
     }
     public function SetUpBreadcrumbs(){
         if(!is_null(FFSForm::$objOrg)){
@@ -90,7 +84,8 @@ class FFSForm extends MJaxWAdminForm{
                         '<i class="icon-plus-sign"></i>Add New Competition',
                         '/org/competition/editCompetition'
                     );
-
+                    $lnkManageCompetitions = $this->AddHeaderNav('Your Athletes', 'icon-user');
+                    $lnkManageCompetitions->Href = '/org/manageAthletes';
                 }else{
                     $lnkManageSessions = $this->AddHeaderNav('Manage Sessions', 'icon-calendar');
                     $lnkManageSessions->Href = '/' . FFSForm::$objCompetition->Namespace . '/org/competition/manageSessions';
@@ -103,7 +98,7 @@ class FFSForm extends MJaxWAdminForm{
                         );
                     }
                     $this->AddHeaderNav('Invite Gyms', 'icon-building')->Href = '/' . FFSForm::$objCompetition->Namespace . '/org/competition/manageGyms';
-                    $this->AddHeaderNav('Manage Atheletes', 'icon-user')->Href = '/' . FFSForm::$objCompetition->Namespace . '/org/competition/manageAtheletes';
+                    $this->AddHeaderNav('Manage Athletes', 'icon-user')->Href = '/' . FFSForm::$objCompetition->Namespace . '/org/competition/manageAthletes';
 
                     //Probablly don't allow untill meet starts
                     $this->AddHeaderNav('Results', 'icon-trophy')->Href = '/' . FFSForm::$objCompetition->Namespace . '/org/competition/results';

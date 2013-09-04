@@ -89,7 +89,23 @@ abstract class FFSApplication{
         }
         return $arrReturn;
     }
+    public static function Init(){
 
+
+        if(is_null(FFSForm::$objOrg)){
+
+            $arrOrgs = MLCAuthDriver::GetRolls(FFSRoll::ORG_MANAGER);
+            if(count($arrOrgs) == 0){
+                //Do nothing
+            }elseif(count($arrOrgs) == 1){
+                FFSForm::$objOrg = $arrOrgs[0]->GetEntity();
+
+            }else{
+                FFSForm::$objOrg = $arrOrgs[0]->GetEntity();
+            }
+        }
+
+    }
     public static function GetOrgs(){
         return MLCAuthDriver::GetRolls(FFSRoll::ORG_MANAGER);
     }

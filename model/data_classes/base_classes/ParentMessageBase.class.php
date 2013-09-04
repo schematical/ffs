@@ -6,6 +6,8 @@
 * - LoadById()
 * - LoadAll()
 * - ToXml()
+* - Materilize()
+* - GetSQLSelectFieldsAsArr()
 * - Query()
 * - QueryCount()
 * - LoadCollByIdAthelete()
@@ -63,29 +65,18 @@ class ParentMessageBase extends BaseEntity {
     const DB_CONN = 'DB_1';
     const TABLE_NAME = 'ParentMessage';
     const P_KEY = 'idParentMessage';
+    protected $objIdAthelete = null;
+    protected $objIdCompetition = null;
     public function __construct() {
         $this->table = DB_PREFIX . self::TABLE_NAME;
         $this->pKey = self::P_KEY;
         $this->strDBConn = self::DB_CONN;
     }
     public static function LoadById($intId) {
-        $sql = sprintf("SELECT * FROM %s WHERE idParentMessage = %s;", self::TABLE_NAME, $intId);
-        $result = MLCDBDriver::Query($sql, self::DB_CONN);
-        while ($data = mysql_fetch_assoc($result)) {
-            $tObj = new ParentMessage();
-            $tObj->materilize($data);
-            return $tObj;
-        }
+        return self::Query('WHERE ParentMessage.idParentMessage = ' . $intId, true);
     }
     public static function LoadAll() {
-        $sql = sprintf("SELECT * FROM %s;", self::TABLE_NAME);
-        $result = MLCDBDriver::Query($sql, ParentMessage::DB_CONN);
-        $coll = new BaseEntityCollection();
-        while ($data = mysql_fetch_assoc($result)) {
-            $tObj = new ParentMessage();
-            $tObj->materilize($data);
-            $coll->addItem($tObj);
-        }
+        $coll = new BaseEntityCollection(self::Query(''));
         return $coll;
     }
     public function ToXml($blnReclusive = false) {
@@ -143,16 +134,100 @@ class ParentMessageBase extends BaseEntity {
         $xmlStr.= "</ParentMessage>";
         return $xmlStr;
     }
-    public static function Query($strExtra, $blnReturnSingle = false) {
-        $sql = sprintf("SELECT * FROM %s %s;", self::TABLE_NAME, $strExtra);
+    public function Materilize($arrData) {
+        if (isset($arrData) && (sizeof($arrData) > 1)) {
+            if (array_key_exists('ParentMessage.idParentMessage', $arrData)) {
+                //New Smart Way
+                $this->arrDBFields['idParentMessage'] = $arrData['ParentMessage.idParentMessage'];
+                $this->arrDBFields['idAthelete'] = $arrData['ParentMessage.idAthelete'];
+                $this->arrDBFields['atheleteName'] = $arrData['ParentMessage.atheleteName'];
+                $this->arrDBFields['message'] = $arrData['ParentMessage.message'];
+                $this->arrDBFields['creDate'] = $arrData['ParentMessage.creDate'];
+                $this->arrDBFields['dispDate'] = $arrData['ParentMessage.dispDate'];
+                $this->arrDBFields['idUser'] = $arrData['ParentMessage.idUser'];
+                $this->arrDBFields['queDate'] = $arrData['ParentMessage.queDate'];
+                $this->arrDBFields['inviteData'] = $arrData['ParentMessage.inviteData'];
+                $this->arrDBFields['inviteType'] = $arrData['ParentMessage.inviteType'];
+                $this->arrDBFields['inviteToken'] = $arrData['ParentMessage.inviteToken'];
+                $this->arrDBFields['inviteViewDate'] = $arrData['ParentMessage.inviteViewDate'];
+                $this->arrDBFields['idCompetition'] = $arrData['ParentMessage.idCompetition'];
+                $this->arrDBFields['approveDate'] = $arrData['ParentMessage.approveDate'];
+                $this->arrDBFields['idStripeData'] = $arrData['ParentMessage.idStripeData'];
+                //Foregin Key
+                if (array_key_exists('Athelete.idAthelete', $arrData)) {
+                    $this->objIdCompetition = new Athelete();
+                    $this->objIdCompetition->Materilize($arrData);
+                }
+                if (array_key_exists('Competition.idCompetition', $arrData)) {
+                    $this->objIdCompetition = new Competition();
+                    $this->objIdCompetition->Materilize($arrData);
+                }
+            } else {
+                //Old ways
+                $this->arrDBFields = $arrData;
+            }
+            $this->loaded = true;
+            $this->setId($this->getField($this->getPKey()));
+        }
+        if (self::$blnUseCache) {
+            if (!array_key_exists(get_class($this) , self::$arrCachedData)) {
+                self::$arrCachedData[get_class($this) ] = array();
+            }
+            self::$arrCachedData[get_class($this) ][$this->getId() ] = $this;
+        }
+    }
+    public static function GetSQLSelectFieldsAsArr($blnLongSelect = false) {
+        $arrFields = array();
+        $arrFields[] = 'ParentMessage.idParentMessage ' . (($blnLongSelect) ? ' as "ParentMessage.idParentMessage"' : '');
+        $arrFields[] = 'ParentMessage.idAthelete ' . (($blnLongSelect) ? ' as "ParentMessage.idAthelete"' : '');
+        $arrFields[] = 'ParentMessage.atheleteName ' . (($blnLongSelect) ? ' as "ParentMessage.atheleteName"' : '');
+        $arrFields[] = 'ParentMessage.message ' . (($blnLongSelect) ? ' as "ParentMessage.message"' : '');
+        $arrFields[] = 'ParentMessage.creDate ' . (($blnLongSelect) ? ' as "ParentMessage.creDate"' : '');
+        $arrFields[] = 'ParentMessage.dispDate ' . (($blnLongSelect) ? ' as "ParentMessage.dispDate"' : '');
+        $arrFields[] = 'ParentMessage.idUser ' . (($blnLongSelect) ? ' as "ParentMessage.idUser"' : '');
+        $arrFields[] = 'ParentMessage.queDate ' . (($blnLongSelect) ? ' as "ParentMessage.queDate"' : '');
+        $arrFields[] = 'ParentMessage.inviteData ' . (($blnLongSelect) ? ' as "ParentMessage.inviteData"' : '');
+        $arrFields[] = 'ParentMessage.inviteType ' . (($blnLongSelect) ? ' as "ParentMessage.inviteType"' : '');
+        $arrFields[] = 'ParentMessage.inviteToken ' . (($blnLongSelect) ? ' as "ParentMessage.inviteToken"' : '');
+        $arrFields[] = 'ParentMessage.inviteViewDate ' . (($blnLongSelect) ? ' as "ParentMessage.inviteViewDate"' : '');
+        $arrFields[] = 'ParentMessage.idCompetition ' . (($blnLongSelect) ? ' as "ParentMessage.idCompetition"' : '');
+        $arrFields[] = 'ParentMessage.approveDate ' . (($blnLongSelect) ? ' as "ParentMessage.approveDate"' : '');
+        $arrFields[] = 'ParentMessage.idStripeData ' . (($blnLongSelect) ? ' as "ParentMessage.idStripeData"' : '');
+        return $arrFields;
+    }
+    public static function Query($strExtra, $blnReturnSingle = false, $arrJoins = null) {
+        $blnLongSelect = !is_null($arrJoins);
+        $arrFields = self::GetSQLSelectFieldsAsArr($blnLongSelect);
+        if ($blnLongSelect) {
+            foreach ($arrJoins as $strTable) {
+                if (class_exists($strTable)) {
+                    $arrFields = array_merge($arrFields, call_user_func($strTable . '::GetSQLSelectFieldsAsArr', true));
+                }
+            }
+        }
+        $strFields = implode(', ', $arrFields);
+        $strJoin = '';
+        if ($blnLongSelect) {
+            foreach ($arrJoins as $strTable) {
+                switch ($strTable) {
+                    case ('Athelete'):
+                        $strJoin.= ' JOIN Athelete ON ParentMessage.idAthelete = Athelete.idAthelete';
+                    break;
+                    case ('Competition'):
+                        $strJoin.= ' JOIN Competition ON ParentMessage.idCompetition = Competition.idCompetition';
+                    break;
+                }
+            }
+        }
+        $sql = sprintf("SELECT %s FROM ParentMessage %s %s;", $strFields, $strJoin, $strExtra);
         $result = MLCDBDriver::Query($sql, self::DB_CONN);
-        $coll = new BaseEntityCollection();
+        $arrReturn = array();
         while ($data = mysql_fetch_assoc($result)) {
             $tObj = new ParentMessage();
-            $tObj->materilize($data);
-            $coll->addItem($tObj);
+            $tObj->Materilize($data);
+            $arrReturn[] = $tObj;
         }
-        $arrReturn = $coll->getCollection();
+        //$arrReturn = $coll->getCollection();
         if ($blnReturnSingle) {
             if (count($arrReturn) == 0) {
                 return null;
@@ -164,14 +239,14 @@ class ParentMessageBase extends BaseEntity {
         }
     }
     public static function QueryCount($strExtra = '') {
-        $sql = sprintf("SELECT * FROM %s %s;", self::TABLE_NAME, $strExtra);
+        $sql = sprintf("SELECT ParentMessage.* FROM ParentMessage %s;", $strExtra);
         $result = MLCDBDriver::Query($sql, self::DB_CONN);
         return mysql_num_rows($result);
     }
     //Get children
     //Load by foregin key
     public static function LoadCollByIdAthelete($intIdAthelete) {
-        $sql = sprintf("SELECT * FROM ParentMessage WHERE idAthelete = %s;", $intIdAthelete);
+        $sql = sprintf("SELECT ParentMessage.* FROM ParentMessage WHERE idAthelete = %s;", $intIdAthelete);
         $result = MLCDBDriver::Query($sql, self::DB_CONN);
         $coll = new BaseEntityCollection();
         while ($data = mysql_fetch_assoc($result)) {
@@ -182,7 +257,7 @@ class ParentMessageBase extends BaseEntity {
         return $coll;
     }
     public static function LoadCollByIdCompetition($intIdCompetition) {
-        $sql = sprintf("SELECT * FROM ParentMessage WHERE idCompetition = %s;", $intIdCompetition);
+        $sql = sprintf("SELECT ParentMessage.* FROM ParentMessage WHERE idCompetition = %s;", $intIdCompetition);
         $result = MLCDBDriver::Query($sql, self::DB_CONN);
         $coll = new BaseEntityCollection();
         while ($data = mysql_fetch_assoc($result)) {
@@ -221,11 +296,14 @@ class ParentMessageBase extends BaseEntity {
         }
     }
     public static function LoadSingleByField($strField, $mixValue, $strCompairison = '=') {
-        $arrResults = self::LoadArrayByField($strField, $mixValue, $strCompairison);
-        if (count($arrResults)) {
-            return $arrResults[0];
+        if (is_numeric($mixValue)) {
+            $strValue = $mixValue;
+        } else {
+            $strValue = sprintf('"%s"', $mixValue);
         }
-        return null;
+        $strExtra = sprintf(' WHERE ParentMessage.%s %s %s', $strField, $strCompairison, $strValue);
+        $objEntity = self::Query($strExtra, true);
+        return $objEntity;
     }
     public static function LoadArrayByField($strField, $mixValue, $strCompairison = '=') {
         if (is_numeric($mixValue)) {
@@ -233,17 +311,8 @@ class ParentMessageBase extends BaseEntity {
         } else {
             $strValue = sprintf('"%s"', $mixValue);
         }
-        $strExtra = sprintf(' WHERE %s %s %s', $strField, $strCompairison, $strValue);
-        $sql = sprintf("SELECT * FROM %s %s;", self::TABLE_NAME, $strExtra);
-        //die($sql);
-        $result = MLCDBDriver::query($sql, self::DB_CONN);
-        $coll = new BaseEntityCollection();
-        while ($data = mysql_fetch_assoc($result)) {
-            $tObj = new ParentMessage();
-            $tObj->materilize($data);
-            $coll->addItem($tObj);
-        }
-        $arrResults = $coll->getCollection();
+        $strExtra = sprintf(' WHERE ParentMessage.%s %s %s', $strField, $strCompairison, $strValue);
+        $arrResults = self::Query($strExtra);
         return $arrResults;
     }
     public function __toArray() {
@@ -385,16 +454,22 @@ class ParentMessageBase extends BaseEntity {
                 return null;
             break;
             case ('IdAtheleteObject'):
-            case ('idCompetitionObject'):
+                if (!is_null($this->objIdAthelete)) {
+                    return $this->objIdAthelete;
+                }
                 if ((array_key_exists('idAthelete', $this->arrDBFields)) && (!is_null($this->arrDBFields['idAthelete']))) {
-                    return Athelete::LoadById($this->arrDBFields['idAthelete']);
+                    $this->objIdAthelete = Athelete::LoadById($this->arrDBFields['idAthelete']);
+                    return $this->objIdAthelete;
                 }
                 return null;
             break;
             case ('IdCompetitionObject'):
-            case ('idCompetitionObject'):
+                if (!is_null($this->objIdCompetition)) {
+                    return $this->objIdCompetition;
+                }
                 if ((array_key_exists('idCompetition', $this->arrDBFields)) && (!is_null($this->arrDBFields['idCompetition']))) {
-                    return Competition::LoadById($this->arrDBFields['idCompetition']);
+                    $this->objIdCompetition = Competition::LoadById($this->arrDBFields['idCompetition']);
+                    return $this->objIdCompetition;
                 }
                 return null;
             break;
@@ -413,6 +488,7 @@ class ParentMessageBase extends BaseEntity {
             case ('IdAthelete'):
             case ('idAthelete'):
                 $this->arrDBFields['idAthelete'] = $strValue;
+                $this->objAthelete = null;
             break;
             case ('AtheleteName'):
             case ('atheleteName'):
@@ -457,6 +533,7 @@ class ParentMessageBase extends BaseEntity {
             case ('IdCompetition'):
             case ('idCompetition'):
                 $this->arrDBFields['idCompetition'] = $strValue;
+                $this->objCompetition = null;
             break;
             case ('ApproveDate'):
             case ('approveDate'):
@@ -465,6 +542,14 @@ class ParentMessageBase extends BaseEntity {
             case ('IdStripeData'):
             case ('idStripeData'):
                 $this->arrDBFields['idStripeData'] = $strValue;
+            break;
+            case ('IdAtheleteObject'):
+                $this->arrDBFields['idAthelete'] = $strValue->idAthelete;
+                $this->objIdAthelete = $strValue;
+            break;
+            case ('IdCompetitionObject'):
+                $this->arrDBFields['idCompetition'] = $strValue->idCompetition;
+                $this->objIdCompetition = $strValue;
             break;
             default:
                 throw new MLCMissingPropertyException($this, $strName);

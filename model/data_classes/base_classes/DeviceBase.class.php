@@ -6,9 +6,13 @@
 * - LoadById()
 * - LoadAll()
 * - ToXml()
+* - Materilize()
+* - GetSQLSelectFieldsAsArr()
 * - Query()
 * - QueryCount()
 * - GetAssignmentArr()
+* - GetAssignmentArrBySession()
+* - CreateAssignmentFromSession()
 * - LoadCollByIdOrg()
 * - LoadByTag()
 * - AddTag()
@@ -44,29 +48,17 @@ class DeviceBase extends BaseEntity {
     const DB_CONN = 'DB_1';
     const TABLE_NAME = 'Device';
     const P_KEY = 'idDevice';
+    protected $objIdOrg = null;
     public function __construct() {
         $this->table = DB_PREFIX . self::TABLE_NAME;
         $this->pKey = self::P_KEY;
         $this->strDBConn = self::DB_CONN;
     }
     public static function LoadById($intId) {
-        $sql = sprintf("SELECT * FROM %s WHERE idDevice = %s;", self::TABLE_NAME, $intId);
-        $result = MLCDBDriver::Query($sql, self::DB_CONN);
-        while ($data = mysql_fetch_assoc($result)) {
-            $tObj = new Device();
-            $tObj->materilize($data);
-            return $tObj;
-        }
+        return self::Query('WHERE Device.idDevice = ' . $intId, true);
     }
     public static function LoadAll() {
-        $sql = sprintf("SELECT * FROM %s;", self::TABLE_NAME);
-        $result = MLCDBDriver::Query($sql, Device::DB_CONN);
-        $coll = new BaseEntityCollection();
-        while ($data = mysql_fetch_assoc($result)) {
-            $tObj = new Device();
-            $tObj->materilize($data);
-            $coll->addItem($tObj);
-        }
+        $coll = new BaseEntityCollection(self::Query(''));
         return $coll;
     }
     public function ToXml($blnReclusive = false) {
@@ -97,16 +89,75 @@ class DeviceBase extends BaseEntity {
         $xmlStr.= "</Device>";
         return $xmlStr;
     }
-    public static function Query($strExtra, $blnReturnSingle = false) {
-        $sql = sprintf("SELECT * FROM %s %s;", self::TABLE_NAME, $strExtra);
+    public function Materilize($arrData) {
+        if (isset($arrData) && (sizeof($arrData) > 1)) {
+            if (array_key_exists('Device.idDevice', $arrData)) {
+                //New Smart Way
+                $this->arrDBFields['idDevice'] = $arrData['Device.idDevice'];
+                $this->arrDBFields['name'] = $arrData['Device.name'];
+                $this->arrDBFields['token'] = $arrData['Device.token'];
+                $this->arrDBFields['creDate'] = $arrData['Device.creDate'];
+                $this->arrDBFields['inviteEmail'] = $arrData['Device.inviteEmail'];
+                $this->arrDBFields['idOrg'] = $arrData['Device.idOrg'];
+                //Foregin Key
+                if (array_key_exists('Org.idOrg', $arrData)) {
+                    $this->objIdOrg = new Org();
+                    $this->objIdOrg->Materilize($arrData);
+                }
+            } else {
+                //Old ways
+                $this->arrDBFields = $arrData;
+            }
+            $this->loaded = true;
+            $this->setId($this->getField($this->getPKey()));
+        }
+        if (self::$blnUseCache) {
+            if (!array_key_exists(get_class($this) , self::$arrCachedData)) {
+                self::$arrCachedData[get_class($this) ] = array();
+            }
+            self::$arrCachedData[get_class($this) ][$this->getId() ] = $this;
+        }
+    }
+    public static function GetSQLSelectFieldsAsArr($blnLongSelect = false) {
+        $arrFields = array();
+        $arrFields[] = 'Device.idDevice ' . (($blnLongSelect) ? ' as "Device.idDevice"' : '');
+        $arrFields[] = 'Device.name ' . (($blnLongSelect) ? ' as "Device.name"' : '');
+        $arrFields[] = 'Device.token ' . (($blnLongSelect) ? ' as "Device.token"' : '');
+        $arrFields[] = 'Device.creDate ' . (($blnLongSelect) ? ' as "Device.creDate"' : '');
+        $arrFields[] = 'Device.inviteEmail ' . (($blnLongSelect) ? ' as "Device.inviteEmail"' : '');
+        $arrFields[] = 'Device.idOrg ' . (($blnLongSelect) ? ' as "Device.idOrg"' : '');
+        return $arrFields;
+    }
+    public static function Query($strExtra, $blnReturnSingle = false, $arrJoins = null) {
+        $blnLongSelect = !is_null($arrJoins);
+        $arrFields = self::GetSQLSelectFieldsAsArr($blnLongSelect);
+        if ($blnLongSelect) {
+            foreach ($arrJoins as $strTable) {
+                if (class_exists($strTable)) {
+                    $arrFields = array_merge($arrFields, call_user_func($strTable . '::GetSQLSelectFieldsAsArr', true));
+                }
+            }
+        }
+        $strFields = implode(', ', $arrFields);
+        $strJoin = '';
+        if ($blnLongSelect) {
+            foreach ($arrJoins as $strTable) {
+                switch ($strTable) {
+                    case ('Org'):
+                        $strJoin.= ' JOIN Org ON Device.idOrg = Org.idOrg';
+                    break;
+                }
+            }
+        }
+        $sql = sprintf("SELECT %s FROM Device %s %s;", $strFields, $strJoin, $strExtra);
         $result = MLCDBDriver::Query($sql, self::DB_CONN);
-        $coll = new BaseEntityCollection();
+        $arrReturn = array();
         while ($data = mysql_fetch_assoc($result)) {
             $tObj = new Device();
-            $tObj->materilize($data);
-            $coll->addItem($tObj);
+            $tObj->Materilize($data);
+            $arrReturn[] = $tObj;
         }
-        $arrReturn = $coll->getCollection();
+        //$arrReturn = $coll->getCollection();
         if ($blnReturnSingle) {
             if (count($arrReturn) == 0) {
                 return null;
@@ -118,17 +169,27 @@ class DeviceBase extends BaseEntity {
         }
     }
     public static function QueryCount($strExtra = '') {
-        $sql = sprintf("SELECT * FROM %s %s;", self::TABLE_NAME, $strExtra);
+        $sql = sprintf("SELECT Device.* FROM Device %s;", $strExtra);
         $result = MLCDBDriver::Query($sql, self::DB_CONN);
         return mysql_num_rows($result);
     }
     //Get children
-    public function GetAssignmentArr() {
-        return Assignment::LoadCollByIdDevice($this->idDevice);
+    public function GetAssignmentArr($strExtra = '') {
+        return Assignment::Query('WHERE Assignment_rel.idDevice = ' . $this->idDevice . ' ' . $strExtra);
+    }
+    public function GetAssignmentArrBySession($objSession, $strExtra = '') {
+        return Assignment::GetArrByDeviceAndSession($this, $objSession, $strExtra);
+    }
+    public function CreateAssignmentFromSession($objSession) {
+        $objAssignment = new Assignment();
+        $objAssignment->IdDevice = $this->IdDevice;
+        $objAssignment->IdSession = $objSession->IdSession;
+        //$objAssignment->Save();
+        return $objAssignment;
     }
     //Load by foregin key
     public static function LoadCollByIdOrg($intIdOrg) {
-        $sql = sprintf("SELECT * FROM Device WHERE idOrg = %s;", $intIdOrg);
+        $sql = sprintf("SELECT Device.* FROM Device WHERE idOrg = %s;", $intIdOrg);
         $result = MLCDBDriver::Query($sql, self::DB_CONN);
         $coll = new BaseEntityCollection();
         while ($data = mysql_fetch_assoc($result)) {
@@ -170,11 +231,14 @@ class DeviceBase extends BaseEntity {
         }
     }
     public static function LoadSingleByField($strField, $mixValue, $strCompairison = '=') {
-        $arrResults = self::LoadArrayByField($strField, $mixValue, $strCompairison);
-        if (count($arrResults)) {
-            return $arrResults[0];
+        if (is_numeric($mixValue)) {
+            $strValue = $mixValue;
+        } else {
+            $strValue = sprintf('"%s"', $mixValue);
         }
-        return null;
+        $strExtra = sprintf(' WHERE Device.%s %s %s', $strField, $strCompairison, $strValue);
+        $objEntity = self::Query($strExtra, true);
+        return $objEntity;
     }
     public static function LoadArrayByField($strField, $mixValue, $strCompairison = '=') {
         if (is_numeric($mixValue)) {
@@ -182,17 +246,8 @@ class DeviceBase extends BaseEntity {
         } else {
             $strValue = sprintf('"%s"', $mixValue);
         }
-        $strExtra = sprintf(' WHERE %s %s %s', $strField, $strCompairison, $strValue);
-        $sql = sprintf("SELECT * FROM %s %s;", self::TABLE_NAME, $strExtra);
-        //die($sql);
-        $result = MLCDBDriver::query($sql, self::DB_CONN);
-        $coll = new BaseEntityCollection();
-        while ($data = mysql_fetch_assoc($result)) {
-            $tObj = new Device();
-            $tObj->materilize($data);
-            $coll->addItem($tObj);
-        }
-        $arrResults = $coll->getCollection();
+        $strExtra = sprintf(' WHERE Device.%s %s %s', $strField, $strCompairison, $strValue);
+        $arrResults = self::Query($strExtra);
         return $arrResults;
     }
     public function __toArray() {
@@ -262,9 +317,12 @@ class DeviceBase extends BaseEntity {
                 return null;
             break;
             case ('IdOrgObject'):
-            case ('idOrgObject'):
+                if (!is_null($this->objIdOrg)) {
+                    return $this->objIdOrg;
+                }
                 if ((array_key_exists('idOrg', $this->arrDBFields)) && (!is_null($this->arrDBFields['idOrg']))) {
-                    return Org::LoadById($this->arrDBFields['idOrg']);
+                    $this->objIdOrg = Org::LoadById($this->arrDBFields['idOrg']);
+                    return $this->objIdOrg;
                 }
                 return null;
             break;
@@ -299,6 +357,11 @@ class DeviceBase extends BaseEntity {
             case ('IdOrg'):
             case ('idOrg'):
                 $this->arrDBFields['idOrg'] = $strValue;
+                $this->objOrg = null;
+            break;
+            case ('IdOrgObject'):
+                $this->arrDBFields['idOrg'] = $strValue->idOrg;
+                $this->objIdOrg = $strValue;
             break;
             default:
                 throw new MLCMissingPropertyException($this, $strName);

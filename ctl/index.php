@@ -1,6 +1,6 @@
 <?php
 //_dv(MLCAuthDriver::User());
-if(!is_null(MLCAuthDriver::User()) &&  (!is_null(FFSApplication::GetOrgs()))){
+if(!is_null(MLCAuthDriver::User()) &&  (count(FFSApplication::GetOrgs())) > 0){
 
     //assume it is a coach for now
 

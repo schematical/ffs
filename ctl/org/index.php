@@ -2,7 +2,9 @@
 if(is_null(MLCAuthDriver::User())){
     die(header('/'));
 }
+FFSForm::$strSection = 'org';
 if(!is_null(FFSForm::$objCompetition)){
+
     $objRoll = MLCAuthDriver::GetRollByEntity(FFSForm::$objCompetition->IdOrgObject);
     if(
         (!is_null($objRoll)) &&

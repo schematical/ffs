@@ -10,8 +10,11 @@ MLCApplication::InitPackage('MLCCodegen');
 require_once(dirname(__FILE__) . '/Discussion.class.php');
 require_once(dirname(__FILE__) . '/Comment.class.php');
 require_once(dirname(__FILE__) . '/Cat.class.php');
+require_once(dirname(__FILE__) . '/User.class.php');
 
 $objSaveDriver = new MLCZipSaveDriver('andre.zip');
+
+
 //Load all catigorys
 $arrCat = Cat::Query('WHERE 1');
 foreach($arrCat as $objCat){
@@ -37,6 +40,13 @@ foreach($arrCat as $objCat){
     }
 
 
+}
+
+foreach(User::$arrUsers as $strEmail => $objUser){
+    $objSaveDriver->AddFile(
+        'users/' . $objUser->intIdUser . '.json',
+        json_encode($objUser->GetData())
+    );
 }
 $objSaveDriver->CleanUp();
 _dv($objSaveDriver->GetResult());

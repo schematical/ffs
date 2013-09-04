@@ -28,7 +28,7 @@ class FFSOrgInvitePanel extends MJaxPanel{
     public function pnlSelect_select(){
         $this->blnModified = true;
         $arrOrgs = $this->pnlSelect->GetValue();
-        _dv($arrOrgs);
+
         if(count($arrOrgs) == 0){
             $this->Alert("Sorry we were unable to find a gym with that info. Please create one using the form below");
             $this->objForm->ScrollTo($this->objForm->pnlEdit);
@@ -36,10 +36,18 @@ class FFSOrgInvitePanel extends MJaxPanel{
             return;
         }
         $objOrg = $arrOrgs[0];
+
         $arrUsers = MLCAuthDriver::GetUsersByEntity($objOrg, FFSRoll::ORG_MANAGER);
 
         if(count($arrUsers) == 0){
             $this->pnlInvite->SetEntity($objOrg, FFSRoll::ORG_MANAGER);
+            $arrPSData = json_decode($objOrg->PsData, true);
+            //_dv($arrPSData['Email']);
+            if(
+                (array_key_exists('Email', $arrPSData))
+            ){
+                $this->pnlInvite->txtEmail->Text = $arrPSData['Email'];
+            }
         }else{
             $arrUserEmails = array();
             //Display a button invite

@@ -1,6 +1,6 @@
 <div class=''>
     <div class='controls input-prepend '>
-        <span class='add-on'>Search Orgs</span>
+        <span class='add-on'>Search  Session</span>
         <?php
 /**
 * Class and Function List:

@@ -8,8 +8,12 @@ class Discussion{
         $link = mysql_connect('localhost', 'root', 'learnlearn');
         mysql_select_db('andregagnon');
         mysql_set_charset('utf8');
-        $sql = sprintf("SELECT * FROM wp_ahq_forum_topics %s;", $strExtra);
-
+        $sql = sprintf(
+            "SELECT wp_ahq_forum_topics.*, %s  FROM wp_ahq_forum_topics  JOIN wp_users ON wp_ahq_forum_topics.t_starter_id = wp_users.ID %s;",
+            User::SELECT_EXT,
+            $strExtra
+        );
+        //_dv($sql);
         $result =  mysql_query($sql);
         $arrReturn = array();
         while ($data = mysql_fetch_assoc($result)) {
@@ -31,9 +35,12 @@ class Discussion{
     public function materilize($arrData){
         $this->intIdTopic = $arrData['t_id'];
         $this->arrData["title"] = $arrData['t_title'];//: "engineer rich networks",
-        $this->arrData["author_email"] = 'agagnon@themewich.com';//"author_email": "towski@entp.com",
+        $this->arrData["author_email"] = $arrData['email'];//"author_email": "towski@entp.com",
         $this->arrData["created_at"] = date('Y-m-dTh:i:s', $arrData['t_date']);// "2008-01-01T00:01:00Z",
         //$this->arrData["comments"] = array();
+
+        User::ParseUser($arrData);
+
     }
     public function PopulateComments(){
         $this->arrComments = Comment::Query(
