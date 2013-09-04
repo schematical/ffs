@@ -11,22 +11,7 @@ class FFSForm extends MJaxWAdminForm{
         $this->objJsonSearchDriver = new FFSJsonSearchDriver();
         FFSApplication::Init();
 
-        if(!is_null(self::$objCompetition)){
-            $intIdSession = MLCApplication::QS(FFSQS::IdSession);
-            if(
-                (!is_null($intIdSession)) &&
-                (is_numeric($intIdSession))
-            ){
-                FFSForm::$objSession = Session::Query(
-                    sprintf(
-                        'WHERE idSession = %s AND idCompetition = %s',
-                        $intIdSession,
-                        FFSForm::$objCompetition->IdCompetition
-                    ),
-                    true
-                );
-            }
-        }
+
         $this->SetUpNavMenu();
         //If not is paid account{
             $this->InitAds();
@@ -94,7 +79,7 @@ class FFSForm extends MJaxWAdminForm{
                         //_dv($lnkManageSessions);
                         $lnkManageSessions->AddSubNavLink(
                             $objSession->Name,
-                            '/' . FFSForm::$objCompetition->Namespace . '/org/competition/manageEnrollments?' . FFSQS::IdSession . '='. $objSession->IdSession
+                            '/' . FFSForm::$objCompetition->Namespace . '/org/competition/sessionDetails?' . FFSQS::IdSession . '='. $objSession->IdSession
                         );
                     }
                     $this->AddHeaderNav('Invite Gyms', 'icon-building')->Href = '/' . FFSForm::$objCompetition->Namespace . '/org/competition/manageGyms';

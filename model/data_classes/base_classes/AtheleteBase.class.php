@@ -29,6 +29,7 @@
 * - __toJson()
 * - __get()
 * - __set()
+* - PsData()
 * Classes list:
 * - AtheleteBase extends BaseEntity
 */
@@ -48,8 +49,6 @@
  * @property-write mixed $MemType
  * @property-read mixed $MemId
  * @property-write mixed $MemId
- * @property-read mixed $PsData
- * @property-write mixed $PsData
  * @property-read mixed $CreDate
  * @property-write mixed $CreDate
  * @property-read mixed $Level
@@ -381,13 +380,6 @@ class AtheleteBase extends BaseEntity {
                 }
                 return null;
             break;
-            case ('PsData'):
-            case ('PsData'):
-                if (array_key_exists('PsData', $this->arrDBFields)) {
-                    return $this->arrDBFields['PsData'];
-                }
-                return null;
-            break;
             case ('CreDate'):
             case ('creDate'):
                 if (array_key_exists('creDate', $this->arrDBFields)) {
@@ -427,7 +419,7 @@ class AtheleteBase extends BaseEntity {
             case ('IdOrg'):
             case ('idOrg'):
                 $this->arrDBFields['idOrg'] = $strValue;
-                $this->objOrg = null;
+                $this->objIdOrg = null;
             break;
             case ('FirstName'):
             case ('firstName'):
@@ -449,10 +441,6 @@ class AtheleteBase extends BaseEntity {
             case ('memId'):
                 $this->arrDBFields['memId'] = $strValue;
             break;
-            case ('PsData'):
-            case ('PsData'):
-                $this->arrDBFields['PsData'] = $strValue;
-            break;
             case ('CreDate'):
             case ('creDate'):
                 $this->arrDBFields['creDate'] = $strValue;
@@ -468,6 +456,30 @@ class AtheleteBase extends BaseEntity {
             default:
                 throw new MLCMissingPropertyException($this, $strName);
             break;
+        }
+    }
+    public function PsData($strKey, $mixData = null) {
+        if (is_null($mixData)) {
+            if ((!array_key_exists('PsData', $this->arrDBFields))) {
+                return null;
+            }
+            if ((strlen($this->arrDBFields['PsData']) < 1)) {
+                return null;
+            }
+            $arrData = json_decode($this->arrDBFields['PsData'], true);
+            if (!array_key_exists($strKey, $arrData)) {
+                return null;
+            }
+            return $arrData[$strKey];
+        } else {
+            if ((!array_key_exists('PsData', $this->arrDBFields)) || (strlen($this->arrDBFields['PsData']) < 1)) {
+                $arrData = array();
+            } else {
+                $arrData = json_decode($this->arrDBFields['PsData'], true);
+            }
+            $arrData[$strKey] = $mixData;
+            $this->arrDBFields['PsData'] = json_encode($arrData);
+            $this->Save();
         }
     }
 }

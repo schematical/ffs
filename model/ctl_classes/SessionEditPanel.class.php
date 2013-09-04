@@ -25,6 +25,13 @@ class SessionEditPanel extends SessionEditPanelBase
         $this->InitEventSelector();
 
     }
+    public function CreateFieldControls(){
+        parent::CreateFieldControls();
+        $this->dttStartDate->Format = 'mm-dd-yy hh:ii';
+        $this->dttStartDate->LinkFormat = 'mm-dd-yy hh:ii';
+        $this->dttEndDate->Format = 'mm-dd-yy hh:ii';
+        $this->dttEndDate->LinkFormat = 'mm-dd-yy hh:ii';
+    }
 
     public function InitEventSelector()
     {
@@ -54,7 +61,7 @@ class SessionEditPanel extends SessionEditPanelBase
             $this->objSession = new Session();
         }
         $strFunction = $this->lstEventSelector->SelectedValue;
-        $this->objSession->EventData = json_encode(FFSEventData::$$strFunction);
+        $this->objSession->Events(FFSEventData::$$strFunction);
 
        /* if (
         (!is_null($this->intIdCompetition))
@@ -82,6 +89,20 @@ class SessionEditPanel extends SessionEditPanelBase
     public function SetSession($objSession)
     {
         parent::SetSession($objSession);
+
+        if(
+            (is_null($this->objSession)) &&
+            (!is_null(FFSForm::$objCompetition))
+        ){
+            //_dv(FFSForm::$objCompetition->StartDate);
+            $this->dttStartDate->Value =  date("Y-m-d H:i:s",strtotime(FFSForm::$objCompetition->StartDate));
+            $strOffset = '+4 Hours';
+            $intTime = strtotime($strOffset . ' ' . FFSForm::$objCompetition->StartDate);
+            $strDate = date("Y-m-d H:i:s", $intTime);
+            $this->dttEndDate->Value = $strDate;
+        }
+
+
         if (
             (!is_null($this->intIdCompetition)) &&
             (!is_null($this->objSession)) &&

@@ -39,3 +39,20 @@ abstract class FFSEventData{
         'PommelHorse' => 'Pommel Horse'
     );
 }
+abstract class FFSFlightData{
+    public static $WOMENS_ARTISTIC_GYMNASTICS = array(
+        'Flight A' => 'Flight A',
+        'Flight B' => 'Flight B',
+        'Flight C' => 'Flight C',
+        'Flight D' => 'Flight D'
+
+    );
+    public static $MENS_ARTISTIC_GYMNASTICS = array(
+        'Flight A' => 'Flight A',
+        'Flight B' => 'Flight B',
+        'Flight C' => 'Flight C',
+        'Flight D' => 'Flight D',
+        'Flight E' => 'Flight E',
+        'Flight F' => 'Flight F',
+    );
+}

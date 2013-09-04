@@ -81,15 +81,25 @@ class FFSJsonSearchDriverBase {
         if ((is_null($strField)) || ($strField == 'apartatus')) {
             $arrOrConditions[] = sprintf('apartatus LIKE "%s%%"', strtolower($strSearch));
         }
+        if (count($arrOrConditions) == 0) {
+            $arrOrConditions[] = '1';
+        }
         $strQuery = ' WHERE (' . implode(' OR ', $arrOrConditions) . ')' . $this->GetAssignmentOwnerQuery();
         $arrAssignments = Assignment::Query($strQuery);
         foreach ($arrAssignments as $strKey => $objAssignment) {
+            if (is_null($strField)) {
+                $strValue = 'Assignment_' . $objAssignment->idAssignment;
+                $strText = $objAssignment->__toString();
+            } else {
+                $strValue = $objAssignment->__get($strField);
+                $strText = $strValue;
+            }
             $arrData[$strKey] = array(
-                'value' => 'Assignment_' . $objAssignment->idAssignment,
-                'text' => $objAssignment->__toString()
+                'value' => $strValue,
+                'text' => $strText
             );
         }
-        if ((!is_null($strSearch)) && (strlen($strSearch) > 0)) {
+        if ((!is_null($strSearch)) && (strlen($strSearch) > 0) && (is_null($strField))) {
             /*---------------Load by parent field: Device----------------------*/
             $arrOrConditions = array();
             $arrOrConditions[] = sprintf('name LIKE "%s%%"', strtolower($strSearch));
@@ -146,15 +156,25 @@ class FFSJsonSearchDriverBase {
         if ((is_null($strField)) || ($strField == 'level')) {
             $arrOrConditions[] = sprintf('level LIKE "%s%%"', strtolower($strSearch));
         }
+        if (count($arrOrConditions) == 0) {
+            $arrOrConditions[] = '1';
+        }
         $strQuery = ' WHERE (' . implode(' OR ', $arrOrConditions) . ')' . $this->GetAtheleteOwnerQuery();
         $arrAtheletes = Athelete::Query($strQuery);
         foreach ($arrAtheletes as $strKey => $objAthelete) {
+            if (is_null($strField)) {
+                $strValue = 'Athelete_' . $objAthelete->idAthelete;
+                $strText = $objAthelete->__toString();
+            } else {
+                $strValue = $objAthelete->__get($strField);
+                $strText = $strValue;
+            }
             $arrData[$strKey] = array(
-                'value' => 'Athelete_' . $objAthelete->idAthelete,
-                'text' => $objAthelete->__toString()
+                'value' => $strValue,
+                'text' => $strText
             );
         }
-        if ((!is_null($strSearch)) && (strlen($strSearch) > 0)) {
+        if ((!is_null($strSearch)) && (strlen($strSearch) > 0) && (is_null($strField))) {
             /*---------------Load by parent field: Org----------------------*/
             $arrOrConditions = array();
             $arrOrConditions[] = sprintf('namespace LIKE "%s%%"', strtolower($strSearch));
@@ -190,15 +210,25 @@ class FFSJsonSearchDriverBase {
         if ((is_null($strField)) || ($strField == 'namespace')) {
             $arrOrConditions[] = sprintf('namespace LIKE "%s%%"', strtolower($strSearch));
         }
+        if (count($arrOrConditions) == 0) {
+            $arrOrConditions[] = '1';
+        }
         $strQuery = ' WHERE (' . implode(' OR ', $arrOrConditions) . ')' . $this->GetCompetitionOwnerQuery();
         $arrCompetitions = Competition::Query($strQuery);
         foreach ($arrCompetitions as $strKey => $objCompetition) {
+            if (is_null($strField)) {
+                $strValue = 'Competition_' . $objCompetition->idCompetition;
+                $strText = $objCompetition->__toString();
+            } else {
+                $strValue = $objCompetition->__get($strField);
+                $strText = $strValue;
+            }
             $arrData[$strKey] = array(
-                'value' => 'Competition_' . $objCompetition->idCompetition,
-                'text' => $objCompetition->__toString()
+                'value' => $strValue,
+                'text' => $strText
             );
         }
-        if ((!is_null($strSearch)) && (strlen($strSearch) > 0)) {
+        if ((!is_null($strSearch)) && (strlen($strSearch) > 0) && (is_null($strField))) {
             /*---------------Load by parent field: Org----------------------*/
             $arrOrConditions = array();
             $arrOrConditions[] = sprintf('namespace LIKE "%s%%"', strtolower($strSearch));
@@ -237,15 +267,25 @@ class FFSJsonSearchDriverBase {
         if ((is_null($strField)) || ($strField == 'inviteEmail')) {
             $arrOrConditions[] = sprintf('inviteEmail LIKE "%s%%"', strtolower($strSearch));
         }
+        if (count($arrOrConditions) == 0) {
+            $arrOrConditions[] = '1';
+        }
         $strQuery = ' WHERE (' . implode(' OR ', $arrOrConditions) . ')' . $this->GetDeviceOwnerQuery();
         $arrDevices = Device::Query($strQuery);
         foreach ($arrDevices as $strKey => $objDevice) {
+            if (is_null($strField)) {
+                $strValue = 'Device_' . $objDevice->idDevice;
+                $strText = $objDevice->__toString();
+            } else {
+                $strValue = $objDevice->__get($strField);
+                $strText = $strValue;
+            }
             $arrData[$strKey] = array(
-                'value' => 'Device_' . $objDevice->idDevice,
-                'text' => $objDevice->__toString()
+                'value' => $strValue,
+                'text' => $strText
             );
         }
-        if ((!is_null($strSearch)) && (strlen($strSearch) > 0)) {
+        if ((!is_null($strSearch)) && (strlen($strSearch) > 0) && (is_null($strField))) {
             /*---------------Load by parent field: Org----------------------*/
             $arrOrConditions = array();
             $arrOrConditions[] = sprintf('namespace LIKE "%s%%"', strtolower($strSearch));
@@ -302,15 +342,25 @@ class FFSJsonSearchDriverBase {
         if ((is_null($strField)) || ($strField == 'level')) {
             $arrOrConditions[] = sprintf('level LIKE "%s%%"', strtolower($strSearch));
         }
+        if (count($arrOrConditions) == 0) {
+            $arrOrConditions[] = '1';
+        }
         $strQuery = ' WHERE (' . implode(' OR ', $arrOrConditions) . ')' . $this->GetEnrollmentOwnerQuery();
         $arrEnrollments = Enrollment::Query($strQuery);
         foreach ($arrEnrollments as $strKey => $objEnrollment) {
+            if (is_null($strField)) {
+                $strValue = 'Enrollment_' . $objEnrollment->idEnrollment;
+                $strText = $objEnrollment->__toString();
+            } else {
+                $strValue = $objEnrollment->__get($strField);
+                $strText = $strValue;
+            }
             $arrData[$strKey] = array(
-                'value' => 'Enrollment_' . $objEnrollment->idEnrollment,
-                'text' => $objEnrollment->__toString()
+                'value' => $strValue,
+                'text' => $strText
             );
         }
-        if ((!is_null($strSearch)) && (strlen($strSearch) > 0)) {
+        if ((!is_null($strSearch)) && (strlen($strSearch) > 0) && (is_null($strField))) {
             /*---------------Load by parent field: Athelete----------------------*/
             $arrOrConditions = array();
             $arrOrConditions[] = sprintf('firstName LIKE "%s%%"', strtolower($strSearch));
@@ -379,15 +429,25 @@ class FFSJsonSearchDriverBase {
         if ((is_null($strField)) || ($strField == 'clubType')) {
             $arrOrConditions[] = sprintf('clubType LIKE "%s%%"', strtolower($strSearch));
         }
+        if (count($arrOrConditions) == 0) {
+            $arrOrConditions[] = '1';
+        }
         $strQuery = ' WHERE (' . implode(' OR ', $arrOrConditions) . ')' . $this->GetOrgOwnerQuery();
         $arrOrgs = Org::Query($strQuery);
         foreach ($arrOrgs as $strKey => $objOrg) {
+            if (is_null($strField)) {
+                $strValue = 'Org_' . $objOrg->idOrg;
+                $strText = $objOrg->__toString();
+            } else {
+                $strValue = $objOrg->__get($strField);
+                $strText = $strValue;
+            }
             $arrData[$strKey] = array(
-                'value' => 'Org_' . $objOrg->idOrg,
-                'text' => $objOrg->__toString()
+                'value' => $strValue,
+                'text' => $strText
             );
         }
-        if ((!is_null($strSearch)) && (strlen($strSearch) > 0)) {
+        if ((!is_null($strSearch)) && (strlen($strSearch) > 0) && (is_null($strField))) {
         }
         if (count($arrData) == 0) {
             $arrData[] = array(
@@ -403,15 +463,25 @@ class FFSJsonSearchDriverBase {
     public function _searchOrgCompetition($strSearch, $strField = null) {
         $arrData = array();
         $arrOrConditions = array();
+        if (count($arrOrConditions) == 0) {
+            $arrOrConditions[] = '1';
+        }
         $strQuery = ' WHERE (' . implode(' OR ', $arrOrConditions) . ')' . $this->GetOrgCompetitionOwnerQuery();
         $arrOrgCompetitions = OrgCompetition::Query($strQuery);
         foreach ($arrOrgCompetitions as $strKey => $objOrgCompetition) {
+            if (is_null($strField)) {
+                $strValue = 'OrgCompetition_' . $objOrgCompetition->idOrgCompetition;
+                $strText = $objOrgCompetition->__toString();
+            } else {
+                $strValue = $objOrgCompetition->__get($strField);
+                $strText = $strValue;
+            }
             $arrData[$strKey] = array(
-                'value' => 'OrgCompetition_' . $objOrgCompetition->idOrgCompetition,
-                'text' => $objOrgCompetition->__toString()
+                'value' => $strValue,
+                'text' => $strText
             );
         }
-        if ((!is_null($strSearch)) && (strlen($strSearch) > 0)) {
+        if ((!is_null($strSearch)) && (strlen($strSearch) > 0) && (is_null($strField))) {
             /*---------------Load by parent field: Org----------------------*/
             $arrOrConditions = array();
             $arrOrConditions[] = sprintf('namespace LIKE "%s%%"', strtolower($strSearch));
@@ -467,15 +537,25 @@ class FFSJsonSearchDriverBase {
         if ((is_null($strField)) || ($strField == 'inviteToken')) {
             $arrOrConditions[] = sprintf('inviteToken LIKE "%s%%"', strtolower($strSearch));
         }
+        if (count($arrOrConditions) == 0) {
+            $arrOrConditions[] = '1';
+        }
         $strQuery = ' WHERE (' . implode(' OR ', $arrOrConditions) . ')' . $this->GetParentMessageOwnerQuery();
         $arrParentMessages = ParentMessage::Query($strQuery);
         foreach ($arrParentMessages as $strKey => $objParentMessage) {
+            if (is_null($strField)) {
+                $strValue = 'ParentMessage_' . $objParentMessage->idParentMessage;
+                $strText = $objParentMessage->__toString();
+            } else {
+                $strValue = $objParentMessage->__get($strField);
+                $strText = $strValue;
+            }
             $arrData[$strKey] = array(
-                'value' => 'ParentMessage_' . $objParentMessage->idParentMessage,
-                'text' => $objParentMessage->__toString()
+                'value' => $strValue,
+                'text' => $strText
             );
         }
-        if ((!is_null($strSearch)) && (strlen($strSearch) > 0)) {
+        if ((!is_null($strSearch)) && (strlen($strSearch) > 0) && (is_null($strField))) {
             /*---------------Load by parent field: Athelete----------------------*/
             $arrOrConditions = array();
             $arrOrConditions[] = sprintf('firstName LIKE "%s%%"', strtolower($strSearch));
@@ -528,15 +608,25 @@ class FFSJsonSearchDriverBase {
         if ((is_null($strField)) || ($strField == 'event')) {
             $arrOrConditions[] = sprintf('event LIKE "%s%%"', strtolower($strSearch));
         }
+        if (count($arrOrConditions) == 0) {
+            $arrOrConditions[] = '1';
+        }
         $strQuery = ' WHERE (' . implode(' OR ', $arrOrConditions) . ')' . $this->GetResultOwnerQuery();
         $arrResults = Result::Query($strQuery);
         foreach ($arrResults as $strKey => $objResult) {
+            if (is_null($strField)) {
+                $strValue = 'Result_' . $objResult->idResult;
+                $strText = $objResult->__toString();
+            } else {
+                $strValue = $objResult->__get($strField);
+                $strText = $strValue;
+            }
             $arrData[$strKey] = array(
-                'value' => 'Result_' . $objResult->idResult,
-                'text' => $objResult->__toString()
+                'value' => $strValue,
+                'text' => $strText
             );
         }
-        if ((!is_null($strSearch)) && (strlen($strSearch) > 0)) {
+        if ((!is_null($strSearch)) && (strlen($strSearch) > 0) && (is_null($strField))) {
             /*---------------Load by parent field: Session----------------------*/
             $arrOrConditions = array();
             $arrOrConditions[] = sprintf('name LIKE "%s%%"', strtolower($strSearch));
@@ -585,15 +675,25 @@ class FFSJsonSearchDriverBase {
         if ((is_null($strField)) || ($strField == 'equipmentSet')) {
             $arrOrConditions[] = sprintf('equipmentSet LIKE "%s%%"', strtolower($strSearch));
         }
+        if (count($arrOrConditions) == 0) {
+            $arrOrConditions[] = '1';
+        }
         $strQuery = ' WHERE (' . implode(' OR ', $arrOrConditions) . ')' . $this->GetSessionOwnerQuery();
         $arrSessions = Session::Query($strQuery);
         foreach ($arrSessions as $strKey => $objSession) {
+            if (is_null($strField)) {
+                $strValue = 'Session_' . $objSession->idSession;
+                $strText = $objSession->__toString();
+            } else {
+                $strValue = $objSession->__get($strField);
+                $strText = $strValue;
+            }
             $arrData[$strKey] = array(
-                'value' => 'Session_' . $objSession->idSession,
-                'text' => $objSession->__toString()
+                'value' => $strValue,
+                'text' => $strText
             );
         }
-        if ((!is_null($strSearch)) && (strlen($strSearch) > 0)) {
+        if ((!is_null($strSearch)) && (strlen($strSearch) > 0) && (is_null($strField))) {
             /*---------------Load by parent field: Competition----------------------*/
             $arrOrConditions = array();
             $arrOrConditions[] = sprintf('name LIKE "%s%%"', strtolower($strSearch));

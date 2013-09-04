@@ -504,17 +504,17 @@ class EnrollmentBase extends BaseEntity {
             case ('IdAthelete'):
             case ('idAthelete'):
                 $this->arrDBFields['idAthelete'] = $strValue;
-                $this->objAthelete = null;
+                $this->objIdAthelete = null;
             break;
             case ('IdCompetition'):
             case ('idCompetition'):
                 $this->arrDBFields['idCompetition'] = $strValue;
-                $this->objCompetition = null;
+                $this->objIdCompetition = null;
             break;
             case ('IdSession'):
             case ('idSession'):
                 $this->arrDBFields['idSession'] = $strValue;
-                $this->objSession = null;
+                $this->objIdSession = null;
             break;
             case ('Flight'):
             case ('flight'):

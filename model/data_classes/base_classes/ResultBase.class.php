@@ -398,12 +398,12 @@ class ResultBase extends BaseEntity {
             case ('IdSession'):
             case ('idSession'):
                 $this->arrDBFields['idSession'] = $strValue;
-                $this->objSession = null;
+                $this->objIdSession = null;
             break;
             case ('IdAthelete'):
             case ('idAthelete'):
                 $this->arrDBFields['idAthelete'] = $strValue;
-                $this->objAthelete = null;
+                $this->objIdAthelete = null;
             break;
             case ('Score'):
             case ('score'):

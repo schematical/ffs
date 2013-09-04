@@ -25,8 +25,12 @@ class SessionManageForm extends SessionManageFormBase {
         );
 
     }
+    public function InitEditPanel($objSession = null){
+        parent::InitEditPanel();
+        $this->pnlEdit->SetSession($objSession);
+    }
     public function InitWizzard(){
-        if(is_null(MLCApplication::QS(FFSQS::UseWizzard))){
+        if(!is_null(MLCApplication::QS(FFSQS::UseWizzard))){
             $this->pnlEdit->Intro("Enter in your session info", "Start by entering in a sessions info such as a unique name, a start time and an end time. If you are running more than one sessions at a time use the <b>Equipment Set</b> field to denote which set of equipment this session is running on.");
 
             $this->lstSessions->Intro("Here are your sessions", "Once you have entered in a session it should appear in the session list. Each row has the following buttons:
@@ -60,7 +64,8 @@ class SessionManageForm extends SessionManageFormBase {
     }
     public function pnlEdit_save($strFormId, $strControlId, $objSession) {
         $objSession->IdCompetition = FFSForm::$objCompetition->IdCompetition;
-        $objSession->Save();
+        $objSession->Data('flights', FFSFlightData::$WOMENS_ARTISTIC_GYMNASTICS);
+        //$objSession->Save();
         parent::pnlEdit_save($strFormId, $strControlId, $objSession);
     }
 }

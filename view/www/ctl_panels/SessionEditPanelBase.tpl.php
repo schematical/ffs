@@ -1,63 +1,60 @@
 
     <form action="/" id="validation-form" class="form-horizontal">
         <fieldset>
-            
+
+
+            <?php if (!is_null($_CONTROL->strName)) { ?>
+                <div class="control-group pull-left">
+                    <label class="control-label" for="name"> Name</label>
+                    <div class="controls">
+                        <?php $_CONTROL->strName->Render(); ?>
+                    </div>
+                </div>
+            <?php
+            } ?>
+
+
+
+
+            <?php
+            /**
+             * Class and Function List:
+             * Function list:
+             * Classes list:
+             */
+            if (!is_null($_CONTROL->dttStartDate)) { ?>
+                <div class="control-group pull-left">
+                    <label class="control-label" for="name"> Start Date</label>
+                    <div class="controls">
+                        <?php $_CONTROL->dttStartDate->Render(); ?>
+                    </div>
+                </div>
+            <?php
+            } ?>
+
+
+
+            <?php if (!is_null($_CONTROL->dttEndDate)) { ?>
+                <div class="control-group pull-left">
+                    <label class="control-label" for="name"> End Date</label>
+                    <div class="controls">
+                        <?php $_CONTROL->dttEndDate->Render(); ?>
+                    </div>
+                </div>
+            <?php
+            } ?>
+
+            <?php if (!is_null($_CONTROL->lstEventSelector)) { ?>
+                <div class="control-group pull-left">
+                    <label class="control-label" for="name">Events</label>
+                    <div class="controls">
+                        <?php $_CONTROL->lstEventSelector->Render(); ?>
+                    </div>
+                </div>
+            <?php
+            } ?>
                 
-            
-                
-                    <?php
-/**
-* Class and Function List:
-* Function list:
-* Classes list:
-*/
-if (!is_null($_CONTROL->dttStartDate)) { ?>
-                        <div class="control-group pull-left">
-                          <label class="control-label" for="name"> Start Date</label>
-                          <div class="controls">
-                             <?php $_CONTROL->dttStartDate->Render(); ?>
-                          </div>
-                        </div>
-                    <?php
-} ?>
-                
-            
-                
-                    <?php if (!is_null($_CONTROL->dttEndDate)) { ?>
-                        <div class="control-group pull-left">
-                          <label class="control-label" for="name"> End Date</label>
-                          <div class="controls">
-                             <?php $_CONTROL->dttEndDate->Render(); ?>
-                          </div>
-                        </div>
-                    <?php
-} ?>
-                
-            
-                
-                    <?php if (!is_null($_CONTROL->intIdCompetition)) { ?>
-                        <div class="control-group pull-left">
-                          <label class="control-label" for="name"> Competition</label>
-                          <div class="controls">
-                             <?php $_CONTROL->intIdCompetition->Render(); ?>
-                          </div>
-                        </div>
-                    <?php
-} ?>
-                
-            
-                
-                    <?php if (!is_null($_CONTROL->strName)) { ?>
-                        <div class="control-group pull-left">
-                          <label class="control-label" for="name"> Name</label>
-                          <div class="controls">
-                             <?php $_CONTROL->strName->Render(); ?>
-                          </div>
-                        </div>
-                    <?php
-} ?>
-                
-            
+
                 
                     <?php if (!is_null($_CONTROL->strNotes)) { ?>
                         <div class="control-group pull-left">

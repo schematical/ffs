@@ -15,11 +15,13 @@ abstract class FFSJsonSearchDriverHandeler {
         return pathinfo($_SERVER['REQUEST_URI'], PATHINFO_EXTENSION);
     }
     public static function Run() {
+        FFSApplication::Init();
         if (array_key_exists('search', $_POST)) {
             $strSearch = $_POST['search'];
         } else {
             $strSearch = '';
         }
+
         $arrParts = explode('_', self::GetExtension());
         $strExtension = $arrParts[0];
         if (count($arrParts) == 2) {

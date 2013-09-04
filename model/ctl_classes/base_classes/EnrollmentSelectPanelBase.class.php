@@ -32,7 +32,7 @@ class EnrollmentSelectPanelBase extends MJaxPanel {
     public function __construct($objParentControl, $strControlId = null) {
         parent::__construct($objParentControl, $strControlId);
         $this->strTemplate = __VIEW_ACTIVE_APP_DIR__ . '/www/ctl_panels/' . get_class($this) . '.tpl.php';
-        $this->txtSearch = new MJaxBSAutocompleteTextBox($this, $this->objForm->objJsonSearchDriver, '_searchEnrollment');
+        $this->txtSearch = new MJaxBSAutocompleteTextBox($this, '/data/search?mjax-route-ext=Enrollment');
         $this->txtSearch->Name = 'idEnrollment';
         $this->txtSearch->AddCssClass('input-large');
         $this->txtSearch->AddAction(new MJaxChangeEvent() , new MJaxServerControlAction($this, 'txtSearch_change'));

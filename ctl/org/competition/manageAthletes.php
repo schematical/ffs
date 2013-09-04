@@ -13,26 +13,25 @@ class AtheleteManageForm extends AtheleteManageFormBase {
         parent::Form_Create();
 
 
+        $arrAtheletes = $this->Query();
+        $this->InitList($arrAtheletes);
 
         $this->InitSelectPanel();
-        $arrAtheletes = $this->Query();
 
         $objAthelete = null;
-        if (count($arrAtheletes) == 1) {
-            $objAthelete = $arrAtheletes[0];
-        }
+
         $this->InitEditPanel($objAthelete);
 
 
 
-        $this->InitList($arrAtheletes);
+
         if(!is_null(MLCApplication::QS(FFSQS::UseWizzard))){
             $this->InitWizzard();
         }
     }
     public function UpdateTable($objAthelete) {
         $objEnrollment = $objAthelete->GetEnrollmentArrByCompetition(FFSForm::$objCompetition);
-        if(is_null($objEnrollment)){
+        if(count($objEnrollment) == 0){
             $objEnrollment = $objAthelete->CreateEnrollmentFromCompetition(FFSForm::$objCompetition);
             $objEnrollment->Save();
         }
@@ -41,25 +40,27 @@ class AtheleteManageForm extends AtheleteManageFormBase {
             //This already exists
 
             $this->lstEnrollments->SelectedRow->UpdateEntity($objEnrollment);
+            $this->ScrollTo($this->lstEnrollments->SelectedRow);
             $this->lstEnrollments->SelectedRow = null;
         } else {
             $objRow = $this->lstEnrollments->AddRow($objEnrollment);
+            $this->ScrollTo($objRow);
         }
     }
     public function InitList($arrAtheletes){
         $arrEnrollments = array();
-        foreach($arrAtheletes as $objAthelete){
-            $arrInvEnrollment = $objAthelete->GetEnrollmentArrByCompetition(FFSForm::$objCompetition);
-            if(count($arrInvEnrollment) == 0){
-                $objEnrollment = $objAthelete->CreateEnrollmentFromCompetition(FFSForm::$objCompetition);
-                $objEnrollment->Save();
-                $arrEnrollments[] = $objEnrollment;
-            }else{
+
+        foreach($arrAtheletes as $mixAthelete){
+            if($mixAthelete instanceof Athelete){
+                $arrInvEnrollment = $mixAthelete->GetEnrollmentArrByCompetition(FFSForm::$objCompetition);
+
                 foreach($arrInvEnrollment as $objEnrollment){
                     $arrEnrollments[] = $objEnrollment;
                 };
-            }
 
+            }elseif($mixAthelete instanceof Enrollment){
+                $arrEnrollments[] = $mixAthelete;
+            }
         }
 
         $this->lstEnrollments = new EnrollmentListPanel($this, $arrEnrollments);
@@ -72,11 +73,12 @@ class AtheleteManageForm extends AtheleteManageFormBase {
             new MJaxTableEditSaveEvent(),
             new MJaxServerControlAction($this, 'lstAthelete_editSave')
         );
-        $this->AddWidget(
+        $wgtLstEnrollments = $this->AddWidget(
             'Atheletes',
             'icon-ul',
             $this->lstEnrollments
         );
+        $wgtLstEnrollments->AddCssClass('span12');
 
     }
     public function pnlEdit_save($strFormId, $strControlId, $objAthelete) {
@@ -90,19 +92,30 @@ class AtheleteManageForm extends AtheleteManageFormBase {
                 $objAthelete->Save();
             }
         }
-        parent::pnlEdit_save($strFormId, $strControlId, $objAthelete);
+        //parent::pnlEdit_save($strFormId, $strControlId, $objAthelete); //Cant do because it has ref to lstAtheletes and were using lstEnrollments
+
+        $this->UpdateTable($objAthelete);
+        $this->pnlEdit->Alert('Saved!', 'info');
+
     }
     public function InitWizzard(){
 
             $this->pnlEdit->Intro("Add Athletes", "You may start manually adding athletes that are enrolled in your meet using the Athlete manager. Though it is much easier to invite coaches to enroll their athletes or use our Proscore import tool.");
 
-            $this->lstEnrollments->Intro("Athlete List", "Once you have entered in an athlete they should appear in the Athlete List. You can assign that athlete to a division, or any other grouping you would like.");
-
+            $this->lstEnrollments->Intro("Athlete List", "Once you have entered in an athlete they should appear in the Athlete List. You can assign that athlete to a division, or any other grouping you would like. Simply click on any field but the Athlete's name to edit it");
+            $arrSessions = FFSForm::$objCompetition->GetSessionArr();
+            if(count($arrSessions) > 0){
+                $strBody = 'When you have entered your Athletes click below to move on to managing a specific session';
+                $strUrl ='/' . FFSForm::$objCompetition->Namespace . '/org/competition/sessionDetails?' . FFSQS::Session_IdSession . '=' . $arrSessions[0]->IdSession;
+            }else{
+                $strBody = 'Oh no! You havent created any sessions for this competition yet. You will need to do that before we can move forward';
+                $strUrl ='/' . FFSForm::$objCompetition->Namespace . '/org/competition/manageSessions';
+            }
             $pnlWizzard = new FFSWizzardPanel(
                 $this,
                 'Ready to move on?',
-                'Once you have added some Athletes you can go a head assign Athletes to Sessions',
-                '/' . FFSForm::$objCompetition->Namespace . '/org/competition/manageEnrollments'
+                $strBody,
+                $strUrl
             );
             $wgtWizzard =$this->AddWidget(
                 'Setup Wizzard',
@@ -117,46 +130,43 @@ class AtheleteManageForm extends AtheleteManageFormBase {
     public function Query() {
 
         $arrAndConditions = array();
+        if(!is_null(FFSForm::$objSession)){
+            $arrAndConditions[]  = sprintf('Enrollment_rel.idSession = %s', FFSForm::$objSession->IdSession);
+        }elseif(!is_null(FFSForm::$objCompetition)){
+            $arrAndConditions[]  = sprintf('Enrollment_rel.idCompetition = %s', FFSForm::$objCompetition->IdCompetition);
+        }
         $intIdOrg = MLCApplication::QS(FFSQS::Athelete_IdOrg);
         if (!is_null($intIdOrg)) {
-            $arrAndConditions[] = sprintf('idOrg = %s', $intIdOrg);
-        }else{
-            $arrIdOrgs = array();
-            $arrOrgCompetition = FFSForm::$objCompetition->GetOrgCompetitionArr();
-            foreach($arrOrgCompetition as $objOrgCompetition){
-                $arrIdOrgs[] = $objOrgCompetition->IdOrg;
-            }
-            $arrAndConditions[] = sprintf('idOrg IN(%s)', implode(',', $arrIdOrgs));
+            $arrAndConditions[] = sprintf('Athelete.idOrg = %s', $intIdOrg);
         }
-
 
         $intIdAthelete = MLCApplication::QS(FFSQS::Athelete_IdAthelete);
         if (!is_null($intIdAthelete)) {
-            $arrAndConditions[] = sprintf('idAthelete = %s', $intIdAthelete);
+            $arrAndConditions[] = sprintf('Athelete.idAthelete = %s', $intIdAthelete);
         }
 
         $strFirstName = MLCApplication::QS(FFSQS::Athelete_FirstName);
         if (!is_null($strFirstName)) {
-            $arrAndConditions[] = sprintf('firstName LIKE "%s%%"', $strFirstName);
+            $arrAndConditions[] = sprintf('Athelete.firstName LIKE "%s%%"', $strFirstName);
         }
         $strLastName = MLCApplication::QS(FFSQS::Athelete_LastName);
         if (!is_null($strLastName)) {
-            $arrAndConditions[] = sprintf('lastName LIKE "%s%%"', $strLastName);
+            $arrAndConditions[] = sprintf('Athelete.lastName LIKE "%s%%"', $strLastName);
         }
         $strMemType = MLCApplication::QS(FFSQS::Athelete_MemType);
         if (!is_null($strMemType)) {
-            $arrAndConditions[] = sprintf('memType LIKE "%s%%"', $strMemType);
+            $arrAndConditions[] = sprintf('Athelete.memType LIKE "%s%%"', $strMemType);
         }
         $strMemId = MLCApplication::QS(FFSQS::Athelete_MemId);
         if (!is_null($strMemId)) {
-            $arrAndConditions[] = sprintf('memId LIKE "%s%%"', $strMemId);
+            $arrAndConditions[] = sprintf('Athelete.memId LIKE "%s%%"', $strMemId);
         }
         $strLevel = MLCApplication::QS(FFSQS::Athelete_Level);
         if (!is_null($strLevel)) {
-            $arrAndConditions[] = sprintf('level LIKE "%s%%"', $strLevel);
+            $arrAndConditions[] = sprintf('Athelete.level LIKE "%s%%"', $strLevel);
         }
         if (count($arrAndConditions) >= 1) {
-            $arrAtheletes = Athelete::Query('WHERE ' . implode(' AND ', $arrAndConditions));
+            $arrAtheletes = Enrollment::Query('WHERE ' . implode(' AND ', $arrAndConditions));
         } else {
             $arrAtheletes = array();
         }

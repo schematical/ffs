@@ -4,12 +4,12 @@ class Session extends SessionBase {
 
     public function Events($arrEventData = null){
         if(is_null($arrEventData)){
-            if(strlen($this->EventData) < 1){
+            if(strlen($this->arrDBFields['eventData']) < 1){
                 return array();
             }
-            return json_decode($this->EventData, true);
+            return json_decode($this->arrDBFields['eventData'], true);
         }else{
-            $this->EventData = json_encode($arrEventData);
+            $this->arrDBFields['eventData'] = json_encode($arrEventData);
             $this->Save();
         }
     }

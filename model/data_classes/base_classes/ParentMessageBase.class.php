@@ -23,6 +23,8 @@
 * - __toJson()
 * - __get()
 * - __set()
+* - InviteData()
+* - IdStripeData()
 * Classes list:
 * - ParentMessageBase extends BaseEntity
 */
@@ -44,8 +46,6 @@
  * @property-write mixed $IdUser
  * @property-read mixed $QueDate
  * @property-write mixed $QueDate
- * @property-read mixed $InviteData
- * @property-write mixed $InviteData
  * @property-read mixed $InviteType
  * @property-write mixed $InviteType
  * @property-read mixed $InviteToken
@@ -56,8 +56,6 @@
  * @property-write mixed $IdCompetition
  * @property-read mixed $ApproveDate
  * @property-write mixed $ApproveDate
- * @property-read mixed $IdStripeData
- * @property-write mixed $IdStripeData
  * @property-read ParentMessage $IdAtheleteObject
  * @property-read ParentMessage $IdCompetitionObject
  */
@@ -404,13 +402,6 @@ class ParentMessageBase extends BaseEntity {
                 }
                 return null;
             break;
-            case ('InviteData'):
-            case ('inviteData'):
-                if (array_key_exists('inviteData', $this->arrDBFields)) {
-                    return $this->arrDBFields['inviteData'];
-                }
-                return null;
-            break;
             case ('InviteType'):
             case ('inviteType'):
                 if (array_key_exists('inviteType', $this->arrDBFields)) {
@@ -488,7 +479,7 @@ class ParentMessageBase extends BaseEntity {
             case ('IdAthelete'):
             case ('idAthelete'):
                 $this->arrDBFields['idAthelete'] = $strValue;
-                $this->objAthelete = null;
+                $this->objIdAthelete = null;
             break;
             case ('AtheleteName'):
             case ('atheleteName'):
@@ -514,10 +505,6 @@ class ParentMessageBase extends BaseEntity {
             case ('queDate'):
                 $this->arrDBFields['queDate'] = $strValue;
             break;
-            case ('InviteData'):
-            case ('inviteData'):
-                $this->arrDBFields['inviteData'] = $strValue;
-            break;
             case ('InviteType'):
             case ('inviteType'):
                 $this->arrDBFields['inviteType'] = $strValue;
@@ -533,7 +520,7 @@ class ParentMessageBase extends BaseEntity {
             case ('IdCompetition'):
             case ('idCompetition'):
                 $this->arrDBFields['idCompetition'] = $strValue;
-                $this->objCompetition = null;
+                $this->objIdCompetition = null;
             break;
             case ('ApproveDate'):
             case ('approveDate'):
@@ -554,6 +541,54 @@ class ParentMessageBase extends BaseEntity {
             default:
                 throw new MLCMissingPropertyException($this, $strName);
             break;
+        }
+    }
+    public function InviteData($strKey, $mixData = null) {
+        if (is_null($mixData)) {
+            if ((!array_key_exists('inviteData', $this->arrDBFields))) {
+                return null;
+            }
+            if ((strlen($this->arrDBFields['inviteData']) < 1)) {
+                return null;
+            }
+            $arrData = json_decode($this->arrDBFields['inviteData'], true);
+            if (!array_key_exists($strKey, $arrData)) {
+                return null;
+            }
+            return $arrData[$strKey];
+        } else {
+            if ((!array_key_exists('inviteData', $this->arrDBFields)) || (strlen($this->arrDBFields['inviteData']) < 1)) {
+                $arrData = array();
+            } else {
+                $arrData = json_decode($this->arrDBFields['inviteData'], true);
+            }
+            $arrData[$strKey] = $mixData;
+            $this->arrDBFields['inviteData'] = json_encode($arrData);
+            $this->Save();
+        }
+    }
+    public function IdStripeData($strKey, $mixData = null) {
+        if (is_null($mixData)) {
+            if ((!array_key_exists('idStripeData', $this->arrDBFields))) {
+                return null;
+            }
+            if ((strlen($this->arrDBFields['idStripeData']) < 1)) {
+                return null;
+            }
+            $arrData = json_decode($this->arrDBFields['idStripeData'], true);
+            if (!array_key_exists($strKey, $arrData)) {
+                return null;
+            }
+            return $arrData[$strKey];
+        } else {
+            if ((!array_key_exists('idStripeData', $this->arrDBFields)) || (strlen($this->arrDBFields['idStripeData']) < 1)) {
+                $arrData = array();
+            } else {
+                $arrData = json_decode($this->arrDBFields['idStripeData'], true);
+            }
+            $arrData[$strKey] = $mixData;
+            $this->arrDBFields['idStripeData'] = json_encode($arrData);
+            $this->Save();
         }
     }
 }

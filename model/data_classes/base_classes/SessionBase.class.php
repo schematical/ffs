@@ -31,6 +31,8 @@
 * - __toJson()
 * - __get()
 * - __set()
+* - Data()
+* - EventData()
 * Classes list:
 * - SessionBase extends BaseEntity
 */
@@ -48,12 +50,8 @@
  * @property-write mixed $Name
  * @property-read mixed $Notes
  * @property-write mixed $Notes
- * @property-read mixed $Data
- * @property-write mixed $Data
  * @property-read mixed $EquipmentSet
  * @property-write mixed $EquipmentSet
- * @property-read mixed $EventData
- * @property-write mixed $EventData
  * @property-read Session $IdCompetitionObject
  */
 class SessionBase extends BaseEntity {
@@ -378,24 +376,10 @@ class SessionBase extends BaseEntity {
                 }
                 return null;
             break;
-            case ('Data'):
-            case ('data'):
-                if (array_key_exists('data', $this->arrDBFields)) {
-                    return $this->arrDBFields['data'];
-                }
-                return null;
-            break;
             case ('EquipmentSet'):
             case ('equipmentSet'):
                 if (array_key_exists('equipmentSet', $this->arrDBFields)) {
                     return $this->arrDBFields['equipmentSet'];
-                }
-                return null;
-            break;
-            case ('EventData'):
-            case ('eventData'):
-                if (array_key_exists('eventData', $this->arrDBFields)) {
-                    return $this->arrDBFields['eventData'];
                 }
                 return null;
             break;
@@ -432,7 +416,7 @@ class SessionBase extends BaseEntity {
             case ('IdCompetition'):
             case ('idCompetition'):
                 $this->arrDBFields['idCompetition'] = $strValue;
-                $this->objCompetition = null;
+                $this->objIdCompetition = null;
             break;
             case ('Name'):
             case ('name'):
@@ -442,17 +426,9 @@ class SessionBase extends BaseEntity {
             case ('notes'):
                 $this->arrDBFields['notes'] = $strValue;
             break;
-            case ('Data'):
-            case ('data'):
-                $this->arrDBFields['data'] = $strValue;
-            break;
             case ('EquipmentSet'):
             case ('equipmentSet'):
                 $this->arrDBFields['equipmentSet'] = $strValue;
-            break;
-            case ('EventData'):
-            case ('eventData'):
-                $this->arrDBFields['eventData'] = $strValue;
             break;
             case ('IdCompetitionObject'):
                 $this->arrDBFields['idCompetition'] = $strValue->idCompetition;
@@ -461,6 +437,54 @@ class SessionBase extends BaseEntity {
             default:
                 throw new MLCMissingPropertyException($this, $strName);
             break;
+        }
+    }
+    public function Data($strKey, $mixData = null) {
+        if (is_null($mixData)) {
+            if ((!array_key_exists('data', $this->arrDBFields))) {
+                return null;
+            }
+            if ((strlen($this->arrDBFields['data']) < 1)) {
+                return null;
+            }
+            $arrData = json_decode($this->arrDBFields['data'], true);
+            if (!array_key_exists($strKey, $arrData)) {
+                return null;
+            }
+            return $arrData[$strKey];
+        } else {
+            if ((!array_key_exists('data', $this->arrDBFields)) || (strlen($this->arrDBFields['data']) < 1)) {
+                $arrData = array();
+            } else {
+                $arrData = json_decode($this->arrDBFields['data'], true);
+            }
+            $arrData[$strKey] = $mixData;
+            $this->arrDBFields['data'] = json_encode($arrData);
+            $this->Save();
+        }
+    }
+    public function EventData($strKey, $mixData = null) {
+        if (is_null($mixData)) {
+            if ((!array_key_exists('eventData', $this->arrDBFields))) {
+                return null;
+            }
+            if ((strlen($this->arrDBFields['eventData']) < 1)) {
+                return null;
+            }
+            $arrData = json_decode($this->arrDBFields['eventData'], true);
+            if (!array_key_exists($strKey, $arrData)) {
+                return null;
+            }
+            return $arrData[$strKey];
+        } else {
+            if ((!array_key_exists('eventData', $this->arrDBFields)) || (strlen($this->arrDBFields['eventData']) < 1)) {
+                $arrData = array();
+            } else {
+                $arrData = json_decode($this->arrDBFields['eventData'], true);
+            }
+            $arrData[$strKey] = $mixData;
+            $this->arrDBFields['eventData'] = json_encode($arrData);
+            $this->Save();
         }
     }
 }

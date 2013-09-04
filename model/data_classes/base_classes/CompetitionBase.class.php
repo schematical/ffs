@@ -451,7 +451,7 @@ class CompetitionBase extends BaseEntity {
             case ('IdOrg'):
             case ('idOrg'):
                 $this->arrDBFields['idOrg'] = $strValue;
-                $this->objOrg = null;
+                $this->objIdOrg = null;
             break;
             case ('Namespace'):
             case ('namespace'):

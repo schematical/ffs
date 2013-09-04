@@ -338,12 +338,12 @@ class OrgCompetitionBase extends BaseEntity {
             case ('IdOrg'):
             case ('idOrg'):
                 $this->arrDBFields['idOrg'] = $strValue;
-                $this->objOrg = null;
+                $this->objIdOrg = null;
             break;
             case ('IdCompetition'):
             case ('idCompetition'):
                 $this->arrDBFields['idCompetition'] = $strValue;
-                $this->objCompetition = null;
+                $this->objIdCompetition = null;
             break;
             case ('CreDate'):
             case ('creDate'):

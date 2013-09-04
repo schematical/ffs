@@ -102,14 +102,11 @@ class OrgManageForm extends OrgManageFormBase {
 
     public function InitWizzard(){
         if(!is_null(MLCApplication::QS(FFSQS::UseWizzard))){
-            $this->pnlEdit->Intro("Enter in your session info", "Start by entering in a sessions info such as a unique name, a start time and an end time. If you are running more than one sessions at a time use the <b>Equipment Set</b> field to denote which set of equipment this session is running on.");
+            $this->pnlSelect->Intro("Invite a gym to enroll their Athletes in your competition", "You can search our system to find out if a gym has been added to our system previously. If it is in our system you can invite it to your competition here. Their athletes will be available to enroll", null,"bottom");
 
-            $this->lstOrgs->Intro("Here are your sessions", "Once you have entered in a session it should appear in the session list. Each row has the following buttons:
-                <ul>
-                    <li>Edit - Allows you to edit a sessions data</li>
-                    <li>Athletes - Allows you to control the enrollment of athletes into a session</li>
-                </ul>
-            ");
+            $this->pnlEdit->Intro("Enter in gym's info manually", "If it is not in our system you can enter in its info here.");
+
+            $this->lstOrgs->Intro("Gym List", "Here are the gyms you have invited and the gyms that have selected your competition as one the want to attend");
 
             $pnlWizzard = new FFSWizzardPanel(
                 $this,

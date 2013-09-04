@@ -383,12 +383,12 @@ class AssignmentBase extends BaseEntity {
             case ('IdDevice'):
             case ('idDevice'):
                 $this->arrDBFields['idDevice'] = $strValue;
-                $this->objDevice = null;
+                $this->objIdDevice = null;
             break;
             case ('IdSession'):
             case ('idSession'):
                 $this->arrDBFields['idSession'] = $strValue;
-                $this->objSession = null;
+                $this->objIdSession = null;
             break;
             case ('Event'):
             case ('event'):

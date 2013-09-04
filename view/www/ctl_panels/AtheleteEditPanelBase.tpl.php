@@ -11,17 +11,10 @@
 * Function list:
 * Classes list:
 */
-if (!is_null($_CONTROL->intIdOrg)) { ?>
-                        <div class="control-group pull-left">
-                          <label class="control-label" for="name"> Org</label>
-                          <div class="controls">
-                             <?php $_CONTROL->intIdOrg->Render(); ?>
-                          </div>
-                        </div>
-                    <?php
+if (!is_null($_CONTROL->intIdOrg)) {  $_CONTROL->intIdOrg->Render();
 } ?>
                 
-            
+            <hr>
                 
                     <?php if (!is_null($_CONTROL->strFirstName)) { ?>
                         <div class="control-group pull-left">

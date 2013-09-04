@@ -357,7 +357,7 @@ class DeviceBase extends BaseEntity {
             case ('IdOrg'):
             case ('idOrg'):
                 $this->arrDBFields['idOrg'] = $strValue;
-                $this->objOrg = null;
+                $this->objIdOrg = null;
             break;
             case ('IdOrgObject'):
                 $this->arrDBFields['idOrg'] = $strValue->idOrg;

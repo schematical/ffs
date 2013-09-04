@@ -16,12 +16,12 @@ class FFSWizzardPanel extends MJaxPanel{
         $this->lnkNext = new MJaxLinkButton($this);
         $this->lnkNext->AddCssClass('btn btn-large');
         $this->lnkNext->Text = "Next Step";
-        if(strpos('?', $strNextUrl) !== false){
+        if(strpos($strNextUrl, '?') !== false){
             $strNextUrl .= '&' . FFSQS::UseWizzard;
         }else{
             $strNextUrl .= '?' . FFSQS::UseWizzard;
         }
-        $this->lnkNext->Href = $strNextUrl ;
+        $this->lnkNext->Href = $strNextUrl;
     }
 
 

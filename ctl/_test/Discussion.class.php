@@ -37,6 +37,7 @@ class Discussion{
         $this->arrData["title"] = $arrData['t_title'];//: "engineer rich networks",
         $this->arrData["author_email"] = $arrData['email'];//"author_email": "towski@entp.com",
         $this->arrData["created_at"] = date('Y-m-dTh:i:s', $arrData['t_date']);// "2008-01-01T00:01:00Z",
+        $this->arrData["state"] = "resolved";
         //$this->arrData["comments"] = array();
 
         User::ParseUser($arrData);

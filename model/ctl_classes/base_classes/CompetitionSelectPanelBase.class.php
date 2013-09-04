@@ -30,7 +30,7 @@ class CompetitionSelectPanelBase extends MJaxPanel {
     public function __construct($objParentControl, $strControlId = null) {
         parent::__construct($objParentControl, $strControlId);
         $this->strTemplate = __VIEW_ACTIVE_APP_DIR__ . '/www/ctl_panels/' . get_class($this) . '.tpl.php';
-        $this->txtSearch = new MJaxBSAutocompleteTextBox($this, $this->objForm->objJsonSearchDriver, '_searchCompetition');
+        $this->txtSearch = new MJaxBSAutocompleteTextBox($this, '/data/search?mjax-route-ext=Competition');
         $this->txtSearch->Name = 'idCompetition';
         $this->txtSearch->AddCssClass('input-large');
         $this->txtSearch->AddAction(new MJaxChangeEvent() , new MJaxServerControlAction($this, 'txtSearch_change'));

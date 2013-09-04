@@ -12,6 +12,7 @@ if(!defined('SKIP_DATALAYER')){
 
 }
 require_once(__MODEL_FFS_APP_DIR__ . '/_enum.inc.php');
+require_once(__MODEL_FFS_APP_DIR__ . '/_exceptions.inc.php');
 
 define('__HIGHRISE_URL__', 'https://mattleaconsulting.highrisehq.com');
 define('__HIGHRISE_API_KEY__', '69138c143576fae6de2ab9d14b9138a8');
@@ -88,6 +89,7 @@ MLCApplication::InitPackage('MLCSalesTools');
 MLCApplication::InitPackage('MLCEntityModel');
 MLCApplication::InitPackage('MLCTwitter');
 require_once(__CTL_FFS_APP_DIR__ . '/_events.inc.php');
+
 //_dv(MLCApplicationBase::$arrClassFiles['MLCApiFFSPackage']);
 if(class_exists('MLCAuthDriver')){
     MLCAuthDriver::SetCookieDomain('ffs.com');

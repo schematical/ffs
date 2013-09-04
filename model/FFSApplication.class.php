@@ -104,7 +104,25 @@ abstract class FFSApplication{
                 FFSForm::$objOrg = $arrOrgs[0]->GetEntity();
             }
         }
-
+        if(!is_null(FFSForm::$objCompetition)){
+            $intIdSession = MLCApplication::QS(FFSQS::IdSession);
+            if(is_null($intIdSession)){
+                $intIdSession = MLCApplication::QS(FFSQS::Session_IdSession);
+            }
+            if(
+                (!is_null($intIdSession)) &&
+                (is_numeric($intIdSession))
+            ){
+                FFSForm::$objSession = Session::Query(
+                    sprintf(
+                        'WHERE idSession = %s AND idCompetition = %s',
+                        $intIdSession,
+                        FFSForm::$objCompetition->IdCompetition
+                    ),
+                    true
+                );
+            }
+        }
     }
     public static function GetOrgs(){
         return MLCAuthDriver::GetRolls(FFSRoll::ORG_MANAGER);
