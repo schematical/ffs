@@ -33,7 +33,7 @@ class AtheleteManageForm extends AtheleteManageFormBase {
         if(is_null($objAthelete->IdOrg)){
             $intIdOrg = MLCApplication::QS(FFSQS::IdOrg);
             if(is_null($intIdOrg)){
-                $intIdOrg = FFSForm::$objOrg->IdOrg;
+                $intIdOrg = FFSForm::Org()->IdOrg;
             }
             if(!is_null($intIdOrg)){
                 $objAthelete->IdOrg = $intIdOrg;
@@ -57,7 +57,7 @@ class AtheleteManageForm extends AtheleteManageFormBase {
                 $this,
                 'Ready to move on?',
                 'Once you have added a couple of sessions you can go a head and add some athletes',
-                '/' . FFSForm::$objCompetition->Namespace . '/org/competition/manageAthletes'
+                '/' . FFSForm::Competition()->Namespace . '/org/competition/manageAthletes'
             );
             $wgtWizzard =$this->AddWidget(
                 'Setup Wizzard',
@@ -70,7 +70,7 @@ class AtheleteManageForm extends AtheleteManageFormBase {
 
     }
     public function Query() {
-        return FFSForm::$objOrg->GetAtheleteArr();
+        return FFSForm::Org()->GetAtheleteArr();
     }
 }
 AtheleteManageForm::Run('AtheleteManageForm');

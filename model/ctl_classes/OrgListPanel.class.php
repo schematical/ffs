@@ -24,10 +24,10 @@ class OrgListPanel extends OrgListPanelBase {
     }
     */
     public function lnkViewAtheletes_click($strFormId, $strControlId, $strActionParameter) {
-        if(is_null(FFSForm::$objCompetition)){
+        if(is_null(FFSForm::Competition())){
             $strUrl = '/org/competition/manageAthletes';
         }else{
-            $strUrl = '/' . FFSForm::$objCompetition->Namespace .'/org/competition/manageAthletes';
+            $strUrl = '/' . FFSForm::Competition()->Namespace .'/org/competition/manageAthletes';
         }
         $this->objForm->Redirect(
             $strUrl,

@@ -42,7 +42,7 @@ class SessionManageFormBase extends FFSForm{
         if(is_null($objSession)){
             $objSession = new Session();
         }
-        $objSession->IdCompetition = FFSForm::$objCompetition->IdCompetition;
+        $objSession->IdCompetition = FFSForm::Competition()->IdCompetition;
         $this->lstSessions->SelectedRow->UpdateEntity(
             $objSession
         );

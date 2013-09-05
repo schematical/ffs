@@ -1,6 +1,11 @@
 <?php
 class FFSRewriteHandeler extends MLCRewriteHandelerBase{
+    protected $objEntityManager = null;
     public function Handel($strUri){
+
+
+        $this->objEntityManager = new FFSEntityManager();
+
         if($strUri == '/'){
             return parent::Handel($strUri);
         }
@@ -17,8 +22,9 @@ class FFSRewriteHandeler extends MLCRewriteHandelerBase{
             $objCompetition = Competition::LoadSingleByField('namespace', $arrParts[1]);
 
             if(!is_null($objCompetition)){
-                FFSForm::$objCompetition = $objCompetition;
-                FFSForm::$objOrg = Org::LoadById($objCompetition->IdOrg);
+
+                $this->objEntityManager->Competition($objCompetition);
+                $this->objEntityManager->Org(Org::LoadById($objCompetition->IdOrg));
                 $arrEndUri = array();
                 for($i = 3; $i < count($arrParts); $i++){
                     $arrEndUri[] = $arrParts[$i];

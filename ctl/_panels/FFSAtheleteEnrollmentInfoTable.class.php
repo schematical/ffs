@@ -13,7 +13,7 @@ class FFSAtheleteEnrollmentInfoTable extends MJaxTable{
                 $objAthelete = $mixEntrollment->IdAtheleteObject;
             }elseif($mixEntrollment instanceof Athelete){
                 throw new Exception("TODO:write this");
-                /*if(is_null(FFSForm::$objCompetition)){
+                /*if(is_null(FFSForm::Competition())){
                     $objEnrollment
                 }
                 $objEnrollment = $mixEntrollment->IdAtheleteObject;

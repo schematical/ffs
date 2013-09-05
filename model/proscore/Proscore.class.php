@@ -133,12 +133,12 @@ class Proscore{
     public function ImportCompetitions(){
         $arrReturn = array();
         foreach($this->arrData['Meets'] as $intId => $objPSData){
-            FFSForm::$objOrg = $this->ImportHostOrg($objPSData);
+            FFSForm::Org() = $this->ImportHostOrg($objPSData);
             $objCompetition = Competition::Query(
                 sprintf(
                     'WHERE name = "%s" AND idOrg = %s',
                     $objPSData->Name,
-                    FFSForm::$objOrg->IdOrg
+                    FFSForm::Org()->IdOrg
                 ),
                 true
             );
@@ -152,12 +152,12 @@ class Proscore{
             $objCompetition->StartDate =  MLCDateTime::Parse($objPSData->Start_Date);
             //_dv($objCompetition->StartDate);
             $objCompetition->EndDate = MLCDateTime::Parse($objPSData->End_Date);
-            $objCompetition->IdOrg = FFSForm::$objOrg->IdOrg;
+            $objCompetition->IdOrg = FFSForm::Org()->IdOrg;
 
             $objCompetition->Save();
             $objPSData->DataEntity = $objCompetition;
             $arrReturn[] = $objCompetition;
-            FFSForm::$objCompetition = $objCompetition;
+            FFSForm::Competition() = $objCompetition;
 
 
             $this->ImportSessions();

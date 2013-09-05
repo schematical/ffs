@@ -1,5 +1,5 @@
 <?php
-//die(header('location:' . FFSForm::$objCompetition->Namespace . '/parent/message.php'));
+//die(header('location:' . FFSForm::Competition()->Namespace . '/parent/message.php'));
 
 class index extends FFSFeedForm
 {
@@ -8,7 +8,7 @@ class index extends FFSFeedForm
     public function Form_Create()
     {
         parent::Form_Create();
-        if(is_null(FFSForm::$objCompetition)){
+        if(is_null(FFSForm::Competition())){
             $this->Redirect('/index.php');
         }
 
@@ -65,7 +65,7 @@ class index extends FFSFeedForm
             }
             //Load All parent messages by competiton
             $this->AddFeedEntity(
-                ParentMessage::LoadCollByIdCompetition(FFSForm::$objCompetition->IdCompetition)
+                ParentMessage::LoadCollByIdCompetition(FFSForm::Competition()->IdCompetition)
             );
         //}else{
             //If user is logged in get their subscriptions(should be stored in rolls)

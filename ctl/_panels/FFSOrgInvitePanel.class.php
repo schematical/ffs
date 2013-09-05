@@ -7,7 +7,7 @@ class FFSOrgInvitePanel extends MJaxPanel{
 
     public function __construct($objParentControl, $strControlId = null){
         parent::__construct($objParentControl, $strControlId);
-        //_dv(FFSForm::$objOrg->Name);
+        //_dv(FFSForm::Org()->Name);
         $this->strTemplate = __VIEW_ACTIVE_APP_DIR__ . '/www/_panels/' . get_class($this) . '.tpl.php';
         $this->pnlSelect = new OrgSelectPanel($this);
         $this->pnlSelect->AddCssClass('span4');
@@ -63,7 +63,7 @@ class FFSOrgInvitePanel extends MJaxPanel{
     {
         $arrOrgs = $this->pnlSelect->GetValue();
         $objOrg = $arrOrgs[0];
-        $objOrgCompettion = FFSApplication::InviteOrgToCompetition($objOrg, FFSForm::$objCompetition);
+        $objOrgCompettion = FFSApplication::InviteOrgToCompetition($objOrg, FFSForm::Competition());
         $this->Alert("Success!");
     }
 }

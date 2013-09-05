@@ -30,9 +30,9 @@ class AtheleteManageForm extends AtheleteManageFormBase {
         }
     }
     public function UpdateTable($objAthelete) {
-        $objEnrollment = $objAthelete->GetEnrollmentArrByCompetition(FFSForm::$objCompetition);
+        $objEnrollment = $objAthelete->GetEnrollmentArrByCompetition(FFSForm::Competition());
         if(count($objEnrollment) == 0){
-            $objEnrollment = $objAthelete->CreateEnrollmentFromCompetition(FFSForm::$objCompetition);
+            $objEnrollment = $objAthelete->CreateEnrollmentFromCompetition(FFSForm::Competition());
             $objEnrollment->Save();
         }
 
@@ -52,7 +52,7 @@ class AtheleteManageForm extends AtheleteManageFormBase {
 
         foreach($arrAtheletes as $mixAthelete){
             if($mixAthelete instanceof Athelete){
-                $arrInvEnrollment = $mixAthelete->GetEnrollmentArrByCompetition(FFSForm::$objCompetition);
+                $arrInvEnrollment = $mixAthelete->GetEnrollmentArrByCompetition(FFSForm::Competition());
 
                 foreach($arrInvEnrollment as $objEnrollment){
                     $arrEnrollments[] = $objEnrollment;
@@ -85,7 +85,7 @@ class AtheleteManageForm extends AtheleteManageFormBase {
         if(is_null($objAthelete->IdOrg)){
             $intIdOrg = MLCApplication::QS(FFSQS::IdOrg);
             if(is_null($intIdOrg)){
-                $intIdOrg = FFSForm::$objOrg->IdOrg;
+                $intIdOrg = FFSForm::Org()->IdOrg;
             }
             if(!is_null($intIdOrg)){
                 $objAthelete->IdOrg = $intIdOrg;
@@ -103,13 +103,13 @@ class AtheleteManageForm extends AtheleteManageFormBase {
             $this->pnlEdit->Intro("Add Athletes", "You may start manually adding athletes that are enrolled in your meet using the Athlete manager. Though it is much easier to invite coaches to enroll their athletes or use our Proscore import tool.");
 
             $this->lstEnrollments->Intro("Athlete List", "Once you have entered in an athlete they should appear in the Athlete List. You can assign that athlete to a division, or any other grouping you would like. Simply click on any field but the Athlete's name to edit it");
-            $arrSessions = FFSForm::$objCompetition->GetSessionArr();
+            $arrSessions = FFSForm::Competition()->GetSessionArr();
             if(count($arrSessions) > 0){
                 $strBody = 'When you have entered your Athletes click below to move on to managing a specific session';
-                $strUrl ='/' . FFSForm::$objCompetition->Namespace . '/org/competition/sessionDetails?' . FFSQS::Session_IdSession . '=' . $arrSessions[0]->IdSession;
+                $strUrl ='/' . FFSForm::Competition()->Namespace . '/org/competition/sessionDetails?' . FFSQS::Session_IdSession . '=' . $arrSessions[0]->IdSession;
             }else{
                 $strBody = 'Oh no! You havent created any sessions for this competition yet. You will need to do that before we can move forward';
-                $strUrl ='/' . FFSForm::$objCompetition->Namespace . '/org/competition/manageSessions';
+                $strUrl ='/' . FFSForm::Competition()->Namespace . '/org/competition/manageSessions';
             }
             $pnlWizzard = new FFSWizzardPanel(
                 $this,
@@ -130,10 +130,10 @@ class AtheleteManageForm extends AtheleteManageFormBase {
     public function Query() {
 
         $arrAndConditions = array();
-        if(!is_null(FFSForm::$objSession)){
-            $arrAndConditions[]  = sprintf('Enrollment_rel.idSession = %s', FFSForm::$objSession->IdSession);
-        }elseif(!is_null(FFSForm::$objCompetition)){
-            $arrAndConditions[]  = sprintf('Enrollment_rel.idCompetition = %s', FFSForm::$objCompetition->IdCompetition);
+        if(!is_null(FFSForm::Session())){
+            $arrAndConditions[]  = sprintf('Enrollment_rel.idSession = %s', FFSForm::Session()->IdSession);
+        }elseif(!is_null(FFSForm::Competition())){
+            $arrAndConditions[]  = sprintf('Enrollment_rel.idCompetition = %s', FFSForm::Competition()->IdCompetition);
         }
         $intIdOrg = MLCApplication::QS(FFSQS::Athelete_IdOrg);
         if (!is_null($intIdOrg)) {

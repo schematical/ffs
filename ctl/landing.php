@@ -54,8 +54,8 @@ class landing extends FFSForm {
     }
     public function pnlImport_import(){
 
-        $this->pnlCompetition->SetCompetition(FFSForm::$objCompetition);
-        $this->pnlCompetition->objOrg = FFSForm::$objOrg;
+        $this->pnlCompetition->SetCompetition(FFSForm::Competition());
+        $this->pnlCompetition->objOrg = FFSForm::Org();
         $this->HideAlert();
     }
     public function pnlSignup_signup(){

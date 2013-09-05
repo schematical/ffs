@@ -21,8 +21,8 @@ class Enrollment extends EnrollmentRelBase {
             case "division":
             case "AgeGroup":
             case "ageGroup":
-            case "Level":
-            case "level":
+            //case "Level":
+            //case "level":
             case "Misc1":
             case "misc1":
             case "Misc2":
@@ -33,7 +33,10 @@ class Enrollment extends EnrollmentRelBase {
             case "misc4":
             case "Misc5":
             case "misc5":
-                $arrFlightData = $this->objIdSession->Data($strName . 's');
+                if(is_null($this->IdSessionObject)){
+                    throw new FFSUnregisteredDataException($strName, $mixValue);
+                }
+                $arrFlightData = $this->IdSessionObject->Data($strName . 's');
                 if(
                     (is_null($arrFlightData)) ||
                     (!array_key_exists($mixValue, $arrFlightData))

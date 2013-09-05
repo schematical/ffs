@@ -116,7 +116,7 @@ class StripeDataManageFormBase extends FFSForm {
         if (is_null($objStripeData)) {
             $objStripeData = new StripeData();
         }
-        $objStripeData->IdCompetition = FFSForm::$objCompetition->IdCompetition;
+        $objStripeData->IdCompetition = FFSForm::Competition()->IdCompetition;
         $this->lstStripeDatas->SelectedRow->UpdateEntity($objStripeData);
     }
     public function lnkEdit_click($strFormId, $strControlId, $strActionParameter) {

@@ -92,12 +92,12 @@ class SessionEditPanel extends SessionEditPanelBase
 
         if(
             (is_null($this->objSession)) &&
-            (!is_null(FFSForm::$objCompetition))
+            (!is_null(FFSForm::Competition()))
         ){
-            //_dv(FFSForm::$objCompetition->StartDate);
-            $this->dttStartDate->Value =  date("Y-m-d H:i:s",strtotime(FFSForm::$objCompetition->StartDate));
+            //_dv(FFSForm::Competition()->StartDate);
+            $this->dttStartDate->Value =  date("Y-m-d H:i:s",strtotime(FFSForm::Competition()->StartDate));
             $strOffset = '+4 Hours';
-            $intTime = strtotime($strOffset . ' ' . FFSForm::$objCompetition->StartDate);
+            $intTime = strtotime($strOffset . ' ' . FFSForm::Competition()->StartDate);
             $strDate = date("Y-m-d H:i:s", $intTime);
             $this->dttEndDate->Value = $strDate;
         }

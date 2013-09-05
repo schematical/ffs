@@ -16,7 +16,7 @@ class FFSResultFeedDisplayPanel extends FFSFeedDisplayPanel{
     public function GetShareUrl(){
         return sprintf(
             '/%s/parent/index?%s=%s',
-            FFSForm::$objCompetition->Namespace,
+            FFSForm::Competition()->Namespace,
             FFSQS::IdResult,
             $this->objEntity->IdResult
         );

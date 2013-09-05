@@ -14,10 +14,10 @@ class FFSDeviceAssignmentPanel extends MJaxPanel{
 
 
         $this->lstSession = new MJaxListBox($this);
-        $arrSessions = FFSForm::$objCompetition->GetSessionArr()->getCollection();
+        $arrSessions = FFSForm::Competition()->GetSessionArr()->getCollection();
         $intFormIdSession = -1000;
-        if(!is_null(FFSForm::$objSession)){
-            $intFormIdSession = FFSForm::$objSession->IdSession;
+        if(!is_null(FFSForm::Session())){
+            $intFormIdSession = FFSForm::Session()->IdSession;
         }
         foreach($arrSessions as $intIndex => $objSession){
             $this->lstSession->AddItem(
@@ -42,7 +42,7 @@ class FFSDeviceAssignmentPanel extends MJaxPanel{
         $this->lnkAddInput->AddCssClass('btn');
         $this->lnkAddInput->AddAction($this, 'lnkAddInput_click');
 
-        if(!is_null(FFSForm::$objSession)){
+        if(!is_null(FFSForm::Session())){
             $this->RefreshEvents();
         }
 
@@ -93,7 +93,7 @@ class FFSDeviceAssignmentPanel extends MJaxPanel{
         $objEmail->addTo(
             $objDevice->InviteEmail
         );
-        $objEmail->Subject('You have been invited to help at the ' . FFSForm::$objCompetition->Name);
+        $objEmail->Subject('You have been invited to help at the ' . FFSForm::Competition()->Name);
         $objEmail->Send();
         $this->Alert("Invite Sent");
 

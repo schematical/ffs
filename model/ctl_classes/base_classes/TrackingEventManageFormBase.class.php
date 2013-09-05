@@ -120,7 +120,7 @@ class TrackingEventManageFormBase extends FFSForm {
         if (is_null($objTrackingEvent)) {
             $objTrackingEvent = new TrackingEvent();
         }
-        $objTrackingEvent->IdCompetition = FFSForm::$objCompetition->IdCompetition;
+        $objTrackingEvent->IdCompetition = FFSForm::Competition()->IdCompetition;
         $this->lstTrackingEvents->SelectedRow->UpdateEntity($objTrackingEvent);
     }
     public function lnkEdit_click($strFormId, $strControlId, $strActionParameter) {

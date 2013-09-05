@@ -42,7 +42,7 @@ class AssignmentManageFormBase extends FFSForm{
         if(is_null($objAssignment)){
             $objAssignment = new Assignment();
         }
-        $objAssignment->IdCompetition = FFSForm::$objCompetition->IdCompetition;
+        $objAssignment->IdCompetition = $this->Competition()->IdCompetition;
         $this->lstAssignments->SelectedRow->UpdateEntity(
             $objAssignment
         );

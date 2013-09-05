@@ -78,7 +78,7 @@ class fullScreen extends MJaxGentaForm {
             $this->pnlMessage->Text = sprintf(
                 '<p> Go to <b>%s/%s</b> to post a message to your athlete</p>',
                 $_SERVER['SERVER_NAME'],
-                FFSForm::$objCompetition->Namespace
+                FFSForm::Competition()->Namespace
             );
             return;
         }

@@ -73,7 +73,7 @@ abstract class FFSFeedDisplayPanel extends MJaxPanel{
         $this->objForm->Redirect(
             sprintf(
                 '%s/parent/message',
-                FFSForm::$objCompetition->Namespace
+                FFSForm::Competition()->Namespace
             ),
             array(
                 FFSQS::IdAthelete => $this->objEntity->IdAthelete

@@ -42,7 +42,7 @@ class EnrollmentManageFormBase extends FFSForm{
         if(is_null($objEnrollment)){
             $objEnrollment = new Enrollment();
         }
-        $objEnrollment->IdCompetition = FFSForm::$objCompetition->IdCompetition;
+        $objEnrollment->IdCompetition = FFSForm::Competition()->IdCompetition;
         $this->lstEnrollments->SelectedRow->UpdateEntity(
             $objEnrollment
         );

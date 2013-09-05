@@ -8,13 +8,13 @@ class index extends FFSForm {
         if(is_null(MLCAuthDriver::User())){
             $this->Redirect('/index.php');
         }
-        if(is_null(FFSForm::$objCompetition)){
+        if(is_null(FFSForm::Competition())){
             $this->Redirect('/org');
         }else{
             $this->AddWidget(
-                FFSForm::$objCompetition->Name,
+                FFSForm::Competition()->Name,
                 'icon-home',
-                new FFSOrgCompActivePanel($this, FFSForm::$objCompetition)
+                new FFSOrgCompActivePanel($this, FFSForm::Competition())
             );
         }
 

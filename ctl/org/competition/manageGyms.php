@@ -112,7 +112,7 @@ class OrgManageForm extends OrgManageFormBase {
                 $this,
                 'Ready to move on?',
                 'Once you have added a couple of sessions you can go a head and add some athletes',
-                '/' . FFSForm::$objCompetition->Namespace . '/org/competition/manageAthletes'
+                '/' . FFSForm::Competition()->Namespace . '/org/competition/manageAthletes'
             );
             $wgtWizzard =$this->AddWidget(
                 'Setup Wizzard',

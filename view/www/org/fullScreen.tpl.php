@@ -1,5 +1,5 @@
 <h1>
-    <?php echo FFSForm::$objCompetition->Name; ?>
+    <?php echo FFSForm::Competition()->Name; ?>
 </h1>
 
 <div class="progress">

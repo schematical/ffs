@@ -108,7 +108,7 @@ class MLCBatchManageFormBase extends FFSForm {
         if (is_null($objMLCBatch)) {
             $objMLCBatch = new MLCBatch();
         }
-        $objMLCBatch->IdCompetition = FFSForm::$objCompetition->IdCompetition;
+        $objMLCBatch->IdCompetition = FFSForm::Competition()->IdCompetition;
         $this->lstMLCBatchs->SelectedRow->UpdateEntity($objMLCBatch);
     }
     public function lnkEdit_click($strFormId, $strControlId, $strActionParameter) {

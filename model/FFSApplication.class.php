@@ -28,7 +28,7 @@ abstract class FFSApplication{
     }
     public static function GetDevicesByOrg($objOrg = null, $strSearch = null){
         if(is_null($objOrg)){
-            $objOrg = FFSForm::$objOrg;
+            $objOrg = FFSForm::Org();
         }
         $arrDevices = Device::Query(
             sprintf(
@@ -72,7 +72,7 @@ abstract class FFSApplication{
     }
     public static function GetAssignmentsByCompetiton($objCompetition = null){
         if(is_null($objCompetition)){
-            $objCompetition = FFSForm::$objCompetition;
+            $objCompetition = FFSForm::Competition();
         }
         if(is_null($objCompetition)){
             throw new Exception("Must pass in a valid competition");
@@ -89,41 +89,7 @@ abstract class FFSApplication{
         }
         return $arrReturn;
     }
-    public static function Init(){
 
-
-        if(is_null(FFSForm::$objOrg)){
-
-            $arrOrgs = MLCAuthDriver::GetRolls(FFSRoll::ORG_MANAGER);
-            if(count($arrOrgs) == 0){
-                //Do nothing
-            }elseif(count($arrOrgs) == 1){
-                FFSForm::$objOrg = $arrOrgs[0]->GetEntity();
-
-            }else{
-                FFSForm::$objOrg = $arrOrgs[0]->GetEntity();
-            }
-        }
-        if(!is_null(FFSForm::$objCompetition)){
-            $intIdSession = MLCApplication::QS(FFSQS::IdSession);
-            if(is_null($intIdSession)){
-                $intIdSession = MLCApplication::QS(FFSQS::Session_IdSession);
-            }
-            if(
-                (!is_null($intIdSession)) &&
-                (is_numeric($intIdSession))
-            ){
-                FFSForm::$objSession = Session::Query(
-                    sprintf(
-                        'WHERE idSession = %s AND idCompetition = %s',
-                        $intIdSession,
-                        FFSForm::$objCompetition->IdCompetition
-                    ),
-                    true
-                );
-            }
-        }
-    }
     public static function GetOrgs(){
         return MLCAuthDriver::GetRolls(FFSRoll::ORG_MANAGER);
     }
@@ -149,7 +115,7 @@ abstract class FFSApplication{
     }
     public static function QueMessage($mixAthelete, $strMessage, $objCompetition = null, $objParentMessage = null){
         if(is_null($objCompetition)){
-            $objCompetition = FFSForm::$objCompetition;
+            $objCompetition = FFSForm::Competition();
         }
         if(is_string($objParentMessage)){
             $objParentMessage = ParentMessage::LoadSingleByField('token', $objParentMessage);
@@ -182,7 +148,7 @@ abstract class FFSApplication{
     public static function InviteDevice($strEmail, $strName = null){
         $objDevice = new Device();
         $objDevice->InviteEmail = $strEmail;
-        $objDevice->IdOrg = FFSForm::$objOrg->IdOrg;
+        $objDevice->IdOrg = FFSForm::Org()->IdOrg;
         $objDevice->CreDate=  MLCDateTime::Now();
         $objDevice->Token = rand(0,9999) .'-'. time();
         $objDevice->Name = $strName;
@@ -201,7 +167,7 @@ abstract class FFSApplication{
     }
     public static function InviteMessage($strInviteData, $strInviteType, $objCompetition = null, $objParentMessage = null){
         if(is_null($objCompetition)){
-            $objCompetition = FFSForm::$objCompetition;
+            $objCompetition = FFSForm::Competition();
         }
         if(is_null($objParentMessage)){
             //Load a message token
@@ -298,7 +264,7 @@ abstract class FFSApplication{
         $arrMessage = ParentMessage::Query(
             sprintf(
                 'WHERE idCompetition = %s AND (dispDate > "%s" OR dispDate IS NULL)',
-                FFSForm::$objCompetition->IdCompetition,
+                FFSForm::Competition()->IdCompetition,
                 MLCDateTime::Now(self::$strMaxDispTime)
             )
         );
@@ -357,7 +323,7 @@ abstract class FFSApplication{
     }
     public static function GetActiveSessions($objCompetition = null, $arrEquipmentSet = array()){
         if(is_null($objCompetition)){
-            $objCompetition = FFSForm::$objCompetition;
+            $objCompetition = FFSForm::Competition();
         }
         if(is_null($objCompetition)){
             throw new Exception("No valid competition passed in");
@@ -401,7 +367,7 @@ abstract class FFSApplication{
     }
     public static function GetInvitedOrgsByCompetition(Competition $objCompetition = null){
         if(is_null($objCompetition)){
-            $objCompetition = FFSForm::$objCompetition;
+            $objCompetition = FFSForm::Competition();
         }
         $arrOrgCompetitions = OrgCompetition::LoadCollByIdCompetition($objCompetition->IdCompetition)->getCollection();
 

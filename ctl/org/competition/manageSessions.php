@@ -44,7 +44,7 @@ class SessionManageForm extends SessionManageFormBase {
                 $this,
                 'Ready to move on?',
                 'Once you have added a couple of sessions you can go a head and add some athletes',
-                '/' . FFSForm::$objCompetition->Namespace . '/org/competition/manageGyms'
+                '/' . FFSForm::Competition()->Namespace . '/org/competition/manageGyms'
             );
             $wgtWizzard =$this->AddWidget(
                 'Setup Wizzard',
@@ -59,11 +59,11 @@ class SessionManageForm extends SessionManageFormBase {
     }
     public function Query() {
         //return parent::Query();
-        $arrSessions = Session::LoadCollByIdCompetition(FFSForm::$objCompetition->IdCompetition)->getCollection();
+        $arrSessions = Session::LoadCollByIdCompetition(FFSForm::Competition()->IdCompetition)->getCollection();
         return $arrSessions;
     }
     public function pnlEdit_save($strFormId, $strControlId, $objSession) {
-        $objSession->IdCompetition = FFSForm::$objCompetition->IdCompetition;
+        $objSession->IdCompetition = FFSForm::Competition()->IdCompetition;
         $objSession->Data('flights', FFSFlightData::$WOMENS_ARTISTIC_GYMNASTICS);
         //$objSession->Save();
         parent::pnlEdit_save($strFormId, $strControlId, $objSession);

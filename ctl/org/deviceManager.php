@@ -9,7 +9,7 @@ class deviceManager extends FFSForm {
             $this->Redirect('/index.php');
 
         }
-        //$arrDevices = Device::LoadCollByIdOrg(FFSForm::$objOrg);
+        //$arrDevices = Device::LoadCollByIdOrg(FFSForm::Org());
 
         $arrAssignments = FFSApplication::GetAssignmentsByCompetiton();
         $this->pnlAssignmentList = new AssignmentListPanel($this, $arrAssignments);

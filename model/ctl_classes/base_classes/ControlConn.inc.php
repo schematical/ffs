@@ -4,7 +4,7 @@
 * Function list:
 * Classes list:
 */
-MLCApplicationBase::$arrClassFiles['FFSJsonSearchDriver'] = __MODEL_APP_CONTROL__ . '/FFSJsonSearchDriver.class.php';
+MLCApplicationBase::$arrClassFiles['FFSEntityManager'] = __MODEL_APP_CONTROL__ . '/FFSEntityManager.class.php';
 MLCApplicationBase::$arrClassFiles['FFSQSBase'] = __MODEL_APP_CONTROL__ . '/base_classes/FFSQSBase.class.php';
 //Edit Panels
 MLCApplicationBase::$arrClassFiles['AssignmentEditPanel'] = __MODEL_APP_CONTROL__ . '/AssignmentEditPanel.class.php';

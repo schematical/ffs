@@ -112,7 +112,7 @@ class MLCNotificationManageFormBase extends FFSForm {
         if (is_null($objMLCNotification)) {
             $objMLCNotification = new MLCNotification();
         }
-        $objMLCNotification->IdCompetition = FFSForm::$objCompetition->IdCompetition;
+        $objMLCNotification->IdCompetition = FFSForm::Competition()->IdCompetition;
         $this->lstMLCNotifications->SelectedRow->UpdateEntity($objMLCNotification);
     }
     public function lnkEdit_click($strFormId, $strControlId, $strActionParameter) {

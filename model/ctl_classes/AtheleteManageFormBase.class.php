@@ -42,7 +42,7 @@ class AtheleteManageFormBase extends FFSForm{
         if(is_null($objAthelete)){
             $objAthelete = new Athelete();
         }
-        $objAthelete->IdCompetition = FFSForm::$objCompetition->IdCompetition;
+        $objAthelete->IdCompetition = $this->Competition()->IdCompetition;
         $this->lstAtheletes->SelectedRow->UpdateEntity(
             $objAthelete
         );

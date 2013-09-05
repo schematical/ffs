@@ -136,7 +136,7 @@ class MLCLocationManageFormBase extends FFSForm {
         if (is_null($objMLCLocation)) {
             $objMLCLocation = new MLCLocation();
         }
-        $objMLCLocation->IdCompetition = FFSForm::$objCompetition->IdCompetition;
+        $objMLCLocation->IdCompetition = FFSForm::Competition()->IdCompetition;
         $this->lstMLCLocations->SelectedRow->UpdateEntity($objMLCLocation);
     }
     public function lnkEdit_click($strFormId, $strControlId, $strActionParameter) {

@@ -81,7 +81,7 @@ class EnrollmentListPanel extends EnrollmentListPanelBase {
             );
             $objRow->AddData($txtMisc, 'txtMisc');
         }
-        $txtMisc->Url = '/' . FFSForm::$objCompetition->Namespace . '/data/search?mjax-route-ext=enrollment_' . $strKey . '&' . FFSQS::Session_IdSession . '=' . $objEnrollment->IdSession;
+        $txtMisc->Url = '/' . $this->objForm->Competition()->Namespace . '/data/search?mjax-route-ext=enrollment_' . $strKey . '&' . FFSQS::Session_IdSession . '=' . $objEnrollment->IdSession;
         $txtMisc->SetValue($objEnrollment->{$strKey});
         //$lnkSession = $objRow->GetData('lnkSession');
         return $txtMisc;
@@ -146,7 +146,7 @@ class EnrollmentListPanel extends EnrollmentListPanelBase {
     public function colSession_init($objRow, $mixData, $strKey){
         $txtSession = $objRow->GetData('txtSession');
         if(is_null($txtSession)){
-            $txtSession = new MJaxBSAutocompleteTextBox($objRow, '/' . FFSForm::$objCompetition->Namespace . '/data/search.session');
+            $txtSession = new MJaxBSAutocompleteTextBox($objRow, '/' . $this->objForm->Competition()->Namespace . '/data/search.session_name');
             $objEnrollment = $objRow->GetData('_entity');
             $txtSession->SetValue($objEnrollment->IdSessionObject);
             $txtSession->ActionParameter = $objEnrollment;

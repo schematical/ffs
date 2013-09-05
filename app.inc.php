@@ -84,9 +84,9 @@ if(!defined('SKIP_DATALAYER')){
 MLCApplication::InitPackage('MLCDataLayer');
 MLCApplication::InitPackage('MJaxTracking');
 MLCApplication::InitPackage('MJaxWAdminTheme');
-MLCApplication::InitPackage('MJaxJQueryUI');
+//MLCApplication::InitPackage('MJaxJQueryUI');
 MLCApplication::InitPackage('MLCSalesTools');
-MLCApplication::InitPackage('MLCEntityModel');
+//MLCApplication::InitPackage('MLCEntityModel');
 MLCApplication::InitPackage('MLCTwitter');
 require_once(__CTL_FFS_APP_DIR__ . '/_events.inc.php');
 

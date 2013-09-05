@@ -3,9 +3,9 @@ if(is_null(MLCAuthDriver::User())){
     die(header('/'));
 }
 FFSForm::$strSection = 'org';
-if(!is_null(FFSForm::$objCompetition)){
+if(!is_null(FFSForm::Competition())){
 
-    $objRoll = MLCAuthDriver::GetRollByEntity(FFSForm::$objCompetition->IdOrgObject);
+    $objRoll = MLCAuthDriver::GetRollByEntity(FFSForm::Competition()->IdOrgObject);
     if(
         (!is_null($objRoll)) &&
         ($objRoll->Type == FFSRoll::ORG_MANAGER)
