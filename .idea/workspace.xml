@@ -59,7 +59,7 @@
     <file path="/MDEApplication.class.php" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378149231475" ignored="false" />
     <file path="$PROJECT_DIR$/../MLCPackages/mlc_packages/private_packages/MDETools/package.inc.php" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1375721343222" ignored="false" />
     <file path="/mconf.json" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378397261676" ignored="false" />
-    <file path="/app.inc.php" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1376251688571" ignored="false" />
+    <file path="/app.inc.php" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378502072944" ignored="false" />
     <file path="$PROJECT_DIR$/../MLCPackages/mlc_packages/private_packages/MLCDBManager/_core/model/MLCFieldObject.class.php" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378147166082" ignored="false" />
     <file path="/MLCFieldObject.class.php" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378147165017" ignored="false" />
     <file path="/MLCDBParser.class.php" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378151457558" ignored="false" />
@@ -495,19 +495,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="env.inc.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="env.inc.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/env.inc.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="46" column="50" selection-start="1270" selection-end="1270" vertical-scroll-proportion="0.2814259">
+            <state line="46" column="50" selection-start="1270" selection-end="1270" vertical-scroll-proportion="4.6666665">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.inc.php" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="app.inc.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.inc.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="89" column="2" selection-start="5417" selection-end="5417" vertical-scroll-proportion="-11.666667">
+            <state line="99" column="55" selection-start="5816" selection-end="5816" vertical-scroll-proportion="0.65384614">
               <folding />
             </state>
           </provider>
@@ -580,10 +580,10 @@
         <option value="$PROJECT_DIR$/ctl/_panels/FFSOrgInvitePanel.class.php" />
         <option value="$PROJECT_DIR$/ctl/org/competition/manageGyms.php" />
         <option value="$PROJECT_DIR$/model/FFSApplication.class.php" />
-        <option value="$PROJECT_DIR$/app.inc.php" />
         <option value="$PROJECT_DIR$/view/www/ctl_panels/CompetitionEditPanelBase.tpl.php" />
         <option value="$PROJECT_DIR$/model/FFSRewriteHandeler.class.php" />
         <option value="$PROJECT_DIR$/env.inc.php" />
+        <option value="$PROJECT_DIR$/app.inc.php" />
       </list>
     </option>
   </component>
@@ -593,7 +593,7 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="64" />
+    <option name="x" value="-1302" />
     <option name="y" value="764" />
     <option name="width" value="1303" />
     <option name="height" value="773" />
@@ -855,7 +855,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="64" y="764" width="1303" height="773" extended-state="6" />
+    <frame x="-1302" y="764" width="1303" height="773" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1023,13 +1023,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app.inc.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="89" column="2" selection-start="5417" selection-end="5417" vertical-scroll-proportion="-11.666667">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/view/www/ctl_panels/CompetitionEditPanelBase.tpl.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="100" column="81" selection-start="3719" selection-end="3719" vertical-scroll-proportion="-15.958333">
@@ -1046,7 +1039,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/env.inc.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="50" selection-start="1270" selection-end="1270" vertical-scroll-proportion="0.2814259">
+        <state line="46" column="50" selection-start="1270" selection-end="1270" vertical-scroll-proportion="4.6666665">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.inc.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="99" column="55" selection-start="5816" selection-end="5816" vertical-scroll-proportion="0.65384614">
           <folding />
         </state>
       </provider>

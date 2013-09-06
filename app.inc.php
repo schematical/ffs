@@ -92,7 +92,14 @@ require_once(__CTL_FFS_APP_DIR__ . '/_events.inc.php');
 
 //_dv(MLCApplicationBase::$arrClassFiles['MLCApiFFSPackage']);
 if(class_exists('MLCAuthDriver')){
-    MLCAuthDriver::SetCookieDomain('ffs.com');
+    switch(SERVER_ENV){
+        case('local'):
+            MLCAuthDriver::SetCookieDomain('ffs.com');
+        case('beta'):
+        case('prod'):
+            MLCAuthDriver::SetCookieDomain('tumblescore.com');
+    }
+
 }
 
 define('__ASSETS_URL__', MLCApplication::GetAssetUrl(''));
