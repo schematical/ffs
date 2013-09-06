@@ -110,7 +110,7 @@ class SessionBase extends BaseEntity {
     }
     public function Materilize($arrData) {
         if (isset($arrData) && (sizeof($arrData) > 1)) {
-            if (array_key_exists('Session.idSession', $arrData)) {
+            if ((array_key_exists('Session.idSession', $arrData))) {
                 //New Smart Way
                 $this->arrDBFields['idSession'] = $arrData['Session.idSession'];
                 $this->arrDBFields['startDate'] = $arrData['Session.startDate'];
@@ -122,7 +122,7 @@ class SessionBase extends BaseEntity {
                 $this->arrDBFields['equipmentSet'] = $arrData['Session.equipmentSet'];
                 $this->arrDBFields['eventData'] = $arrData['Session.eventData'];
                 //Foregin Key
-                if (array_key_exists('Competition.idCompetition', $arrData)) {
+                if ((array_key_exists('Competition.idCompetition', $arrData)) && (!is_null($arrData['Competition.idCompetition']))) {
                     $this->objIdCompetition = new Competition();
                     $this->objIdCompetition->Materilize($arrData);
                 }
@@ -169,7 +169,7 @@ class SessionBase extends BaseEntity {
             foreach ($arrJoins as $strTable) {
                 switch ($strTable) {
                     case ('Competition'):
-                        $strJoin.= ' JOIN Competition ON Session.idCompetition = Competition.idCompetition';
+                        $strJoin.= ' LEFT JOIN Competition ON Session.idCompetition = Competition.idCompetition';
                     break;
                 }
             }
@@ -398,41 +398,44 @@ class SessionBase extends BaseEntity {
             break;
         }
     }
-    public function __set($strName, $strValue) {
+    public function __set($strName, $mixValue) {
         $this->modified = 1;
         switch ($strName) {
             case ('IdSession'):
             case ('idSession'):
-                $this->arrDBFields['idSession'] = $strValue;
+                $this->arrDBFields['idSession'] = $mixValue;
             break;
             case ('StartDate'):
             case ('startDate'):
-                $this->arrDBFields['startDate'] = $strValue;
+                $this->arrDBFields['startDate'] = $mixValue;
             break;
             case ('EndDate'):
             case ('endDate'):
-                $this->arrDBFields['endDate'] = $strValue;
+                $this->arrDBFields['endDate'] = $mixValue;
             break;
             case ('IdCompetition'):
             case ('idCompetition'):
-                $this->arrDBFields['idCompetition'] = $strValue;
+                $this->arrDBFields['idCompetition'] = $mixValue;
                 $this->objIdCompetition = null;
             break;
             case ('Name'):
             case ('name'):
-                $this->arrDBFields['name'] = $strValue;
+                $this->arrDBFields['name'] = $mixValue;
             break;
             case ('Notes'):
             case ('notes'):
-                $this->arrDBFields['notes'] = $strValue;
+                $this->arrDBFields['notes'] = $mixValue;
             break;
             case ('EquipmentSet'):
             case ('equipmentSet'):
-                $this->arrDBFields['equipmentSet'] = $strValue;
+                $this->arrDBFields['equipmentSet'] = $mixValue;
             break;
             case ('IdCompetitionObject'):
-                $this->arrDBFields['idCompetition'] = $strValue->idCompetition;
-                $this->objIdCompetition = $strValue;
+                if ((!is_object($mixValue)) || (!($mixValue instanceof Competition))) {
+                    throw new MLCWrongTypeException('__set', $strName);
+                }
+                $this->arrDBFields['idCompetition'] = $mixValue->idCompetition;
+                $this->objIdCompetition = $mixValue;
             break;
             default:
                 throw new MLCMissingPropertyException($this, $strName);

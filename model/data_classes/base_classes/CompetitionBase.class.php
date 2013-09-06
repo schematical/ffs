@@ -113,7 +113,7 @@ class CompetitionBase extends BaseEntity {
     }
     public function Materilize($arrData) {
         if (isset($arrData) && (sizeof($arrData) > 1)) {
-            if (array_key_exists('Competition.idCompetition', $arrData)) {
+            if ((array_key_exists('Competition.idCompetition', $arrData))) {
                 //New Smart Way
                 $this->arrDBFields['idCompetition'] = $arrData['Competition.idCompetition'];
                 $this->arrDBFields['name'] = $arrData['Competition.name'];
@@ -125,7 +125,7 @@ class CompetitionBase extends BaseEntity {
                 $this->arrDBFields['namespace'] = $arrData['Competition.namespace'];
                 $this->arrDBFields['signupCutOffDate'] = $arrData['Competition.signupCutOffDate'];
                 //Foregin Key
-                if (array_key_exists('Org.idOrg', $arrData)) {
+                if ((array_key_exists('Org.idOrg', $arrData)) && (!is_null($arrData['Org.idOrg']))) {
                     $this->objIdOrg = new Org();
                     $this->objIdOrg->Materilize($arrData);
                 }
@@ -172,7 +172,7 @@ class CompetitionBase extends BaseEntity {
             foreach ($arrJoins as $strTable) {
                 switch ($strTable) {
                     case ('Org'):
-                        $strJoin.= ' JOIN Org ON Competition.idOrg = Org.idOrg';
+                        $strJoin.= ' LEFT JOIN Org ON Competition.idOrg = Org.idOrg';
                     break;
                 }
             }
@@ -421,49 +421,52 @@ class CompetitionBase extends BaseEntity {
             break;
         }
     }
-    public function __set($strName, $strValue) {
+    public function __set($strName, $mixValue) {
         $this->modified = 1;
         switch ($strName) {
             case ('IdCompetition'):
             case ('idCompetition'):
-                $this->arrDBFields['idCompetition'] = $strValue;
+                $this->arrDBFields['idCompetition'] = $mixValue;
             break;
             case ('Name'):
             case ('name'):
-                $this->arrDBFields['name'] = $strValue;
+                $this->arrDBFields['name'] = $mixValue;
             break;
             case ('LongDesc'):
             case ('longDesc'):
-                $this->arrDBFields['longDesc'] = $strValue;
+                $this->arrDBFields['longDesc'] = $mixValue;
             break;
             case ('CreDate'):
             case ('creDate'):
-                $this->arrDBFields['creDate'] = $strValue;
+                $this->arrDBFields['creDate'] = $mixValue;
             break;
             case ('StartDate'):
             case ('startDate'):
-                $this->arrDBFields['startDate'] = $strValue;
+                $this->arrDBFields['startDate'] = $mixValue;
             break;
             case ('EndDate'):
             case ('endDate'):
-                $this->arrDBFields['endDate'] = $strValue;
+                $this->arrDBFields['endDate'] = $mixValue;
             break;
             case ('IdOrg'):
             case ('idOrg'):
-                $this->arrDBFields['idOrg'] = $strValue;
+                $this->arrDBFields['idOrg'] = $mixValue;
                 $this->objIdOrg = null;
             break;
             case ('Namespace'):
             case ('namespace'):
-                $this->arrDBFields['namespace'] = $strValue;
+                $this->arrDBFields['namespace'] = $mixValue;
             break;
             case ('SignupCutOffDate'):
             case ('signupCutOffDate'):
-                $this->arrDBFields['signupCutOffDate'] = $strValue;
+                $this->arrDBFields['signupCutOffDate'] = $mixValue;
             break;
             case ('IdOrgObject'):
-                $this->arrDBFields['idOrg'] = $strValue->idOrg;
-                $this->objIdOrg = $strValue;
+                if ((!is_object($mixValue)) || (!($mixValue instanceof Org))) {
+                    throw new MLCWrongTypeException('__set', $strName);
+                }
+                $this->arrDBFields['idOrg'] = $mixValue->idOrg;
+                $this->objIdOrg = $mixValue;
             break;
             default:
                 throw new MLCMissingPropertyException($this, $strName);

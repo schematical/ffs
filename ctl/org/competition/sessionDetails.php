@@ -54,7 +54,8 @@ class sessionDetails extends FFSForm {
         //List enrolled athletes
         $this->lstEnrollments = new EnrollmentListPanel($this);
         $this->lstEnrollments->InitRowControl('edit_enrollment','Edit Enrollment', $this,'lnkEditEnrollment_click');
-        $arrEnrollments = FFSForm::Session()->GetEnrollmentArr();
+        $arrEnrollments = $this->objEntityManager->Session()->GetEnrollmentArr();
+
         $this->lstEnrollments->SetDataEntites($arrEnrollments);
         $this->lstEnrollments->EditMode = MJaxTableEditMode::NONE;
         $wgtWidget = $this->AddWidget(
@@ -70,6 +71,7 @@ class sessionDetails extends FFSForm {
         $this->lstResults = new ResultListPanel($this);
         $arrResults = FFSForm::Session()->GetResultArr();
         $this->lstResults->SetDataEntites($arrResults);
+        $this->lstResults->AddEmptyRow();
         $wgtWidget = $this->AddWidget(
             'Results',
             'icon-trophy',

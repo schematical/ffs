@@ -36,6 +36,7 @@ class Enrollment extends EnrollmentRelBase {
                 if(is_null($this->IdSessionObject)){
                     throw new FFSUnregisteredDataException($strName, $mixValue);
                 }
+                _dv($this->IdSessionObject);
                 $arrFlightData = $this->IdSessionObject->Data($strName . 's');
                 if(
                     (is_null($arrFlightData)) ||

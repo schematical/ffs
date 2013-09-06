@@ -101,7 +101,7 @@ class AssignmentBase extends BaseEntity {
     }
     public function Materilize($arrData) {
         if (isset($arrData) && (sizeof($arrData) > 1)) {
-            if (array_key_exists('Assignment_rel.idAssignment', $arrData)) {
+            if ((array_key_exists('Assignment_rel.idAssignment', $arrData))) {
                 //New Smart Way
                 $this->arrDBFields['idAssignment'] = $arrData['Assignment_rel.idAssignment'];
                 $this->arrDBFields['idDevice'] = $arrData['Assignment_rel.idDevice'];
@@ -112,11 +112,11 @@ class AssignmentBase extends BaseEntity {
                 $this->arrDBFields['idUser'] = $arrData['Assignment_rel.idUser'];
                 $this->arrDBFields['revokeDate'] = $arrData['Assignment_rel.revokeDate'];
                 //Foregin Key
-                if (array_key_exists('Device.idDevice', $arrData)) {
-                    $this->objIdSession = new Device();
-                    $this->objIdSession->Materilize($arrData);
+                if ((array_key_exists('Device.idDevice', $arrData)) && (!is_null($arrData['Device.idDevice']))) {
+                    $this->objIdDevice = new Device();
+                    $this->objIdDevice->Materilize($arrData);
                 }
-                if (array_key_exists('Session.idSession', $arrData)) {
+                if ((array_key_exists('Session.idSession', $arrData)) && (!is_null($arrData['Session.idSession']))) {
                     $this->objIdSession = new Session();
                     $this->objIdSession->Materilize($arrData);
                 }
@@ -162,10 +162,10 @@ class AssignmentBase extends BaseEntity {
             foreach ($arrJoins as $strTable) {
                 switch ($strTable) {
                     case ('Device'):
-                        $strJoin.= ' JOIN Device ON Assignment_rel.idDevice = Device.idDevice';
+                        $strJoin.= ' LEFT JOIN Device ON Assignment_rel.idDevice = Device.idDevice';
                     break;
                     case ('Session'):
-                        $strJoin.= ' JOIN Session ON Assignment_rel.idSession = Session.idSession';
+                        $strJoin.= ' LEFT JOIN Session ON Assignment_rel.idSession = Session.idSession';
                     break;
                 }
             }
@@ -373,50 +373,56 @@ class AssignmentBase extends BaseEntity {
             break;
         }
     }
-    public function __set($strName, $strValue) {
+    public function __set($strName, $mixValue) {
         $this->modified = 1;
         switch ($strName) {
             case ('IdAssignment'):
             case ('idAssignment'):
-                $this->arrDBFields['idAssignment'] = $strValue;
+                $this->arrDBFields['idAssignment'] = $mixValue;
             break;
             case ('IdDevice'):
             case ('idDevice'):
-                $this->arrDBFields['idDevice'] = $strValue;
+                $this->arrDBFields['idDevice'] = $mixValue;
                 $this->objIdDevice = null;
             break;
             case ('IdSession'):
             case ('idSession'):
-                $this->arrDBFields['idSession'] = $strValue;
+                $this->arrDBFields['idSession'] = $mixValue;
                 $this->objIdSession = null;
             break;
             case ('Event'):
             case ('event'):
-                $this->arrDBFields['event'] = $strValue;
+                $this->arrDBFields['event'] = $mixValue;
             break;
             case ('Apartatus'):
             case ('apartatus'):
-                $this->arrDBFields['apartatus'] = $strValue;
+                $this->arrDBFields['apartatus'] = $mixValue;
             break;
             case ('CreDate'):
             case ('creDate'):
-                $this->arrDBFields['creDate'] = $strValue;
+                $this->arrDBFields['creDate'] = $mixValue;
             break;
             case ('IdUser'):
             case ('idUser'):
-                $this->arrDBFields['idUser'] = $strValue;
+                $this->arrDBFields['idUser'] = $mixValue;
             break;
             case ('RevokeDate'):
             case ('revokeDate'):
-                $this->arrDBFields['revokeDate'] = $strValue;
+                $this->arrDBFields['revokeDate'] = $mixValue;
             break;
             case ('IdDeviceObject'):
-                $this->arrDBFields['idDevice'] = $strValue->idDevice;
-                $this->objIdDevice = $strValue;
+                if ((!is_object($mixValue)) || (!($mixValue instanceof Device))) {
+                    throw new MLCWrongTypeException('__set', $strName);
+                }
+                $this->arrDBFields['idDevice'] = $mixValue->idDevice;
+                $this->objIdDevice = $mixValue;
             break;
             case ('IdSessionObject'):
-                $this->arrDBFields['idSession'] = $strValue->idSession;
-                $this->objIdSession = $strValue;
+                if ((!is_object($mixValue)) || (!($mixValue instanceof Session))) {
+                    throw new MLCWrongTypeException('__set', $strName);
+                }
+                $this->arrDBFields['idSession'] = $mixValue->idSession;
+                $this->objIdSession = $mixValue;
             break;
             default:
                 throw new MLCMissingPropertyException($this, $strName);

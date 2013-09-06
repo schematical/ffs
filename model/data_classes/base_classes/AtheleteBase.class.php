@@ -114,7 +114,7 @@ class AtheleteBase extends BaseEntity {
     }
     public function Materilize($arrData) {
         if (isset($arrData) && (sizeof($arrData) > 1)) {
-            if (array_key_exists('Athelete.idAthelete', $arrData)) {
+            if ((array_key_exists('Athelete.idAthelete', $arrData))) {
                 //New Smart Way
                 $this->arrDBFields['idAthelete'] = $arrData['Athelete.idAthelete'];
                 $this->arrDBFields['idOrg'] = $arrData['Athelete.idOrg'];
@@ -127,7 +127,7 @@ class AtheleteBase extends BaseEntity {
                 $this->arrDBFields['creDate'] = $arrData['Athelete.creDate'];
                 $this->arrDBFields['level'] = $arrData['Athelete.level'];
                 //Foregin Key
-                if (array_key_exists('Org.idOrg', $arrData)) {
+                if ((array_key_exists('Org.idOrg', $arrData)) && (!is_null($arrData['Org.idOrg']))) {
                     $this->objIdOrg = new Org();
                     $this->objIdOrg->Materilize($arrData);
                 }
@@ -175,7 +175,7 @@ class AtheleteBase extends BaseEntity {
             foreach ($arrJoins as $strTable) {
                 switch ($strTable) {
                     case ('Org'):
-                        $strJoin.= ' JOIN Org ON Athelete.idOrg = Org.idOrg';
+                        $strJoin.= ' LEFT JOIN Org ON Athelete.idOrg = Org.idOrg';
                     break;
                 }
             }
@@ -409,49 +409,52 @@ class AtheleteBase extends BaseEntity {
             break;
         }
     }
-    public function __set($strName, $strValue) {
+    public function __set($strName, $mixValue) {
         $this->modified = 1;
         switch ($strName) {
             case ('IdAthelete'):
             case ('idAthelete'):
-                $this->arrDBFields['idAthelete'] = $strValue;
+                $this->arrDBFields['idAthelete'] = $mixValue;
             break;
             case ('IdOrg'):
             case ('idOrg'):
-                $this->arrDBFields['idOrg'] = $strValue;
+                $this->arrDBFields['idOrg'] = $mixValue;
                 $this->objIdOrg = null;
             break;
             case ('FirstName'):
             case ('firstName'):
-                $this->arrDBFields['firstName'] = $strValue;
+                $this->arrDBFields['firstName'] = $mixValue;
             break;
             case ('LastName'):
             case ('lastName'):
-                $this->arrDBFields['lastName'] = $strValue;
+                $this->arrDBFields['lastName'] = $mixValue;
             break;
             case ('BirthDate'):
             case ('birthDate'):
-                $this->arrDBFields['birthDate'] = $strValue;
+                $this->arrDBFields['birthDate'] = $mixValue;
             break;
             case ('MemType'):
             case ('memType'):
-                $this->arrDBFields['memType'] = $strValue;
+                $this->arrDBFields['memType'] = $mixValue;
             break;
             case ('MemId'):
             case ('memId'):
-                $this->arrDBFields['memId'] = $strValue;
+                $this->arrDBFields['memId'] = $mixValue;
             break;
             case ('CreDate'):
             case ('creDate'):
-                $this->arrDBFields['creDate'] = $strValue;
+                $this->arrDBFields['creDate'] = $mixValue;
             break;
             case ('Level'):
             case ('level'):
-                $this->arrDBFields['level'] = $strValue;
+                $this->arrDBFields['level'] = $mixValue;
             break;
             case ('IdOrgObject'):
-                $this->arrDBFields['idOrg'] = $strValue->idOrg;
-                $this->objIdOrg = $strValue;
+                if ((!is_object($mixValue)) || (!($mixValue instanceof Org))) {
+                    throw new MLCWrongTypeException('__set', $strName);
+                }
+                $this->arrDBFields['idOrg'] = $mixValue->idOrg;
+                $this->objIdOrg = $mixValue;
             break;
             default:
                 throw new MLCMissingPropertyException($this, $strName);

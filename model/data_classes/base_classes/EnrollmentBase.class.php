@@ -134,7 +134,7 @@ class EnrollmentBase extends BaseEntity {
     }
     public function Materilize($arrData) {
         if (isset($arrData) && (sizeof($arrData) > 1)) {
-            if (array_key_exists('Enrollment_rel.idEnrollment', $arrData)) {
+            if ((array_key_exists('Enrollment_rel.idEnrollment', $arrData))) {
                 //New Smart Way
                 $this->arrDBFields['idEnrollment'] = $arrData['Enrollment_rel.idEnrollment'];
                 $this->arrDBFields['idAthelete'] = $arrData['Enrollment_rel.idAthelete'];
@@ -151,15 +151,15 @@ class EnrollmentBase extends BaseEntity {
                 $this->arrDBFields['creDate'] = $arrData['Enrollment_rel.creDate'];
                 $this->arrDBFields['level'] = $arrData['Enrollment_rel.level'];
                 //Foregin Key
-                if (array_key_exists('Athelete.idAthelete', $arrData)) {
-                    $this->objIdSession = new Athelete();
-                    $this->objIdSession->Materilize($arrData);
+                if ((array_key_exists('Athelete.idAthelete', $arrData)) && (!is_null($arrData['Athelete.idAthelete']))) {
+                    $this->objIdAthelete = new Athelete();
+                    $this->objIdAthelete->Materilize($arrData);
                 }
-                if (array_key_exists('Competition.idCompetition', $arrData)) {
-                    $this->objIdSession = new Competition();
-                    $this->objIdSession->Materilize($arrData);
+                if ((array_key_exists('Competition.idCompetition', $arrData)) && (!is_null($arrData['Competition.idCompetition']))) {
+                    $this->objIdCompetition = new Competition();
+                    $this->objIdCompetition->Materilize($arrData);
                 }
-                if (array_key_exists('Session.idSession', $arrData)) {
+                if ((array_key_exists('Session.idSession', $arrData)) && (!is_null($arrData['Session.idSession']))) {
                     $this->objIdSession = new Session();
                     $this->objIdSession->Materilize($arrData);
                 }
@@ -211,13 +211,13 @@ class EnrollmentBase extends BaseEntity {
             foreach ($arrJoins as $strTable) {
                 switch ($strTable) {
                     case ('Athelete'):
-                        $strJoin.= ' JOIN Athelete ON Enrollment_rel.idAthelete = Athelete.idAthelete';
+                        $strJoin.= ' LEFT JOIN Athelete ON Enrollment_rel.idAthelete = Athelete.idAthelete';
                     break;
                     case ('Competition'):
-                        $strJoin.= ' JOIN Competition ON Enrollment_rel.idCompetition = Competition.idCompetition';
+                        $strJoin.= ' LEFT JOIN Competition ON Enrollment_rel.idCompetition = Competition.idCompetition';
                     break;
                     case ('Session'):
-                        $strJoin.= ' JOIN Session ON Enrollment_rel.idSession = Session.idSession';
+                        $strJoin.= ' LEFT JOIN Session ON Enrollment_rel.idSession = Session.idSession';
                     break;
                 }
             }
@@ -494,79 +494,88 @@ class EnrollmentBase extends BaseEntity {
             break;
         }
     }
-    public function __set($strName, $strValue) {
+    public function __set($strName, $mixValue) {
         $this->modified = 1;
         switch ($strName) {
             case ('IdEnrollment'):
             case ('idEnrollment'):
-                $this->arrDBFields['idEnrollment'] = $strValue;
+                $this->arrDBFields['idEnrollment'] = $mixValue;
             break;
             case ('IdAthelete'):
             case ('idAthelete'):
-                $this->arrDBFields['idAthelete'] = $strValue;
+                $this->arrDBFields['idAthelete'] = $mixValue;
                 $this->objIdAthelete = null;
             break;
             case ('IdCompetition'):
             case ('idCompetition'):
-                $this->arrDBFields['idCompetition'] = $strValue;
+                $this->arrDBFields['idCompetition'] = $mixValue;
                 $this->objIdCompetition = null;
             break;
             case ('IdSession'):
             case ('idSession'):
-                $this->arrDBFields['idSession'] = $strValue;
+                $this->arrDBFields['idSession'] = $mixValue;
                 $this->objIdSession = null;
             break;
             case ('Flight'):
             case ('flight'):
-                $this->arrDBFields['flight'] = $strValue;
+                $this->arrDBFields['flight'] = $mixValue;
             break;
             case ('Division'):
             case ('division'):
-                $this->arrDBFields['division'] = $strValue;
+                $this->arrDBFields['division'] = $mixValue;
             break;
             case ('AgeGroup'):
             case ('ageGroup'):
-                $this->arrDBFields['ageGroup'] = $strValue;
+                $this->arrDBFields['ageGroup'] = $mixValue;
             break;
             case ('Misc1'):
             case ('misc1'):
-                $this->arrDBFields['misc1'] = $strValue;
+                $this->arrDBFields['misc1'] = $mixValue;
             break;
             case ('Misc2'):
             case ('misc2'):
-                $this->arrDBFields['misc2'] = $strValue;
+                $this->arrDBFields['misc2'] = $mixValue;
             break;
             case ('Misc3'):
             case ('misc3'):
-                $this->arrDBFields['misc3'] = $strValue;
+                $this->arrDBFields['misc3'] = $mixValue;
             break;
             case ('Misc4'):
             case ('misc4'):
-                $this->arrDBFields['misc4'] = $strValue;
+                $this->arrDBFields['misc4'] = $mixValue;
             break;
             case ('Misc5'):
             case ('misc5'):
-                $this->arrDBFields['misc5'] = $strValue;
+                $this->arrDBFields['misc5'] = $mixValue;
             break;
             case ('CreDate'):
             case ('creDate'):
-                $this->arrDBFields['creDate'] = $strValue;
+                $this->arrDBFields['creDate'] = $mixValue;
             break;
             case ('Level'):
             case ('level'):
-                $this->arrDBFields['level'] = $strValue;
+                $this->arrDBFields['level'] = $mixValue;
             break;
             case ('IdAtheleteObject'):
-                $this->arrDBFields['idAthelete'] = $strValue->idAthelete;
-                $this->objIdAthelete = $strValue;
+                if ((!is_object($mixValue)) || (!($mixValue instanceof Athelete))) {
+                    throw new MLCWrongTypeException('__set', $strName);
+                }
+                $this->arrDBFields['idAthelete'] = $mixValue->idAthelete;
+                $this->objIdAthelete = $mixValue;
             break;
             case ('IdCompetitionObject'):
-                $this->arrDBFields['idCompetition'] = $strValue->idCompetition;
-                $this->objIdCompetition = $strValue;
+                if ((!is_object($mixValue)) || (!($mixValue instanceof Competition))) {
+                    throw new MLCWrongTypeException('__set', $strName);
+                }
+                $this->arrDBFields['idCompetition'] = $mixValue->idCompetition;
+                $this->objIdCompetition = $mixValue;
             break;
             case ('IdSessionObject'):
-                $this->arrDBFields['idSession'] = $strValue->idSession;
-                $this->objIdSession = $strValue;
+                if ((!is_object($mixValue)) || (!($mixValue instanceof Session))) {
+                    throw new MLCWrongTypeException('__set', $strName);
+                }
+                $this->arrDBFields['idSession'] = $mixValue->idSession;
+                $this->objIdSession = $mixValue;
             break;
             default:
                 throw new MLCMissingPropertyException($this, $strName);

@@ -106,7 +106,7 @@ class ResultBase extends BaseEntity {
     }
     public function Materilize($arrData) {
         if (isset($arrData) && (sizeof($arrData) > 1)) {
-            if (array_key_exists('Result.idResult', $arrData)) {
+            if ((array_key_exists('Result.idResult', $arrData))) {
                 //New Smart Way
                 $this->arrDBFields['idResult'] = $arrData['Result.idResult'];
                 $this->arrDBFields['idSession'] = $arrData['Result.idSession'];
@@ -118,11 +118,11 @@ class ResultBase extends BaseEntity {
                 $this->arrDBFields['event'] = $arrData['Result.event'];
                 $this->arrDBFields['dispDate'] = $arrData['Result.dispDate'];
                 //Foregin Key
-                if (array_key_exists('Session.idSession', $arrData)) {
-                    $this->objIdAthelete = new Session();
-                    $this->objIdAthelete->Materilize($arrData);
+                if ((array_key_exists('Session.idSession', $arrData)) && (!is_null($arrData['Session.idSession']))) {
+                    $this->objIdSession = new Session();
+                    $this->objIdSession->Materilize($arrData);
                 }
-                if (array_key_exists('Athelete.idAthelete', $arrData)) {
+                if ((array_key_exists('Athelete.idAthelete', $arrData)) && (!is_null($arrData['Athelete.idAthelete']))) {
                     $this->objIdAthelete = new Athelete();
                     $this->objIdAthelete->Materilize($arrData);
                 }
@@ -169,10 +169,10 @@ class ResultBase extends BaseEntity {
             foreach ($arrJoins as $strTable) {
                 switch ($strTable) {
                     case ('Session'):
-                        $strJoin.= ' JOIN Session ON Result.idSession = Session.idSession';
+                        $strJoin.= ' LEFT JOIN Session ON Result.idSession = Session.idSession';
                     break;
                     case ('Athelete'):
-                        $strJoin.= ' JOIN Athelete ON Result.idAthelete = Athelete.idAthelete';
+                        $strJoin.= ' LEFT JOIN Athelete ON Result.idAthelete = Athelete.idAthelete';
                     break;
                 }
             }
@@ -388,54 +388,60 @@ class ResultBase extends BaseEntity {
             break;
         }
     }
-    public function __set($strName, $strValue) {
+    public function __set($strName, $mixValue) {
         $this->modified = 1;
         switch ($strName) {
             case ('IdResult'):
             case ('idResult'):
-                $this->arrDBFields['idResult'] = $strValue;
+                $this->arrDBFields['idResult'] = $mixValue;
             break;
             case ('IdSession'):
             case ('idSession'):
-                $this->arrDBFields['idSession'] = $strValue;
+                $this->arrDBFields['idSession'] = $mixValue;
                 $this->objIdSession = null;
             break;
             case ('IdAthelete'):
             case ('idAthelete'):
-                $this->arrDBFields['idAthelete'] = $strValue;
+                $this->arrDBFields['idAthelete'] = $mixValue;
                 $this->objIdAthelete = null;
             break;
             case ('Score'):
             case ('score'):
-                $this->arrDBFields['score'] = $strValue;
+                $this->arrDBFields['score'] = $mixValue;
             break;
             case ('Judge'):
             case ('judge'):
-                $this->arrDBFields['judge'] = $strValue;
+                $this->arrDBFields['judge'] = $mixValue;
             break;
             case ('Flag'):
             case ('flag'):
-                $this->arrDBFields['flag'] = $strValue;
+                $this->arrDBFields['flag'] = $mixValue;
             break;
             case ('CreDate'):
             case ('creDate'):
-                $this->arrDBFields['creDate'] = $strValue;
+                $this->arrDBFields['creDate'] = $mixValue;
             break;
             case ('Event'):
             case ('event'):
-                $this->arrDBFields['event'] = $strValue;
+                $this->arrDBFields['event'] = $mixValue;
             break;
             case ('DispDate'):
             case ('dispDate'):
-                $this->arrDBFields['dispDate'] = $strValue;
+                $this->arrDBFields['dispDate'] = $mixValue;
             break;
             case ('IdSessionObject'):
-                $this->arrDBFields['idSession'] = $strValue->idSession;
-                $this->objIdSession = $strValue;
+                if ((!is_object($mixValue)) || (!($mixValue instanceof Session))) {
+                    throw new MLCWrongTypeException('__set', $strName);
+                }
+                $this->arrDBFields['idSession'] = $mixValue->idSession;
+                $this->objIdSession = $mixValue;
             break;
             case ('IdAtheleteObject'):
-                $this->arrDBFields['idAthelete'] = $strValue->idAthelete;
-                $this->objIdAthelete = $strValue;
+                if ((!is_object($mixValue)) || (!($mixValue instanceof Athelete))) {
+                    throw new MLCWrongTypeException('__set', $strName);
+                }
+                $this->arrDBFields['idAthelete'] = $mixValue->idAthelete;
+                $this->objIdAthelete = $mixValue;
             break;
             default:
                 throw new MLCMissingPropertyException($this, $strName);

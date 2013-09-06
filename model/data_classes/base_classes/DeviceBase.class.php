@@ -91,7 +91,7 @@ class DeviceBase extends BaseEntity {
     }
     public function Materilize($arrData) {
         if (isset($arrData) && (sizeof($arrData) > 1)) {
-            if (array_key_exists('Device.idDevice', $arrData)) {
+            if ((array_key_exists('Device.idDevice', $arrData))) {
                 //New Smart Way
                 $this->arrDBFields['idDevice'] = $arrData['Device.idDevice'];
                 $this->arrDBFields['name'] = $arrData['Device.name'];
@@ -100,7 +100,7 @@ class DeviceBase extends BaseEntity {
                 $this->arrDBFields['inviteEmail'] = $arrData['Device.inviteEmail'];
                 $this->arrDBFields['idOrg'] = $arrData['Device.idOrg'];
                 //Foregin Key
-                if (array_key_exists('Org.idOrg', $arrData)) {
+                if ((array_key_exists('Org.idOrg', $arrData)) && (!is_null($arrData['Org.idOrg']))) {
                     $this->objIdOrg = new Org();
                     $this->objIdOrg->Materilize($arrData);
                 }
@@ -144,7 +144,7 @@ class DeviceBase extends BaseEntity {
             foreach ($arrJoins as $strTable) {
                 switch ($strTable) {
                     case ('Org'):
-                        $strJoin.= ' JOIN Org ON Device.idOrg = Org.idOrg';
+                        $strJoin.= ' LEFT JOIN Org ON Device.idOrg = Org.idOrg';
                     break;
                 }
             }
@@ -331,37 +331,40 @@ class DeviceBase extends BaseEntity {
             break;
         }
     }
-    public function __set($strName, $strValue) {
+    public function __set($strName, $mixValue) {
         $this->modified = 1;
         switch ($strName) {
             case ('IdDevice'):
             case ('idDevice'):
-                $this->arrDBFields['idDevice'] = $strValue;
+                $this->arrDBFields['idDevice'] = $mixValue;
             break;
             case ('Name'):
             case ('name'):
-                $this->arrDBFields['name'] = $strValue;
+                $this->arrDBFields['name'] = $mixValue;
             break;
             case ('Token'):
             case ('token'):
-                $this->arrDBFields['token'] = $strValue;
+                $this->arrDBFields['token'] = $mixValue;
             break;
             case ('CreDate'):
             case ('creDate'):
-                $this->arrDBFields['creDate'] = $strValue;
+                $this->arrDBFields['creDate'] = $mixValue;
             break;
             case ('InviteEmail'):
             case ('inviteEmail'):
-                $this->arrDBFields['inviteEmail'] = $strValue;
+                $this->arrDBFields['inviteEmail'] = $mixValue;
             break;
             case ('IdOrg'):
             case ('idOrg'):
-                $this->arrDBFields['idOrg'] = $strValue;
+                $this->arrDBFields['idOrg'] = $mixValue;
                 $this->objIdOrg = null;
             break;
             case ('IdOrgObject'):
-                $this->arrDBFields['idOrg'] = $strValue->idOrg;
-                $this->objIdOrg = $strValue;
+                if ((!is_object($mixValue)) || (!($mixValue instanceof Org))) {
+                    throw new MLCWrongTypeException('__set', $strName);
+                }
+                $this->arrDBFields['idOrg'] = $mixValue->idOrg;
+                $this->objIdOrg = $mixValue;
             break;
             default:
                 throw new MLCMissingPropertyException($this, $strName);

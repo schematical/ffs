@@ -14,6 +14,7 @@ class AtheleteManageForm extends AtheleteManageFormBase {
 
 
         $arrAtheletes = $this->Query();
+
         $this->InitList($arrAtheletes);
 
         $this->InitSelectPanel();
@@ -130,11 +131,12 @@ class AtheleteManageForm extends AtheleteManageFormBase {
     public function Query() {
 
         $arrAndConditions = array();
-        if(!is_null(FFSForm::Session())){
-            $arrAndConditions[]  = sprintf('Enrollment_rel.idSession = %s', FFSForm::Session()->IdSession);
+        if(!is_null($this->objEntityManager->Session())){
+            $arrAndConditions[]  = sprintf('Enrollment_rel.idSession = %s', $this->objEntityManager->Session()->IdSession);
         }elseif(!is_null(FFSForm::Competition())){
-            $arrAndConditions[]  = sprintf('Enrollment_rel.idCompetition = %s', FFSForm::Competition()->IdCompetition);
+            $arrAndConditions[]  = sprintf('Enrollment_rel.idCompetition = %s', $this->objEntityManager->Competition()->IdCompetition);
         }
+
         $intIdOrg = MLCApplication::QS(FFSQS::Athelete_IdOrg);
         if (!is_null($intIdOrg)) {
             $arrAndConditions[] = sprintf('Athelete.idOrg = %s', $intIdOrg);

@@ -20,6 +20,7 @@ class EnrollmentListPanel extends EnrollmentListPanelBase {
             $colAthelete->RenderObject = $this;
             $colAthelete->RenderFunction = 'render_atheleteName';
 
+
             $colSession = $this->AddColumn('idSession','Session');
             $colSession->RenderObject = $this;
             $colSession->RenderFunction = 'colSession_render';
@@ -215,11 +216,10 @@ class EnrollmentListPanel extends EnrollmentListPanelBase {
 
     //
     public function render_atheleteName($intIdAthelete, $objRow){
-        $intIdAthelete = $objRow->GetData('_entity')->IdAthelete;
-        if(is_null($intIdAthelete)){
+        $objAthelete = $objRow->GetData('_entity')->IdAtheleteObject;
+        if(is_null($objAthelete)){
            return 'Unknown';
         }
-        $objAthelete = Athelete::LoadById($intIdAthelete);
         $strReturn = $objAthelete->LastName . ', ' . $objAthelete->FirstName;
         return $strReturn;
 

@@ -86,7 +86,7 @@ class OrgCompetitionBase extends BaseEntity {
     }
     public function Materilize($arrData) {
         if (isset($arrData) && (sizeof($arrData) > 1)) {
-            if (array_key_exists('OrgCompetition_rel.idOrgCompetition', $arrData)) {
+            if ((array_key_exists('OrgCompetition_rel.idOrgCompetition', $arrData))) {
                 //New Smart Way
                 $this->arrDBFields['idOrgCompetition'] = $arrData['OrgCompetition_rel.idOrgCompetition'];
                 $this->arrDBFields['idOrg'] = $arrData['OrgCompetition_rel.idOrg'];
@@ -94,11 +94,11 @@ class OrgCompetitionBase extends BaseEntity {
                 $this->arrDBFields['creDate'] = $arrData['OrgCompetition_rel.creDate'];
                 $this->arrDBFields['idAuthUser'] = $arrData['OrgCompetition_rel.idAuthUser'];
                 //Foregin Key
-                if (array_key_exists('Org.idOrg', $arrData)) {
-                    $this->objIdCompetition = new Org();
-                    $this->objIdCompetition->Materilize($arrData);
+                if ((array_key_exists('Org.idOrg', $arrData)) && (!is_null($arrData['Org.idOrg']))) {
+                    $this->objIdOrg = new Org();
+                    $this->objIdOrg->Materilize($arrData);
                 }
-                if (array_key_exists('Competition.idCompetition', $arrData)) {
+                if ((array_key_exists('Competition.idCompetition', $arrData)) && (!is_null($arrData['Competition.idCompetition']))) {
                     $this->objIdCompetition = new Competition();
                     $this->objIdCompetition->Materilize($arrData);
                 }
@@ -141,10 +141,10 @@ class OrgCompetitionBase extends BaseEntity {
             foreach ($arrJoins as $strTable) {
                 switch ($strTable) {
                     case ('Org'):
-                        $strJoin.= ' JOIN Org ON OrgCompetition_rel.idOrg = Org.idOrg';
+                        $strJoin.= ' LEFT JOIN Org ON OrgCompetition_rel.idOrg = Org.idOrg';
                     break;
                     case ('Competition'):
-                        $strJoin.= ' JOIN Competition ON OrgCompetition_rel.idCompetition = Competition.idCompetition';
+                        $strJoin.= ' LEFT JOIN Competition ON OrgCompetition_rel.idCompetition = Competition.idCompetition';
                     break;
                 }
             }
@@ -328,38 +328,44 @@ class OrgCompetitionBase extends BaseEntity {
             break;
         }
     }
-    public function __set($strName, $strValue) {
+    public function __set($strName, $mixValue) {
         $this->modified = 1;
         switch ($strName) {
             case ('IdOrgCompetition'):
             case ('idOrgCompetition'):
-                $this->arrDBFields['idOrgCompetition'] = $strValue;
+                $this->arrDBFields['idOrgCompetition'] = $mixValue;
             break;
             case ('IdOrg'):
             case ('idOrg'):
-                $this->arrDBFields['idOrg'] = $strValue;
+                $this->arrDBFields['idOrg'] = $mixValue;
                 $this->objIdOrg = null;
             break;
             case ('IdCompetition'):
             case ('idCompetition'):
-                $this->arrDBFields['idCompetition'] = $strValue;
+                $this->arrDBFields['idCompetition'] = $mixValue;
                 $this->objIdCompetition = null;
             break;
             case ('CreDate'):
             case ('creDate'):
-                $this->arrDBFields['creDate'] = $strValue;
+                $this->arrDBFields['creDate'] = $mixValue;
             break;
             case ('IdAuthUser'):
             case ('idAuthUser'):
-                $this->arrDBFields['idAuthUser'] = $strValue;
+                $this->arrDBFields['idAuthUser'] = $mixValue;
             break;
             case ('IdOrgObject'):
-                $this->arrDBFields['idOrg'] = $strValue->idOrg;
-                $this->objIdOrg = $strValue;
+                if ((!is_object($mixValue)) || (!($mixValue instanceof Org))) {
+                    throw new MLCWrongTypeException('__set', $strName);
+                }
+                $this->arrDBFields['idOrg'] = $mixValue->idOrg;
+                $this->objIdOrg = $mixValue;
             break;
             case ('IdCompetitionObject'):
-                $this->arrDBFields['idCompetition'] = $strValue->idCompetition;
-                $this->objIdCompetition = $strValue;
+                if ((!is_object($mixValue)) || (!($mixValue instanceof Competition))) {
+                    throw new MLCWrongTypeException('__set', $strName);
+                }
+                $this->arrDBFields['idCompetition'] = $mixValue->idCompetition;
+                $this->objIdCompetition = $mixValue;
             break;
             default:
                 throw new MLCMissingPropertyException($this, $strName);

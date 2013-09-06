@@ -100,7 +100,7 @@ class OrgBase extends BaseEntity {
     }
     public function Materilize($arrData) {
         if (isset($arrData) && (sizeof($arrData) > 1)) {
-            if (array_key_exists('Org.idOrg', $arrData)) {
+            if ((array_key_exists('Org.idOrg', $arrData))) {
                 //New Smart Way
                 $this->arrDBFields['idOrg'] = $arrData['Org.idOrg'];
                 $this->arrDBFields['namespace'] = $arrData['Org.namespace'];
@@ -344,36 +344,36 @@ class OrgBase extends BaseEntity {
             break;
         }
     }
-    public function __set($strName, $strValue) {
+    public function __set($strName, $mixValue) {
         $this->modified = 1;
         switch ($strName) {
             case ('IdOrg'):
             case ('idOrg'):
-                $this->arrDBFields['idOrg'] = $strValue;
+                $this->arrDBFields['idOrg'] = $mixValue;
             break;
             case ('Namespace'):
             case ('namespace'):
-                $this->arrDBFields['namespace'] = $strValue;
+                $this->arrDBFields['namespace'] = $mixValue;
             break;
             case ('Name'):
             case ('name'):
-                $this->arrDBFields['name'] = $strValue;
+                $this->arrDBFields['name'] = $mixValue;
             break;
             case ('CreDate'):
             case ('creDate'):
-                $this->arrDBFields['creDate'] = $strValue;
+                $this->arrDBFields['creDate'] = $mixValue;
             break;
             case ('IdImportAuthUser'):
             case ('idImportAuthUser'):
-                $this->arrDBFields['idImportAuthUser'] = $strValue;
+                $this->arrDBFields['idImportAuthUser'] = $mixValue;
             break;
             case ('ClubNum'):
             case ('clubNum'):
-                $this->arrDBFields['clubNum'] = $strValue;
+                $this->arrDBFields['clubNum'] = $mixValue;
             break;
             case ('ClubType'):
             case ('clubType'):
-                $this->arrDBFields['clubType'] = $strValue;
+                $this->arrDBFields['clubType'] = $mixValue;
             break;
             default:
                 throw new MLCMissingPropertyException($this, $strName);

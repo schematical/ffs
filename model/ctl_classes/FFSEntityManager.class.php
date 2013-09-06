@@ -79,7 +79,7 @@ class FFSEntityManager extends FFSEntityManagerBase {
                     die(json_encode($arrJsonData));
             }
         }
-        return parent::SearchEnrollment($strSearch, $strField = null);
+        return parent::SearchEnrollment($strSearch, $strField);
 
     }
     public function GetSessionOwnerQuery(){
