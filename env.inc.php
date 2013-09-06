@@ -14,7 +14,7 @@ if(!defined('SERVER_ENV')){
         break;*/
         case('tumblescore.com'):
         case('www.tumblescore.com'):
-            define('SERVER_ENV', 'prod');
+            define('SERVER_ENV', 'beta');
             define('MLC_APPLICATION_NAME', 'ffs');
         break;
 	}
