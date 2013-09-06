@@ -98,7 +98,7 @@ if (!is_null($_CONTROL->strName)) { ?>
             
         </fieldset>
         <div class="form-actions">
-            <?php $_CONTROL->btnSave->Render(); ?>&nbsp;&nbsp;
-            <?php $_CONTROL->btnDelete->Render(); ?>
+            <?php if(!is_null($_CONTROL->btnSave)){ $_CONTROL->btnSave->Render(); }; ?>&nbsp;&nbsp;
+            <?php  if(!is_null($_CONTROL->btnDelete)){ $_CONTROL->btnDelete->Render(); } ?>
         </div>
     </form>
