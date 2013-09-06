@@ -51,7 +51,15 @@
                 </div>
             </div>
             <div class='row-fluid'>
-                <div class='span2'></div>
+                <div class='span2'>
+                    <?php $arrSessions = FFSApplication::GetActiveSessions(null); ?>
+                    <b>Active sessions: </b>
+                    <?php echo count($arrSessions); ?>
+                    <br/>
+                    <?php foreach($arrSessions as $objSession){ ?>
+                        <?php echo $objSession->Name; ?> <br/>
+                    <?php } ?>
+                </div>
                 <div class='span4'>
 
                         <a href="/" class="btn btn-large">

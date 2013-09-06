@@ -99,7 +99,7 @@
     <file path="/FFSApplication.class.php" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378499530393" ignored="false" />
     <file path="/FFSOrgHomeNavPanel.class.php" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1375471664235" ignored="false" />
     <file path="/FFSOrgHomeNavPanel.tpl.php" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1375472670635" ignored="false" />
-    <file path="/fullScreen.tpl.php" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1375998496886" ignored="false" />
+    <file path="/fullScreen.tpl.php" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378508470752" ignored="false" />
     <file path="/fullScreen.php" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1376341746480" ignored="false" />
     <file path="$PROJECT_DIR$/../MLCPackages/mlc_packages/MJax/_core/_events.php" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378499055425" ignored="false" />
     <file path="/_events.php" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378499055425" ignored="false" />
@@ -421,7 +421,7 @@
     <file path="$PROJECT_DIR$/model/proscore/Proscore.class.php" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378398595855" ignored="false" />
     <file path="$PROJECT_DIR$/../MLCOfficial/mde_codebase/_core/ctl/MLCForm.class.php" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378483031459" ignored="false" />
     <file path="/EntityManager.xtpl" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378399030233" ignored="false" />
-    <file path="/FFSEntityManager.class.php" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378505239635" ignored="false" />
+    <file path="/FFSEntityManager.class.php" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378507901622" ignored="false" />
     <file path="/ControlConn.inc.php" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378399140974" ignored="false" />
     <file path="/EntityManagerBase.xtpl" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378402883269" ignored="false" />
     <file path="/AssignmentManageFormBase.class.php" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378400303583" ignored="false" />
@@ -478,19 +478,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MJaxBSAutocompleteTextBox.class.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../MLCPackages/mlc_packages/MJaxBootstrap/_core/ctl/MJaxBSAutocompleteTextBox.class.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="131" column="9" selection-start="4191" selection-end="4191" vertical-scroll-proportion="-10.208333">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="EnrollmentListPanel.class.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/model/ctl_classes/EnrollmentListPanel.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="143" column="17" selection-start="5500" selection-end="5503" vertical-scroll-proportion="2.2857144">
+            <state line="143" column="17" selection-start="5500" selection-end="5503" vertical-scroll-proportion="-40.877552">
               <folding />
             </state>
           </provider>
@@ -499,7 +490,7 @@
       <file leaf-file-name="ResultListPanel.class.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/model/ctl_classes/ResultListPanel.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="38" column="0" selection-start="1139" selection-end="1139" vertical-scroll-proportion="-8.75">
+            <state line="38" column="0" selection-start="1139" selection-end="1139" vertical-scroll-proportion="-23.75">
               <folding />
             </state>
           </provider>
@@ -508,16 +499,7 @@
       <file leaf-file-name="parse.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ctl/_test/parse.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="54" column="50" selection-start="1938" selection-end="1938" vertical-scroll-proportion="-11.583333">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test.txt" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/ctl/_test/test.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="215" column="12" selection-start="4798" selection-end="4805" vertical-scroll-proportion="0.21903051">
+            <state line="44" column="36" selection-start="1485" selection-end="1485" vertical-scroll-proportion="-27.5">
               <folding />
             </state>
           </provider>
@@ -526,7 +508,7 @@
       <file leaf-file-name="Enrollment_Rel.class.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/model/data_classes/Enrollment_Rel.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="0" selection-start="421" selection-end="881" vertical-scroll-proportion="-5.9583335">
+            <state line="16" column="0" selection-start="421" selection-end="881" vertical-scroll-proportion="1.5416666">
               <folding />
             </state>
           </provider>
@@ -535,7 +517,34 @@
       <file leaf-file-name="FFSEntityManager.class.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/model/ctl_classes/FFSEntityManager.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="44" column="67" selection-start="1532" selection-end="1532" vertical-scroll-proportion="-8.75">
+            <state line="60" column="31" selection-start="2139" selection-end="2139" vertical-scroll-proportion="-18.75">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fullScreen.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ctl/org/fullScreen.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="49" column="0" selection-start="1628" selection-end="1628" vertical-scroll-proportion="-0.33333334">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fullScreen.tpl.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/view/www/org/fullScreen.tpl.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="54" column="55" selection-start="1761" selection-end="1761" vertical-scroll-proportion="0.32457787">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FFSApplication.class.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/model/FFSApplication.class.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="280" column="10" selection-start="10639" selection-end="10639" vertical-scroll-proportion="-10.041667">
               <folding />
             </state>
           </provider>
@@ -560,8 +569,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app.inc.php" />
-        <option value="$PROJECT_DIR$/view/www/ctl_panels/CompetitionEditPanelBase.tpl.php" />
         <option value="$PROJECT_DIR$/ctl/org/competition/editCompetition.php" />
         <option value="$PROJECT_DIR$/ctl/org/landing.php" />
         <option value="$PROJECT_DIR$/model/ctl_classes/CompetitionEditPanel.class.php" />
@@ -571,11 +578,13 @@
         <option value="$PROJECT_DIR$/model/ctl_classes/EnrollmentEditPanel.class.php" />
         <option value="$PROJECT_DIR$/../MLCPackages/mlc_packages/MJaxBootstrap/_core/ctl/MJaxBSAutocompleteTextBox.class.php" />
         <option value="$PROJECT_DIR$/model/ctl_classes/EnrollmentListPanel.class.php" />
-        <option value="$PROJECT_DIR$/model/ctl_classes/FFSEntityManager.class.php" />
         <option value="$PROJECT_DIR$/model/ctl_classes/ResultListPanel.class.php" />
         <option value="$PROJECT_DIR$/ctl/_test/parse.php" />
         <option value="$PROJECT_DIR$/model/data_classes/Enrollment_Rel.class.php" />
         <option value="$PROJECT_DIR$/ctl/_test/test.txt" />
+        <option value="$PROJECT_DIR$/model/ctl_classes/FFSEntityManager.class.php" />
+        <option value="$PROJECT_DIR$/model/FFSApplication.class.php" />
+        <option value="$PROJECT_DIR$/view/www/org/fullScreen.tpl.php" />
       </list>
     </option>
   </component>
@@ -585,7 +594,7 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-1302" />
+    <option name="x" value="64" />
     <option name="y" value="764" />
     <option name="width" value="1303" />
     <option name="height" value="773" />
@@ -686,7 +695,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ctl_panels" />
+              <option name="myItemId" value="org" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -887,7 +896,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1302" y="764" width="1303" height="773" extended-state="6" />
+    <frame x="64" y="764" width="1303" height="773" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -971,29 +980,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/model/ctl_classes/CompetitionEditPanel.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="68" column="44" selection-start="2274" selection-end="2274" vertical-scroll-proportion="-16.875">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ctl/org/competition/manageSessions.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="27.083334">
-          <folding>
-            <marker date="1378398612082" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model/ctl_classes/base_classes/EnrollmentManageFormBase.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="58" column="34" selection-start="2319" selection-end="2319" vertical-scroll-proportion="8.877551">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/model/ctl_classes/EnrollmentListPanel.bkup.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="91" column="32" selection-start="3326" selection-end="3326" vertical-scroll-proportion="-17.5">
@@ -1015,44 +1001,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/model/ctl_classes/EnrollmentEditPanel.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="0" selection-start="925" selection-end="1380" vertical-scroll-proportion="1.5714285">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model/ctl_classes/base_classes/EnrollmentEditPanelBase.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="265" column="42" selection-start="11276" selection-end="11276" vertical-scroll-proportion="-8.458333">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../MLCPackages/mlc_packages/MJaxBootstrap/_core/ctl/MJaxBSAutocompleteTextBox.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="131" column="9" selection-start="4191" selection-end="4191" vertical-scroll-proportion="-10.208333">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model/ctl_classes/EnrollmentListPanel.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="143" column="17" selection-start="5500" selection-end="5503" vertical-scroll-proportion="2.2857144">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model/ctl_classes/ResultListPanel.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="0" selection-start="1139" selection-end="1139" vertical-scroll-proportion="-8.75">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model/ctl_classes/FFSEntityManager.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="67" selection-start="1532" selection-end="1532" vertical-scroll-proportion="-8.75">
           <folding />
         </state>
       </provider>
@@ -1064,23 +1015,79 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ctl/_test/parse.php">
+    <entry file="file://$PROJECT_DIR$/ctl/_test/test.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="50" selection-start="1938" selection-end="1938" vertical-scroll-proportion="-11.583333">
+        <state line="215" column="12" selection-start="4798" selection-end="4805" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/model/data_classes/Enrollment_Rel.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="0" selection-start="421" selection-end="881" vertical-scroll-proportion="-5.9583335">
+        <state line="16" column="0" selection-start="421" selection-end="881" vertical-scroll-proportion="1.5416666">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ctl/_test/test.txt">
+    <entry file="file://$PROJECT_DIR$/model/ctl_classes/base_classes/EnrollmentEditPanelBase.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="215" column="12" selection-start="4798" selection-end="4805" vertical-scroll-proportion="0.21903051">
+        <state line="265" column="42" selection-start="11276" selection-end="11276" vertical-scroll-proportion="-8.458333">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/ctl_classes/EnrollmentEditPanel.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="0" selection-start="925" selection-end="1380" vertical-scroll-proportion="1.5714285">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ctl/_test/parse.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="44" column="36" selection-start="1485" selection-end="1485" vertical-scroll-proportion="-27.5">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/ctl_classes/ResultListPanel.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="38" column="0" selection-start="1139" selection-end="1139" vertical-scroll-proportion="-23.75">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/ctl_classes/EnrollmentListPanel.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="143" column="17" selection-start="5500" selection-end="5503" vertical-scroll-proportion="-40.877552">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/ctl_classes/FFSEntityManager.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="60" column="31" selection-start="2139" selection-end="2139" vertical-scroll-proportion="-18.75">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/FFSApplication.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="280" column="10" selection-start="10639" selection-end="10639" vertical-scroll-proportion="-10.041667">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ctl/org/fullScreen.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="49" column="0" selection-start="1628" selection-end="1628" vertical-scroll-proportion="-0.33333334">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/www/org/fullScreen.tpl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="54" column="55" selection-start="1761" selection-end="1761" vertical-scroll-proportion="0.32457787">
           <folding />
         </state>
       </provider>

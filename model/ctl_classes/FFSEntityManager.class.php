@@ -51,10 +51,15 @@ class FFSEntityManager extends FFSEntityManagerBase {
                    $intIdSession
                )
            );
-           foreach($arrEnrollments as $intIndex => $objEnrollment){
-                $arrIdAtheletes[] = $objEnrollment->IdAthelete;
+           if(count($arrEnrollments) > 0){
+               foreach($arrEnrollments as $intIndex => $objEnrollment){
+                    $arrIdAtheletes[] = $objEnrollment->IdAthelete;
+               }
+
+               return 'AND Athelete.idAthelete IN(' .implode(',', $arrIdAtheletes) . ')';
+           }else{
+               return ' AND 0';
            }
-           return 'AND Athelete.idAthelete IN(' .implode(',', $arrIdAtheletes) . ')';
        }
        return '';
    }
