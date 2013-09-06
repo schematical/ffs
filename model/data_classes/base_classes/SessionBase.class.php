@@ -175,6 +175,7 @@ class SessionBase extends BaseEntity {
             }
         }
         $sql = sprintf("SELECT %s FROM Session %s %s;", $strFields, $strJoin, $strExtra);
+        error_log($sql);
         $result = MLCDBDriver::Query($sql, self::DB_CONN);
         $arrReturn = array();
         while ($data = mysql_fetch_assoc($result)) {

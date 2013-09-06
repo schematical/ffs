@@ -162,7 +162,7 @@
     <file path="/import.tpl.php" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1375818879998" ignored="false" />
     <file path="/logout.php" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1375987229777" ignored="false" />
     <file path="/signin.php" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1375987397935" ignored="false" />
-    <file path="/SessionBase.class.php" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378492837793" ignored="false" />
+    <file path="/SessionBase.class.php" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378508601913" ignored="false" />
     <file path="/FFSScoreDisplayPanel.class.php" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1375991399104" ignored="false" />
     <file path="/FFSScoreDisplayPanel.tpl.php" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1375991638461" ignored="false" />
     <file path="$PROJECT_DIR$/../MLCPackages/mlc_packages/private_packages/MJaxGentaTheme/_core/assets/js/supersized-init.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1375991922224" ignored="false" />
@@ -505,15 +505,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Enrollment_Rel.class.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/model/data_classes/Enrollment_Rel.class.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="0" selection-start="421" selection-end="881" vertical-scroll-proportion="1.5416666">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="FFSEntityManager.class.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/model/ctl_classes/FFSEntityManager.class.php">
           <provider selected="true" editor-type-id="text-editor">
@@ -532,10 +523,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="fullScreen.tpl.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="fullScreen.tpl.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/view/www/org/fullScreen.tpl.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="54" column="55" selection-start="1761" selection-end="1761" vertical-scroll-proportion="0.32457787">
+            <state line="54" column="60" selection-start="1766" selection-end="1766" vertical-scroll-proportion="-7.2083335">
               <folding />
             </state>
           </provider>
@@ -544,7 +535,16 @@
       <file leaf-file-name="FFSApplication.class.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/model/FFSApplication.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="280" column="10" selection-start="10639" selection-end="10639" vertical-scroll-proportion="-10.041667">
+            <state line="346" column="33" selection-start="13219" selection-end="13219" vertical-scroll-proportion="-19.708334">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SessionBase.class.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/model/data_classes/base_classes/SessionBase.class.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="177" column="24" selection-start="6815" selection-end="6815" vertical-scroll-proportion="0.9423077">
               <folding />
             </state>
           </provider>
@@ -569,7 +569,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/ctl/org/competition/editCompetition.php" />
         <option value="$PROJECT_DIR$/ctl/org/landing.php" />
         <option value="$PROJECT_DIR$/model/ctl_classes/CompetitionEditPanel.class.php" />
         <option value="$PROJECT_DIR$/model/ctl_classes/base_classes/EnrollmentManageFormBase.class.php" />
@@ -585,6 +584,7 @@
         <option value="$PROJECT_DIR$/model/ctl_classes/FFSEntityManager.class.php" />
         <option value="$PROJECT_DIR$/model/FFSApplication.class.php" />
         <option value="$PROJECT_DIR$/view/www/org/fullScreen.tpl.php" />
+        <option value="$PROJECT_DIR$/model/data_classes/base_classes/SessionBase.class.php" />
       </list>
     </option>
   </component>
@@ -594,7 +594,7 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="64" />
+    <option name="x" value="-1302" />
     <option name="y" value="764" />
     <option name="width" value="1303" />
     <option name="height" value="773" />
@@ -896,7 +896,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="64" y="764" width="1303" height="773" extended-state="6" />
+    <frame x="-1302" y="764" width="1303" height="773" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -980,13 +980,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/model/ctl_classes/EnrollmentListPanel.bkup.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="91" column="32" selection-start="3326" selection-end="3326" vertical-scroll-proportion="-17.5">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ctl/_panels/FFSAtheleteSelectPanel.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="16" column="54" selection-start="682" selection-end="682" vertical-scroll-proportion="-6.25">
@@ -1071,13 +1064,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/model/FFSApplication.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="280" column="10" selection-start="10639" selection-end="10639" vertical-scroll-proportion="-10.041667">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ctl/org/fullScreen.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="49" column="0" selection-start="1628" selection-end="1628" vertical-scroll-proportion="-0.33333334">
@@ -1087,7 +1073,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/view/www/org/fullScreen.tpl.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="55" selection-start="1761" selection-end="1761" vertical-scroll-proportion="0.32457787">
+        <state line="54" column="60" selection-start="1766" selection-end="1766" vertical-scroll-proportion="-7.2083335">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/FFSApplication.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="346" column="33" selection-start="13219" selection-end="13219" vertical-scroll-proportion="-19.708334">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/data_classes/base_classes/SessionBase.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="177" column="24" selection-start="6815" selection-end="6815" vertical-scroll-proportion="0.9423077">
           <folding />
         </state>
       </provider>
