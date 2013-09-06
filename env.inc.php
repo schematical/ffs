@@ -57,6 +57,7 @@ if(defined('SERVER_ENV')){
                 'user'=>'evillabs',
                 'pass'=>'gaM3rPuPu'
             )));
+            define('MLC_DISPLAY_EXCEPTIONS', '1');
         break;
 	}
 
