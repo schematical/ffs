@@ -46,9 +46,9 @@ class EnrollmentListPanelBase extends MJaxTable {
     }
     public function SetupCols() {
         //$this->AddColumn('idEnrollment','idEnrollment');
-        $this->AddColumn('idAthelete', ' Athelete', $this, 'render_idAthelete', 'MJaxTextBox');
-        $this->AddColumn('idCompetition', ' Competition', $this, 'render_idCompetition', 'MJaxTextBox');
-        $this->AddColumn('idSession', ' Session', $this, 'render_idSession', 'MJaxTextBox');
+        $this->AddColumn('IdAtheleteObject', ' Athelete');
+        $this->AddColumn('IdCompetitionObject', ' Competition');
+        $this->AddColumn('IdSessionObject', ' Session');
         $this->AddColumn('flight', ' Flight', null, null, 'MJaxTextBox');
         $this->AddColumn('division', ' Division', null, null, 'MJaxTextBox');
         $this->AddColumn('ageGroup', ' Age Group', null, null, 'MJaxTextBox');

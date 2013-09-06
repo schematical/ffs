@@ -557,24 +557,36 @@ class EnrollmentBase extends BaseEntity {
                 $this->arrDBFields['level'] = $mixValue;
             break;
             case ('IdAtheleteObject'):
-                if ((!is_object($mixValue)) || (!($mixValue instanceof Athelete))) {
+                if ((!is_null($mixValue)) && ((!is_object($mixValue)) || (!($mixValue instanceof Athelete)))) {
                     throw new MLCWrongTypeException('__set', $strName);
                 }
-                $this->arrDBFields['idAthelete'] = $mixValue->idAthelete;
+                if (!is_null($mixValue)) {
+                    $this->arrDBFields['idAthelete'] = $mixValue->idAthelete;
+                } else {
+                    $this->arrDBFields['idAthelete'] = null;
+                }
                 $this->objIdAthelete = $mixValue;
             break;
             case ('IdCompetitionObject'):
-                if ((!is_object($mixValue)) || (!($mixValue instanceof Competition))) {
+                if ((!is_null($mixValue)) && ((!is_object($mixValue)) || (!($mixValue instanceof Competition)))) {
                     throw new MLCWrongTypeException('__set', $strName);
                 }
-                $this->arrDBFields['idCompetition'] = $mixValue->idCompetition;
+                if (!is_null($mixValue)) {
+                    $this->arrDBFields['idCompetition'] = $mixValue->idCompetition;
+                } else {
+                    $this->arrDBFields['idCompetition'] = null;
+                }
                 $this->objIdCompetition = $mixValue;
             break;
             case ('IdSessionObject'):
-                if ((!is_object($mixValue)) || (!($mixValue instanceof Session))) {
+                if ((!is_null($mixValue)) && ((!is_object($mixValue)) || (!($mixValue instanceof Session)))) {
                     throw new MLCWrongTypeException('__set', $strName);
                 }
-                $this->arrDBFields['idSession'] = $mixValue->idSession;
+                if (!is_null($mixValue)) {
+                    $this->arrDBFields['idSession'] = $mixValue->idSession;
+                } else {
+                    $this->arrDBFields['idSession'] = null;
+                }
                 $this->objIdSession = $mixValue;
             break;
             default:

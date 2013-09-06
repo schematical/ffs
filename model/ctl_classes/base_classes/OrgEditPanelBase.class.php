@@ -11,6 +11,10 @@
 * - btnDelete_click()
 * - btnDelete_confirm()
 * - IsNew()
+* - InitNamespaceAutocomplete()
+* - InitNameAutocomplete()
+* - InitClubNumAutocomplete()
+* - InitClubTypeAutocomplete()
 * Classes list:
 * - OrgEditPanelBase extends MJaxPanel
 */
@@ -152,6 +156,30 @@ class OrgEditPanelBase extends MJaxPanel {
     }
     public function IsNew() {
         return is_null($this->objOrg);
+    }
+    public function InitNamespaceAutocomplete() {
+        $this->strNamespace = new MJaxBSAutocompleteTextBox($this);
+        $this->strNamespace->SetSearchEntity('org', 'namespace');
+        $this->strNamespace->Name = 'namespace';
+        $this->strNamespace->AddCssClass('input-large');
+    }
+    public function InitNameAutocomplete() {
+        $this->strName = new MJaxBSAutocompleteTextBox($this);
+        $this->strName->SetSearchEntity('org', 'name');
+        $this->strName->Name = 'name';
+        $this->strName->AddCssClass('input-large');
+    }
+    public function InitClubNumAutocomplete() {
+        $this->strClubNum = new MJaxBSAutocompleteTextBox($this);
+        $this->strClubNum->SetSearchEntity('org', 'clubNum');
+        $this->strClubNum->Name = 'clubNum';
+        $this->strClubNum->AddCssClass('input-large');
+    }
+    public function InitClubTypeAutocomplete() {
+        $this->strClubType = new MJaxBSAutocompleteTextBox($this);
+        $this->strClubType->SetSearchEntity('org', 'clubType');
+        $this->strClubType->Name = 'clubType';
+        $this->strClubType->AddCssClass('input-large');
     }
 }
 ?>

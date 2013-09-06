@@ -45,8 +45,8 @@ class OrgCompetitionListPanelBase extends MJaxTable {
     }
     public function SetupCols() {
         //$this->AddColumn('idOrgCompetition','idOrgCompetition');
-        $this->AddColumn('idOrg', ' Org', $this, 'render_idOrg', 'MJaxTextBox');
-        $this->AddColumn('idCompetition', ' Competition', $this, 'render_idCompetition', 'MJaxTextBox');
+        $this->AddColumn('IdOrgObject', ' Org');
+        $this->AddColumn('IdCompetitionObject', ' Competition');
         $this->AddColumn('idAuthUser', ' Auth User', null, null, 'MJaxTextBox');
     }
     public function render_idOrg($intIdIdOrg, $objRow, $objColumn) {

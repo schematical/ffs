@@ -411,17 +411,25 @@ class AssignmentBase extends BaseEntity {
                 $this->arrDBFields['revokeDate'] = $mixValue;
             break;
             case ('IdDeviceObject'):
-                if ((!is_object($mixValue)) || (!($mixValue instanceof Device))) {
+                if ((!is_null($mixValue)) && ((!is_object($mixValue)) || (!($mixValue instanceof Device)))) {
                     throw new MLCWrongTypeException('__set', $strName);
                 }
-                $this->arrDBFields['idDevice'] = $mixValue->idDevice;
+                if (!is_null($mixValue)) {
+                    $this->arrDBFields['idDevice'] = $mixValue->idDevice;
+                } else {
+                    $this->arrDBFields['idDevice'] = null;
+                }
                 $this->objIdDevice = $mixValue;
             break;
             case ('IdSessionObject'):
-                if ((!is_object($mixValue)) || (!($mixValue instanceof Session))) {
+                if ((!is_null($mixValue)) && ((!is_object($mixValue)) || (!($mixValue instanceof Session)))) {
                     throw new MLCWrongTypeException('__set', $strName);
                 }
-                $this->arrDBFields['idSession'] = $mixValue->idSession;
+                if (!is_null($mixValue)) {
+                    $this->arrDBFields['idSession'] = $mixValue->idSession;
+                } else {
+                    $this->arrDBFields['idSession'] = null;
+                }
                 $this->objIdSession = $mixValue;
             break;
             default:

@@ -531,17 +531,25 @@ class ParentMessageBase extends BaseEntity {
                 $this->arrDBFields['idStripeData'] = $mixValue;
             break;
             case ('IdAtheleteObject'):
-                if ((!is_object($mixValue)) || (!($mixValue instanceof Athelete))) {
+                if ((!is_null($mixValue)) && ((!is_object($mixValue)) || (!($mixValue instanceof Athelete)))) {
                     throw new MLCWrongTypeException('__set', $strName);
                 }
-                $this->arrDBFields['idAthelete'] = $mixValue->idAthelete;
+                if (!is_null($mixValue)) {
+                    $this->arrDBFields['idAthelete'] = $mixValue->idAthelete;
+                } else {
+                    $this->arrDBFields['idAthelete'] = null;
+                }
                 $this->objIdAthelete = $mixValue;
             break;
             case ('IdCompetitionObject'):
-                if ((!is_object($mixValue)) || (!($mixValue instanceof Competition))) {
+                if ((!is_null($mixValue)) && ((!is_object($mixValue)) || (!($mixValue instanceof Competition)))) {
                     throw new MLCWrongTypeException('__set', $strName);
                 }
-                $this->arrDBFields['idCompetition'] = $mixValue->idCompetition;
+                if (!is_null($mixValue)) {
+                    $this->arrDBFields['idCompetition'] = $mixValue->idCompetition;
+                } else {
+                    $this->arrDBFields['idCompetition'] = null;
+                }
                 $this->objIdCompetition = $mixValue;
             break;
             default:

@@ -15,7 +15,7 @@
         <i class="shortcut-icon icon-building "></i>
         <span class="shortcut-label">Gyms</span>
     </a>
-    <a href="/<?php echo $_CONTROL->objCompetition->Namespace; ?>/org/competition/manageAtheletes" class="shortcut">
+    <a href="/<?php echo $_CONTROL->objCompetition->Namespace; ?>/org/competition/manageAthletes" class="shortcut">
         <i class="shortcut-icon icon-group "></i>
         <span class="shortcut-label">Atheletes</span>
     </a>

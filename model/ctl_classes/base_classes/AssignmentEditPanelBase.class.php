@@ -11,6 +11,10 @@
 * - btnDelete_click()
 * - btnDelete_confirm()
 * - IsNew()
+* - InitIdDeviceAutocomplete()
+* - InitIdSessionAutocomplete()
+* - InitEventAutocomplete()
+* - InitApartatusAutocomplete()
 * Classes list:
 * - AssignmentEditPanelBase extends MJaxPanel
 */
@@ -132,6 +136,30 @@ class AssignmentEditPanelBase extends MJaxPanel {
     }
     public function IsNew() {
         return is_null($this->objAssignment);
+    }
+    public function InitIdDeviceAutocomplete() {
+        $this->intIdDevice = new MJaxBSAutocompleteTextBox($this, $this, '_searchDevice');
+        $this->intIdDevice->SetSearchEntity('assignment');
+        $this->intIdDevice->Name = 'idDevice';
+        $this->intIdDevice->AddCssClass('input-large');
+    }
+    public function InitIdSessionAutocomplete() {
+        $this->intIdSession = new MJaxBSAutocompleteTextBox($this, $this, '_searchSession');
+        $this->intIdSession->SetSearchEntity('assignment');
+        $this->intIdSession->Name = 'idSession';
+        $this->intIdSession->AddCssClass('input-large');
+    }
+    public function InitEventAutocomplete() {
+        $this->strEvent = new MJaxBSAutocompleteTextBox($this);
+        $this->strEvent->SetSearchEntity('assignment', 'event');
+        $this->strEvent->Name = 'event';
+        $this->strEvent->AddCssClass('input-large');
+    }
+    public function InitApartatusAutocomplete() {
+        $this->strApartatus = new MJaxBSAutocompleteTextBox($this);
+        $this->strApartatus->SetSearchEntity('assignment', 'apartatus');
+        $this->strApartatus->Name = 'apartatus';
+        $this->strApartatus->AddCssClass('input-large');
     }
 }
 ?>

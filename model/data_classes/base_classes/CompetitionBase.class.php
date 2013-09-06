@@ -462,10 +462,14 @@ class CompetitionBase extends BaseEntity {
                 $this->arrDBFields['signupCutOffDate'] = $mixValue;
             break;
             case ('IdOrgObject'):
-                if ((!is_object($mixValue)) || (!($mixValue instanceof Org))) {
+                if ((!is_null($mixValue)) && ((!is_object($mixValue)) || (!($mixValue instanceof Org)))) {
                     throw new MLCWrongTypeException('__set', $strName);
                 }
-                $this->arrDBFields['idOrg'] = $mixValue->idOrg;
+                if (!is_null($mixValue)) {
+                    $this->arrDBFields['idOrg'] = $mixValue->idOrg;
+                } else {
+                    $this->arrDBFields['idOrg'] = null;
+                }
                 $this->objIdOrg = $mixValue;
             break;
             default:

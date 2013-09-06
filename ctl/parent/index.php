@@ -13,7 +13,7 @@ class index extends FFSFeedForm
         }
 
         $this->InitFeed();
-        ksort($this->arrFeedEntities);
+        krsort($this->arrFeedEntities, SORT_NUMERIC);
 
 
     }
@@ -56,16 +56,34 @@ class index extends FFSFeedForm
         //if user is not logged in load by competition
         //if(is_null(MLCAuthDriver::User())){
 
+
             //Load All results by session
             $arrSessions = FFSApplication::GetActiveSessions();
             foreach($arrSessions as $objSession){
+
+                $arrResults = FFSApplication::GetResultsBySessionGroupByAthelete($objSession);
+                /*foreach($arrResults as $arrGroupedResults){
+                    foreach($arrGroupedResults as $objResult){
+                        if(is_null($objResult->IdAthelete)){
+                            $objResult->MarkDeleted();
+                        }
+                    }
+                }*/
                 $this->AddFeedEntity(
-                    FFSApplication::GetResultsBySessionGroupByAthelete($objSession)
+                    $arrResults
                 );
             }
             //Load All parent messages by competiton
+            $collCompetition = ParentMessage::Query(
+                sprintf(
+                    ' WHERE ParentMessage.idCompetition = %s ORDER BY queDate DESC LIMIT 5',
+                    FFSForm::Competition()->IdCompetition
+                )
+            );
+
+
             $this->AddFeedEntity(
-                ParentMessage::LoadCollByIdCompetition(FFSForm::Competition()->IdCompetition)
+                $collCompetition
             );
         //}else{
             //If user is logged in get their subscriptions(should be stored in rolls)

@@ -430,17 +430,25 @@ class ResultBase extends BaseEntity {
                 $this->arrDBFields['dispDate'] = $mixValue;
             break;
             case ('IdSessionObject'):
-                if ((!is_object($mixValue)) || (!($mixValue instanceof Session))) {
+                if ((!is_null($mixValue)) && ((!is_object($mixValue)) || (!($mixValue instanceof Session)))) {
                     throw new MLCWrongTypeException('__set', $strName);
                 }
-                $this->arrDBFields['idSession'] = $mixValue->idSession;
+                if (!is_null($mixValue)) {
+                    $this->arrDBFields['idSession'] = $mixValue->idSession;
+                } else {
+                    $this->arrDBFields['idSession'] = null;
+                }
                 $this->objIdSession = $mixValue;
             break;
             case ('IdAtheleteObject'):
-                if ((!is_object($mixValue)) || (!($mixValue instanceof Athelete))) {
+                if ((!is_null($mixValue)) && ((!is_object($mixValue)) || (!($mixValue instanceof Athelete)))) {
                     throw new MLCWrongTypeException('__set', $strName);
                 }
-                $this->arrDBFields['idAthelete'] = $mixValue->idAthelete;
+                if (!is_null($mixValue)) {
+                    $this->arrDBFields['idAthelete'] = $mixValue->idAthelete;
+                } else {
+                    $this->arrDBFields['idAthelete'] = null;
+                }
                 $this->objIdAthelete = $mixValue;
             break;
             default:

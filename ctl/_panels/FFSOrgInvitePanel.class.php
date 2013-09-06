@@ -18,8 +18,13 @@ class FFSOrgInvitePanel extends MJaxPanel{
 
         $this->pnlInvite = new MLCInvitePanel($this);
         $this->pnlInvite->AddCssClass('span4');
+        $this->pnlInvite->AddAction(
+            new MJaxSuccessEvent(),
+            new MJaxServerControlAction($this, 'btnInvite_click')
+        );
         $this->btnInvite = new MJaxLinkButton($this);
         $this->btnInvite->AddCssClass('btn btn-large');
+
         $this->btnInvite->Text = "Invite";
         $this->btnInvite->AddAction($this, 'btnInvite_click');
     }
@@ -41,12 +46,12 @@ class FFSOrgInvitePanel extends MJaxPanel{
 
         if(count($arrUsers) == 0){
             $this->pnlInvite->SetEntity($objOrg, FFSRoll::ORG_MANAGER);
-            $arrPSData = json_decode($objOrg->PsData, true);
+            $strEmail = $objOrg->PsData('Email');
             //_dv($arrPSData['Email']);
             if(
-                (array_key_exists('Email', $arrPSData))
+                (!is_null($strEmail))
             ){
-                $this->pnlInvite->txtEmail->Text = $arrPSData['Email'];
+                $this->pnlInvite->txtEmail->Text = trim($strEmail);
             }
         }else{
             $arrUserEmails = array();
@@ -64,6 +69,11 @@ class FFSOrgInvitePanel extends MJaxPanel{
         $arrOrgs = $this->pnlSelect->GetValue();
         $objOrg = $arrOrgs[0];
         $objOrgCompettion = FFSApplication::InviteOrgToCompetition($objOrg, FFSForm::Competition());
-        $this->Alert("Success!");
+        //$this->pnlInvite->txtEmail->Alert("Success!",'success');
+        $this->ActionParameter = $objOrg;
+        $this->TriggerEvent('mjax-success');
     }
+}
+class FFSOrgInvitePanelSuccessEvent extends MJaxEventBase{
+    protected $strEventName = 'ffs-org-invite-panel-success-event';
 }

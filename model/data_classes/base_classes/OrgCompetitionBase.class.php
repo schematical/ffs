@@ -354,17 +354,25 @@ class OrgCompetitionBase extends BaseEntity {
                 $this->arrDBFields['idAuthUser'] = $mixValue;
             break;
             case ('IdOrgObject'):
-                if ((!is_object($mixValue)) || (!($mixValue instanceof Org))) {
+                if ((!is_null($mixValue)) && ((!is_object($mixValue)) || (!($mixValue instanceof Org)))) {
                     throw new MLCWrongTypeException('__set', $strName);
                 }
-                $this->arrDBFields['idOrg'] = $mixValue->idOrg;
+                if (!is_null($mixValue)) {
+                    $this->arrDBFields['idOrg'] = $mixValue->idOrg;
+                } else {
+                    $this->arrDBFields['idOrg'] = null;
+                }
                 $this->objIdOrg = $mixValue;
             break;
             case ('IdCompetitionObject'):
-                if ((!is_object($mixValue)) || (!($mixValue instanceof Competition))) {
+                if ((!is_null($mixValue)) && ((!is_object($mixValue)) || (!($mixValue instanceof Competition)))) {
                     throw new MLCWrongTypeException('__set', $strName);
                 }
-                $this->arrDBFields['idCompetition'] = $mixValue->idCompetition;
+                if (!is_null($mixValue)) {
+                    $this->arrDBFields['idCompetition'] = $mixValue->idCompetition;
+                } else {
+                    $this->arrDBFields['idCompetition'] = null;
+                }
                 $this->objIdCompetition = $mixValue;
             break;
             default:

@@ -33,14 +33,21 @@ abstract class FFSFeedForm extends FFSForm{
             throw $e;
             throw new Exception("Objects passed in to this method must have a '" . $strDateField . "'");
         }
-        while(array_key_exists($intTime, $this->arrFeedEntities)){
-            $intTime += 1;
+
+        if(is_numeric($intTime)){
+            while(array_key_exists($intTime, $this->arrFeedEntities)){
+                $intTime += 1;
+            }
+            $this->arrFeedEntities[$intTime] = $this->GetFeedEntityCtl($mixFeedEntity, $mixOrigData);
+        }else{
+            throw new Exception("Invalid time to sort by");
         }
-        $this->arrFeedEntities[$intTime] = $this->GetFeedEntityCtl($mixFeedEntity, $mixOrigData);
+
 
     }
     public function Pre_Render(){
-        ksort($this->arrFeedEntities);
+        _dv(array_keys($this->arrFeedEntities));
+        krsort($this->arrFeedEntities, SORT_NUMERIC);
         foreach($this->arrFeedEntities as $pnlFeedEntite){
             $this->AddWidget('x','x', $pnlFeedEntite);
         }

@@ -47,7 +47,7 @@ class AtheleteListPanelBase extends MJaxTable {
     }
     public function SetupCols() {
         //$this->AddColumn('idAthelete','idAthelete');
-        $this->AddColumn('idOrg', ' Org', $this, 'render_idOrg', 'MJaxTextBox');
+        $this->AddColumn('IdOrgObject', ' Org');
         $this->AddColumn('firstName', ' First Name', null, null, 'MJaxTextBox');
         $this->AddColumn('lastName', ' Last Name', null, null, 'MJaxTextBox');
         $this->AddColumn('memType', ' Mem Type', null, null, 'MJaxTextBox');

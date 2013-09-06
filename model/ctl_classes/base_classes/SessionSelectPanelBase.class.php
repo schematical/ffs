@@ -30,7 +30,8 @@ class SessionSelectPanelBase extends MJaxPanel {
     public function __construct($objParentControl, $strControlId = null) {
         parent::__construct($objParentControl, $strControlId);
         $this->strTemplate = __VIEW_ACTIVE_APP_DIR__ . '/www/ctl_panels/' . get_class($this) . '.tpl.php';
-        $this->txtSearch = new MJaxBSAutocompleteTextBox($this, '/data/search?mjax-route-ext=Session');
+        $this->txtSearch = new MJaxBSAutocompleteTextBox($this);
+        $this->txtSearch->Url = '/data/search?mjax-route-ext=Session';
         $this->txtSearch->Name = 'idSession';
         $this->txtSearch->AddCssClass('input-large');
         $this->txtSearch->AddAction(new MJaxChangeEvent() , new MJaxServerControlAction($this, 'txtSearch_change'));

@@ -18,9 +18,9 @@ class sessionDetails extends FFSForm {
     public function Form_Create() {
         parent::Form_Create();
 
-        $this->InitEnrollmentList();
+       // $this->InitEnrollmentList();
         $this->InitResults();
-        $this->InitAssignements();
+       // $this->InitAssignements();
         if(!is_null(MLCApplication::QS(FFSQS::UseWizzard))){
             $this->InitWizzard();
         }

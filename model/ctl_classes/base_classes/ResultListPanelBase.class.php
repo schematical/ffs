@@ -45,8 +45,8 @@ class ResultListPanelBase extends MJaxTable {
     }
     public function SetupCols() {
         //$this->AddColumn('idResult','idResult');
-        $this->AddColumn('idSession', ' Session', $this, 'render_idSession', 'MJaxTextBox');
-        $this->AddColumn('idAthelete', ' Athelete', $this, 'render_idAthelete', 'MJaxTextBox');
+        $this->AddColumn('IdSessionObject', ' Session');
+        $this->AddColumn('IdAtheleteObject', ' Athelete');
         $this->AddColumn('score', ' Score', null, null, 'MJaxTextBox');
         $this->AddColumn('judge', ' Judge', null, null, 'MJaxTextBox');
         $this->AddColumn('flag', ' Flag', null, null, 'MJaxTextBox');

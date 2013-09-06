@@ -11,6 +11,9 @@
 * - btnDelete_click()
 * - btnDelete_confirm()
 * - IsNew()
+* - InitIdCompetitionAutocomplete()
+* - InitNameAutocomplete()
+* - InitEquipmentSetAutocomplete()
 * Classes list:
 * - SessionEditPanelBase extends MJaxPanel
 */
@@ -153,6 +156,24 @@ class SessionEditPanelBase extends MJaxPanel {
     }
     public function IsNew() {
         return is_null($this->objSession);
+    }
+    public function InitIdCompetitionAutocomplete() {
+        $this->intIdCompetition = new MJaxBSAutocompleteTextBox($this, $this, '_searchCompetition');
+        $this->intIdCompetition->SetSearchEntity('session');
+        $this->intIdCompetition->Name = 'idCompetition';
+        $this->intIdCompetition->AddCssClass('input-large');
+    }
+    public function InitNameAutocomplete() {
+        $this->strName = new MJaxBSAutocompleteTextBox($this);
+        $this->strName->SetSearchEntity('session', 'name');
+        $this->strName->Name = 'name';
+        $this->strName->AddCssClass('input-large');
+    }
+    public function InitEquipmentSetAutocomplete() {
+        $this->strEquipmentSet = new MJaxBSAutocompleteTextBox($this);
+        $this->strEquipmentSet->SetSearchEntity('session', 'equipmentSet');
+        $this->strEquipmentSet->Name = 'equipmentSet';
+        $this->strEquipmentSet->AddCssClass('input-large');
     }
 }
 ?>

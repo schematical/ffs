@@ -11,6 +11,12 @@
 * - btnDelete_click()
 * - btnDelete_confirm()
 * - IsNew()
+* - InitIdAtheleteAutocomplete()
+* - InitAtheleteNameAutocomplete()
+* - InitInviteDataAutocomplete()
+* - InitInviteTypeAutocomplete()
+* - InitInviteTokenAutocomplete()
+* - InitIdCompetitionAutocomplete()
 * Classes list:
 * - ParentMessageEditPanelBase extends MJaxPanel
 */
@@ -177,6 +183,42 @@ class ParentMessageEditPanelBase extends MJaxPanel {
     }
     public function IsNew() {
         return is_null($this->objParentMessage);
+    }
+    public function InitIdAtheleteAutocomplete() {
+        $this->intIdAthelete = new MJaxBSAutocompleteTextBox($this, $this, '_searchAthelete');
+        $this->intIdAthelete->SetSearchEntity('parentmessage');
+        $this->intIdAthelete->Name = 'idAthelete';
+        $this->intIdAthelete->AddCssClass('input-large');
+    }
+    public function InitAtheleteNameAutocomplete() {
+        $this->strAtheleteName = new MJaxBSAutocompleteTextBox($this);
+        $this->strAtheleteName->SetSearchEntity('parentmessage', 'atheleteName');
+        $this->strAtheleteName->Name = 'atheleteName';
+        $this->strAtheleteName->AddCssClass('input-large');
+    }
+    public function InitInviteDataAutocomplete() {
+        $this->strInviteData = new MJaxBSAutocompleteTextBox($this);
+        $this->strInviteData->SetSearchEntity('parentmessage', 'inviteData');
+        $this->strInviteData->Name = 'inviteData';
+        $this->strInviteData->AddCssClass('input-large');
+    }
+    public function InitInviteTypeAutocomplete() {
+        $this->strInviteType = new MJaxBSAutocompleteTextBox($this);
+        $this->strInviteType->SetSearchEntity('parentmessage', 'inviteType');
+        $this->strInviteType->Name = 'inviteType';
+        $this->strInviteType->AddCssClass('input-large');
+    }
+    public function InitInviteTokenAutocomplete() {
+        $this->strInviteToken = new MJaxBSAutocompleteTextBox($this);
+        $this->strInviteToken->SetSearchEntity('parentmessage', 'inviteToken');
+        $this->strInviteToken->Name = 'inviteToken';
+        $this->strInviteToken->AddCssClass('input-large');
+    }
+    public function InitIdCompetitionAutocomplete() {
+        $this->intIdCompetition = new MJaxBSAutocompleteTextBox($this, $this, '_searchCompetition');
+        $this->intIdCompetition->SetSearchEntity('parentmessage');
+        $this->intIdCompetition->Name = 'idCompetition';
+        $this->intIdCompetition->AddCssClass('input-large');
     }
 }
 ?>

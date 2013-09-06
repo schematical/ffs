@@ -11,6 +11,11 @@
 * - btnDelete_click()
 * - btnDelete_confirm()
 * - IsNew()
+* - InitIdSessionAutocomplete()
+* - InitIdAtheleteAutocomplete()
+* - InitScoreAutocomplete()
+* - InitJudgeAutocomplete()
+* - InitEventAutocomplete()
 * Classes list:
 * - ResultEditPanelBase extends MJaxPanel
 */
@@ -141,6 +146,36 @@ class ResultEditPanelBase extends MJaxPanel {
     }
     public function IsNew() {
         return is_null($this->objResult);
+    }
+    public function InitIdSessionAutocomplete() {
+        $this->intIdSession = new MJaxBSAutocompleteTextBox($this, $this, '_searchSession');
+        $this->intIdSession->SetSearchEntity('result');
+        $this->intIdSession->Name = 'idSession';
+        $this->intIdSession->AddCssClass('input-large');
+    }
+    public function InitIdAtheleteAutocomplete() {
+        $this->intIdAthelete = new MJaxBSAutocompleteTextBox($this, $this, '_searchAthelete');
+        $this->intIdAthelete->SetSearchEntity('result');
+        $this->intIdAthelete->Name = 'idAthelete';
+        $this->intIdAthelete->AddCssClass('input-large');
+    }
+    public function InitScoreAutocomplete() {
+        $this->strScore = new MJaxBSAutocompleteTextBox($this);
+        $this->strScore->SetSearchEntity('result', 'score');
+        $this->strScore->Name = 'score';
+        $this->strScore->AddCssClass('input-large');
+    }
+    public function InitJudgeAutocomplete() {
+        $this->strJudge = new MJaxBSAutocompleteTextBox($this);
+        $this->strJudge->SetSearchEntity('result', 'judge');
+        $this->strJudge->Name = 'judge';
+        $this->strJudge->AddCssClass('input-large');
+    }
+    public function InitEventAutocomplete() {
+        $this->strEvent = new MJaxBSAutocompleteTextBox($this);
+        $this->strEvent->SetSearchEntity('result', 'event');
+        $this->strEvent->Name = 'event';
+        $this->strEvent->AddCssClass('input-large');
     }
 }
 ?>

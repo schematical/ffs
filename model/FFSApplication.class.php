@@ -14,11 +14,14 @@ abstract class FFSApplication{
             }catch(Exception $e){
                 throw new Exception("Objects(" . get_class($objEntity) . ") passed in to this method must have a '" . $strDateField . "'");
             }
-            while(array_key_exists($intTime, $arrReturn)){
-                $intTime += 1;
+
+            if(is_numeric($intTime)){
+                while(array_key_exists($intTime, $arrReturn)){
+                    $intTime += 1;
+                }
+                $arrReturn[$intTime] = $objEntity;
             }
 
-            $arrReturn[$intTime] = $objEntity;
         }
         return array_values($arrReturn);
 
@@ -334,6 +337,7 @@ abstract class FFSApplication{
             MLCDateTime::Now(),
             MLCDateTime::Now()
         );
+
         if(count($arrEquipmentSet) > 0){
             $strQuery .= sprintf(
                 ' AND equipmentSet IN "%s"',
@@ -381,12 +385,15 @@ abstract class FFSApplication{
 
         $objOrgCompetition = OrgCompetition::Query(
             sprintf(
-                'WHERE idOrg = %s AND idCompetition = %s',
+                'WHERE OrgCompetition_rel.idOrg = %s AND OrgCompetition_rel.idCompetition = %s',
                 $objOrg->IdOrg,
                 $objCompetition->IdCompetition
-            )
+            ),
+            true
         );
-        $objOrgCompetition = new OrgCompetition();
+        if(is_null($objOrgCompetition)){
+            $objOrgCompetition = new OrgCompetition();
+        }
         $objOrgCompetition->IdOrg = $objOrg->IdOrg;
         $objOrgCompetition->IdCompetition = $objCompetition->IdCompetition;
         $objOrgCompetition->CreDate = MLCDateTime::Now();

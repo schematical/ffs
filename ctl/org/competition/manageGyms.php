@@ -50,30 +50,22 @@ class OrgManageForm extends OrgManageFormBase {
     }
     public function InitSelectPanel() {
         $this->pnlSelect = new FFSOrgInvitePanel($this);
+        $this->pnlSelect->AddAction(
+            new MJaxSuccessEvent(),
+            new MJaxServerControlAction(
+                $this,
+                'pnlInvite_success'
+            )
+        );
 
         $wgtOrg = $this->AddWidget('Select Org', 'icon-select', $this->pnlSelect);
         $wgtOrg->AddCssClass('span12');
         return $wgtOrg;
     }
-    /*public function lnkEdit_click($strFormId, $strControlId, $strActionParameter) {
-        parent::lnkEdit_click($strFormId, $strControlId, $strActionParameter);
-        $objOrg = Org::LoadById($strActionParameter);
-        $arrEntityManagers = MLCAuthDriver::GetRollByEntity($objOrg, FFSRoll::ORG_MANAGER);
-        if(
-            (count($arrEntityManagers) == 0) ||
-            (MLCAuthDriver::User()->HasRoll($objOrg, FFSRoll::ORG_MANAGER))
-        ){
-            $this->pnlInvite->SetEntity(
-                $objOrg,
-                FFSRoll::ORG_MANAGER
-            );
-            $this->wgtInvite->Style->Display = 'inline';
-        }else{
-            //Hide it
-             $this->wgtInvite->Style->Display = 'none';
-        }
-
-    }*/
+    public function pnlInvite_success($strFormId, $strControlId, $objOrg){
+        $this->lstOrgs->AddRow($objOrg);
+        $this->ScrollTo($this->lstOrgs);
+    }
     public function pnlEdit_save($strFormId, $strControlId, $objOrg){
         parent::pnlEdit_save($strFormId, $strControlId, $objOrg);
 
@@ -96,6 +88,13 @@ class OrgManageForm extends OrgManageFormBase {
             'Invite',
             'envelope-alt',
             $this->pnlInvite
+        );
+        $this->pnlInvite->AddAction(
+            new MJaxSuccessEvent(),
+            new MJaxServerControlAction(
+                $this,
+                'pnlInvite_success'
+            )
         );
         $this->wgtInvite->AddCssClass('span6');
     }

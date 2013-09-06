@@ -47,7 +47,7 @@ class SessionListPanelBase extends MJaxTable {
     }
     public function SetupCols() {
         //$this->AddColumn('idSession','idSession');
-        $this->AddColumn('idCompetition', ' Competition', $this, 'render_idCompetition', 'MJaxTextBox');
+        $this->AddColumn('IdCompetitionObject', ' Competition');
         $this->AddColumn('name', ' Name', null, null, 'MJaxTextBox');
         $this->AddColumn('notes', ' Notes', null, null, 'MJaxTextArea');
         $this->AddColumn('equipmentSet', ' Equipment Set', null, null, 'MJaxTextBox');

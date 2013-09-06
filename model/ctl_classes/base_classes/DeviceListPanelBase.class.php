@@ -48,7 +48,7 @@ class DeviceListPanelBase extends MJaxTable {
         $this->AddColumn('name', ' Name', null, null, 'MJaxTextBox');
         $this->AddColumn('token', ' Token', null, null, 'MJaxTextBox');
         $this->AddColumn('inviteEmail', ' Invite Email', null, null, 'MJaxTextBox');
-        $this->AddColumn('idOrg', ' Org', $this, 'render_idOrg', 'MJaxTextBox');
+        $this->AddColumn('IdOrgObject', ' Org');
         $this->InitRowControl('view_Assignments', 'View Assignments', $this, 'lnkViewAssignments_click', 'btn btn-small');
     }
     public function lnkViewAssignments_click($strFormId, $strControlId, $strActionParameter) {

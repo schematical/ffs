@@ -45,12 +45,12 @@ class ParentMessageListPanelBase extends MJaxTable {
     }
     public function SetupCols() {
         //$this->AddColumn('idParentMessage','idParentMessage');
-        $this->AddColumn('idAthelete', ' Athelete', $this, 'render_idAthelete', 'MJaxTextBox');
+        $this->AddColumn('IdAtheleteObject', ' Athelete');
         $this->AddColumn('atheleteName', ' Athelete Name', null, null, 'MJaxTextBox');
         $this->AddColumn('message', ' Message', null, null, 'MJaxTextArea');
         $this->AddColumn('inviteType', ' Invite Type', null, null, 'MJaxTextBox');
         $this->AddColumn('inviteToken', ' Invite Token', null, null, 'MJaxTextBox');
-        $this->AddColumn('idCompetition', ' Competition', $this, 'render_idCompetition', 'MJaxTextBox');
+        $this->AddColumn('IdCompetitionObject', ' Competition');
     }
     public function render_idAthelete($intIdIdAthelete, $objRow, $objColumn) {
         if (is_null($intIdIdAthelete)) {

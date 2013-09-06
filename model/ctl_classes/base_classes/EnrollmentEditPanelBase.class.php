@@ -11,6 +11,18 @@
 * - btnDelete_click()
 * - btnDelete_confirm()
 * - IsNew()
+* - InitIdAtheleteAutocomplete()
+* - InitIdCompetitionAutocomplete()
+* - InitIdSessionAutocomplete()
+* - InitFlightAutocomplete()
+* - InitDivisionAutocomplete()
+* - InitAgeGroupAutocomplete()
+* - InitMisc1Autocomplete()
+* - InitMisc2Autocomplete()
+* - InitMisc3Autocomplete()
+* - InitMisc4Autocomplete()
+* - InitMisc5Autocomplete()
+* - InitLevelAutocomplete()
 * Classes list:
 * - EnrollmentEditPanelBase extends MJaxPanel
 */
@@ -176,6 +188,78 @@ class EnrollmentEditPanelBase extends MJaxPanel {
     }
     public function IsNew() {
         return is_null($this->objEnrollment);
+    }
+    public function InitIdAtheleteAutocomplete() {
+        $this->intIdAthelete = new MJaxBSAutocompleteTextBox($this, $this, '_searchAthelete');
+        $this->intIdAthelete->SetSearchEntity('enrollment');
+        $this->intIdAthelete->Name = 'idAthelete';
+        $this->intIdAthelete->AddCssClass('input-large');
+    }
+    public function InitIdCompetitionAutocomplete() {
+        $this->intIdCompetition = new MJaxBSAutocompleteTextBox($this, $this, '_searchCompetition');
+        $this->intIdCompetition->SetSearchEntity('enrollment');
+        $this->intIdCompetition->Name = 'idCompetition';
+        $this->intIdCompetition->AddCssClass('input-large');
+    }
+    public function InitIdSessionAutocomplete() {
+        $this->intIdSession = new MJaxBSAutocompleteTextBox($this, $this, '_searchSession');
+        $this->intIdSession->SetSearchEntity('enrollment');
+        $this->intIdSession->Name = 'idSession';
+        $this->intIdSession->AddCssClass('input-large');
+    }
+    public function InitFlightAutocomplete() {
+        $this->strFlight = new MJaxBSAutocompleteTextBox($this);
+        $this->strFlight->SetSearchEntity('enrollment', 'flight');
+        $this->strFlight->Name = 'flight';
+        $this->strFlight->AddCssClass('input-large');
+    }
+    public function InitDivisionAutocomplete() {
+        $this->strDivision = new MJaxBSAutocompleteTextBox($this);
+        $this->strDivision->SetSearchEntity('enrollment', 'division');
+        $this->strDivision->Name = 'division';
+        $this->strDivision->AddCssClass('input-large');
+    }
+    public function InitAgeGroupAutocomplete() {
+        $this->strAgeGroup = new MJaxBSAutocompleteTextBox($this);
+        $this->strAgeGroup->SetSearchEntity('enrollment', 'ageGroup');
+        $this->strAgeGroup->Name = 'ageGroup';
+        $this->strAgeGroup->AddCssClass('input-large');
+    }
+    public function InitMisc1Autocomplete() {
+        $this->strMisc1 = new MJaxBSAutocompleteTextBox($this);
+        $this->strMisc1->SetSearchEntity('enrollment', 'misc1');
+        $this->strMisc1->Name = 'misc1';
+        $this->strMisc1->AddCssClass('input-large');
+    }
+    public function InitMisc2Autocomplete() {
+        $this->strMisc2 = new MJaxBSAutocompleteTextBox($this);
+        $this->strMisc2->SetSearchEntity('enrollment', 'misc2');
+        $this->strMisc2->Name = 'misc2';
+        $this->strMisc2->AddCssClass('input-large');
+    }
+    public function InitMisc3Autocomplete() {
+        $this->strMisc3 = new MJaxBSAutocompleteTextBox($this);
+        $this->strMisc3->SetSearchEntity('enrollment', 'misc3');
+        $this->strMisc3->Name = 'misc3';
+        $this->strMisc3->AddCssClass('input-large');
+    }
+    public function InitMisc4Autocomplete() {
+        $this->strMisc4 = new MJaxBSAutocompleteTextBox($this);
+        $this->strMisc4->SetSearchEntity('enrollment', 'misc4');
+        $this->strMisc4->Name = 'misc4';
+        $this->strMisc4->AddCssClass('input-large');
+    }
+    public function InitMisc5Autocomplete() {
+        $this->strMisc5 = new MJaxBSAutocompleteTextBox($this);
+        $this->strMisc5->SetSearchEntity('enrollment', 'misc5');
+        $this->strMisc5->Name = 'misc5';
+        $this->strMisc5->AddCssClass('input-large');
+    }
+    public function InitLevelAutocomplete() {
+        $this->strLevel = new MJaxBSAutocompleteTextBox($this);
+        $this->strLevel->SetSearchEntity('enrollment', 'level');
+        $this->strLevel->Name = 'level';
+        $this->strLevel->AddCssClass('input-large');
     }
 }
 ?>

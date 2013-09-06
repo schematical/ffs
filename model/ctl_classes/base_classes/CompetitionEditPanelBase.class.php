@@ -11,6 +11,9 @@
 * - btnDelete_click()
 * - btnDelete_confirm()
 * - IsNew()
+* - InitNameAutocomplete()
+* - InitIdOrgAutocomplete()
+* - InitNamespaceAutocomplete()
 * Classes list:
 * - CompetitionEditPanelBase extends MJaxPanel
 */
@@ -163,6 +166,24 @@ class CompetitionEditPanelBase extends MJaxPanel {
     }
     public function IsNew() {
         return is_null($this->objCompetition);
+    }
+    public function InitNameAutocomplete() {
+        $this->strName = new MJaxBSAutocompleteTextBox($this);
+        $this->strName->SetSearchEntity('competition', 'name');
+        $this->strName->Name = 'name';
+        $this->strName->AddCssClass('input-large');
+    }
+    public function InitIdOrgAutocomplete() {
+        $this->intIdOrg = new MJaxBSAutocompleteTextBox($this, $this, '_searchOrg');
+        $this->intIdOrg->SetSearchEntity('competition');
+        $this->intIdOrg->Name = 'idOrg';
+        $this->intIdOrg->AddCssClass('input-large');
+    }
+    public function InitNamespaceAutocomplete() {
+        $this->strNamespace = new MJaxBSAutocompleteTextBox($this);
+        $this->strNamespace->SetSearchEntity('competition', 'namespace');
+        $this->strNamespace->Name = 'namespace';
+        $this->strNamespace->AddCssClass('input-large');
     }
 }
 ?>

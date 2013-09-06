@@ -11,6 +11,12 @@
 * - btnDelete_click()
 * - btnDelete_confirm()
 * - IsNew()
+* - InitIdOrgAutocomplete()
+* - InitFirstNameAutocomplete()
+* - InitLastNameAutocomplete()
+* - InitMemTypeAutocomplete()
+* - InitMemIdAutocomplete()
+* - InitLevelAutocomplete()
 * Classes list:
 * - AtheleteEditPanelBase extends MJaxPanel
 */
@@ -161,6 +167,42 @@ class AtheleteEditPanelBase extends MJaxPanel {
     }
     public function IsNew() {
         return is_null($this->objAthelete);
+    }
+    public function InitIdOrgAutocomplete() {
+        $this->intIdOrg = new MJaxBSAutocompleteTextBox($this, $this, '_searchOrg');
+        $this->intIdOrg->SetSearchEntity('athelete');
+        $this->intIdOrg->Name = 'idOrg';
+        $this->intIdOrg->AddCssClass('input-large');
+    }
+    public function InitFirstNameAutocomplete() {
+        $this->strFirstName = new MJaxBSAutocompleteTextBox($this);
+        $this->strFirstName->SetSearchEntity('athelete', 'firstName');
+        $this->strFirstName->Name = 'firstName';
+        $this->strFirstName->AddCssClass('input-large');
+    }
+    public function InitLastNameAutocomplete() {
+        $this->strLastName = new MJaxBSAutocompleteTextBox($this);
+        $this->strLastName->SetSearchEntity('athelete', 'lastName');
+        $this->strLastName->Name = 'lastName';
+        $this->strLastName->AddCssClass('input-large');
+    }
+    public function InitMemTypeAutocomplete() {
+        $this->strMemType = new MJaxBSAutocompleteTextBox($this);
+        $this->strMemType->SetSearchEntity('athelete', 'memType');
+        $this->strMemType->Name = 'memType';
+        $this->strMemType->AddCssClass('input-large');
+    }
+    public function InitMemIdAutocomplete() {
+        $this->strMemId = new MJaxBSAutocompleteTextBox($this);
+        $this->strMemId->SetSearchEntity('athelete', 'memId');
+        $this->strMemId->Name = 'memId';
+        $this->strMemId->AddCssClass('input-large');
+    }
+    public function InitLevelAutocomplete() {
+        $this->strLevel = new MJaxBSAutocompleteTextBox($this);
+        $this->strLevel->SetSearchEntity('athelete', 'level');
+        $this->strLevel->Name = 'level';
+        $this->strLevel->AddCssClass('input-large');
     }
 }
 ?>

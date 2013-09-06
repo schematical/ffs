@@ -11,6 +11,10 @@
 * - btnDelete_click()
 * - btnDelete_confirm()
 * - IsNew()
+* - InitNameAutocomplete()
+* - InitTokenAutocomplete()
+* - InitInviteEmailAutocomplete()
+* - InitIdOrgAutocomplete()
 * Classes list:
 * - DeviceEditPanelBase extends MJaxPanel
 */
@@ -126,6 +130,30 @@ class DeviceEditPanelBase extends MJaxPanel {
     }
     public function IsNew() {
         return is_null($this->objDevice);
+    }
+    public function InitNameAutocomplete() {
+        $this->strName = new MJaxBSAutocompleteTextBox($this);
+        $this->strName->SetSearchEntity('device', 'name');
+        $this->strName->Name = 'name';
+        $this->strName->AddCssClass('input-large');
+    }
+    public function InitTokenAutocomplete() {
+        $this->strToken = new MJaxBSAutocompleteTextBox($this);
+        $this->strToken->SetSearchEntity('device', 'token');
+        $this->strToken->Name = 'token';
+        $this->strToken->AddCssClass('input-large');
+    }
+    public function InitInviteEmailAutocomplete() {
+        $this->strInviteEmail = new MJaxBSAutocompleteTextBox($this);
+        $this->strInviteEmail->SetSearchEntity('device', 'inviteEmail');
+        $this->strInviteEmail->Name = 'inviteEmail';
+        $this->strInviteEmail->AddCssClass('input-large');
+    }
+    public function InitIdOrgAutocomplete() {
+        $this->intIdOrg = new MJaxBSAutocompleteTextBox($this, $this, '_searchOrg');
+        $this->intIdOrg->SetSearchEntity('device');
+        $this->intIdOrg->Name = 'idOrg';
+        $this->intIdOrg->AddCssClass('input-large');
     }
 }
 ?>

@@ -149,7 +149,7 @@ class SessionEditPanel extends SessionEditPanelBase
     }
 
 
-    public function InitnameAutocomplete()
+   /* public function InitnameAutocomplete()
     {
 
 
@@ -168,7 +168,7 @@ class SessionEditPanel extends SessionEditPanelBase
 
         $this->strEquipmentSet->Name = 'equipmentSet';
         $this->strEquipmentSet->AddCssClass('input-large');
-    }
+    }*/
 
 
     public function _searchCompetition($objRoute)
