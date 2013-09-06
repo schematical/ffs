@@ -135,10 +135,34 @@ class SessionEditPanelBase extends MJaxPanel {
         $this->objSession->startDate = $this->dttStartDate->GetValue();
         //Is special field!!!!!
         $this->objSession->endDate = $this->dttEndDate->GetValue();
-        $this->objSession->name = $this->strName->Text;
-        $this->objSession->notes = $this->strNotes->Text;
+        if (get_class($this->strName) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strName->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('name');
+            }
+            $this->objSession->name = $mixEntity;
+        } else {
+            $this->objSession->name = $this->strName->Text;
+        }
+        if (get_class($this->strNotes) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strNotes->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('notes');
+            }
+            $this->objSession->notes = $mixEntity;
+        } else {
+            $this->objSession->notes = $this->strNotes->Text;
+        }
         //Is special field!!!!!
-        $this->objSession->equipmentSet = $this->strEquipmentSet->Text;
+        if (get_class($this->strEquipmentSet) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strEquipmentSet->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('equipmentSet');
+            }
+            $this->objSession->equipmentSet = $mixEntity;
+        } else {
+            $this->objSession->equipmentSet = $this->strEquipmentSet->Text;
+        }
         //Is special field!!!!!
         $this->objSession->Save();
         //Experimental save event trigger
@@ -158,8 +182,8 @@ class SessionEditPanelBase extends MJaxPanel {
         return is_null($this->objSession);
     }
     public function InitIdCompetitionAutocomplete() {
-        $this->intIdCompetition = new MJaxBSAutocompleteTextBox($this, $this, '_searchCompetition');
-        $this->intIdCompetition->SetSearchEntity('session');
+        $this->intIdCompetition = new MJaxBSAutocompleteTextBox($this);
+        $this->intIdCompetition->SetSearchEntity('competition');
         $this->intIdCompetition->Name = 'idCompetition';
         $this->intIdCompetition->AddCssClass('input-large');
     }

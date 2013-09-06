@@ -132,14 +132,54 @@ class OrgEditPanelBase extends MJaxPanel {
             //Create a new one
             $this->objOrg = new Org();
         }
-        $this->objOrg->namespace = $this->strNamespace->Text;
-        $this->objOrg->name = $this->strName->Text;
+        if (get_class($this->strNamespace) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strNamespace->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('namespace');
+            }
+            $this->objOrg->namespace = $mixEntity;
+        } else {
+            $this->objOrg->namespace = $this->strNamespace->Text;
+        }
+        if (get_class($this->strName) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strName->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('name');
+            }
+            $this->objOrg->name = $mixEntity;
+        } else {
+            $this->objOrg->name = $this->strName->Text;
+        }
         //Is special field!!!!!
         //Do nothing this is a creDate
         //Is special field!!!!!
-        $this->objOrg->idImportAuthUser = $this->intIdImportAuthUser->Text;
-        $this->objOrg->clubNum = $this->strClubNum->Text;
-        $this->objOrg->clubType = $this->strClubType->Text;
+        if (get_class($this->intIdImportAuthUser) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->intIdImportAuthUser->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('idImportAuthUser');
+            }
+            $this->objOrg->idImportAuthUser = $mixEntity;
+        } else {
+            $this->objOrg->idImportAuthUser = $this->intIdImportAuthUser->Text;
+        }
+        if (get_class($this->strClubNum) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strClubNum->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('clubNum');
+            }
+            $this->objOrg->clubNum = $mixEntity;
+        } else {
+            $this->objOrg->clubNum = $this->strClubNum->Text;
+        }
+        if (get_class($this->strClubType) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strClubType->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('clubType');
+            }
+            $this->objOrg->clubType = $mixEntity;
+        } else {
+            $this->objOrg->clubType = $this->strClubType->Text;
+        }
         $this->objOrg->Save();
         //Experimental save event trigger
         $this->ActionParameter = $this->objOrg;

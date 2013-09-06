@@ -149,8 +149,24 @@ class ParentMessageEditPanelBase extends MJaxPanel {
             //Create a new one
             $this->objParentMessage = new ParentMessage();
         }
-        $this->objParentMessage->atheleteName = $this->strAtheleteName->Text;
-        $this->objParentMessage->message = $this->strMessage->Text;
+        if (get_class($this->strAtheleteName) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strAtheleteName->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('atheleteName');
+            }
+            $this->objParentMessage->atheleteName = $mixEntity;
+        } else {
+            $this->objParentMessage->atheleteName = $this->strAtheleteName->Text;
+        }
+        if (get_class($this->strMessage) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strMessage->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('message');
+            }
+            $this->objParentMessage->message = $mixEntity;
+        } else {
+            $this->objParentMessage->message = $this->strMessage->Text;
+        }
         //Is special field!!!!!
         //Do nothing this is a creDate
         //Is special field!!!!!
@@ -160,8 +176,24 @@ class ParentMessageEditPanelBase extends MJaxPanel {
         //Is special field!!!!!
         $this->objParentMessage->queDate = $this->dttQueDate->GetValue();
         //Is special field!!!!!
-        $this->objParentMessage->inviteType = $this->strInviteType->Text;
-        $this->objParentMessage->inviteToken = $this->strInviteToken->Text;
+        if (get_class($this->strInviteType) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strInviteType->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('inviteType');
+            }
+            $this->objParentMessage->inviteType = $mixEntity;
+        } else {
+            $this->objParentMessage->inviteType = $this->strInviteType->Text;
+        }
+        if (get_class($this->strInviteToken) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strInviteToken->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('inviteToken');
+            }
+            $this->objParentMessage->inviteToken = $mixEntity;
+        } else {
+            $this->objParentMessage->inviteToken = $this->strInviteToken->Text;
+        }
         //Is special field!!!!!
         $this->objParentMessage->inviteViewDate = $this->dttInviteViewDate->GetValue();
         //Is special field!!!!!
@@ -185,8 +217,8 @@ class ParentMessageEditPanelBase extends MJaxPanel {
         return is_null($this->objParentMessage);
     }
     public function InitIdAtheleteAutocomplete() {
-        $this->intIdAthelete = new MJaxBSAutocompleteTextBox($this, $this, '_searchAthelete');
-        $this->intIdAthelete->SetSearchEntity('parentmessage');
+        $this->intIdAthelete = new MJaxBSAutocompleteTextBox($this);
+        $this->intIdAthelete->SetSearchEntity('athelete');
         $this->intIdAthelete->Name = 'idAthelete';
         $this->intIdAthelete->AddCssClass('input-large');
     }
@@ -215,8 +247,8 @@ class ParentMessageEditPanelBase extends MJaxPanel {
         $this->strInviteToken->AddCssClass('input-large');
     }
     public function InitIdCompetitionAutocomplete() {
-        $this->intIdCompetition = new MJaxBSAutocompleteTextBox($this, $this, '_searchCompetition');
-        $this->intIdCompetition->SetSearchEntity('parentmessage');
+        $this->intIdCompetition = new MJaxBSAutocompleteTextBox($this);
+        $this->intIdCompetition->SetSearchEntity('competition');
         $this->intIdCompetition->Name = 'idCompetition';
         $this->intIdCompetition->AddCssClass('input-large');
     }

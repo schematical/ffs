@@ -161,17 +161,89 @@ class EnrollmentEditPanelBase extends MJaxPanel {
             //Create a new one
             $this->objEnrollment = new Enrollment();
         }
-        $this->objEnrollment->flight = $this->strFlight->Text;
-        $this->objEnrollment->division = $this->strDivision->Text;
-        $this->objEnrollment->ageGroup = $this->strAgeGroup->Text;
-        $this->objEnrollment->misc1 = $this->strMisc1->Text;
-        $this->objEnrollment->misc2 = $this->strMisc2->Text;
-        $this->objEnrollment->misc3 = $this->strMisc3->Text;
-        $this->objEnrollment->misc4 = $this->strMisc4->Text;
-        $this->objEnrollment->misc5 = $this->strMisc5->Text;
+        if (get_class($this->strFlight) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strFlight->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('flight');
+            }
+            $this->objEnrollment->flight = $mixEntity;
+        } else {
+            $this->objEnrollment->flight = $this->strFlight->Text;
+        }
+        if (get_class($this->strDivision) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strDivision->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('division');
+            }
+            $this->objEnrollment->division = $mixEntity;
+        } else {
+            $this->objEnrollment->division = $this->strDivision->Text;
+        }
+        if (get_class($this->strAgeGroup) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strAgeGroup->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('ageGroup');
+            }
+            $this->objEnrollment->ageGroup = $mixEntity;
+        } else {
+            $this->objEnrollment->ageGroup = $this->strAgeGroup->Text;
+        }
+        if (get_class($this->strMisc1) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strMisc1->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('misc1');
+            }
+            $this->objEnrollment->misc1 = $mixEntity;
+        } else {
+            $this->objEnrollment->misc1 = $this->strMisc1->Text;
+        }
+        if (get_class($this->strMisc2) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strMisc2->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('misc2');
+            }
+            $this->objEnrollment->misc2 = $mixEntity;
+        } else {
+            $this->objEnrollment->misc2 = $this->strMisc2->Text;
+        }
+        if (get_class($this->strMisc3) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strMisc3->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('misc3');
+            }
+            $this->objEnrollment->misc3 = $mixEntity;
+        } else {
+            $this->objEnrollment->misc3 = $this->strMisc3->Text;
+        }
+        if (get_class($this->strMisc4) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strMisc4->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('misc4');
+            }
+            $this->objEnrollment->misc4 = $mixEntity;
+        } else {
+            $this->objEnrollment->misc4 = $this->strMisc4->Text;
+        }
+        if (get_class($this->strMisc5) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strMisc5->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('misc5');
+            }
+            $this->objEnrollment->misc5 = $mixEntity;
+        } else {
+            $this->objEnrollment->misc5 = $this->strMisc5->Text;
+        }
         //Is special field!!!!!
         //Do nothing this is a creDate
-        $this->objEnrollment->level = $this->strLevel->Text;
+        if (get_class($this->strLevel) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strLevel->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('level');
+            }
+            $this->objEnrollment->level = $mixEntity;
+        } else {
+            $this->objEnrollment->level = $this->strLevel->Text;
+        }
         $this->objEnrollment->Save();
         //Experimental save event trigger
         $this->ActionParameter = $this->objEnrollment;
@@ -190,20 +262,20 @@ class EnrollmentEditPanelBase extends MJaxPanel {
         return is_null($this->objEnrollment);
     }
     public function InitIdAtheleteAutocomplete() {
-        $this->intIdAthelete = new MJaxBSAutocompleteTextBox($this, $this, '_searchAthelete');
-        $this->intIdAthelete->SetSearchEntity('enrollment');
+        $this->intIdAthelete = new MJaxBSAutocompleteTextBox($this);
+        $this->intIdAthelete->SetSearchEntity('athelete');
         $this->intIdAthelete->Name = 'idAthelete';
         $this->intIdAthelete->AddCssClass('input-large');
     }
     public function InitIdCompetitionAutocomplete() {
-        $this->intIdCompetition = new MJaxBSAutocompleteTextBox($this, $this, '_searchCompetition');
-        $this->intIdCompetition->SetSearchEntity('enrollment');
+        $this->intIdCompetition = new MJaxBSAutocompleteTextBox($this);
+        $this->intIdCompetition->SetSearchEntity('competition');
         $this->intIdCompetition->Name = 'idCompetition';
         $this->intIdCompetition->AddCssClass('input-large');
     }
     public function InitIdSessionAutocomplete() {
-        $this->intIdSession = new MJaxBSAutocompleteTextBox($this, $this, '_searchSession');
-        $this->intIdSession->SetSearchEntity('enrollment');
+        $this->intIdSession = new MJaxBSAutocompleteTextBox($this);
+        $this->intIdSession->SetSearchEntity('session');
         $this->intIdSession->Name = 'idSession';
         $this->intIdSession->AddCssClass('input-large');
     }

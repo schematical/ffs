@@ -100,5 +100,7 @@ if (!is_null($_CONTROL->strName)) { ?>
         <div class="form-actions">
             <?php if(!is_null($_CONTROL->btnSave)){ $_CONTROL->btnSave->Render(); }; ?>&nbsp;&nbsp;
             <?php  if(!is_null($_CONTROL->btnDelete)){ $_CONTROL->btnDelete->Render(); } ?>
+            <?php  if(!is_null($_CONTROL->btnContinue)){ $_CONTROL->btnContinue->Render(); } ?>
+
         </div>
     </form>

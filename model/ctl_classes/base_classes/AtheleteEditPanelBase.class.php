@@ -141,16 +141,56 @@ class AtheleteEditPanelBase extends MJaxPanel {
             //Create a new one
             $this->objAthelete = new Athelete();
         }
-        $this->objAthelete->firstName = $this->strFirstName->Text;
-        $this->objAthelete->lastName = $this->strLastName->Text;
+        if (get_class($this->strFirstName) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strFirstName->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('firstName');
+            }
+            $this->objAthelete->firstName = $mixEntity;
+        } else {
+            $this->objAthelete->firstName = $this->strFirstName->Text;
+        }
+        if (get_class($this->strLastName) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strLastName->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('lastName');
+            }
+            $this->objAthelete->lastName = $mixEntity;
+        } else {
+            $this->objAthelete->lastName = $this->strLastName->Text;
+        }
         //Is special field!!!!!
         $this->objAthelete->birthDate = $this->dttBirthDate->GetValue();
-        $this->objAthelete->memType = $this->strMemType->Text;
-        $this->objAthelete->memId = $this->strMemId->Text;
+        if (get_class($this->strMemType) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strMemType->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('memType');
+            }
+            $this->objAthelete->memType = $mixEntity;
+        } else {
+            $this->objAthelete->memType = $this->strMemType->Text;
+        }
+        if (get_class($this->strMemId) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strMemId->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('memId');
+            }
+            $this->objAthelete->memId = $mixEntity;
+        } else {
+            $this->objAthelete->memId = $this->strMemId->Text;
+        }
         //Is special field!!!!!
         //Is special field!!!!!
         //Do nothing this is a creDate
-        $this->objAthelete->level = $this->strLevel->Text;
+        if (get_class($this->strLevel) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strLevel->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('level');
+            }
+            $this->objAthelete->level = $mixEntity;
+        } else {
+            $this->objAthelete->level = $this->strLevel->Text;
+        }
         $this->objAthelete->Save();
         //Experimental save event trigger
         $this->ActionParameter = $this->objAthelete;
@@ -169,8 +209,8 @@ class AtheleteEditPanelBase extends MJaxPanel {
         return is_null($this->objAthelete);
     }
     public function InitIdOrgAutocomplete() {
-        $this->intIdOrg = new MJaxBSAutocompleteTextBox($this, $this, '_searchOrg');
-        $this->intIdOrg->SetSearchEntity('athelete');
+        $this->intIdOrg = new MJaxBSAutocompleteTextBox($this);
+        $this->intIdOrg->SetSearchEntity('org');
         $this->intIdOrg->Name = 'idOrg';
         $this->intIdOrg->AddCssClass('input-large');
     }

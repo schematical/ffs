@@ -29,31 +29,31 @@ class ParentMessageManageFormBase extends FFSForm {
         $arrAndConditions = array();
         $intIdParentMessage = MLCApplication::QS(FFSQS::ParentMessage_IdParentMessage);
         if (!is_null($intIdParentMessage)) {
-            $arrAndConditions[] = sprintf('idParentMessage = %s', $intIdParentMessage);
+            $arrAndConditions[] = sprintf('ParentMessage.idParentMessage = %s', $intIdParentMessage);
         }
         $intIdAthelete = MLCApplication::QS(FFSQS::ParentMessage_IdAthelete);
         if (!is_null($intIdAthelete)) {
-            $arrAndConditions[] = sprintf('idAthelete = %s', $intIdAthelete);
+            $arrAndConditions[] = sprintf('ParentMessage.idAthelete = %s', $intIdAthelete);
         }
         $strAtheleteName = MLCApplication::QS(FFSQS::ParentMessage_AtheleteName);
         if (!is_null($strAtheleteName)) {
-            $arrAndConditions[] = sprintf('atheleteName LIKE "%s%%"', $strAtheleteName);
+            $arrAndConditions[] = sprintf('ParentMessage.atheleteName LIKE "%s%%"', $strAtheleteName);
         }
         $strInviteData = MLCApplication::QS(FFSQS::ParentMessage_InviteData);
         if (!is_null($strInviteData)) {
-            $arrAndConditions[] = sprintf('inviteData LIKE "%s%%"', $strInviteData);
+            $arrAndConditions[] = sprintf('ParentMessage.inviteData LIKE "%s%%"', $strInviteData);
         }
         $strInviteType = MLCApplication::QS(FFSQS::ParentMessage_InviteType);
         if (!is_null($strInviteType)) {
-            $arrAndConditions[] = sprintf('inviteType LIKE "%s%%"', $strInviteType);
+            $arrAndConditions[] = sprintf('ParentMessage.inviteType LIKE "%s%%"', $strInviteType);
         }
         $strInviteToken = MLCApplication::QS(FFSQS::ParentMessage_InviteToken);
         if (!is_null($strInviteToken)) {
-            $arrAndConditions[] = sprintf('inviteToken LIKE "%s%%"', $strInviteToken);
+            $arrAndConditions[] = sprintf('ParentMessage.inviteToken LIKE "%s%%"', $strInviteToken);
         }
         $intIdCompetition = MLCApplication::QS(FFSQS::ParentMessage_IdCompetition);
         if (!is_null($intIdCompetition)) {
-            $arrAndConditions[] = sprintf('idCompetition = %s', $intIdCompetition);
+            $arrAndConditions[] = sprintf('ParentMessage.idCompetition = %s', $intIdCompetition);
         }
         if (count($arrAndConditions) >= 1) {
             $arrParentMessages = ParentMessage::Query('WHERE ' . implode(' AND ', $arrAndConditions));

@@ -41,6 +41,23 @@ class FFSEntityManager extends FFSEntityManagerBase {
             }
         }
     }
+    public function GetAtheleteOwnerQuery(){
+       $intIdSession = MLCApplication::QS(FFSQS::Session_IdSession);
+        $arrIdAtheletes = array();
+       if(!is_null($intIdSession)){
+           $arrEnrollments = Enrollment::Query(
+               sprintf(
+                   'WHERE Enrollment_rel.idSession = %s',
+                   $intIdSession
+               )
+           );
+           foreach($arrEnrollments as $intIndex => $objEnrollment){
+                $arrIdAtheletes[] = $objEnrollment->IdAthelete;
+           }
+           return 'AND Athelete.idAthelete IN(' .implode(',', $arrIdAtheletes) . ')';
+       }
+       return '';
+   }
     public function SearchEnrollment($strSearch, $strField = null){
         //TODO Move this, i put it here becasuse I did not want it genned over
 

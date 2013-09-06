@@ -112,8 +112,24 @@ class AssignmentEditPanelBase extends MJaxPanel {
             //Create a new one
             $this->objAssignment = new Assignment();
         }
-        $this->objAssignment->event = $this->strEvent->Text;
-        $this->objAssignment->apartatus = $this->strApartatus->Text;
+        if (get_class($this->strEvent) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strEvent->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('event');
+            }
+            $this->objAssignment->event = $mixEntity;
+        } else {
+            $this->objAssignment->event = $this->strEvent->Text;
+        }
+        if (get_class($this->strApartatus) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strApartatus->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('apartatus');
+            }
+            $this->objAssignment->apartatus = $mixEntity;
+        } else {
+            $this->objAssignment->apartatus = $this->strApartatus->Text;
+        }
         //Is special field!!!!!
         //Do nothing this is a creDate
         //Is special field!!!!!
@@ -138,14 +154,14 @@ class AssignmentEditPanelBase extends MJaxPanel {
         return is_null($this->objAssignment);
     }
     public function InitIdDeviceAutocomplete() {
-        $this->intIdDevice = new MJaxBSAutocompleteTextBox($this, $this, '_searchDevice');
-        $this->intIdDevice->SetSearchEntity('assignment');
+        $this->intIdDevice = new MJaxBSAutocompleteTextBox($this);
+        $this->intIdDevice->SetSearchEntity('device');
         $this->intIdDevice->Name = 'idDevice';
         $this->intIdDevice->AddCssClass('input-large');
     }
     public function InitIdSessionAutocomplete() {
-        $this->intIdSession = new MJaxBSAutocompleteTextBox($this, $this, '_searchSession');
-        $this->intIdSession->SetSearchEntity('assignment');
+        $this->intIdSession = new MJaxBSAutocompleteTextBox($this);
+        $this->intIdSession->SetSearchEntity('session');
         $this->intIdSession->Name = 'idSession';
         $this->intIdSession->AddCssClass('input-large');
     }

@@ -98,7 +98,15 @@ class OrgCompetitionEditPanelBase extends MJaxPanel {
         }
         //Is special field!!!!!
         //Do nothing this is a creDate
-        $this->objOrgCompetition->idAuthUser = $this->intIdAuthUser->Text;
+        if (get_class($this->intIdAuthUser) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->intIdAuthUser->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('idAuthUser');
+            }
+            $this->objOrgCompetition->idAuthUser = $mixEntity;
+        } else {
+            $this->objOrgCompetition->idAuthUser = $this->intIdAuthUser->Text;
+        }
         $this->objOrgCompetition->Save();
         //Experimental save event trigger
         $this->ActionParameter = $this->objOrgCompetition;
@@ -117,14 +125,14 @@ class OrgCompetitionEditPanelBase extends MJaxPanel {
         return is_null($this->objOrgCompetition);
     }
     public function InitIdOrgAutocomplete() {
-        $this->intIdOrg = new MJaxBSAutocompleteTextBox($this, $this, '_searchOrg');
-        $this->intIdOrg->SetSearchEntity('orgcompetition');
+        $this->intIdOrg = new MJaxBSAutocompleteTextBox($this);
+        $this->intIdOrg->SetSearchEntity('org');
         $this->intIdOrg->Name = 'idOrg';
         $this->intIdOrg->AddCssClass('input-large');
     }
     public function InitIdCompetitionAutocomplete() {
-        $this->intIdCompetition = new MJaxBSAutocompleteTextBox($this, $this, '_searchCompetition');
-        $this->intIdCompetition->SetSearchEntity('orgcompetition');
+        $this->intIdCompetition = new MJaxBSAutocompleteTextBox($this);
+        $this->intIdCompetition->SetSearchEntity('competition');
         $this->intIdCompetition->Name = 'idCompetition';
         $this->intIdCompetition->AddCssClass('input-large');
     }

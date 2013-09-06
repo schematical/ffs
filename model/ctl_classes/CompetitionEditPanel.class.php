@@ -15,18 +15,21 @@ class CompetitionEditPanel extends CompetitionEditPanelBase {
             new MJaxBlurEvent(),
             new MJaxServerControlAction($this, 'strName_blur')
         );
-
-
+    }
+    public function SetUpHomePage(){
         $this->btnSave->Remove();
         $this->btnSave = null;
+
         $this->btnContinue = new MJaxLinkButton($this);
         $this->btnContinue->AddAction($this, 'btnContinue_click');
         $this->btnContinue->Text = 'Continue';
         $this->btnContinue->AddCssClass('btn btn-large btn-info');
     }
 
+
     public function CreateFieldControls(){
         $this->txtOrgName = new MJaxTextBox($this);
+
         parent::CreateFieldControls();
 
     }
@@ -63,6 +66,7 @@ class CompetitionEditPanel extends CompetitionEditPanelBase {
         $this->objOrg->Save();
         $this->objCompetition->IdOrg = $this->objOrg->IdOrg;
         $this->objCompetition->Save();
+        $this->TriggerEvent('mjax-success');
         return;
     }
     public function GetCompetition(){

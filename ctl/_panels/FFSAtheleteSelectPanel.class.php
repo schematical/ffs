@@ -13,7 +13,8 @@ class FFSAtheleteSelectPanel extends MJaxPanel{
     public function __construct($objParentControl, $strControlId = null){
         parent::__construct($objParentControl, $strControlId);
         $this->strTemplate = __VIEW_ACTIVE_APP_DIR__ . '/www/_panels/' . get_class($this) . '.tpl.php';
-        $this->txtSearch = new MJaxBSAutocompleteTextBox($this, $this, 'txtSearch_search');
+        $this->txtSearch = new MJaxBSAutocompleteTextBox($this);
+        $this->txtSearch->SetSearchEntity('athelete');
 
 
         $this->txtSearch->Name = 'idAthelete';

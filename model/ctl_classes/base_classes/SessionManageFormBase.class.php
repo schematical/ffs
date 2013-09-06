@@ -29,19 +29,19 @@ class SessionManageFormBase extends FFSForm {
         $arrAndConditions = array();
         $intIdSession = MLCApplication::QS(FFSQS::Session_IdSession);
         if (!is_null($intIdSession)) {
-            $arrAndConditions[] = sprintf('idSession = %s', $intIdSession);
+            $arrAndConditions[] = sprintf('Session.idSession = %s', $intIdSession);
         }
         $intIdCompetition = MLCApplication::QS(FFSQS::Session_IdCompetition);
         if (!is_null($intIdCompetition)) {
-            $arrAndConditions[] = sprintf('idCompetition = %s', $intIdCompetition);
+            $arrAndConditions[] = sprintf('Session.idCompetition = %s', $intIdCompetition);
         }
         $strName = MLCApplication::QS(FFSQS::Session_Name);
         if (!is_null($strName)) {
-            $arrAndConditions[] = sprintf('name LIKE "%s%%"', $strName);
+            $arrAndConditions[] = sprintf('Session.name LIKE "%s%%"', $strName);
         }
         $strEquipmentSet = MLCApplication::QS(FFSQS::Session_EquipmentSet);
         if (!is_null($strEquipmentSet)) {
-            $arrAndConditions[] = sprintf('equipmentSet LIKE "%s%%"', $strEquipmentSet);
+            $arrAndConditions[] = sprintf('Session.equipmentSet LIKE "%s%%"', $strEquipmentSet);
         }
         if (count($arrAndConditions) >= 1) {
             $arrSessions = Session::Query('WHERE ' . implode(' AND ', $arrAndConditions));

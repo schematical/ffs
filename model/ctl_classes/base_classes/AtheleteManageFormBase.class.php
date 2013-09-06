@@ -29,31 +29,31 @@ class AtheleteManageFormBase extends FFSForm {
         $arrAndConditions = array();
         $intIdAthelete = MLCApplication::QS(FFSQS::Athelete_IdAthelete);
         if (!is_null($intIdAthelete)) {
-            $arrAndConditions[] = sprintf('idAthelete = %s', $intIdAthelete);
+            $arrAndConditions[] = sprintf('Athelete.idAthelete = %s', $intIdAthelete);
         }
         $intIdOrg = MLCApplication::QS(FFSQS::Athelete_IdOrg);
         if (!is_null($intIdOrg)) {
-            $arrAndConditions[] = sprintf('idOrg = %s', $intIdOrg);
+            $arrAndConditions[] = sprintf('Athelete.idOrg = %s', $intIdOrg);
         }
         $strFirstName = MLCApplication::QS(FFSQS::Athelete_FirstName);
         if (!is_null($strFirstName)) {
-            $arrAndConditions[] = sprintf('firstName LIKE "%s%%"', $strFirstName);
+            $arrAndConditions[] = sprintf('Athelete.firstName LIKE "%s%%"', $strFirstName);
         }
         $strLastName = MLCApplication::QS(FFSQS::Athelete_LastName);
         if (!is_null($strLastName)) {
-            $arrAndConditions[] = sprintf('lastName LIKE "%s%%"', $strLastName);
+            $arrAndConditions[] = sprintf('Athelete.lastName LIKE "%s%%"', $strLastName);
         }
         $strMemType = MLCApplication::QS(FFSQS::Athelete_MemType);
         if (!is_null($strMemType)) {
-            $arrAndConditions[] = sprintf('memType LIKE "%s%%"', $strMemType);
+            $arrAndConditions[] = sprintf('Athelete.memType LIKE "%s%%"', $strMemType);
         }
         $strMemId = MLCApplication::QS(FFSQS::Athelete_MemId);
         if (!is_null($strMemId)) {
-            $arrAndConditions[] = sprintf('memId LIKE "%s%%"', $strMemId);
+            $arrAndConditions[] = sprintf('Athelete.memId LIKE "%s%%"', $strMemId);
         }
         $strLevel = MLCApplication::QS(FFSQS::Athelete_Level);
         if (!is_null($strLevel)) {
-            $arrAndConditions[] = sprintf('level LIKE "%s%%"', $strLevel);
+            $arrAndConditions[] = sprintf('Athelete.level LIKE "%s%%"', $strLevel);
         }
         if (count($arrAndConditions) >= 1) {
             $arrAtheletes = Athelete::Query('WHERE ' . implode(' AND ', $arrAndConditions));

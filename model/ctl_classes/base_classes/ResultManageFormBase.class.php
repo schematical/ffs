@@ -29,27 +29,27 @@ class ResultManageFormBase extends FFSForm {
         $arrAndConditions = array();
         $intIdResult = MLCApplication::QS(FFSQS::Result_IdResult);
         if (!is_null($intIdResult)) {
-            $arrAndConditions[] = sprintf('idResult = %s', $intIdResult);
+            $arrAndConditions[] = sprintf('Result.idResult = %s', $intIdResult);
         }
         $intIdSession = MLCApplication::QS(FFSQS::Result_IdSession);
         if (!is_null($intIdSession)) {
-            $arrAndConditions[] = sprintf('idSession = %s', $intIdSession);
+            $arrAndConditions[] = sprintf('Result.idSession = %s', $intIdSession);
         }
         $intIdAthelete = MLCApplication::QS(FFSQS::Result_IdAthelete);
         if (!is_null($intIdAthelete)) {
-            $arrAndConditions[] = sprintf('idAthelete = %s', $intIdAthelete);
+            $arrAndConditions[] = sprintf('Result.idAthelete = %s', $intIdAthelete);
         }
         $strScore = MLCApplication::QS(FFSQS::Result_Score);
         if (!is_null($strScore)) {
-            $arrAndConditions[] = sprintf('score LIKE "%s%%"', $strScore);
+            $arrAndConditions[] = sprintf('Result.score LIKE "%s%%"', $strScore);
         }
         $strJudge = MLCApplication::QS(FFSQS::Result_Judge);
         if (!is_null($strJudge)) {
-            $arrAndConditions[] = sprintf('judge LIKE "%s%%"', $strJudge);
+            $arrAndConditions[] = sprintf('Result.judge LIKE "%s%%"', $strJudge);
         }
         $strEvent = MLCApplication::QS(FFSQS::Result_Event);
         if (!is_null($strEvent)) {
-            $arrAndConditions[] = sprintf('event LIKE "%s%%"', $strEvent);
+            $arrAndConditions[] = sprintf('Result.event LIKE "%s%%"', $strEvent);
         }
         if (count($arrAndConditions) >= 1) {
             $arrResults = Result::Query('WHERE ' . implode(' AND ', $arrAndConditions));

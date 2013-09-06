@@ -109,11 +109,35 @@ class DeviceEditPanelBase extends MJaxPanel {
             //Create a new one
             $this->objDevice = new Device();
         }
-        $this->objDevice->name = $this->strName->Text;
-        $this->objDevice->token = $this->strToken->Text;
+        if (get_class($this->strName) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strName->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('name');
+            }
+            $this->objDevice->name = $mixEntity;
+        } else {
+            $this->objDevice->name = $this->strName->Text;
+        }
+        if (get_class($this->strToken) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strToken->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('token');
+            }
+            $this->objDevice->token = $mixEntity;
+        } else {
+            $this->objDevice->token = $this->strToken->Text;
+        }
         //Is special field!!!!!
         //Do nothing this is a creDate
-        $this->objDevice->inviteEmail = $this->strInviteEmail->Text;
+        if (get_class($this->strInviteEmail) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strInviteEmail->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('inviteEmail');
+            }
+            $this->objDevice->inviteEmail = $mixEntity;
+        } else {
+            $this->objDevice->inviteEmail = $this->strInviteEmail->Text;
+        }
         $this->objDevice->Save();
         //Experimental save event trigger
         $this->ActionParameter = $this->objDevice;
@@ -150,8 +174,8 @@ class DeviceEditPanelBase extends MJaxPanel {
         $this->strInviteEmail->AddCssClass('input-large');
     }
     public function InitIdOrgAutocomplete() {
-        $this->intIdOrg = new MJaxBSAutocompleteTextBox($this, $this, '_searchOrg');
-        $this->intIdOrg->SetSearchEntity('device');
+        $this->intIdOrg = new MJaxBSAutocompleteTextBox($this);
+        $this->intIdOrg->SetSearchEntity('org');
         $this->intIdOrg->Name = 'idOrg';
         $this->intIdOrg->AddCssClass('input-large');
     }

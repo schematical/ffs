@@ -8,10 +8,23 @@ class editCompetition extends FFSForm{
             (is_null(FFSForm::Competition())?'Create Competition':'Edit Competition'),
             'icon-cog',
             $this->pnlCompetition
+        )->AddCssClass('span6');
+
+        $this->pnlCompetition->AddAction(
+            new MJaxSuccessEvent(),
+            new MJaxServerControlAction(
+                $this,
+                'pnlCompetition_success'
+            )
         );
         if(!is_null(FFSForm::Competition())){
 
         }
+    }
+    public function pnlCompetition_success($strFormId, $strControlId, $objCompetition){
+        $this->Redirect(
+            '/' . $objCompetition->Namespace . '/org/competition/index'
+        );
     }
 }
 editCompetition::Run('editCompetition');

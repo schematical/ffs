@@ -29,23 +29,23 @@ class DeviceManageFormBase extends FFSForm {
         $arrAndConditions = array();
         $intIdDevice = MLCApplication::QS(FFSQS::Device_IdDevice);
         if (!is_null($intIdDevice)) {
-            $arrAndConditions[] = sprintf('idDevice = %s', $intIdDevice);
+            $arrAndConditions[] = sprintf('Device.idDevice = %s', $intIdDevice);
         }
         $strName = MLCApplication::QS(FFSQS::Device_Name);
         if (!is_null($strName)) {
-            $arrAndConditions[] = sprintf('name LIKE "%s%%"', $strName);
+            $arrAndConditions[] = sprintf('Device.name LIKE "%s%%"', $strName);
         }
         $strToken = MLCApplication::QS(FFSQS::Device_Token);
         if (!is_null($strToken)) {
-            $arrAndConditions[] = sprintf('token LIKE "%s%%"', $strToken);
+            $arrAndConditions[] = sprintf('Device.token LIKE "%s%%"', $strToken);
         }
         $strInviteEmail = MLCApplication::QS(FFSQS::Device_InviteEmail);
         if (!is_null($strInviteEmail)) {
-            $arrAndConditions[] = sprintf('inviteEmail LIKE "%s%%"', $strInviteEmail);
+            $arrAndConditions[] = sprintf('Device.inviteEmail LIKE "%s%%"', $strInviteEmail);
         }
         $intIdOrg = MLCApplication::QS(FFSQS::Device_IdOrg);
         if (!is_null($intIdOrg)) {
-            $arrAndConditions[] = sprintf('idOrg = %s', $intIdOrg);
+            $arrAndConditions[] = sprintf('Device.idOrg = %s', $intIdOrg);
         }
         if (count($arrAndConditions) >= 1) {
             $arrDevices = Device::Query('WHERE ' . implode(' AND ', $arrAndConditions));

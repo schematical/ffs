@@ -29,19 +29,19 @@ class CompetitionManageFormBase extends FFSForm {
         $arrAndConditions = array();
         $intIdCompetition = MLCApplication::QS(FFSQS::Competition_IdCompetition);
         if (!is_null($intIdCompetition)) {
-            $arrAndConditions[] = sprintf('idCompetition = %s', $intIdCompetition);
+            $arrAndConditions[] = sprintf('Competition.idCompetition = %s', $intIdCompetition);
         }
         $strName = MLCApplication::QS(FFSQS::Competition_Name);
         if (!is_null($strName)) {
-            $arrAndConditions[] = sprintf('name LIKE "%s%%"', $strName);
+            $arrAndConditions[] = sprintf('Competition.name LIKE "%s%%"', $strName);
         }
         $intIdOrg = MLCApplication::QS(FFSQS::Competition_IdOrg);
         if (!is_null($intIdOrg)) {
-            $arrAndConditions[] = sprintf('idOrg = %s', $intIdOrg);
+            $arrAndConditions[] = sprintf('Competition.idOrg = %s', $intIdOrg);
         }
         $strNamespace = MLCApplication::QS(FFSQS::Competition_Namespace);
         if (!is_null($strNamespace)) {
-            $arrAndConditions[] = sprintf('namespace LIKE "%s%%"', $strNamespace);
+            $arrAndConditions[] = sprintf('Competition.namespace LIKE "%s%%"', $strNamespace);
         }
         if (count($arrAndConditions) >= 1) {
             $arrCompetitions = Competition::Query('WHERE ' . implode(' AND ', $arrAndConditions));

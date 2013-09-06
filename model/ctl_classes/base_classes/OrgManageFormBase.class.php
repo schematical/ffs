@@ -29,23 +29,23 @@ class OrgManageFormBase extends FFSForm {
         $arrAndConditions = array();
         $intIdOrg = MLCApplication::QS(FFSQS::Org_IdOrg);
         if (!is_null($intIdOrg)) {
-            $arrAndConditions[] = sprintf('idOrg = %s', $intIdOrg);
+            $arrAndConditions[] = sprintf('Org.idOrg = %s', $intIdOrg);
         }
         $strNamespace = MLCApplication::QS(FFSQS::Org_Namespace);
         if (!is_null($strNamespace)) {
-            $arrAndConditions[] = sprintf('namespace LIKE "%s%%"', $strNamespace);
+            $arrAndConditions[] = sprintf('Org.namespace LIKE "%s%%"', $strNamespace);
         }
         $strName = MLCApplication::QS(FFSQS::Org_Name);
         if (!is_null($strName)) {
-            $arrAndConditions[] = sprintf('name LIKE "%s%%"', $strName);
+            $arrAndConditions[] = sprintf('Org.name LIKE "%s%%"', $strName);
         }
         $strClubNum = MLCApplication::QS(FFSQS::Org_ClubNum);
         if (!is_null($strClubNum)) {
-            $arrAndConditions[] = sprintf('clubNum LIKE "%s%%"', $strClubNum);
+            $arrAndConditions[] = sprintf('Org.clubNum LIKE "%s%%"', $strClubNum);
         }
         $strClubType = MLCApplication::QS(FFSQS::Org_ClubType);
         if (!is_null($strClubType)) {
-            $arrAndConditions[] = sprintf('clubType LIKE "%s%%"', $strClubType);
+            $arrAndConditions[] = sprintf('Org.clubType LIKE "%s%%"', $strClubType);
         }
         if (count($arrAndConditions) >= 1) {
             $arrOrgs = Org::Query('WHERE ' . implode(' AND ', $arrAndConditions));

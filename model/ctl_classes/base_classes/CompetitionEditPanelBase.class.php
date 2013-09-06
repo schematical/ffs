@@ -139,15 +139,39 @@ class CompetitionEditPanelBase extends MJaxPanel {
             //Create a new one
             $this->objCompetition = new Competition();
         }
-        $this->objCompetition->name = $this->strName->Text;
-        $this->objCompetition->longDesc = $this->strLongDesc->Text;
+        if (get_class($this->strName) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strName->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('name');
+            }
+            $this->objCompetition->name = $mixEntity;
+        } else {
+            $this->objCompetition->name = $this->strName->Text;
+        }
+        if (get_class($this->strLongDesc) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strLongDesc->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('longDesc');
+            }
+            $this->objCompetition->longDesc = $mixEntity;
+        } else {
+            $this->objCompetition->longDesc = $this->strLongDesc->Text;
+        }
         //Is special field!!!!!
         //Do nothing this is a creDate
         //Is special field!!!!!
         $this->objCompetition->startDate = $this->dttStartDate->GetValue();
         //Is special field!!!!!
         $this->objCompetition->endDate = $this->dttEndDate->GetValue();
-        $this->objCompetition->namespace = $this->strNamespace->Text;
+        if (get_class($this->strNamespace) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strNamespace->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('namespace');
+            }
+            $this->objCompetition->namespace = $mixEntity;
+        } else {
+            $this->objCompetition->namespace = $this->strNamespace->Text;
+        }
         //Is special field!!!!!
         $this->objCompetition->signupCutOffDate = $this->dttSignupCutOffDate->GetValue();
         $this->objCompetition->Save();
@@ -174,8 +198,8 @@ class CompetitionEditPanelBase extends MJaxPanel {
         $this->strName->AddCssClass('input-large');
     }
     public function InitIdOrgAutocomplete() {
-        $this->intIdOrg = new MJaxBSAutocompleteTextBox($this, $this, '_searchOrg');
-        $this->intIdOrg->SetSearchEntity('competition');
+        $this->intIdOrg = new MJaxBSAutocompleteTextBox($this);
+        $this->intIdOrg->SetSearchEntity('org');
         $this->intIdOrg->Name = 'idOrg';
         $this->intIdOrg->AddCssClass('input-large');
     }

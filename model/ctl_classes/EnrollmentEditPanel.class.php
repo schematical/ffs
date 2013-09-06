@@ -34,7 +34,7 @@ class EnrollmentEditPanel extends EnrollmentEditPanelBase {
             
         
             
-            
+
                 $this->InitMisc1Autocomplete();
             
         
@@ -58,7 +58,7 @@ class EnrollmentEditPanel extends EnrollmentEditPanelBase {
                 $this->InitMisc5Autocomplete();
             
         
-            
+
             
         
             
@@ -232,7 +232,7 @@ class EnrollmentEditPanel extends EnrollmentEditPanelBase {
 
     }
     public function btnSave_click() {
-        _dv($this->intIdAthelete->GetValue());
+        //_dv($this->intIdAthelete->GetValue());
         if (is_null($this->objEnrollment)) {
                 //Create a new one
                 $this->objEnrollment = new Enrollment();
@@ -378,7 +378,7 @@ class EnrollmentEditPanel extends EnrollmentEditPanelBase {
     
         
     
-
+/*
         
             public function InitidAtheleteAutocomplete(){
                 
@@ -394,7 +394,8 @@ class EnrollmentEditPanel extends EnrollmentEditPanelBase {
         
             public function InitidCompetitionAutocomplete(){
                 
-                $this->intIdCompetition = new MJaxBSAutocompleteTextBox($this, $this, '_searchCompetition');
+                $this->intIdCompetition = new MJaxBSAutocompleteTextBox($this);
+                $this->intIdCompetition->SetSearchEntity('competition');
                 
                 
                 $this->intIdCompetition->Name = 'idCompetition';
@@ -406,8 +407,8 @@ class EnrollmentEditPanel extends EnrollmentEditPanelBase {
         
             public function InitidSessionAutocomplete(){
                 
-                $this->intIdSession = new MJaxBSAutocompleteTextBox($this, $this, '_searchSession');
-                
+                $this->intIdSession = new MJaxBSAutocompleteTextBox($this);
+                $this->intIdSession->SetSearchEntity('session');
                 
                 $this->intIdSession->Name = 'idSession';
                 $this->intIdSession->AddCssClass('input-large');
@@ -419,7 +420,8 @@ class EnrollmentEditPanel extends EnrollmentEditPanelBase {
             public function InitflightAutocomplete(){
                 
                 
-                   $this->strFlight = new MJaxBSAutocompleteTextBox($this, $this, '_searchFlight');
+                   $this->strFlight = new MJaxBSAutocompleteTextBox($this);
+                $this->strFlight->SetSearchEntity('enrollment','flight');
                 
                 $this->strFlight->Name = 'flight';
                 $this->strFlight->AddCssClass('input-large');
@@ -432,7 +434,7 @@ class EnrollmentEditPanel extends EnrollmentEditPanelBase {
                 
                 
                    $this->strDivision = new MJaxBSAutocompleteTextBox($this, $this, '_searchDivision');
-                
+                $this->strDivision->SetSearchEntity('enrollment','division');
                 $this->strDivision->Name = 'division';
                 $this->strDivision->AddCssClass('input-large');
             }
@@ -443,8 +445,8 @@ class EnrollmentEditPanel extends EnrollmentEditPanelBase {
             public function InitageGroupAutocomplete(){
                 
                 
-                   $this->strAgeGroup = new MJaxBSAutocompleteTextBox($this, $this, '_searchAgeGroup');
-                
+                   $this->strAgeGroup = new MJaxBSAutocompleteTextBox($this);
+                $this->strDivision->SetSearchEntity('enrollment','ageGroup');
                 $this->strAgeGroup->Name = 'ageGroup';
                 $this->strAgeGroup->AddCssClass('input-large');
             }
@@ -527,7 +529,7 @@ class EnrollmentEditPanel extends EnrollmentEditPanelBase {
     
     
     
-    
+
     
     
     
@@ -957,6 +959,6 @@ class EnrollmentEditPanel extends EnrollmentEditPanelBase {
            )
        );
     }
-
+ */
 }
 ?>

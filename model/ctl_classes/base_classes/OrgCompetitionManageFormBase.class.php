@@ -29,15 +29,15 @@ class OrgCompetitionManageFormBase extends FFSForm {
         $arrAndConditions = array();
         $intIdOrgCompetition = MLCApplication::QS(FFSQS::OrgCompetition_IdOrgCompetition);
         if (!is_null($intIdOrgCompetition)) {
-            $arrAndConditions[] = sprintf('idOrgCompetition = %s', $intIdOrgCompetition);
+            $arrAndConditions[] = sprintf('OrgCompetition_rel.idOrgCompetition = %s', $intIdOrgCompetition);
         }
         $intIdOrg = MLCApplication::QS(FFSQS::OrgCompetition_IdOrg);
         if (!is_null($intIdOrg)) {
-            $arrAndConditions[] = sprintf('idOrg = %s', $intIdOrg);
+            $arrAndConditions[] = sprintf('OrgCompetition_rel.idOrg = %s', $intIdOrg);
         }
         $intIdCompetition = MLCApplication::QS(FFSQS::OrgCompetition_IdCompetition);
         if (!is_null($intIdCompetition)) {
-            $arrAndConditions[] = sprintf('idCompetition = %s', $intIdCompetition);
+            $arrAndConditions[] = sprintf('OrgCompetition_rel.idCompetition = %s', $intIdCompetition);
         }
         if (count($arrAndConditions) >= 1) {
             $arrOrgCompetitions = OrgCompetition::Query('WHERE ' . implode(' AND ', $arrAndConditions));

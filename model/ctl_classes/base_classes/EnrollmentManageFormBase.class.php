@@ -29,55 +29,55 @@ class EnrollmentManageFormBase extends FFSForm {
         $arrAndConditions = array();
         $intIdEnrollment = MLCApplication::QS(FFSQS::Enrollment_IdEnrollment);
         if (!is_null($intIdEnrollment)) {
-            $arrAndConditions[] = sprintf('idEnrollment = %s', $intIdEnrollment);
+            $arrAndConditions[] = sprintf('Enrollment_rel.idEnrollment = %s', $intIdEnrollment);
         }
         $intIdAthelete = MLCApplication::QS(FFSQS::Enrollment_IdAthelete);
         if (!is_null($intIdAthelete)) {
-            $arrAndConditions[] = sprintf('idAthelete = %s', $intIdAthelete);
+            $arrAndConditions[] = sprintf('Enrollment_rel.idAthelete = %s', $intIdAthelete);
         }
         $intIdCompetition = MLCApplication::QS(FFSQS::Enrollment_IdCompetition);
         if (!is_null($intIdCompetition)) {
-            $arrAndConditions[] = sprintf('idCompetition = %s', $intIdCompetition);
+            $arrAndConditions[] = sprintf('Enrollment_rel.idCompetition = %s', $intIdCompetition);
         }
         $intIdSession = MLCApplication::QS(FFSQS::Enrollment_IdSession);
         if (!is_null($intIdSession)) {
-            $arrAndConditions[] = sprintf('idSession = %s', $intIdSession);
+            $arrAndConditions[] = sprintf('Enrollment_rel.idSession = %s', $intIdSession);
         }
         $strFlight = MLCApplication::QS(FFSQS::Enrollment_Flight);
         if (!is_null($strFlight)) {
-            $arrAndConditions[] = sprintf('flight LIKE "%s%%"', $strFlight);
+            $arrAndConditions[] = sprintf('Enrollment_rel.flight LIKE "%s%%"', $strFlight);
         }
         $strDivision = MLCApplication::QS(FFSQS::Enrollment_Division);
         if (!is_null($strDivision)) {
-            $arrAndConditions[] = sprintf('division LIKE "%s%%"', $strDivision);
+            $arrAndConditions[] = sprintf('Enrollment_rel.division LIKE "%s%%"', $strDivision);
         }
         $strAgeGroup = MLCApplication::QS(FFSQS::Enrollment_AgeGroup);
         if (!is_null($strAgeGroup)) {
-            $arrAndConditions[] = sprintf('ageGroup LIKE "%s%%"', $strAgeGroup);
+            $arrAndConditions[] = sprintf('Enrollment_rel.ageGroup LIKE "%s%%"', $strAgeGroup);
         }
         $strMisc1 = MLCApplication::QS(FFSQS::Enrollment_Misc1);
         if (!is_null($strMisc1)) {
-            $arrAndConditions[] = sprintf('misc1 LIKE "%s%%"', $strMisc1);
+            $arrAndConditions[] = sprintf('Enrollment_rel.misc1 LIKE "%s%%"', $strMisc1);
         }
         $strMisc2 = MLCApplication::QS(FFSQS::Enrollment_Misc2);
         if (!is_null($strMisc2)) {
-            $arrAndConditions[] = sprintf('misc2 LIKE "%s%%"', $strMisc2);
+            $arrAndConditions[] = sprintf('Enrollment_rel.misc2 LIKE "%s%%"', $strMisc2);
         }
         $strMisc3 = MLCApplication::QS(FFSQS::Enrollment_Misc3);
         if (!is_null($strMisc3)) {
-            $arrAndConditions[] = sprintf('misc3 LIKE "%s%%"', $strMisc3);
+            $arrAndConditions[] = sprintf('Enrollment_rel.misc3 LIKE "%s%%"', $strMisc3);
         }
         $strMisc4 = MLCApplication::QS(FFSQS::Enrollment_Misc4);
         if (!is_null($strMisc4)) {
-            $arrAndConditions[] = sprintf('misc4 LIKE "%s%%"', $strMisc4);
+            $arrAndConditions[] = sprintf('Enrollment_rel.misc4 LIKE "%s%%"', $strMisc4);
         }
         $strMisc5 = MLCApplication::QS(FFSQS::Enrollment_Misc5);
         if (!is_null($strMisc5)) {
-            $arrAndConditions[] = sprintf('misc5 LIKE "%s%%"', $strMisc5);
+            $arrAndConditions[] = sprintf('Enrollment_rel.misc5 LIKE "%s%%"', $strMisc5);
         }
         $strLevel = MLCApplication::QS(FFSQS::Enrollment_Level);
         if (!is_null($strLevel)) {
-            $arrAndConditions[] = sprintf('level LIKE "%s%%"', $strLevel);
+            $arrAndConditions[] = sprintf('Enrollment_rel.level LIKE "%s%%"', $strLevel);
         }
         if (count($arrAndConditions) >= 1) {
             $arrEnrollments = Enrollment::Query('WHERE ' . implode(' AND ', $arrAndConditions));

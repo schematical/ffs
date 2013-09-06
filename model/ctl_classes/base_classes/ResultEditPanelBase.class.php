@@ -122,12 +122,44 @@ class ResultEditPanelBase extends MJaxPanel {
             //Create a new one
             $this->objResult = new Result();
         }
-        $this->objResult->score = $this->strScore->Text;
-        $this->objResult->judge = $this->strJudge->Text;
-        $this->objResult->flag = $this->intFlag->Text;
+        if (get_class($this->strScore) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strScore->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('score');
+            }
+            $this->objResult->score = $mixEntity;
+        } else {
+            $this->objResult->score = $this->strScore->Text;
+        }
+        if (get_class($this->strJudge) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strJudge->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('judge');
+            }
+            $this->objResult->judge = $mixEntity;
+        } else {
+            $this->objResult->judge = $this->strJudge->Text;
+        }
+        if (get_class($this->intFlag) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->intFlag->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('flag');
+            }
+            $this->objResult->flag = $mixEntity;
+        } else {
+            $this->objResult->flag = $this->intFlag->Text;
+        }
         //Is special field!!!!!
         //Do nothing this is a creDate
-        $this->objResult->event = $this->strEvent->Text;
+        if (get_class($this->strEvent) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strEvent->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('event');
+            }
+            $this->objResult->event = $mixEntity;
+        } else {
+            $this->objResult->event = $this->strEvent->Text;
+        }
         //Is special field!!!!!
         $this->objResult->dispDate = $this->dttDispDate->GetValue();
         $this->objResult->Save();
@@ -148,14 +180,14 @@ class ResultEditPanelBase extends MJaxPanel {
         return is_null($this->objResult);
     }
     public function InitIdSessionAutocomplete() {
-        $this->intIdSession = new MJaxBSAutocompleteTextBox($this, $this, '_searchSession');
-        $this->intIdSession->SetSearchEntity('result');
+        $this->intIdSession = new MJaxBSAutocompleteTextBox($this);
+        $this->intIdSession->SetSearchEntity('session');
         $this->intIdSession->Name = 'idSession';
         $this->intIdSession->AddCssClass('input-large');
     }
     public function InitIdAtheleteAutocomplete() {
-        $this->intIdAthelete = new MJaxBSAutocompleteTextBox($this, $this, '_searchAthelete');
-        $this->intIdAthelete->SetSearchEntity('result');
+        $this->intIdAthelete = new MJaxBSAutocompleteTextBox($this);
+        $this->intIdAthelete->SetSearchEntity('athelete');
         $this->intIdAthelete->Name = 'idAthelete';
         $this->intIdAthelete->AddCssClass('input-large');
     }

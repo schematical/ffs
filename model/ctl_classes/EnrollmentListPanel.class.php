@@ -153,7 +153,9 @@ class EnrollmentListPanel extends EnrollmentListPanelBase {
     public function colSession_init($objRow, $mixData, $strKey){
         $txtSession = $objRow->GetData('txtSession');
         if(is_null($txtSession)){
-            $txtSession = new MJaxBSAutocompleteTextBox($objRow, '/' . $this->objForm->Competition()->Namespace . '/data/search.session_name');
+            $txtSession = new MJaxBSAutocompleteTextBox($objRow);
+            $txtSession->SetSearchEntity('session', 'name');
+
             $objEnrollment = $objRow->GetData('_entity');
             $txtSession->SetValue($objEnrollment->IdSessionObject);
             $txtSession->ActionParameter = $objEnrollment;

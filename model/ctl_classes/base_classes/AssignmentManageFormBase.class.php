@@ -29,23 +29,23 @@ class AssignmentManageFormBase extends FFSForm {
         $arrAndConditions = array();
         $intIdAssignment = MLCApplication::QS(FFSQS::Assignment_IdAssignment);
         if (!is_null($intIdAssignment)) {
-            $arrAndConditions[] = sprintf('idAssignment = %s', $intIdAssignment);
+            $arrAndConditions[] = sprintf('Assignment_rel.idAssignment = %s', $intIdAssignment);
         }
         $intIdDevice = MLCApplication::QS(FFSQS::Assignment_IdDevice);
         if (!is_null($intIdDevice)) {
-            $arrAndConditions[] = sprintf('idDevice = %s', $intIdDevice);
+            $arrAndConditions[] = sprintf('Assignment_rel.idDevice = %s', $intIdDevice);
         }
         $intIdSession = MLCApplication::QS(FFSQS::Assignment_IdSession);
         if (!is_null($intIdSession)) {
-            $arrAndConditions[] = sprintf('idSession = %s', $intIdSession);
+            $arrAndConditions[] = sprintf('Assignment_rel.idSession = %s', $intIdSession);
         }
         $strEvent = MLCApplication::QS(FFSQS::Assignment_Event);
         if (!is_null($strEvent)) {
-            $arrAndConditions[] = sprintf('event LIKE "%s%%"', $strEvent);
+            $arrAndConditions[] = sprintf('Assignment_rel.event LIKE "%s%%"', $strEvent);
         }
         $strApartatus = MLCApplication::QS(FFSQS::Assignment_Apartatus);
         if (!is_null($strApartatus)) {
-            $arrAndConditions[] = sprintf('apartatus LIKE "%s%%"', $strApartatus);
+            $arrAndConditions[] = sprintf('Assignment_rel.apartatus LIKE "%s%%"', $strApartatus);
         }
         if (count($arrAndConditions) >= 1) {
             $arrAssignments = Assignment::Query('WHERE ' . implode(' AND ', $arrAndConditions));

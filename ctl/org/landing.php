@@ -22,6 +22,7 @@ class landing extends FFSForm {
         $this->arrRows[0][] = $this->lnkImport;
         $this->pnlCompetition = new CompetitionEditPanel($this);
         $this->pnlCompetition->AddCssClass("span10 offset1");
+        $this->pnlCompetition->SetUpHomePage();
 
         //$this->AddWidget('Setup your meet', '', $this->pnlCompetition);
         $this->pnlSignup = new MLCShortSignUpPanel($this);
