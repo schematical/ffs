@@ -43,7 +43,8 @@ if(defined('SERVER_ENV')){
             )));*/
 			define('MLC_DISPLAY_EXCEPTIONS', '1');
 		break;
-
+        case('beta'):
+            define('MLC_DISPLAY_EXCEPTIONS', '1');
         case('prod'):
             define('DB_1', serialize(array(
                 'host'=>'lab.cv7i1bpkvj0w.us-east-1.rds.amazonaws.com',
@@ -57,7 +58,7 @@ if(defined('SERVER_ENV')){
                 'user'=>'evillabs',
                 'pass'=>'gaM3rPuPu'
             )));
-            define('MLC_DISPLAY_EXCEPTIONS', '1');
+
         break;
 	}
 
