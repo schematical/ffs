@@ -175,7 +175,6 @@ class SessionBase extends BaseEntity {
             }
         }
         $sql = sprintf("SELECT %s FROM Session %s %s;", $strFields, $strJoin, $strExtra);
-        error_log($sql);
         $result = MLCDBDriver::Query($sql, self::DB_CONN);
         $arrReturn = array();
         while ($data = mysql_fetch_assoc($result)) {
@@ -408,10 +407,12 @@ class SessionBase extends BaseEntity {
             break;
             case ('StartDate'):
             case ('startDate'):
+            case ('_StartDate'):
                 $this->arrDBFields['startDate'] = $mixValue;
             break;
             case ('EndDate'):
             case ('endDate'):
+            case ('_EndDate'):
                 $this->arrDBFields['endDate'] = $mixValue;
             break;
             case ('IdCompetition'):
@@ -421,15 +422,24 @@ class SessionBase extends BaseEntity {
             break;
             case ('Name'):
             case ('name'):
+            case ('_Name'):
                 $this->arrDBFields['name'] = $mixValue;
             break;
             case ('Notes'):
             case ('notes'):
+            case ('_Notes'):
                 $this->arrDBFields['notes'] = $mixValue;
+            break;
+            case ('_Data'):
+                $this->arrDBFields['data'] = $mixValue;
             break;
             case ('EquipmentSet'):
             case ('equipmentSet'):
+            case ('_EquipmentSet'):
                 $this->arrDBFields['equipmentSet'] = $mixValue;
+            break;
+            case ('_EventData'):
+                $this->arrDBFields['eventData'] = $mixValue;
             break;
             case ('IdCompetitionObject'):
                 if ((!is_null($mixValue)) && ((!is_object($mixValue)) || (!($mixValue instanceof Competition)))) {

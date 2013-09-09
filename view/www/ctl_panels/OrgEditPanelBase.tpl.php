@@ -1,8 +1,8 @@
 
     <form action="/" id="validation-form" class="form-horizontal">
         <fieldset>
-            
-                
+
+
             
                 
                     <?php

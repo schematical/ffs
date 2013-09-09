@@ -135,12 +135,12 @@ class ParentMessageEditPanelBase extends MJaxPanel {
             if (!is_null($this->objParentMessage->idAthelete)) {
                 $this->lnkViewParentIdAthelete = new MJaxLinkButton($this);
                 $this->lnkViewParentIdAthelete->Text = 'View Athelete';
-                $this->lnkViewParentIdAthelete->Href = __ENTITY_MODEL_DIR__ . '/Athelete/' . $this->objParentMessage->idAthelete;
+                $this->lnkViewParentIdAthelete->Href = '/data/editParentMessage?' . FFSQS::ParentMessage_IdAthelete . $this->objParentMessage->idAthelete;
             }
             if (!is_null($this->objParentMessage->idCompetition)) {
                 $this->lnkViewParentIdCompetition = new MJaxLinkButton($this);
                 $this->lnkViewParentIdCompetition->Text = 'View Competition';
-                $this->lnkViewParentIdCompetition->Href = __ENTITY_MODEL_DIR__ . '/Competition/' . $this->objParentMessage->idCompetition;
+                $this->lnkViewParentIdCompetition->Href = '/data/editParentMessage?' . FFSQS::ParentMessage_IdCompetition . $this->objParentMessage->idCompetition;
             }
         }
     }

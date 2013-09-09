@@ -109,7 +109,7 @@ class SessionEditPanelBase extends MJaxPanel {
             if (!is_null($this->objSession->idCompetition)) {
                 $this->lnkViewParentIdCompetition = new MJaxLinkButton($this);
                 $this->lnkViewParentIdCompetition->Text = 'View Competition';
-                $this->lnkViewParentIdCompetition->Href = __ENTITY_MODEL_DIR__ . '/Competition/' . $this->objSession->idCompetition;
+                $this->lnkViewParentIdCompetition->Href = '/data/editSession?' . FFSQS::Session_IdCompetition . $this->objSession->idCompetition;
             }
         }
         $this->lnkViewChildAssignment = new MJaxLinkButton($this);

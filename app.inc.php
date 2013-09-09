@@ -95,9 +95,11 @@ if(class_exists('MLCAuthDriver')){
     switch(SERVER_ENV){
         case('local'):
             MLCAuthDriver::SetCookieDomain('ffs.com');
+        break;
         case('beta'):
         case('prod'):
             MLCAuthDriver::SetCookieDomain('tumblescore.com');
+        break;
     }
 
 }

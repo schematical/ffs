@@ -340,18 +340,22 @@ class DeviceBase extends BaseEntity {
             break;
             case ('Name'):
             case ('name'):
+            case ('_Name'):
                 $this->arrDBFields['name'] = $mixValue;
             break;
             case ('Token'):
             case ('token'):
+            case ('_Token'):
                 $this->arrDBFields['token'] = $mixValue;
             break;
             case ('CreDate'):
             case ('creDate'):
+            case ('_CreDate'):
                 $this->arrDBFields['creDate'] = $mixValue;
             break;
             case ('InviteEmail'):
             case ('inviteEmail'):
+            case ('_InviteEmail'):
                 $this->arrDBFields['inviteEmail'] = $mixValue;
             break;
             case ('IdOrg'):

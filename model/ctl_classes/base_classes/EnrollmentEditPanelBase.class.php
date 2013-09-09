@@ -142,17 +142,17 @@ class EnrollmentEditPanelBase extends MJaxPanel {
             if (!is_null($this->objEnrollment->idAthelete)) {
                 $this->lnkViewParentIdAthelete = new MJaxLinkButton($this);
                 $this->lnkViewParentIdAthelete->Text = 'View Athelete';
-                $this->lnkViewParentIdAthelete->Href = __ENTITY_MODEL_DIR__ . '/Athelete/' . $this->objEnrollment->idAthelete;
+                $this->lnkViewParentIdAthelete->Href = '/data/editEnrollment?' . FFSQS::Enrollment_IdAthelete . $this->objEnrollment->idAthelete;
             }
             if (!is_null($this->objEnrollment->idCompetition)) {
                 $this->lnkViewParentIdCompetition = new MJaxLinkButton($this);
                 $this->lnkViewParentIdCompetition->Text = 'View Competition';
-                $this->lnkViewParentIdCompetition->Href = __ENTITY_MODEL_DIR__ . '/Competition/' . $this->objEnrollment->idCompetition;
+                $this->lnkViewParentIdCompetition->Href = '/data/editEnrollment?' . FFSQS::Enrollment_IdCompetition . $this->objEnrollment->idCompetition;
             }
             if (!is_null($this->objEnrollment->idSession)) {
                 $this->lnkViewParentIdSession = new MJaxLinkButton($this);
                 $this->lnkViewParentIdSession->Text = 'View Session';
-                $this->lnkViewParentIdSession->Href = __ENTITY_MODEL_DIR__ . '/Session/' . $this->objEnrollment->idSession;
+                $this->lnkViewParentIdSession->Href = '/data/editEnrollment?' . FFSQS::Enrollment_IdSession . $this->objEnrollment->idSession;
             }
         }
     }

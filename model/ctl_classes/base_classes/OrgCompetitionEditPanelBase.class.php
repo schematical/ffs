@@ -82,12 +82,12 @@ class OrgCompetitionEditPanelBase extends MJaxPanel {
             if (!is_null($this->objOrgCompetition->idOrg)) {
                 $this->lnkViewParentIdOrg = new MJaxLinkButton($this);
                 $this->lnkViewParentIdOrg->Text = 'View Org';
-                $this->lnkViewParentIdOrg->Href = __ENTITY_MODEL_DIR__ . '/Org/' . $this->objOrgCompetition->idOrg;
+                $this->lnkViewParentIdOrg->Href = '/data/editOrgCompetition?' . FFSQS::OrgCompetition_IdOrg . $this->objOrgCompetition->idOrg;
             }
             if (!is_null($this->objOrgCompetition->idCompetition)) {
                 $this->lnkViewParentIdCompetition = new MJaxLinkButton($this);
                 $this->lnkViewParentIdCompetition->Text = 'View Competition';
-                $this->lnkViewParentIdCompetition->Href = __ENTITY_MODEL_DIR__ . '/Competition/' . $this->objOrgCompetition->idCompetition;
+                $this->lnkViewParentIdCompetition->Href = '/data/editOrgCompetition?' . FFSQS::OrgCompetition_IdCompetition . $this->objOrgCompetition->idCompetition;
             }
         }
     }

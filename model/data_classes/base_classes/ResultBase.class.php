@@ -407,26 +407,32 @@ class ResultBase extends BaseEntity {
             break;
             case ('Score'):
             case ('score'):
+            case ('_Score'):
                 $this->arrDBFields['score'] = $mixValue;
             break;
             case ('Judge'):
             case ('judge'):
+            case ('_Judge'):
                 $this->arrDBFields['judge'] = $mixValue;
             break;
             case ('Flag'):
             case ('flag'):
+            case ('_Flag'):
                 $this->arrDBFields['flag'] = $mixValue;
             break;
             case ('CreDate'):
             case ('creDate'):
+            case ('_CreDate'):
                 $this->arrDBFields['creDate'] = $mixValue;
             break;
             case ('Event'):
             case ('event'):
+            case ('_Event'):
                 $this->arrDBFields['event'] = $mixValue;
             break;
             case ('DispDate'):
             case ('dispDate'):
+            case ('_DispDate'):
                 $this->arrDBFields['dispDate'] = $mixValue;
             break;
             case ('IdSessionObject'):

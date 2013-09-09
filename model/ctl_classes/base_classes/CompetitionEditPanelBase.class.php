@@ -113,7 +113,7 @@ class CompetitionEditPanelBase extends MJaxPanel {
             if (!is_null($this->objCompetition->idOrg)) {
                 $this->lnkViewParentIdOrg = new MJaxLinkButton($this);
                 $this->lnkViewParentIdOrg->Text = 'View Org';
-                $this->lnkViewParentIdOrg->Href = __ENTITY_MODEL_DIR__ . '/Org/' . $this->objCompetition->idOrg;
+                $this->lnkViewParentIdOrg->Href = '/data/editCompetition?' . FFSQS::Competition_IdOrg . $this->objCompetition->idOrg;
             }
         }
         $this->lnkViewChildEnrollment = new MJaxLinkButton($this);

@@ -430,22 +430,27 @@ class CompetitionBase extends BaseEntity {
             break;
             case ('Name'):
             case ('name'):
+            case ('_Name'):
                 $this->arrDBFields['name'] = $mixValue;
             break;
             case ('LongDesc'):
             case ('longDesc'):
+            case ('_LongDesc'):
                 $this->arrDBFields['longDesc'] = $mixValue;
             break;
             case ('CreDate'):
             case ('creDate'):
+            case ('_CreDate'):
                 $this->arrDBFields['creDate'] = $mixValue;
             break;
             case ('StartDate'):
             case ('startDate'):
+            case ('_StartDate'):
                 $this->arrDBFields['startDate'] = $mixValue;
             break;
             case ('EndDate'):
             case ('endDate'):
+            case ('_EndDate'):
                 $this->arrDBFields['endDate'] = $mixValue;
             break;
             case ('IdOrg'):
@@ -455,10 +460,12 @@ class CompetitionBase extends BaseEntity {
             break;
             case ('Namespace'):
             case ('namespace'):
+            case ('_Namespace'):
                 $this->arrDBFields['namespace'] = $mixValue;
             break;
             case ('SignupCutOffDate'):
             case ('signupCutOffDate'):
+            case ('_SignupCutOffDate'):
                 $this->arrDBFields['signupCutOffDate'] = $mixValue;
             break;
             case ('IdOrgObject'):

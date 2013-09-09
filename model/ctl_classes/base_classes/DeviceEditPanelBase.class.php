@@ -95,7 +95,7 @@ class DeviceEditPanelBase extends MJaxPanel {
             if (!is_null($this->objDevice->idOrg)) {
                 $this->lnkViewParentIdOrg = new MJaxLinkButton($this);
                 $this->lnkViewParentIdOrg->Text = 'View Org';
-                $this->lnkViewParentIdOrg->Href = __ENTITY_MODEL_DIR__ . '/Org/' . $this->objDevice->idOrg;
+                $this->lnkViewParentIdOrg->Href = '/data/editDevice?' . FFSQS::Device_IdOrg . $this->objDevice->idOrg;
             }
         }
         $this->lnkViewChildAssignment = new MJaxLinkButton($this);

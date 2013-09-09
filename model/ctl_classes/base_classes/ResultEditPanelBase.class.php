@@ -108,12 +108,12 @@ class ResultEditPanelBase extends MJaxPanel {
             if (!is_null($this->objResult->idSession)) {
                 $this->lnkViewParentIdSession = new MJaxLinkButton($this);
                 $this->lnkViewParentIdSession->Text = 'View Session';
-                $this->lnkViewParentIdSession->Href = __ENTITY_MODEL_DIR__ . '/Session/' . $this->objResult->idSession;
+                $this->lnkViewParentIdSession->Href = '/data/editResult?' . FFSQS::Result_IdSession . $this->objResult->idSession;
             }
             if (!is_null($this->objResult->idAthelete)) {
                 $this->lnkViewParentIdAthelete = new MJaxLinkButton($this);
                 $this->lnkViewParentIdAthelete->Text = 'View Athelete';
-                $this->lnkViewParentIdAthelete->Href = __ENTITY_MODEL_DIR__ . '/Athelete/' . $this->objResult->idAthelete;
+                $this->lnkViewParentIdAthelete->Href = '/data/editResult?' . FFSQS::Result_IdAthelete . $this->objResult->idAthelete;
             }
         }
     }

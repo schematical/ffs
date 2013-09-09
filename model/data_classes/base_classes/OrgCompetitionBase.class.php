@@ -347,6 +347,7 @@ class OrgCompetitionBase extends BaseEntity {
             break;
             case ('CreDate'):
             case ('creDate'):
+            case ('_CreDate'):
                 $this->arrDBFields['creDate'] = $mixValue;
             break;
             case ('IdAuthUser'):

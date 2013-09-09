@@ -392,14 +392,17 @@ class AssignmentBase extends BaseEntity {
             break;
             case ('Event'):
             case ('event'):
+            case ('_Event'):
                 $this->arrDBFields['event'] = $mixValue;
             break;
             case ('Apartatus'):
             case ('apartatus'):
+            case ('_Apartatus'):
                 $this->arrDBFields['apartatus'] = $mixValue;
             break;
             case ('CreDate'):
             case ('creDate'):
+            case ('_CreDate'):
                 $this->arrDBFields['creDate'] = $mixValue;
             break;
             case ('IdUser'):
@@ -408,6 +411,7 @@ class AssignmentBase extends BaseEntity {
             break;
             case ('RevokeDate'):
             case ('revokeDate'):
+            case ('_RevokeDate'):
                 $this->arrDBFields['revokeDate'] = $mixValue;
             break;
             case ('IdDeviceObject'):

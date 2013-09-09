@@ -98,12 +98,12 @@ class AssignmentEditPanelBase extends MJaxPanel {
             if (!is_null($this->objAssignment->idDevice)) {
                 $this->lnkViewParentIdDevice = new MJaxLinkButton($this);
                 $this->lnkViewParentIdDevice->Text = 'View Device';
-                $this->lnkViewParentIdDevice->Href = __ENTITY_MODEL_DIR__ . '/Device/' . $this->objAssignment->idDevice;
+                $this->lnkViewParentIdDevice->Href = '/data/editAssignment?' . FFSQS::Assignment_IdDevice . $this->objAssignment->idDevice;
             }
             if (!is_null($this->objAssignment->idSession)) {
                 $this->lnkViewParentIdSession = new MJaxLinkButton($this);
                 $this->lnkViewParentIdSession->Text = 'View Session';
-                $this->lnkViewParentIdSession->Href = __ENTITY_MODEL_DIR__ . '/Session/' . $this->objAssignment->idSession;
+                $this->lnkViewParentIdSession->Href = '/data/editAssignment?' . FFSQS::Assignment_IdSession . $this->objAssignment->idSession;
             }
         }
     }

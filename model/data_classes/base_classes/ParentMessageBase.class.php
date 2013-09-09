@@ -483,18 +483,22 @@ class ParentMessageBase extends BaseEntity {
             break;
             case ('AtheleteName'):
             case ('atheleteName'):
+            case ('_AtheleteName'):
                 $this->arrDBFields['atheleteName'] = $mixValue;
             break;
             case ('Message'):
             case ('message'):
+            case ('_Message'):
                 $this->arrDBFields['message'] = $mixValue;
             break;
             case ('CreDate'):
             case ('creDate'):
+            case ('_CreDate'):
                 $this->arrDBFields['creDate'] = $mixValue;
             break;
             case ('DispDate'):
             case ('dispDate'):
+            case ('_DispDate'):
                 $this->arrDBFields['dispDate'] = $mixValue;
             break;
             case ('IdUser'):
@@ -503,18 +507,25 @@ class ParentMessageBase extends BaseEntity {
             break;
             case ('QueDate'):
             case ('queDate'):
+            case ('_QueDate'):
                 $this->arrDBFields['queDate'] = $mixValue;
+            break;
+            case ('_InviteData'):
+                $this->arrDBFields['inviteData'] = $mixValue;
             break;
             case ('InviteType'):
             case ('inviteType'):
+            case ('_InviteType'):
                 $this->arrDBFields['inviteType'] = $mixValue;
             break;
             case ('InviteToken'):
             case ('inviteToken'):
+            case ('_InviteToken'):
                 $this->arrDBFields['inviteToken'] = $mixValue;
             break;
             case ('InviteViewDate'):
             case ('inviteViewDate'):
+            case ('_InviteViewDate'):
                 $this->arrDBFields['inviteViewDate'] = $mixValue;
             break;
             case ('IdCompetition'):
@@ -524,10 +535,12 @@ class ParentMessageBase extends BaseEntity {
             break;
             case ('ApproveDate'):
             case ('approveDate'):
+            case ('_ApproveDate'):
                 $this->arrDBFields['approveDate'] = $mixValue;
             break;
             case ('IdStripeData'):
             case ('idStripeData'):
+            case ('_IdStripeData'):
                 $this->arrDBFields['idStripeData'] = $mixValue;
             break;
             case ('IdAtheleteObject'):

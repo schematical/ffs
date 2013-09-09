@@ -21,11 +21,18 @@ class landing extends FFSForm {
         $this->lnkImport->AddAction($this, 'lnkImport_click');
         $this->arrRows[0][] = $this->lnkImport;
         $this->pnlCompetition = new CompetitionEditPanel($this);
-        $this->pnlCompetition->AddCssClass("span10 offset1");
+        $this->pnlCompetition->AddCssClass("well");
+        $this->pnlCompetition->SetUpHomePage();
+        /*$this->pnlCompetition->AddAction(
+            new MJaxDataEntitySaveEvent(),
+            new MJaxServerControlAction(
+                $this, 'pnlCompetition_click'
+            )
+        );*/
 
         //$this->AddWidget('Setup your meet', '', $this->pnlCompetition);
         $this->pnlSignup = new MLCShortSignUpPanel($this);
-        $this->pnlSignup->AddCssClass("span10 offset1");
+        $this->pnlSignup->AddCssClass("well");
         //$this->AddWidget('Create Account', '', $this->pnlSignup);
 
         $this->pnlSignup->AddAction(
@@ -57,6 +64,8 @@ class landing extends FFSForm {
         $this->pnlCompetition->SetCompetition(FFSForm::Competition());
         $this->pnlCompetition->objOrg = FFSForm::Org();
         $this->HideAlert();
+        $this->ScrollTo($this->pnlCompetition);
+        $this->pnlCompetition->Alert('Import Successfull', 'success');
     }
     public function pnlSignup_signup(){
         $this->pnlCompetition->btnSave_click();
@@ -66,7 +75,7 @@ class landing extends FFSForm {
             FFSRoll::ORG_MANAGER,//Roll
             $this->pnlCompetition->objOrg//Entity
         );
-        $this->Redirect("/" . $this->pnlCompetition->GetCompetition()->Namespace . '/org/competition/editCompetition');
+        $this->Redirect("/" . $this->pnlCompetition->GetCompetition()->Namespace . '/org/competition/index');
     }
 
 }

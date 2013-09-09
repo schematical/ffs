@@ -353,15 +353,21 @@ class OrgBase extends BaseEntity {
             break;
             case ('Namespace'):
             case ('namespace'):
+            case ('_Namespace'):
                 $this->arrDBFields['namespace'] = $mixValue;
             break;
             case ('Name'):
             case ('name'):
+            case ('_Name'):
                 $this->arrDBFields['name'] = $mixValue;
             break;
             case ('CreDate'):
             case ('creDate'):
+            case ('_CreDate'):
                 $this->arrDBFields['creDate'] = $mixValue;
+            break;
+            case ('_PsData'):
+                $this->arrDBFields['psData'] = $mixValue;
             break;
             case ('IdImportAuthUser'):
             case ('idImportAuthUser'):
@@ -369,10 +375,12 @@ class OrgBase extends BaseEntity {
             break;
             case ('ClubNum'):
             case ('clubNum'):
+            case ('_ClubNum'):
                 $this->arrDBFields['clubNum'] = $mixValue;
             break;
             case ('ClubType'):
             case ('clubType'):
+            case ('_ClubType'):
                 $this->arrDBFields['clubType'] = $mixValue;
             break;
             default:

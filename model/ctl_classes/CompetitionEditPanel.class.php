@@ -19,6 +19,8 @@ class CompetitionEditPanel extends CompetitionEditPanelBase {
     public function SetUpHomePage(){
         $this->btnSave->Remove();
         $this->btnSave = null;
+        $this->btnDelete->Remove();
+        $this->btnDelete = null;
 
         $this->btnContinue = new MJaxLinkButton($this);
         $this->btnContinue->AddAction($this, 'btnContinue_click');
@@ -51,6 +53,7 @@ class CompetitionEditPanel extends CompetitionEditPanelBase {
     }
     public function btnContinue_click(){
         $this->objForm->ScrollTo($this->objForm->pnlSignup);
+        $this->objForm->pnlSignup->Alert('Almost there! Just fill out your login info.','success');
     }
     public function btnSave_click(){
 

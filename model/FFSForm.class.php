@@ -125,11 +125,19 @@ class FFSForm extends MJaxWAdminForm{
             )
         );
     }
-    public static function Org(){
+    public static function Org($objOrg = null){
         if(!is_null(self::$objForm)){
-            return self::$objForm->objEntityManager->Org();
+            if(is_null($objOrg)){
+                return self::$objForm->objEntityManager->Org();
+            }else{
+                return self::$objForm->objEntityManager->Org($objOrg);
+            }
         }
-        return MLCApplication::$objRewriteHandeler->EntityManager->Org();
+        if(is_null($objOrg)){
+            return MLCApplication::$objRewriteHandeler->EntityManager->Org();
+        }else{
+            return MLCApplication::$objRewriteHandeler->EntityManager->Org($objOrg);
+        }
     }
     public static function Session(){
         if(!is_null(self::$objForm)){
@@ -137,10 +145,10 @@ class FFSForm extends MJaxWAdminForm{
         }
         return MLCApplication::$objRewriteHandeler->EntityManager->Session();
     }
-    public static function Competition(){
+    public static function Competition($objCompetition = null){
         if(!is_null(self::$objForm)){
-            return self::$objForm->objEntityManager->Competition();
+            return self::$objForm->objEntityManager->Competition($objCompetition);
         }
-        return MLCApplication::$objRewriteHandeler->EntityManager->Competition();
+        return MLCApplication::$objRewriteHandeler->EntityManager->Competition($objCompetition);
     }
 }

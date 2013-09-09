@@ -423,30 +423,40 @@ class AtheleteBase extends BaseEntity {
             break;
             case ('FirstName'):
             case ('firstName'):
+            case ('_FirstName'):
                 $this->arrDBFields['firstName'] = $mixValue;
             break;
             case ('LastName'):
             case ('lastName'):
+            case ('_LastName'):
                 $this->arrDBFields['lastName'] = $mixValue;
             break;
             case ('BirthDate'):
             case ('birthDate'):
+            case ('_BirthDate'):
                 $this->arrDBFields['birthDate'] = $mixValue;
             break;
             case ('MemType'):
             case ('memType'):
+            case ('_MemType'):
                 $this->arrDBFields['memType'] = $mixValue;
             break;
             case ('MemId'):
             case ('memId'):
+            case ('_MemId'):
                 $this->arrDBFields['memId'] = $mixValue;
+            break;
+            case ('_PsData'):
+                $this->arrDBFields['PsData'] = $mixValue;
             break;
             case ('CreDate'):
             case ('creDate'):
+            case ('_CreDate'):
                 $this->arrDBFields['creDate'] = $mixValue;
             break;
             case ('Level'):
             case ('level'):
+            case ('_Level'):
                 $this->arrDBFields['level'] = $mixValue;
             break;
             case ('IdOrgObject'):

@@ -119,7 +119,7 @@ class AtheleteEditPanelBase extends MJaxPanel {
             if (!is_null($this->objAthelete->idOrg)) {
                 $this->lnkViewParentIdOrg = new MJaxLinkButton($this);
                 $this->lnkViewParentIdOrg->Text = 'View Org';
-                $this->lnkViewParentIdOrg->Href = __ENTITY_MODEL_DIR__ . '/Org/' . $this->objAthelete->idOrg;
+                $this->lnkViewParentIdOrg->Href = '/data/editAthelete?' . FFSQS::Athelete_IdOrg . $this->objAthelete->idOrg;
             }
         }
         $this->lnkViewChildEnrollment = new MJaxLinkButton($this);

@@ -101,7 +101,7 @@ class Proscore{
 
 
         $objOrg->IdImportAuthUser = MLCAuthDriver::IdUser();
-        $objOrg->PsData = $objPSData->__toJson();
+        $objOrg->_PsData = $objPSData->__toJson();
         $objOrg->CreDate = MLCDateTime::Now();
         $objOrg->ClubNum = $objPSData->ClubNum;
         $objOrg->Save();
@@ -123,7 +123,7 @@ class Proscore{
 
 
         //$objOrg->IdImportAuthUser = MLCAuthDriver::IdUser();
-        $objOrg->PsData = $objPSData->__toJson();
+        $objOrg->_PsData = $objPSData->__toJson();
         $objOrg->CreDate = MLCDateTime::Now();
         $objOrg->ClubNum = $objPSData->ProNumber;
         $objOrg->Save();
@@ -133,7 +133,7 @@ class Proscore{
     public function ImportCompetitions(){
         $arrReturn = array();
         foreach($this->arrData['Meets'] as $intId => $objPSData){
-            FFSForm::Org() = $this->ImportHostOrg($objPSData);
+            FFSForm::Org($this->ImportHostOrg($objPSData));
             $objCompetition = Competition::Query(
                 sprintf(
                     'WHERE name = "%s" AND idOrg = %s',
@@ -157,7 +157,7 @@ class Proscore{
             $objCompetition->Save();
             $objPSData->DataEntity = $objCompetition;
             $arrReturn[] = $objCompetition;
-            FFSForm::Competition() = $objCompetition;
+            FFSForm::Competition($objCompetition);
 
 
             $this->ImportSessions();
@@ -248,7 +248,7 @@ class Proscore{
             $objAthelete->IdOrg = $objOrg->IdOrg;
 
 
-            $objAthelete->PsData = $objPSData->__toJson();
+            $objAthelete->_PsData = $objPSData->__toJson();
             $objAthelete->CreDate = MLCDateTime::Now();
             $objAthelete->Save();
             $objPSData->DataEntity = $objAthelete;

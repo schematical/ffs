@@ -518,42 +518,52 @@ class EnrollmentBase extends BaseEntity {
             break;
             case ('Flight'):
             case ('flight'):
+            case ('_Flight'):
                 $this->arrDBFields['flight'] = $mixValue;
             break;
             case ('Division'):
             case ('division'):
+            case ('_Division'):
                 $this->arrDBFields['division'] = $mixValue;
             break;
             case ('AgeGroup'):
             case ('ageGroup'):
+            case ('_AgeGroup'):
                 $this->arrDBFields['ageGroup'] = $mixValue;
             break;
             case ('Misc1'):
             case ('misc1'):
+            case ('_Misc1'):
                 $this->arrDBFields['misc1'] = $mixValue;
             break;
             case ('Misc2'):
             case ('misc2'):
+            case ('_Misc2'):
                 $this->arrDBFields['misc2'] = $mixValue;
             break;
             case ('Misc3'):
             case ('misc3'):
+            case ('_Misc3'):
                 $this->arrDBFields['misc3'] = $mixValue;
             break;
             case ('Misc4'):
             case ('misc4'):
+            case ('_Misc4'):
                 $this->arrDBFields['misc4'] = $mixValue;
             break;
             case ('Misc5'):
             case ('misc5'):
+            case ('_Misc5'):
                 $this->arrDBFields['misc5'] = $mixValue;
             break;
             case ('CreDate'):
             case ('creDate'):
+            case ('_CreDate'):
                 $this->arrDBFields['creDate'] = $mixValue;
             break;
             case ('Level'):
             case ('level'):
+            case ('_Level'):
                 $this->arrDBFields['level'] = $mixValue;
             break;
             case ('IdAtheleteObject'):
