@@ -66,7 +66,9 @@ abstract class FFSApplication{
         $arrAtheleteResults = array();
         foreach($arrResults as $intIndex => $objResult){
             if(!array_key_exists($objResult->IdAthelete, $arrAtheleteResults)){
-                $arrAtheleteResults[$objResult->IdAthelete] = array();
+                $arrAtheleteResults[$objResult->IdAthelete] = new FFSResultCollection();
+                $arrAtheleteResults[$objResult->IdAthelete]->Athelete = $objResult->IdAtheleteObject;
+                $arrAtheleteResults[$objResult->IdAthelete]->Session = $objSession;
             }
             $arrAtheleteResults[$objResult->IdAthelete][] = $objResult;
         }
@@ -400,5 +402,16 @@ abstract class FFSApplication{
         $objOrgCompetition->IdAuthUser = MLCAuthDriver::IdUser();
         $objOrgCompetition->Save();
         return $objOrgCompetition;
+    }
+    public static function GetResultsByCompetition(Competition $objCompetition = null){
+        if(is_null($objCompetition)){
+            $objCompetition = FFSForm::Competition();
+        }
+        $arrSessions = $objCompetition->GetSessionArr();
+        $arrReturn = array();
+        foreach($arrSessions as $objSession){
+            $arrReturn = array_merge(FFSApplication::GetResultsBySessionGroupByAthelete($objSession), $arrReturn);
+        }
+        return $arrReturn;
     }
 }

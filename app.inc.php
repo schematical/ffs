@@ -31,6 +31,9 @@ MLCApplicationBase::$arrClassFiles['FFSForm'] = __MODEL_FFS_APP_DIR__ . '/FFSFor
 MLCApplicationBase::$arrClassFiles['FFSFeedForm'] = __MODEL_FFS_APP_DIR__ . '/FFSFeedForm.class.php';
 MLCApplicationBase::$arrClassFiles['FFSRewriteHandeler'] = __MODEL_FFS_APP_DIR__ . '/FFSRewriteHandeler.class.php';
 MLCApplicationBase::$arrClassFiles['FFSApplication'] = __MODEL_FFS_APP_DIR__ . '/FFSApplication.class.php';
+//Gymnastics scoring
+MLCApplicationBase::$arrClassFiles['FFSResultCollection'] = __MODEL_FFS_APP_DIR__ . '/gymnastics/FFSResultCollection.class.php';
+
 
 //CTL
 MLCApplicationBase::$arrClassFiles['FFSGymLandingHeaderPanel'] = __CTL_FFS_APP_DIR__ . '/_panels/FFSGymLandingHeaderPanel.class.php';
@@ -50,6 +53,8 @@ MLCApplicationBase::$arrClassFiles['FFSSharePanel'] = __CTL_FFS_APP_DIR__ . '/_p
 MLCApplicationBase::$arrClassFiles['FFSAtheleteSelectPanel'] = __CTL_FFS_APP_DIR__ . '/_panels/FFSAtheleteSelectPanel.class.php';
 MLCApplicationBase::$arrClassFiles['FFSWizzardPanel'] = __CTL_FFS_APP_DIR__ . '/_panels/FFSWizzardPanel.class.php';
 MLCApplicationBase::$arrClassFiles['FFSOrgInvitePanel'] = __CTL_FFS_APP_DIR__ . '/_panels/FFSOrgInvitePanel.class.php';
+MLCApplicationBase::$arrClassFiles['FFSResultAdvList'] = __CTL_FFS_APP_DIR__ . '/_panels/reports/FFSResultAdvList.class.php';
+
 
 
 
