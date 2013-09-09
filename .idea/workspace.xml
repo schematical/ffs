@@ -4,8 +4,8 @@
     <list default="true" id="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" name="Default" comment="" />
     <ignored path="FFS.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/a.dummy" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378500266105" ignored="false" />
-    <file path="/index.php" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378497427710" ignored="false" />
+    <file path="/a.dummy" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378669747034" ignored="false" />
+    <file path="/index.php" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378676573213" ignored="false" />
     <file path="$PROJECT_DIR$/../MLCPackages/mlc_packages/private_packages/MLCWAdminTheme/package.inc.php" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1375057879420" ignored="false" />
     <file path="$PROJECT_DIR$/../MLCPackages/mlc_packages/private_packages/MJaxWAdminTheme/package.inc.php" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1375634585436" ignored="false" />
     <file path="/MJaxWAdminForm.class.php" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1377880296711" ignored="false" />
@@ -445,6 +445,68 @@
     <file path="$USER_HOME$/dumps/FFS_deploy_9_6_13/util_MLCBatch.sql" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378500272419" ignored="false" />
     <file path="$USER_HOME$/dumps/FFS_deploy_9_6_13/util_AuthRoll.sql" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378500272420" ignored="false" />
     <file path="/parse.php" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378506886831" ignored="false" />
+    <file path="/index.html" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378577321771" ignored="false" />
+    <file path="$PROJECT_DIR$/../owens_game/index.html" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378577321771" ignored="false" />
+    <file path="$PROJECT_DIR$/../owens_game/js/chars/Owen.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378658035942" ignored="false" />
+    <file path="$PROJECT_DIR$/../owens_game/js/chars/Dog.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378577269683" ignored="false" />
+    <file path="$PROJECT_DIR$/../owens_game/js/chars/Ned.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378577281182" ignored="false" />
+    <file path="$PROJECT_DIR$/../owens_game/js/chars/Bomb.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378577295388" ignored="false" />
+    <file path="$PROJECT_DIR$/../owens_game/index.php" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378676574707" ignored="false" />
+    <file path="$PROJECT_DIR$/../owens_game/php/_config.inc.php" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378676549350" ignored="false" />
+    <file path="/_config.inc.php" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378676549350" ignored="false" />
+    <file path="$PROJECT_DIR$/../owens_game/js/OGame.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378740136709" ignored="false" />
+    <file path="$PROJECT_DIR$/../owens_game/sprite.php" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378697160544" ignored="false" />
+    <file path="/sprite.php" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378697158577" ignored="false" />
+    <file path="$PROJECT_DIR$/../owens_game/js/chars/SparkleTile.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378583614152" ignored="false" />
+    <file path="/SparkleTile.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378583558212" ignored="false" />
+    <file path="$PROJECT_DIR$/../owens_game/js/OObject.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378698467292" ignored="false" />
+    <file path="/OObject.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378698466851" ignored="false" />
+    <file path="/OGame.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378740135282" ignored="false" />
+    <file path="$PROJECT_DIR$/../owens_game/js/tiles/Sparkle.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378669759549" ignored="false" />
+    <file path="/Sparkle.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378642258017" ignored="false" />
+    <file path="$PROJECT_DIR$/../owens_game/js/tiles/TileBase.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378683365732" ignored="false" />
+    <file path="/TileBase.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378683359307" ignored="false" />
+    <file path="$PROJECT_DIR$/../owens_game/js/tiles/Grass.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378693482701" ignored="false" />
+    <file path="/Grass.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378693480809" ignored="false" />
+    <file path="$PROJECT_DIR$/../owens_game/js/chars/Heli.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378675867589" ignored="false" />
+    <file path="/Owen.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378658033723" ignored="false" />
+    <file path="/Heli.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378675819233" ignored="false" />
+    <file path="$PROJECT_DIR$/../owens_game/js/tiles/Air.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378683302914" ignored="false" />
+    <file path="/Air.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378655630919" ignored="false" />
+    <file path="$PROJECT_DIR$/../owens_game/js/tiles/Dirt.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378669759549" ignored="false" />
+    <file path="/Dirt.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378650250375" ignored="false" />
+    <file path="$PROJECT_DIR$/../owens_game/js/OLevelBase.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378677083680" ignored="false" />
+    <file path="/OLevelBase.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378677083680" ignored="false" />
+    <file path="$PROJECT_DIR$/../owens_game/js/levels/BeggarsCanyon.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378655378102" ignored="false" />
+    <file path="/BeggarsCanyon.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378654997855" ignored="false" />
+    <file path="$PROJECT_DIR$/../owens_game/js/levels/IceLand.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378697377472" ignored="false" />
+    <file path="/IceLand.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378697354707" ignored="false" />
+    <file path="$PROJECT_DIR$/../owens_game/js/tiles/Ice.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378690163443" ignored="false" />
+    <file path="/Ice.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378655499065" ignored="false" />
+    <file path="$PROJECT_DIR$/../owens_game/js/chars/Cow.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378697977812" ignored="false" />
+    <file path="/Cow.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378697967568" ignored="false" />
+    <file path="$PROJECT_DIR$/../owens_game/js/OAction.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378677351566" ignored="false" />
+    <file path="/OAction.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378677351566" ignored="false" />
+    <file path="/Follow.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378682782252" ignored="false" />
+    <file path="$PROJECT_DIR$/../owens_game/js/actions/Follow.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378693632551" ignored="false" />
+    <file path="$PROJECT_DIR$/../owens_game/js/chars/Explosion.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378698534962" ignored="false" />
+    <file path="/Explosion.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378680825235" ignored="false" />
+    <file path="$PROJECT_DIR$/../owens_game/js/actions/BlowUp.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378698262608" ignored="false" />
+    <file path="/BlowUp.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378698259009" ignored="false" />
+    <file path="$PROJECT_DIR$/../owens_game/js/chars/Lazer.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378693200251" ignored="false" />
+    <file path="/Lazer.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378693192047" ignored="false" />
+    <file path="$PROJECT_DIR$/../owens_game/js/actions/Throw.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378696840503" ignored="false" />
+    <file path="/Throw.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378696839659" ignored="false" />
+    <file path="/Push.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378691313839" ignored="false" />
+    <file path="$PROJECT_DIR$/../owens_game/js/actions/Push.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378691315819" ignored="false" />
+    <file path="$PROJECT_DIR$/../owens_game/js/chars/Axe.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378696956959" ignored="false" />
+    <file path="/Axe.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378696955575" ignored="false" />
+    <file path="$PROJECT_DIR$/../owens_game/js/chars/Ball.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378696918762" ignored="false" />
+    <file path="/Ball.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378696846904" ignored="false" />
+    <file path="$PROJECT_DIR$/../owens_game/js/actions/Hold.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378698016897" ignored="false" />
+    <file path="/Hold.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378698014931" ignored="false" />
+    <file path="$PROJECT_DIR$/../owens_game/js/tiles/Clouds.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378697249307" ignored="false" />
+    <file path="/Clouds.js" changelist="8e6b2a6b-1245-45c6-996f-9e4ecf7ceb66" time="1378697228738" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -472,7 +534,7 @@
       <file leaf-file-name="EnrollmentEditPanelBase.class.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/model/ctl_classes/base_classes/EnrollmentEditPanelBase.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="265" column="42" selection-start="11276" selection-end="11276" vertical-scroll-proportion="-8.458333">
+            <state line="265" column="42" selection-start="11276" selection-end="11276" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -481,7 +543,7 @@
       <file leaf-file-name="EnrollmentListPanel.class.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/model/ctl_classes/EnrollmentListPanel.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="143" column="17" selection-start="5500" selection-end="5503" vertical-scroll-proportion="-40.877552">
+            <state line="143" column="17" selection-start="5500" selection-end="5503" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -490,7 +552,7 @@
       <file leaf-file-name="ResultListPanel.class.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/model/ctl_classes/ResultListPanel.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="38" column="0" selection-start="1139" selection-end="1139" vertical-scroll-proportion="-23.75">
+            <state line="38" column="0" selection-start="1139" selection-end="1139" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -499,7 +561,7 @@
       <file leaf-file-name="parse.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ctl/_test/parse.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="44" column="36" selection-start="1485" selection-end="1485" vertical-scroll-proportion="-27.5">
+            <state line="44" column="36" selection-start="1485" selection-end="1485" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -508,7 +570,7 @@
       <file leaf-file-name="FFSEntityManager.class.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/model/ctl_classes/FFSEntityManager.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="60" column="31" selection-start="2139" selection-end="2139" vertical-scroll-proportion="-18.75">
+            <state line="60" column="31" selection-start="2139" selection-end="2139" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -517,7 +579,7 @@
       <file leaf-file-name="fullScreen.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ctl/org/fullScreen.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="49" column="0" selection-start="1628" selection-end="1628" vertical-scroll-proportion="-0.33333334">
+            <state line="49" column="0" selection-start="1628" selection-end="1628" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -526,7 +588,7 @@
       <file leaf-file-name="fullScreen.tpl.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/view/www/org/fullScreen.tpl.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="54" column="60" selection-start="1766" selection-end="1766" vertical-scroll-proportion="-7.2083335">
+            <state line="54" column="60" selection-start="1766" selection-end="1766" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -535,7 +597,7 @@
       <file leaf-file-name="FFSApplication.class.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/model/FFSApplication.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="346" column="33" selection-start="13219" selection-end="13219" vertical-scroll-proportion="-19.708334">
+            <state line="346" column="33" selection-start="13219" selection-end="13219" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -544,7 +606,7 @@
       <file leaf-file-name="SessionBase.class.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/model/data_classes/base_classes/SessionBase.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="177" column="24" selection-start="6815" selection-end="6815" vertical-scroll-proportion="0.9423077">
+            <state line="177" column="24" selection-start="6815" selection-end="6815" vertical-scroll-proportion="0.028846154">
               <folding />
             </state>
           </provider>
@@ -553,7 +615,7 @@
       <file leaf-file-name="EnrollmentEditPanel.class.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/model/ctl_classes/EnrollmentEditPanel.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="36" column="0" selection-start="925" selection-end="1380" vertical-scroll-proportion="1.5714285">
+            <state line="36" column="0" selection-start="925" selection-end="1380" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -594,7 +656,7 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-1302" />
+    <option name="x" value="64" />
     <option name="y" value="764" />
     <option name="width" value="1303" />
     <option name="height" value="773" />
@@ -641,6 +703,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -787,22 +850,21 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="true" />
-    <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
     <property name="options.lastSelected" value="editor.preferences.completion" />
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../MDE_app" />
     <property name="WebServerToolWindowPanel.toolwindow.highlight.symlinks" value="true" />
-    <property name="dynamic.classpath" value="false" />
-    <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
+    <property name="dynamic.classpath" value="false" />
   </component>
   <component name="PublishConfig">
     <servers>
@@ -896,16 +958,15 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1302" y="764" width="1303" height="773" extended-state="6" />
+    <frame x="64" y="764" width="1303" height="773" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32988048" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24940239" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" x="479" y="52" width="400" height="715" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32988048" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27968127" sideWeight="0.6704" order="0" side_tool="false" content_ui="combo" x="64" y="-4" width="1303" height="773" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28446215" sideWeight="0.6704" order="0" side_tool="false" content_ui="combo" x="64" y="-4" width="1303" height="773" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
@@ -914,6 +975,7 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -982,16 +1044,12 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/ctl/_panels/FFSAtheleteSelectPanel.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="54" selection-start="682" selection-end="682" vertical-scroll-proportion="-6.25">
-          <folding />
-        </state>
+        <state line="16" column="54" selection-start="682" selection-end="682" vertical-scroll-proportion="-6.25" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ctl/org/competition/manageAthletes.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="71.458336">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="71.458336" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../MLCPackages/mlc_packages/MJaxBootstrap/_core/ctl/MJaxBSAutocompleteTextBox.class.php">
@@ -1003,91 +1061,85 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/model/data_classes/Athelete.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="20" selection-start="555" selection-end="555" vertical-scroll-proportion="0.36585367">
-          <folding />
-        </state>
+        <state line="13" column="20" selection-start="555" selection-end="555" vertical-scroll-proportion="0.36585367" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ctl/_test/test.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="215" column="12" selection-start="4798" selection-end="4805" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="215" column="12" selection-start="4798" selection-end="4805" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/model/data_classes/Enrollment_Rel.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="0" selection-start="421" selection-end="881" vertical-scroll-proportion="1.5416666">
-          <folding />
-        </state>
+        <state line="16" column="0" selection-start="421" selection-end="881" vertical-scroll-proportion="1.5416666" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/model/ctl_classes/base_classes/EnrollmentEditPanelBase.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="265" column="42" selection-start="11276" selection-end="11276" vertical-scroll-proportion="-8.458333">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model/ctl_classes/EnrollmentEditPanel.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="0" selection-start="925" selection-end="1380" vertical-scroll-proportion="1.5714285">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ctl/_test/parse.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="36" selection-start="1485" selection-end="1485" vertical-scroll-proportion="-27.5">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model/ctl_classes/ResultListPanel.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="0" selection-start="1139" selection-end="1139" vertical-scroll-proportion="-23.75">
+        <state line="265" column="42" selection-start="11276" selection-end="11276" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/model/ctl_classes/EnrollmentListPanel.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="143" column="17" selection-start="5500" selection-end="5503" vertical-scroll-proportion="-40.877552">
+        <state line="143" column="17" selection-start="5500" selection-end="5503" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/ctl_classes/ResultListPanel.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="38" column="0" selection-start="1139" selection-end="1139" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ctl/_test/parse.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="44" column="36" selection-start="1485" selection-end="1485" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/model/ctl_classes/FFSEntityManager.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="31" selection-start="2139" selection-end="2139" vertical-scroll-proportion="-18.75">
+        <state line="60" column="31" selection-start="2139" selection-end="2139" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ctl/org/fullScreen.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="0" selection-start="1628" selection-end="1628" vertical-scroll-proportion="-0.33333334">
+        <state line="49" column="0" selection-start="1628" selection-end="1628" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/view/www/org/fullScreen.tpl.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="60" selection-start="1766" selection-end="1766" vertical-scroll-proportion="-7.2083335">
+        <state line="54" column="60" selection-start="1766" selection-end="1766" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/model/FFSApplication.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="346" column="33" selection-start="13219" selection-end="13219" vertical-scroll-proportion="-19.708334">
+        <state line="346" column="33" selection-start="13219" selection-end="13219" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/model/data_classes/base_classes/SessionBase.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="177" column="24" selection-start="6815" selection-end="6815" vertical-scroll-proportion="0.9423077">
+        <state line="177" column="24" selection-start="6815" selection-end="6815" vertical-scroll-proportion="0.028846154">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/ctl_classes/EnrollmentEditPanel.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="0" selection-start="925" selection-end="1380" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
