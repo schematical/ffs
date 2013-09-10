@@ -182,7 +182,7 @@ class message extends FFSForm{
     }
     public function pnlSignup_success(){
         $this->pnlSignup->Alert("Success",'info');
-        $this->
+        $this->ScrollTo($this->pnlStripe);
     }
     public function pnlStripe_error(){
         if(!is_null($this->objStripeCustomer)){

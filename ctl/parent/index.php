@@ -69,13 +69,13 @@ class index extends FFSFeedForm
             foreach($arrSessions as $objSession){
 
                 $arrResults = FFSApplication::GetResultsBySessionGroupByAthelete($objSession);
-                /*foreach($arrResults as $arrGroupedResults){
-                    foreach($arrGroupedResults as $objResult){
+                foreach($arrResults as $arrGroupedResults){
+                    foreach($arrGroupedResults as $strKey => $objResult){
                         if(is_null($objResult->IdAthelete)){
-                            $objResult->MarkDeleted();
+                           unset($arrGroupedResults[$strKey]);
                         }
                     }
-                }*/
+                }
                 $this->AddFeedEntity(
                     $arrResults
                 );

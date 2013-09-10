@@ -10,6 +10,14 @@ class FFSResultCollection extends BaseEntityCollection{
     protected $objSession = null;
     protected $objCompetition = null;
     protected $objAthelete = null;
+    public function GetMaxDate($strField = 'CreDate'){
+        $arrOrder = FFSApplication::SortChronologically($this->arrCollection, $strField);
+        return $arrOrder[0];
+    }
+    public function GetMinDate($strField = 'CreDate'){
+        $arrOrder = FFSApplication::SortChronologically($this->arrCollection, $strField);
+        return $arrOrder[count($arrOrder) - 1];
+    }
     public function GetAtheletes(){
         //Should return null if none
 
@@ -58,6 +66,8 @@ class FFSResultCollection extends BaseEntityCollection{
     public function __get($strName)
     {
         switch ($strName) {
+            case "LatestResultDate":
+                return $this->GetMaxDate();
             case "Athelete":
                 return $this->objAthelete;
             case "Session":
@@ -81,6 +91,7 @@ class FFSResultCollection extends BaseEntityCollection{
     public function __set($strName, $mixValue)
     {
         switch ($strName) {
+
             case "Athelete":
                 return $this->objAthelete = $mixValue;
             case "Session":

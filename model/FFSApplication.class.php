@@ -61,7 +61,12 @@ abstract class FFSApplication{
         return $arrReturn;
     }
     public static function GetResultsBySessionGroupByAthelete($objSession){
-        $arrResults = Result::LoadCollByIdSession($objSession->IdSession)->getCollection();
+        $arrResults = Result::Query(
+            sprintf(
+                'WHERE Result.idSession = %s ORDER BY CreDate DESC',
+                $objSession->IdSession
+            )
+        );
         //die("fuck");
         $arrAtheleteResults = array();
         foreach($arrResults as $intIndex => $objResult){
@@ -143,6 +148,7 @@ abstract class FFSApplication{
         if(is_string($mixAthelete)){
             $objParentMessage->AtheleteName = $mixAthelete;
         }
+        $objParentMessage->FromName = $strFromName;
         $objParentMessage->IdUser = MLCAuthDriver::IdUser();
         $objParentMessage->QueDate = MLCDateTime::Now();
         $objParentMessage->IdCompetition = $objCompetition->IdCompetition;

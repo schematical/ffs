@@ -2,8 +2,14 @@
 class FFSRewriteHandeler extends MLCRewriteHandelerBase{
     protected $objEntityManager = null;
     public function Handel($strUri){
-
-
+        if(SERVER_ENV != 'local'){
+            $arrParts = explode('://', $_SERVER['SCRIPT_URI']);
+            if(strtolower($arrParts[0]) != 'https'){
+                $strUrl =  'https://' . $arrParts[1];
+                //die($strUrl);
+                die(header('location:' . $strUrl));
+            }
+        }
         $this->objEntityManager = new FFSEntityManager();
 
         if($strUri == '/'){
