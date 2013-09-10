@@ -16,6 +16,18 @@ class Session extends SessionBase {
     public function __toString(){
         return $this->Name;
     }
+    public function State(){
+         if(MLCDateTime::IsGreaterThan($this->StartDate)){
+             return FFSSessionState::UPCOMING;
+         }else{
+
+             if(MLCDateTime::IsLessThan($this->EndDate)){
+                 return FFSSessionState::CLOSED;
+             }else{
+                 return FFSSessionState::ACTIVE;
+             }
+         }
+    }
 
 }
 

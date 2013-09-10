@@ -1,17 +1,7 @@
 
     <form action="/" id="validation-form" class="form-horizontal">
         <fieldset>
-            <legend style=''>
-                &nbsp;&nbsp;&nbsp;
-                <i>
-                    Shout Out
-                </i>
-                a supportive message to your athlete
-            </legend>
-            <p style='padding-left:10Px;padding-right:10Px;'>
-                Enter in a message to your athlete. We will then flash it on the score displays to help them get pumped up before their next event.
-            </p>
-            <hr/>
+            
                 
             
                 
@@ -23,7 +13,7 @@
 */
 if (!is_null($_CONTROL->intIdAthelete)) { ?>
                         <div class="control-group pull-left">
-                          <label class="control-label" for="name"> Athlete's Name:</label>
+                          <label class="control-label" for="name"> Athelete</label>
                           <div class="controls">
                              <?php $_CONTROL->intIdAthelete->Render(); ?>
                           </div>
@@ -33,11 +23,11 @@ if (!is_null($_CONTROL->intIdAthelete)) { ?>
                 
             
                 
-                    <?php if (!is_null($_CONTROL->strFromName)) { ?>
+                    <?php if (!is_null($_CONTROL->strAtheleteName)) { ?>
                         <div class="control-group pull-left">
-                          <label class="control-label" for="name"> From:</label>
+                          <label class="control-label" for="name"> Athelete Name</label>
                           <div class="controls">
-                             <?php $_CONTROL->strFromName->Render(); ?>
+                             <?php $_CONTROL->strAtheleteName->Render(); ?>
                           </div>
                         </div>
                     <?php
@@ -59,7 +49,7 @@ if (!is_null($_CONTROL->intIdAthelete)) { ?>
                 
             
                 
-                    <?php /*if (!is_null($_CONTROL->dttDispDate)) { ?>
+                    <?php /* if (!is_null($_CONTROL->dttDispDate)) { ?>
                         <div class="control-group pull-left">
                           <label class="control-label" for="name"> Disp Date</label>
                           <div class="controls">
@@ -156,8 +146,7 @@ if (!is_null($_CONTROL->intIdAthelete)) { ?>
             
                 
                     <?php if (!is_null($_CONTROL->dttApproveDate)) { ?>
-                        <div class="conldset>
-trol-group pull-left">
+                        <div class="control-group pull-left">
                           <label class="control-label" for="name"> Approve Date</label>
                           <div class="controls">
                              <?php $_CONTROL->dttApproveDate->Render(); ?>
@@ -177,7 +166,7 @@ trol-group pull-left">
                         </div>
                     <?php
 } */ ?>
-                
+
             
         </fieldset>
         <div class="form-actions">

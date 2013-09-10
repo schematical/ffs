@@ -40,9 +40,10 @@ abstract class FFSFeedForm extends FFSForm{
             }
             $this->arrFeedEntities[$intTime] = $this->GetFeedEntityCtl($mixFeedEntity, $mixOrigData);
         }else{
+            //_dv($mixFeedEntity);
             throw new Exception("Invalid time to sort by");
         }
-
+        return $this->arrFeedEntities[$intTime];
 
     }
     public function Pre_Render(){

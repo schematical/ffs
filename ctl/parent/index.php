@@ -37,13 +37,20 @@ class index extends FFSFeedForm
         return $pnlReturn;
     }
     public function InitFeed(){
+        $strExcludeParentMessage = '';
         $intIdParentMessage = MLCApplication::QS(FFSQS::IdParentMessage);
 
         if(!is_null($intIdParentMessage)){
-            $this->AddFeedEntity(
-                ParentMessage::LoadById($intIdParentMessage)
+            $pnlEntity = $this->AddFeedEntity(
+                ParentMessage::LoadById($intIdParentMessage),
+                'QueDate'
             );
-            return ;
+            //Makr highlighted
+            $pnlEntity->AddCssClass('alert');
+            $this->ScrollTo($pnlEntity);
+            //return ;
+
+            $strExcludeParentMessage = 'AND ParentMessage.idParentMessage != ' . $intIdParentMessage . ' ';
         }
         $intIdResult= MLCApplication::QS(FFSQS::IdResult);
 
@@ -76,14 +83,16 @@ class index extends FFSFeedForm
             //Load All parent messages by competiton
             $collCompetition = ParentMessage::Query(
                 sprintf(
-                    ' WHERE ParentMessage.idCompetition = %s ORDER BY queDate DESC LIMIT 5',
-                    FFSForm::Competition()->IdCompetition
+                    ' WHERE ParentMessage.idCompetition = %s %s ORDER BY queDate DESC LIMIT 5',
+                    FFSForm::Competition()->IdCompetition,
+                    $strExcludeParentMessage
                 )
             );
 
 
             $this->AddFeedEntity(
-                $collCompetition
+                $collCompetition,
+                'QueDate'
             );
         //}else{
             //If user is logged in get their subscriptions(should be stored in rolls)

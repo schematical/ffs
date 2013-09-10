@@ -77,6 +77,7 @@ class FFSQSBase {
     const ParentMessage_IdParentMessage = 'idParentMessage';
     const ParentMessage_IdAthelete = 'idAthelete';
     const ParentMessage_AtheleteName = 'atheleteName';
+    const ParentMessage_FromName = 'fromName';
     const ParentMessage_Message = 'message';
     const ParentMessage_CreDate = 'creDate';
     const ParentMessage_DispDate = 'dispDate';

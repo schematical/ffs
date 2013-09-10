@@ -39,6 +39,10 @@ class ParentMessageManageFormBase extends FFSForm {
         if (!is_null($strAtheleteName)) {
             $arrAndConditions[] = sprintf('ParentMessage.atheleteName LIKE "%s%%"', $strAtheleteName);
         }
+        $strFromName = MLCApplication::QS(FFSQS::ParentMessage_FromName);
+        if (!is_null($strFromName)) {
+            $arrAndConditions[] = sprintf('ParentMessage.fromName LIKE "%s%%"', $strFromName);
+        }
         $strInviteData = MLCApplication::QS(FFSQS::ParentMessage_InviteData);
         if (!is_null($strInviteData)) {
             $arrAndConditions[] = sprintf('ParentMessage.inviteData LIKE "%s%%"', $strInviteData);

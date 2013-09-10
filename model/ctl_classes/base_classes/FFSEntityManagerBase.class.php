@@ -473,6 +473,9 @@ class FFSEntityManagerBase {
         if ((is_null($strField)) || ($strField == 'atheleteName')) {
             $arrOrConditions[] = sprintf('ParentMessage.atheleteName LIKE "%s%%"', strtolower($strSearch));
         }
+        if ((is_null($strField)) || ($strField == 'fromName')) {
+            $arrOrConditions[] = sprintf('ParentMessage.fromName LIKE "%s%%"', strtolower($strSearch));
+        }
         if ((is_null($strField)) || ($strField == 'inviteData')) {
             $arrOrConditions[] = sprintf('ParentMessage.inviteData LIKE "%s%%"', strtolower($strSearch));
         }

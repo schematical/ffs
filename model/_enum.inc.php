@@ -16,7 +16,7 @@ abstract class FFSSection{
 }
 abstract class FFSQS extends FFSQSBase{
     const IdAthelete = 'a';
-    const IdParentMessage = 'pm';
+    const IdParentMessage = 'idParentMessage';
     const IdResult = 'r';
     const IdCompetition = 'c';
     const IdSession  = 's';
@@ -55,4 +55,9 @@ abstract class FFSFlightData{
         'Flight E' => 'Flight E',
         'Flight F' => 'Flight F',
     );
+}
+abstract class FFSSessionState{
+    CONST UPCOMING = 'UPCOMING';
+    CONST ACTIVE = 'ACTIVE';
+    CONST CLOSED = 'CLOSED';
 }

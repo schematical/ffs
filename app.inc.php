@@ -54,6 +54,7 @@ MLCApplicationBase::$arrClassFiles['FFSAtheleteSelectPanel'] = __CTL_FFS_APP_DIR
 MLCApplicationBase::$arrClassFiles['FFSWizzardPanel'] = __CTL_FFS_APP_DIR__ . '/_panels/FFSWizzardPanel.class.php';
 MLCApplicationBase::$arrClassFiles['FFSOrgInvitePanel'] = __CTL_FFS_APP_DIR__ . '/_panels/FFSOrgInvitePanel.class.php';
 MLCApplicationBase::$arrClassFiles['FFSResultAdvList'] = __CTL_FFS_APP_DIR__ . '/_panels/reports/FFSResultAdvList.class.php';
+MLCApplicationBase::$arrClassFiles['FFSSessionControlPanel'] = __CTL_FFS_APP_DIR__ . '/_panels/FFSSessionControlPanel.class.php';
 
 
 

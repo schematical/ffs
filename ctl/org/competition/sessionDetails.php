@@ -12,18 +12,29 @@
  * - EnrollmentManageForm extends EnrollmentManageFormBase
  */
 class sessionDetails extends FFSForm {
+    protected $pnlMain = null;
     protected $lstEnrollments = null;
     protected $lstResults = null;
     protected $lstAssignments = null;
     public function Form_Create() {
         parent::Form_Create();
-
-       // $this->InitEnrollmentList();
+        $this->InitMain();
+        $this->InitEnrollmentList();
         $this->InitResults();
-       // $this->InitAssignements();
+        $this->InitAssignements();
         if(!is_null(MLCApplication::QS(FFSQS::UseWizzard))){
             $this->InitWizzard();
         }
+    }
+    public function InitMain(){
+        $objSession = $this->objEntityManager->Session();
+        $this->pnlMain = new FFSSessionControlPanel($this, $objSession);
+        $wgtMain = $this->AddWidget(
+            $objSession->Name,
+            '',
+            $this->pnlMain
+        );
+        $wgtMain->AddCssClass('span12');
     }
     public function InitWizzard(){
 

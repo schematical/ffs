@@ -63,6 +63,19 @@ $_CONTROL->txtSearch->Render(); ?>
                     
                         <div class='span3'>
                             
+                                <?php if (!is_null($_CONTROL->strFromName)) { ?>
+                                    <div class='controls'>
+                                        <!--label> From Name</label-->
+                                        <?php $_CONTROL->strFromName->Render(); ?>
+                                     </div>
+                                 <?php
+    } ?>
+                            
+                            
+                        </div>
+                    
+                        <div class='span3'>
+                            
                                 <?php if (!is_null($_CONTROL->strMessage)) { ?>
                                     <div class='controls'>
                                         <!--label> Message</label-->

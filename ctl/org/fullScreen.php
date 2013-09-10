@@ -89,8 +89,11 @@ class fullScreen extends MJaxGentaForm {
         }
         //_dv($objMessage);
         $this->pnlMessage->Text = sprintf(
-            '<h5>To <b>%s: </b></h5><p>%s</p>',
+            'To <b>%s: </b><br/>
+            From <b>%s: </b>
+            <p class="pull-right">%s</p>',
             $objMessage->AtheleteName,
+            $objMessage->FromName,
             $objMessage->Message
         );
     }

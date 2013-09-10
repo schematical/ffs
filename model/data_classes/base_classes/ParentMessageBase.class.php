@@ -36,6 +36,8 @@
  * @property-write mixed $IdAthelete
  * @property-read mixed $AtheleteName
  * @property-write mixed $AtheleteName
+ * @property-read mixed $FromName
+ * @property-write mixed $FromName
  * @property-read mixed $Message
  * @property-write mixed $Message
  * @property-read mixed $CreDate
@@ -89,6 +91,9 @@ class ParentMessageBase extends BaseEntity {
         $xmlStr.= "<atheleteName>";
         $xmlStr.= $this->atheleteName;
         $xmlStr.= "</atheleteName>";
+        $xmlStr.= "<fromName>";
+        $xmlStr.= $this->fromName;
+        $xmlStr.= "</fromName>";
         $xmlStr.= "<message>";
         $xmlStr.= $this->message;
         $xmlStr.= "</message>";
@@ -139,6 +144,7 @@ class ParentMessageBase extends BaseEntity {
                 $this->arrDBFields['idParentMessage'] = $arrData['ParentMessage.idParentMessage'];
                 $this->arrDBFields['idAthelete'] = $arrData['ParentMessage.idAthelete'];
                 $this->arrDBFields['atheleteName'] = $arrData['ParentMessage.atheleteName'];
+                $this->arrDBFields['fromName'] = $arrData['ParentMessage.fromName'];
                 $this->arrDBFields['message'] = $arrData['ParentMessage.message'];
                 $this->arrDBFields['creDate'] = $arrData['ParentMessage.creDate'];
                 $this->arrDBFields['dispDate'] = $arrData['ParentMessage.dispDate'];
@@ -179,6 +185,7 @@ class ParentMessageBase extends BaseEntity {
         $arrFields[] = 'ParentMessage.idParentMessage ' . (($blnLongSelect) ? ' as "ParentMessage.idParentMessage"' : '');
         $arrFields[] = 'ParentMessage.idAthelete ' . (($blnLongSelect) ? ' as "ParentMessage.idAthelete"' : '');
         $arrFields[] = 'ParentMessage.atheleteName ' . (($blnLongSelect) ? ' as "ParentMessage.atheleteName"' : '');
+        $arrFields[] = 'ParentMessage.fromName ' . (($blnLongSelect) ? ' as "ParentMessage.fromName"' : '');
         $arrFields[] = 'ParentMessage.message ' . (($blnLongSelect) ? ' as "ParentMessage.message"' : '');
         $arrFields[] = 'ParentMessage.creDate ' . (($blnLongSelect) ? ' as "ParentMessage.creDate"' : '');
         $arrFields[] = 'ParentMessage.dispDate ' . (($blnLongSelect) ? ' as "ParentMessage.dispDate"' : '');
@@ -319,6 +326,7 @@ class ParentMessageBase extends BaseEntity {
         $arrReturn['idParentMessage'] = $this->idParentMessage;
         $arrReturn['idAthelete'] = $this->idAthelete;
         $arrReturn['atheleteName'] = $this->atheleteName;
+        $arrReturn['fromName'] = $this->fromName;
         $arrReturn['message'] = $this->message;
         $arrReturn['creDate'] = $this->creDate;
         $arrReturn['dispDate'] = $this->dispDate;
@@ -364,6 +372,13 @@ class ParentMessageBase extends BaseEntity {
             case ('atheleteName'):
                 if (array_key_exists('atheleteName', $this->arrDBFields)) {
                     return $this->arrDBFields['atheleteName'];
+                }
+                return null;
+            break;
+            case ('FromName'):
+            case ('fromName'):
+                if (array_key_exists('fromName', $this->arrDBFields)) {
+                    return $this->arrDBFields['fromName'];
                 }
                 return null;
             break;
@@ -485,6 +500,11 @@ class ParentMessageBase extends BaseEntity {
             case ('atheleteName'):
             case ('_AtheleteName'):
                 $this->arrDBFields['atheleteName'] = $mixValue;
+            break;
+            case ('FromName'):
+            case ('fromName'):
+            case ('_FromName'):
+                $this->arrDBFields['fromName'] = $mixValue;
             break;
             case ('Message'):
             case ('message'):

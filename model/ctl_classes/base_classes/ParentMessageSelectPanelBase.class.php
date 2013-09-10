@@ -19,6 +19,7 @@ class ParentMessageSelectPanelBase extends MJaxPanel {
     public $intIdParentMessage = null;
     public $intIdAthelete = null;
     public $strAtheleteName = null;
+    public $strFromName = null;
     public $strMessage = null;
     public $txtDispDate_StartDate = null;
     public $txtDispDate_EndDate = null;
@@ -48,6 +49,8 @@ class ParentMessageSelectPanelBase extends MJaxPanel {
         $this->intIdAthelete->Attr('placeholder', " Athelete");
         $this->strAtheleteName = new MJaxTextBox($this);
         $this->strAtheleteName->Attr('placeholder', " Athelete Name");
+        $this->strFromName = new MJaxTextBox($this);
+        $this->strFromName->Attr('placeholder', " From Name");
         $this->strMessage = new MJaxTextBox($this);
         $this->strMessage->Attr('placeholder', " Message");
         $this->txtDispDate_StartDate = new MJaxBSDateTimePicker($this);
@@ -126,6 +129,9 @@ class ParentMessageSelectPanelBase extends MJaxPanel {
         $arrAndConditions = array();
         if (!is_null($this->strAtheleteName->GetValue())) {
             $arrAndConditions[] = sprintf('atheleteName LIKE "%s%%"', $this->strAtheleteName->GetValue());
+        }
+        if (!is_null($this->strFromName->GetValue())) {
+            $arrAndConditions[] = sprintf('fromName LIKE "%s%%"', $this->strFromName->GetValue());
         }
         if (!is_null($this->strMessage->GetValue())) {
             $arrAndConditions[] = sprintf('message LIKE "%s%%"', $this->strMessage->GetValue());

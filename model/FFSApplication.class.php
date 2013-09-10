@@ -118,7 +118,7 @@ abstract class FFSApplication{
         //echo("h4\n");
 
     }
-    public static function QueMessage($mixAthelete, $strMessage, $objCompetition = null, $objParentMessage = null){
+    public static function QueMessage($mixAthelete, $strMessage, $strFromName, $objCompetition = null, $objParentMessage = null){
         if(is_null($objCompetition)){
             $objCompetition = FFSForm::Competition();
         }
@@ -143,7 +143,7 @@ abstract class FFSApplication{
         if(is_string($mixAthelete)){
             $objParentMessage->AtheleteName = $mixAthelete;
         }
-
+        $objParentMessage->IdUser = MLCAuthDriver::IdUser();
         $objParentMessage->QueDate = MLCDateTime::Now();
         $objParentMessage->IdCompetition = $objCompetition->IdCompetition;
         $objParentMessage->Save();
@@ -317,7 +317,7 @@ abstract class FFSApplication{
                 if(
                     $intIdAthelete != $objResult->IdAthelete ||
                     $strEventName != $objResult->Event ||
-                    $intIdSession != $objResult->Session
+                    $intIdSession != $objResult->IdSession
                 ){
                     throw new Exception("Cannot avg scores that are not from a single athelete on a single session on an event");
                 }
