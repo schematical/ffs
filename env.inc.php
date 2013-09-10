@@ -101,6 +101,8 @@ if(defined('SERVER_ENV')){
     define('FFS_GIT_CACHE_TIME', 3600);
     define('__GIT_TMP_DIR__', '/var/www/fake_git');
 
+    define('GRASSHOPPER_NUMBER', '1-888-879-7927');
+
 	if(true){//Cant do live yet
 		define('STRIPE_MODE', 'test');
 		define('STRIPE_API_SECRET', 'sk_sk3VF1S2GK9kwsa8PfLkQNWfma5pD');

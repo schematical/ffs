@@ -11,7 +11,7 @@ class landing extends FFSForm {
         /*if(!is_null(MDEAuthDriver::User())){
             $this->Redirect('/home.php');
        } */
-        $this->strTemplate = __VIEW_ACTIVE_APP_DIR__ . '/www/org/landing.tpl.php';
+        $this->strTemplate = __VIEW_ACTIVE_APP_DIR__ . '/www/org/competition/landing.tpl.php';
 
         //$this->pnlHeader = new FFSGymLandingHeaderPanel($this);
         //$this->AddWidget('','', $this->pnlHeader);

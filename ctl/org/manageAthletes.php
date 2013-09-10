@@ -70,7 +70,20 @@ class AtheleteManageForm extends AtheleteManageFormBase {
 
     }
     public function Query() {
-        return FFSForm::Org()->GetAtheleteArr();
+        $arrOrgs = MLCAuthDriver::GetRolls(FFSRoll::ORG_MANAGER);
+        $objOrg = null;
+        if(count($arrOrgs) == 0){
+            //Do nothing
+        }elseif(count($arrOrgs) == 1){
+            $objOrg = $arrOrgs[0]->GetEntity();
+
+        }else{
+            $objOrg =$arrOrgs[0]->GetEntity();
+        }
+        if(is_null($objOrg)){
+            $this->Redirect('/');
+        }
+        return $objOrg->GetAtheleteArr();
     }
 }
 AtheleteManageForm::Run('AtheleteManageForm');

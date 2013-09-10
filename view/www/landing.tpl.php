@@ -1,67 +1,139 @@
 <div class='container'>
-    <div class='row-fluid margin-bottom-25'>
+<div class='row margin-bottom-25'>
+    <div id='ffs-parent-message-packages' class="pricing-header">
+        <h1>TumbleScore</h1>
 
-        <div class='span10 offset1'>
-           <h1>Raise more funds with tumblescore.com</h1>
-        </div>
+        <h2>The competition management software where every body wins</h2>
     </div>
-    <div class='row-fluid margin-bottom-25'>
+    <!-- /.pricing-header -->
 
-        <div class='span3 offset1 ffs-header-img-holder'>
-            <img class='' src='<?php echo __ASSETS_IMG__; ?>/org1.png'/>
-            <div class='ffs-header-info-holder'>
-                <h3>
-                    Simply setup
-                </h3>
-                <p>
-                    Login to tumblescore.com on your laptop
-                </p>
-                <p>
-                    Plug your laptop in to your HDMI enabled television set
-                </p>
+    <div class="pricing-plans plans-3">
+
+        <div class="plan-container">
+            <div class="plan stacked">
+                <div class="plan-header">
+
+                    <div class="plan-title">
+                        For Teams and Clubs
+                    </div>
+                    <!-- /plan-title -->
+
+                    <!--<div class="plan-price">
+                        <span class="note"></span><span class="term"></span>
+                    </div>-->
+                    <!-- /plan-price -->
+
+                </div>
+                <!-- /plan-header -->
+
+                <div class="plan-features">
+                    <ul>
+                        <li><strong>Easy</strong> competition registration</li>
+                        <li><strong>Manage</strong> your team</li>
+                        <li><strong>Instant</strong> competition updates</li>
+                    </ul>
+                </div>
+                <!-- /plan-features -->
+
+                <div class="plan-actions">
+                    <a class='btn' href='/org/landing'>
+                        Get Started!
+                    </a>
+
+                </div>
+                <!-- /plan-actions -->
+
             </div>
+            <!-- /plan -->
         </div>
-        <div class='span3 ffs-header-img-holder'>
-            <img class='' src='<?php echo __ASSETS_IMG__; ?>/org2.png'/>
-            <div class='ffs-header-info-holder'>
-                <h3>
-                    Empower parents
-                </h3>
-                <p>
-                    Parents can now send supportive messages to their athletes that will show up on your displays
-                </p>
+        <!-- /plan-container -->
+
+
+        <div class="plan-container">
+            <div class="plan stacked orange">
+                <div class="plan-header">
+
+                    <div class="plan-title">
+                        For Competition Hosts
+                    </div>
+                    <!-- /plan-title -->
+
+                   <!-- <div class="plan-price">
+                        <span class="note">
+
+                        </span>
+                    </div>-->
+                    <!-- /plan-price -->
+
+                </div>
+                <!-- /plan-header -->
+
+                <div class="plan-features">
+                    <ul>
+                        <li><strong>Easy</strong> competition management</li>
+                        <li><strong>Increase</strong> your bottom line</li>
+                        <li><strong>Promote</strong> your competition like the pros</li>
+                        <li><strong>Never</strong> lose sleep over a meet again</li>
+                    </ul>
+                </div>
+                <!-- /plan-features -->
+
+                <div class="plan-actions">
+                    <a class='btn' href='/org/competition/landing'>
+                        Get Started!
+                    </a>
+                    <br/>
+                    <a class='btn' href='/faq'>
+                        Checkout the FAQ
+                    </a>
+                </div>
+
+                <!-- /plan-actions -->
+
             </div>
+            <!-- /plan -->
         </div>
-        <div class='span3 ffs-header-img-holder'>
-            <img class='' src='<?php echo __ASSETS_IMG__; ?>/org3.png'/>
-            <div class='ffs-header-info-holder'>
-                <h3>
-                    Increase your profits
-                </h3>
-                <p>
-                    For every message sent we split the profit with you 50%/50%.
-                </p>
-                <p>
-                    Once your meet is over we will send you a check with your additional income
-                </p>
+        <!-- /plan-container -->
+
+        <div class="plan-container">
+            <div class="plan stacked">
+                <div class="plan-header">
+
+                    <div class="plan-title">
+                        For Parents
+                    </div>
+                    <!-- /plan-title -->
+
+                   <!-- <div class="plan-price">
+                        <span class="note">$</span>20<span class="term"></span>
+                    </div>-->
+                    <!-- /plan-price -->
+
+                </div>
+                <!-- /plan-header -->
+
+                <div class="plan-features">
+                    <ul>
+                        <li><strong>Support</strong> your growing athlete</li>
+                        <li><strong>Follow</strong> their progress</li>
+                        <li><strong>Share</strong> their victories with family and friends</li>
+                    </ul>
+                </div>
+
+                <!-- /plan-features -->
+
+                <div class="plan-actions">
+                    <a class='btn' href='/parent/landing'>
+                        Get Started!
+                    </a>
+                </div>
+                <!-- /plan-actions -->
+
             </div>
+            <!-- /plan -->
         </div>
+        <!-- /plan-container -->
+
     </div>
-    <?php //if(!is_null($this->lnkUseTokens)){ ?>
-        <div class='row margin-bottom-25'>
-            <?php $this->lnkImport->Render(); ?>
-        </div>
-        <div class='row margin-bottom-25'>
-            <div class='span6'>
-                <?php $this->pnlCompetition->Render(); ?>
-            </div>
-            <div class='span6'>
-                <?php $this->pnlSignup->Render(); ?>
-            </div>
-        </div>
-        <div class='row margin-bottom-25'>
-
-        </div>
-
-    <?php //} ?>
+</div>
 </div>

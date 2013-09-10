@@ -27,19 +27,15 @@
                             </form>
                             <div class="faq-toc">
                                 <ol>
-                                    <li>1. <a href="#faq-1">How much will it cost to host a competition on tumblescore.com?</a></li>
-                                    <li>2. <a href="#faq-2">Do I need to install software?</a>
-                                    </li>
-                                    <li>3. <a href="#faq-3">Will I lose my meet data if my computer crashes?</a></li>
-                                    <li>4. <a href="#faq-4">Do I need to buy any expensive hardware?</a></li>
-                                    <li>5. <a href="#faq-5">Can I access tumblescore from my home and office computers?</a></li>
-                                    <li>6. <a href="#faq-6">How can I disable the browser's right-click options?</a>
-                                    </li>
-                                    <li>7. <a href="#faq-7">How do I hide my URL?</a></li>
-                                    <li>8. <a href="#faq-8">How do I detect what browser is being used?</a></li>
-                                    <li>9. <a href="#faq-9">How do I get my visitors' email addresses?</a></li>
-                                    <li>10. <a href="#faq-10">Why is my custom 404 Not Found message not displayed?</a>
-                                    </li>
+                                    <li>1. <a href="#faq-1">What is TumbleScore?</a></li>                                        </a></li>
+                                    <li>2. <a href="#faq-2">Can TumbleScore make me money?                                        </a></li>
+                                    <li>3. <a href="#faq-3">What does it cost to host a competition on TumbleScore?</a></li>
+                                    <li>4. <a href="#faq-4">How easy is it to use TumbleScore on Competition Day?
+                                        </a></li>
+                                    <li>5. <a href="#faq-5">What are the benefits of being cloud based?
+                                        </a></li>
+                                    <li>6. <a href="#faq-6">How do I get started?</a></li>
+
                                 </ol>
                             </div>
                             <ol class="faq-list">
@@ -49,7 +45,7 @@
                                         <div class="faq-number">1</div>
                                     </div>
                                     <div class="faq-text">
-                                        <h4>How much will it cost to host a competition on tumblescore.com?</h4>
+                                        <h4>TumbleScore is a state-of-the-art athletic competition management software. It allows hosts to easily manage the competition and generate extra income.</h4>
 
                                         <p>
                                             <b>It is free!</b> No monthly costs.
@@ -66,11 +62,34 @@
                                         <div class="faq-number">2</div>
                                     </div>
                                     <div class="faq-text">
-                                        <h4>Do I need to install software?</h4>
+                                        <h4>Can TumbleScore make me money?                                        </h4>
 
                                         <p>
-                                            No! There is no software to install. It is all browser based so you don't have to worry about installing updates.
+                                            <b>Yes!</b> - Generate more income from your competitors by offering your patrons the following services:
+                                        </p>
+                                        <hr/>
+                                        <b>Shout Outs:</b>
+                                        <p>
+                                            Allow Athlete’s family and friends to post supportive messages when they need it most! Shout outs will show up on the scoreboard for everyone to see. Even invite grandma to post a message for your athlete.
+                                        </p>
+                                        <hr/>
+                                        <b>Sell your own Ads:</b>
+                                        <p>
+                                            You can manage and sell ad's that will be broadcast to your competition's patrons via your score displays and the online meet feed. All you have to do is <a href='/upgrade'>upgrade to the premium addition</a>.
+                                        </p>
+                                        <hr/>
+                                        <b>Coming Soon: Custom Merchandise</b>
+                                        <p>
+                                            Selling custom merchandise printed on demand at big competitions is common. However, long lines frequently deter some parents from purchasing your competition merchandise. Allow friends and family to purchase and customize competition gear that you can deliver to your athletes during awards.  Of course grandma in Florida can purchase and customize competition gear for her favorite athlete.
 
+                                        </p>
+                                        <hr/>
+                                        <b>Coming Soon: Photography:</b>
+                                        <p>
+                                            Earn extra revenue by selling your photography online. For $2(subject to change), parents can share a photo taken by your photographers at the meet on their social network of choice or via email and text message.Additionally, prints can be ordered and shipped anywhere.
+                                        </p>
+                                        <p>
+                                            Again even grandma down in Florida can purchase competition photography without ever attending the meet.
                                         </p>
 
                                     </div>
@@ -82,11 +101,14 @@
                                     </div>
                                     <div class="faq-text">
 
-                                        <h4>Will I lose my meet data if my computer crashes?</h4>
+                                        <h4>What does it cost to host a competition on TumbleScore?
+                                        </h4>
 
                                         <p>
-                                            No. Our system is completely cloud based. This means that it all runs online on our servers.
-                                            This means you don't have to worry about backups, system crashes, or lost data. We take care of everything.
+                                            TumbleScore is free to host competitions. We make our money only when you make money from selling a service to the patrons of your competition.
+                                        </p>
+                                        <p>
+                                            If you would like to manage and sell your own ads instead of ours all you have to do is <a href='/upgrade'>upgrade to the premium addition</a>.
                                         </p>
                                     </div>
                                 </li>
@@ -96,16 +118,15 @@
                                         <div class="faq-number">4</div>
                                     </div>
                                     <div class="faq-text">
-                                        <h4>Do I need to buy any expensive hardware?</h4>
+                                        <h4>How easy is it to use TumbleScore on Competition Day? </h4>
 
-                                        <p>
-                                            Nope. No expensive score boards. No special score input devices.
-
-                                        </p>
-                                        <p>
-                                            We make it so you can use you and your volunteers smart phones,
-                                            laptops and tablet computers to run your competition smoothly.
-                                        </p>
+                                        <ul>
+                                            <li>There is no additional expensive custom hardware needed</li>
+                                            <li>Use the mobile phones, tablets, and laptops for inputting scores.</li>
+                                            <li>Use those same devices and you and your competition staff’s home television sets to display scores.</li>
+                                            <li>Don’t have access to television sets to use as displays? No problem. Your competions patrons can go to <b>http://tumblescore.com/{your meet’s name}</b> to see a live feed of the scores as they are entered in.</li>
+                                            <li>Manage multiple sessions at once from a single computer or multiple computers. You can run TumbleScore on as many devices as you want without needing to purchase multiple licenses.</li>
+                                        </ul>
 
                                     </div>
                                 </li>
@@ -116,12 +137,36 @@
                                     </div>
                                     <div class="faq-text">
 
-                                        <h4>Can I access tumblescore from my home and office computers?</h4>
+                                        <h4>What are the benefits of being "cloud based"?</h4>
 
                                         <p>
-                                            You can securely access your data anywhere on any device. Laptops, desktops, tablets, even your smart phone.
-                                            No need to run back to the office to check meet info. Check it from anywhere.
+                                            Secure access for you and your staff to manage meet info from the office, home and your mobile devices. TumbleScore handles all backups, so no lost data.
                                         </p>
+                                        <p>
+                                            There are no complicated install or updates. With TumbleScore based online, all you need is a browser and an internet connection.
+                                        </p>
+                                        <p>
+                                            Automatically publish scores online in real time.
+                                        </p>
+                                        <ul>
+                                            <li>
+                                                Let coaches and competition patrons alike keep up to date online.
+                                            </li>
+                                            <li>
+                                                Even push out competition related announcements before, during, and after the meet.
+                                            </li>
+                                        </ul>
+                                        <p>
+                                            Allow coaches manage their athlete information online
+                                        </p>
+                                        <ul>
+                                            <li>
+                                                Pick a cut off date and coaches will be able to enroll or remove athletes
+                                            </li>
+                                            <li>
+                                                After the cut off date all changes will need to be run through you
+                                            </li>
+                                        </ul>
 
                                     </div>
                                 </li>
@@ -131,108 +176,14 @@
                                         <div class="faq-number">6</div>
                                     </div>
                                     <div class="faq-text">
-                                        <h4>How can I disable the browser's right-click options?</h4>
+                                        <h4>How do I get started?</h4>
 
-                                        <p>These scripts annoy visitors who lose ready access to their browsers' normal
-                                            context-menu functions (e.g., "Open in new window" or "Bookmark link").
-                                            These scripts can also interfere with features like mouse gestures.
-                                            Nothing (including these scripts) can prevent anyone from copying your
-                                            source or images. The browser cannot display your document without the
-                                            source and images, so your web server must send them to the browser. Even
-                                            without the various "save" functions in today's browsers, someone can
-                                            retrieve your source or images from the browser's cache, request them from
-                                            the server with some other tool, or use a screen-capture tool to copy the
-                                            images.
-                                            These scripts do nothing when JavaScript is disabled or unavailable, when
-                                            JavaScript access to right-click events is disabled, on systems without
-                                            mice, or on systems with single-button mice.</p>
+                                        <p></p>
 
                                     </div>
                                 </li>
 
-                                <li id="faq-7">
-                                    <div class="faq-icon">
-                                        <div class="faq-number">7</div>
-                                    </div>
-                                    <div class="faq-text">
 
-                                        <h4>How do I hide my URL?</h4>
-
-                                        <p>You can't. URLs are fundamental to navigation on the WWW. The URL is
-                                            necessary for the browser to be able to retrieve your document. It is
-                                            impossible to hide the URL of a resource from the browser.</p>
-
-                                    </div>
-                                </li>
-
-                                <li id="faq-8">
-                                    <div class="faq-icon">
-                                        <div class="faq-number">8</div>
-                                    </div>
-                                    <div class="faq-text">
-
-                                        <h4>How do I detect what browser is being used?</h4>
-
-                                        <p>Many browsers identify themselves when they request a document. A CGI script
-                                            will have this information available in the HTTP_USER_AGENT environment
-                                            variable, and it can use that to send out a version of the document which is
-                                            optimized for that browser.</p>
-
-                                        <p>Keep in mind not all browsers identify themselves correctly. For example,
-                                            Microsoft Internet Explorer identifies itself as Netscape Navigator, and
-                                            many other browsers identify themselves as Microsoft Internet Explorer.</p>
-
-                                        <p>And of course, if a cache proxy keeps a version intended for one brower,
-                                            someone with another browser may get that version, rather than the version
-                                            intended for the other browser.</p>
-
-                                    </div>
-                                </li>
-
-                                <li id="faq-9">
-                                    <div class="faq-icon">
-                                        <div class="faq-number">9</div>
-                                    </div>
-                                    <div class="faq-text">
-
-                                        <h4>How do I get my visitors' email addresses?</h4>
-
-                                        <p>You can't. Although each request for a document is usually logged with the
-                                            name or address of the remote host, the actual username is almost never
-                                            logged as well. This is mostly because of performance reasons, as it would
-                                            require that the server uses the ident protocol to see who is on the other
-                                            end. This takes time. And if a cache proxy is doing the request, you don't
-                                            get anything sensible.</p>
-
-                                        <p>But just stop to think for a minute... would you really want every single
-                                            site you visit to know your email address? Imagine the loads of automated
-                                            thank you's you would be receiving. If you visited 20 sites, you would get
-                                            at least 20 emails that day, plus no doubt they would send you invitations
-                                            to return later. It would be a nightmare as well as an invasion of
-                                            privacy!</p>
-
-                                    </div>
-                                </li>
-
-                                <li id="faq-10">
-                                    <div class="faq-icon">
-                                        <div class="faq-number">10</div>
-                                    </div>
-                                    <div class="faq-text">
-                                        <h4>Why is my custom 404 Not Found message not displayed?</h4>
-
-                                        <p>If only Internet Explorer ignores your custom 404 Not Found messages, then
-                                            you've been caught by its "friendly" HTTP error messages. When a special
-                                            HTTP response (e.g., a 404 Not Found response) is shorter than 512 bytes,
-                                            Internet Explorer substitutes its own message for the one delivered by the
-                                            server. As a user of Internet Explorer, you can disable this feature in the
-                                            "Advanced" options panel. As a web author, your only recourse is to make
-                                            your 404 Not Found message longer.</p>
-
-                                    </div>
-                                </li>
-
-                                <div class="faq-empty">Nothing Found</div>
                             </ol>
                         </div>
 
@@ -253,10 +204,10 @@
 
                     <div class="widget-content">
 
-                        <a href="javascript:;" class="btn btn-large btn-warning btn-support-ask">Ask A Question</a>
+                        <a href="/contactUs" class="btn btn-large btn-warning btn-support-ask">Ask A Question</a>
 
 
-                        <a href="javascript:;" class="btn btn-large btn-support-contact">Contact Support</a>
+                        <a href="/contactUs" class="btn btn-large btn-support-contact">Contact Support</a>
 
 
                     </div>
@@ -269,17 +220,13 @@
                 <div class="widget stacked widget-box">
 
                     <div class="widget-header">
-                        <h3>Most Popular Questions</h3>
+                        <h3>What is TumbleScore?</h3>
                     </div>
                     <!-- /widget-header -->
 
                     <div class="widget-content">
 
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                            laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-                            voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        <p>TumbleScore is a state-of-the-art athletic competition management software. It allows hosts to easily manage the competition and generate extra income.</p>
 
                     </div>
                     <!-- /widget-content -->
