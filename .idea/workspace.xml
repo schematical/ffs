@@ -44,7 +44,7 @@
     <file path="/OrgEditPanel.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378932619846" ignored="false" />
     <file path="/OrgManageFormBase.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378928925017" ignored="false" />
     <file path="/_FFSFeedForm.tpl.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378930682808" ignored="false" />
-    <file path="/landing.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378932963779" ignored="false" />
+    <file path="/landing.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378933600750" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,7 +123,7 @@
       <file leaf-file-name="landing.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ctl/org/competition/landing.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="79" column="93" selection-start="2895" selection-end="2895" vertical-scroll-proportion="0.5841035">
+            <state line="11" column="33" selection-start="338" selection-end="338" vertical-scroll-proportion="0.30499077">
               <folding />
             </state>
           </provider>
@@ -159,7 +159,7 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="64" />
+    <option name="x" value="-1302" />
     <option name="y" value="764" />
     <option name="width" value="1303" />
     <option name="height" value="773" />
@@ -423,7 +423,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="64" y="764" width="1303" height="773" extended-state="6" />
+    <frame x="-1302" y="764" width="1303" height="773" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -616,7 +616,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ctl/org/competition/landing.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="79" column="93" selection-start="2895" selection-end="2895" vertical-scroll-proportion="0.5841035">
+        <state line="11" column="33" selection-start="338" selection-end="338" vertical-scroll-proportion="0.30499077">
           <folding />
         </state>
       </provider>

@@ -8,9 +8,9 @@ class landing extends FFSForm {
     public $pnlImport = null;
     public function Form_Create(){
         parent::Form_Create();
-        /*if(!is_null(MDEAuthDriver::User())){
-            $this->Redirect('/home.php');
-       } */
+        if(!is_null(MLCAuthDriver::User())){
+            $this->Redirect('/org');
+        }
         $this->strTemplate = __VIEW_ACTIVE_APP_DIR__ . '/www/org/competition/landing.tpl.php';
 
         //$this->pnlHeader = new FFSGymLandingHeaderPanel($this);
