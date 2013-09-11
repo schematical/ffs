@@ -25,7 +25,7 @@ if (!is_null($_CONTROL->strName)) { ?>
                 
                     <?php if (!is_null($_CONTROL->strLongDesc)) { ?>
                         <div class="control-group pull-left">
-                          <label class="control-label" for="name"> Long Desc</label>
+                          <label class="control-label" for="name"> Public Description</label>
                           <div class="controls">
                              <?php $_CONTROL->strLongDesc->Render(); ?>
                           </div>
@@ -75,7 +75,7 @@ if (!is_null($_CONTROL->strName)) { ?>
                 
                     <?php if (!is_null($_CONTROL->strNamespace)) { ?>
                         <div class="control-group pull-left">
-                          <label class="control-label" for="name"> Namespace</label>
+                          <label class="control-label" for="name">Custom URL</label>
                           <div class="controls">
                              <?php $_CONTROL->strNamespace->Render(); ?>
                           </div>

@@ -10,6 +10,10 @@ class OrgEditPanel extends OrgEditPanelBase {
         $this->strNamespace->Remove();
         $this->strNamespace = null;*/
     }
+    public function ForceClubType($strType){
+        $this->strClubType->Attr('readonly','readonly');
+        $this->strClubType->Text = $strType;
+    }
 
 }
 

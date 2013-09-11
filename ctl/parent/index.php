@@ -19,6 +19,19 @@ class index extends FFSFeedForm
 
             $this->intLastUpdated = $arrKeys[0];
         }
+        $arrActiveSessions = FFSApplication::GetActiveSessions();
+
+        if(count($arrActiveSessions) == 0){
+            $pnlAnounce = new MJaxPanel($this);
+            $pnlAnounce->Text = sprintf(
+                '<h3>There are no active sessions at the moment</h3> Thanks for checking out <b>%s</b>',
+                FFSForm::Competition()->Name
+            );
+            $this->arrFeedEntities[$this->intLastUpdated + 1] = $pnlAnounce;
+        }
+
+
+
         $this->pxyMainWindow->AddAction(
             new MJaxTimeoutEvent(5000),
             new MJaxServerControlAction($this, 'Update')

@@ -10,7 +10,9 @@ class AtheleteEditPanel extends AtheleteEditPanelBase {
         $this->strMemType->Attr('readonly','readonly');
         $this->strMemType->Text = 'USAG';//FOR NOW
 
-
+        $this->dttBirthDate->RemoveMinStartDate();
+        $this->dttBirthDate->DateOnly();
+        $this->dttBirthDate->SetValue(MLCDateTime::Now('- 10 years'));
         $this->intIdOrg = new OrgSelectPanel($this);
     }
     public function btnSave_click() {
@@ -20,6 +22,10 @@ class AtheleteEditPanel extends AtheleteEditPanelBase {
         }
         if(!is_null($this->intIdOrg)){
             $arrOrgs = $this->intIdOrg->GetValue();
+            if(count($arrOrgs) == 0){
+                $this->intIdOrg->Alert("You must enter in a gym");
+                return;
+            }
             $objOrg = $arrOrgs[0];
             if(
                 (is_null($objOrg)) ||

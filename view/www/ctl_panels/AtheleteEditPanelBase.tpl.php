@@ -43,9 +43,7 @@ if (!is_null($_CONTROL->intIdOrg)) {  $_CONTROL->intIdOrg->Render();
                     <?php if (!is_null($_CONTROL->dttBirthDate)) { ?>
                         <div class="control-group pull-left">
                           <label class="control-label" for="name"> Birth Date</label>
-                          <div class="controls">
                              <?php $_CONTROL->dttBirthDate->Render(); ?>
-                          </div>
                         </div>
                     <?php
 } ?>

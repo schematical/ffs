@@ -3,6 +3,10 @@ abstract class FFSFeedForm extends FFSForm{
     public $arrFeedEntities = array();
     public abstract function InitFeed();
     public abstract function GetFeedEntityCtl($objFeedEntity);
+    public function Form_Create(){
+        parent::Form_Create();
+        $this->strTemplate = __VIEW_ACTIVE_APP_DIR__ . '/www/_FFSFeedForm.tpl.php';
+    }
     public function AddFeedEntity($mixFeedEntity, $strDateField = 'CreDate', $mixOrigData = null){
         if(is_null($mixFeedEntity)){
             return null;

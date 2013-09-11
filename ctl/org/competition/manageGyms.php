@@ -81,6 +81,7 @@ class OrgManageForm extends OrgManageFormBase {
             $this->pnlInvite->SetEntity($objOrg, FFSRoll::ORG_MANAGER);
             $this->Alert($this->pnlInvite);
         }
+        $this->pnlEdit->SetOrg(null);
     }
     public function InitInvitePanel(){
         $this->pnlInvite = new MLCInvitePanel($this);

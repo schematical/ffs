@@ -82,6 +82,7 @@ class OrgManageFormBase extends FFSForm {
     }
     public function InitEditPanel($objOrg = null) {
         $this->pnlEdit = new OrgEditPanel($this, $objOrg);
+        $this->pnlEdit->ForceClubType(FFSForm::Org()->ClubType);
         $this->pnlEdit->AddAction(new MJaxDataEntitySaveEvent() , new MJaxServerControlAction($this, 'pnlEdit_save'));
         $this->pnlEdit->AddAction(new MJaxDataEntityDeleteEvent() , new MJaxServerControlAction($this, 'pnlEdit_delete'));
         $wgtOrg = $this->AddWidget(((is_null($objOrg)) ? 'Create Org' : 'Edit Org') , 'icon-edit', $this->pnlEdit);

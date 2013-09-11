@@ -45,12 +45,15 @@ class sessionDetails extends FFSForm {
     }
     public function InitWizzard(){
 
-        $this->lstEnrollments->Intro("Add Athletes", "You may start manually adding athletes that are enrolled in your meet using the Athlete manager. Though it is much easier to invite coaches to enroll their athletes or use our Proscore import tool.");
+        $this->pnlMain->Intro("Here is where you run your sessions", "This is the main page for managing an active session during your competition. You can use the short cuts to navigate this page.");
 
-        $this->lstEnrollments->Intro("Athlete List", "Once you have entered in an athlete they should appear in the Athlete List. You can assign that athlete to a division, or any other grouping you would like. Simply click on any field but the Athlete's name to edit it");
+
+        $this->lstEnrollments->Intro("View Enrolled Athletes", "Here you can view list of athletes you enrolled in this session. You can add more athletes to this session on the <a href='/" . FFSForm::Competition()->Namespace . "/org/competition/manageAthletes'>Manage Athlete Screen</a>");
+
+        $this->lstResults->Intro("Results List", "Here you can enter in results as they come in. Just click the blank row at the bottom and start typing an Athlete's name or number. It should auto populate with the athlete's information then you can enter in the score. If you need to edit a score just click on the record.");
 
         $strBody = 'Oh no! You havent created any sessions for this competition yet. You will need to do that before we can move forward';
-        $strUrl ='/' . FFSForm::Competition()->Namespace . '/org/competition/manageSessions';
+        $strUrl ='/' . FFSForm::Competition()->Namespace . '/org/competition/results';
 
         $pnlWizzard = new FFSWizzardPanel(
             $this,
@@ -64,7 +67,7 @@ class sessionDetails extends FFSForm {
             $pnlWizzard
         );
         $wgtWizzard->AddCssClass('span12');
-        $pnlWizzard->Intro("Ready to move on?", "When you are ready to move on to the next thing click here");
+        $pnlWizzard->Intro("Ready to move on to the result screen?", "When you are ready to move on to the next thing click here");
 
 
     }

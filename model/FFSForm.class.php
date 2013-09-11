@@ -6,6 +6,7 @@ class FFSForm extends MJaxWAdminForm{
     public function Form_Create(){
         parent::Form_Create();
         self::$objForm = $this;
+        
         $this->blnSkipMainWindowRender = true;
         $this->objEntityManager = MLCApplication::$objRewriteHandeler->EntityManager;
         if(is_null($this->objEntityManager)){

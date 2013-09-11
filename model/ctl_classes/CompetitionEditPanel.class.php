@@ -9,7 +9,10 @@ class CompetitionEditPanel extends CompetitionEditPanelBase {
 
     public function __construct($objParentControl, $objCompetion = null){
         parent::__construct($objParentControl, $objCompetion);
-
+        //Because of the date init
+        if (is_null($this->objCompetition)) {
+            $this->SetCompetition($this->objCompetition);
+        }
         $this->strNamespace->Attr('readonly', 'readonly');
         $this->strName->AddAction(
             new MJaxBlurEvent(),
@@ -34,19 +37,27 @@ class CompetitionEditPanel extends CompetitionEditPanelBase {
 
         parent::CreateFieldControls();
 
+
     }
     public function SetCompetition($objCompetition, $objOrg = null){
-        if(is_null($objOrg)){
-            $objOrg = $objCompetition->IdOrgObject;
-        }
-        if(!is_null($objOrg)){
-            //_dv($objOrg);
-            $this->txtOrgName->Text = $objOrg->Name;
+        if(is_null($objCompetition)){
+
+            $this->dttStartDate->SetValue(MLCDateTime::Now());
+            $this->dttEndDate->SetValue(MLCDateTime::Now('+ 1 Day'));
+            $this->dttSignupCutOffDate->SetValue(MLCDateTime::Now());
+        }else{
+            if(is_null($objOrg)){
+                $objOrg = $objCompetition->IdOrgObject;
+            }
+            if(!is_null($objOrg)){
+                //_dv($objOrg);
+                $this->txtOrgName->Text = $objOrg->Name;
+            }
         }
         return parent::SetCompetition($objCompetition);
     }
     public function strName_blur(){
-        $this->strNamespace->Text = FFSRewriteHandeler::ConvertToNamespace(
+        $this->strNamespace->Text =  $_SERVER['SERVER_NAME'] . '/' .FFSRewriteHandeler::ConvertToNamespace(
             $this->strName->Text
         );
        //_dv($this->strName->Text);
