@@ -15,10 +15,23 @@ class FFSForm extends MJaxWAdminForm{
 
 
         $this->SetUpNavMenu();
-        //If not is paid account{
+        if(!is_null($this->Competition())){
             $this->InitAds();
-        //}
+        }
         $this->SetUpBreadcrumbs();
+    }
+    public function SecureCompetition(){
+
+        if(is_null(MLCAuthDriver::User())){
+            $this->Redirect('/index.php');
+        }
+        if(is_null(FFSForm::Competition())){
+            $this->Redirect('/org');
+        }
+
+        if(!MLCAuthDriver::User()->HasRoll(FFSForm::Competition(), FFSRoll::ORG_MANAGER)){
+            $this->Redirect('/org');
+        }
     }
     public function TriggerControlEvent($strControlId, $strEvent){
         self::$objForm = $this;
@@ -99,6 +112,14 @@ class FFSForm extends MJaxWAdminForm{
                 //TODO - Add invite/share functionality
 
             break;
+            default:
+                $this->AddHeaderNav('FAQ', 'icon-question-sign')->Href = '/faq';
+
+                $this->AddHeaderNav('Competition Hosts', 'icon-trophy')->Href = '/org/competition/landing';
+                $this->AddHeaderNav('Parents', 'icon-female')->Href = '/parents/landing';
+                $this->AddHeaderNav('Contact Us', 'icon-phone')->Href = '/contactUs';
+
+
         }
     }
     public function InitAds(){

@@ -102,15 +102,17 @@ if(defined('SERVER_ENV')){
     define('__GIT_TMP_DIR__', '/var/www/fake_git');
 
     define('GRASSHOPPER_NUMBER', '1-888-879-7927');
+    define('SALES_SUPPORT_EMAIL', 'hello@tumblescore.com');
+    define('TECH_SUPPORT_EMAIL', 'techsupport@tumblescore.com');
 
-	if(true){//Cant do live yet
-		define('STRIPE_MODE', 'test');
-		define('STRIPE_API_SECRET', 'sk_sk3VF1S2GK9kwsa8PfLkQNWfma5pD');
-		define('STRIPE_API_PUBLIC', 'pk_RXEN6DBtQiZeFKULC66vTD2ycP0hJ');
+	if(true){//We are live baby
+        define('STRIPE_MODE', 'live');
+        define('STRIPE_API_SECRET', 'sk_GTlGrn8L9erPQpTNvDiznek9BEVLE');
+        define('STRIPE_API_PUBLIC', 'pk_tu8lmXHcSfLBFRiDbh67hGvg5z8vY');
 	}else{
-		define('STRIPE_MODE', 'live');
-		define('STRIPE_API_SECRET', 'sk_GTlGrn8L9erPQpTNvDiznek9BEVLE');
-		define('STRIPE_API_PUBLIC', 'pk_tu8lmXHcSfLBFRiDbh67hGvg5z8vY');
+        define('STRIPE_MODE', 'test');
+        define('STRIPE_API_SECRET', 'sk_sk3VF1S2GK9kwsa8PfLkQNWfma5pD');
+        define('STRIPE_API_PUBLIC', 'pk_RXEN6DBtQiZeFKULC66vTD2ycP0hJ');
 	}
     define('__MST_ACCOUNT__', '1');
 }

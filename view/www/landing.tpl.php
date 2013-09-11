@@ -3,7 +3,7 @@
     <div id='ffs-parent-message-packages' class="pricing-header">
         <h1>TumbleScore</h1>
 
-        <h2>The competition management software where every body wins</h2>
+        <h2>Hosting a meet has never been easier</h2>
     </div>
     <!-- /.pricing-header -->
 
@@ -116,7 +116,7 @@
                     <ul>
                         <li><strong>Support</strong> your growing athlete</li>
                         <li><strong>Follow</strong> their progress</li>
-                        <li><strong>Share</strong> their victories with family and friends</li>
+                        <li><strong>Share</strong> victories with family and friends</li>
                     </ul>
                 </div>
 
@@ -137,3 +137,9 @@
     </div>
 </div>
 </div>
+<script type="text/javascript">
+    setTimeout(function(){var a=document.createElement("script");
+        var b=document.getElementsByTagName("script")[0];
+        a.src=document.location.protocol+"//dnn506yrbagrg.cloudfront.net/pages/scripts/0017/1061.js?"+Math.floor(new Date().getTime()/3600000);
+        a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+</script>

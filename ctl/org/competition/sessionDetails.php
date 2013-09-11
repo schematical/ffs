@@ -18,6 +18,11 @@ class sessionDetails extends FFSForm {
     protected $lstAssignments = null;
     public function Form_Create() {
         parent::Form_Create();
+        $this->SecureCompetition();
+        $objSession = $this->objEntityManager->Session();
+        if(is_null($objSession)){
+            $this->Redirect('/' . FFSForm::Competition()->Namespace .'/org/competition/index');
+        }
         $this->InitMain();
         $this->InitEnrollmentList();
         $this->InitResults();
@@ -25,9 +30,11 @@ class sessionDetails extends FFSForm {
         if(!is_null(MLCApplication::QS(FFSQS::UseWizzard))){
             $this->InitWizzard();
         }
+
     }
     public function InitMain(){
         $objSession = $this->objEntityManager->Session();
+
         $this->pnlMain = new FFSSessionControlPanel($this, $objSession);
         $wgtMain = $this->AddWidget(
             $objSession->Name,

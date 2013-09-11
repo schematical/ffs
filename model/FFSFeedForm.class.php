@@ -4,8 +4,10 @@ abstract class FFSFeedForm extends FFSForm{
     public abstract function InitFeed();
     public abstract function GetFeedEntityCtl($objFeedEntity);
     public function AddFeedEntity($mixFeedEntity, $strDateField = 'CreDate', $mixOrigData = null){
-
-        $this->strTemplate = __VIEW_ACTIVE_APP_DIR__ . '/www/_FFSFeedForm.tpl.php';
+        if(is_null($mixFeedEntity)){
+            return null;
+        }
+        //$this->strTemplate = __VIEW_ACTIVE_APP_DIR__ . '/www/_FFSFeedForm.tpl.php';
         if(is_object($mixFeedEntity) && ($mixFeedEntity instanceof BaseEntityCollection)){
             $mixFeedEntity = $mixFeedEntity->getCollection();
         }

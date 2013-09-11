@@ -35,31 +35,7 @@ if (!is_null($_CONTROL->strNamespace)) { ?>
                 
             
                 
-            
-                
-                    <?php if (!is_null($_CONTROL->strPsData)) { ?>
-                        <div class="control-group pull-left">
-                          <label class="control-label" for="name"> Ps Data</label>
-                          <div class="controls">
-                             <?php $_CONTROL->strPsData->Render(); ?>
-                          </div>
-                        </div>
-                    <?php
-} ?>
-                
-            
-                
-                    <?php if (!is_null($_CONTROL->intIdImportAuthUser)) { ?>
-                        <div class="control-group pull-left">
-                          <label class="control-label" for="name"> Import Auth User</label>
-                          <div class="controls">
-                             <?php $_CONTROL->intIdImportAuthUser->Render(); ?>
-                          </div>
-                        </div>
-                    <?php
-} ?>
-                
-            
+
                 
                     <?php if (!is_null($_CONTROL->strClubNum)) { ?>
                         <div class="control-group pull-left">
