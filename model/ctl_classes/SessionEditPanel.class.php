@@ -27,10 +27,10 @@ class SessionEditPanel extends SessionEditPanelBase
     }
     public function CreateFieldControls(){
         parent::CreateFieldControls();
-        $this->dttStartDate->Format = 'mm-dd-yy hh:ii';
-        $this->dttStartDate->LinkFormat = 'mm-dd-yy hh:ii';
-        $this->dttEndDate->Format = 'mm-dd-yy hh:ii';
-        $this->dttEndDate->LinkFormat = 'mm-dd-yy hh:ii';
+        $this->dttStartDate->Format = 'mm-dd-yy hh:ii p\m';
+        $this->dttStartDate->LinkFormat = 'mm-dd-yy hh:ii  p\m';
+        $this->dttEndDate->Format = 'mm-dd-yy hh:ii  p\m';
+        $this->dttEndDate->LinkFormat = 'mm-dd-yy hh:ii  p\m';
     }
 
     public function InitEventSelector()
@@ -134,7 +134,27 @@ class SessionEditPanel extends SessionEditPanelBase
             $this->strEquipmentSet->SetValue($this->strEquipmentSet->Text);
 
         }
+        if(
+            is_null($this->objSession)
+        ){
+            if(!is_null(FFSForm::Competition())){
+                //Get latest session
 
+                $strNextStartDate = MLCDateTime::Now();
+                $strNextEndDate = MLCDateTime::Now('+ 4 hours');
+                $arrSessions = FFSForm::Competition()->GetSessionArr();
+                if(count($arrSessions) > 0){
+                    $arrSessions = FFSApplication::SortChronologically($arrSessions, 'StartDate');
+                    $objSession = $arrSessions[0];
+                    $strNextStartDate = $objSession->EndDate;
+                    $intTime = strtotime('+ 4 hours ' . $strNextStartDate);
+                    $strNextEndDate = date(MLCDateTime::MYSQL_FORMAT, $intTime);;
+                }
+            }
+
+            $this->dttStartDate->SetValue($strNextStartDate);
+            $this->dttEndDate->SetValue($strNextEndDate);
+        }
 
     }
 

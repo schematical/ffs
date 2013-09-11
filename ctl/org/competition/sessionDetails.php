@@ -26,7 +26,7 @@ class sessionDetails extends FFSForm {
         $this->InitMain();
         $this->InitEnrollmentList();
         $this->InitResults();
-        $this->InitAssignements();
+        //$this->InitAssignements();
         if(!is_null(MLCApplication::QS(FFSQS::UseWizzard))){
             $this->InitWizzard();
         }
@@ -38,7 +38,7 @@ class sessionDetails extends FFSForm {
         $this->pnlMain = new FFSSessionControlPanel($this, $objSession);
         $wgtMain = $this->AddWidget(
             $objSession->Name,
-            '',
+            'icon-flag',
             $this->pnlMain
         );
         $wgtMain->AddCssClass('span12');
@@ -71,6 +71,7 @@ class sessionDetails extends FFSForm {
     public function InitEnrollmentList(){
         //List enrolled athletes
         $this->lstEnrollments = new EnrollmentListPanel($this);
+        $this->lstEnrollments->AddCssClass('ffs-enrollment-list');
         $this->lstEnrollments->InitRowControl('edit_enrollment','Edit Enrollment', $this,'lnkEditEnrollment_click');
         $arrEnrollments = $this->objEntityManager->Session()->GetEnrollmentArr();
 
@@ -87,6 +88,7 @@ class sessionDetails extends FFSForm {
     public function InitResults(){
         //results
         $this->lstResults = new ResultListPanel($this);
+        $this->lstResults->AddCssClass('ffs-result-list');
         $arrResults = FFSForm::Session()->GetResultArr();
         $this->lstResults->SetDataEntites($arrResults);
         $this->lstResults->AddEmptyRow();
@@ -101,6 +103,7 @@ class sessionDetails extends FFSForm {
         //devices
 
         $this->lstAssignments = new AssignmentListPanel($this);
+        $this->lstAssignments->AddCssClass('ffs-assignment-list');
         $arrAssignments = FFSForm::Session()->GetAssignmentArr();
         $this->lstAssignments->SetDataEntites($arrAssignments);
         $wgtWidget = $this->AddWidget(

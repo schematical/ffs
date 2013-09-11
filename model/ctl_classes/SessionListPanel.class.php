@@ -12,55 +12,33 @@ class SessionListPanel extends SessionListPanelBase {
         parent::__construct($objParentControl, $arrSessions);
         $this->AddCssClass('table table-striped table-bordered table-condensed');
     }
-    /*
+
     public function SetupCols(){
-        
-            
-            $this->AddColumn('idSession','idSession');
-            
-            
-        
-            
-            
-            $this->AddColumn('startDate','startDate');
-            
-        
-            
-            
-            $this->AddColumn('endDate','endDate');
-            
-        
-            
-            
-            $this->AddColumn('idCompetition','idCompetition');
-            
-        
-            
-            
+
+
             $this->AddColumn('name','name');
-            
-        
-            
-            
-            $this->AddColumn('notes','notes');
-            
-        
-            
-            
-            $this->AddColumn('data','data');
-            
-        
-            
-            
+
+            $colStartDate = $this->AddColumn('startDate','startDate');
+            $colStartDate->RenderObject = $this;
+            $colStartDate->RenderFunction = 'RenderTimeWithDate';
+
+            $colEndDate = $this->AddColumn('endDate','endDate');
+            $colEndDate->RenderObject = $this;
+            $colEndDate->RenderFunction = 'RenderTimeWithDate';
+
+
+
             $this->AddColumn('equipmentSet','equipmentSet');
             
         
             
-            
-            $this->AddColumn('eventData','eventData');
+
             
         
     }
-    */
+    public function RenderTimeWithDate($strData, $objRow) {
+        return date_format(new DateTime($strData) , 'D h:i');
+    }
+
 }
 ?>

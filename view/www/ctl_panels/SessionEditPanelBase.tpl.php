@@ -25,9 +25,9 @@
             if (!is_null($_CONTROL->dttStartDate)) { ?>
                 <div class="control-group pull-left">
                     <label class="control-label" for="name"> Start Date</label>
-                    <div class="controls">
+
                         <?php $_CONTROL->dttStartDate->Render(); ?>
-                    </div>
+
                 </div>
             <?php
             } ?>
@@ -37,9 +37,9 @@
             <?php if (!is_null($_CONTROL->dttEndDate)) { ?>
                 <div class="control-group pull-left">
                     <label class="control-label" for="name"> End Date</label>
-                    <div class="controls">
+
                         <?php $_CONTROL->dttEndDate->Render(); ?>
-                    </div>
+
                 </div>
             <?php
             } ?>

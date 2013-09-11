@@ -7,7 +7,7 @@ class FFSSessionControlPanel extends MJaxPanel{
         $this->objSession = $objSession;
         $this->strTemplate = __VIEW_ACTIVE_APP_DIR__ . '/www/_panels/' . get_class($this) . '.tpl.php';
         $this->lnkToggleState = new MJaxLinkButton($this);
-        $this->lnkToggleState->AddCssClass('btn');
+        $this->lnkToggleState->AddCssClass('btn btn-large btn-info');
         //_dv($this->objSession->State());
         if($this->objSession->State() == FFSSessionState::CLOSED){
             $this->lnkToggleState->Text = 'Mark Open';

@@ -9,6 +9,7 @@ CREATE TABLE `MLCNamespace` (
   PRIMARY KEY (`idNamespace`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1$$
 
+ALTER TABLE `ffs`.`Competition` ADD COLUMN `clubType` VARCHAR(45) NULL  AFTER `signupCutOffDate` ;
 
 
 #Added 9.10.13
