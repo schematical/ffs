@@ -3,7 +3,16 @@
         <fieldset>
 
             <legend>Competition Info:</legend>
-            
+
+            <?php if(!is_null($_CONTROL->txtOrgName)){ ?>
+                <div class="control-group pull-left">
+                    <label class="control-label" for="name"> Your Club's Name</label>
+                    <div class="controls">
+                        <?php $_CONTROL->txtOrgName->Render(); ?>
+                    </div>
+                </div>
+                <hr />
+            <?php } ?>
                 
                     <?php
 /**
@@ -13,7 +22,7 @@
 */
 if (!is_null($_CONTROL->strName)) { ?>
                         <div class="control-group pull-left">
-                          <label class="control-label" for="name"> Name</label>
+                          <label class="control-label" for="name">Competition Name</label>
                           <div class="controls">
                              <?php $_CONTROL->strName->Render(); ?>
                           </div>
@@ -60,22 +69,12 @@ if (!is_null($_CONTROL->strName)) { ?>
 } ?>
                 
             
-                
-                    <?php if (!is_null($_CONTROL->intIdOrg)) { ?>
-                        <div class="control-group pull-left">
-                          <label class="control-label" for="name"> Org</label>
-                          <div class="controls">
-                             <?php $_CONTROL->intIdOrg->Render(); ?>
-                          </div>
-                        </div>
-                    <?php
-} ?>
-                
+
             
                 
                     <?php if (!is_null($_CONTROL->strNamespace)) { ?>
                         <div class="control-group pull-left">
-                          <label class="control-label" for="name">Custom URL</label>
+                          <label class="control-label" for="name">TumbleScore.com URL</label>
                           <div class="controls">
                              <?php $_CONTROL->strNamespace->Render(); ?>
                           </div>

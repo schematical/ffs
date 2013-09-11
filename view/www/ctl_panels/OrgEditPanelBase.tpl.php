@@ -47,14 +47,6 @@ if (!is_null($_CONTROL->strNamespace)) { ?>
                     <?php
 } ?>
 
-            <?php if (!is_null($_CONTROL->strClubType)) { ?>
-                <div class="control-group pull-left">
-                    <label class="control-label" for="name"> Club Affiliation</label>
-                    <div class="controls">
-                        <?php $_CONTROL->strClubType->Render(); ?>
-                    </div>
-                </div>
-            <?php  } ?>
             
         </fieldset>
         <div class="form-actions">

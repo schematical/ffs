@@ -57,7 +57,7 @@ class CompetitionEditPanel extends CompetitionEditPanelBase {
         return parent::SetCompetition($objCompetition);
     }
     public function strName_blur(){
-        $this->strNamespace->Text =  $_SERVER['SERVER_NAME'] . '/' .FFSRewriteHandeler::ConvertToNamespace(
+        $this->strNamespace->Text = FFSRewriteHandeler::ConvertToNamespace(
             $this->strName->Text
         );
        //_dv($this->strName->Text);
@@ -69,15 +69,18 @@ class CompetitionEditPanel extends CompetitionEditPanelBase {
     public function btnSave_click(){
 
         parent::btnSave_click();
-
         //Create new Org
         $this->objOrg = new Org();
         $this->objOrg->Name = $this->txtOrgName->Text;
         $this->objOrg->Namespace = FFSRewriteHandeler::ConvertToNamespace(
-            $this->txtOrgName->Text
+
+                $this->txtOrgName->Text
+
+
         );
         $this->objOrg->CreDate = MLCDateTime::Now();
         $this->objOrg->Save();
+
         $this->objCompetition->IdOrg = $this->objOrg->IdOrg;
         $this->objCompetition->Save();
         $this->TriggerEvent('mjax-success');

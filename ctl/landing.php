@@ -65,17 +65,19 @@ class landing extends FFSForm {
         $this->pnlCompetition->objOrg = FFSForm::Org();
         $this->HideAlert();
         $this->ScrollTo($this->pnlCompetition);
-        $this->pnlCompetition->Alert('Import Successfull', 'success');
+        $this->pnlCompetition->Alert('Import Successful', 'success');
     }
     public function pnlSignup_signup(){
         $this->pnlCompetition->btnSave_click();
-        $this->Alert("Success");
-
         MLCAuthDriver::AddRoll(
             FFSRoll::ORG_MANAGER,//Roll
             $this->pnlCompetition->objOrg//Entity
         );
-        $this->Redirect("/" . $this->pnlCompetition->GetCompetition()->Namespace . '/org/competition/index');
+        $this->Redirect(
+            "/" . $this->pnlCompetition->GetCompetition()->Namespace . '/org/competition/manaageSessions',
+        array(
+            FFSQS::UseWizzard => 1
+        ));
     }
 
 }

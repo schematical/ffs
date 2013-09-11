@@ -23,12 +23,12 @@ class landing extends FFSForm {
         $this->pnlCompetition = new CompetitionEditPanel($this);
         $this->pnlCompetition->AddCssClass("well");
         $this->pnlCompetition->SetUpHomePage();
-        /*$this->pnlCompetition->AddAction(
-            new MJaxDataEntitySaveEvent(),
+        $this->pnlCompetition->AddAction(
+            new MJaxSuccessEvent(),
             new MJaxServerControlAction(
-                $this, 'pnlCompetition_click'
+                $this, 'pnlCompetition_success'
             )
-        );*/
+        );
 
         //$this->AddWidget('Setup your meet', '', $this->pnlCompetition);
         $this->pnlSignup = new MLCShortSignUpPanel($this);
@@ -48,7 +48,7 @@ class landing extends FFSForm {
             new FFSPTFImportEvent(),
             new MJaxServerControlAction($this, 'pnlImport_import')
         );
-        //$this->pnlCompetition->SetCompetition(Competition::LoadAll()->getCollection()[0]);
+
 
     }
 
@@ -65,17 +65,23 @@ class landing extends FFSForm {
         $this->pnlCompetition->objOrg = FFSForm::Org();
         $this->HideAlert();
         $this->ScrollTo($this->pnlCompetition);
-        $this->pnlCompetition->Alert('Import Successfull', 'success');
+        $this->pnlCompetition->Alert('Import Successful', 'success');
     }
     public function pnlSignup_signup(){
         $this->pnlCompetition->btnSave_click();
-        $this->Alert("Success");
-
+    }
+    public function pnlCompetition_success($strFormId, $strControlId, $objCompetition){
+        $this->pnlCompetition->Alert("Success", 'success');
         MLCAuthDriver::AddRoll(
             FFSRoll::ORG_MANAGER,//Roll
             $this->pnlCompetition->objOrg//Entity
         );
-        $this->Redirect("/" . $this->pnlCompetition->GetCompetition()->Namespace . '/org/competition/index');
+        $this->Redirect(
+            "/" . $this->pnlCompetition->GetCompetition()->Namespace . '/org/competition/manageSessions',
+            array(
+                FFSQS::UseWizzard => 1
+            )
+        );
     }
 
 }
