@@ -39,6 +39,8 @@ class SessionEditPanel extends SessionEditPanelBase
 
         $this->dttEndDate->TimeOnly();
         $this->dttEndDate->Format = 'D H:ii  P';
+        $this->dttStartDate->StartDate = FFSForm::Competition()->StartDate;
+        $this->dttEndDate->StartDate = FFSForm::Competition()->StartDate;
         $this->dttStartDate->EndDate = FFSForm::Competition()->EndDate;
         $this->dttEndDate->EndDate = FFSForm::Competition()->EndDate;
 
