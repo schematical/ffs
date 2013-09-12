@@ -134,6 +134,24 @@ $_CONTROL->txtSearch->Render(); ?>
                              
                         </div>
                     
+                        <div class='span3'>
+                            
+                                <?php if (!is_null($_CONTROL->strClubType)) { ?>
+                                    <div class='controls'>
+                                        <!--label> Club Type</label-->
+                                        <?php $_CONTROL->strClubType->Render(); ?>
+                                     </div>
+                                 <?php
+    } ?>
+                            
+                            
+                        </div>
+                    
+                        <div class='span3'>
+                            
+                            
+                        </div>
+                    
                 </div>
             </div>
         </div>

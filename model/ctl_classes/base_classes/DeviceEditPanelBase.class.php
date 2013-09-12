@@ -87,6 +87,11 @@ class DeviceEditPanelBase extends MJaxPanel {
             //Do nothing this is a creDate
             $this->strInviteEmail->Text = $this->objDevice->inviteEmail;
         } else {
+            $this->strName->Text = '';
+            $this->strToken->Text = '';
+            //Is special field!!!!!
+            //Do nothing this is a creDate
+            $this->strInviteEmail->Text = '';
             $this->btnDelete->Style->Display = 'none';
         }
     }

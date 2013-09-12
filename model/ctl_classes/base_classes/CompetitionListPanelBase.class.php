@@ -52,7 +52,7 @@ class CompetitionListPanelBase extends MJaxTable {
         $this->AddColumn('longDesc', ' Long Desc', null, null, 'MJaxTextArea');
         $this->AddColumn('IdOrgObject', ' Org');
         $this->AddColumn('namespace', ' Namespace', null, null, 'MJaxTextBox');
-        $this->AddColumn('signupCutOffDate', ' Signup Cut Off Date', $this, 'RenderDate', 'MJaxBSDateTimePicker');
+        $this->AddColumn('clubType', ' Club Type', null, null, 'MJaxTextBox');
         $this->InitRowControl('view_Enrollments', 'View Enrollments', $this, 'lnkViewEnrollments_click', 'btn btn-small');
         $this->InitRowControl('view_OrgCompetitions', 'View OrgCompetitions', $this, 'lnkViewOrgCompetitions_click', 'btn btn-small');
         $this->InitRowControl('view_ParentMessages', 'View ParentMessages', $this, 'lnkViewParentMessages_click', 'btn btn-small');

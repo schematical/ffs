@@ -89,12 +89,9 @@ class DeviceManageFormBase extends FFSForm {
         return $wgtDevice;
     }
     public function pnlEdit_save($strFormId, $strControlId, $objDevice) {
-        $this->UpdateTable($objDevice);
-        if (!is_null($this->lstDevices->SelectedRow)) {
-            $this->ScrollTo($this->lstDevices->SelectedRow);
-        } else {
-            $this->pnlEdit->Alert('Saved!', 'info');
-        }
+        $pnlRow = $this->UpdateTable($objDevice);
+        $this->ScrollTo($pnlRow);
+        $this->pnlEdit->SetDevice(null);
     }
     public function pnlEdit_delete($strFormId, $strControlId, $objDevice) {
         $this->lstDevices->SelectedRow->Remove();
@@ -138,9 +135,12 @@ class DeviceManageFormBase extends FFSForm {
         if (!is_null($this->lstDevices->SelectedRow)) {
             //This already exists
             $this->lstDevices->SelectedRow->UpdateEntity($objDevice);
+            $objRow = $this->lstDevices->SelectedRow;
             $this->lstDevices->SelectedRow = null;
         } else {
             $objRow = $this->lstDevices->AddRow($objDevice);
         }
+        $this->lstDevices->RefreshControls();
+        return $objRow;
     }
 }

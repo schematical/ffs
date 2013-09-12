@@ -43,6 +43,10 @@ class CompetitionManageFormBase extends FFSForm {
         if (!is_null($strNamespace)) {
             $arrAndConditions[] = sprintf('Competition.namespace LIKE "%s%%"', $strNamespace);
         }
+        $strClubType = MLCApplication::QS(FFSQS::Competition_ClubType);
+        if (!is_null($strClubType)) {
+            $arrAndConditions[] = sprintf('Competition.clubType LIKE "%s%%"', $strClubType);
+        }
         if (count($arrAndConditions) >= 1) {
             $arrCompetitions = Competition::Query('WHERE ' . implode(' AND ', $arrAndConditions));
         } else {
@@ -85,12 +89,9 @@ class CompetitionManageFormBase extends FFSForm {
         return $wgtCompetition;
     }
     public function pnlEdit_save($strFormId, $strControlId, $objCompetition) {
-        $this->UpdateTable($objCompetition);
-        if (!is_null($this->lstCompetitions->SelectedRow)) {
-            $this->ScrollTo($this->lstCompetitions->SelectedRow);
-        } else {
-            $this->pnlEdit->Alert('Saved!', 'info');
-        }
+        $pnlRow = $this->UpdateTable($objCompetition);
+        $this->ScrollTo($pnlRow);
+        $this->pnlEdit->SetCompetition(null);
     }
     public function pnlEdit_delete($strFormId, $strControlId, $objCompetition) {
         $this->lstCompetitions->SelectedRow->Remove();
@@ -134,9 +135,12 @@ class CompetitionManageFormBase extends FFSForm {
         if (!is_null($this->lstCompetitions->SelectedRow)) {
             //This already exists
             $this->lstCompetitions->SelectedRow->UpdateEntity($objCompetition);
+            $objRow = $this->lstCompetitions->SelectedRow;
             $this->lstCompetitions->SelectedRow = null;
         } else {
             $objRow = $this->lstCompetitions->AddRow($objCompetition);
         }
+        $this->lstCompetitions->RefreshControls();
+        return $objRow;
     }
 }

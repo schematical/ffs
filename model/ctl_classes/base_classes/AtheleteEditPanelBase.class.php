@@ -111,6 +111,16 @@ class AtheleteEditPanelBase extends MJaxPanel {
             //Do nothing this is a creDate
             $this->strLevel->Text = $this->objAthelete->level;
         } else {
+            $this->strFirstName->Text = '';
+            $this->strLastName->Text = '';
+            //Is special field!!!!!
+            $this->dttBirthDate->Value = MLCDateTime::Now();
+            $this->strMemType->Text = '';
+            $this->strMemId->Text = '';
+            //Is special field!!!!!
+            //Is special field!!!!!
+            //Do nothing this is a creDate
+            $this->strLevel->Text = '';
             $this->btnDelete->Style->Display = 'none';
         }
     }

@@ -101,12 +101,9 @@ class ParentMessageManageFormBase extends FFSForm {
         return $wgtParentMessage;
     }
     public function pnlEdit_save($strFormId, $strControlId, $objParentMessage) {
-        $this->UpdateTable($objParentMessage);
-        if (!is_null($this->lstParentMessages->SelectedRow)) {
-            $this->ScrollTo($this->lstParentMessages->SelectedRow);
-        } else {
-            $this->pnlEdit->Alert('Saved!', 'info');
-        }
+        $pnlRow = $this->UpdateTable($objParentMessage);
+        $this->ScrollTo($pnlRow);
+        $this->pnlEdit->SetParentMessage(null);
     }
     public function pnlEdit_delete($strFormId, $strControlId, $objParentMessage) {
         $this->lstParentMessages->SelectedRow->Remove();
@@ -150,9 +147,12 @@ class ParentMessageManageFormBase extends FFSForm {
         if (!is_null($this->lstParentMessages->SelectedRow)) {
             //This already exists
             $this->lstParentMessages->SelectedRow->UpdateEntity($objParentMessage);
+            $objRow = $this->lstParentMessages->SelectedRow;
             $this->lstParentMessages->SelectedRow = null;
         } else {
             $objRow = $this->lstParentMessages->AddRow($objParentMessage);
         }
+        $this->lstParentMessages->RefreshControls();
+        return $objRow;
     }
 }

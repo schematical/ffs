@@ -27,6 +27,8 @@ class CompetitionSelectPanelBase extends MJaxPanel {
     public $strNamespace = null;
     public $txtSignupCutOffDate_StartDate = null;
     public $txtSignupCutOffDate_EndDate = null;
+    public $strClubType = null;
+    public $strData = null;
     public function __construct($objParentControl, $strControlId = null) {
         parent::__construct($objParentControl, $strControlId);
         $this->strTemplate = __VIEW_ACTIVE_APP_DIR__ . '/www/ctl_panels/' . get_class($this) . '.tpl.php';
@@ -57,6 +59,10 @@ class CompetitionSelectPanelBase extends MJaxPanel {
         $this->txtSignupCutOffDate_StartDate->DateOnly();
         $this->txtSignupCutOffDate_EndDate = new MJaxBSDateTimePicker($this);
         $this->txtSignupCutOffDate_EndDate->DateOnly();
+        $this->strClubType = new MJaxTextBox($this);
+        $this->strClubType->Attr('placeholder', " Club Type");
+        $this->strData = new MJaxTextBox($this);
+        $this->strData->Attr('placeholder', " Data");
     }
     public function txtSearch_change() {
         $objEntity = null;
@@ -133,6 +139,10 @@ class CompetitionSelectPanelBase extends MJaxPanel {
                 $arrAndConditions[] = sprintf('(signupCutOffDate > "%s" AND signupCutOffDate < "%s")', $this->txtSignupCutOffDate_StartDate->GetValue() , $this->txtSignupCutOffDate_EndDate->GetValue());
             }
         }
+        if (!is_null($this->strClubType->GetValue())) {
+            $arrAndConditions[] = sprintf('clubType LIKE "%s%%"', $this->strClubType->GetValue());
+        }
+        //Is special field!!!!!
         return $arrAndConditions;
     }
     public function GetValue() {

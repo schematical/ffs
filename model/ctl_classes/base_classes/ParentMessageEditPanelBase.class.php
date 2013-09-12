@@ -134,6 +134,24 @@ class ParentMessageEditPanelBase extends MJaxPanel {
             //Is special field!!!!!
             
         } else {
+            $this->strAtheleteName->Text = '';
+            $this->strFromName->Text = '';
+            $this->strMessage->Text = '';
+            //Is special field!!!!!
+            //Do nothing this is a creDate
+            //Is special field!!!!!
+            $this->dttDispDate->Value = MLCDateTime::Now();
+            //Is special field!!!!!
+            //Is special field!!!!!
+            $this->dttQueDate->Value = MLCDateTime::Now();
+            //Is special field!!!!!
+            $this->strInviteType->Text = '';
+            $this->strInviteToken->Text = '';
+            //Is special field!!!!!
+            $this->dttInviteViewDate->Value = MLCDateTime::Now();
+            //Is special field!!!!!
+            $this->dttApproveDate->Value = MLCDateTime::Now();
+            //Is special field!!!!!
             $this->btnDelete->Style->Display = 'none';
         }
     }

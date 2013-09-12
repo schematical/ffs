@@ -100,6 +100,14 @@ class ResultEditPanelBase extends MJaxPanel {
             //Is special field!!!!!
             $this->dttDispDate->Value = $this->objResult->dispDate;
         } else {
+            $this->strScore->Text = '';
+            $this->strJudge->Text = '';
+            $this->intFlag->Text = '';
+            //Is special field!!!!!
+            //Do nothing this is a creDate
+            $this->strEvent->Text = '';
+            //Is special field!!!!!
+            $this->dttDispDate->Value = MLCDateTime::Now();
             $this->btnDelete->Style->Display = 'none';
         }
     }

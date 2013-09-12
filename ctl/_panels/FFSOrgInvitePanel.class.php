@@ -43,7 +43,7 @@ class FFSOrgInvitePanel extends MJaxPanel{
         $objOrg = $arrOrgs[0];
 
         $arrUsers = MLCAuthDriver::GetUsersByEntity($objOrg, FFSRoll::ORG_MANAGER);
-
+        $this->Alert('Almost there. Click "Invite" below to send invits these users','info');
         if(count($arrUsers) == 0){
             $this->pnlInvite->SetEntity($objOrg, FFSRoll::ORG_MANAGER);
             $strEmail = $objOrg->PsData('Email');
@@ -52,6 +52,7 @@ class FFSOrgInvitePanel extends MJaxPanel{
                 (!is_null($strEmail))
             ){
                 $this->pnlInvite->txtEmail->Text = trim($strEmail);
+
             }
         }else{
             $arrUserEmails = array();
@@ -71,6 +72,9 @@ class FFSOrgInvitePanel extends MJaxPanel{
         $objOrgCompettion = FFSApplication::InviteOrgToCompetition($objOrg, FFSForm::Competition());
         //$this->pnlInvite->txtEmail->Alert("Success!",'success');
         $this->ActionParameter = $objOrg;
+        $this->strUserEmails = null;
+        $this->pnlInvite->SetEntity(null, FFSRoll::ORG_MANAGER);
+        $this->Alert('Invite Sent!','success');
         $this->TriggerEvent('mjax-success');
     }
 }

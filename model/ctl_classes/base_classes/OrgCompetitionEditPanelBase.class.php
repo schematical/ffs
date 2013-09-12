@@ -74,6 +74,9 @@ class OrgCompetitionEditPanelBase extends MJaxPanel {
             //Do nothing this is a creDate
             $this->intIdAuthUser->Text = $this->objOrgCompetition->idAuthUser;
         } else {
+            //Is special field!!!!!
+            //Do nothing this is a creDate
+            $this->intIdAuthUser->Text = '';
             $this->btnDelete->Style->Display = 'none';
         }
     }

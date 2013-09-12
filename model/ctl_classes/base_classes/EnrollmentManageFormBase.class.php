@@ -121,12 +121,9 @@ class EnrollmentManageFormBase extends FFSForm {
         return $wgtEnrollment;
     }
     public function pnlEdit_save($strFormId, $strControlId, $objEnrollment) {
-        $this->UpdateTable($objEnrollment);
-        if (!is_null($this->lstEnrollments->SelectedRow)) {
-            $this->ScrollTo($this->lstEnrollments->SelectedRow);
-        } else {
-            $this->pnlEdit->Alert('Saved!', 'info');
-        }
+        $pnlRow = $this->UpdateTable($objEnrollment);
+        $this->ScrollTo($pnlRow);
+        $this->pnlEdit->SetEnrollment(null);
     }
     public function pnlEdit_delete($strFormId, $strControlId, $objEnrollment) {
         $this->lstEnrollments->SelectedRow->Remove();
@@ -170,9 +167,12 @@ class EnrollmentManageFormBase extends FFSForm {
         if (!is_null($this->lstEnrollments->SelectedRow)) {
             //This already exists
             $this->lstEnrollments->SelectedRow->UpdateEntity($objEnrollment);
+            $objRow = $this->lstEnrollments->SelectedRow;
             $this->lstEnrollments->SelectedRow = null;
         } else {
             $objRow = $this->lstEnrollments->AddRow($objEnrollment);
         }
+        $this->lstEnrollments->RefreshControls();
+        return $objRow;
     }
 }

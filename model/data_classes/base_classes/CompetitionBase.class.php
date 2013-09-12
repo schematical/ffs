@@ -32,6 +32,7 @@
 * - __toJson()
 * - __get()
 * - __set()
+* - Data()
 * Classes list:
 * - CompetitionBase extends BaseEntity
 */
@@ -55,6 +56,8 @@
  * @property-write mixed $Namespace
  * @property-read mixed $SignupCutOffDate
  * @property-write mixed $SignupCutOffDate
+ * @property-read mixed $ClubType
+ * @property-write mixed $ClubType
  * @property-read Competition $IdOrgObject
  */
 class CompetitionBase extends BaseEntity {
@@ -104,6 +107,12 @@ class CompetitionBase extends BaseEntity {
         $xmlStr.= "<signupCutOffDate>";
         $xmlStr.= $this->signupCutOffDate;
         $xmlStr.= "</signupCutOffDate>";
+        $xmlStr.= "<clubType>";
+        $xmlStr.= $this->clubType;
+        $xmlStr.= "</clubType>";
+        $xmlStr.= "<data>";
+        $xmlStr.= $this->data;
+        $xmlStr.= "</data>";
         if ($blnReclusive) {
             //Finish FK Rel stuff
             
@@ -124,6 +133,8 @@ class CompetitionBase extends BaseEntity {
                 $this->arrDBFields['idOrg'] = $arrData['Competition.idOrg'];
                 $this->arrDBFields['namespace'] = $arrData['Competition.namespace'];
                 $this->arrDBFields['signupCutOffDate'] = $arrData['Competition.signupCutOffDate'];
+                $this->arrDBFields['clubType'] = $arrData['Competition.clubType'];
+                $this->arrDBFields['data'] = $arrData['Competition.data'];
                 //Foregin Key
                 if ((array_key_exists('Org.idOrg', $arrData)) && (!is_null($arrData['Org.idOrg']))) {
                     $this->objIdOrg = new Org();
@@ -154,6 +165,8 @@ class CompetitionBase extends BaseEntity {
         $arrFields[] = 'Competition.idOrg ' . (($blnLongSelect) ? ' as "Competition.idOrg"' : '');
         $arrFields[] = 'Competition.namespace ' . (($blnLongSelect) ? ' as "Competition.namespace"' : '');
         $arrFields[] = 'Competition.signupCutOffDate ' . (($blnLongSelect) ? ' as "Competition.signupCutOffDate"' : '');
+        $arrFields[] = 'Competition.clubType ' . (($blnLongSelect) ? ' as "Competition.clubType"' : '');
+        $arrFields[] = 'Competition.data ' . (($blnLongSelect) ? ' as "Competition.data"' : '');
         return $arrFields;
     }
     public static function Query($strExtra, $blnReturnSingle = false, $arrJoins = null) {
@@ -328,6 +341,8 @@ class CompetitionBase extends BaseEntity {
         $arrReturn['idOrg'] = $this->idOrg;
         $arrReturn['namespace'] = $this->namespace;
         $arrReturn['signupCutOffDate'] = $this->signupCutOffDate;
+        $arrReturn['clubType'] = $this->clubType;
+        $arrReturn['data'] = $this->data;
         return $arrReturn;
     }
     public function __toString() {
@@ -406,6 +421,13 @@ class CompetitionBase extends BaseEntity {
                 }
                 return null;
             break;
+            case ('ClubType'):
+            case ('clubType'):
+                if (array_key_exists('clubType', $this->arrDBFields)) {
+                    return $this->arrDBFields['clubType'];
+                }
+                return null;
+            break;
             case ('IdOrgObject'):
                 if (!is_null($this->objIdOrg)) {
                     return $this->objIdOrg;
@@ -468,6 +490,14 @@ class CompetitionBase extends BaseEntity {
             case ('_SignupCutOffDate'):
                 $this->arrDBFields['signupCutOffDate'] = $mixValue;
             break;
+            case ('ClubType'):
+            case ('clubType'):
+            case ('_ClubType'):
+                $this->arrDBFields['clubType'] = $mixValue;
+            break;
+            case ('_Data'):
+                $this->arrDBFields['data'] = $mixValue;
+            break;
             case ('IdOrgObject'):
                 if ((!is_null($mixValue)) && ((!is_object($mixValue)) || (!($mixValue instanceof Org)))) {
                     throw new MLCWrongTypeException('__set', $strName);
@@ -482,6 +512,30 @@ class CompetitionBase extends BaseEntity {
             default:
                 throw new MLCMissingPropertyException($this, $strName);
             break;
+        }
+    }
+    public function Data($strKey, $mixData = null) {
+        if (is_null($mixData)) {
+            if ((!array_key_exists('data', $this->arrDBFields))) {
+                return null;
+            }
+            if ((strlen($this->arrDBFields['data']) < 1)) {
+                return null;
+            }
+            $arrData = json_decode($this->arrDBFields['data'], true);
+            if (!array_key_exists($strKey, $arrData)) {
+                return null;
+            }
+            return $arrData[$strKey];
+        } else {
+            if ((!array_key_exists('data', $this->arrDBFields)) || (strlen($this->arrDBFields['data']) < 1)) {
+                $arrData = array();
+            } else {
+                $arrData = json_decode($this->arrDBFields['data'], true);
+            }
+            $arrData[$strKey] = $mixData;
+            $this->arrDBFields['data'] = json_encode($arrData);
+            $this->Save();
         }
     }
 }

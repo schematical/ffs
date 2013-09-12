@@ -134,6 +134,17 @@ class EnrollmentEditPanelBase extends MJaxPanel {
             //Do nothing this is a creDate
             $this->strLevel->Text = $this->objEnrollment->level;
         } else {
+            $this->strFlight->Text = '';
+            $this->strDivision->Text = '';
+            $this->strAgeGroup->Text = '';
+            $this->strMisc1->Text = '';
+            $this->strMisc2->Text = '';
+            $this->strMisc3->Text = '';
+            $this->strMisc4->Text = '';
+            $this->strMisc5->Text = '';
+            //Is special field!!!!!
+            //Do nothing this is a creDate
+            $this->strLevel->Text = '';
             $this->btnDelete->Style->Display = 'none';
         }
     }

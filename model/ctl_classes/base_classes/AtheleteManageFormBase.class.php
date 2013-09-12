@@ -97,12 +97,9 @@ class AtheleteManageFormBase extends FFSForm {
         return $wgtAthelete;
     }
     public function pnlEdit_save($strFormId, $strControlId, $objAthelete) {
-        $this->UpdateTable($objAthelete);
-        if (!is_null($this->lstAtheletes->SelectedRow)) {
-            $this->ScrollTo($this->lstAtheletes->SelectedRow);
-        } else {
-            $this->pnlEdit->Alert('Saved!', 'info');
-        }
+        $pnlRow = $this->UpdateTable($objAthelete);
+        $this->ScrollTo($pnlRow);
+        $this->pnlEdit->SetAthelete(null);
     }
     public function pnlEdit_delete($strFormId, $strControlId, $objAthelete) {
         $this->lstAtheletes->SelectedRow->Remove();
@@ -146,9 +143,12 @@ class AtheleteManageFormBase extends FFSForm {
         if (!is_null($this->lstAtheletes->SelectedRow)) {
             //This already exists
             $this->lstAtheletes->SelectedRow->UpdateEntity($objAthelete);
+            $objRow = $this->lstAtheletes->SelectedRow;
             $this->lstAtheletes->SelectedRow = null;
         } else {
             $objRow = $this->lstAtheletes->AddRow($objAthelete);
         }
+        $this->lstAtheletes->RefreshControls();
+        return $objRow;
     }
 }

@@ -22,15 +22,25 @@ class SessionEditPanel extends SessionEditPanelBase
 
         $this->InitEquipmentSetAutocomplete();
 
+
         $this->InitEventSelector();
 
     }
+    public function InitEquipmentSetAutocomplete(){
+        parent::InitEquipmentSetAutocomplete();
+        $arrEquipmentSets = FFSForm::Competition()->Data('equipmentSets');
+        if(is_null($arrEquipmentSets) || count($arrEquipmentSets) == 0){
+            $this->strEquipmentSet->Attr('readonly','readonly');
+        }
+    }
     public function CreateFieldControls(){
         parent::CreateFieldControls();
-        $this->dttStartDate->Format = 'mm-dd-yy hh:ii p\m';
-        $this->dttStartDate->LinkFormat = 'mm-dd-yy hh:ii  p\m';
-        $this->dttEndDate->Format = 'mm-dd-yy hh:ii  p\m';
-        $this->dttEndDate->LinkFormat = 'mm-dd-yy hh:ii  p\m';
+        $this->dttStartDate->Format = 'mm-dd-yy hh:ii p';
+        $this->dttEndDate->Format = 'mm-dd-yy hh:ii  p';
+        $this->dttEndDate->TimeOnly();
+        $this->dttStartDate->EndDate = FFSForm::Competition()->EndDate;
+        $this->dttEndDate->EndDate = FFSForm::Competition()->EndDate;
+
     }
 
     public function InitEventSelector()
@@ -49,9 +59,7 @@ class SessionEditPanel extends SessionEditPanelBase
                 'MENS_ARTISTIC_GYMNASTICS'
             );
         }
-        /*if (!static(FFSEventData, $this->lstEventSelector->SelectedValue)) {
-            throw new Exception("Nice Try");
-        }*/
+
     }
 
     public function btnSave_click()
@@ -90,17 +98,7 @@ class SessionEditPanel extends SessionEditPanelBase
     {
         parent::SetSession($objSession);
 
-        if(
-            (is_null($this->objSession)) &&
-            (!is_null(FFSForm::Competition()))
-        ){
-            //_dv(FFSForm::Competition()->StartDate);
-            $this->dttStartDate->Value =  date("Y-m-d H:i:s",strtotime(FFSForm::Competition()->StartDate));
-            $strOffset = '+4 Hours';
-            $intTime = strtotime($strOffset . ' ' . FFSForm::Competition()->StartDate);
-            $strDate = date("Y-m-d H:i:s", $intTime);
-            $this->dttEndDate->Value = $strDate;
-        }
+
 
 
         if (
@@ -134,27 +132,30 @@ class SessionEditPanel extends SessionEditPanelBase
             $this->strEquipmentSet->SetValue($this->strEquipmentSet->Text);
 
         }
-        if(
-            is_null($this->objSession)
-        ){
-            if(!is_null(FFSForm::Competition())){
-                //Get latest session
 
-                $strNextStartDate = MLCDateTime::Now();
-                $strNextEndDate = MLCDateTime::Now('+ 4 hours');
-                $arrSessions = FFSForm::Competition()->GetSessionArr();
-                if(count($arrSessions) > 0){
-                    $arrSessions = FFSApplication::SortChronologically($arrSessions, 'StartDate');
-                    $objSession = $arrSessions[0];
-                    $strNextStartDate = $objSession->EndDate;
-                    $intTime = strtotime('+ 4 hours ' . $strNextStartDate);
-                    $strNextEndDate = date(MLCDateTime::MYSQL_FORMAT, $intTime);;
-                }
+        if(!is_null(FFSForm::Competition())){
+            //_dv(FFSForm::Competition()->StartDate);
+            //Get latest session
+            $arrSessions = FFSForm::Competition()->GetSessionArr();
+            if(count($arrSessions) > 0){
+                $arrSessions = FFSApplication::SortChronologically($arrSessions, 'StartDate');
+                $objSession = $arrSessions[0];
+                $strNextStartDate = $objSession->EndDate;
+
+            }else{
+                $strNextStartDate =  date(MLCDateTime::MYSQL_FORMAT,strtotime(FFSForm::Competition()->StartDate));
+                //_dv($strNextStartDate);
             }
 
-            $this->dttStartDate->SetValue($strNextStartDate);
-            $this->dttEndDate->SetValue($strNextEndDate);
+        }else{
+            $strNextStartDate = MLCDateTime::Now();
         }
+        $intTime = strtotime('+ 4 hours ' . $strNextStartDate);
+        $strNextEndDate = date(MLCDateTime::MYSQL_FORMAT, $intTime);
+
+        $this->dttStartDate->SetValue($strNextStartDate);
+        $this->dttEndDate->SetValue($strNextEndDate);
+
 
     }
 

@@ -90,6 +90,13 @@ class AssignmentEditPanelBase extends MJaxPanel {
             //Is special field!!!!!
             $this->dttRevokeDate->Value = $this->objAssignment->revokeDate;
         } else {
+            $this->strEvent->Text = '';
+            $this->strApartatus->Text = '';
+            //Is special field!!!!!
+            //Do nothing this is a creDate
+            //Is special field!!!!!
+            //Is special field!!!!!
+            $this->dttRevokeDate->Value = MLCDateTime::Now();
             $this->btnDelete->Style->Display = 'none';
         }
     }

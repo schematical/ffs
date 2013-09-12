@@ -101,6 +101,15 @@ class SessionEditPanelBase extends MJaxPanel {
             //Is special field!!!!!
             
         } else {
+            //Is special field!!!!!
+            $this->dttStartDate->Value = MLCDateTime::Now();
+            //Is special field!!!!!
+            $this->dttEndDate->Value = MLCDateTime::Now();
+            $this->strName->Text = '';
+            $this->strNotes->Text = '';
+            //Is special field!!!!!
+            $this->strEquipmentSet->Text = '';
+            //Is special field!!!!!
             $this->btnDelete->Style->Display = 'none';
         }
     }

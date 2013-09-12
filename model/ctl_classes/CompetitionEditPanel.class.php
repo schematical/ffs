@@ -38,6 +38,7 @@ class CompetitionEditPanel extends CompetitionEditPanelBase {
         parent::CreateFieldControls();
 
         $this->dttStartDate->DateOnly();
+        $this->dttStartDate->SetValue(MLCDateTime::Now());
         $this->dttStartDate->AddAction(
             new MJaxBSDatetimepickerChangeEvent(),
             new MJaxServerControlAction(
@@ -46,6 +47,7 @@ class CompetitionEditPanel extends CompetitionEditPanelBase {
             )
         );
         $this->dttEndDate->DateOnly();
+        $this->dttEndDate->SetValue(MLCDateTime::Now('+ 1'));
 
 
     }

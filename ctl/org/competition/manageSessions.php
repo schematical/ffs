@@ -65,8 +65,11 @@ class SessionManageForm extends SessionManageFormBase {
     public function pnlEdit_save($strFormId, $strControlId, $objSession) {
         $objSession->IdCompetition = FFSForm::Competition()->IdCompetition;
         $objSession->Data('flights', FFSFlightData::$WOMENS_ARTISTIC_GYMNASTICS);
-        //$objSession->Save();
+
         parent::pnlEdit_save($strFormId, $strControlId, $objSession);
+
+
     }
+
 }
 SessionManageForm::Run('SessionManageForm');

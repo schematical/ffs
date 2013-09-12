@@ -82,15 +82,19 @@
                 
                     <?php if (!is_null($_CONTROL->strEquipmentSet)) { ?>
                         <div class="control-group pull-left">
-                          <label class="control-label" for="name"> Equipment Set</label>
+                          <label class="control-label" for="name"> Equipment Set
+                              <ahref='#'  data-toggle="popover" title="" data-content="This field is important if you are running a competition with multiple sessions running at once on more that one set of equipment. If you are only running a single session at a time ignore this field." data-original-title="Equipment Set">
+                                  <i class='icon-question-sign'></i>
+                              </a>
+                          </label>
                           <div class="controls">
                              <?php $_CONTROL->strEquipmentSet->Render(); ?>
                           </div>
                         </div>
                     <?php
 } ?>
-                
-            
+
+
                 
                     <?php if (!is_null($_CONTROL->strEventData)) { ?>
                         <div class="control-group pull-left">

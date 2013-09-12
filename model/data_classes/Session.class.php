@@ -28,6 +28,15 @@ class Session extends SessionBase {
              }
          }
     }
+    public function IsUpcoming(){
+       return ($this->State() == FFSSessionState::UPCOMING);
+    }
+    public function IsClosed(){
+        return ($this->State() == FFSSessionState::CLOSED);
+    }
+    public function IsActive(){
+        return ($this->State() == FFSSessionState::ACTIVE);
+    }
 
 }
 

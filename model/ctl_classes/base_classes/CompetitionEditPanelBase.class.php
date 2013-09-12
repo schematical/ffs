@@ -14,6 +14,7 @@
 * - InitNameAutocomplete()
 * - InitIdOrgAutocomplete()
 * - InitNamespaceAutocomplete()
+* - InitClubTypeAutocomplete()
 * Classes list:
 * - CompetitionEditPanelBase extends MJaxPanel
 */
@@ -28,6 +29,8 @@ class CompetitionEditPanelBase extends MJaxPanel {
     public $intIdOrg = null;
     public $strNamespace = null;
     public $dttSignupCutOffDate = null;
+    public $strClubType = null;
+    public $strData = null;
     public $lnkViewParentIdOrg = null;
     public $lnkViewChildEnrollment = null;
     public $lnkViewChildOrgCompetition = null;
@@ -79,6 +82,11 @@ class CompetitionEditPanelBase extends MJaxPanel {
         //varchar(45)
         //Is special field!!!!!
         $this->dttSignupCutOffDate = new MJaxBSDateTimePicker($this);
+        $this->strClubType = new MJaxTextBox($this);
+        $this->strClubType->Name = 'clubType';
+        $this->strClubType->AddCssClass('input-large');
+        //varchar(45)
+        //Is special field!!!!!
         if (!is_null($this->objCompetition)) {
             $this->SetCompetition($this->objCompetition);
         }
@@ -104,7 +112,23 @@ class CompetitionEditPanelBase extends MJaxPanel {
             $this->strNamespace->Text = $this->objCompetition->namespace;
             //Is special field!!!!!
             $this->dttSignupCutOffDate->Value = $this->objCompetition->signupCutOffDate;
+            $this->strClubType->Text = $this->objCompetition->clubType;
+            //Is special field!!!!!
+            
         } else {
+            $this->strName->Text = '';
+            $this->strLongDesc->Text = '';
+            //Is special field!!!!!
+            //Do nothing this is a creDate
+            //Is special field!!!!!
+            $this->dttStartDate->Value = MLCDateTime::Now();
+            //Is special field!!!!!
+            $this->dttEndDate->Value = MLCDateTime::Now();
+            $this->strNamespace->Text = '';
+            //Is special field!!!!!
+            $this->dttSignupCutOffDate->Value = MLCDateTime::Now();
+            $this->strClubType->Text = '';
+            //Is special field!!!!!
             $this->btnDelete->Style->Display = 'none';
         }
     }
@@ -174,6 +198,16 @@ class CompetitionEditPanelBase extends MJaxPanel {
         }
         //Is special field!!!!!
         $this->objCompetition->signupCutOffDate = $this->dttSignupCutOffDate->GetValue();
+        if (get_class($this->strClubType) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strClubType->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('clubType');
+            }
+            $this->objCompetition->clubType = $mixEntity;
+        } else {
+            $this->objCompetition->clubType = $this->strClubType->Text;
+        }
+        //Is special field!!!!!
         $this->objCompetition->Save();
         //Experimental save event trigger
         $this->ActionParameter = $this->objCompetition;
@@ -208,6 +242,12 @@ class CompetitionEditPanelBase extends MJaxPanel {
         $this->strNamespace->SetSearchEntity('competition', 'namespace');
         $this->strNamespace->Name = 'namespace';
         $this->strNamespace->AddCssClass('input-large');
+    }
+    public function InitClubTypeAutocomplete() {
+        $this->strClubType = new MJaxBSAutocompleteTextBox($this);
+        $this->strClubType->SetSearchEntity('competition', 'clubType');
+        $this->strClubType->Name = 'clubType';
+        $this->strClubType->AddCssClass('input-large');
     }
 }
 ?>

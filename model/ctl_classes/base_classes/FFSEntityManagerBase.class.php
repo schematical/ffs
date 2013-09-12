@@ -285,6 +285,9 @@ class FFSEntityManagerBase {
         if ((is_null($strField)) || ($strField == 'namespace')) {
             $arrOrConditions[] = sprintf('Competition.namespace LIKE "%s%%"', strtolower($strSearch));
         }
+        if ((is_null($strField)) || ($strField == 'clubType')) {
+            $arrOrConditions[] = sprintf('Competition.clubType LIKE "%s%%"', strtolower($strSearch));
+        }
         if (count($arrOrConditions) == 0) {
             $arrOrConditions[] = '1';
         }

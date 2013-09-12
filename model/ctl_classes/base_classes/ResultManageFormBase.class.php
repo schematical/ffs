@@ -93,12 +93,9 @@ class ResultManageFormBase extends FFSForm {
         return $wgtResult;
     }
     public function pnlEdit_save($strFormId, $strControlId, $objResult) {
-        $this->UpdateTable($objResult);
-        if (!is_null($this->lstResults->SelectedRow)) {
-            $this->ScrollTo($this->lstResults->SelectedRow);
-        } else {
-            $this->pnlEdit->Alert('Saved!', 'info');
-        }
+        $pnlRow = $this->UpdateTable($objResult);
+        $this->ScrollTo($pnlRow);
+        $this->pnlEdit->SetResult(null);
     }
     public function pnlEdit_delete($strFormId, $strControlId, $objResult) {
         $this->lstResults->SelectedRow->Remove();
@@ -142,9 +139,12 @@ class ResultManageFormBase extends FFSForm {
         if (!is_null($this->lstResults->SelectedRow)) {
             //This already exists
             $this->lstResults->SelectedRow->UpdateEntity($objResult);
+            $objRow = $this->lstResults->SelectedRow;
             $this->lstResults->SelectedRow = null;
         } else {
             $objRow = $this->lstResults->AddRow($objResult);
         }
+        $this->lstResults->RefreshControls();
+        return $objRow;
     }
 }

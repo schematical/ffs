@@ -82,7 +82,6 @@ class OrgManageFormBase extends FFSForm {
     }
     public function InitEditPanel($objOrg = null) {
         $this->pnlEdit = new OrgEditPanel($this, $objOrg);
-        $this->pnlEdit->ForceClubType(FFSForm::Org()->ClubType);
         $this->pnlEdit->AddAction(new MJaxDataEntitySaveEvent() , new MJaxServerControlAction($this, 'pnlEdit_save'));
         $this->pnlEdit->AddAction(new MJaxDataEntityDeleteEvent() , new MJaxServerControlAction($this, 'pnlEdit_delete'));
         $wgtOrg = $this->AddWidget(((is_null($objOrg)) ? 'Create Org' : 'Edit Org') , 'icon-edit', $this->pnlEdit);
@@ -90,12 +89,9 @@ class OrgManageFormBase extends FFSForm {
         return $wgtOrg;
     }
     public function pnlEdit_save($strFormId, $strControlId, $objOrg) {
-        $this->UpdateTable($objOrg);
-        if (!is_null($this->lstOrgs->SelectedRow)) {
-            $this->ScrollTo($this->lstOrgs->SelectedRow);
-        } else {
-            $this->pnlEdit->Alert('Saved!', 'info');
-        }
+        $pnlRow = $this->UpdateTable($objOrg);
+        $this->ScrollTo($pnlRow);
+        $this->pnlEdit->SetOrg(null);
     }
     public function pnlEdit_delete($strFormId, $strControlId, $objOrg) {
         $this->lstOrgs->SelectedRow->Remove();
@@ -139,9 +135,12 @@ class OrgManageFormBase extends FFSForm {
         if (!is_null($this->lstOrgs->SelectedRow)) {
             //This already exists
             $this->lstOrgs->SelectedRow->UpdateEntity($objOrg);
+            $objRow = $this->lstOrgs->SelectedRow;
             $this->lstOrgs->SelectedRow = null;
         } else {
             $objRow = $this->lstOrgs->AddRow($objOrg);
         }
+        $this->lstOrgs->RefreshControls();
+        return $objRow;
     }
 }

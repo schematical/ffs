@@ -61,3 +61,15 @@ abstract class FFSSessionState{
     CONST ACTIVE = 'ACTIVE';
     CONST CLOSED = 'CLOSED';
 }
+abstract class FFSCompetitionState{
+    CONST UPCOMING = 'UPCOMING';
+    CONST ACTIVE = 'ACTIVE';
+    CONST CLOSED = 'CLOSED';
+}
+abstract class FFSClubTypes{
+    public static $arrClubTypes = array(
+        'AAU'=>'AAU',
+        'USGA'=>'USGA',
+        'USTA'=>'USTA'
+    );
+}

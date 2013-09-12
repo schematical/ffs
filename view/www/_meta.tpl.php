@@ -7,28 +7,7 @@
         .margin-bottom-25{
             margin-bottom: 25Px;
         }
-        .row-fluid input, .row-fluid textarea{
-            padding: 20Px;
-            font-size: 16Pt;
-            line-height: 30Px;
-            width:90%;
-        }
-        .row-fluid select{
 
-            font-size: 16Pt;
-            line-height: 30Px;
-            width:90%;
-            height: 38Px
-        }
-
-        .row-fluid .input-prepend .add-on:first-child{
-            padding: 20Px;
-            font-size: 14Pt;
-        }
-        .row-fluid label{
-            font-size: 17Pt;
-            margin-top: 14Px;
-        }
         .ffs-header-img-holder{
             border:thin grey solid;
             margin-bottom:10Px;

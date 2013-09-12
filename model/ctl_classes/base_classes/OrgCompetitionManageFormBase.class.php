@@ -81,12 +81,9 @@ class OrgCompetitionManageFormBase extends FFSForm {
         return $wgtOrgCompetition;
     }
     public function pnlEdit_save($strFormId, $strControlId, $objOrgCompetition) {
-        $this->UpdateTable($objOrgCompetition);
-        if (!is_null($this->lstOrgCompetitions->SelectedRow)) {
-            $this->ScrollTo($this->lstOrgCompetitions->SelectedRow);
-        } else {
-            $this->pnlEdit->Alert('Saved!', 'info');
-        }
+        $pnlRow = $this->UpdateTable($objOrgCompetition);
+        $this->ScrollTo($pnlRow);
+        $this->pnlEdit->SetOrgCompetition(null);
     }
     public function pnlEdit_delete($strFormId, $strControlId, $objOrgCompetition) {
         $this->lstOrgCompetitions->SelectedRow->Remove();
@@ -130,9 +127,12 @@ class OrgCompetitionManageFormBase extends FFSForm {
         if (!is_null($this->lstOrgCompetitions->SelectedRow)) {
             //This already exists
             $this->lstOrgCompetitions->SelectedRow->UpdateEntity($objOrgCompetition);
+            $objRow = $this->lstOrgCompetitions->SelectedRow;
             $this->lstOrgCompetitions->SelectedRow = null;
         } else {
             $objRow = $this->lstOrgCompetitions->AddRow($objOrgCompetition);
         }
+        $this->lstOrgCompetitions->RefreshControls();
+        return $objRow;
     }
 }

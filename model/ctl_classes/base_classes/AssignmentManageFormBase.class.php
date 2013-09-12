@@ -89,12 +89,9 @@ class AssignmentManageFormBase extends FFSForm {
         return $wgtAssignment;
     }
     public function pnlEdit_save($strFormId, $strControlId, $objAssignment) {
-        $this->UpdateTable($objAssignment);
-        if (!is_null($this->lstAssignments->SelectedRow)) {
-            $this->ScrollTo($this->lstAssignments->SelectedRow);
-        } else {
-            $this->pnlEdit->Alert('Saved!', 'info');
-        }
+        $pnlRow = $this->UpdateTable($objAssignment);
+        $this->ScrollTo($pnlRow);
+        $this->pnlEdit->SetAssignment(null);
     }
     public function pnlEdit_delete($strFormId, $strControlId, $objAssignment) {
         $this->lstAssignments->SelectedRow->Remove();
@@ -138,9 +135,12 @@ class AssignmentManageFormBase extends FFSForm {
         if (!is_null($this->lstAssignments->SelectedRow)) {
             //This already exists
             $this->lstAssignments->SelectedRow->UpdateEntity($objAssignment);
+            $objRow = $this->lstAssignments->SelectedRow;
             $this->lstAssignments->SelectedRow = null;
         } else {
             $objRow = $this->lstAssignments->AddRow($objAssignment);
         }
+        $this->lstAssignments->RefreshControls();
+        return $objRow;
     }
 }

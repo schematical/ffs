@@ -103,6 +103,14 @@ class OrgEditPanelBase extends MJaxPanel {
             $this->strClubNum->Text = $this->objOrg->clubNum;
             $this->strClubType->Text = $this->objOrg->clubType;
         } else {
+            $this->strNamespace->Text = '';
+            $this->strName->Text = '';
+            //Is special field!!!!!
+            //Do nothing this is a creDate
+            //Is special field!!!!!
+            $this->intIdImportAuthUser->Text = '';
+            $this->strClubNum->Text = '';
+            $this->strClubType->Text = '';
             $this->btnDelete->Style->Display = 'none';
         }
     }

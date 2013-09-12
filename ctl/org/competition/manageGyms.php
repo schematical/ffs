@@ -9,26 +9,65 @@
 class OrgManageForm extends OrgManageFormBase {
     protected $blnInlineEdit = false;
 
-
+    public $pnlSpecial = null;
     public $pnlInvite = null;
     public $wgtInvite = null;
     public function Form_Create() {
         parent::Form_Create();
-        $this->InitSelectPanel();
         $arrOrgs = FFSApplication::GetInvitedOrgsByCompetition();//$this->Query();
 
         $objOrg = null;
         if (count($arrOrgs) == 1) {
             $objOrg = $arrOrgs[0];
         }
-        $this->InitList($arrOrgs);
-        $this->InitEditPanel($objOrg);
-        //$this->InitInvitePanel();
 
-        $this->InitWizzard();
+        if(FFSForm::Competition()->IsUpcoming()){
+            if(
+                (is_null(FFSForm::Competition()->SignupCutOffDate)) ||
+                (is_null(FFSForm::Org()->ClubType))
+            ){
+                $this->InitSpecialPanel();
+            }else{
+                $this->InitSelectPanel();
+                $this->InitEditPanel($objOrg);
+            }
+        }
+
+        $wgtList = $this->InitList($arrOrgs);
+
+        if(FFSForm::Competition()->IsUpcoming()){
+            $this->InitWizzard();
+
+        }else{
+           $wgtList->Alert("Many of the controls you saw here before are no longer available once the meet has begun",'info');
+        }
 
 
 
+    }
+    public function InitSpecialPanel(){
+
+        $this->pnlSpecial = new FFSOrgManagerSpecialPanel($this);
+        $wgtOrg = $this->AddWidget('Action Required', 'icon-select', $this->pnlSpecial);
+        $wgtOrg->AddCssClass('span12');
+        return $wgtOrg;
+
+    }
+    public function InitEditPanel($objOrg = null) {
+        $wgtEdit = parent::InitEditPanel($objOrg);
+
+        $wgtEdit->Title = str_replace('Org', 'Gym', $wgtEdit->Title);
+        $this->pnlEdit->ForceClubType(
+            FFSForm::Org()->ClubType
+        );
+    }
+    public function InitList($arrOrgs = null) {
+        $wgtList = parent::InitList($arrOrgs);
+        $wgtList->Title = str_replace('Org', 'Gym', $wgtList->Title);
+        if(is_null($this->pnlEdit)){
+            $this->lstOrgs->RemoveColumn('edit');
+        }
+        return $wgtList;
     }
     public function lnkEdit_click($strFormId, $strControlId, $strActionParameter) {
         $objOrg = Org::LoadById($strActionParameter);
@@ -58,17 +97,18 @@ class OrgManageForm extends OrgManageFormBase {
             )
         );
 
-        $wgtOrg = $this->AddWidget('Select Org', 'icon-select', $this->pnlSelect);
-        $wgtOrg->AddCssClass('span12');
+        $wgtOrg = $this->AddWidget('Select Gym', 'icon-select', $this->pnlSelect);
+        $wgtOrg->AddCssClass('span6');
         return $wgtOrg;
     }
     public function pnlInvite_success($strFormId, $strControlId, $objOrg){
         $this->lstOrgs->AddRow($objOrg);
         $this->ScrollTo($this->lstOrgs);
+        $this->AddJSCall(' setTimeout(function(){ MJax.BS.HideAlert(); },4000);');
     }
     public function pnlEdit_save($strFormId, $strControlId, $objOrg){
         parent::pnlEdit_save($strFormId, $strControlId, $objOrg);
-
+        FFSApplication::InviteOrgToCompetition($objOrg, FFSForm::Competition());
         $arrEntityManagers = MLCAuthDriver::GetRollByEntity($objOrg, FFSRoll::ORG_MANAGER);
         //_dv($arrEntityManagers);
         if(
@@ -77,11 +117,21 @@ class OrgManageForm extends OrgManageFormBase {
         ){
             if(is_null($this->pnlInvite)){
                 $this->pnlInvite = new MLCInvitePanel($this);
+                $this->pnlInvite->AddAction(
+                    new MJaxSuccessEvent(),
+                    new MJaxServerControlAction(
+                        $this,
+                        'pnlInvite_success'
+                    )
+                );
             }
             $this->pnlInvite->SetEntity($objOrg, FFSRoll::ORG_MANAGER);
             $this->Alert($this->pnlInvite);
         }
         $this->pnlEdit->SetOrg(null);
+        $this->pnlEdit->ForceClubType(
+            FFSForm::Org()->ClubType
+        );
     }
     public function InitInvitePanel(){
         $this->pnlInvite = new MLCInvitePanel($this);
@@ -102,12 +152,6 @@ class OrgManageForm extends OrgManageFormBase {
 
     public function InitWizzard(){
         if(!is_null(MLCApplication::QS(FFSQS::UseWizzard))){
-            $this->pnlSelect->Intro("Invite a gym to enroll their Athletes in your competition", "You can search our system to find out if a gym has been added to our system previously. If it is in our system you can invite it to your competition here. Their athletes will be available to enroll", null,"bottom");
-
-            $this->pnlEdit->Intro("Enter in gym's info manually", "If it is not in our system you can enter in its info here.");
-
-            $this->lstOrgs->Intro("Gym List", "Here are the gyms you have invited and the gyms that have selected your competition as one the want to attend");
-
             $pnlWizzard = new FFSWizzardPanel(
                 $this,
                 'Ready to move on?',
@@ -120,7 +164,20 @@ class OrgManageForm extends OrgManageFormBase {
                 $pnlWizzard
             );
             $wgtWizzard->AddCssClass('span6');
-            $pnlWizzard->Intro("Ready to move on?", "When you are ready to move on to the next thing click here");
+
+
+            if(!is_null($this->pnlSpecial)){
+                $this->pnlSpecial->Intro("We need more info", "Before you can invite other gyms to join your meet you need to enter in some more info about yourself", null,"bottom");
+            }else{
+
+                $this->pnlSelect->Intro("Invite a gym to enroll their Athletes in your competition", "You can search our system to find out if a gym has been added to our system previously. If it is in our system you can invite it to your competition here. Their athletes will be available to enroll", null,"bottom");
+
+                $this->pnlEdit->Intro("Enter in gym's info manually", "If it is not in our system you can enter in its info here.");
+
+                $this->lstOrgs->Intro("Gym List", "Here are the gyms you have invited and the gyms that have selected your competition as one the want to attend");
+
+                $pnlWizzard->Intro("Ready to move on?", "When you are ready to move on to the next thing click here");
+            }
 
 
         }

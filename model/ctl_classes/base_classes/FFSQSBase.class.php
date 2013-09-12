@@ -36,6 +36,8 @@ class FFSQSBase {
     const Competition_IdOrg = 'idOrg';
     const Competition_Namespace = 'namespace';
     const Competition_SignupCutOffDate = 'signupCutOffDate';
+    const Competition_ClubType = 'clubType';
+    const Competition_Data = 'data';
     const IdDevice = 'idDevice';
     const Device_IdDevice = 'idDevice';
     const Device_Name = 'name';

@@ -85,12 +85,9 @@ class SessionManageFormBase extends FFSForm {
         return $wgtSession;
     }
     public function pnlEdit_save($strFormId, $strControlId, $objSession) {
-        $this->UpdateTable($objSession);
-        if (!is_null($this->lstSessions->SelectedRow)) {
-            $this->ScrollTo($this->lstSessions->SelectedRow);
-        } else {
-            $this->pnlEdit->Alert('Saved!', 'info');
-        }
+        $pnlRow = $this->UpdateTable($objSession);
+        $this->ScrollTo($pnlRow);
+        $this->pnlEdit->SetSession(null);
     }
     public function pnlEdit_delete($strFormId, $strControlId, $objSession) {
         $this->lstSessions->SelectedRow->Remove();
@@ -134,9 +131,12 @@ class SessionManageFormBase extends FFSForm {
         if (!is_null($this->lstSessions->SelectedRow)) {
             //This already exists
             $this->lstSessions->SelectedRow->UpdateEntity($objSession);
+            $objRow = $this->lstSessions->SelectedRow;
             $this->lstSessions->SelectedRow = null;
         } else {
             $objRow = $this->lstSessions->AddRow($objSession);
         }
+        $this->lstSessions->RefreshControls();
+        return $objRow;
     }
 }
