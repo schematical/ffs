@@ -37,7 +37,25 @@ class CompetitionEditPanel extends CompetitionEditPanelBase {
 
         parent::CreateFieldControls();
 
+        $this->dttStartDate->DateOnly();
+        $this->dttStartDate->AddAction(
+            new MJaxBSDatetimepickerChangeEvent(),
+            new MJaxServerControlAction(
+                $this,
+                'dttStartDate_change'
+            )
+        );
+        $this->dttEndDate->DateOnly();
 
+
+    }
+    public function dttStartDate_change(){
+        $strOffset = '+ 1 Days';
+
+        $intTime = strtotime($strOffset . ' ' . $this->dttStartDate->GetValue());
+        $strDate = date(MLCDateTime::MYSQL_FORMAT, $intTime);
+
+        $this->dttEndDate->SetValue($strDate);
     }
     public function SetCompetition($objCompetition, $objOrg = null){
         if(is_null($objCompetition)){
@@ -83,6 +101,8 @@ class CompetitionEditPanel extends CompetitionEditPanelBase {
 
         $this->objCompetition->IdOrg = $this->objOrg->IdOrg;
         $this->objCompetition->Save();
+
+        FFSApplication::InviteOrgToCompetition($this->objOrg, $this->objCompetition);
         $this->TriggerEvent('mjax-success');
         return;
     }

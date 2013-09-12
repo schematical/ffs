@@ -23,16 +23,16 @@
     <file path="$PROJECT_DIR$/../MLCPackages/mlc_packages/private_packages/MJaxWAdminTheme/_core/view/_header.tpl.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378919516443" ignored="false" />
     <file path="/_header.tpl.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378910937932" ignored="false" />
     <file path="/FFSSessionControlPanel.tpl.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378919069196" ignored="false" />
-    <file path="$PROJECT_DIR$/../MLCPackages/mlc_packages/MJaxBootstrap/_core/assets/js/MJax.BS.js" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378918627230" ignored="false" />
+    <file path="$PROJECT_DIR$/../MLCPackages/mlc_packages/MJaxBootstrap/_core/assets/js/MJax.BS.js" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379006710730" ignored="false" />
     <file path="/SessionEditPanel.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378920471458" ignored="false" />
     <file path="/SessionListPanel.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378921171140" ignored="false" />
     <file path="$PROJECT_DIR$/../MLCPackages/mlc_packages/private_packages/MJaxWAdminTheme/_core/view/_meta.tpl.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378925564048" ignored="false" />
     <file path="$PROJECT_DIR$/../MLCPackages/mlc_packages/MJax/_core/_events.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378926354221" ignored="false" />
     <file path="/_events.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378926341975" ignored="false" />
-    <file path="/CompetitionEditPanel.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378933220304" ignored="false" />
+    <file path="/CompetitionEditPanel.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379007051188" ignored="false" />
     <file path="/CompetitionEditPanelBase.tpl.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378932843890" ignored="false" />
-    <file path="$PROJECT_DIR$/../MLCPackages/mlc_packages/MJaxBootstrap/_core/ctl/MJaxBSDateTimePicker.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378928137854" ignored="false" />
-    <file path="/MJaxBSDateTimePicker.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378928032478" ignored="false" />
+    <file path="$PROJECT_DIR$/../MLCPackages/mlc_packages/MJaxBootstrap/_core/ctl/MJaxBSDateTimePicker.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379007354794" ignored="false" />
+    <file path="/MJaxBSDateTimePicker.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379007138691" ignored="false" />
     <file path="/AtheleteEditPanel.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378928238881" ignored="false" />
     <file path="$PROJECT_DIR$/../MLCPackages/mlc_packages/MJaxBootstrap/_core/assets/css/datetimepicker.css" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378927747802" ignored="false" />
     <file path="/datetimepicker.css" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378927723618" ignored="false" />
@@ -40,11 +40,32 @@
     <file path="/custom.css" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378927780538" ignored="false" />
     <file path="$PROJECT_DIR$/../MLCPackages/mlc_packages/MJaxBootstrap/_core/view/MJaxBSDateTimePicker.tpl.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378928351091" ignored="false" />
     <file path="/manageGyms.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378928669377" ignored="false" />
-    <file path="/OrgEditPanelBase.tpl.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378932729379" ignored="false" />
+    <file path="/OrgEditPanelBase.tpl.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378999735779" ignored="false" />
     <file path="/OrgEditPanel.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378932619846" ignored="false" />
     <file path="/OrgManageFormBase.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378928925017" ignored="false" />
     <file path="/_FFSFeedForm.tpl.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378930682808" ignored="false" />
     <file path="/landing.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378933600750" ignored="false" />
+    <file path="$PROJECT_DIR$/../owens_game/js/OGame.js" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378941393692" ignored="false" />
+    <file path="/OGame.js" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378941392174" ignored="false" />
+    <file path="$PROJECT_DIR$/../owens_game/js/chars/Raptor.js" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378935190327" ignored="false" />
+    <file path="/Raptor.js" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378934797787" ignored="false" />
+    <file path="$PROJECT_DIR$/../owens_game/js/OObject.js" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378942561682" ignored="false" />
+    <file path="/OObject.js" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378940631762" ignored="false" />
+    <file path="$PROJECT_DIR$/../owens_game/js/levels/IceLand.js" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378942439136" ignored="false" />
+    <file path="/IceLand.js" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378942439136" ignored="false" />
+    <file path="$PROJECT_DIR$/../owens_game/js/chars/Cow.js" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378939579051" ignored="false" />
+    <file path="$PROJECT_DIR$/../owens_game/js/actions/Follow.js" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378941970124" ignored="false" />
+    <file path="$PROJECT_DIR$/../owens_game/js/actions/Throw.js" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378942482699" ignored="false" />
+    <file path="/Throw.js" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378942373300" ignored="false" />
+    <file path="/Follow.js" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378941968008" ignored="false" />
+    <file path="$PROJECT_DIR$/../owens_game/js/chars/Ball.js" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378942520087" ignored="false" />
+    <file path="$PROJECT_DIR$/../owens_game/js/chars/Heli.js" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378942418393" ignored="false" />
+    <file path="/Ball.js" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378939869561" ignored="false" />
+    <file path="$PROJECT_DIR$/../owens_game/js/actions/Hold.js" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378941934811" ignored="false" />
+    <file path="/Hold.js" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378940047469" ignored="false" />
+    <file path="$PROJECT_DIR$/../MLCPackages/mlc_packages/MJaxBootstrap/_core/ctl/_events.inc.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379006002813" ignored="false" />
+    <file path="/_events.inc.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379006002127" ignored="false" />
+    <file path="/MJax.BS.js" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379006207984" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,46 +85,62 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="FFSForm.class.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/model/FFSForm.class.php">
+      <file leaf-file-name="contactUs.tpl.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/view/www/contactUs.tpl.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="8" selection-start="224" selection-end="224" vertical-scroll-proportion="-5.0">
+            <state line="121" column="0" selection-start="3714" selection-end="3714" vertical-scroll-proportion="-8.387755">
+              <folding>
+                <marker date="1378925933365" expanded="true" signature="18:3303" placeholder="..." />
+                <marker date="1378925933365" expanded="true" signature="43:3275" placeholder="..." />
+                <marker date="1378925933365" expanded="true" signature="62:3253" placeholder="..." />
+                <marker date="1378925933365" expanded="true" signature="84:3227" placeholder="..." />
+                <marker date="1378925933365" expanded="true" signature="114:3202" placeholder="..." />
+                <marker date="1378925933365" expanded="true" signature="143:208" placeholder="..." />
+                <marker date="1378925933365" expanded="true" signature="262:3169" placeholder="..." />
+                <marker date="1378925933365" expanded="true" signature="296:383" placeholder="..." />
+                <marker date="1378925933365" expanded="true" signature="455:538" placeholder="..." />
+                <marker date="1378925933365" expanded="true" signature="607:1585" placeholder="..." />
+                <marker date="1378925933365" expanded="true" signature="637:935" placeholder="..." />
+                <marker date="1378925933365" expanded="true" signature="680:920" placeholder="..." />
+                <marker date="1378925933365" expanded="true" signature="701:901" placeholder="..." />
+                <marker date="1378925933365" expanded="true" signature="964:1261" placeholder="..." />
+                <marker date="1378925933365" expanded="true" signature="1007:1246" placeholder="..." />
+                <marker date="1378925933365" expanded="true" signature="1028:1227" placeholder="..." />
+                <marker date="1378925933365" expanded="true" signature="1291:1572" placeholder="..." />
+                <marker date="1378925933365" expanded="true" signature="1334:1557" placeholder="..." />
+                <marker date="1378925933365" expanded="true" signature="1355:1538" placeholder="..." />
+                <marker date="1378925933365" expanded="true" signature="1628:3123" placeholder="..." />
+                <marker date="1378925933365" expanded="true" signature="1664:2508" placeholder="..." />
+                <marker date="1378925933365" expanded="true" signature="1691:2493" placeholder="..." />
+                <marker date="1378925933365" expanded="false" signature="2417:2446" placeholder="..." />
+                <marker date="1378925933365" expanded="true" signature="2546:3108" placeholder="..." />
+                <marker date="1378925933365" expanded="false" signature="2582:2595" placeholder="..." />
+                <marker date="1378925933365" expanded="true" signature="2596:3093" placeholder="..." />
+                <marker date="1378925933365" expanded="true" signature="2617:3074" placeholder="..." />
+                <marker date="1378925933365" expanded="true" signature="2687:2788" placeholder="..." />
+                <marker date="1378925933365" expanded="true" signature="2812:2875" placeholder="..." />
+                <marker date="1378925933365" expanded="true" signature="2899:2961" placeholder="..." />
+                <marker date="1378925933365" expanded="true" signature="2985:3052" placeholder="..." />
+                <marker date="1378925933365" expanded="true" signature="3350:3711" placeholder="..." />
+                <marker date="1378925933365" expanded="true" signature="3377:3697" placeholder="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_footer.tpl.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/view/www/_footer.tpl.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FFSFeedDisplayPanel.class.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ctl/_panels/FFSFeedDisplayPanel.class.php">
+      <file leaf-file-name="_meta.tpl.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/view/www/_meta.tpl.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="34" selection-start="21" selection-end="40" vertical-scroll-proportion="-0.625">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FFSRewriteHandeler.class.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/model/FFSRewriteHandeler.class.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="39" selection-start="214" selection-end="214" vertical-scroll-proportion="-3.125">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CompetitionEditPanel.class.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/model/ctl_classes/CompetitionEditPanel.class.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="82" column="0" selection-start="2749" selection-end="2749" vertical-scroll-proportion="-16.583334">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CompetitionEditPanelBase.tpl.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/view/www/ctl_panels/CompetitionEditPanelBase.tpl.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="76" column="81" selection-start="2644" selection-end="2644" vertical-scroll-proportion="-5.9583335">
+            <state line="168" column="0" selection-start="4941" selection-end="4941" vertical-scroll-proportion="-20.958334">
               <folding />
             </state>
           </provider>
@@ -112,19 +149,127 @@
       <file leaf-file-name="OrgEditPanelBase.tpl.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/view/www/ctl_panels/OrgEditPanelBase.tpl.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="48" column="0" selection-start="1580" selection-end="1580" vertical-scroll-proportion="-21.833334">
-              <folding>
-                <element signature="e#145#211#0" expanded="true" />
-              </folding>
+            <state line="31" column="53" selection-start="1101" selection-end="1101" vertical-scroll-proportion="-19.375">
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="landing.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="CompetitionEditPanel.class.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/model/ctl_classes/CompetitionEditPanel.class.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="56" column="0" selection-start="1824" selection-end="1824" vertical-scroll-proportion="0.6480144">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CompetitionEditPanelBase.tpl.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/view/www/ctl_panels/CompetitionEditPanelBase.tpl.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="85" column="0" selection-start="2904" selection-end="2904" vertical-scroll-proportion="-50.625">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SessionEditPanel.class.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/model/ctl_classes/SessionEditPanel.class.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="98" column="12" selection-start="2780" selection-end="2995" vertical-scroll-proportion="-3.125">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="landing.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ctl/org/competition/landing.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="33" selection-start="338" selection-end="338" vertical-scroll-proportion="0.30499077">
+            <state line="17" column="0" selection-start="338" selection-end="567" vertical-scroll-proportion="-10.625">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="landing.tpl.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/view/www/landing.tpl.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="146" column="0" selection-start="4713" selection-end="4713" vertical-scroll-proportion="-21.291666">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="faq.tpl.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/view/www/faq.tpl.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="253" column="0" selection-start="13052" selection-end="13052" vertical-scroll-proportion="-21.291666">
+              <folding>
+                <marker date="1378949277462" expanded="true" signature="18:12657" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="47:12625" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="74:12591" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="107:11412" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="153:11359" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="202:343" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="437:11290" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="561:11261" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="615:716" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="766:1690" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="803:1655" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="1248:1371" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="1268:1366" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="1412:1525" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="1432:1520" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="1740:11230" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="1789:2731" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="1848:1963" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="2022:2693" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="2268:2394" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="2438:2649" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="2780:5766" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="2839:2954" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="3013:5728" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="3178:3373" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="3522:3817" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="3973:4272" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="4441:4924" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="5087:5446" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="5490:5684" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="5815:6831" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="5874:5989" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="6048:6793" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="6094:6195" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="6240:6473" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="6517:6750" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="6880:8268" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="6939:7054" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="7113:8230" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="7263:8186" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="8317:10710" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="8376:8491" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="8550:10672" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="8691:8934" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="8978:9197" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="9241:9380" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="9425:9915" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="9474:9638" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="9687:9869" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="9959:10102" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="10147:10628" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="10196:10368" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="10417:10582" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="10759:11194" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="10818:10933" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="10992:11156" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="11474:12546" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="11525:11897" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="11575:11828" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="11988:12493" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="12037:12118" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="12212:12424" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="12689:13050" placeholder="..." />
+                <marker date="1378949277462" expanded="true" signature="12716:13036" placeholder="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -139,10 +284,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/model/ctl_classes/AtheleteEditPanel.class.php" />
-        <option value="$PROJECT_DIR$/model/ctl_classes/OrgListPanel.class.php" />
-        <option value="$PROJECT_DIR$/ctl/org/competition/manageGyms.php" />
-        <option value="$PROJECT_DIR$/model/ctl_classes/base_classes/OrgManageFormBase.class.php" />
         <option value="$PROJECT_DIR$/ctl/org/competition/sessionDetails.php" />
         <option value="$PROJECT_DIR$/ctl/org/competition/results.php" />
         <option value="$PROJECT_DIR$/view/www/_FFSFeedForm.tpl.php" />
@@ -150,16 +291,20 @@
         <option value="$PROJECT_DIR$/model/FFSForm.class.php" />
         <option value="$PROJECT_DIR$/model/FFSFeedForm.class.php" />
         <option value="$PROJECT_DIR$/ctl/landing.php" />
-        <option value="$PROJECT_DIR$/view/www/ctl_panels/OrgEditPanelBase.tpl.php" />
         <option value="$PROJECT_DIR$/model/ctl_classes/OrgEditPanel.class.php" />
+        <option value="$PROJECT_DIR$/ctl/org/competition/landing.php" />
+        <option value="$PROJECT_DIR$/view/www/faq.tpl.php" />
+        <option value="$PROJECT_DIR$/view/www/landing.tpl.php" />
+        <option value="$PROJECT_DIR$/view/www/contactUs.tpl.php" />
+        <option value="$PROJECT_DIR$/view/www/_meta.tpl.php" />
+        <option value="$PROJECT_DIR$/view/www/ctl_panels/OrgEditPanelBase.tpl.php" />
         <option value="$PROJECT_DIR$/view/www/ctl_panels/CompetitionEditPanelBase.tpl.php" />
         <option value="$PROJECT_DIR$/model/ctl_classes/CompetitionEditPanel.class.php" />
-        <option value="$PROJECT_DIR$/ctl/org/competition/landing.php" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-1302" />
+    <option name="x" value="64" />
     <option name="y" value="764" />
     <option name="width" value="1303" />
     <option name="height" value="773" />
@@ -359,6 +504,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../owens_game" />
   </component>
   <component name="PublishConfig">
     <servers>
@@ -423,7 +569,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1302" y="764" width="1303" height="773" extended-state="6" />
+    <frame x="64" y="764" width="1303" height="773" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -507,92 +653,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/ctl/org/competition/sessionDetails.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="8" selection-start="885" selection-end="981" vertical-scroll-proportion="-4.3333335">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ctl/org/competition/results.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="0" selection-start="808" selection-end="808" vertical-scroll-proportion="-17.5">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/www/_FFSFeedForm.tpl.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="0" selection-start="230" selection-end="230" vertical-scroll-proportion="-3.75">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ctl/org/landing.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-1.1645101">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ctl/_panels/FFSFeedDisplayPanel.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="34" selection-start="21" selection-end="40" vertical-scroll-proportion="-0.625">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ctl/landing.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="75" column="8" selection-start="2716" selection-end="2901" vertical-scroll-proportion="0.75961536">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model/ctl_classes/base_classes/OrgEditPanelBase.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="129" column="33" selection-start="5392" selection-end="5405" vertical-scroll-proportion="-1.1212121">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/www/ctl_panels/OrgEditPanelBase.tpl.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="0" selection-start="1580" selection-end="1580" vertical-scroll-proportion="-21.833334">
-          <folding>
-            <element signature="e#145#211#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/www/ctl_panels/CompetitionEditPanelBase.tpl.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="76" column="81" selection-start="2644" selection-end="2644" vertical-scroll-proportion="-5.9583335">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model/ctl_classes/OrgEditPanel.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="0" selection-start="482" selection-end="482" vertical-scroll-proportion="0.39399624">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model/FFSRewriteHandeler.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="39" selection-start="214" selection-end="214" vertical-scroll-proportion="-3.125">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model/ctl_classes/CompetitionEditPanel.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="82" column="0" selection-start="2749" selection-end="2749" vertical-scroll-proportion="-16.583334">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/model/FFSFeedForm.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="6" column="30" selection-start="258" selection-end="258" vertical-scroll-proportion="-0.08442777">
@@ -614,9 +674,192 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/view/www/faq.tpl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="253" column="0" selection-start="13052" selection-end="13052" vertical-scroll-proportion="-21.291666">
+          <folding>
+            <marker date="1378949277462" expanded="true" signature="18:12657" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="47:12625" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="74:12591" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="107:11412" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="153:11359" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="202:343" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="437:11290" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="561:11261" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="615:716" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="766:1690" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="803:1655" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="1248:1371" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="1268:1366" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="1412:1525" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="1432:1520" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="1740:11230" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="1789:2731" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="1848:1963" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="2022:2693" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="2268:2394" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="2438:2649" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="2780:5766" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="2839:2954" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="3013:5728" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="3178:3373" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="3522:3817" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="3973:4272" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="4441:4924" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="5087:5446" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="5490:5684" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="5815:6831" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="5874:5989" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="6048:6793" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="6094:6195" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="6240:6473" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="6517:6750" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="6880:8268" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="6939:7054" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="7113:8230" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="7263:8186" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="8317:10710" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="8376:8491" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="8550:10672" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="8691:8934" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="8978:9197" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="9241:9380" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="9425:9915" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="9474:9638" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="9687:9869" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="9959:10102" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="10147:10628" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="10196:10368" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="10417:10582" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="10759:11194" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="10818:10933" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="10992:11156" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="11474:12546" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="11525:11897" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="11575:11828" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="11988:12493" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="12037:12118" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="12212:12424" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="12689:13050" placeholder="..." />
+            <marker date="1378949277462" expanded="true" signature="12716:13036" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/www/org/index.tpl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/www/landing.tpl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="146" column="0" selection-start="4713" selection-end="4713" vertical-scroll-proportion="-21.291666">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/www/contactUs.tpl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="121" column="0" selection-start="3714" selection-end="3714" vertical-scroll-proportion="-8.387755">
+          <folding>
+            <marker date="1378925933365" expanded="true" signature="18:3303" placeholder="..." />
+            <marker date="1378925933365" expanded="true" signature="43:3275" placeholder="..." />
+            <marker date="1378925933365" expanded="true" signature="62:3253" placeholder="..." />
+            <marker date="1378925933365" expanded="true" signature="84:3227" placeholder="..." />
+            <marker date="1378925933365" expanded="true" signature="114:3202" placeholder="..." />
+            <marker date="1378925933365" expanded="true" signature="143:208" placeholder="..." />
+            <marker date="1378925933365" expanded="true" signature="262:3169" placeholder="..." />
+            <marker date="1378925933365" expanded="true" signature="296:383" placeholder="..." />
+            <marker date="1378925933365" expanded="true" signature="455:538" placeholder="..." />
+            <marker date="1378925933365" expanded="true" signature="607:1585" placeholder="..." />
+            <marker date="1378925933365" expanded="true" signature="637:935" placeholder="..." />
+            <marker date="1378925933365" expanded="true" signature="680:920" placeholder="..." />
+            <marker date="1378925933365" expanded="true" signature="701:901" placeholder="..." />
+            <marker date="1378925933365" expanded="true" signature="964:1261" placeholder="..." />
+            <marker date="1378925933365" expanded="true" signature="1007:1246" placeholder="..." />
+            <marker date="1378925933365" expanded="true" signature="1028:1227" placeholder="..." />
+            <marker date="1378925933365" expanded="true" signature="1291:1572" placeholder="..." />
+            <marker date="1378925933365" expanded="true" signature="1334:1557" placeholder="..." />
+            <marker date="1378925933365" expanded="true" signature="1355:1538" placeholder="..." />
+            <marker date="1378925933365" expanded="true" signature="1628:3123" placeholder="..." />
+            <marker date="1378925933365" expanded="true" signature="1664:2508" placeholder="..." />
+            <marker date="1378925933365" expanded="true" signature="1691:2493" placeholder="..." />
+            <marker date="1378925933365" expanded="false" signature="2417:2446" placeholder="..." />
+            <marker date="1378925933365" expanded="true" signature="2546:3108" placeholder="..." />
+            <marker date="1378925933365" expanded="false" signature="2582:2595" placeholder="..." />
+            <marker date="1378925933365" expanded="true" signature="2596:3093" placeholder="..." />
+            <marker date="1378925933365" expanded="true" signature="2617:3074" placeholder="..." />
+            <marker date="1378925933365" expanded="true" signature="2687:2788" placeholder="..." />
+            <marker date="1378925933365" expanded="true" signature="2812:2875" placeholder="..." />
+            <marker date="1378925933365" expanded="true" signature="2899:2961" placeholder="..." />
+            <marker date="1378925933365" expanded="true" signature="2985:3052" placeholder="..." />
+            <marker date="1378925933365" expanded="true" signature="3350:3711" placeholder="..." />
+            <marker date="1378925933365" expanded="true" signature="3377:3697" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/www/_footer.tpl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/www/_meta.tpl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="168" column="0" selection-start="4941" selection-end="4941" vertical-scroll-proportion="-20.958334">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/ctl_classes/CompetitionListPanel.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/www/ctl_panels/OrgEditPanelBase.tpl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="53" selection-start="1101" selection-end="1101" vertical-scroll-proportion="-19.375">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/FFSApplication.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="391" column="27" selection-start="14839" selection-end="14839" vertical-scroll-proportion="0.34750462">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ctl/org/competition/landing.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="33" selection-start="338" selection-end="338" vertical-scroll-proportion="0.30499077">
+        <state line="17" column="0" selection-start="338" selection-end="567" vertical-scroll-proportion="-10.625">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/www/ctl_panels/CompetitionEditPanelBase.tpl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="85" column="0" selection-start="2904" selection-end="2904" vertical-scroll-proportion="-50.625">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/ctl_classes/SessionEditPanel.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="98" column="12" selection-start="2780" selection-end="2995" vertical-scroll-proportion="-3.125">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/ctl_classes/CompetitionEditPanel.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="56" column="0" selection-start="1824" selection-end="1824" vertical-scroll-proportion="0.6480144">
           <folding />
         </state>
       </provider>

@@ -83,16 +83,7 @@ if (!is_null($_CONTROL->strName)) { ?>
 } ?>
                 
             
-                
-                    <?php if (!is_null($_CONTROL->dttSignupCutOffDate)) { ?>
-                        <div class="control-group pull-left">
-                          <label class="control-label" for="name"> Signup Cut Off Date</label>
 
-                             <?php $_CONTROL->dttSignupCutOffDate->Render(); ?>
-
-                        </div>
-                    <?php
-} ?>
                 
             
         </fieldset>

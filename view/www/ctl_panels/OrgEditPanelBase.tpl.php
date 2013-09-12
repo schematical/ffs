@@ -6,24 +6,7 @@
             
                 
                     <?php
-/**
-* Class and Function List:
-* Function list:
-* Classes list:
-*/
-if (!is_null($_CONTROL->strNamespace)) { ?>
-                        <div class="control-group pull-left">
-                          <label class="control-label" for="name"> Namespace</label>
-                          <div class="controls">
-                             <?php $_CONTROL->strNamespace->Render(); ?>
-                          </div>
-                        </div>
-                    <?php
-} ?>
-                
-            
-                
-                    <?php if (!is_null($_CONTROL->strName)) { ?>
+                if (!is_null($_CONTROL->strName)) { ?>
                         <div class="control-group pull-left">
                           <label class="control-label" for="name"> Name</label>
                           <div class="controls">
@@ -46,6 +29,15 @@ if (!is_null($_CONTROL->strNamespace)) { ?>
                         </div>
                     <?php
 } ?>
+            <?php if (!is_null($_CONTROL->strClubType)) { ?>
+                <div class="control-group pull-left">
+                    <label class="control-label" for="name"> Club Type</label>
+                    <div class="controls">
+                        <?php $_CONTROL->strClubType->Render(); ?>
+                    </div>
+                </div>
+            <?php
+            } ?>
 
             
         </fieldset>
