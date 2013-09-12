@@ -35,9 +35,10 @@ class SessionEditPanel extends SessionEditPanelBase
     }
     public function CreateFieldControls(){
         parent::CreateFieldControls();
-        $this->dttStartDate->Format = 'mm-dd-yy hh:ii p';
-        $this->dttEndDate->Format = 'mm-dd-yy hh:ii  p';
+        $this->dttStartDate->Format = 'D H:ii P';
+
         $this->dttEndDate->TimeOnly();
+        $this->dttEndDate->Format = 'D H:ii  P';
         $this->dttStartDate->EndDate = FFSForm::Competition()->EndDate;
         $this->dttEndDate->EndDate = FFSForm::Competition()->EndDate;
 

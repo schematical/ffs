@@ -1,4 +1,9 @@
 
+
+
+
+
+#Added 10.12.13
 delimiter $$
 
 CREATE TABLE `MLCNamespace` (

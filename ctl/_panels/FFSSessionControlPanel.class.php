@@ -8,23 +8,28 @@ class FFSSessionControlPanel extends MJaxPanel{
         $this->strTemplate = __VIEW_ACTIVE_APP_DIR__ . '/www/_panels/' . get_class($this) . '.tpl.php';
         $this->lnkToggleState = new MJaxLinkButton($this);
         $this->lnkToggleState->AddCssClass('btn btn-large btn-info');
-        //_dv($this->objSession->State());
-        if($this->objSession->State() == FFSSessionState::CLOSED){
-            $this->lnkToggleState->Text = 'Mark Open';
-        }else{
-            $this->lnkToggleState->Text = 'Mark Closed';
-        }
+        $this->UpdateToggleStateText();
+
         $this->lnkToggleState->AddAction($this, 'lnkToggleState_click');
     }
     public function lnkToggleState_click(){
         if($this->objSession->State() == FFSSessionState::CLOSED){
             $this->objSession->EndDate = MLCDateTime::Now('+ 1 day');
-            $this->lnkToggleState->Text = 'Mark Closed';
         }else{
             $this->objSession->EndDate = MLCDateTime::Now();
-            $this->lnkToggleState->Text = 'Mark Open';
+
         }
+        $this->UpdateToggleStateText();
         $this->objSession->Save();
+    }
+    public function UpdateToggleStateText(){
+        if($this->objSession->IsUpcoming()){
+            $this->lnkToggleState->Text = 'Start Session Now';
+        }elseif($this->objSession->IsClosed()){
+            $this->lnkToggleState->Text = 'Re-open Session';
+        }elseif($this->objSession->IsActive()){
+            $this->lnkToggleState->Text = 'End Session Now';
+        }
     }
     
 }
