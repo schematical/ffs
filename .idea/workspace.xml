@@ -109,19 +109,55 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="SessionEditPanel.class.php" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/model/ctl_classes/SessionEditPanel.class.php">
+      <file leaf-file-name="contactUs.tpl.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/view/www/contactUs.tpl.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="42" column="36" selection-start="1294" selection-end="1294" vertical-scroll-proportion="0.4061372">
+            <state line="114" column="4" selection-start="3320" selection-end="3719" vertical-scroll-proportion="-16.041666">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SessionEditPanelBase.class.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/model/ctl_classes/base_classes/SessionEditPanelBase.class.php">
+      <file leaf-file-name="landing.tpl.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/view/www/landing.tpl.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="92" column="20" selection-start="3525" selection-end="3525" vertical-scroll-proportion="-15.041667">
+            <state line="139" column="4" selection-start="4319" selection-end="4718" vertical-scroll-proportion="-14.416667">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_meta.tpl.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/view/www/_meta.tpl.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="141" column="0" selection-start="4019" selection-end="4019" vertical-scroll-proportion="0.8375451">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_footer.tpl.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/view/www/_footer.tpl.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="9" column="9" selection-start="564" selection-end="564" vertical-scroll-proportion="-5.625">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SessionEditPanel.class.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/model/ctl_classes/SessionEditPanel.class.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="42" column="36" selection-start="1294" selection-end="1294" vertical-scroll-proportion="-9.375">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="faq.tpl.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/view/www/faq.tpl.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="105" selection-start="105" selection-end="105" vertical-scroll-proportion="-0.0">
               <folding />
             </state>
           </provider>
@@ -145,28 +181,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="OrgSelectPanel.tpl.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/view/www/ctl_panels/OrgSelectPanel.tpl.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="40" selection-start="97" selection-end="97" vertical-scroll-proportion="-1.25">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="FFSOrgManagerSpecialPanel.tpl.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/view/www/_panels/FFSOrgManagerSpecialPanel.tpl.php">
           <provider selected="true" editor-type-id="text-editor">
             <state line="41" column="0" selection-start="1625" selection-end="1625" vertical-scroll-proportion="-18.166666">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Session.class.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/model/data_classes/Session.class.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="4" selection-start="594" selection-end="1246" vertical-scroll-proportion="-9.333333">
               <folding />
             </state>
           </provider>
@@ -194,11 +212,7 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/view/www/ctl_panels/OrgEditPanelBase.tpl.php" />
-        <option value="$PROJECT_DIR$/view/www/ctl_panels/OrgSelectPanel.tpl.php" />
-        <option value="$PROJECT_DIR$/app.inc.php" />
         <option value="$PROJECT_DIR$/../MLCPackages/mlc_packages/MLCDataLayer/_core/MLCDateTime.class.php" />
-        <option value="$PROJECT_DIR$/view/www/_meta.tpl.php" />
         <option value="$PROJECT_DIR$/view/www/faq.tpl.php" />
         <option value="$PROJECT_DIR$/view/www/_panels/FFSOrgManagerSpecialPanel.tpl.php" />
         <option value="$PROJECT_DIR$/model/_enum.inc.php" />
@@ -210,6 +224,10 @@
         <option value="$PROJECT_DIR$/ctl/_panels/FFSSessionControlPanel.class.php" />
         <option value="$PROJECT_DIR$/cli/_deploy.sql" />
         <option value="$PROJECT_DIR$/model/ctl_classes/SessionEditPanel.class.php" />
+        <option value="$PROJECT_DIR$/view/www/contactUs.tpl.php" />
+        <option value="$PROJECT_DIR$/view/www/landing.tpl.php" />
+        <option value="$PROJECT_DIR$/view/www/_meta.tpl.php" />
+        <option value="$PROJECT_DIR$/view/www/_footer.tpl.php" />
       </list>
     </option>
   </component>
@@ -260,6 +278,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="FFS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FFS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FFS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="view" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="www" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -555,62 +591,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/view/www/ctl_panels/OrgEditPanelBase.tpl.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="118" vertical-scroll-proportion="-0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/www/_meta.tpl.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="0" selection-start="419" selection-end="419" vertical-scroll-proportion="35.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/www/faq.tpl.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="105" selection-start="105" selection-end="105" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model/_enum.inc.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="34" selection-start="1669" selection-end="1688" vertical-scroll-proportion="0.67509025">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model/data_classes/Session.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="4" selection-start="594" selection-end="1246" vertical-scroll-proportion="-9.333333">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model/data_classes/Competition.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="17" selection-start="100" selection-end="111" vertical-scroll-proportion="0.08122744">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model/ctl_classes/base_classes/OrgManageFormBase.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="108" column="48" selection-start="4438" selection-end="4442" vertical-scroll-proportion="0.5970425">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ctl/_panels/FFSOrgInvitePanel.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="44" selection-start="496" selection-end="496" vertical-scroll-proportion="0.29783395">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/model/ctl_classes/OrgEditPanel.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="15" column="33" selection-start="503" selection-end="516" vertical-scroll-proportion="0.4061372">
@@ -665,7 +645,63 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/model/ctl_classes/SessionEditPanel.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="36" selection-start="1294" selection-end="1294" vertical-scroll-proportion="0.4061372">
+        <state line="42" column="36" selection-start="1294" selection-end="1294" vertical-scroll-proportion="-9.375">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/www/faq.tpl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="105" selection-start="105" selection-end="105" vertical-scroll-proportion="-0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/www/contactUs.tpl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="114" column="4" selection-start="3320" selection-end="3719" vertical-scroll-proportion="-16.041666">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/ctl_classes/base_classes/SessionEditPanelBase.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="92" column="20" selection-start="3525" selection-end="3525" vertical-scroll-proportion="-15.041667">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/www/landing.tpl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="139" column="4" selection-start="4319" selection-end="4718" vertical-scroll-proportion="-14.416667">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/www/ctl_panels/OrgSelectPanel.tpl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="40" selection-start="97" selection-end="97" vertical-scroll-proportion="-1.25">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/data_classes/Session.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="4" selection-start="594" selection-end="1246" vertical-scroll-proportion="-9.333333">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/www/_footer.tpl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="9" selection-start="564" selection-end="564" vertical-scroll-proportion="-5.625">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/www/_meta.tpl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="141" column="0" selection-start="4019" selection-end="4019" vertical-scroll-proportion="0.8375451">
           <folding />
         </state>
       </provider>
