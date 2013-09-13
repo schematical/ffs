@@ -24,7 +24,7 @@
 * - __get()
 * - __set()
 * Classes list:
-* - ResultBase extends BaseEntity
+* - ResultBase extends MLCBaseEntity
 */
 /**
  * Class Competition
@@ -49,7 +49,7 @@
  * @property-read Result $IdSessionObject
  * @property-read Result $IdAtheleteObject
  */
-class ResultBase extends BaseEntity {
+class ResultBase extends MLCBaseEntity {
     const DB_CONN = 'DB_1';
     const TABLE_NAME = 'Result';
     const P_KEY = 'idResult';
@@ -153,7 +153,7 @@ class ResultBase extends BaseEntity {
         $arrFields[] = 'Result.dispDate ' . (($blnLongSelect) ? ' as "Result.dispDate"' : '');
         return $arrFields;
     }
-    public static function Query($strExtra, $blnReturnSingle = false, $arrJoins = null) {
+    public static function Query($strExtra, $mixReturnSingle = false, $arrJoins = null) {
         $blnLongSelect = !is_null($arrJoins);
         $arrFields = self::GetSQLSelectFieldsAsArr($blnLongSelect);
         if ($blnLongSelect) {
@@ -177,35 +177,42 @@ class ResultBase extends BaseEntity {
                 }
             }
         }
-        $sql = sprintf("SELECT %s FROM Result %s %s;", $strFields, $strJoin, $strExtra);
-        $result = MLCDBDriver::Query($sql, self::DB_CONN);
-        $arrReturn = array();
+        $strSql = sprintf("SELECT %s FROM Result %s %s;", $strFields, $strJoin, $strExtra);
+        $result = MLCDBDriver::Query($strSql, self::DB_CONN);
+        if ((is_object($mixReturnSingle)) && ($mixReturnSingle instanceof MLCBaseEntityCollection)) {
+            $collReturn = $mixReturnSingle;
+            $collReturn->RemoveAll();
+        } else {
+            $collReturn = new MLCBaseEntityCollection();
+            $collReturn->SetQueryEntity('Result');
+        }
+        $collReturn->AddQueryToHistory($strSql);
         while ($data = mysql_fetch_assoc($result)) {
             $tObj = new Result();
             $tObj->Materilize($data);
-            $arrReturn[] = $tObj;
+            $collReturn[] = $tObj;
         }
-        //$arrReturn = $coll->getCollection();
-        if ($blnReturnSingle) {
-            if (count($arrReturn) == 0) {
+        //$collReturn = $coll->getCollection();
+        if ($mixReturnSingle !== false) {
+            if (count($collReturn) == 0) {
                 return null;
             } else {
-                return $arrReturn[0];
+                return $collReturn[0];
             }
         } else {
-            return $arrReturn;
+            return $collReturn;
         }
     }
     public static function QueryCount($strExtra = '') {
-        $sql = sprintf("SELECT Result.* FROM Result %s;", $strExtra);
-        $result = MLCDBDriver::Query($sql, self::DB_CONN);
+        $strSql = sprintf("SELECT Result.* FROM Result %s;", $strExtra);
+        $result = MLCDBDriver::Query($strSql, self::DB_CONN);
         return mysql_num_rows($result);
     }
     //Get children
     //Load by foregin key
     public static function LoadCollByIdSession($intIdSession) {
-        $sql = sprintf("SELECT Result.* FROM Result WHERE idSession = %s;", $intIdSession);
-        $result = MLCDBDriver::Query($sql, self::DB_CONN);
+        $strSql = sprintf("SELECT Result.* FROM Result WHERE idSession = %s;", $intIdSession);
+        $result = MLCDBDriver::Query($strSql, self::DB_CONN);
         $coll = new BaseEntityCollection();
         while ($data = mysql_fetch_assoc($result)) {
             $objResult = new Result();
@@ -215,8 +222,8 @@ class ResultBase extends BaseEntity {
         return $coll;
     }
     public static function LoadCollByIdAthelete($intIdAthelete) {
-        $sql = sprintf("SELECT Result.* FROM Result WHERE idAthelete = %s;", $intIdAthelete);
-        $result = MLCDBDriver::Query($sql, self::DB_CONN);
+        $strSql = sprintf("SELECT Result.* FROM Result WHERE idAthelete = %s;", $intIdAthelete);
+        $result = MLCDBDriver::Query($strSql, self::DB_CONN);
         $coll = new BaseEntityCollection();
         while ($data = mysql_fetch_assoc($result)) {
             $objResult = new Result();
@@ -274,28 +281,28 @@ class ResultBase extends BaseEntity {
         return $arrResults;
     }
     public function __toArray() {
-        $arrReturn = array();
-        $arrReturn['_ClassName'] = "Result %>";
-        $arrReturn['idResult'] = $this->idResult;
-        $arrReturn['idSession'] = $this->idSession;
-        $arrReturn['idAthelete'] = $this->idAthelete;
-        $arrReturn['score'] = $this->score;
-        $arrReturn['judge'] = $this->judge;
-        $arrReturn['flag'] = $this->flag;
-        $arrReturn['creDate'] = $this->creDate;
-        $arrReturn['event'] = $this->event;
-        $arrReturn['dispDate'] = $this->dispDate;
-        return $arrReturn;
+        $collReturn = array();
+        $collReturn['_ClassName'] = "Result %>";
+        $collReturn['idResult'] = $this->idResult;
+        $collReturn['idSession'] = $this->idSession;
+        $collReturn['idAthelete'] = $this->idAthelete;
+        $collReturn['score'] = $this->score;
+        $collReturn['judge'] = $this->judge;
+        $collReturn['flag'] = $this->flag;
+        $collReturn['creDate'] = $this->creDate;
+        $collReturn['event'] = $this->event;
+        $collReturn['dispDate'] = $this->dispDate;
+        return $collReturn;
     }
     public function __toString() {
         return 'Result(' . $this->getId() . ')';
     }
     public function __toJson($blnPosponeEncode = false) {
-        $arrReturn = $this->__toArray();
+        $collReturn = $this->__toArray();
         if ($blnPosponeEncode) {
-            return json_encode($arrReturn);
+            return json_encode($collReturn);
         } else {
-            return $arrReturn;
+            return $collReturn;
         }
     }
     public function __get($strName) {

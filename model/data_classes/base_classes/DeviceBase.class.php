@@ -26,7 +26,7 @@
 * - __get()
 * - __set()
 * Classes list:
-* - DeviceBase extends BaseEntity
+* - DeviceBase extends MLCBaseEntity
 */
 /**
  * Class Competition
@@ -44,7 +44,7 @@
  * @property-write mixed $IdOrg
  * @property-read Device $IdOrgObject
  */
-class DeviceBase extends BaseEntity {
+class DeviceBase extends MLCBaseEntity {
     const DB_CONN = 'DB_1';
     const TABLE_NAME = 'Device';
     const P_KEY = 'idDevice';
@@ -128,7 +128,7 @@ class DeviceBase extends BaseEntity {
         $arrFields[] = 'Device.idOrg ' . (($blnLongSelect) ? ' as "Device.idOrg"' : '');
         return $arrFields;
     }
-    public static function Query($strExtra, $blnReturnSingle = false, $arrJoins = null) {
+    public static function Query($strExtra, $mixReturnSingle = false, $arrJoins = null) {
         $blnLongSelect = !is_null($arrJoins);
         $arrFields = self::GetSQLSelectFieldsAsArr($blnLongSelect);
         if ($blnLongSelect) {
@@ -149,28 +149,35 @@ class DeviceBase extends BaseEntity {
                 }
             }
         }
-        $sql = sprintf("SELECT %s FROM Device %s %s;", $strFields, $strJoin, $strExtra);
-        $result = MLCDBDriver::Query($sql, self::DB_CONN);
-        $arrReturn = array();
+        $strSql = sprintf("SELECT %s FROM Device %s %s;", $strFields, $strJoin, $strExtra);
+        $result = MLCDBDriver::Query($strSql, self::DB_CONN);
+        if ((is_object($mixReturnSingle)) && ($mixReturnSingle instanceof MLCBaseEntityCollection)) {
+            $collReturn = $mixReturnSingle;
+            $collReturn->RemoveAll();
+        } else {
+            $collReturn = new MLCBaseEntityCollection();
+            $collReturn->SetQueryEntity('Device');
+        }
+        $collReturn->AddQueryToHistory($strSql);
         while ($data = mysql_fetch_assoc($result)) {
             $tObj = new Device();
             $tObj->Materilize($data);
-            $arrReturn[] = $tObj;
+            $collReturn[] = $tObj;
         }
-        //$arrReturn = $coll->getCollection();
-        if ($blnReturnSingle) {
-            if (count($arrReturn) == 0) {
+        //$collReturn = $coll->getCollection();
+        if ($mixReturnSingle !== false) {
+            if (count($collReturn) == 0) {
                 return null;
             } else {
-                return $arrReturn[0];
+                return $collReturn[0];
             }
         } else {
-            return $arrReturn;
+            return $collReturn;
         }
     }
     public static function QueryCount($strExtra = '') {
-        $sql = sprintf("SELECT Device.* FROM Device %s;", $strExtra);
-        $result = MLCDBDriver::Query($sql, self::DB_CONN);
+        $strSql = sprintf("SELECT Device.* FROM Device %s;", $strExtra);
+        $result = MLCDBDriver::Query($strSql, self::DB_CONN);
         return mysql_num_rows($result);
     }
     //Get children
@@ -189,8 +196,8 @@ class DeviceBase extends BaseEntity {
     }
     //Load by foregin key
     public static function LoadCollByIdOrg($intIdOrg) {
-        $sql = sprintf("SELECT Device.* FROM Device WHERE idOrg = %s;", $intIdOrg);
-        $result = MLCDBDriver::Query($sql, self::DB_CONN);
+        $strSql = sprintf("SELECT Device.* FROM Device WHERE idOrg = %s;", $intIdOrg);
+        $result = MLCDBDriver::Query($strSql, self::DB_CONN);
         $coll = new BaseEntityCollection();
         while ($data = mysql_fetch_assoc($result)) {
             $objDevice = new Device();
@@ -251,25 +258,25 @@ class DeviceBase extends BaseEntity {
         return $arrResults;
     }
     public function __toArray() {
-        $arrReturn = array();
-        $arrReturn['_ClassName'] = "Device %>";
-        $arrReturn['idDevice'] = $this->idDevice;
-        $arrReturn['name'] = $this->name;
-        $arrReturn['token'] = $this->token;
-        $arrReturn['creDate'] = $this->creDate;
-        $arrReturn['inviteEmail'] = $this->inviteEmail;
-        $arrReturn['idOrg'] = $this->idOrg;
-        return $arrReturn;
+        $collReturn = array();
+        $collReturn['_ClassName'] = "Device %>";
+        $collReturn['idDevice'] = $this->idDevice;
+        $collReturn['name'] = $this->name;
+        $collReturn['token'] = $this->token;
+        $collReturn['creDate'] = $this->creDate;
+        $collReturn['inviteEmail'] = $this->inviteEmail;
+        $collReturn['idOrg'] = $this->idOrg;
+        return $collReturn;
     }
     public function __toString() {
         return 'Device(' . $this->getId() . ')';
     }
     public function __toJson($blnPosponeEncode = false) {
-        $arrReturn = $this->__toArray();
+        $collReturn = $this->__toArray();
         if ($blnPosponeEncode) {
-            return json_encode($arrReturn);
+            return json_encode($collReturn);
         } else {
-            return $arrReturn;
+            return $collReturn;
         }
     }
     public function __get($strName) {

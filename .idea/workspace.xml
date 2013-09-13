@@ -10,7 +10,7 @@
     <file path="$PROJECT_DIR$/../MLCPackages/mlc_packages/private_packages/MJaxWAdminTheme/_core/view/_footer.tpl.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379025100193" ignored="false" />
     <file path="/_footer.tpl.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379025093419" ignored="false" />
     <file path="/FFSForm.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378930793763" ignored="false" />
-    <file path="/a.dummy" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379019971404" ignored="false" />
+    <file path="/a.dummy" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379083640494" ignored="false" />
     <file path="$PROJECT_DIR$/../MLCPackages/mlc_packages/private_packages/MJaxWAdminTheme/_core/view/MJaxWAdminSubNavItem.tpl.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378853020792" ignored="false" />
     <file path="/MJaxWAdminSubNavItem.tpl.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378853007374" ignored="false" />
     <file path="$PROJECT_DIR$/../MLCPackages/mlc_packages/private_packages/MJaxWAdminTheme/_core/ctl/MJaxWAdminSubNavItem.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378853060888" ignored="false" />
@@ -66,11 +66,9 @@
     <file path="$PROJECT_DIR$/../MLCPackages/mlc_packages/MJaxBootstrap/_core/ctl/_events.inc.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379006002813" ignored="false" />
     <file path="/_events.inc.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379006002127" ignored="false" />
     <file path="/MJax.BS.js" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379017041038" ignored="false" />
-    <file path="$PROJECT_DIR$/model/data_classes/base_classes/OrgBase.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379015531884" ignored="false" />
     <file path="/SessionEditPanelBase.tpl.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379013791758" ignored="false" />
     <file path="/manageSessions.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379014401395" ignored="false" />
     <file path="$PROJECT_DIR$/../MLCOfficial/mde_codebase/_mlc/mtpl/ctl/ControlManageFormBase.xtpl" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379023117398" ignored="false" />
-    <file path="$PROJECT_DIR$/model/data_classes/base_classes/SessionBase.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379023150739" ignored="false" />
     <file path="/ControlManageFormBase.xtpl" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379015470715" ignored="false" />
     <file path="$PROJECT_DIR$/../MLCOfficial/mde_codebase/_mlc/mtpl/ctl/ControlEditPanelBase.xtpl" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379015128917" ignored="false" />
     <file path="/ControlEditPanelBase.xtpl" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379015102709" ignored="false" />
@@ -81,15 +79,40 @@
     <file path="/MJaxWAdminWidget.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379017221941" ignored="false" />
     <file path="/OrgSelectPanel.tpl.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379017282413" ignored="false" />
     <file path="/_enum.inc.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379021969054" ignored="false" />
-    <file path="/MLCDateTime.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379019844185" ignored="false" />
+    <file path="/MLCDateTime.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379084662251" ignored="false" />
     <file path="/FFSOrgManagerSpecialPanel.tpl.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379021502411" ignored="false" />
     <file path="/_meta.tpl.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379021011041" ignored="false" />
     <file path="/Competition.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379021945396" ignored="false" />
     <file path="/Session.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379022058617" ignored="false" />
-    <file path="$PROJECT_DIR$/model/data_classes/base_classes/CompetitionBase.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379023150739" ignored="false" />
     <file path="/_actions.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379023561711" ignored="false" />
     <file path="$PROJECT_DIR$/../MLCPackages/mlc_packages/MLCAuth/2.0/_core/view/MLCInvitePanel.tpl.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379024544797" ignored="false" />
     <file path="/FFSSessionControlPanel.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379024820064" ignored="false" />
+    <file path="$PROJECT_DIR$/../MLCPackages/mlc_packages/MLCDataLayer/package.inc.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379084779578" ignored="false" />
+    <file path="/package.inc.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379083839656" ignored="false" />
+    <file path="$PROJECT_DIR$/../MLCPackages/mlc_packages/MLCDataLayer/2.0/_core/MLCBaseEntity.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379081054408" ignored="false" />
+    <file path="/MLCBaseEntity.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379081054408" ignored="false" />
+    <file path="$PROJECT_DIR$/../MLCPackages/mlc_packages/MLCDataLayer/2.0/_core/MLCBaseEntityCollection.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379086607052" ignored="false" />
+    <file path="/MLCBaseEntityCollection.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379086600397" ignored="false" />
+    <file path="$PROJECT_DIR$/../MLCPackages/mlc_packages/MLCDataLayer/2.0/_core/MLCDateTime.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379084663299" ignored="false" />
+    <file path="$PROJECT_DIR$/../MLCPackages/mlc_packages/MLCDataLayer/2.0/_core/MLCFieldCondition.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379082668956" ignored="false" />
+    <file path="/MLCFieldCondition.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379082663246" ignored="false" />
+    <file path="$PROJECT_DIR$/../MLCOfficial/mde_codebase/_mlc/mtpl/data_layer/DataClassBase.xtpl" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379085806893" ignored="false" />
+    <file path="/DataClassBase.xtpl" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379085684933" ignored="false" />
+    <file path="$PROJECT_DIR$/../MLCPackages/mlc_packages/MLCDataLayer/2.0/_core/_hack.inc.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379083620725" ignored="false" />
+    <file path="/_hack.inc.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379083615419" ignored="false" />
+    <file path="/MySqlDataConnection.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379083646021" ignored="false" />
+    <file path="$PROJECT_DIR$/../MLCPackages/mlc_packages/MLCDataLayer/2.0/_core/MySqlDataConnection.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379083646021" ignored="false" />
+    <file path="$PROJECT_DIR$/../MLCPackages/mlc_packages/MLCDataLayer/2.0/_core/MLCDataConnectionBase.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379083826116" ignored="false" />
+    <file path="/MLCDataConnectionBase.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379083826435" ignored="false" />
+    <file path="$PROJECT_DIR$/../MLCPackages/mlc_packages/MLCDataLayer/2.0/_core/MLCDBDriver.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379084593049" ignored="false" />
+    <file path="/MLCDBDriver.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379084592690" ignored="false" />
+    <file path="/FFSApplication.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379084921918" ignored="false" />
+    <file path="/entity.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379086642648" ignored="false" />
+    <file path="/manageEnrollment.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379088504739" ignored="false" />
+    <file path="/manageEnrollment.tpl.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379089236073" ignored="false" />
+    <file path="/MJaxTable.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379087283088" ignored="false" />
+    <file path="/FFSSessionEnrollmentPanel.tpl.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379088799374" ignored="false" />
+    <file path="/FFSSessionEnrollmentPanel.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379088850045" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,96 +132,53 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="contactUs.tpl.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/view/www/contactUs.tpl.php">
+      <file leaf-file-name="manageEnrollment.tpl.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/view/www/org/competition/manageEnrollment.tpl.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="114" column="4" selection-start="3320" selection-end="3719" vertical-scroll-proportion="-16.041666">
+            <state line="7" column="51" selection-start="251" selection-end="251" vertical-scroll-proportion="0.18953069">
+              <folding>
+                <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FFSSessionEnrollmentPanel.class.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ctl/_panels/FFSSessionEnrollmentPanel.class.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="10" column="76" selection-start="486" selection-end="486" vertical-scroll-proportion="-4.375">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="landing.tpl.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/view/www/landing.tpl.php">
+      <file leaf-file-name="FFSSessionEnrollmentPanel.tpl.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/view/www/_panels/FFSSessionEnrollmentPanel.tpl.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="139" column="4" selection-start="4319" selection-end="4718" vertical-scroll-proportion="-14.416667">
+            <state line="6" column="49" selection-start="329" selection-end="329" vertical-scroll-proportion="-3.75">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_meta.tpl.php" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/view/www/_meta.tpl.php">
+      <file leaf-file-name="manageEnrollment.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ctl/org/competition/manageEnrollment.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="141" column="0" selection-start="4019" selection-end="4019" vertical-scroll-proportion="0.8375451">
+            <state line="3" column="34" selection-start="117" selection-end="117" vertical-scroll-proportion="-1.875">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_footer.tpl.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/view/www/_footer.tpl.php">
+      <file leaf-file-name="MJaxTable.class.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../MLCPackages/mlc_packages/MJax/_core/MJaxTable.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="9" selection-start="564" selection-end="564" vertical-scroll-proportion="-5.625">
-              <folding />
+            <state line="62" column="15" selection-start="2057" selection-end="2057" vertical-scroll-proportion="-4.375">
+              <folding>
+                <marker date="1379087287983" expanded="true" signature="5881:5980" placeholder="..." />
+                <marker date="1379087287983" expanded="true" signature="5893:5965" placeholder="..." />
+              </folding>
             </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SessionEditPanel.class.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/model/ctl_classes/SessionEditPanel.class.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="42" column="36" selection-start="1294" selection-end="1294" vertical-scroll-proportion="-9.375">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="faq.tpl.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/view/www/faq.tpl.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="105" selection-start="105" selection-end="105" vertical-scroll-proportion="-0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="manageGyms.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ctl/org/competition/manageGyms.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="42" column="8" selection-start="1232" selection-end="1232" vertical-scroll-proportion="-7.3469386">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FFSSessionControlPanel.class.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ctl/_panels/FFSSessionControlPanel.class.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="34" column="1" selection-start="1369" selection-end="1369" vertical-scroll-proportion="-21.25">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FFSOrgManagerSpecialPanel.tpl.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/view/www/_panels/FFSOrgManagerSpecialPanel.tpl.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="41" column="0" selection-start="1625" selection-end="1625" vertical-scroll-proportion="-18.166666">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_deploy.sql" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cli/_deploy.sql">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="0" selection-start="4" selection-end="4" vertical-scroll-proportion="-2.4">
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-            <state />
           </provider>
         </entry>
       </file>
@@ -212,14 +192,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/../MLCPackages/mlc_packages/MLCDataLayer/_core/MLCDateTime.class.php" />
-        <option value="$PROJECT_DIR$/view/www/faq.tpl.php" />
-        <option value="$PROJECT_DIR$/view/www/_panels/FFSOrgManagerSpecialPanel.tpl.php" />
-        <option value="$PROJECT_DIR$/model/_enum.inc.php" />
-        <option value="$PROJECT_DIR$/model/data_classes/Session.class.php" />
-        <option value="$PROJECT_DIR$/model/data_classes/Competition.class.php" />
-        <option value="$PROJECT_DIR$/ctl/_panels/FFSOrgManagerSpecialPanel.class.php" />
-        <option value="$PROJECT_DIR$/../MLCPackages/mlc_packages/MJax/_core/_actions.php" />
         <option value="$PROJECT_DIR$/ctl/org/competition/manageGyms.php" />
         <option value="$PROJECT_DIR$/ctl/_panels/FFSSessionControlPanel.class.php" />
         <option value="$PROJECT_DIR$/cli/_deploy.sql" />
@@ -228,6 +200,14 @@
         <option value="$PROJECT_DIR$/view/www/landing.tpl.php" />
         <option value="$PROJECT_DIR$/view/www/_meta.tpl.php" />
         <option value="$PROJECT_DIR$/view/www/_footer.tpl.php" />
+        <option value="$PROJECT_DIR$/model/FFSApplication.class.php" />
+        <option value="$PROJECT_DIR$/ctl/_test/entity.php" />
+        <option value="$PROJECT_DIR$/../MLCPackages/mlc_packages/MJax/_core/MJaxTable.class.php" />
+        <option value="$PROJECT_DIR$/app.inc.php" />
+        <option value="$PROJECT_DIR$/ctl/org/competition/manageEnrollment.php" />
+        <option value="$PROJECT_DIR$/view/www/_panels/FFSSessionEnrollmentPanel.tpl.php" />
+        <option value="$PROJECT_DIR$/ctl/_panels/FFSSessionEnrollmentPanel.class.php" />
+        <option value="$PROJECT_DIR$/view/www/org/competition/manageEnrollment.tpl.php" />
       </list>
     </option>
   </component>
@@ -309,71 +289,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FFS" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FFS" />
+              <option name="myItemId" value="view" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="data_classes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FFS" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FFS" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ctl_classes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FFS" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FFS" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ctl" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FFS" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FFS" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ctl" />
+              <option name="myItemId" value="www" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -391,7 +311,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ctl" />
+              <option name="myItemId" value="view" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="www" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -400,6 +324,56 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="competition" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FFS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FFS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="view" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="www" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="_panels" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FFS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FFS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FFS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FFS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ctl" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -478,6 +452,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/view/www/_panels" />
       <recent name="$PROJECT_DIR$/ctl/org" />
       <recent name="$PROJECT_DIR$/ctl/super" />
       <recent name="$PROJECT_DIR$/ctl/org/competition" />
@@ -591,86 +566,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/model/ctl_classes/OrgEditPanel.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="33" selection-start="503" selection-end="516" vertical-scroll-proportion="0.4061372">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ctl/_panels/FFSOrgManagerSpecialPanel.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="39" selection-start="590" selection-end="590" vertical-scroll-proportion="0.39697543">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/www/_panels/FFSOrgManagerSpecialPanel.tpl.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="0" selection-start="1625" selection-end="1625" vertical-scroll-proportion="-18.166666">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../MLCPackages/mlc_packages/MJax/_core/_actions.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="94" column="30" selection-start="3132" selection-end="3132" vertical-scroll-proportion="0.6524954">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ctl/org/competition/manageGyms.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="8" selection-start="1232" selection-end="1232" vertical-scroll-proportion="-7.3469386">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ctl/_panels/FFSSessionControlPanel.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="1" selection-start="1369" selection-end="1369" vertical-scroll-proportion="-21.25">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cli/_deploy.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="0" selection-start="4" selection-end="4" vertical-scroll-proportion="-2.4">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model/ctl_classes/SessionEditPanel.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="36" selection-start="1294" selection-end="1294" vertical-scroll-proportion="-9.375">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/www/faq.tpl.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="105" selection-start="105" selection-end="105" vertical-scroll-proportion="-0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/www/contactUs.tpl.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="114" column="4" selection-start="3320" selection-end="3719" vertical-scroll-proportion="-16.041666">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model/ctl_classes/base_classes/SessionEditPanelBase.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="92" column="20" selection-start="3525" selection-end="3525" vertical-scroll-proportion="-15.041667">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/view/www/landing.tpl.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="139" column="4" selection-start="4319" selection-end="4718" vertical-scroll-proportion="-14.416667">
@@ -701,8 +596,90 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/view/www/_meta.tpl.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="141" column="0" selection-start="4019" selection-end="4019" vertical-scroll-proportion="0.8375451">
+        <state line="141" column="0" selection-start="4019" selection-end="4019" vertical-scroll-proportion="-19.333334">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/FFSApplication.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="363" column="46" selection-start="13907" selection-end="13930" vertical-scroll-proportion="-2.5918367">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/data_classes/base_classes/AtheleteBase.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="186" column="9" selection-start="7194" selection-end="7194" vertical-scroll-proportion="0.33271718">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ctl/_test/entity.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="1" selection-start="833" selection-end="833" vertical-scroll-proportion="-15.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/ctl_classes/SessionEditPanel.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="42" column="36" selection-start="1294" selection-end="1294" vertical-scroll-proportion="0.39130434">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ctl/org/competition/manageAthletes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="0" selection-start="279" selection-end="345" vertical-scroll-proportion="0.2935943">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../MLCPackages/mlc_packages/MJax/_core/MJaxTable.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="62" column="15" selection-start="2057" selection-end="2057" vertical-scroll-proportion="-4.375">
+          <folding>
+            <marker date="1379087287983" expanded="true" signature="5881:5980" placeholder="..." />
+            <marker date="1379087287983" expanded="true" signature="5893:5965" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.inc.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="58" column="123" selection-start="4864" selection-end="4864" vertical-scroll-proportion="0.4177449">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ctl/org/competition/manageEnrollment.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="34" selection-start="117" selection-end="117" vertical-scroll-proportion="-1.875">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ctl/_panels/FFSSessionEnrollmentPanel.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="76" selection-start="486" selection-end="486" vertical-scroll-proportion="-4.375">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/www/_panels/FFSSessionEnrollmentPanel.tpl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="49" selection-start="329" selection-end="329" vertical-scroll-proportion="-3.75">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/www/org/competition/manageEnrollment.tpl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="51" selection-start="251" selection-end="251" vertical-scroll-proportion="0.18953069">
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

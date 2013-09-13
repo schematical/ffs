@@ -34,7 +34,7 @@
 * - __set()
 * - Data()
 * Classes list:
-* - CompetitionBase extends BaseEntity
+* - CompetitionBase extends MLCBaseEntity
 */
 /**
  * Class Competition
@@ -60,7 +60,7 @@
  * @property-write mixed $ClubType
  * @property-read Competition $IdOrgObject
  */
-class CompetitionBase extends BaseEntity {
+class CompetitionBase extends MLCBaseEntity {
     const DB_CONN = 'DB_1';
     const TABLE_NAME = 'Competition';
     const P_KEY = 'idCompetition';
@@ -169,7 +169,7 @@ class CompetitionBase extends BaseEntity {
         $arrFields[] = 'Competition.data ' . (($blnLongSelect) ? ' as "Competition.data"' : '');
         return $arrFields;
     }
-    public static function Query($strExtra, $blnReturnSingle = false, $arrJoins = null) {
+    public static function Query($strExtra, $mixReturnSingle = false, $arrJoins = null) {
         $blnLongSelect = !is_null($arrJoins);
         $arrFields = self::GetSQLSelectFieldsAsArr($blnLongSelect);
         if ($blnLongSelect) {
@@ -190,28 +190,35 @@ class CompetitionBase extends BaseEntity {
                 }
             }
         }
-        $sql = sprintf("SELECT %s FROM Competition %s %s;", $strFields, $strJoin, $strExtra);
-        $result = MLCDBDriver::Query($sql, self::DB_CONN);
-        $arrReturn = array();
+        $strSql = sprintf("SELECT %s FROM Competition %s %s;", $strFields, $strJoin, $strExtra);
+        $result = MLCDBDriver::Query($strSql, self::DB_CONN);
+        if ((is_object($mixReturnSingle)) && ($mixReturnSingle instanceof MLCBaseEntityCollection)) {
+            $collReturn = $mixReturnSingle;
+            $collReturn->RemoveAll();
+        } else {
+            $collReturn = new MLCBaseEntityCollection();
+            $collReturn->SetQueryEntity('Competition');
+        }
+        $collReturn->AddQueryToHistory($strSql);
         while ($data = mysql_fetch_assoc($result)) {
             $tObj = new Competition();
             $tObj->Materilize($data);
-            $arrReturn[] = $tObj;
+            $collReturn[] = $tObj;
         }
-        //$arrReturn = $coll->getCollection();
-        if ($blnReturnSingle) {
-            if (count($arrReturn) == 0) {
+        //$collReturn = $coll->getCollection();
+        if ($mixReturnSingle !== false) {
+            if (count($collReturn) == 0) {
                 return null;
             } else {
-                return $arrReturn[0];
+                return $collReturn[0];
             }
         } else {
-            return $arrReturn;
+            return $collReturn;
         }
     }
     public static function QueryCount($strExtra = '') {
-        $sql = sprintf("SELECT Competition.* FROM Competition %s;", $strExtra);
-        $result = MLCDBDriver::Query($sql, self::DB_CONN);
+        $strSql = sprintf("SELECT Competition.* FROM Competition %s;", $strExtra);
+        $result = MLCDBDriver::Query($strSql, self::DB_CONN);
         return mysql_num_rows($result);
     }
     //Get children
@@ -259,8 +266,8 @@ class CompetitionBase extends BaseEntity {
     }
     //Load by foregin key
     public static function LoadCollByIdOrg($intIdOrg) {
-        $sql = sprintf("SELECT Competition.* FROM Competition WHERE idOrg = %s;", $intIdOrg);
-        $result = MLCDBDriver::Query($sql, self::DB_CONN);
+        $strSql = sprintf("SELECT Competition.* FROM Competition WHERE idOrg = %s;", $intIdOrg);
+        $result = MLCDBDriver::Query($strSql, self::DB_CONN);
         $coll = new BaseEntityCollection();
         while ($data = mysql_fetch_assoc($result)) {
             $objCompetition = new Competition();
@@ -330,30 +337,30 @@ class CompetitionBase extends BaseEntity {
         return $arrResults;
     }
     public function __toArray() {
-        $arrReturn = array();
-        $arrReturn['_ClassName'] = "Competition %>";
-        $arrReturn['idCompetition'] = $this->idCompetition;
-        $arrReturn['name'] = $this->name;
-        $arrReturn['longDesc'] = $this->longDesc;
-        $arrReturn['creDate'] = $this->creDate;
-        $arrReturn['startDate'] = $this->startDate;
-        $arrReturn['endDate'] = $this->endDate;
-        $arrReturn['idOrg'] = $this->idOrg;
-        $arrReturn['namespace'] = $this->namespace;
-        $arrReturn['signupCutOffDate'] = $this->signupCutOffDate;
-        $arrReturn['clubType'] = $this->clubType;
-        $arrReturn['data'] = $this->data;
-        return $arrReturn;
+        $collReturn = array();
+        $collReturn['_ClassName'] = "Competition %>";
+        $collReturn['idCompetition'] = $this->idCompetition;
+        $collReturn['name'] = $this->name;
+        $collReturn['longDesc'] = $this->longDesc;
+        $collReturn['creDate'] = $this->creDate;
+        $collReturn['startDate'] = $this->startDate;
+        $collReturn['endDate'] = $this->endDate;
+        $collReturn['idOrg'] = $this->idOrg;
+        $collReturn['namespace'] = $this->namespace;
+        $collReturn['signupCutOffDate'] = $this->signupCutOffDate;
+        $collReturn['clubType'] = $this->clubType;
+        $collReturn['data'] = $this->data;
+        return $collReturn;
     }
     public function __toString() {
         return 'Competition(' . $this->getId() . ')';
     }
     public function __toJson($blnPosponeEncode = false) {
-        $arrReturn = $this->__toArray();
+        $collReturn = $this->__toArray();
         if ($blnPosponeEncode) {
-            return json_encode($arrReturn);
+            return json_encode($collReturn);
         } else {
-            return $arrReturn;
+            return $collReturn;
         }
     }
     public function __get($strName) {

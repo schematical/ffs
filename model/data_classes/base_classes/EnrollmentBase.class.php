@@ -25,7 +25,7 @@
 * - __get()
 * - __set()
 * Classes list:
-* - EnrollmentBase extends BaseEntity
+* - EnrollmentBase extends MLCBaseEntity
 */
 /**
  * Class Competition
@@ -61,7 +61,7 @@
  * @property-read Enrollment $IdCompetitionObject
  * @property-read Enrollment $IdSessionObject
  */
-class EnrollmentBase extends BaseEntity {
+class EnrollmentBase extends MLCBaseEntity {
     const DB_CONN = 'DB_1';
     const TABLE_NAME = 'Enrollment_rel';
     const P_KEY = 'idEnrollment';
@@ -195,7 +195,7 @@ class EnrollmentBase extends BaseEntity {
         $arrFields[] = 'Enrollment_rel.level ' . (($blnLongSelect) ? ' as "Enrollment_rel.level"' : '');
         return $arrFields;
     }
-    public static function Query($strExtra, $blnReturnSingle = false, $arrJoins = null) {
+    public static function Query($strExtra, $mixReturnSingle = false, $arrJoins = null) {
         $blnLongSelect = !is_null($arrJoins);
         $arrFields = self::GetSQLSelectFieldsAsArr($blnLongSelect);
         if ($blnLongSelect) {
@@ -222,35 +222,42 @@ class EnrollmentBase extends BaseEntity {
                 }
             }
         }
-        $sql = sprintf("SELECT %s FROM Enrollment_rel %s %s;", $strFields, $strJoin, $strExtra);
-        $result = MLCDBDriver::Query($sql, self::DB_CONN);
-        $arrReturn = array();
+        $strSql = sprintf("SELECT %s FROM Enrollment_rel %s %s;", $strFields, $strJoin, $strExtra);
+        $result = MLCDBDriver::Query($strSql, self::DB_CONN);
+        if ((is_object($mixReturnSingle)) && ($mixReturnSingle instanceof MLCBaseEntityCollection)) {
+            $collReturn = $mixReturnSingle;
+            $collReturn->RemoveAll();
+        } else {
+            $collReturn = new MLCBaseEntityCollection();
+            $collReturn->SetQueryEntity('Enrollment');
+        }
+        $collReturn->AddQueryToHistory($strSql);
         while ($data = mysql_fetch_assoc($result)) {
             $tObj = new Enrollment();
             $tObj->Materilize($data);
-            $arrReturn[] = $tObj;
+            $collReturn[] = $tObj;
         }
-        //$arrReturn = $coll->getCollection();
-        if ($blnReturnSingle) {
-            if (count($arrReturn) == 0) {
+        //$collReturn = $coll->getCollection();
+        if ($mixReturnSingle !== false) {
+            if (count($collReturn) == 0) {
                 return null;
             } else {
-                return $arrReturn[0];
+                return $collReturn[0];
             }
         } else {
-            return $arrReturn;
+            return $collReturn;
         }
     }
     public static function QueryCount($strExtra = '') {
-        $sql = sprintf("SELECT Enrollment_rel.* FROM Enrollment_rel %s;", $strExtra);
-        $result = MLCDBDriver::Query($sql, self::DB_CONN);
+        $strSql = sprintf("SELECT Enrollment_rel.* FROM Enrollment_rel %s;", $strExtra);
+        $result = MLCDBDriver::Query($strSql, self::DB_CONN);
         return mysql_num_rows($result);
     }
     //Get children
     //Load by foregin key
     public static function LoadCollByIdAthelete($intIdAthelete) {
-        $sql = sprintf("SELECT Enrollment_rel.* FROM Enrollment_rel WHERE idAthelete = %s;", $intIdAthelete);
-        $result = MLCDBDriver::Query($sql, self::DB_CONN);
+        $strSql = sprintf("SELECT Enrollment_rel.* FROM Enrollment_rel WHERE idAthelete = %s;", $intIdAthelete);
+        $result = MLCDBDriver::Query($strSql, self::DB_CONN);
         $coll = new BaseEntityCollection();
         while ($data = mysql_fetch_assoc($result)) {
             $objEnrollment = new Enrollment();
@@ -260,8 +267,8 @@ class EnrollmentBase extends BaseEntity {
         return $coll;
     }
     public static function LoadCollByIdCompetition($intIdCompetition) {
-        $sql = sprintf("SELECT Enrollment_rel.* FROM Enrollment_rel WHERE idCompetition = %s;", $intIdCompetition);
-        $result = MLCDBDriver::Query($sql, self::DB_CONN);
+        $strSql = sprintf("SELECT Enrollment_rel.* FROM Enrollment_rel WHERE idCompetition = %s;", $intIdCompetition);
+        $result = MLCDBDriver::Query($strSql, self::DB_CONN);
         $coll = new BaseEntityCollection();
         while ($data = mysql_fetch_assoc($result)) {
             $objEnrollment = new Enrollment();
@@ -271,8 +278,8 @@ class EnrollmentBase extends BaseEntity {
         return $coll;
     }
     public static function LoadCollByIdSession($intIdSession) {
-        $sql = sprintf("SELECT Enrollment_rel.* FROM Enrollment_rel WHERE idSession = %s;", $intIdSession);
-        $result = MLCDBDriver::Query($sql, self::DB_CONN);
+        $strSql = sprintf("SELECT Enrollment_rel.* FROM Enrollment_rel WHERE idSession = %s;", $intIdSession);
+        $result = MLCDBDriver::Query($strSql, self::DB_CONN);
         $coll = new BaseEntityCollection();
         while ($data = mysql_fetch_assoc($result)) {
             $objEnrollment = new Enrollment();
@@ -330,33 +337,33 @@ class EnrollmentBase extends BaseEntity {
         return $arrResults;
     }
     public function __toArray() {
-        $arrReturn = array();
-        $arrReturn['_ClassName'] = "Enrollment %>";
-        $arrReturn['idEnrollment'] = $this->idEnrollment;
-        $arrReturn['idAthelete'] = $this->idAthelete;
-        $arrReturn['idCompetition'] = $this->idCompetition;
-        $arrReturn['idSession'] = $this->idSession;
-        $arrReturn['flight'] = $this->flight;
-        $arrReturn['division'] = $this->division;
-        $arrReturn['ageGroup'] = $this->ageGroup;
-        $arrReturn['misc1'] = $this->misc1;
-        $arrReturn['misc2'] = $this->misc2;
-        $arrReturn['misc3'] = $this->misc3;
-        $arrReturn['misc4'] = $this->misc4;
-        $arrReturn['misc5'] = $this->misc5;
-        $arrReturn['creDate'] = $this->creDate;
-        $arrReturn['level'] = $this->level;
-        return $arrReturn;
+        $collReturn = array();
+        $collReturn['_ClassName'] = "Enrollment %>";
+        $collReturn['idEnrollment'] = $this->idEnrollment;
+        $collReturn['idAthelete'] = $this->idAthelete;
+        $collReturn['idCompetition'] = $this->idCompetition;
+        $collReturn['idSession'] = $this->idSession;
+        $collReturn['flight'] = $this->flight;
+        $collReturn['division'] = $this->division;
+        $collReturn['ageGroup'] = $this->ageGroup;
+        $collReturn['misc1'] = $this->misc1;
+        $collReturn['misc2'] = $this->misc2;
+        $collReturn['misc3'] = $this->misc3;
+        $collReturn['misc4'] = $this->misc4;
+        $collReturn['misc5'] = $this->misc5;
+        $collReturn['creDate'] = $this->creDate;
+        $collReturn['level'] = $this->level;
+        return $collReturn;
     }
     public function __toString() {
         return 'Enrollment(' . $this->getId() . ')';
     }
     public function __toJson($blnPosponeEncode = false) {
-        $arrReturn = $this->__toArray();
+        $collReturn = $this->__toArray();
         if ($blnPosponeEncode) {
-            return json_encode($arrReturn);
+            return json_encode($collReturn);
         } else {
-            return $arrReturn;
+            return $collReturn;
         }
     }
     public function __get($strName) {

@@ -29,7 +29,7 @@
 * - __set()
 * - PsData()
 * Classes list:
-* - OrgBase extends BaseEntity
+* - OrgBase extends MLCBaseEntity
 */
 /**
  * Class Competition
@@ -48,7 +48,7 @@
  * @property-read mixed $ClubType
  * @property-write mixed $ClubType
  */
-class OrgBase extends BaseEntity {
+class OrgBase extends MLCBaseEntity {
     const DB_CONN = 'DB_1';
     const TABLE_NAME = 'Org';
     const P_KEY = 'idOrg';
@@ -138,7 +138,7 @@ class OrgBase extends BaseEntity {
         $arrFields[] = 'Org.clubType ' . (($blnLongSelect) ? ' as "Org.clubType"' : '');
         return $arrFields;
     }
-    public static function Query($strExtra, $blnReturnSingle = false, $arrJoins = null) {
+    public static function Query($strExtra, $mixReturnSingle = false, $arrJoins = null) {
         $blnLongSelect = !is_null($arrJoins);
         $arrFields = self::GetSQLSelectFieldsAsArr($blnLongSelect);
         if ($blnLongSelect) {
@@ -156,28 +156,35 @@ class OrgBase extends BaseEntity {
                 }
             }
         }
-        $sql = sprintf("SELECT %s FROM Org %s %s;", $strFields, $strJoin, $strExtra);
-        $result = MLCDBDriver::Query($sql, self::DB_CONN);
-        $arrReturn = array();
+        $strSql = sprintf("SELECT %s FROM Org %s %s;", $strFields, $strJoin, $strExtra);
+        $result = MLCDBDriver::Query($strSql, self::DB_CONN);
+        if ((is_object($mixReturnSingle)) && ($mixReturnSingle instanceof MLCBaseEntityCollection)) {
+            $collReturn = $mixReturnSingle;
+            $collReturn->RemoveAll();
+        } else {
+            $collReturn = new MLCBaseEntityCollection();
+            $collReturn->SetQueryEntity('Org');
+        }
+        $collReturn->AddQueryToHistory($strSql);
         while ($data = mysql_fetch_assoc($result)) {
             $tObj = new Org();
             $tObj->Materilize($data);
-            $arrReturn[] = $tObj;
+            $collReturn[] = $tObj;
         }
-        //$arrReturn = $coll->getCollection();
-        if ($blnReturnSingle) {
-            if (count($arrReturn) == 0) {
+        //$collReturn = $coll->getCollection();
+        if ($mixReturnSingle !== false) {
+            if (count($collReturn) == 0) {
                 return null;
             } else {
-                return $arrReturn[0];
+                return $collReturn[0];
             }
         } else {
-            return $arrReturn;
+            return $collReturn;
         }
     }
     public static function QueryCount($strExtra = '') {
-        $sql = sprintf("SELECT Org.* FROM Org %s;", $strExtra);
-        $result = MLCDBDriver::Query($sql, self::DB_CONN);
+        $strSql = sprintf("SELECT Org.* FROM Org %s;", $strExtra);
+        $result = MLCDBDriver::Query($strSql, self::DB_CONN);
         return mysql_num_rows($result);
     }
     //Get children
@@ -265,27 +272,27 @@ class OrgBase extends BaseEntity {
         return $arrResults;
     }
     public function __toArray() {
-        $arrReturn = array();
-        $arrReturn['_ClassName'] = "Org %>";
-        $arrReturn['idOrg'] = $this->idOrg;
-        $arrReturn['namespace'] = $this->namespace;
-        $arrReturn['name'] = $this->name;
-        $arrReturn['creDate'] = $this->creDate;
-        $arrReturn['psData'] = $this->psData;
-        $arrReturn['idImportAuthUser'] = $this->idImportAuthUser;
-        $arrReturn['clubNum'] = $this->clubNum;
-        $arrReturn['clubType'] = $this->clubType;
-        return $arrReturn;
+        $collReturn = array();
+        $collReturn['_ClassName'] = "Org %>";
+        $collReturn['idOrg'] = $this->idOrg;
+        $collReturn['namespace'] = $this->namespace;
+        $collReturn['name'] = $this->name;
+        $collReturn['creDate'] = $this->creDate;
+        $collReturn['psData'] = $this->psData;
+        $collReturn['idImportAuthUser'] = $this->idImportAuthUser;
+        $collReturn['clubNum'] = $this->clubNum;
+        $collReturn['clubType'] = $this->clubType;
+        return $collReturn;
     }
     public function __toString() {
         return 'Org(' . $this->getId() . ')';
     }
     public function __toJson($blnPosponeEncode = false) {
-        $arrReturn = $this->__toArray();
+        $collReturn = $this->__toArray();
         if ($blnPosponeEncode) {
-            return json_encode($arrReturn);
+            return json_encode($collReturn);
         } else {
-            return $arrReturn;
+            return $collReturn;
         }
     }
     public function __get($strName) {

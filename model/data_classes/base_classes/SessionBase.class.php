@@ -34,7 +34,7 @@
 * - Data()
 * - EventData()
 * Classes list:
-* - SessionBase extends BaseEntity
+* - SessionBase extends MLCBaseEntity
 */
 /**
  * Class Competition
@@ -54,7 +54,7 @@
  * @property-write mixed $EquipmentSet
  * @property-read Session $IdCompetitionObject
  */
-class SessionBase extends BaseEntity {
+class SessionBase extends MLCBaseEntity {
     const DB_CONN = 'DB_1';
     const TABLE_NAME = 'Session';
     const P_KEY = 'idSession';
@@ -153,7 +153,7 @@ class SessionBase extends BaseEntity {
         $arrFields[] = 'Session.eventData ' . (($blnLongSelect) ? ' as "Session.eventData"' : '');
         return $arrFields;
     }
-    public static function Query($strExtra, $blnReturnSingle = false, $arrJoins = null) {
+    public static function Query($strExtra, $mixReturnSingle = false, $arrJoins = null) {
         $blnLongSelect = !is_null($arrJoins);
         $arrFields = self::GetSQLSelectFieldsAsArr($blnLongSelect);
         if ($blnLongSelect) {
@@ -174,28 +174,35 @@ class SessionBase extends BaseEntity {
                 }
             }
         }
-        $sql = sprintf("SELECT %s FROM Session %s %s;", $strFields, $strJoin, $strExtra);
-        $result = MLCDBDriver::Query($sql, self::DB_CONN);
-        $arrReturn = array();
+        $strSql = sprintf("SELECT %s FROM Session %s %s;", $strFields, $strJoin, $strExtra);
+        $result = MLCDBDriver::Query($strSql, self::DB_CONN);
+        if ((is_object($mixReturnSingle)) && ($mixReturnSingle instanceof MLCBaseEntityCollection)) {
+            $collReturn = $mixReturnSingle;
+            $collReturn->RemoveAll();
+        } else {
+            $collReturn = new MLCBaseEntityCollection();
+            $collReturn->SetQueryEntity('Session');
+        }
+        $collReturn->AddQueryToHistory($strSql);
         while ($data = mysql_fetch_assoc($result)) {
             $tObj = new Session();
             $tObj->Materilize($data);
-            $arrReturn[] = $tObj;
+            $collReturn[] = $tObj;
         }
-        //$arrReturn = $coll->getCollection();
-        if ($blnReturnSingle) {
-            if (count($arrReturn) == 0) {
+        //$collReturn = $coll->getCollection();
+        if ($mixReturnSingle !== false) {
+            if (count($collReturn) == 0) {
                 return null;
             } else {
-                return $arrReturn[0];
+                return $collReturn[0];
             }
         } else {
-            return $arrReturn;
+            return $collReturn;
         }
     }
     public static function QueryCount($strExtra = '') {
-        $sql = sprintf("SELECT Session.* FROM Session %s;", $strExtra);
-        $result = MLCDBDriver::Query($sql, self::DB_CONN);
+        $strSql = sprintf("SELECT Session.* FROM Session %s;", $strExtra);
+        $result = MLCDBDriver::Query($strSql, self::DB_CONN);
         return mysql_num_rows($result);
     }
     //Get children
@@ -240,8 +247,8 @@ class SessionBase extends BaseEntity {
     }
     //Load by foregin key
     public static function LoadCollByIdCompetition($intIdCompetition) {
-        $sql = sprintf("SELECT Session.* FROM Session WHERE idCompetition = %s;", $intIdCompetition);
-        $result = MLCDBDriver::Query($sql, self::DB_CONN);
+        $strSql = sprintf("SELECT Session.* FROM Session WHERE idCompetition = %s;", $intIdCompetition);
+        $result = MLCDBDriver::Query($strSql, self::DB_CONN);
         $coll = new BaseEntityCollection();
         while ($data = mysql_fetch_assoc($result)) {
             $objSession = new Session();
@@ -308,28 +315,28 @@ class SessionBase extends BaseEntity {
         return $arrResults;
     }
     public function __toArray() {
-        $arrReturn = array();
-        $arrReturn['_ClassName'] = "Session %>";
-        $arrReturn['idSession'] = $this->idSession;
-        $arrReturn['startDate'] = $this->startDate;
-        $arrReturn['endDate'] = $this->endDate;
-        $arrReturn['idCompetition'] = $this->idCompetition;
-        $arrReturn['name'] = $this->name;
-        $arrReturn['notes'] = $this->notes;
-        $arrReturn['data'] = $this->data;
-        $arrReturn['equipmentSet'] = $this->equipmentSet;
-        $arrReturn['eventData'] = $this->eventData;
-        return $arrReturn;
+        $collReturn = array();
+        $collReturn['_ClassName'] = "Session %>";
+        $collReturn['idSession'] = $this->idSession;
+        $collReturn['startDate'] = $this->startDate;
+        $collReturn['endDate'] = $this->endDate;
+        $collReturn['idCompetition'] = $this->idCompetition;
+        $collReturn['name'] = $this->name;
+        $collReturn['notes'] = $this->notes;
+        $collReturn['data'] = $this->data;
+        $collReturn['equipmentSet'] = $this->equipmentSet;
+        $collReturn['eventData'] = $this->eventData;
+        return $collReturn;
     }
     public function __toString() {
         return 'Session(' . $this->getId() . ')';
     }
     public function __toJson($blnPosponeEncode = false) {
-        $arrReturn = $this->__toArray();
+        $collReturn = $this->__toArray();
         if ($blnPosponeEncode) {
-            return json_encode($arrReturn);
+            return json_encode($collReturn);
         } else {
-            return $arrReturn;
+            return $collReturn;
         }
     }
     public function __get($strName) {

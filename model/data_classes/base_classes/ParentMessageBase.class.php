@@ -26,7 +26,7 @@
 * - InviteData()
 * - IdStripeData()
 * Classes list:
-* - ParentMessageBase extends BaseEntity
+* - ParentMessageBase extends MLCBaseEntity
 */
 /**
  * Class Competition
@@ -61,7 +61,7 @@
  * @property-read ParentMessage $IdAtheleteObject
  * @property-read ParentMessage $IdCompetitionObject
  */
-class ParentMessageBase extends BaseEntity {
+class ParentMessageBase extends MLCBaseEntity {
     const DB_CONN = 'DB_1';
     const TABLE_NAME = 'ParentMessage';
     const P_KEY = 'idParentMessage';
@@ -200,7 +200,7 @@ class ParentMessageBase extends BaseEntity {
         $arrFields[] = 'ParentMessage.idStripeData ' . (($blnLongSelect) ? ' as "ParentMessage.idStripeData"' : '');
         return $arrFields;
     }
-    public static function Query($strExtra, $blnReturnSingle = false, $arrJoins = null) {
+    public static function Query($strExtra, $mixReturnSingle = false, $arrJoins = null) {
         $blnLongSelect = !is_null($arrJoins);
         $arrFields = self::GetSQLSelectFieldsAsArr($blnLongSelect);
         if ($blnLongSelect) {
@@ -224,35 +224,42 @@ class ParentMessageBase extends BaseEntity {
                 }
             }
         }
-        $sql = sprintf("SELECT %s FROM ParentMessage %s %s;", $strFields, $strJoin, $strExtra);
-        $result = MLCDBDriver::Query($sql, self::DB_CONN);
-        $arrReturn = array();
+        $strSql = sprintf("SELECT %s FROM ParentMessage %s %s;", $strFields, $strJoin, $strExtra);
+        $result = MLCDBDriver::Query($strSql, self::DB_CONN);
+        if ((is_object($mixReturnSingle)) && ($mixReturnSingle instanceof MLCBaseEntityCollection)) {
+            $collReturn = $mixReturnSingle;
+            $collReturn->RemoveAll();
+        } else {
+            $collReturn = new MLCBaseEntityCollection();
+            $collReturn->SetQueryEntity('ParentMessage');
+        }
+        $collReturn->AddQueryToHistory($strSql);
         while ($data = mysql_fetch_assoc($result)) {
             $tObj = new ParentMessage();
             $tObj->Materilize($data);
-            $arrReturn[] = $tObj;
+            $collReturn[] = $tObj;
         }
-        //$arrReturn = $coll->getCollection();
-        if ($blnReturnSingle) {
-            if (count($arrReturn) == 0) {
+        //$collReturn = $coll->getCollection();
+        if ($mixReturnSingle !== false) {
+            if (count($collReturn) == 0) {
                 return null;
             } else {
-                return $arrReturn[0];
+                return $collReturn[0];
             }
         } else {
-            return $arrReturn;
+            return $collReturn;
         }
     }
     public static function QueryCount($strExtra = '') {
-        $sql = sprintf("SELECT ParentMessage.* FROM ParentMessage %s;", $strExtra);
-        $result = MLCDBDriver::Query($sql, self::DB_CONN);
+        $strSql = sprintf("SELECT ParentMessage.* FROM ParentMessage %s;", $strExtra);
+        $result = MLCDBDriver::Query($strSql, self::DB_CONN);
         return mysql_num_rows($result);
     }
     //Get children
     //Load by foregin key
     public static function LoadCollByIdAthelete($intIdAthelete) {
-        $sql = sprintf("SELECT ParentMessage.* FROM ParentMessage WHERE idAthelete = %s;", $intIdAthelete);
-        $result = MLCDBDriver::Query($sql, self::DB_CONN);
+        $strSql = sprintf("SELECT ParentMessage.* FROM ParentMessage WHERE idAthelete = %s;", $intIdAthelete);
+        $result = MLCDBDriver::Query($strSql, self::DB_CONN);
         $coll = new BaseEntityCollection();
         while ($data = mysql_fetch_assoc($result)) {
             $objParentMessage = new ParentMessage();
@@ -262,8 +269,8 @@ class ParentMessageBase extends BaseEntity {
         return $coll;
     }
     public static function LoadCollByIdCompetition($intIdCompetition) {
-        $sql = sprintf("SELECT ParentMessage.* FROM ParentMessage WHERE idCompetition = %s;", $intIdCompetition);
-        $result = MLCDBDriver::Query($sql, self::DB_CONN);
+        $strSql = sprintf("SELECT ParentMessage.* FROM ParentMessage WHERE idCompetition = %s;", $intIdCompetition);
+        $result = MLCDBDriver::Query($strSql, self::DB_CONN);
         $coll = new BaseEntityCollection();
         while ($data = mysql_fetch_assoc($result)) {
             $objParentMessage = new ParentMessage();
@@ -321,35 +328,35 @@ class ParentMessageBase extends BaseEntity {
         return $arrResults;
     }
     public function __toArray() {
-        $arrReturn = array();
-        $arrReturn['_ClassName'] = "ParentMessage %>";
-        $arrReturn['idParentMessage'] = $this->idParentMessage;
-        $arrReturn['idAthelete'] = $this->idAthelete;
-        $arrReturn['atheleteName'] = $this->atheleteName;
-        $arrReturn['fromName'] = $this->fromName;
-        $arrReturn['message'] = $this->message;
-        $arrReturn['creDate'] = $this->creDate;
-        $arrReturn['dispDate'] = $this->dispDate;
-        $arrReturn['idUser'] = $this->idUser;
-        $arrReturn['queDate'] = $this->queDate;
-        $arrReturn['inviteData'] = $this->inviteData;
-        $arrReturn['inviteType'] = $this->inviteType;
-        $arrReturn['inviteToken'] = $this->inviteToken;
-        $arrReturn['inviteViewDate'] = $this->inviteViewDate;
-        $arrReturn['idCompetition'] = $this->idCompetition;
-        $arrReturn['approveDate'] = $this->approveDate;
-        $arrReturn['idStripeData'] = $this->idStripeData;
-        return $arrReturn;
+        $collReturn = array();
+        $collReturn['_ClassName'] = "ParentMessage %>";
+        $collReturn['idParentMessage'] = $this->idParentMessage;
+        $collReturn['idAthelete'] = $this->idAthelete;
+        $collReturn['atheleteName'] = $this->atheleteName;
+        $collReturn['fromName'] = $this->fromName;
+        $collReturn['message'] = $this->message;
+        $collReturn['creDate'] = $this->creDate;
+        $collReturn['dispDate'] = $this->dispDate;
+        $collReturn['idUser'] = $this->idUser;
+        $collReturn['queDate'] = $this->queDate;
+        $collReturn['inviteData'] = $this->inviteData;
+        $collReturn['inviteType'] = $this->inviteType;
+        $collReturn['inviteToken'] = $this->inviteToken;
+        $collReturn['inviteViewDate'] = $this->inviteViewDate;
+        $collReturn['idCompetition'] = $this->idCompetition;
+        $collReturn['approveDate'] = $this->approveDate;
+        $collReturn['idStripeData'] = $this->idStripeData;
+        return $collReturn;
     }
     public function __toString() {
         return 'ParentMessage(' . $this->getId() . ')';
     }
     public function __toJson($blnPosponeEncode = false) {
-        $arrReturn = $this->__toArray();
+        $collReturn = $this->__toArray();
         if ($blnPosponeEncode) {
-            return json_encode($arrReturn);
+            return json_encode($collReturn);
         } else {
-            return $arrReturn;
+            return $collReturn;
         }
     }
     public function __get($strName) {

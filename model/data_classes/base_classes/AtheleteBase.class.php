@@ -31,7 +31,7 @@
 * - __set()
 * - PsData()
 * Classes list:
-* - AtheleteBase extends BaseEntity
+* - AtheleteBase extends MLCBaseEntity
 */
 /**
  * Class Competition
@@ -55,7 +55,7 @@
  * @property-write mixed $Level
  * @property-read Athelete $IdOrgObject
  */
-class AtheleteBase extends BaseEntity {
+class AtheleteBase extends MLCBaseEntity {
     const DB_CONN = 'DB_1';
     const TABLE_NAME = 'Athelete';
     const P_KEY = 'idAthelete';
@@ -159,7 +159,7 @@ class AtheleteBase extends BaseEntity {
         $arrFields[] = 'Athelete.level ' . (($blnLongSelect) ? ' as "Athelete.level"' : '');
         return $arrFields;
     }
-    public static function Query($strExtra, $blnReturnSingle = false, $arrJoins = null) {
+    public static function Query($strExtra, $mixReturnSingle = false, $arrJoins = null) {
         $blnLongSelect = !is_null($arrJoins);
         $arrFields = self::GetSQLSelectFieldsAsArr($blnLongSelect);
         if ($blnLongSelect) {
@@ -180,28 +180,35 @@ class AtheleteBase extends BaseEntity {
                 }
             }
         }
-        $sql = sprintf("SELECT %s FROM Athelete %s %s;", $strFields, $strJoin, $strExtra);
-        $result = MLCDBDriver::Query($sql, self::DB_CONN);
-        $arrReturn = array();
+        $strSql = sprintf("SELECT %s FROM Athelete %s %s;", $strFields, $strJoin, $strExtra);
+        $result = MLCDBDriver::Query($strSql, self::DB_CONN);
+        if ((is_object($mixReturnSingle)) && ($mixReturnSingle instanceof MLCBaseEntityCollection)) {
+            $collReturn = $mixReturnSingle;
+            $collReturn->RemoveAll();
+        } else {
+            $collReturn = new MLCBaseEntityCollection();
+            $collReturn->SetQueryEntity('Athelete');
+        }
+        $collReturn->AddQueryToHistory($strSql);
         while ($data = mysql_fetch_assoc($result)) {
             $tObj = new Athelete();
             $tObj->Materilize($data);
-            $arrReturn[] = $tObj;
+            $collReturn[] = $tObj;
         }
-        //$arrReturn = $coll->getCollection();
-        if ($blnReturnSingle) {
-            if (count($arrReturn) == 0) {
+        //$collReturn = $coll->getCollection();
+        if ($mixReturnSingle !== false) {
+            if (count($collReturn) == 0) {
                 return null;
             } else {
-                return $arrReturn[0];
+                return $collReturn[0];
             }
         } else {
-            return $arrReturn;
+            return $collReturn;
         }
     }
     public static function QueryCount($strExtra = '') {
-        $sql = sprintf("SELECT Athelete.* FROM Athelete %s;", $strExtra);
-        $result = MLCDBDriver::Query($sql, self::DB_CONN);
+        $strSql = sprintf("SELECT Athelete.* FROM Athelete %s;", $strExtra);
+        $result = MLCDBDriver::Query($strSql, self::DB_CONN);
         return mysql_num_rows($result);
     }
     //Get children
@@ -236,8 +243,8 @@ class AtheleteBase extends BaseEntity {
     }
     //Load by foregin key
     public static function LoadCollByIdOrg($intIdOrg) {
-        $sql = sprintf("SELECT Athelete.* FROM Athelete WHERE idOrg = %s;", $intIdOrg);
-        $result = MLCDBDriver::Query($sql, self::DB_CONN);
+        $strSql = sprintf("SELECT Athelete.* FROM Athelete WHERE idOrg = %s;", $intIdOrg);
+        $result = MLCDBDriver::Query($strSql, self::DB_CONN);
         $coll = new BaseEntityCollection();
         while ($data = mysql_fetch_assoc($result)) {
             $objAthelete = new Athelete();
@@ -304,29 +311,29 @@ class AtheleteBase extends BaseEntity {
         return $arrResults;
     }
     public function __toArray() {
-        $arrReturn = array();
-        $arrReturn['_ClassName'] = "Athelete %>";
-        $arrReturn['idAthelete'] = $this->idAthelete;
-        $arrReturn['idOrg'] = $this->idOrg;
-        $arrReturn['firstName'] = $this->firstName;
-        $arrReturn['lastName'] = $this->lastName;
-        $arrReturn['birthDate'] = $this->birthDate;
-        $arrReturn['memType'] = $this->memType;
-        $arrReturn['memId'] = $this->memId;
-        $arrReturn['PsData'] = $this->PsData;
-        $arrReturn['creDate'] = $this->creDate;
-        $arrReturn['level'] = $this->level;
-        return $arrReturn;
+        $collReturn = array();
+        $collReturn['_ClassName'] = "Athelete %>";
+        $collReturn['idAthelete'] = $this->idAthelete;
+        $collReturn['idOrg'] = $this->idOrg;
+        $collReturn['firstName'] = $this->firstName;
+        $collReturn['lastName'] = $this->lastName;
+        $collReturn['birthDate'] = $this->birthDate;
+        $collReturn['memType'] = $this->memType;
+        $collReturn['memId'] = $this->memId;
+        $collReturn['PsData'] = $this->PsData;
+        $collReturn['creDate'] = $this->creDate;
+        $collReturn['level'] = $this->level;
+        return $collReturn;
     }
     public function __toString() {
         return 'Athelete(' . $this->getId() . ')';
     }
     public function __toJson($blnPosponeEncode = false) {
-        $arrReturn = $this->__toArray();
+        $collReturn = $this->__toArray();
         if ($blnPosponeEncode) {
-            return json_encode($arrReturn);
+            return json_encode($collReturn);
         } else {
-            return $arrReturn;
+            return $collReturn;
         }
     }
     public function __get($strName) {

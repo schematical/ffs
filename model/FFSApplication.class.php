@@ -95,7 +95,7 @@ abstract class FFSApplication{
         //Do a merge by id
         foreach($arrSessions as $intIndex => $objSession){
             $arrAssignments = Assignment::LoadCollByIdSession($objSession->IdSession)->GetCollection();
-            $arrReturn = array_merge($arrAssignments, $arrReturn);
+            $arrReturn->Combine($arrAssignments);
         }
         return $arrReturn;
     }
@@ -361,11 +361,11 @@ abstract class FFSApplication{
         //Get user orgs by roll
         $arrRolls = MLCAuthDriver::GetRolls(FFSRoll::ORG_MANAGER);
         //_dv($arrRolls);
-        $arrComp = array();
+        $arrComp = new MLCBaseEntityCollection();
         foreach($arrRolls as $intIndex => $objRoll){
 
-            $arrComp = array_merge(
-                $arrComp,
+
+            $arrComp->Combine(
                 Competition::Query(
                     sprintf(
                         'WHERE idOrg = %s AND 1',
