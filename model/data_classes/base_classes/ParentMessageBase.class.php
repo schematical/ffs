@@ -200,7 +200,60 @@ class ParentMessageBase extends MLCBaseEntity {
         $arrFields[] = 'ParentMessage.idStripeData ' . (($blnLongSelect) ? ' as "ParentMessage.idStripeData"' : '');
         return $arrFields;
     }
-    public static function Query($strExtra, $mixReturnSingle = false, $arrJoins = null) {
+    public static function Query($strExtra = null, $mixReturnSingle = false, $arrJoins = null) {
+        $blnLongSelect = !is_null($arrJoins);
+        $arrFields = self::GetSQLSelectFieldsAsArr($blnLongSelect);
+        if ($blnLongSelect) {
+            foreach ($arrJoins as $strTable) {
+                if (class_exists($strTable)) {
+                    $arrFields = array_merge($arrFields, call_user_func($strTable . '::GetSQLSelectFieldsAsArr', true));
+                }
+            }
+        }
+        $strFields = implode(', ', $arrFields);
+        $strJoin = '';
+        if ($blnLongSelect) {
+            foreach ($arrJoins as $strTable) {
+                switch ($strTable) {
+                    case ('Athelete'):
+                        $strJoin.= ' LEFT JOIN Athelete ON ParentMessage.idAthelete = Athelete.idAthelete';
+                    break;
+                    case ('Competition'):
+                        $strJoin.= ' LEFT JOIN Competition ON ParentMessage.idCompetition = Competition.idCompetition';
+                    break;
+                }
+            }
+        }
+        if (!is_null($strExtra)) {
+            $strSql = sprintf("SELECT %s FROM ParentMessage %s %s;", $strFields, $strJoin, $strExtra);
+            $result = MLCDBDriver::Query($strSql, self::DB_CONN);
+        }
+        if ((is_object($mixReturnSingle)) && ($mixReturnSingle instanceof MLCBaseEntityCollection)) {
+            $collReturn = $mixReturnSingle;
+            $collReturn->RemoveAll();
+        } else {
+            $collReturn = new MLCBaseEntityCollection();
+            $collReturn->SetQueryEntity('ParentMessage');
+        }
+        if (!is_null($strExtra)) {
+            $collReturn->AddQueryToHistory($strSql);
+            while ($data = mysql_fetch_assoc($result)) {
+                $tObj = new ParentMessage();
+                $tObj->Materilize($data);
+                $collReturn[] = $tObj;
+            }
+        }
+        if ($mixReturnSingle !== false) {
+            if (count($collReturn) == 0) {
+                return null;
+            } else {
+                return $collReturn[0];
+            }
+        } else {
+            return $collReturn;
+        }
+    }
+    public static function QueryCount($strExtra = '', $arrJoins = array()) {
         $blnLongSelect = !is_null($arrJoins);
         $arrFields = self::GetSQLSelectFieldsAsArr($blnLongSelect);
         if ($blnLongSelect) {
@@ -225,33 +278,6 @@ class ParentMessageBase extends MLCBaseEntity {
             }
         }
         $strSql = sprintf("SELECT %s FROM ParentMessage %s %s;", $strFields, $strJoin, $strExtra);
-        $result = MLCDBDriver::Query($strSql, self::DB_CONN);
-        if ((is_object($mixReturnSingle)) && ($mixReturnSingle instanceof MLCBaseEntityCollection)) {
-            $collReturn = $mixReturnSingle;
-            $collReturn->RemoveAll();
-        } else {
-            $collReturn = new MLCBaseEntityCollection();
-            $collReturn->SetQueryEntity('ParentMessage');
-        }
-        $collReturn->AddQueryToHistory($strSql);
-        while ($data = mysql_fetch_assoc($result)) {
-            $tObj = new ParentMessage();
-            $tObj->Materilize($data);
-            $collReturn[] = $tObj;
-        }
-        //$collReturn = $coll->getCollection();
-        if ($mixReturnSingle !== false) {
-            if (count($collReturn) == 0) {
-                return null;
-            } else {
-                return $collReturn[0];
-            }
-        } else {
-            return $collReturn;
-        }
-    }
-    public static function QueryCount($strExtra = '') {
-        $strSql = sprintf("SELECT ParentMessage.* FROM ParentMessage %s;", $strExtra);
         $result = MLCDBDriver::Query($strSql, self::DB_CONN);
         return mysql_num_rows($result);
     }

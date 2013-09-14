@@ -3,6 +3,7 @@
     <link href="<?php echo __MJAX_WADMIN_THEME_ASSET_URL__ . '/css'; ?>/pages/pricing.css" rel="stylesheet">
     <link href="<?php echo __MJAX_WADMIN_THEME_ASSET_URL__ . '/css'; ?>/pages/plans.css" rel="stylesheet">
 
+    <link rel='stylesheet' href="<?php echo  MLCApplication::GetAssetUrl('/css/pillbox.css', 'MJaxBootstrap'); ?>"></link>
     <style>
         .margin-bottom-25{
             margin-bottom: 25Px;

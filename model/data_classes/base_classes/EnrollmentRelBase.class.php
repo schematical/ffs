@@ -3,6 +3,7 @@
 * Class and Function List:
 * Function list:
 * - Query()
+* - QueryCount()
 * - GetArrByAtheleteAndCompetition()
 * - GetArrByAtheleteAndSession()
 * - GetArrByCompetitionAndAthelete()
@@ -14,12 +15,19 @@
 */
 require_once (__MODEL_APP_DATALAYER_DIR__ . "/base_classes/EnrollmentBase.class.php");
 class EnrollmentRelBase extends EnrollmentBase {
-    public static function Query($strExtra, $blnReturnSingle = false, $arrJoin = array()) {
+    public static function Query($strExtra = null, $blnReturnSingle = false, $arrJoin = array()) {
         $arrJoin = array();
         $arrJoin[] = 'Athelete';
         $arrJoin[] = 'Competition';
         $arrJoin[] = 'Session';
         return parent::Query($strExtra, $blnReturnSingle, $arrJoin);
+    }
+    public static function QueryCount($strExtra = null, $arrJoin = array()) {
+        $arrJoin = array();
+        $arrJoin[] = 'Athelete';
+        $arrJoin[] = 'Competition';
+        $arrJoin[] = 'Session';
+        return parent::QueryCount($strExtra, $arrJoin);
     }
     public static function GetArrByAtheleteAndCompetition($objAthelete, $objCompetition, $strExtra = '') {
         return self::Query(sprintf('WHERE (Enrollment_rel.idAthelete = %s AND Enrollment_rel.idCompetition = %s) %s', $objAthelete->idAthelete, $objCompetition->idCompetition, $strExtra));

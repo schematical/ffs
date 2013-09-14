@@ -3,6 +3,7 @@
 * Class and Function List:
 * Function list:
 * - Query()
+* - QueryCount()
 * - GetArrByDeviceAndSession()
 * - GetArrBySessionAndDevice()
 * Classes list:
@@ -10,11 +11,17 @@
 */
 require_once (__MODEL_APP_DATALAYER_DIR__ . "/base_classes/AssignmentBase.class.php");
 class AssignmentRelBase extends AssignmentBase {
-    public static function Query($strExtra, $blnReturnSingle = false, $arrJoin = array()) {
+    public static function Query($strExtra = null, $blnReturnSingle = false, $arrJoin = array()) {
         $arrJoin = array();
         $arrJoin[] = 'Device';
         $arrJoin[] = 'Session';
         return parent::Query($strExtra, $blnReturnSingle, $arrJoin);
+    }
+    public static function QueryCount($strExtra = null, $arrJoin = array()) {
+        $arrJoin = array();
+        $arrJoin[] = 'Device';
+        $arrJoin[] = 'Session';
+        return parent::QueryCount($strExtra, $arrJoin);
     }
     public static function GetArrByDeviceAndSession($objDevice, $objSession, $strExtra = '') {
         return self::Query(sprintf('WHERE (Assignment_rel.idDevice = %s AND Assignment_rel.idSession = %s) %s', $objDevice->idDevice, $objSession->idSession, $strExtra));

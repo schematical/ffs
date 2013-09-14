@@ -20,6 +20,10 @@ class EnrollmentListPanel extends EnrollmentListPanelBase {
             $colAthelete->RenderObject = $this;
             $colAthelete->RenderFunction = 'render_atheleteName';
 
+            $colOrg = $this->AddColumn('IdOrgObject','Gym');
+            $colOrg->RenderObject = $this;
+            $colOrg->RenderFunction = 'render_org';
+
             $colSession = $this->AddColumn('idSession','Session');
             $colSession->RenderObject = $this;
             $colSession->RenderFunction = 'colSession_render';
@@ -28,11 +32,16 @@ class EnrollmentListPanel extends EnrollmentListPanelBase {
             $colFlight = $this->AddSpecialColumn('flight','Flight');
 
 
-            $colDivision = $this->AddSpecialColumn('division','Division');
+            //$colDivision = $this->AddSpecialColumn('division','Division');
 
 
-            
-            $this->AddSpecialColumn('ageGroup','Age Group');
+            $colBirth = $this->AddColumn('birthDate','Birth');
+            $colBirth->RenderObject = $this;
+            $colBirth->RenderFunction = 'render_atheleteBirthDate';
+            $colBirth->Editable = true;
+            $colBirth->EditControlClass = 'MJaxBSDateTimePicker';
+
+            //$this->AddSpecialColumn('ageGroup','Age Group');
 
             $this->AddSpecialColumn('level','Level');
             
@@ -69,7 +78,7 @@ class EnrollmentListPanel extends EnrollmentListPanelBase {
         $txtMisc = $objRow->GetData('txtMisc');
         if(is_null($txtMisc)){
 
-            $txtMisc = new MJaxBSAutocompleteTextBox($objRow, 'x');
+            $txtMisc = new MJaxBSAutocompleteTextBox($objRow);
 
 
 
@@ -142,7 +151,7 @@ class EnrollmentListPanel extends EnrollmentListPanelBase {
         }else{
             $objEnrollment = $objRow->GetData('_entity');
             //_dv($objEnrollment->IdSession);
-            if(is_null($objEnrollment->IdSession)){
+            if(is_null($objEnrollment->IdSessionObject)){
                 $strHtml = 'Unassigned';
             }else{
                 $strHtml = $objEnrollment->IdSessionObject->__toString();
@@ -188,32 +197,6 @@ class EnrollmentListPanel extends EnrollmentListPanelBase {
             "No session with name '" . $mixSession. "' exists"
         );
     }
-    /*public function render_idSession($strData, $objRow, $objColumn){
-        $lnkSession = $objRow->GetData('lnkSession');
-        if(is_null($lnkSession)){
-
-        }
-
-
-        return $lnkSession->Render(false);
-    }
-    public function lnkSession_click($strFormId, $strControlId, $objEnrollment){
-        $objRow = $this->objForm->Controls[$strControlId]->ParentControl;
-        $txtSession = $objRow->GetData('txtSession');
-        if(is_null($txtSession)){
-            $txtSession = new MJaxBSAutocompleteTextBox($this, $this->objForm->objJsonSearchDriver, '_searchSession');
-            $txtSession->AddAction(
-                new MJaxBSAutocompleteSelectEvent(),
-                new MJaxServerControlAction(
-                    $this,
-                    'txtSession_select'
-                )
-            );
-            $objRow->SetData($txtSession, 'txtSession');
-        }
-        $lnkSession = $objRow->GetData('lnkSession');
-        $lnkSession->ReplaceWith($txtSession);
-    }*/
 
     //
     public function render_atheleteName($intIdAthelete, $objRow){
@@ -225,6 +208,32 @@ class EnrollmentListPanel extends EnrollmentListPanelBase {
         $strReturn = $objAthelete->LastName . ', ' . $objAthelete->FirstName;
         return $strReturn;
 
+    }
+    //
+    public function render_org($strData, $objRow, $objCol){
+        $objAthelete = $objRow->GetData('_entity')->IdAtheleteObject;
+        if(is_null($objAthelete)){
+            return 'Unknown';
+        }
+
+        return $objAthelete->IdOrgObject->__toString();
+
+    }
+    public function render_atheleteBirthDate($strData, $objRow, $objCol){
+        if($objRow->IsSelected() && $objCol->IsSelected() && $objCol->Editable && $this->EditMode == MJaxTableEditMode::INLINE){
+            return $objCol->RenderIndvControl($objRow);
+
+        }else{
+            $objAthelete = $objRow->GetData('_entity')->IdAtheleteObject;
+            if(is_null($objAthelete)){
+                return 'Unknown';
+            }
+            if(is_null($objAthelete->BirthDate)){
+                return $objAthelete->BirthDate;
+            }
+            //return $objAthelete->BirthDate;
+            return $this->RenderDate($objAthelete->BirthDate, $objRow);
+        }
     }
 
 }

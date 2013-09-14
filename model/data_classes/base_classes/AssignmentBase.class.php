@@ -146,7 +146,60 @@ class AssignmentBase extends MLCBaseEntity {
         $arrFields[] = 'Assignment_rel.revokeDate ' . (($blnLongSelect) ? ' as "Assignment_rel.revokeDate"' : '');
         return $arrFields;
     }
-    public static function Query($strExtra, $mixReturnSingle = false, $arrJoins = null) {
+    public static function Query($strExtra = null, $mixReturnSingle = false, $arrJoins = null) {
+        $blnLongSelect = !is_null($arrJoins);
+        $arrFields = self::GetSQLSelectFieldsAsArr($blnLongSelect);
+        if ($blnLongSelect) {
+            foreach ($arrJoins as $strTable) {
+                if (class_exists($strTable)) {
+                    $arrFields = array_merge($arrFields, call_user_func($strTable . '::GetSQLSelectFieldsAsArr', true));
+                }
+            }
+        }
+        $strFields = implode(', ', $arrFields);
+        $strJoin = '';
+        if ($blnLongSelect) {
+            foreach ($arrJoins as $strTable) {
+                switch ($strTable) {
+                    case ('Device'):
+                        $strJoin.= ' LEFT JOIN Device ON Assignment_rel.idDevice = Device.idDevice';
+                    break;
+                    case ('Session'):
+                        $strJoin.= ' LEFT JOIN Session ON Assignment_rel.idSession = Session.idSession';
+                    break;
+                }
+            }
+        }
+        if (!is_null($strExtra)) {
+            $strSql = sprintf("SELECT %s FROM Assignment_rel %s %s;", $strFields, $strJoin, $strExtra);
+            $result = MLCDBDriver::Query($strSql, self::DB_CONN);
+        }
+        if ((is_object($mixReturnSingle)) && ($mixReturnSingle instanceof MLCBaseEntityCollection)) {
+            $collReturn = $mixReturnSingle;
+            $collReturn->RemoveAll();
+        } else {
+            $collReturn = new MLCBaseEntityCollection();
+            $collReturn->SetQueryEntity('Assignment');
+        }
+        if (!is_null($strExtra)) {
+            $collReturn->AddQueryToHistory($strSql);
+            while ($data = mysql_fetch_assoc($result)) {
+                $tObj = new Assignment();
+                $tObj->Materilize($data);
+                $collReturn[] = $tObj;
+            }
+        }
+        if ($mixReturnSingle !== false) {
+            if (count($collReturn) == 0) {
+                return null;
+            } else {
+                return $collReturn[0];
+            }
+        } else {
+            return $collReturn;
+        }
+    }
+    public static function QueryCount($strExtra = '', $arrJoins = array()) {
         $blnLongSelect = !is_null($arrJoins);
         $arrFields = self::GetSQLSelectFieldsAsArr($blnLongSelect);
         if ($blnLongSelect) {
@@ -171,33 +224,6 @@ class AssignmentBase extends MLCBaseEntity {
             }
         }
         $strSql = sprintf("SELECT %s FROM Assignment_rel %s %s;", $strFields, $strJoin, $strExtra);
-        $result = MLCDBDriver::Query($strSql, self::DB_CONN);
-        if ((is_object($mixReturnSingle)) && ($mixReturnSingle instanceof MLCBaseEntityCollection)) {
-            $collReturn = $mixReturnSingle;
-            $collReturn->RemoveAll();
-        } else {
-            $collReturn = new MLCBaseEntityCollection();
-            $collReturn->SetQueryEntity('Assignment');
-        }
-        $collReturn->AddQueryToHistory($strSql);
-        while ($data = mysql_fetch_assoc($result)) {
-            $tObj = new Assignment();
-            $tObj->Materilize($data);
-            $collReturn[] = $tObj;
-        }
-        //$collReturn = $coll->getCollection();
-        if ($mixReturnSingle !== false) {
-            if (count($collReturn) == 0) {
-                return null;
-            } else {
-                return $collReturn[0];
-            }
-        } else {
-            return $collReturn;
-        }
-    }
-    public static function QueryCount($strExtra = '') {
-        $strSql = sprintf("SELECT Assignment_rel.* FROM Assignment_rel %s;", $strExtra);
         $result = MLCDBDriver::Query($strSql, self::DB_CONN);
         return mysql_num_rows($result);
     }

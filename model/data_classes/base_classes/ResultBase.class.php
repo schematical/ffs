@@ -153,7 +153,60 @@ class ResultBase extends MLCBaseEntity {
         $arrFields[] = 'Result.dispDate ' . (($blnLongSelect) ? ' as "Result.dispDate"' : '');
         return $arrFields;
     }
-    public static function Query($strExtra, $mixReturnSingle = false, $arrJoins = null) {
+    public static function Query($strExtra = null, $mixReturnSingle = false, $arrJoins = null) {
+        $blnLongSelect = !is_null($arrJoins);
+        $arrFields = self::GetSQLSelectFieldsAsArr($blnLongSelect);
+        if ($blnLongSelect) {
+            foreach ($arrJoins as $strTable) {
+                if (class_exists($strTable)) {
+                    $arrFields = array_merge($arrFields, call_user_func($strTable . '::GetSQLSelectFieldsAsArr', true));
+                }
+            }
+        }
+        $strFields = implode(', ', $arrFields);
+        $strJoin = '';
+        if ($blnLongSelect) {
+            foreach ($arrJoins as $strTable) {
+                switch ($strTable) {
+                    case ('Session'):
+                        $strJoin.= ' LEFT JOIN Session ON Result.idSession = Session.idSession';
+                    break;
+                    case ('Athelete'):
+                        $strJoin.= ' LEFT JOIN Athelete ON Result.idAthelete = Athelete.idAthelete';
+                    break;
+                }
+            }
+        }
+        if (!is_null($strExtra)) {
+            $strSql = sprintf("SELECT %s FROM Result %s %s;", $strFields, $strJoin, $strExtra);
+            $result = MLCDBDriver::Query($strSql, self::DB_CONN);
+        }
+        if ((is_object($mixReturnSingle)) && ($mixReturnSingle instanceof MLCBaseEntityCollection)) {
+            $collReturn = $mixReturnSingle;
+            $collReturn->RemoveAll();
+        } else {
+            $collReturn = new MLCBaseEntityCollection();
+            $collReturn->SetQueryEntity('Result');
+        }
+        if (!is_null($strExtra)) {
+            $collReturn->AddQueryToHistory($strSql);
+            while ($data = mysql_fetch_assoc($result)) {
+                $tObj = new Result();
+                $tObj->Materilize($data);
+                $collReturn[] = $tObj;
+            }
+        }
+        if ($mixReturnSingle !== false) {
+            if (count($collReturn) == 0) {
+                return null;
+            } else {
+                return $collReturn[0];
+            }
+        } else {
+            return $collReturn;
+        }
+    }
+    public static function QueryCount($strExtra = '', $arrJoins = array()) {
         $blnLongSelect = !is_null($arrJoins);
         $arrFields = self::GetSQLSelectFieldsAsArr($blnLongSelect);
         if ($blnLongSelect) {
@@ -178,33 +231,6 @@ class ResultBase extends MLCBaseEntity {
             }
         }
         $strSql = sprintf("SELECT %s FROM Result %s %s;", $strFields, $strJoin, $strExtra);
-        $result = MLCDBDriver::Query($strSql, self::DB_CONN);
-        if ((is_object($mixReturnSingle)) && ($mixReturnSingle instanceof MLCBaseEntityCollection)) {
-            $collReturn = $mixReturnSingle;
-            $collReturn->RemoveAll();
-        } else {
-            $collReturn = new MLCBaseEntityCollection();
-            $collReturn->SetQueryEntity('Result');
-        }
-        $collReturn->AddQueryToHistory($strSql);
-        while ($data = mysql_fetch_assoc($result)) {
-            $tObj = new Result();
-            $tObj->Materilize($data);
-            $collReturn[] = $tObj;
-        }
-        //$collReturn = $coll->getCollection();
-        if ($mixReturnSingle !== false) {
-            if (count($collReturn) == 0) {
-                return null;
-            } else {
-                return $collReturn[0];
-            }
-        } else {
-            return $collReturn;
-        }
-    }
-    public static function QueryCount($strExtra = '') {
-        $strSql = sprintf("SELECT Result.* FROM Result %s;", $strExtra);
         $result = MLCDBDriver::Query($strSql, self::DB_CONN);
         return mysql_num_rows($result);
     }

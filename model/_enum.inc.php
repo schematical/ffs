@@ -23,6 +23,9 @@ abstract class FFSQS extends FFSQSBase{
     const IdOrg = 'o';
     const UseWizzard = 'w';
 }
+abstract class FFSSessionSettings{
+    const athelete_capacity = 'athelete_capacity';
+}
 abstract class FFSEventData{
     public static $WOMENS_ARTISTIC_GYMNASTICS = array(
         'Vault' => 'Vault',

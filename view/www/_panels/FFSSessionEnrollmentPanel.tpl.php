@@ -6,7 +6,29 @@
                 </div>
                 <div data-id-session='<?php echo $intIdSession; ?>' class="accordion-body collapse">
                     <div class="accordion-inner">
-                        <?php echo $lnkSession->ActionParameter->Name; ?>
+                        <div class="stats">
+
+                            <div class="stat">
+                                <span class="stat-value"><?php echo $_CONTROL->arrStats[$intIdSession]['spaces_left']; ?></span>
+                                Spots Left
+                            </div> <!-- /stat -->
+
+                            <div class="stat">
+                                <span class="stat-value"><?php echo $_CONTROL->arrStats[$intIdSession]['org_ct']; ?></span>
+                                Teams
+                            </div> <!-- /stat -->
+
+                            <div class="stat">
+                                <span class="stat-value">
+                                    <?php echo $_CONTROL->arrStats[$intIdSession]['athelete_ct']; ?>
+                                </span>
+                                Athletes
+                            </div> <!-- /stat -->
+
+                        </div>
+                        <hr />
+
+                        <?php $_CONTROL->arrViewAllLinks[$intIdSession]->Render(); ?>
                     </div>
                 </div>
             </div>

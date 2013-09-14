@@ -13,22 +13,22 @@ class AtheleteListPanel extends AtheleteListPanelBase {
 
             //$this->AddColumn('idAthelete','idAthelete');
 
-            $this->AddColumn('orgName','Gym', $this, 'render_orgName');
+            $clmOrg = $this->AddColumn('orgName','Gym');
+            $clmOrg->RenderObject = $this;
+            $clmOrg->RenderFunction = 'render_orgName';
 
 
-            
-            
-            $this->AddColumn('name','Name', $this, 'render_name');
-            
-        
-            
-            
+
+
+            $colAthelete = $this->AddColumn('name','Name', $this, 'render_name');
+            $colAthelete->RenderObject = $this;
+            $colAthelete->RenderFunction = 'render_name';
+
             //$this->AddColumn('lastName','lastName');
             
-        
-            
-            
-            $this->AddColumn('birthDate','Birth', $this, 'render_birthDate');
+            $colBirth = $this->AddColumn('birthDate','Birth', $this, 'render_birthDate');
+            $colBirth->RenderObject = $this;
+            $colBirth->RenderFunction = 'render_name';
             $this->AddColumn('memId','Mem#');
             $this->AddColumn('level','Level');
             
@@ -51,7 +51,7 @@ class AtheleteListPanel extends AtheleteListPanelBase {
     public function render_name($strData, $objRow){
         $objAthelete = $objRow->GetData('_entity');
         if(is_null($objAthelete)){
-            return '';
+            return 'fail';
         }
         return $objAthelete->__toString();
     }

@@ -30,8 +30,18 @@ class Comment{
             return $arrReturn;
         }
     }
+
     public function materilize($arrData){
+
         $this->arrData["body"] = $arrData['p_message'];//: "engineer rich networks",
+        switch($arrData['email']){
+            case('andre@designcirc.us'):
+                $this->arrData['user_id'] = '2658066';
+            break;
+            case('eric@epschmidt.com'):
+                $this->arrData['user_id'] = '2662471';
+            break;
+        }
         $this->arrData["author_email"] = $arrData['email'];//"author_email": "towski@entp.com",
         $this->arrData["created_at"] = date('Y-m-dTh:i:s', $arrData['p_date']);// "2008-01-01T00:01:00Z",
         User::ParseUser($arrData);
