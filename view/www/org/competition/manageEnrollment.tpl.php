@@ -33,8 +33,11 @@
 <div class="navbar" data-spy="affix" data-offset-top="0" style='bottom:-20Px;width:100%;'>
     <div class="navbar-inner">
         <ul class="nav">
-            <li class="active">
+            <li>
                 <?php $this->lnkAddAthelete->Render(); ?>
+            </li>
+            <li>
+                <?php $this->lnkAddSession->Render(); ?>
             </li>
             <!--<li><a href="#">Link</a></li>
             <li><a href="#">Link</a></li>-->

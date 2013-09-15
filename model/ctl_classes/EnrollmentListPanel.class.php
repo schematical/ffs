@@ -16,44 +16,50 @@ class EnrollmentListPanel extends EnrollmentListPanelBase {
 
     public function SetupCols(){
 
-            $colAthelete = $this->AddColumn('atheleteName','Athlete');
-            $colAthelete->RenderObject = $this;
-            $colAthelete->RenderFunction = 'render_atheleteName';
+        $colAthelete = $this->AddColumn('atheleteName','Athlete');
+        $colAthelete->RenderObject = $this;
+        $colAthelete->RenderFunction = 'render_atheleteName';
+        $colAthelete->SetOrderByField('Athelete.lastName');
 
-            $colOrg = $this->AddColumn('IdOrgObject','Gym');
-            $colOrg->RenderObject = $this;
-            $colOrg->RenderFunction = 'render_org';
+        $colOrg = $this->AddColumn('IdOrgObject','Gym');
+        $colOrg->RenderObject = $this;
+        $colOrg->RenderFunction = 'render_org';
+        //$colOrg->SetOrderByField('Org.name');
 
-            $colSession = $this->AddColumn('idSession','Session');
-            $colSession->RenderObject = $this;
-            $colSession->RenderFunction = 'colSession_render';
-            $colSession->EditCtlInitMethod = 'colSession_init';
+        $colSession = $this->AddColumn('idSession','Session');
+        $colSession->RenderObject = $this;
+        $colSession->RenderFunction = 'colSession_render';
+        $colSession->EditCtlInitMethod = 'colSession_init';
+        $colSession->SetOrderByField('Session.name');
 
-            $colFlight = $this->AddSpecialColumn('flight','Flight');
+        $colFlight = $this->AddSpecialColumn('flight','Flight');
+        $colFlight->SetOrderByField('Enrollment_rel.flight');
 
 
-            //$colDivision = $this->AddSpecialColumn('division','Division');
+        //$colDivision = $this->AddSpecialColumn('division','Division');
 
 
-            $colBirth = $this->AddColumn('birthDate','Birth');
-            $colBirth->RenderObject = $this;
-            $colBirth->RenderFunction = 'render_atheleteBirthDate';
-            $colBirth->Editable = true;
-            $colBirth->EditControlClass = 'MJaxBSDateTimePicker';
+        $colBirth = $this->AddColumn('birthDate','Birth');
+        $colBirth->RenderObject = $this;
+        $colBirth->RenderFunction = 'render_atheleteBirthDate';
+        $colBirth->Editable = true;
+        $colBirth->EditControlClass = 'MJaxBSDateTimePicker';
+        $colBirth->SetOrderByField('Athelete.birthDate');
 
-            //$this->AddSpecialColumn('ageGroup','Age Group');
+        //$this->AddSpecialColumn('ageGroup','Age Group');
 
-            $this->AddSpecialColumn('level','Level');
-            
-            if(false){
-                $this->AddSpecialColumn('misc1','misc1');
-                $this->AddSpecialColumn('misc2','misc2');
-                $this->AddSpecialColumn('misc3','misc3');
-                $this->AddSpecialColumn('misc4','misc4');
-                $this->AddSpecialColumn('misc5','misc5');
+        $colLevel = $this->AddSpecialColumn('level','Level');
+        $colLevel->SetOrderByField('Enrollment_rel.level');
 
-            }
-            //$this->AddColumn('creDate','creDate');
+        if(false){
+            $this->AddSpecialColumn('misc1','misc1');
+            $this->AddSpecialColumn('misc2','misc2');
+            $this->AddSpecialColumn('misc3','misc3');
+            $this->AddSpecialColumn('misc4','misc4');
+            $this->AddSpecialColumn('misc5','misc5');
+
+        }
+
 
     }
     public function AddSpecialColumn($strKey, $strName){
@@ -150,8 +156,9 @@ class EnrollmentListPanel extends EnrollmentListPanelBase {
             $strHtml = $objCol->RenderIndvControl($objRow);
         }else{
             $objEnrollment = $objRow->GetData('_entity');
-            //_dv($objEnrollment->IdSession);
+
             if(is_null($objEnrollment->IdSessionObject)){
+
                 $strHtml = 'Unassigned';
             }else{
                 $strHtml = $objEnrollment->IdSessionObject->__toString();

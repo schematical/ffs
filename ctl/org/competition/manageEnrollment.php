@@ -5,7 +5,10 @@ class manageEnrollement extends FFSForm{
     protected $pnlSessions = null;
     protected $collEnrollments = null;
     protected $lnkAddAthelete = null;
+    protected $lnkAddSession = null;
+
     protected $pnlEditAthelete = null;
+    protected $pnlEditSession = null;
 
     protected $pnlPagination = null;
 
@@ -20,9 +23,13 @@ class manageEnrollement extends FFSForm{
             'Competition.idCompetition', FFSForm::Competition()->IdCompetition
         );
         $this->collEnrollments->Limit(10);
-        $arrAtheletes = $this->collEnrollments->getCollection();
 
-        $this->tblEnrollment->SetDataEntites($arrAtheletes);
+
+        $this->tblEnrollment->SetCollection($this->collEnrollments);
+        $colEnroll = $this->tblEnrollment->AddColumn('btnEnroll','');
+        $colEnroll->RenderObject = $this;
+        $colEnroll->RenderFunction = 'colEnroll_render';
+
         $arrSessions = FFSForm::Competition()->GetSessionArr();
         $this->pnlSessions = new FFSSessionEnrollmentPanel($this, null, $arrSessions);
         $this->pnlSessions->AddAction(
@@ -44,6 +51,14 @@ class manageEnrollement extends FFSForm{
         $this->lnkAddAthelete->AddCssClass('btn btn-large');
         $this->lnkAddAthelete->Text = "Add Athlete";
         $this->lnkAddAthelete->AddAction($this, 'lnkAddAthelete_click');
+
+
+        $this->lnkAddSession = new MJaxLinkButton($this);
+        $this->lnkAddSession->AddCssClass('btn btn-large');
+        $this->lnkAddSession->Text = "Add Session";
+        $this->lnkAddSession->AddAction($this, 'lnkAddSession_click');
+
+
 
         $this->pnlPagination = new MJaxPaginationPanel($this);
         $this->pnlPagination->SetCollection($this->collEnrollments);
@@ -91,7 +106,10 @@ class manageEnrollement extends FFSForm{
         $this->UpdateSearch();
     }
     public function pnlSession_select($strFormId, $strControlId, $objSession){
+
         $this->objSession = $objSession;
+
+        $this->UpdateSearch();
     }
     public function pnlSession_viewAll($strFormId, $strControlId, $objSession){
         if(!is_null($objSession)){
@@ -100,6 +118,7 @@ class manageEnrollement extends FFSForm{
             $intIdSession = null;
         }
         $this->collEnrollments->RemoveFieldConditions('Enrollment_rel.idSession');
+        $this->collEnrollments->RemoveFieldConditions('Session.name');
         $this->collEnrollments->AddFieldCondition(
             'Enrollment_rel.idSession',
             $intIdSession
@@ -110,15 +129,9 @@ class manageEnrollement extends FFSForm{
         $this->UpdateSearch();
     }
     public function UpdateSearch(){
-       $this->collEnrollments->ExecuteQuery();
 
-       $arrAtheletes = $this->collEnrollments->GetCollection();
-       $this->tblEnrollment->RemoveAllChildControls();
-       $this->tblEnrollment->Alert("Result Count: " . count($arrAtheletes));
-       $this->tblEnrollment->SetDataEntites($this->collEnrollments->GetCollection());
-       /*$this->Alert(
-           $this->collEnrollments->History[0]
-       );*/
+        $this->tblEnrollment->UpdateFromCollection();
+
     }
     public function lnkAddAthelete_click()
     {
@@ -137,6 +150,9 @@ class manageEnrollement extends FFSForm{
 
     }
     public function pnlEditAthelete_save($strFormId, $strControlId, Athelete $objAthelete){
+        if($strControlId != $this->pnlEditAthelete->ControlId){
+            return ;
+        }
         if(!is_null($this->objSession)){
             $objEnrollment = $objAthelete->CreateEnrollmentFromSession(
                 $this->objSession
@@ -149,6 +165,61 @@ class manageEnrollement extends FFSForm{
         $this->HideAlert();
         $objRow = $this->tblEnrollment->AddRow($objEnrollment);
         $this->ScrollTo($objRow);
+    }
+    public function colEnroll_render($strData, $objRow, $objCol){
+        $objEnrollment = $objRow->GetData('_entity');
+        if(is_null($this->objSession) || !is_null($objEnrollment->IdSession)){
+            return '';
+        }
+        $btnEnroll = $objRow->GetData('btnEnroll');
+        if(is_null($btnEnroll)){
+            $btnEnroll = new MJaxLinkButton($this);
+            $btnEnroll->Text = 'Enroll in ' . $this->objSession->Name;
+            $btnEnroll->ActionParameter = $objEnrollment;
+            $objRow->SetData('btnEnroll', $btnEnroll);
+            $btnEnroll->AddAction(
+                $this,
+                'btnEnroll_click'
+            );
+        }
+        return $btnEnroll->Render(false);
+    }
+    public function btnEnroll_click($f, $c, $objEnrollment){
+        $this->Alert("<div class='alert alert-success'>Successfully Enrolled!</a>");
+        $objEnrollment->IdSession = $this->objSession->IdSession;
+        $objEnrollment->Save();
+
+        $this->UpdateSearch();
+    }
+
+    public function lnkAddSession_click()
+    {
+        if(is_null($this->pnlEditSession)){
+            $this->pnlEditSession = new SessionEditPanel($this);
+            $this->pnlEditSession->AddAction(
+                new MJaxDataEntitySaveEvent(),
+                new MJaxServerControlAction(
+                    $this,
+                    'pnlEditSession_save'
+                )
+            );
+        }
+        $this->pnlEditSession->SetSession(null);
+
+        $this->Alert($this->pnlEditSession);
+
+    }
+    public function pnlEditSession_save($strFormId, $strControlId, Session $objSession){
+        $objSession->IdCompetition = FFSForm::Competition()->IdCompetition;
+        $objSession->Save();
+        if($strControlId != $this->pnlEditSession->ControlId){
+            return ;
+        }
+        $this->HideAlert();
+        $this->pnlSessions->Modified = true;
+        $this->pnlSessions->AddSession($objSession);
+        $this->pnlSessions->FocusSession($objSession);
+
     }
 }
 manageEnrollement::Run('manageEnrollement');

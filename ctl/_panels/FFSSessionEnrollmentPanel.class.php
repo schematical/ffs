@@ -90,6 +90,10 @@ class FFSSessionEnrollmentPanel extends MJaxPanel{
         $this->TriggerEvent('ffs-session-enroll-panel-view-all');
     }
     public function lnkSession_click($strFormId, $strControlId, $objSession){
+        $this->FocusSession($objSession);
+        $this->TriggerEvent('ffs-session-enroll-panel-select-session');
+    }
+    public function FocusSession($objSession){
         $this->strActionParameter = $objSession;
         if(is_null($objSession)){
             $intIdSession = -1;
@@ -98,17 +102,19 @@ class FFSSessionEnrollmentPanel extends MJaxPanel{
         }
         $this->objForm->AddJSCall(
             sprintf(
-                '$("#%s .collapse").each(function(){
-                    var jThis = $(this);
-                    var jLink = jThis.parent().find(".accordion-toggle");
-                    if(jThis.attr("data-id-session") == "%s"){
-                        jThis.collapse("show");
-                        jLink.addClass("btn-primary");
-                    }else{
-                        jThis.collapse("hide");
-                        jLink.removeClass("btn-primary");
-                    }
+                '$(document).one("mjax-page-load", function(){
+                    $("#%s .collapse").each(function(){
+                        var jThis = $(this);
+                        var jLink = jThis.parent().find(".accordion-toggle");
+                        if(jThis.attr("data-id-session") == "%s"){
+                            jThis.collapse("show");
+                            jLink.addClass("btn-primary");
+                        }else{
+                            jThis.collapse("hide");
+                            jLink.removeClass("btn-primary");
+                        }
 
+                    });
                 });',
                 $this->strControlId,
                 $intIdSession
