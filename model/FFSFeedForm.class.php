@@ -12,7 +12,13 @@ abstract class FFSFeedForm extends FFSForm{
             return null;
         }
         //$this->strTemplate = __VIEW_ACTIVE_APP_DIR__ . '/www/_FFSFeedForm.tpl.php';
-        if(is_object($mixFeedEntity) && ($mixFeedEntity instanceof BaseEntityCollection)){
+        if(
+            (is_object($mixFeedEntity)) &&
+            (
+                ($mixFeedEntity instanceof BaseEntityCollection) ||
+                ($mixFeedEntity instanceof MLCBaseEntityCollection)
+            )
+        ){
             $mixFeedEntity = $mixFeedEntity->getCollection();
         }
 

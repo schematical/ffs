@@ -2,22 +2,19 @@
 
 <div class='shortcuts '>
 
-    <a href="/<?php echo $_CONTROL->objCompetition->Namespace; ?>/org/competition/manageSessions?<?php echo FFSQS::UseWizzard; ?>=1" class="shortcut">
+    <a href="/<?php echo $_CONTROL->objCompetition->Namespace; ?>/org/competition/manageGyms?<?php echo FFSQS::UseWizzard; ?>=1" class="shortcut">
         <i class="shortcut-icon icon-list-ol "></i>
         <span class="shortcut-label">Setup Wizzard</span>
     </a>
 
-    <a href="/<?php echo $_CONTROL->objCompetition->Namespace; ?>/org/competition/manageSessions" class="shortcut">
-        <i class="shortcut-icon icon-bar-chart "></i>
-        <span class="shortcut-label">Sessions</span>
-    </a>
+
     <a href="/<?php echo $_CONTROL->objCompetition->Namespace; ?>/org/competition/manageGyms" class="shortcut">
         <i class="shortcut-icon icon-building "></i>
         <span class="shortcut-label">Gyms</span>
     </a>
-    <a href="/<?php echo $_CONTROL->objCompetition->Namespace; ?>/org/competition/manageAthletes" class="shortcut">
+    <a href="/<?php echo $_CONTROL->objCompetition->Namespace; ?>/org/competition/manageEnrollment" class="shortcut">
         <i class="shortcut-icon icon-group "></i>
-        <span class="shortcut-label">Atheletes</span>
+        <span class="shortcut-label">Athletes</span>
     </a>
 
 

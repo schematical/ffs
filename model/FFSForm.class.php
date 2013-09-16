@@ -101,7 +101,7 @@ class FFSForm extends MJaxWAdminForm{
                         );
                     }
                     $this->AddHeaderNav('Invite Gyms', 'icon-building')->Href = '/' . FFSForm::Competition()->Namespace . '/org/competition/manageGyms';
-                    $this->AddHeaderNav('Manage Athletes', 'icon-user')->Href = '/' . FFSForm::Competition()->Namespace . '/org/competition/manageAthletes';
+                    $this->AddHeaderNav('Manage Athletes', 'icon-user')->Href = '/' . FFSForm::Competition()->Namespace . '/org/competition/manageEnrollment';
 
                     //Probablly don't allow untill meet starts
                     $this->AddHeaderNav('Results', 'icon-trophy')->Href = '/' . FFSForm::Competition()->Namespace . '/org/competition/results';

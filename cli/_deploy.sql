@@ -1,5 +1,8 @@
 
 
+ALTER TABLE `ffs`.`Result` ADD COLUMN `sanctioned` TINYINT NULL DEFAULT 0  AFTER `dispDate` , ADD COLUMN `notes` LONGTEXT NULL  AFTER `sanctioned` ;
+ALTER TABLE `ffs`.`Result` ADD COLUMN `startValue` VARCHAR(64) NULL  AFTER `notes` ;
+ALTER TABLE `ffs`.`Result` ADD COLUMN `data` LONGTEXT NULL  AFTER `startValue` ;
 
 
 
