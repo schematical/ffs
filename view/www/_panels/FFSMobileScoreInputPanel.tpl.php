@@ -115,6 +115,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class='row-fluid'>
                                 <div class='span12'>
                                     <div class='width:90%'>
@@ -201,10 +202,37 @@
                                 </div>
                             </div>
                             <div class='row-fluid'>
+                                <div class='span4'>
+                                    <label>Start Value:</label>
+                                    <input id='ffs-start-value-input' type='text' class='input-large' value='10' />
+                                </div>
+                                <div class='span4'>
+                                    <label>Place:</label>
+                                    <div class='alert alert-info'>
+                                        <select>
+                                            <option></option>
+                                            <option>1st</option>
+                                            <option>2nd</option>
+                                            <option>3rd</option>
+                                            <option>4th</option>
+                                            <option>5th</option>
+                                            <option>...</option>
+                                        </select>
+&nbsp;&nbsp;&nbsp;
+                                        <span>
+                                            Tie:
+                                        </span>
+                                        <input type='checkbox' />
+                                    </div>
+                                </div>
+                               
+                            </div>
+                            <div class='row-fluid'>
 
                                 <textarea class='span12 ffs-score-notes' placeholder="notes"></textarea>
 
                             </div>
+
                         </div>
 
                     </div>
