@@ -106,8 +106,13 @@ class FFSQSBase {
     const Result_DispDate = 'dispDate';
     const Result_Sanctioned = 'sanctioned';
     const Result_Notes = 'notes';
-    const Result_StartValue = 'startValue';
+    const Result_NSStartValue = 'NSStartValue';
     const Result_Data = 'data';
+    const Result_IdCompetition = 'idCompetition';
+    const Result_NSSpecialNotes = 'NSSpecialNotes';
+    const Result_NSTied = 'NSTied';
+    const Result_NSPlace = 'NSPlace';
+    const Result_IdInputUser = 'idInputUser';
     const IdSession = 'idSession';
     const Session_IdSession = 'idSession';
     const Session_StartDate = 'startDate';

@@ -11,6 +11,7 @@
 * - lnkViewEnrollments_click()
 * - lnkViewOrgCompetitions_click()
 * - lnkViewParentMessages_click()
+* - lnkViewResults_click()
 * - lnkViewSessions_click()
 * - render_idOrg()
 * Classes list:
@@ -57,6 +58,7 @@ class CompetitionListPanelBase extends MJaxTable {
         $this->InitRowControl('view_Enrollments', 'View Enrollments', $this, 'lnkViewEnrollments_click', 'btn btn-small');
         $this->InitRowControl('view_OrgCompetitions', 'View OrgCompetitions', $this, 'lnkViewOrgCompetitions_click', 'btn btn-small');
         $this->InitRowControl('view_ParentMessages', 'View ParentMessages', $this, 'lnkViewParentMessages_click', 'btn btn-small');
+        $this->InitRowControl('view_Results', 'View Results', $this, 'lnkViewResults_click', 'btn btn-small');
         $this->InitRowControl('view_Sessions', 'View Sessions', $this, 'lnkViewSessions_click', 'btn btn-small');
     }
     public function lnkViewEnrollments_click($strFormId, $strControlId, $strActionParameter) {
@@ -71,6 +73,11 @@ class CompetitionListPanelBase extends MJaxTable {
     }
     public function lnkViewParentMessages_click($strFormId, $strControlId, $strActionParameter) {
         $this->objForm->Redirect('/data/editParentMessage', array(
+            FFSQS::Competition_IdCompetition => $strActionParameter
+        ));
+    }
+    public function lnkViewResults_click($strFormId, $strControlId, $strActionParameter) {
+        $this->objForm->Redirect('/data/editResult', array(
             FFSQS::Competition_IdCompetition => $strActionParameter
         ));
     }

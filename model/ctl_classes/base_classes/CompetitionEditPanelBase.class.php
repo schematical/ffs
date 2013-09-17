@@ -37,6 +37,7 @@ class CompetitionEditPanelBase extends MJaxPanel {
     public $lnkViewChildEnrollment = null;
     public $lnkViewChildOrgCompetition = null;
     public $lnkViewChildParentMessage = null;
+    public $lnkViewChildResult = null;
     public $lnkViewChildSession = null;
     //Regular controls
     public $btnSave = null;
@@ -162,6 +163,10 @@ class CompetitionEditPanelBase extends MJaxPanel {
         $this->lnkViewChildParentMessage->Text = 'View ParentMessages';
         //I should really fix this
         //$this->lnkViewChildParentMessage->Href = __ENTITY_MODEL_DIR__ . '/Competition/' . $this->objCompetition->idCompetition . '/ParentMessages';
+        $this->lnkViewChildResult = new MJaxLinkButton($this);
+        $this->lnkViewChildResult->Text = 'View Results';
+        //I should really fix this
+        //$this->lnkViewChildResult->Href = __ENTITY_MODEL_DIR__ . '/Competition/' . $this->objCompetition->idCompetition . '/Results';
         $this->lnkViewChildSession = new MJaxLinkButton($this);
         $this->lnkViewChildSession->Text = 'View Sessions';
         //I should really fix this

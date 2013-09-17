@@ -77,3 +77,10 @@ abstract class FFSClubTypes{
         'USTA'=>'USTA'
     );
 }
+abstract class FFSResultSpecialNotes{
+    const Stuck = 'Stuck';
+    const Solid = 'Solid';
+    const Averedge = 'Averedge';
+    const Wobbly = 'Wobbly';
+    const Fall = 'Fall';
+}

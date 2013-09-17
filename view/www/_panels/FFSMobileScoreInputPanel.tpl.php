@@ -71,39 +71,11 @@
                         <div class='container-fluid'>
                             <div class='row-fluid'>
                                 <div class='span12'>
-                                    <div class='alert alert-success'>
-                                        Congrats on Jennifer's highest Vault score of the season. Celebrate with a gift from the <a href='javascript:MJax.BS.Alert("Pro-shop Coming Soon");'>TumbleScore Pro-shop</a>
-                                    </div>
+
                                     <div class='input-append'>
-                                        <input id='ffs-score-input' type='text' class='input-large ffs-score-input' value='9.1' />
-                                        <div id='ffs-special-notes' class="btn-group">
-                                            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                                                Special Notes:
-                                                <span class="caret"></span>
-                                            </a>
-                                            <ul class="dropdown-menu">
-                                                <li>
-                                                    <a href='#'>
-                                                       Solid
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href='#'>
-                                                        Averedge
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href='#'>
-                                                        Wobbly
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href='#'>
-                                                        Fall
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                        <?php $_CONTROL->txtScore->Render(); ?>
+                                        <?php $_CONTROL->lstSpecialNotes->Render(); ?>
+
                                     </div>
                                 </div>
                             </div>
@@ -196,32 +168,24 @@
                             <div class='row-fluid'>
                                 <div class='span4'>
                                     <label>Start Value:</label>
-                                    <input id='ffs-start-value-input' type='text' class='input-large' value='10' />
+                                    <?php $_CONTROL->txtStartValue->Render(); ?>
                                 </div>
                                 <div class='span4'>
                                     <label>Place:</label>
                                     <div class='alert alert-info'>
-                                        <select>
-                                            <option></option>
-                                            <option>1st</option>
-                                            <option>2nd</option>
-                                            <option>3rd</option>
-                                            <option>4th</option>
-                                            <option>5th</option>
-                                            <option>...</option>
-                                        </select>
+                                        <?php $_CONTROL->lstPlace->Render(); ?>
 &nbsp;&nbsp;&nbsp;
                                         <span>
                                             Tie:
                                         </span>
-                                        <input type='checkbox' />
+                                        <?php $_CONTROL->chkTied->Render(); ?>
                                     </div>
                                 </div>
 
                             </div>
                             <div class='row-fluid'>
+                                <?php $_CONTROL->txtNotes->Render(); ?>
 
-                                <textarea class='span12 ffs-score-notes' placeholder="notes"></textarea>
 
                             </div>
 

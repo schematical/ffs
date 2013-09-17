@@ -27,8 +27,13 @@ class ResultSelectPanelBase extends MJaxPanel {
     public $txtDispDate_EndDate = null;
     public $intSanctioned = null;
     public $strNotes = null;
-    public $strStartValue = null;
+    public $strNSStartValue = null;
     public $strData = null;
+    public $intIdCompetition = null;
+    public $strNSSpecialNotes = null;
+    public $intNSTied = null;
+    public $intNSPlace = null;
+    public $intIdInputUser = null;
     public function __construct($objParentControl, $strControlId = null) {
         parent::__construct($objParentControl, $strControlId);
         $this->strTemplate = __VIEW_ACTIVE_APP_DIR__ . '/www/ctl_panels/' . get_class($this) . '.tpl.php';
@@ -59,10 +64,20 @@ class ResultSelectPanelBase extends MJaxPanel {
         $this->intSanctioned->Attr('placeholder', " Sanctioned");
         $this->strNotes = new MJaxTextBox($this);
         $this->strNotes->Attr('placeholder', " Notes");
-        $this->strStartValue = new MJaxTextBox($this);
-        $this->strStartValue->Attr('placeholder', " Start Value");
+        $this->strNSStartValue = new MJaxTextBox($this);
+        $this->strNSStartValue->Attr('placeholder', " N S Start Value");
         $this->strData = new MJaxTextBox($this);
         $this->strData->Attr('placeholder', " Data");
+        $this->intIdCompetition = new MJaxTextBox($this);
+        $this->intIdCompetition->Attr('placeholder', " Competition");
+        $this->strNSSpecialNotes = new MJaxTextBox($this);
+        $this->strNSSpecialNotes->Attr('placeholder', " N S Special Notes");
+        $this->intNSTied = new MJaxTextBox($this);
+        $this->intNSTied->Attr('placeholder', " N S Tied");
+        $this->intNSPlace = new MJaxTextBox($this);
+        $this->intNSPlace->Attr('placeholder', " N S Place");
+        $this->intIdInputUser = new MJaxTextBox($this);
+        $this->intIdInputUser->Attr('placeholder', " Input User");
     }
     public function txtSearch_change() {
         $objEntity = null;
@@ -98,6 +113,11 @@ class ResultSelectPanelBase extends MJaxPanel {
             case ('Athelete'):
                 $arrAndConditions = $this->GetExtQuery();
                 $arrAndConditions[] = sprintf(' idAthelete = %s', $objEntity->IdAthelete);
+                $arrResults = Result::Query(' WHERE ' . implode(' AND ', $arrAndConditions));
+            break;
+            case ('Competition'):
+                $arrAndConditions = $this->GetExtQuery();
+                $arrAndConditions[] = sprintf(' idCompetition = %s', $objEntity->IdCompetition);
                 $arrResults = Result::Query(' WHERE ' . implode(' AND ', $arrAndConditions));
             break;
             default:
@@ -137,10 +157,22 @@ class ResultSelectPanelBase extends MJaxPanel {
         if (!is_null($this->strNotes->GetValue())) {
             $arrAndConditions[] = sprintf('notes LIKE "%s%%"', $this->strNotes->GetValue());
         }
-        if (!is_null($this->strStartValue->GetValue())) {
-            $arrAndConditions[] = sprintf('startValue LIKE "%s%%"', $this->strStartValue->GetValue());
+        if (!is_null($this->strNSStartValue->GetValue())) {
+            $arrAndConditions[] = sprintf('NSStartValue LIKE "%s%%"', $this->strNSStartValue->GetValue());
         }
         //Is special field!!!!!
+        if (!is_null($this->strNSSpecialNotes->GetValue())) {
+            $arrAndConditions[] = sprintf('NSSpecialNotes LIKE "%s%%"', $this->strNSSpecialNotes->GetValue());
+        }
+        if (!is_null($this->intNSTied->GetValue())) {
+            $arrAndConditions[] = sprintf('NSTied LIKE "%s%%"', $this->intNSTied->GetValue());
+        }
+        if (!is_null($this->intNSPlace->GetValue())) {
+            $arrAndConditions[] = sprintf('NSPlace LIKE "%s%%"', $this->intNSPlace->GetValue());
+        }
+        if (!is_null($this->intIdInputUser->GetValue())) {
+            $arrAndConditions[] = sprintf('idInputUser LIKE "%s%%"', $this->intIdInputUser->GetValue());
+        }
         return $arrAndConditions;
     }
     public function GetValue() {

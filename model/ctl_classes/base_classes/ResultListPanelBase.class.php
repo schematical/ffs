@@ -10,6 +10,7 @@
 * - SetupCols()
 * - render_idSession()
 * - render_idAthelete()
+* - render_idCompetition()
 * Classes list:
 * - ResultListPanelBase extends MJaxTable
 */
@@ -53,7 +54,12 @@ class ResultListPanelBase extends MJaxTable {
         $this->AddColumn('event', ' Event', null, null, 'MJaxTextBox');
         $this->AddColumn('sanctioned', ' Sanctioned', null, null, 'MJaxTextBox');
         $this->AddColumn('notes', ' Notes', null, null, 'MJaxTextArea');
-        $this->AddColumn('startValue', ' Start Value', null, null, 'MJaxTextBox');
+        $this->AddColumn('NSStartValue', ' N S Start Value', null, null, 'MJaxTextBox');
+        $this->AddColumn('IdCompetitionObject', ' Competition');
+        $this->AddColumn('NSSpecialNotes', ' N S Special Notes', null, null, 'MJaxTextBox');
+        $this->AddColumn('NSTied', ' N S Tied', null, null, 'MJaxTextBox');
+        $this->AddColumn('NSPlace', ' N S Place', null, null, 'MJaxTextBox');
+        $this->AddColumn('idInputUser', ' Input User', null, null, 'MJaxTextBox');
     }
     public function render_idSession($intIdIdSession, $objRow, $objColumn) {
         if (is_null($intIdIdSession)) {
@@ -79,6 +85,19 @@ class ResultListPanelBase extends MJaxTable {
         $lnkView = new MJaxLinkButton($this);
         $lnkView->Text = $objAthelete->__toString();
         $lnkView->Href = '/data/editAthelete?' . FFSQS::Athelete_IdAthelete . '=' . $objAthelete->IdAthelete;
+        return $lnkView->Render(false);
+    }
+    public function render_idCompetition($intIdIdCompetition, $objRow, $objColumn) {
+        if (is_null($intIdIdCompetition)) {
+            return '';
+        }
+        $objCompetition = Competition::LoadById($intIdIdCompetition);
+        if (is_null($objCompetition)) {
+            return 'error';
+        }
+        $lnkView = new MJaxLinkButton($this);
+        $lnkView->Text = $objCompetition->__toString();
+        $lnkView->Href = '/data/editCompetition?' . FFSQS::Competition_IdCompetition . '=' . $objCompetition->IdCompetition;
         return $lnkView->Render(false);
     }
 }

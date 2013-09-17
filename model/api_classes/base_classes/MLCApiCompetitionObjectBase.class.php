@@ -27,6 +27,10 @@ class MLCApiCompetitionObjectBase extends MLCApiObjectBase {
                 $arrParentMessages = ParentMessage::LoadCollByIdCompetition($this->GetEntity()->idCompetition)->GetCollection();
                 return new MLCApiResponse($arrParentMessages);
             break;
+            case ('results'):
+                $arrResults = Result::LoadCollByIdCompetition($this->GetEntity()->idCompetition)->GetCollection();
+                return new MLCApiResponse($arrResults);
+            break;
             case ('sessions'):
                 $arrSessions = Session::LoadCollByIdCompetition($this->GetEntity()->idCompetition)->GetCollection();
                 return new MLCApiResponse($arrSessions);

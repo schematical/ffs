@@ -5,6 +5,14 @@ ALTER TABLE `ffs`.`Result` ADD COLUMN `startValue` VARCHAR(64) NULL  AFTER `note
 ALTER TABLE `ffs`.`Result` ADD COLUMN `data` LONGTEXT NULL  AFTER `startValue` ;
 ALTER TABLE `ffs`.`Competition` ADD COLUMN `sanctioned` TINYINT NULL  AFTER `data` ;
 ALTER TABLE `ffs`.`Athelete` ADD COLUMN `event_default` VARCHAR(45) NULL  AFTER `level` ;
+ALTER TABLE `ffs`.`Result` ADD COLUMN `idCompetition` INT NULL  AFTER `data` ;
+ALTER TABLE `ffs`.`Result` ADD COLUMN `specialNotes` VARCHAR(64) NULL  AFTER `idCompetition` ;
+#Added non sanctioned NS prefix
+ALTER TABLE `ffs`.`Result` ADD COLUMN `NSTied` VARCHAR(45) NULL  AFTER `NSSpecialNotes` , CHANGE COLUMN `startValue` `NSStartValue` VARCHAR(64) NULL DEFAULT NULL  , CHANGE COLUMN `specialNotes` `NSSpecialNotes` VARCHAR(64) NULL DEFAULT NULL  ;
+ALTER TABLE `ffs`.`Result` CHANGE COLUMN `NSTied` `NSTied` TINYINT NULL DEFAULT NULL  ;
+ALTER TABLE `ffs`.`Result` ADD COLUMN `NSPlace` VARCHAR(45) NULL  AFTER `NSTied` ;
+ALTER TABLE `ffs`.`Result` ADD COLUMN `idInputUser` INT NULL  AFTER `NSPlace` , CHANGE COLUMN `NSPlace` `NSPlace` INT(4) NULL DEFAULT NULL  ;
+
 
 
 

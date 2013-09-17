@@ -20,6 +20,11 @@ class MLCApiResultObjectBase extends MLCApiObjectBase {
                 $objAthelete = $this->GetEntity()->IdAthelete;
                 return new MLCApiAtheleteObject($objIdAthelete);
             break;
+            case ('Result'):
+                //Load
+                $objCompetition = $this->GetEntity()->IdCompetition;
+                return new MLCApiCompetitionObject($objIdCompetition);
+            break;
             default:
                 return parent::__call($strName, $arrArguments);
         }

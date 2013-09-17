@@ -160,10 +160,10 @@ $_CONTROL->txtSearch->Render(); ?>
                     
                         <div class='span3'>
                             
-                                <?php if (!is_null($_CONTROL->strStartValue)) { ?>
+                                <?php if (!is_null($_CONTROL->strNSStartValue)) { ?>
                                     <div class='controls'>
-                                        <!--label> Start Value</label-->
-                                        <?php $_CONTROL->strStartValue->Render(); ?>
+                                        <!--label> N S Start Value</label-->
+                                        <?php $_CONTROL->strNSStartValue->Render(); ?>
                                      </div>
                                  <?php
     } ?>
@@ -172,6 +172,71 @@ $_CONTROL->txtSearch->Render(); ?>
                         </div>
                     
                         <div class='span3'>
+                            
+                            
+                        </div>
+                    
+                        <div class='span3'>
+                            
+                                <?php if (!is_null($_CONTROL->intIdCompetition)) { ?>
+                                    <div class='controls'>
+                                        <!--label> Competition</label-->
+                                        <?php $_CONTROL->intIdCompetition->Render(); ?>
+                                     </div>
+                                 <?php
+    } ?>
+                            
+                            
+                        </div>
+                    
+                        <div class='span3'>
+                            
+                                <?php if (!is_null($_CONTROL->strNSSpecialNotes)) { ?>
+                                    <div class='controls'>
+                                        <!--label> N S Special Notes</label-->
+                                        <?php $_CONTROL->strNSSpecialNotes->Render(); ?>
+                                     </div>
+                                 <?php
+    } ?>
+                            
+                            
+                        </div>
+                    
+                        <div class='span3'>
+                            
+                                <?php if (!is_null($_CONTROL->intNSTied)) { ?>
+                                    <div class='controls'>
+                                        <!--label> N S Tied</label-->
+                                        <?php $_CONTROL->intNSTied->Render(); ?>
+                                     </div>
+                                 <?php
+    } ?>
+                            
+                            
+                        </div>
+                    
+                        <div class='span3'>
+                            
+                                <?php if (!is_null($_CONTROL->intNSPlace)) { ?>
+                                    <div class='controls'>
+                                        <!--label> N S Place</label-->
+                                        <?php $_CONTROL->intNSPlace->Render(); ?>
+                                     </div>
+                                 <?php
+    } ?>
+                            
+                            
+                        </div>
+                    
+                        <div class='span3'>
+                            
+                                <?php if (!is_null($_CONTROL->intIdInputUser)) { ?>
+                                    <div class='controls'>
+                                        <!--label> Input User</label-->
+                                        <?php $_CONTROL->intIdInputUser->Render(); ?>
+                                     </div>
+                                 <?php
+    } ?>
                             
                             
                         </div>

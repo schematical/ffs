@@ -12,6 +12,7 @@
 * - QueryCount()
 * - LoadCollByIdSession()
 * - LoadCollByIdAthelete()
+* - LoadCollByIdCompetition()
 * - LoadByTag()
 * - AddTag()
 * - ParseArray()
@@ -51,10 +52,21 @@
  * @property-write mixed $Sanctioned
  * @property-read mixed $Notes
  * @property-write mixed $Notes
- * @property-read mixed $StartValue
- * @property-write mixed $StartValue
+ * @property-read mixed $NSStartValue
+ * @property-write mixed $NSStartValue
+ * @property-read mixed $IdCompetition
+ * @property-write mixed $IdCompetition
+ * @property-read mixed $NSSpecialNotes
+ * @property-write mixed $NSSpecialNotes
+ * @property-read mixed $NSTied
+ * @property-write mixed $NSTied
+ * @property-read mixed $NSPlace
+ * @property-write mixed $NSPlace
+ * @property-read mixed $IdInputUser
+ * @property-write mixed $IdInputUser
  * @property-read Result $IdSessionObject
  * @property-read Result $IdAtheleteObject
+ * @property-read Result $IdCompetitionObject
  */
 class ResultBase extends MLCBaseEntity {
     const DB_CONN = 'DB_1';
@@ -62,6 +74,7 @@ class ResultBase extends MLCBaseEntity {
     const P_KEY = 'idResult';
     protected $objIdSession = null;
     protected $objIdAthelete = null;
+    protected $objIdCompetition = null;
     public function __construct() {
         $this->table = DB_PREFIX . self::TABLE_NAME;
         $this->pKey = self::P_KEY;
@@ -110,12 +123,27 @@ class ResultBase extends MLCBaseEntity {
         $xmlStr.= "<notes>";
         $xmlStr.= $this->notes;
         $xmlStr.= "</notes>";
-        $xmlStr.= "<startValue>";
-        $xmlStr.= $this->startValue;
-        $xmlStr.= "</startValue>";
+        $xmlStr.= "<NSStartValue>";
+        $xmlStr.= $this->NSStartValue;
+        $xmlStr.= "</NSStartValue>";
         $xmlStr.= "<data>";
         $xmlStr.= $this->data;
         $xmlStr.= "</data>";
+        $xmlStr.= "<idCompetition>";
+        $xmlStr.= $this->idCompetition;
+        $xmlStr.= "</idCompetition>";
+        $xmlStr.= "<NSSpecialNotes>";
+        $xmlStr.= $this->NSSpecialNotes;
+        $xmlStr.= "</NSSpecialNotes>";
+        $xmlStr.= "<NSTied>";
+        $xmlStr.= $this->NSTied;
+        $xmlStr.= "</NSTied>";
+        $xmlStr.= "<NSPlace>";
+        $xmlStr.= $this->NSPlace;
+        $xmlStr.= "</NSPlace>";
+        $xmlStr.= "<idInputUser>";
+        $xmlStr.= $this->idInputUser;
+        $xmlStr.= "</idInputUser>";
         if ($blnReclusive) {
             //Finish FK Rel stuff
             
@@ -138,8 +166,13 @@ class ResultBase extends MLCBaseEntity {
                 $this->arrDBFields['dispDate'] = $arrData['Result.dispDate'];
                 $this->arrDBFields['sanctioned'] = $arrData['Result.sanctioned'];
                 $this->arrDBFields['notes'] = $arrData['Result.notes'];
-                $this->arrDBFields['startValue'] = $arrData['Result.startValue'];
+                $this->arrDBFields['NSStartValue'] = $arrData['Result.NSStartValue'];
                 $this->arrDBFields['data'] = $arrData['Result.data'];
+                $this->arrDBFields['idCompetition'] = $arrData['Result.idCompetition'];
+                $this->arrDBFields['NSSpecialNotes'] = $arrData['Result.NSSpecialNotes'];
+                $this->arrDBFields['NSTied'] = $arrData['Result.NSTied'];
+                $this->arrDBFields['NSPlace'] = $arrData['Result.NSPlace'];
+                $this->arrDBFields['idInputUser'] = $arrData['Result.idInputUser'];
                 //Foregin Key
                 if ((array_key_exists('Session.idSession', $arrData)) && (!is_null($arrData['Session.idSession']))) {
                     $this->objIdSession = new Session();
@@ -148,6 +181,10 @@ class ResultBase extends MLCBaseEntity {
                 if ((array_key_exists('Athelete.idAthelete', $arrData)) && (!is_null($arrData['Athelete.idAthelete']))) {
                     $this->objIdAthelete = new Athelete();
                     $this->objIdAthelete->Materilize($arrData);
+                }
+                if ((array_key_exists('Competition.idCompetition', $arrData)) && (!is_null($arrData['Competition.idCompetition']))) {
+                    $this->objIdCompetition = new Competition();
+                    $this->objIdCompetition->Materilize($arrData);
                 }
             } else {
                 //Old ways
@@ -176,8 +213,13 @@ class ResultBase extends MLCBaseEntity {
         $arrFields[] = 'Result.dispDate ' . (($blnLongSelect) ? ' as "Result.dispDate"' : '');
         $arrFields[] = 'Result.sanctioned ' . (($blnLongSelect) ? ' as "Result.sanctioned"' : '');
         $arrFields[] = 'Result.notes ' . (($blnLongSelect) ? ' as "Result.notes"' : '');
-        $arrFields[] = 'Result.startValue ' . (($blnLongSelect) ? ' as "Result.startValue"' : '');
+        $arrFields[] = 'Result.NSStartValue ' . (($blnLongSelect) ? ' as "Result.NSStartValue"' : '');
         $arrFields[] = 'Result.data ' . (($blnLongSelect) ? ' as "Result.data"' : '');
+        $arrFields[] = 'Result.idCompetition ' . (($blnLongSelect) ? ' as "Result.idCompetition"' : '');
+        $arrFields[] = 'Result.NSSpecialNotes ' . (($blnLongSelect) ? ' as "Result.NSSpecialNotes"' : '');
+        $arrFields[] = 'Result.NSTied ' . (($blnLongSelect) ? ' as "Result.NSTied"' : '');
+        $arrFields[] = 'Result.NSPlace ' . (($blnLongSelect) ? ' as "Result.NSPlace"' : '');
+        $arrFields[] = 'Result.idInputUser ' . (($blnLongSelect) ? ' as "Result.idInputUser"' : '');
         return $arrFields;
     }
     public static function Query($strExtra = null, $mixReturnSingle = false, $arrJoins = null) {
@@ -200,6 +242,9 @@ class ResultBase extends MLCBaseEntity {
                     break;
                     case ('Athelete'):
                         $strJoin.= ' LEFT JOIN Athelete ON Result.idAthelete = Athelete.idAthelete';
+                    break;
+                    case ('Competition'):
+                        $strJoin.= ' LEFT JOIN Competition ON Result.idCompetition = Competition.idCompetition';
                     break;
                 }
             }
@@ -254,6 +299,9 @@ class ResultBase extends MLCBaseEntity {
                     case ('Athelete'):
                         $strJoin.= ' LEFT JOIN Athelete ON Result.idAthelete = Athelete.idAthelete';
                     break;
+                    case ('Competition'):
+                        $strJoin.= ' LEFT JOIN Competition ON Result.idCompetition = Competition.idCompetition';
+                    break;
                 }
             }
         }
@@ -276,6 +324,17 @@ class ResultBase extends MLCBaseEntity {
     }
     public static function LoadCollByIdAthelete($intIdAthelete) {
         $strSql = sprintf("SELECT Result.* FROM Result WHERE idAthelete = %s;", $intIdAthelete);
+        $result = MLCDBDriver::Query($strSql, self::DB_CONN);
+        $coll = new BaseEntityCollection();
+        while ($data = mysql_fetch_assoc($result)) {
+            $objResult = new Result();
+            $objResult->materilize($data);
+            $coll->addItem($objResult);
+        }
+        return $coll;
+    }
+    public static function LoadCollByIdCompetition($intIdCompetition) {
+        $strSql = sprintf("SELECT Result.* FROM Result WHERE idCompetition = %s;", $intIdCompetition);
         $result = MLCDBDriver::Query($strSql, self::DB_CONN);
         $coll = new BaseEntityCollection();
         while ($data = mysql_fetch_assoc($result)) {
@@ -347,8 +406,13 @@ class ResultBase extends MLCBaseEntity {
         $collReturn['dispDate'] = $this->dispDate;
         $collReturn['sanctioned'] = $this->sanctioned;
         $collReturn['notes'] = $this->notes;
-        $collReturn['startValue'] = $this->startValue;
+        $collReturn['NSStartValue'] = $this->NSStartValue;
         $collReturn['data'] = $this->data;
+        $collReturn['idCompetition'] = $this->idCompetition;
+        $collReturn['NSSpecialNotes'] = $this->NSSpecialNotes;
+        $collReturn['NSTied'] = $this->NSTied;
+        $collReturn['NSPlace'] = $this->NSPlace;
+        $collReturn['idInputUser'] = $this->idInputUser;
         return $collReturn;
     }
     public function __toString() {
@@ -441,10 +505,45 @@ class ResultBase extends MLCBaseEntity {
                 }
                 return null;
             break;
-            case ('StartValue'):
-            case ('startValue'):
-                if (array_key_exists('startValue', $this->arrDBFields)) {
-                    return $this->arrDBFields['startValue'];
+            case ('NSStartValue'):
+            case ('NSStartValue'):
+                if (array_key_exists('NSStartValue', $this->arrDBFields)) {
+                    return $this->arrDBFields['NSStartValue'];
+                }
+                return null;
+            break;
+            case ('IdCompetition'):
+            case ('idCompetition'):
+                if (array_key_exists('idCompetition', $this->arrDBFields)) {
+                    return $this->arrDBFields['idCompetition'];
+                }
+                return null;
+            break;
+            case ('NSSpecialNotes'):
+            case ('NSSpecialNotes'):
+                if (array_key_exists('NSSpecialNotes', $this->arrDBFields)) {
+                    return $this->arrDBFields['NSSpecialNotes'];
+                }
+                return null;
+            break;
+            case ('NSTied'):
+            case ('NSTied'):
+                if (array_key_exists('NSTied', $this->arrDBFields)) {
+                    return $this->arrDBFields['NSTied'];
+                }
+                return null;
+            break;
+            case ('NSPlace'):
+            case ('NSPlace'):
+                if (array_key_exists('NSPlace', $this->arrDBFields)) {
+                    return $this->arrDBFields['NSPlace'];
+                }
+                return null;
+            break;
+            case ('IdInputUser'):
+            case ('idInputUser'):
+                if (array_key_exists('idInputUser', $this->arrDBFields)) {
+                    return $this->arrDBFields['idInputUser'];
                 }
                 return null;
             break;
@@ -465,6 +564,16 @@ class ResultBase extends MLCBaseEntity {
                 if ((array_key_exists('idAthelete', $this->arrDBFields)) && (!is_null($this->arrDBFields['idAthelete']))) {
                     $this->objIdAthelete = Athelete::LoadById($this->arrDBFields['idAthelete']);
                     return $this->objIdAthelete;
+                }
+                return null;
+            break;
+            case ('IdCompetitionObject'):
+                if (!is_null($this->objIdCompetition)) {
+                    return $this->objIdCompetition;
+                }
+                if ((array_key_exists('idCompetition', $this->arrDBFields)) && (!is_null($this->arrDBFields['idCompetition']))) {
+                    $this->objIdCompetition = Competition::LoadById($this->arrDBFields['idCompetition']);
+                    return $this->objIdCompetition;
                 }
                 return null;
             break;
@@ -530,13 +639,37 @@ class ResultBase extends MLCBaseEntity {
             case ('_Notes'):
                 $this->arrDBFields['notes'] = $mixValue;
             break;
-            case ('StartValue'):
-            case ('startValue'):
-            case ('_StartValue'):
-                $this->arrDBFields['startValue'] = $mixValue;
+            case ('NSStartValue'):
+            case ('NSStartValue'):
+            case ('_NSStartValue'):
+                $this->arrDBFields['NSStartValue'] = $mixValue;
             break;
             case ('_Data'):
                 $this->arrDBFields['data'] = $mixValue;
+            break;
+            case ('IdCompetition'):
+            case ('idCompetition'):
+                $this->arrDBFields['idCompetition'] = $mixValue;
+                $this->objIdCompetition = null;
+            break;
+            case ('NSSpecialNotes'):
+            case ('NSSpecialNotes'):
+            case ('_NSSpecialNotes'):
+                $this->arrDBFields['NSSpecialNotes'] = $mixValue;
+            break;
+            case ('NSTied'):
+            case ('NSTied'):
+            case ('_NSTied'):
+                $this->arrDBFields['NSTied'] = $mixValue;
+            break;
+            case ('NSPlace'):
+            case ('NSPlace'):
+            case ('_NSPlace'):
+                $this->arrDBFields['NSPlace'] = $mixValue;
+            break;
+            case ('IdInputUser'):
+            case ('idInputUser'):
+                $this->arrDBFields['idInputUser'] = $mixValue;
             break;
             case ('IdSessionObject'):
                 if ((!is_null($mixValue)) && ((!is_object($mixValue)) || (!($mixValue instanceof Session)))) {
@@ -559,6 +692,17 @@ class ResultBase extends MLCBaseEntity {
                     $this->arrDBFields['idAthelete'] = null;
                 }
                 $this->objIdAthelete = $mixValue;
+            break;
+            case ('IdCompetitionObject'):
+                if ((!is_null($mixValue)) && ((!is_object($mixValue)) || (!($mixValue instanceof Competition)))) {
+                    throw new MLCWrongTypeException('__set', $strName);
+                }
+                if (!is_null($mixValue)) {
+                    $this->arrDBFields['idCompetition'] = $mixValue->idCompetition;
+                } else {
+                    $this->arrDBFields['idCompetition'] = null;
+                }
+                $this->objIdCompetition = $mixValue;
             break;
             default:
                 throw new MLCMissingPropertyException($this, $strName);

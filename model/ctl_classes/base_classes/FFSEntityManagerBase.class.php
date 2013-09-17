@@ -605,8 +605,11 @@ class FFSEntityManagerBase {
         if ((is_null($strField)) || ($strField == 'event')) {
             $arrOrConditions[] = sprintf('Result.event LIKE "%s%%"', strtolower($strSearch));
         }
-        if ((is_null($strField)) || ($strField == 'startValue')) {
-            $arrOrConditions[] = sprintf('Result.startValue LIKE "%s%%"', strtolower($strSearch));
+        if ((is_null($strField)) || ($strField == 'NSStartValue')) {
+            $arrOrConditions[] = sprintf('Result.NSStartValue LIKE "%s%%"', strtolower($strSearch));
+        }
+        if ((is_null($strField)) || ($strField == 'NSSpecialNotes')) {
+            $arrOrConditions[] = sprintf('Result.NSSpecialNotes LIKE "%s%%"', strtolower($strSearch));
         }
         if (count($arrOrConditions) == 0) {
             $arrOrConditions[] = '1';
@@ -643,6 +646,21 @@ class FFSEntityManagerBase {
                 $arrResults = array_merge($arrResults, $arrAtheletes);
             }
             /*---------------End load: Athelete----------------------*/
+            /*---------------Load by parent field: Competition----------------------*/
+            $arrOrConditions = array();
+            $arrOrConditions[] = sprintf('Competition.name LIKE "%s%%"', strtolower($strSearch));
+            $arrOrConditions[] = sprintf('Competition.namespace LIKE "%s%%"', strtolower($strSearch));
+            if (count($arrOrConditions) > 0) {
+                $arrCompetitions = Competition::Query('WHERE ' . implode(' OR ', $arrOrConditions) . ' ' . $this->GetCompetitionOwnerQuery());
+                if ($arrResults instanceof MLCBaseEntityCollection) {
+                    $arrResults = $arrResults->GetCollection();
+                }
+                if ($arrCompetitions instanceof MLCBaseEntityCollection) {
+                    $arrCompetitions = $arrCompetitions->GetCollection();
+                }
+                $arrResults = array_merge($arrResults, $arrCompetitions);
+            }
+            /*---------------End load: Competition----------------------*/
         }
         return $arrResults;
     }

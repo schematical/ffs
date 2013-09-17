@@ -17,7 +17,9 @@
 * - InitScoreAutocomplete()
 * - InitJudgeAutocomplete()
 * - InitEventAutocomplete()
-* - InitStartValueAutocomplete()
+* - InitNSStartValueAutocomplete()
+* - InitIdCompetitionAutocomplete()
+* - InitNSSpecialNotesAutocomplete()
 * Classes list:
 * - ResultEditPanelBase extends MJaxPanel
 */
@@ -34,10 +36,16 @@ class ResultEditPanelBase extends MJaxPanel {
     public $dttDispDate = null;
     public $intSanctioned = null;
     public $strNotes = null;
-    public $strStartValue = null;
+    public $strNSStartValue = null;
     public $strData = null;
+    public $intIdCompetition = null;
+    public $strNSSpecialNotes = null;
+    public $intNSTied = null;
+    public $intNSPlace = null;
+    public $intIdInputUser = null;
     public $lnkViewParentIdSession = null;
     public $lnkViewParentIdAthelete = null;
+    public $lnkViewParentIdCompetition = null;
     //Regular controls
     public $btnSave = null;
     public $btnDelete = null;
@@ -92,11 +100,27 @@ class ResultEditPanelBase extends MJaxPanel {
         $this->strNotes->AddCssClass('input-large');
         //longtext
         $this->strNotes->TextMode = MJaxTextMode::MultiLine;
-        $this->strStartValue = new MJaxTextBox($this);
-        $this->strStartValue->Name = 'startValue';
-        $this->strStartValue->AddCssClass('input-large');
+        $this->strNSStartValue = new MJaxTextBox($this);
+        $this->strNSStartValue->Name = 'NSStartValue';
+        $this->strNSStartValue->AddCssClass('input-large');
         //varchar(64)
         //Is special field!!!!!
+        $this->strNSSpecialNotes = new MJaxTextBox($this);
+        $this->strNSSpecialNotes->Name = 'NSSpecialNotes';
+        $this->strNSSpecialNotes->AddCssClass('input-large');
+        //varchar(64)
+        $this->intNSTied = new MJaxTextBox($this);
+        $this->intNSTied->Name = 'NSTied';
+        $this->intNSTied->AddCssClass('input-large');
+        //tinyint(4)
+        $this->intNSPlace = new MJaxTextBox($this);
+        $this->intNSPlace->Name = 'NSPlace';
+        $this->intNSPlace->AddCssClass('input-large');
+        //int(4)
+        $this->intIdInputUser = new MJaxTextBox($this);
+        $this->intIdInputUser->Name = 'idInputUser';
+        $this->intIdInputUser->AddCssClass('input-large');
+        //int(11)
         if (!is_null($this->objResult)) {
             $this->SetResult($this->objResult);
         }
@@ -124,9 +148,12 @@ class ResultEditPanelBase extends MJaxPanel {
             $this->dttDispDate->Value = $this->objResult->dispDate;
             $this->intSanctioned->Text = $this->objResult->sanctioned;
             $this->strNotes->Text = $this->objResult->notes;
-            $this->strStartValue->Text = $this->objResult->startValue;
+            $this->strNSStartValue->Text = $this->objResult->NSStartValue;
             //Is special field!!!!!
-            
+            $this->strNSSpecialNotes->Text = $this->objResult->NSSpecialNotes;
+            $this->intNSTied->Text = $this->objResult->NSTied;
+            $this->intNSPlace->Text = $this->objResult->NSPlace;
+            $this->intIdInputUser->Text = $this->objResult->idInputUser;
         } else {
             $this->strScore->Text = '';
             $this->strJudge->Text = '';
@@ -138,8 +165,12 @@ class ResultEditPanelBase extends MJaxPanel {
             $this->dttDispDate->Value = MLCDateTime::Now();
             $this->intSanctioned->Text = '';
             $this->strNotes->Text = '';
-            $this->strStartValue->Text = '';
+            $this->strNSStartValue->Text = '';
             //Is special field!!!!!
+            $this->strNSSpecialNotes->Text = '';
+            $this->intNSTied->Text = '';
+            $this->intNSPlace->Text = '';
+            $this->intIdInputUser->Text = '';
             $this->btnDelete->Style->Display = 'none';
         }
     }
@@ -154,6 +185,11 @@ class ResultEditPanelBase extends MJaxPanel {
                 $this->lnkViewParentIdAthelete = new MJaxLinkButton($this);
                 $this->lnkViewParentIdAthelete->Text = 'View Athelete';
                 $this->lnkViewParentIdAthelete->Href = '/data/editResult?' . FFSQS::Result_IdAthelete . $this->objResult->idAthelete;
+            }
+            if (!is_null($this->objResult->idCompetition)) {
+                $this->lnkViewParentIdCompetition = new MJaxLinkButton($this);
+                $this->lnkViewParentIdCompetition->Text = 'View Competition';
+                $this->lnkViewParentIdCompetition->Href = '/data/editResult?' . FFSQS::Result_IdCompetition . $this->objResult->idCompetition;
             }
         }
     }
@@ -220,16 +256,52 @@ class ResultEditPanelBase extends MJaxPanel {
         } else {
             $this->objResult->notes = $this->strNotes->Text;
         }
-        if (get_class($this->strStartValue) == 'MJaxBSAutocompleteTextBox') {
-            $mixEntity = $this->strStartValue->GetValue();
+        if (get_class($this->strNSStartValue) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strNSStartValue->GetValue();
             if (is_object($mixEntity)) {
-                $mixEntity = $mixEntity->__get('startValue');
+                $mixEntity = $mixEntity->__get('NSStartValue');
             }
-            $this->objResult->startValue = $mixEntity;
+            $this->objResult->NSStartValue = $mixEntity;
         } else {
-            $this->objResult->startValue = $this->strStartValue->Text;
+            $this->objResult->NSStartValue = $this->strNSStartValue->Text;
         }
         //Is special field!!!!!
+        if (get_class($this->strNSSpecialNotes) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strNSSpecialNotes->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('NSSpecialNotes');
+            }
+            $this->objResult->NSSpecialNotes = $mixEntity;
+        } else {
+            $this->objResult->NSSpecialNotes = $this->strNSSpecialNotes->Text;
+        }
+        if (get_class($this->intNSTied) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->intNSTied->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('NSTied');
+            }
+            $this->objResult->NSTied = $mixEntity;
+        } else {
+            $this->objResult->NSTied = $this->intNSTied->Text;
+        }
+        if (get_class($this->intNSPlace) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->intNSPlace->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('NSPlace');
+            }
+            $this->objResult->NSPlace = $mixEntity;
+        } else {
+            $this->objResult->NSPlace = $this->intNSPlace->Text;
+        }
+        if (get_class($this->intIdInputUser) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->intIdInputUser->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('idInputUser');
+            }
+            $this->objResult->idInputUser = $mixEntity;
+        } else {
+            $this->objResult->idInputUser = $this->intIdInputUser->Text;
+        }
         $this->objResult->Save();
         //Experimental save event trigger
         $this->ActionParameter = $this->objResult;
@@ -277,11 +349,23 @@ class ResultEditPanelBase extends MJaxPanel {
         $this->strEvent->Name = 'event';
         $this->strEvent->AddCssClass('input-large');
     }
-    public function InitStartValueAutocomplete() {
-        $this->strStartValue = new MJaxBSAutocompleteTextBox($this);
-        $this->strStartValue->SetSearchEntity('result', 'startValue');
-        $this->strStartValue->Name = 'startValue';
-        $this->strStartValue->AddCssClass('input-large');
+    public function InitNSStartValueAutocomplete() {
+        $this->strNSStartValue = new MJaxBSAutocompleteTextBox($this);
+        $this->strNSStartValue->SetSearchEntity('result', 'NSStartValue');
+        $this->strNSStartValue->Name = 'NSStartValue';
+        $this->strNSStartValue->AddCssClass('input-large');
+    }
+    public function InitIdCompetitionAutocomplete() {
+        $this->intIdCompetition = new MJaxBSAutocompleteTextBox($this);
+        $this->intIdCompetition->SetSearchEntity('competition');
+        $this->intIdCompetition->Name = 'idCompetition';
+        $this->intIdCompetition->AddCssClass('input-large');
+    }
+    public function InitNSSpecialNotesAutocomplete() {
+        $this->strNSSpecialNotes = new MJaxBSAutocompleteTextBox($this);
+        $this->strNSSpecialNotes->SetSearchEntity('result', 'NSSpecialNotes');
+        $this->strNSSpecialNotes->Name = 'NSSpecialNotes';
+        $this->strNSSpecialNotes->AddCssClass('input-large');
     }
 }
 ?>

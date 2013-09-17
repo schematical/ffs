@@ -19,6 +19,7 @@
 * - GetOrgCompetitionArrByOrg()
 * - CreateOrgCompetitionFromOrg()
 * - GetParentMessageArr()
+* - GetResultArr()
 * - GetSessionArr()
 * - LoadCollByIdOrg()
 * - LoadByTag()
@@ -291,6 +292,9 @@ class CompetitionBase extends MLCBaseEntity {
     public function GetParentMessageArr() {
         return ParentMessage::LoadCollByIdCompetition($this->idCompetition)->getCollection();
     }
+    public function GetResultArr() {
+        return Result::LoadCollByIdCompetition($this->idCompetition)->getCollection();
+    }
     public function GetSessionArr() {
         return Session::LoadCollByIdCompetition($this->idCompetition)->getCollection();
     }
@@ -315,6 +319,9 @@ class CompetitionBase extends MLCBaseEntity {
     public function ParseArray($arrData) {
         foreach ($arrData as $strKey => $mixVal) {
             $arrData[strtolower($strKey) ] = $mixVal;
+        }
+        if (array_key_exists('idcompetition', $arrData)) {
+            $this->intIdCompetition = $arrData['idcompetition'];
         }
         if (array_key_exists('idcompetition', $arrData)) {
             $this->intIdCompetition = $arrData['idcompetition'];

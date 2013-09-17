@@ -51,9 +51,17 @@ class ResultManageFormBase extends FFSForm {
         if (!is_null($strEvent)) {
             $arrAndConditions[] = sprintf('Result.event LIKE "%s%%"', $strEvent);
         }
-        $strStartValue = MLCApplication::QS(FFSQS::Result_StartValue);
-        if (!is_null($strStartValue)) {
-            $arrAndConditions[] = sprintf('Result.startValue LIKE "%s%%"', $strStartValue);
+        $strNSStartValue = MLCApplication::QS(FFSQS::Result_NSStartValue);
+        if (!is_null($strNSStartValue)) {
+            $arrAndConditions[] = sprintf('Result.NSStartValue LIKE "%s%%"', $strNSStartValue);
+        }
+        $intIdCompetition = MLCApplication::QS(FFSQS::Result_IdCompetition);
+        if (!is_null($intIdCompetition)) {
+            $arrAndConditions[] = sprintf('Result.idCompetition = %s', $intIdCompetition);
+        }
+        $strNSSpecialNotes = MLCApplication::QS(FFSQS::Result_NSSpecialNotes);
+        if (!is_null($strNSSpecialNotes)) {
+            $arrAndConditions[] = sprintf('Result.NSSpecialNotes LIKE "%s%%"', $strNSSpecialNotes);
         }
         if (count($arrAndConditions) >= 1) {
             $arrResults = Result::Query('WHERE ' . implode(' AND ', $arrAndConditions));
