@@ -22,6 +22,29 @@ class Result extends ResultBase {
         }
         return parent::Save();
     }
+    public static function GroupByAthelete($arrResults){
+        $arrReturn = array();
+        foreach($arrResults as $objResult){
+            if(!array_key_exists($objResult->IdAthelete, $arrReturn)){
+                $arrReturn[$objResult->IdAthelete] = new FFSResultCollection();
+                $arrReturn[$objResult->IdAthelete]->Athelete = $objResult->IdAtheleteObject;
+            }
+            $arrReturn[$objResult->IdAthelete][$objResult->Event] = $objResult;
+        }
+        return $arrReturn;
+    }
+    public static function GroupByCompetition($arrResults){
+        $arrReturn = array();
+        foreach($arrResults as $objResult){
+            if(!array_key_exists($objResult->IdCompetition, $arrReturn)){
+                $arrReturn[$objResult->IdCompetition] = new FFSResultCollection();
+                $arrReturn[$objResult->IdCompetition]->Athelete = $objResult->IdAtheleteObject;
+                $arrReturn[$objResult->IdCompetition]->Competition = $objResult->IdCompetitionObject;
+            }
+            $arrReturn[$objResult->IdCompetition][$objResult->Event] = $objResult;
+        }
+        return $arrReturn;
+    }
 
 }
 

@@ -24,7 +24,7 @@ abstract class FFSJsonSearchDriverHandeler {
         if (array_key_exists('entity', $_POST)) {
             $strEntity = $_POST['entity'];
             $strField = null;
-            if (array_key_exists('entity_field', $_POST)) {
+            if ((array_key_exists('entity_field', $_POST)) && (strlen($_POST['entity_field']) > 0)) {
                 $strField = $_POST['entity_field'];
             }
         } else {

@@ -60,6 +60,15 @@ class FFSResultCollection extends BaseEntityCollection{
         }
         return FFSApplication::AvgResults($arrReturn);
     }
+    public function IsSanctioned(){
+        //RETURN FALSE IF EVEN ONE RESULT IS NOT SANCTIONED
+        foreach($this->arrCollection as $objResult){
+            if(!$objResult->Sanctioned){
+                return false;
+            }
+        }
+        return true;
+    }
     /////////////////////////
     // Public Properties: GET
     /////////////////////////
@@ -72,6 +81,10 @@ class FFSResultCollection extends BaseEntityCollection{
                 return $this->objAthelete;
             case "Session":
                 return $this->objSession;
+            case "Competition":
+                return $this->objCompetition;
+            case "Sanctioned":
+                return $this->IsSanctioned();
             case "Total":
                 return $this->GetTotal();
                 //return $this->GetAtheletes();
@@ -96,6 +109,9 @@ class FFSResultCollection extends BaseEntityCollection{
                 return $this->objAthelete = $mixValue;
             case "Session":
                 return $this->objSession = $mixValue;
+            case "Competition":
+                return $this->objCompetition = $mixValue;
+           ;
             default:
                 //return parent::__set($strName, $mixValue);
                 throw new MLCMissingPropertyException( $this, $strName);

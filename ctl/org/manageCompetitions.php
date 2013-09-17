@@ -10,6 +10,7 @@ class CompetitionManageForm extends CompetitionManageFormBase {
     protected $blnInlineEdit = false;
     public function Form_Create() {
         parent::Form_Create();
+        $this->SecureOrg();
         $this->InitSelectPanel();
         $arrCompetitions = $this->Query();
         $objCompetition = null;

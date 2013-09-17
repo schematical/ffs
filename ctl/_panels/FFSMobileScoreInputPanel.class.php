@@ -289,5 +289,9 @@ class FFSMobileScoreInputPanel extends MJaxPanel{
         );
         $this->UpdateResult();
     }
+    public function lstAtheletes_change(){
+        $this->objSelAthelete = $this->lstAtheletes->GetValue();
+        $this->UpdateResult();
+    }
     
 }

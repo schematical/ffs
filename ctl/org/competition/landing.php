@@ -80,7 +80,7 @@ class landing extends FFSForm {
             $this->pnlCompetition->objOrg//Entity
         );
         $this->Redirect(
-            "/" . $this->pnlCompetition->GetCompetition()->Namespace . '/org/competition/manageSessions',
+            "/" . $this->pnlCompetition->GetCompetition()->Namespace . '/org/competition/index',
             array(
                 FFSQS::UseWizzard => 1
             )

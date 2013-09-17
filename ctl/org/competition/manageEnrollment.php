@@ -221,5 +221,36 @@ class manageEnrollement extends FFSForm{
         $this->pnlSessions->FocusSession($objSession);
 
     }
+    public function InitWizzard(){
+        if(!is_null(MLCApplication::QS(FFSQS::UseWizzard))){
+            $pnlWizzard = new FFSWizzardPanel(
+                $this,
+                'Ready to move on?',
+                'Once you have added a couple of sessions and added your athletes to your sessions please feel free to move on',
+                '/' . FFSForm::Competition()->Namespace . '/org/competition/sessionDetails'
+            );
+            $wgtWizzard =$this->AddWidget(
+                'Setup Wizzard',
+                'icon-list-ol',
+                $pnlWizzard
+            );
+            $wgtWizzard->AddCssClass('span6');
+
+
+
+
+            $this->pnlSelect->Intro("Todo: Matt DO THIS", "", null,"bottom");
+
+            /*$this->pnlEdit->Intro("Enter in gym's info manually", "If it is not in our system you can enter in its info here.");
+
+            $this->lstOrgs->Intro("Gym List", "Here are the gyms you have invited and the gyms that have selected your competition as one the want to attend");
+
+            $pnlWizzard->Intro("Ready to move on?", "When you are ready to move on to the next thing click here");*/
+
+
+
+        }
+    }
+
 }
 manageEnrollement::Run('manageEnrollement');

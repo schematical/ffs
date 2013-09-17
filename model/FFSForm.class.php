@@ -30,8 +30,30 @@ class FFSForm extends MJaxWAdminForm{
             $this->Redirect('/org');
         }
 
-        if(!MLCAuthDriver::User()->HasRoll(FFSForm::Competition(), FFSRoll::ORG_MANAGER)){
+        if(!MLCAuthDriver::User()->HasRoll(FFSForm::Competition()->IdOrgObject, FFSRoll::ORG_MANAGER)){
             $this->Redirect('/org');
+        }
+    }
+    public function SecureOrg(){
+        if(is_null(MLCAuthDriver::User())){
+            $this->Redirect('/index.php');
+        }
+        if(is_null(FFSForm::Org())){
+            $this->Redirect('/index');
+        }
+
+        if(!MLCAuthDriver::User()->HasRoll(FFSForm::Org(), FFSRoll::ORG_MANAGER)){
+            $this->Redirect('/index');
+        }
+    }
+    public function SecureParent(){
+        if(is_null(MLCAuthDriver::User())){
+            $this->Redirect('/index.php');
+        }
+        $arrAtheletes = FFSApplication::GetAtheletesByParent();
+
+        if(count($arrAtheletes) == 0){
+            $this->Redirect('/index');
         }
     }
     public function TriggerControlEvent($strControlId, $strEvent){
@@ -65,10 +87,11 @@ class FFSForm extends MJaxWAdminForm{
     }
 
     public function SetUpNavMenu(){
-        $this->AddHeaderNav('Home', 'icon-home')->Href = '/';
+
 
         switch(FFSForm::$strSection){
             case(FFSSection::ORG):
+                $this->AddHeaderNav('Home', 'icon-home')->Href = '/';
                 $lnkManageCompetitions = $this->AddHeaderNav('Competitions', 'icon-flag');
                 $arrCompetitions = FFSApplication::GetActiveCompetitions();
                 foreach($arrCompetitions as $objCompetition){
@@ -100,7 +123,7 @@ class FFSForm extends MJaxWAdminForm{
                     $lnkManageCompetitions->Href  = '/' . FFSForm::Competition()->Namespace . '/org/competition/index';
 
                     $lnkManageSessions = $this->AddHeaderNav('Manage Sessions', 'icon-calendar');
-                    $lnkManageSessions->Href = '/' . FFSForm::Competition()->Namespace . '/org/competition/manageSessions';
+                    $lnkManageSessions->Href = '/' . FFSForm::Competition()->Namespace . '/org/competition/manageEnrollment';
                     $arrSessions = Session::LoadCollByIdCompetition(FFSForm::Competition()->IdCompetition)->getCollection();
                     foreach($arrSessions as $objSession){
                         //_dv($lnkManageSessions);
@@ -121,11 +144,12 @@ class FFSForm extends MJaxWAdminForm{
             case(FFSSection::PARENT):
                 //TODO - Add invite/share functionality
                 if(!is_null(MLCAuthDriver::User())){
-                    $this->AddHeaderNav('My Competitions', 'icon-flag')->Href = '/parent/myCompetitions';
+                    $this->AddHeaderNav('Home', 'icon-home')->Href = '/parent';
+                    $this->AddHeaderNav('My Competitions', 'icon-flag')->Href = '/parent/home';
                     $arrAtheletes = FFSApplication::GetAtheletesByParent();
                     if(count($arrAtheletes < 3)){
                         foreach($arrAtheletes as $objAthelete){
-                            $this->AddHeaderNav($objAthelete->FirstName, 'icon-smile')->Href = '/parent/athleteDetails?' . FFSQS::Athelete_IdAthelete . '=' . $objAthelete->IdAthelete;
+                            $this->AddHeaderNav($objAthelete->FirstName, 'icon-smile')->Href = '/parent/results?' . FFSQS::Athelete_IdAthelete . '=' . $objAthelete->IdAthelete;
                         }
                     }else{
                         $lnkMyTeam = $this->AddHeaderNav('My Team', 'icon-flag');
@@ -134,14 +158,15 @@ class FFSForm extends MJaxWAdminForm{
                         }
                     }
                     $this->AddHeaderNav('Share', 'icon-bullhorn')->Href = '/parent/share';
+                    $this->AddHeaderNav('Pro-store', 'icon-star')->Href = '/parent/prostore';
+
                 }
 
             break;
             default:
                 $this->AddHeaderNav('FAQ', 'icon-question-sign')->Href = '/faq';
-
                 $this->AddHeaderNav('Competition Hosts', 'icon-trophy')->Href = '/org/competition/landing';
-                $this->AddHeaderNav('Parents', 'icon-female')->Href = '/parents/landing';
+                $this->AddHeaderNav('Parents', 'icon-female')->Href = '/parent/landing';
                 $this->AddHeaderNav('Contact Us', 'icon-phone')->Href = '/contactUs';
 
 
