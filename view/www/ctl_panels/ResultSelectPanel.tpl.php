@@ -132,6 +132,50 @@ $_CONTROL->txtSearch->Render(); ?>
                              
                         </div>
                     
+                        <div class='span3'>
+                            
+                                <?php if (!is_null($_CONTROL->intSanctioned)) { ?>
+                                    <div class='controls'>
+                                        <!--label> Sanctioned</label-->
+                                        <?php $_CONTROL->intSanctioned->Render(); ?>
+                                     </div>
+                                 <?php
+    } ?>
+                            
+                            
+                        </div>
+                    
+                        <div class='span3'>
+                            
+                                <?php if (!is_null($_CONTROL->strNotes)) { ?>
+                                    <div class='controls'>
+                                        <!--label> Notes</label-->
+                                        <?php $_CONTROL->strNotes->Render(); ?>
+                                     </div>
+                                 <?php
+    } ?>
+                            
+                            
+                        </div>
+                    
+                        <div class='span3'>
+                            
+                                <?php if (!is_null($_CONTROL->strStartValue)) { ?>
+                                    <div class='controls'>
+                                        <!--label> Start Value</label-->
+                                        <?php $_CONTROL->strStartValue->Render(); ?>
+                                     </div>
+                                 <?php
+    } ?>
+                            
+                            
+                        </div>
+                    
+                        <div class='span3'>
+                            
+                            
+                        </div>
+                    
                 </div>
             </div>
         </div>

@@ -69,6 +69,9 @@ class landing extends FFSForm {
     }
     public function pnlSignup_signup(){
         $this->pnlCompetition->btnSave_click();
+        $objCompetition = $this->pnlCompetition->GetCompetition();
+        $objCompetition->sanctioned = true;
+        $objCompetition->Save();
     }
     public function pnlCompetition_success($strFormId, $strControlId, $objCompetition){
         $this->pnlCompetition->Alert("Success", 'success');

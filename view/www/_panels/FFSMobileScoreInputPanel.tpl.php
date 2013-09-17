@@ -31,24 +31,19 @@
     }
 </style>
 <div class='container'>
+    <?php if(count($_CONTROL->lstAtheletes->arrOptions) > 0){ ?>
+    <div class='row margin-bottom-25'>
+        <div class='span12'>
+            <?php $_CONTROL->lstAtheletes->Render(); ?>
+        </div>
+    </div>
+    <?php } ?>
     <div class='row'>
         <div class='span12'>
             <div class='well'>
                 <div class='pull-left'>
-                    <h3>Athlete Name:</h3>
-                    <div class="btn-group">
-                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                            Brianna Slonim
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href=''>
-                                    Chelsie Gray
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+                    <h3><?php echo $_CONTROL->objSelAthelete->__toString(); ?></h3>
+
                 </div>
                 <div class='pull-right'>
                     <h3>AA</h3>
@@ -63,25 +58,22 @@
 
     <div class='row'>
         <div class='span12'>
-            <div class="" style='margin-top:100Px;'>
+            <div class="" style='margin-top:60Px;'>
                 <ul id="myTab" class="nav nav-tabs">
-                    <li class="active"><a href="#home" data-toggle="tab">Vault</a></li>
-                    <li><a href="#home" data-toggle="tab">Bars</a></li>
-                    <li><a href="#home" data-toggle="tab">Beam</a></li>
-                    <li><a href="#home" data-toggle="tab">Floor</a></li>
-                   <!-- <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Options <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#dropdown1" data-toggle="tab">@fat</a></li>
-                            <li><a href="#dropdown2" data-toggle="tab">@mdo</a></li>
-                        </ul>
-                    </li>-->
+                    <?php foreach($_CONTROL->arrTabs as $lnkTab){ ?>
+                        <li class="<?php echo (($_CONTROL->strSelEvent == $lnkTab->ActionParameter)?'active':''); ?>">
+                            <?php $lnkTab->Render(); ?>
+                        </li>
+                    <?php } ?>
                 </ul>
                 <div id="myTabContent" class="tab-content" style='overflow: hidden'>
-                    <div class="tab-pane fade in active" id="home">
+                    <div class="tab-pane fade in active" id="<?php echo $_CONTROL->ControlId; ?>_tab-content">
                         <div class='container-fluid'>
                             <div class='row-fluid'>
                                 <div class='span12'>
+                                    <div class='alert alert-success'>
+                                        Congrats on Jennifer's highest Vault score of the season. Celebrate with a gift from the <a href='javascript:MJax.BS.Alert("Pro-shop Coming Soon");'>TumbleScore Pro-shop</a>
+                                    </div>
                                     <div class='input-append'>
                                         <input id='ffs-score-input' type='text' class='input-large ffs-score-input' value='9.1' />
                                         <div id='ffs-special-notes' class="btn-group">
@@ -225,7 +217,7 @@
                                         <input type='checkbox' />
                                     </div>
                                 </div>
-                               
+
                             </div>
                             <div class='row-fluid'>
 
@@ -236,15 +228,7 @@
                         </div>
 
                     </div>
-                    <div class="tab-pane fade" id="profile">
 
-                    </div>
-                    <div class="tab-pane fade" id="dropdown1">
-
-                    </div>
-                    <div class="tab-pane fade" id="dropdown2">
-
-                    </div>
                 </div>
             </div>
         </div>

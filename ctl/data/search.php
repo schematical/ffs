@@ -21,19 +21,27 @@ abstract class FFSJsonSearchDriverHandeler {
         } else {
             $strSearch = '';
         }
-        $arrParts = explode('_', self::GetExtension());
-        $strExtension = $arrParts[0];
-        if (count($arrParts) == 2) {
-            $strField = $arrParts[1];
-        } else {
+        if (array_key_exists('entity', $_POST)) {
+            $strEntity = $_POST['entity'];
             $strField = null;
+            if (array_key_exists('entity_field', $_POST)) {
+                $strField = $_POST['entity_field'];
+            }
+        } else {
+            $arrParts = explode('_', self::GetExtension());
+            $strEntity = $arrParts[0];
+            if (count($arrParts) == 2) {
+                $strField = $arrParts[1];
+            } else {
+                $strField = null;
+            }
         }
         $objSearchDriver = MLCApplication::$objRewriteHandeler->EntityManager;
         if (is_null($objSearchDriver)) {
             $objSearchDriver = new FFSEntityManager();
         }
         $objSearchDriver->Populate();
-        switch ($strExtension) {
+        switch ($strEntity) {
             case ('Assignment'):
             case ('assignment'):
                 $arrEntities = $objSearchDriver->SearchAssignment($strSearch, $strField);
@@ -86,7 +94,7 @@ abstract class FFSJsonSearchDriverHandeler {
             break;
             default:
                 die(json_encode(array(
-                    'error' => 'Not a valid searchable entity: ' . $strExtension
+                    'error' => 'Not a valid searchable entity: ' . $strEntity
                 )));
         }
     }

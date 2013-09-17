@@ -52,7 +52,9 @@ if (!is_null($_CONTROL->intIdOrg)) {  $_CONTROL->intIdOrg->Render();
                 
                     <?php if (!is_null($_CONTROL->strMemType)) { ?>
                         <div class="control-group pull-left">
-                          <label class="control-label" for="name"> Mem Type</label>
+                          <label class="control-label" for="name">
+                              Competitive Association:
+                          </label>
                           <div class="controls">
                              <?php $_CONTROL->strMemType->Render(); ?>
                           </div>
@@ -64,7 +66,7 @@ if (!is_null($_CONTROL->intIdOrg)) {  $_CONTROL->intIdOrg->Render();
                 
                     <?php if (!is_null($_CONTROL->strMemId)) { ?>
                         <div class="control-group pull-left">
-                          <label class="control-label" for="name"> Mem Id</label>
+                          <label class="control-label" for="name"> Athlete Id:</label>
                           <div class="controls">
                              <?php $_CONTROL->strMemId->Render(); ?>
                           </div>
@@ -100,8 +102,10 @@ if (!is_null($_CONTROL->intIdOrg)) {  $_CONTROL->intIdOrg->Render();
                 
             
         </fieldset>
-        <div class="form-actions">
-            <?php $_CONTROL->btnSave->Render(); ?>&nbsp;&nbsp;
-            <?php $_CONTROL->btnDelete->Render(); ?>
-        </div>
+        <?php if(!is_null($_CONTROL->btnSave)){ ?>
+            <div class="form-actions">
+                <?php $_CONTROL->btnSave->Render(); ?>&nbsp;&nbsp;
+                <?php $_CONTROL->btnDelete->Render(); ?>
+            </div>
+        <?php } ?>
     </form>

@@ -58,6 +58,8 @@
  * @property-write mixed $SignupCutOffDate
  * @property-read mixed $ClubType
  * @property-write mixed $ClubType
+ * @property-read mixed $Sanctioned
+ * @property-write mixed $Sanctioned
  * @property-read Competition $IdOrgObject
  */
 class CompetitionBase extends MLCBaseEntity {
@@ -113,6 +115,9 @@ class CompetitionBase extends MLCBaseEntity {
         $xmlStr.= "<data>";
         $xmlStr.= $this->data;
         $xmlStr.= "</data>";
+        $xmlStr.= "<sanctioned>";
+        $xmlStr.= $this->sanctioned;
+        $xmlStr.= "</sanctioned>";
         if ($blnReclusive) {
             //Finish FK Rel stuff
             
@@ -135,6 +140,7 @@ class CompetitionBase extends MLCBaseEntity {
                 $this->arrDBFields['signupCutOffDate'] = $arrData['Competition.signupCutOffDate'];
                 $this->arrDBFields['clubType'] = $arrData['Competition.clubType'];
                 $this->arrDBFields['data'] = $arrData['Competition.data'];
+                $this->arrDBFields['sanctioned'] = $arrData['Competition.sanctioned'];
                 //Foregin Key
                 if ((array_key_exists('Org.idOrg', $arrData)) && (!is_null($arrData['Org.idOrg']))) {
                     $this->objIdOrg = new Org();
@@ -167,6 +173,7 @@ class CompetitionBase extends MLCBaseEntity {
         $arrFields[] = 'Competition.signupCutOffDate ' . (($blnLongSelect) ? ' as "Competition.signupCutOffDate"' : '');
         $arrFields[] = 'Competition.clubType ' . (($blnLongSelect) ? ' as "Competition.clubType"' : '');
         $arrFields[] = 'Competition.data ' . (($blnLongSelect) ? ' as "Competition.data"' : '');
+        $arrFields[] = 'Competition.sanctioned ' . (($blnLongSelect) ? ' as "Competition.sanctioned"' : '');
         return $arrFields;
     }
     public static function Query($strExtra = null, $mixReturnSingle = false, $arrJoins = null) {
@@ -373,6 +380,7 @@ class CompetitionBase extends MLCBaseEntity {
         $collReturn['signupCutOffDate'] = $this->signupCutOffDate;
         $collReturn['clubType'] = $this->clubType;
         $collReturn['data'] = $this->data;
+        $collReturn['sanctioned'] = $this->sanctioned;
         return $collReturn;
     }
     public function __toString() {
@@ -458,6 +466,13 @@ class CompetitionBase extends MLCBaseEntity {
                 }
                 return null;
             break;
+            case ('Sanctioned'):
+            case ('sanctioned'):
+                if (array_key_exists('sanctioned', $this->arrDBFields)) {
+                    return $this->arrDBFields['sanctioned'];
+                }
+                return null;
+            break;
             case ('IdOrgObject'):
                 if (!is_null($this->objIdOrg)) {
                     return $this->objIdOrg;
@@ -527,6 +542,11 @@ class CompetitionBase extends MLCBaseEntity {
             break;
             case ('_Data'):
                 $this->arrDBFields['data'] = $mixValue;
+            break;
+            case ('Sanctioned'):
+            case ('sanctioned'):
+            case ('_Sanctioned'):
+                $this->arrDBFields['sanctioned'] = $mixValue;
             break;
             case ('IdOrgObject'):
                 if ((!is_null($mixValue)) && ((!is_object($mixValue)) || (!($mixValue instanceof Org)))) {

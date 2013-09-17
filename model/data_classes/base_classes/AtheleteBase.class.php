@@ -53,6 +53,8 @@
  * @property-write mixed $CreDate
  * @property-read mixed $Level
  * @property-write mixed $Level
+ * @property-read mixed $Event_default
+ * @property-write mixed $Event_default
  * @property-read Athelete $IdOrgObject
  */
 class AtheleteBase extends MLCBaseEntity {
@@ -105,6 +107,9 @@ class AtheleteBase extends MLCBaseEntity {
         $xmlStr.= "<level>";
         $xmlStr.= $this->level;
         $xmlStr.= "</level>";
+        $xmlStr.= "<event_default>";
+        $xmlStr.= $this->event_default;
+        $xmlStr.= "</event_default>";
         if ($blnReclusive) {
             //Finish FK Rel stuff
             
@@ -126,6 +131,7 @@ class AtheleteBase extends MLCBaseEntity {
                 $this->arrDBFields['PsData'] = $arrData['Athelete.PsData'];
                 $this->arrDBFields['creDate'] = $arrData['Athelete.creDate'];
                 $this->arrDBFields['level'] = $arrData['Athelete.level'];
+                $this->arrDBFields['event_default'] = $arrData['Athelete.event_default'];
                 //Foregin Key
                 if ((array_key_exists('Org.idOrg', $arrData)) && (!is_null($arrData['Org.idOrg']))) {
                     $this->objIdOrg = new Org();
@@ -157,6 +163,7 @@ class AtheleteBase extends MLCBaseEntity {
         $arrFields[] = 'Athelete.PsData ' . (($blnLongSelect) ? ' as "Athelete.PsData"' : '');
         $arrFields[] = 'Athelete.creDate ' . (($blnLongSelect) ? ' as "Athelete.creDate"' : '');
         $arrFields[] = 'Athelete.level ' . (($blnLongSelect) ? ' as "Athelete.level"' : '');
+        $arrFields[] = 'Athelete.event_default ' . (($blnLongSelect) ? ' as "Athelete.event_default"' : '');
         return $arrFields;
     }
     public static function Query($strExtra = null, $mixReturnSingle = false, $arrJoins = null) {
@@ -346,6 +353,7 @@ class AtheleteBase extends MLCBaseEntity {
         $collReturn['PsData'] = $this->PsData;
         $collReturn['creDate'] = $this->creDate;
         $collReturn['level'] = $this->level;
+        $collReturn['event_default'] = $this->event_default;
         return $collReturn;
     }
     public function __toString() {
@@ -424,6 +432,13 @@ class AtheleteBase extends MLCBaseEntity {
                 }
                 return null;
             break;
+            case ('Event_default'):
+            case ('event_default'):
+                if (array_key_exists('event_default', $this->arrDBFields)) {
+                    return $this->arrDBFields['event_default'];
+                }
+                return null;
+            break;
             case ('IdOrgObject'):
                 if (!is_null($this->objIdOrg)) {
                     return $this->objIdOrg;
@@ -488,6 +503,11 @@ class AtheleteBase extends MLCBaseEntity {
             case ('level'):
             case ('_Level'):
                 $this->arrDBFields['level'] = $mixValue;
+            break;
+            case ('Event_default'):
+            case ('event_default'):
+            case ('_Event_default'):
+                $this->arrDBFields['event_default'] = $mixValue;
             break;
             case ('IdOrgObject'):
                 if ((!is_null($mixValue)) && ((!is_object($mixValue)) || (!($mixValue instanceof Org)))) {

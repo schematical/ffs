@@ -25,6 +25,10 @@ class ResultSelectPanelBase extends MJaxPanel {
     public $strEvent = null;
     public $txtDispDate_StartDate = null;
     public $txtDispDate_EndDate = null;
+    public $intSanctioned = null;
+    public $strNotes = null;
+    public $strStartValue = null;
+    public $strData = null;
     public function __construct($objParentControl, $strControlId = null) {
         parent::__construct($objParentControl, $strControlId);
         $this->strTemplate = __VIEW_ACTIVE_APP_DIR__ . '/www/ctl_panels/' . get_class($this) . '.tpl.php';
@@ -51,6 +55,14 @@ class ResultSelectPanelBase extends MJaxPanel {
         $this->txtDispDate_StartDate->DateOnly();
         $this->txtDispDate_EndDate = new MJaxBSDateTimePicker($this);
         $this->txtDispDate_EndDate->DateOnly();
+        $this->intSanctioned = new MJaxTextBox($this);
+        $this->intSanctioned->Attr('placeholder', " Sanctioned");
+        $this->strNotes = new MJaxTextBox($this);
+        $this->strNotes->Attr('placeholder', " Notes");
+        $this->strStartValue = new MJaxTextBox($this);
+        $this->strStartValue->Attr('placeholder', " Start Value");
+        $this->strData = new MJaxTextBox($this);
+        $this->strData->Attr('placeholder', " Data");
     }
     public function txtSearch_change() {
         $objEntity = null;
@@ -119,6 +131,16 @@ class ResultSelectPanelBase extends MJaxPanel {
                 $arrAndConditions[] = sprintf('(dispDate > "%s" AND dispDate < "%s")', $this->txtDispDate_StartDate->GetValue() , $this->txtDispDate_EndDate->GetValue());
             }
         }
+        if (!is_null($this->intSanctioned->GetValue())) {
+            $arrAndConditions[] = sprintf('sanctioned LIKE "%s%%"', $this->intSanctioned->GetValue());
+        }
+        if (!is_null($this->strNotes->GetValue())) {
+            $arrAndConditions[] = sprintf('notes LIKE "%s%%"', $this->strNotes->GetValue());
+        }
+        if (!is_null($this->strStartValue->GetValue())) {
+            $arrAndConditions[] = sprintf('startValue LIKE "%s%%"', $this->strStartValue->GetValue());
+        }
+        //Is special field!!!!!
         return $arrAndConditions;
     }
     public function GetValue() {

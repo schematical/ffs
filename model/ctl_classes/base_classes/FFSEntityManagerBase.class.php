@@ -220,6 +220,12 @@ class FFSEntityManagerBase {
             $arrOrConditions[] = sprintf('Device.name LIKE "%s%%"', strtolower($strSearch));
             if (count($arrOrConditions) > 0) {
                 $arrDevices = Device::Query('WHERE ' . implode(' OR ', $arrOrConditions) . ' ' . $this->GetDeviceOwnerQuery());
+                if ($arrAssignments instanceof MLCBaseEntityCollection) {
+                    $arrAssignments = $arrAssignments->GetCollection();
+                }
+                if ($arrDevices instanceof MLCBaseEntityCollection) {
+                    $arrDevices = $arrDevices->GetCollection();
+                }
                 $arrAssignments = array_merge($arrAssignments, $arrDevices);
             }
             /*---------------End load: Device----------------------*/
@@ -228,6 +234,12 @@ class FFSEntityManagerBase {
             $arrOrConditions[] = sprintf('Session.name LIKE "%s%%"', strtolower($strSearch));
             if (count($arrOrConditions) > 0) {
                 $arrSessions = Session::Query('WHERE ' . implode(' OR ', $arrOrConditions) . ' ' . $this->GetSessionOwnerQuery());
+                if ($arrAssignments instanceof MLCBaseEntityCollection) {
+                    $arrAssignments = $arrAssignments->GetCollection();
+                }
+                if ($arrSessions instanceof MLCBaseEntityCollection) {
+                    $arrSessions = $arrSessions->GetCollection();
+                }
                 $arrAssignments = array_merge($arrAssignments, $arrSessions);
             }
             /*---------------End load: Session----------------------*/
@@ -255,6 +267,9 @@ class FFSEntityManagerBase {
         if ((is_null($strField)) || ($strField == 'level')) {
             $arrOrConditions[] = sprintf('Athelete.level LIKE "%s%%"', strtolower($strSearch));
         }
+        if ((is_null($strField)) || ($strField == 'event_default')) {
+            $arrOrConditions[] = sprintf('Athelete.event_default LIKE "%s%%"', strtolower($strSearch));
+        }
         if (count($arrOrConditions) == 0) {
             $arrOrConditions[] = '1';
         }
@@ -267,6 +282,12 @@ class FFSEntityManagerBase {
             $arrOrConditions[] = sprintf('Org.name LIKE "%s%%"', strtolower($strSearch));
             if (count($arrOrConditions) > 0) {
                 $arrOrgs = Org::Query('WHERE ' . implode(' OR ', $arrOrConditions) . ' ' . $this->GetOrgOwnerQuery());
+                if ($arrAtheletes instanceof MLCBaseEntityCollection) {
+                    $arrAtheletes = $arrAtheletes->GetCollection();
+                }
+                if ($arrOrgs instanceof MLCBaseEntityCollection) {
+                    $arrOrgs = $arrOrgs->GetCollection();
+                }
                 $arrAtheletes = array_merge($arrAtheletes, $arrOrgs);
             }
             /*---------------End load: Org----------------------*/
@@ -300,6 +321,12 @@ class FFSEntityManagerBase {
             $arrOrConditions[] = sprintf('Org.name LIKE "%s%%"', strtolower($strSearch));
             if (count($arrOrConditions) > 0) {
                 $arrOrgs = Org::Query('WHERE ' . implode(' OR ', $arrOrConditions) . ' ' . $this->GetOrgOwnerQuery());
+                if ($arrCompetitions instanceof MLCBaseEntityCollection) {
+                    $arrCompetitions = $arrCompetitions->GetCollection();
+                }
+                if ($arrOrgs instanceof MLCBaseEntityCollection) {
+                    $arrOrgs = $arrOrgs->GetCollection();
+                }
                 $arrCompetitions = array_merge($arrCompetitions, $arrOrgs);
             }
             /*---------------End load: Org----------------------*/
@@ -333,6 +360,12 @@ class FFSEntityManagerBase {
             $arrOrConditions[] = sprintf('Org.name LIKE "%s%%"', strtolower($strSearch));
             if (count($arrOrConditions) > 0) {
                 $arrOrgs = Org::Query('WHERE ' . implode(' OR ', $arrOrConditions) . ' ' . $this->GetOrgOwnerQuery());
+                if ($arrDevices instanceof MLCBaseEntityCollection) {
+                    $arrDevices = $arrDevices->GetCollection();
+                }
+                if ($arrOrgs instanceof MLCBaseEntityCollection) {
+                    $arrOrgs = $arrOrgs->GetCollection();
+                }
                 $arrDevices = array_merge($arrDevices, $arrOrgs);
             }
             /*---------------End load: Org----------------------*/
@@ -384,6 +417,12 @@ class FFSEntityManagerBase {
             $arrOrConditions[] = sprintf('Athelete.lastName LIKE "%s%%"', strtolower($strSearch));
             if (count($arrOrConditions) > 0) {
                 $arrAtheletes = Athelete::Query('WHERE ' . implode(' OR ', $arrOrConditions) . ' ' . $this->GetAtheleteOwnerQuery());
+                if ($arrEnrollments instanceof MLCBaseEntityCollection) {
+                    $arrEnrollments = $arrEnrollments->GetCollection();
+                }
+                if ($arrAtheletes instanceof MLCBaseEntityCollection) {
+                    $arrAtheletes = $arrAtheletes->GetCollection();
+                }
                 $arrEnrollments = array_merge($arrEnrollments, $arrAtheletes);
             }
             /*---------------End load: Athelete----------------------*/
@@ -393,6 +432,12 @@ class FFSEntityManagerBase {
             $arrOrConditions[] = sprintf('Competition.namespace LIKE "%s%%"', strtolower($strSearch));
             if (count($arrOrConditions) > 0) {
                 $arrCompetitions = Competition::Query('WHERE ' . implode(' OR ', $arrOrConditions) . ' ' . $this->GetCompetitionOwnerQuery());
+                if ($arrEnrollments instanceof MLCBaseEntityCollection) {
+                    $arrEnrollments = $arrEnrollments->GetCollection();
+                }
+                if ($arrCompetitions instanceof MLCBaseEntityCollection) {
+                    $arrCompetitions = $arrCompetitions->GetCollection();
+                }
                 $arrEnrollments = array_merge($arrEnrollments, $arrCompetitions);
             }
             /*---------------End load: Competition----------------------*/
@@ -401,6 +446,12 @@ class FFSEntityManagerBase {
             $arrOrConditions[] = sprintf('Session.name LIKE "%s%%"', strtolower($strSearch));
             if (count($arrOrConditions) > 0) {
                 $arrSessions = Session::Query('WHERE ' . implode(' OR ', $arrOrConditions) . ' ' . $this->GetSessionOwnerQuery());
+                if ($arrEnrollments instanceof MLCBaseEntityCollection) {
+                    $arrEnrollments = $arrEnrollments->GetCollection();
+                }
+                if ($arrSessions instanceof MLCBaseEntityCollection) {
+                    $arrSessions = $arrSessions->GetCollection();
+                }
                 $arrEnrollments = array_merge($arrEnrollments, $arrSessions);
             }
             /*---------------End load: Session----------------------*/
@@ -452,6 +503,12 @@ class FFSEntityManagerBase {
             $arrOrConditions[] = sprintf('Org.name LIKE "%s%%"', strtolower($strSearch));
             if (count($arrOrConditions) > 0) {
                 $arrOrgs = Org::Query('WHERE ' . implode(' OR ', $arrOrConditions) . ' ' . $this->GetOrgOwnerQuery());
+                if ($arrOrgCompetitions instanceof MLCBaseEntityCollection) {
+                    $arrOrgCompetitions = $arrOrgCompetitions->GetCollection();
+                }
+                if ($arrOrgs instanceof MLCBaseEntityCollection) {
+                    $arrOrgs = $arrOrgs->GetCollection();
+                }
                 $arrOrgCompetitions = array_merge($arrOrgCompetitions, $arrOrgs);
             }
             /*---------------End load: Org----------------------*/
@@ -461,6 +518,12 @@ class FFSEntityManagerBase {
             $arrOrConditions[] = sprintf('Competition.namespace LIKE "%s%%"', strtolower($strSearch));
             if (count($arrOrConditions) > 0) {
                 $arrCompetitions = Competition::Query('WHERE ' . implode(' OR ', $arrOrConditions) . ' ' . $this->GetCompetitionOwnerQuery());
+                if ($arrOrgCompetitions instanceof MLCBaseEntityCollection) {
+                    $arrOrgCompetitions = $arrOrgCompetitions->GetCollection();
+                }
+                if ($arrCompetitions instanceof MLCBaseEntityCollection) {
+                    $arrCompetitions = $arrCompetitions->GetCollection();
+                }
                 $arrOrgCompetitions = array_merge($arrOrgCompetitions, $arrCompetitions);
             }
             /*---------------End load: Competition----------------------*/
@@ -500,6 +563,12 @@ class FFSEntityManagerBase {
             $arrOrConditions[] = sprintf('Athelete.lastName LIKE "%s%%"', strtolower($strSearch));
             if (count($arrOrConditions) > 0) {
                 $arrAtheletes = Athelete::Query('WHERE ' . implode(' OR ', $arrOrConditions) . ' ' . $this->GetAtheleteOwnerQuery());
+                if ($arrParentMessages instanceof MLCBaseEntityCollection) {
+                    $arrParentMessages = $arrParentMessages->GetCollection();
+                }
+                if ($arrAtheletes instanceof MLCBaseEntityCollection) {
+                    $arrAtheletes = $arrAtheletes->GetCollection();
+                }
                 $arrParentMessages = array_merge($arrParentMessages, $arrAtheletes);
             }
             /*---------------End load: Athelete----------------------*/
@@ -509,6 +578,12 @@ class FFSEntityManagerBase {
             $arrOrConditions[] = sprintf('Competition.namespace LIKE "%s%%"', strtolower($strSearch));
             if (count($arrOrConditions) > 0) {
                 $arrCompetitions = Competition::Query('WHERE ' . implode(' OR ', $arrOrConditions) . ' ' . $this->GetCompetitionOwnerQuery());
+                if ($arrParentMessages instanceof MLCBaseEntityCollection) {
+                    $arrParentMessages = $arrParentMessages->GetCollection();
+                }
+                if ($arrCompetitions instanceof MLCBaseEntityCollection) {
+                    $arrCompetitions = $arrCompetitions->GetCollection();
+                }
                 $arrParentMessages = array_merge($arrParentMessages, $arrCompetitions);
             }
             /*---------------End load: Competition----------------------*/
@@ -530,6 +605,9 @@ class FFSEntityManagerBase {
         if ((is_null($strField)) || ($strField == 'event')) {
             $arrOrConditions[] = sprintf('Result.event LIKE "%s%%"', strtolower($strSearch));
         }
+        if ((is_null($strField)) || ($strField == 'startValue')) {
+            $arrOrConditions[] = sprintf('Result.startValue LIKE "%s%%"', strtolower($strSearch));
+        }
         if (count($arrOrConditions) == 0) {
             $arrOrConditions[] = '1';
         }
@@ -541,6 +619,12 @@ class FFSEntityManagerBase {
             $arrOrConditions[] = sprintf('Session.name LIKE "%s%%"', strtolower($strSearch));
             if (count($arrOrConditions) > 0) {
                 $arrSessions = Session::Query('WHERE ' . implode(' OR ', $arrOrConditions) . ' ' . $this->GetSessionOwnerQuery());
+                if ($arrResults instanceof MLCBaseEntityCollection) {
+                    $arrResults = $arrResults->GetCollection();
+                }
+                if ($arrSessions instanceof MLCBaseEntityCollection) {
+                    $arrSessions = $arrSessions->GetCollection();
+                }
                 $arrResults = array_merge($arrResults, $arrSessions);
             }
             /*---------------End load: Session----------------------*/
@@ -550,6 +634,12 @@ class FFSEntityManagerBase {
             $arrOrConditions[] = sprintf('Athelete.lastName LIKE "%s%%"', strtolower($strSearch));
             if (count($arrOrConditions) > 0) {
                 $arrAtheletes = Athelete::Query('WHERE ' . implode(' OR ', $arrOrConditions) . ' ' . $this->GetAtheleteOwnerQuery());
+                if ($arrResults instanceof MLCBaseEntityCollection) {
+                    $arrResults = $arrResults->GetCollection();
+                }
+                if ($arrAtheletes instanceof MLCBaseEntityCollection) {
+                    $arrAtheletes = $arrAtheletes->GetCollection();
+                }
                 $arrResults = array_merge($arrResults, $arrAtheletes);
             }
             /*---------------End load: Athelete----------------------*/
@@ -580,6 +670,12 @@ class FFSEntityManagerBase {
             $arrOrConditions[] = sprintf('Competition.namespace LIKE "%s%%"', strtolower($strSearch));
             if (count($arrOrConditions) > 0) {
                 $arrCompetitions = Competition::Query('WHERE ' . implode(' OR ', $arrOrConditions) . ' ' . $this->GetCompetitionOwnerQuery());
+                if ($arrSessions instanceof MLCBaseEntityCollection) {
+                    $arrSessions = $arrSessions->GetCollection();
+                }
+                if ($arrCompetitions instanceof MLCBaseEntityCollection) {
+                    $arrCompetitions = $arrCompetitions->GetCollection();
+                }
                 $arrSessions = array_merge($arrSessions, $arrCompetitions);
             }
             /*---------------End load: Competition----------------------*/

@@ -3,6 +3,9 @@
 ALTER TABLE `ffs`.`Result` ADD COLUMN `sanctioned` TINYINT NULL DEFAULT 0  AFTER `dispDate` , ADD COLUMN `notes` LONGTEXT NULL  AFTER `sanctioned` ;
 ALTER TABLE `ffs`.`Result` ADD COLUMN `startValue` VARCHAR(64) NULL  AFTER `notes` ;
 ALTER TABLE `ffs`.`Result` ADD COLUMN `data` LONGTEXT NULL  AFTER `startValue` ;
+ALTER TABLE `ffs`.`Competition` ADD COLUMN `sanctioned` TINYINT NULL  AFTER `data` ;
+ALTER TABLE `ffs`.`Athelete` ADD COLUMN `event_default` VARCHAR(45) NULL  AFTER `level` ;
+
 
 
 

@@ -46,8 +46,10 @@
 
             
         </fieldset>
-        <div class="form-actions">
-            <?php $_CONTROL->btnSave->Render(); ?>&nbsp;&nbsp;
-            <?php $_CONTROL->btnDelete->Render(); ?>
-        </div>
+        <?php if (!is_null($_CONTROL->btnSave)) { ?>
+            <div class="form-actions">
+                <?php $_CONTROL->btnSave->Render(); ?>&nbsp;&nbsp;
+                <?php $_CONTROL->btnDelete->Render(); ?>
+            </div>
+        <?php } ?>
     </form>

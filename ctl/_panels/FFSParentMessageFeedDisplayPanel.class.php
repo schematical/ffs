@@ -9,7 +9,8 @@ class FFSParentMessageFeedDisplayPanel extends FFSFeedDisplayPanel{
     }
     public function GetShareUrl(){
         return sprintf(
-            '/%s/parent/index?%s=%s',
+            'https://%s/%s/parent/index?%s=%s',
+            $_SERVER['SERVER_NAME'],
             FFSForm::Competition()->Namespace,
             FFSQS::IdParentMessage,
             $this->objEntity->IdParentMessage

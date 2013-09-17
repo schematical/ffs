@@ -51,7 +51,9 @@ class ResultListPanelBase extends MJaxTable {
         $this->AddColumn('judge', ' Judge', null, null, 'MJaxTextBox');
         $this->AddColumn('flag', ' Flag', null, null, 'MJaxTextBox');
         $this->AddColumn('event', ' Event', null, null, 'MJaxTextBox');
-        $this->AddColumn('dispDate', ' Disp Date', $this, 'RenderDate', 'MJaxBSDateTimePicker');
+        $this->AddColumn('sanctioned', ' Sanctioned', null, null, 'MJaxTextBox');
+        $this->AddColumn('notes', ' Notes', null, null, 'MJaxTextArea');
+        $this->AddColumn('startValue', ' Start Value', null, null, 'MJaxTextBox');
     }
     public function render_idSession($intIdIdSession, $objRow, $objColumn) {
         if (is_null($intIdIdSession)) {

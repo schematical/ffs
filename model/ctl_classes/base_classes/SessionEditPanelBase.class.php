@@ -5,6 +5,7 @@
 * - __construct()
 * - CreateContentControls()
 * - CreateFieldControls()
+* - GetSession()
 * - SetSession()
 * - CreateReferenceControls()
 * - btnSave_click()
@@ -79,6 +80,9 @@ class SessionEditPanelBase extends MJaxPanel {
         if (!is_null($this->objSession)) {
             $this->SetSession($this->objSession);
         }
+    }
+    public function GetSession() {
+        return $this->objSession;
     }
     public function SetSession($objSession) {
         $this->objSession = $objSession;

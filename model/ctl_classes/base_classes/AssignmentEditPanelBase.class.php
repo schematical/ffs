@@ -5,6 +5,7 @@
 * - __construct()
 * - CreateContentControls()
 * - CreateFieldControls()
+* - GetAssignment()
 * - SetAssignment()
 * - CreateReferenceControls()
 * - btnSave_click()
@@ -71,6 +72,9 @@ class AssignmentEditPanelBase extends MJaxPanel {
         if (!is_null($this->objAssignment)) {
             $this->SetAssignment($this->objAssignment);
         }
+    }
+    public function GetAssignment() {
+        return $this->objAssignment;
     }
     public function SetAssignment($objAssignment) {
         $this->objAssignment = $objAssignment;

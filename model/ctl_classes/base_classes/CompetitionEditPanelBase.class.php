@@ -5,6 +5,7 @@
 * - __construct()
 * - CreateContentControls()
 * - CreateFieldControls()
+* - GetCompetition()
 * - SetCompetition()
 * - CreateReferenceControls()
 * - btnSave_click()
@@ -31,6 +32,7 @@ class CompetitionEditPanelBase extends MJaxPanel {
     public $dttSignupCutOffDate = null;
     public $strClubType = null;
     public $strData = null;
+    public $intSanctioned = null;
     public $lnkViewParentIdOrg = null;
     public $lnkViewChildEnrollment = null;
     public $lnkViewChildOrgCompetition = null;
@@ -87,9 +89,16 @@ class CompetitionEditPanelBase extends MJaxPanel {
         $this->strClubType->AddCssClass('input-large');
         //varchar(45)
         //Is special field!!!!!
+        $this->intSanctioned = new MJaxTextBox($this);
+        $this->intSanctioned->Name = 'sanctioned';
+        $this->intSanctioned->AddCssClass('input-large');
+        //tinyint(4)
         if (!is_null($this->objCompetition)) {
             $this->SetCompetition($this->objCompetition);
         }
+    }
+    public function GetCompetition() {
+        return $this->objCompetition;
     }
     public function SetCompetition($objCompetition) {
         $this->objCompetition = $objCompetition;
@@ -114,7 +123,7 @@ class CompetitionEditPanelBase extends MJaxPanel {
             $this->dttSignupCutOffDate->Value = $this->objCompetition->signupCutOffDate;
             $this->strClubType->Text = $this->objCompetition->clubType;
             //Is special field!!!!!
-            
+            $this->intSanctioned->Text = $this->objCompetition->sanctioned;
         } else {
             $this->strName->Text = '';
             $this->strLongDesc->Text = '';
@@ -129,6 +138,7 @@ class CompetitionEditPanelBase extends MJaxPanel {
             $this->dttSignupCutOffDate->Value = MLCDateTime::Now();
             $this->strClubType->Text = '';
             //Is special field!!!!!
+            $this->intSanctioned->Text = '';
             $this->btnDelete->Style->Display = 'none';
         }
     }
@@ -208,6 +218,15 @@ class CompetitionEditPanelBase extends MJaxPanel {
             $this->objCompetition->clubType = $this->strClubType->Text;
         }
         //Is special field!!!!!
+        if (get_class($this->intSanctioned) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->intSanctioned->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('sanctioned');
+            }
+            $this->objCompetition->sanctioned = $mixEntity;
+        } else {
+            $this->objCompetition->sanctioned = $this->intSanctioned->Text;
+        }
         $this->objCompetition->Save();
         //Experimental save event trigger
         $this->ActionParameter = $this->objCompetition;

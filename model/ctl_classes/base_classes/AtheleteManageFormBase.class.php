@@ -55,6 +55,10 @@ class AtheleteManageFormBase extends FFSForm {
         if (!is_null($strLevel)) {
             $arrAndConditions[] = sprintf('Athelete.level LIKE "%s%%"', $strLevel);
         }
+        $strEvent_default = MLCApplication::QS(FFSQS::Athelete_Event_default);
+        if (!is_null($strEvent_default)) {
+            $arrAndConditions[] = sprintf('Athelete.event_default LIKE "%s%%"', $strEvent_default);
+        }
         if (count($arrAndConditions) >= 1) {
             $arrAtheletes = Athelete::Query('WHERE ' . implode(' AND ', $arrAndConditions));
         } else {

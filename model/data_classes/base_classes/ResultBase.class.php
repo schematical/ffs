@@ -23,6 +23,7 @@
 * - __toJson()
 * - __get()
 * - __set()
+* - Data()
 * Classes list:
 * - ResultBase extends MLCBaseEntity
 */
@@ -46,6 +47,12 @@
  * @property-write mixed $Event
  * @property-read mixed $DispDate
  * @property-write mixed $DispDate
+ * @property-read mixed $Sanctioned
+ * @property-write mixed $Sanctioned
+ * @property-read mixed $Notes
+ * @property-write mixed $Notes
+ * @property-read mixed $StartValue
+ * @property-write mixed $StartValue
  * @property-read Result $IdSessionObject
  * @property-read Result $IdAtheleteObject
  */
@@ -97,6 +104,18 @@ class ResultBase extends MLCBaseEntity {
         $xmlStr.= "<dispDate>";
         $xmlStr.= $this->dispDate;
         $xmlStr.= "</dispDate>";
+        $xmlStr.= "<sanctioned>";
+        $xmlStr.= $this->sanctioned;
+        $xmlStr.= "</sanctioned>";
+        $xmlStr.= "<notes>";
+        $xmlStr.= $this->notes;
+        $xmlStr.= "</notes>";
+        $xmlStr.= "<startValue>";
+        $xmlStr.= $this->startValue;
+        $xmlStr.= "</startValue>";
+        $xmlStr.= "<data>";
+        $xmlStr.= $this->data;
+        $xmlStr.= "</data>";
         if ($blnReclusive) {
             //Finish FK Rel stuff
             
@@ -117,6 +136,10 @@ class ResultBase extends MLCBaseEntity {
                 $this->arrDBFields['creDate'] = $arrData['Result.creDate'];
                 $this->arrDBFields['event'] = $arrData['Result.event'];
                 $this->arrDBFields['dispDate'] = $arrData['Result.dispDate'];
+                $this->arrDBFields['sanctioned'] = $arrData['Result.sanctioned'];
+                $this->arrDBFields['notes'] = $arrData['Result.notes'];
+                $this->arrDBFields['startValue'] = $arrData['Result.startValue'];
+                $this->arrDBFields['data'] = $arrData['Result.data'];
                 //Foregin Key
                 if ((array_key_exists('Session.idSession', $arrData)) && (!is_null($arrData['Session.idSession']))) {
                     $this->objIdSession = new Session();
@@ -151,6 +174,10 @@ class ResultBase extends MLCBaseEntity {
         $arrFields[] = 'Result.creDate ' . (($blnLongSelect) ? ' as "Result.creDate"' : '');
         $arrFields[] = 'Result.event ' . (($blnLongSelect) ? ' as "Result.event"' : '');
         $arrFields[] = 'Result.dispDate ' . (($blnLongSelect) ? ' as "Result.dispDate"' : '');
+        $arrFields[] = 'Result.sanctioned ' . (($blnLongSelect) ? ' as "Result.sanctioned"' : '');
+        $arrFields[] = 'Result.notes ' . (($blnLongSelect) ? ' as "Result.notes"' : '');
+        $arrFields[] = 'Result.startValue ' . (($blnLongSelect) ? ' as "Result.startValue"' : '');
+        $arrFields[] = 'Result.data ' . (($blnLongSelect) ? ' as "Result.data"' : '');
         return $arrFields;
     }
     public static function Query($strExtra = null, $mixReturnSingle = false, $arrJoins = null) {
@@ -318,6 +345,10 @@ class ResultBase extends MLCBaseEntity {
         $collReturn['creDate'] = $this->creDate;
         $collReturn['event'] = $this->event;
         $collReturn['dispDate'] = $this->dispDate;
+        $collReturn['sanctioned'] = $this->sanctioned;
+        $collReturn['notes'] = $this->notes;
+        $collReturn['startValue'] = $this->startValue;
+        $collReturn['data'] = $this->data;
         return $collReturn;
     }
     public function __toString() {
@@ -396,6 +427,27 @@ class ResultBase extends MLCBaseEntity {
                 }
                 return null;
             break;
+            case ('Sanctioned'):
+            case ('sanctioned'):
+                if (array_key_exists('sanctioned', $this->arrDBFields)) {
+                    return $this->arrDBFields['sanctioned'];
+                }
+                return null;
+            break;
+            case ('Notes'):
+            case ('notes'):
+                if (array_key_exists('notes', $this->arrDBFields)) {
+                    return $this->arrDBFields['notes'];
+                }
+                return null;
+            break;
+            case ('StartValue'):
+            case ('startValue'):
+                if (array_key_exists('startValue', $this->arrDBFields)) {
+                    return $this->arrDBFields['startValue'];
+                }
+                return null;
+            break;
             case ('IdSessionObject'):
                 if (!is_null($this->objIdSession)) {
                     return $this->objIdSession;
@@ -468,6 +520,24 @@ class ResultBase extends MLCBaseEntity {
             case ('_DispDate'):
                 $this->arrDBFields['dispDate'] = $mixValue;
             break;
+            case ('Sanctioned'):
+            case ('sanctioned'):
+            case ('_Sanctioned'):
+                $this->arrDBFields['sanctioned'] = $mixValue;
+            break;
+            case ('Notes'):
+            case ('notes'):
+            case ('_Notes'):
+                $this->arrDBFields['notes'] = $mixValue;
+            break;
+            case ('StartValue'):
+            case ('startValue'):
+            case ('_StartValue'):
+                $this->arrDBFields['startValue'] = $mixValue;
+            break;
+            case ('_Data'):
+                $this->arrDBFields['data'] = $mixValue;
+            break;
             case ('IdSessionObject'):
                 if ((!is_null($mixValue)) && ((!is_object($mixValue)) || (!($mixValue instanceof Session)))) {
                     throw new MLCWrongTypeException('__set', $strName);
@@ -493,6 +563,30 @@ class ResultBase extends MLCBaseEntity {
             default:
                 throw new MLCMissingPropertyException($this, $strName);
             break;
+        }
+    }
+    public function Data($strKey, $mixData = null) {
+        if (is_null($mixData)) {
+            if ((!array_key_exists('data', $this->arrDBFields))) {
+                return null;
+            }
+            if ((strlen($this->arrDBFields['data']) < 1)) {
+                return null;
+            }
+            $arrData = json_decode($this->arrDBFields['data'], true);
+            if (!array_key_exists($strKey, $arrData)) {
+                return null;
+            }
+            return $arrData[$strKey];
+        } else {
+            if ((!array_key_exists('data', $this->arrDBFields)) || (strlen($this->arrDBFields['data']) < 1)) {
+                $arrData = array();
+            } else {
+                $arrData = json_decode($this->arrDBFields['data'], true);
+            }
+            $arrData[$strKey] = $mixData;
+            $this->arrDBFields['data'] = json_encode($arrData);
+            $this->Save();
         }
     }
 }

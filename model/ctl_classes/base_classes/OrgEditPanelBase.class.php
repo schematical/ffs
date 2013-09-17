@@ -5,6 +5,7 @@
 * - __construct()
 * - CreateContentControls()
 * - CreateFieldControls()
+* - GetOrg()
 * - SetOrg()
 * - CreateReferenceControls()
 * - btnSave_click()
@@ -83,6 +84,9 @@ class OrgEditPanelBase extends MJaxPanel {
         if (!is_null($this->objOrg)) {
             $this->SetOrg($this->objOrg);
         }
+    }
+    public function GetOrg() {
+        return $this->objOrg;
     }
     public function SetOrg($objOrg) {
         $this->objOrg = $objOrg;

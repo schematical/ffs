@@ -26,6 +26,7 @@ class AtheleteSelectPanelBase extends MJaxPanel {
     public $strMemId = null;
     public $strPsData = null;
     public $strLevel = null;
+    public $strEvent_default = null;
     public function __construct($objParentControl, $strControlId = null) {
         parent::__construct($objParentControl, $strControlId);
         $this->strTemplate = __VIEW_ACTIVE_APP_DIR__ . '/www/ctl_panels/' . get_class($this) . '.tpl.php';
@@ -54,6 +55,8 @@ class AtheleteSelectPanelBase extends MJaxPanel {
         $this->strPsData->Attr('placeholder', " Ps Data");
         $this->strLevel = new MJaxTextBox($this);
         $this->strLevel->Attr('placeholder', " Level");
+        $this->strEvent_default = new MJaxTextBox($this);
+        $this->strEvent_default->Attr('placeholder', " Event _default");
     }
     public function txtSearch_change() {
         $objEntity = null;
@@ -120,6 +123,9 @@ class AtheleteSelectPanelBase extends MJaxPanel {
         //Do nothing this is a creDate
         if (!is_null($this->strLevel->GetValue())) {
             $arrAndConditions[] = sprintf('level LIKE "%s%%"', $this->strLevel->GetValue());
+        }
+        if (!is_null($this->strEvent_default->GetValue())) {
+            $arrAndConditions[] = sprintf('event_default LIKE "%s%%"', $this->strEvent_default->GetValue());
         }
         return $arrAndConditions;
     }

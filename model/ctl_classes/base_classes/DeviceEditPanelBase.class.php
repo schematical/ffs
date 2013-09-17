@@ -5,6 +5,7 @@
 * - __construct()
 * - CreateContentControls()
 * - CreateFieldControls()
+* - GetDevice()
 * - SetDevice()
 * - CreateReferenceControls()
 * - btnSave_click()
@@ -70,6 +71,9 @@ class DeviceEditPanelBase extends MJaxPanel {
         if (!is_null($this->objDevice)) {
             $this->SetDevice($this->objDevice);
         }
+    }
+    public function GetDevice() {
+        return $this->objDevice;
     }
     public function SetDevice($objDevice) {
         $this->objDevice = $objDevice;

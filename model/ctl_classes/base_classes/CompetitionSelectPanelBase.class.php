@@ -29,6 +29,7 @@ class CompetitionSelectPanelBase extends MJaxPanel {
     public $txtSignupCutOffDate_EndDate = null;
     public $strClubType = null;
     public $strData = null;
+    public $intSanctioned = null;
     public function __construct($objParentControl, $strControlId = null) {
         parent::__construct($objParentControl, $strControlId);
         $this->strTemplate = __VIEW_ACTIVE_APP_DIR__ . '/www/ctl_panels/' . get_class($this) . '.tpl.php';
@@ -63,6 +64,8 @@ class CompetitionSelectPanelBase extends MJaxPanel {
         $this->strClubType->Attr('placeholder', " Club Type");
         $this->strData = new MJaxTextBox($this);
         $this->strData->Attr('placeholder', " Data");
+        $this->intSanctioned = new MJaxTextBox($this);
+        $this->intSanctioned->Attr('placeholder', " Sanctioned");
     }
     public function txtSearch_change() {
         $objEntity = null;
@@ -143,6 +146,9 @@ class CompetitionSelectPanelBase extends MJaxPanel {
             $arrAndConditions[] = sprintf('clubType LIKE "%s%%"', $this->strClubType->GetValue());
         }
         //Is special field!!!!!
+        if (!is_null($this->intSanctioned->GetValue())) {
+            $arrAndConditions[] = sprintf('sanctioned LIKE "%s%%"', $this->intSanctioned->GetValue());
+        }
         return $arrAndConditions;
     }
     public function GetValue() {

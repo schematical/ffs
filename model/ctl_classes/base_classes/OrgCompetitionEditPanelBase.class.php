@@ -5,6 +5,7 @@
 * - __construct()
 * - CreateContentControls()
 * - CreateFieldControls()
+* - GetOrgCompetition()
 * - SetOrgCompetition()
 * - CreateReferenceControls()
 * - btnSave_click()
@@ -59,6 +60,9 @@ class OrgCompetitionEditPanelBase extends MJaxPanel {
         if (!is_null($this->objOrgCompetition)) {
             $this->SetOrgCompetition($this->objOrgCompetition);
         }
+    }
+    public function GetOrgCompetition() {
+        return $this->objOrgCompetition;
     }
     public function SetOrgCompetition($objOrgCompetition) {
         $this->objOrgCompetition = $objOrgCompetition;

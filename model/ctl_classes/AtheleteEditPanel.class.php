@@ -7,14 +7,15 @@ class AtheleteEditPanel extends AtheleteEditPanelBase {
         $this->dttBirthDate->DateOnly();
 
         //TODO: Remove following
-        $this->strMemType->Attr('readonly','readonly');
-        $this->strMemType->Text = 'USAG';//FOR NOW
+        //$this->strMemType->Attr('readonly','readonly');
+        $this->strMemType->Attr('placeholder','USAG');//FOR NOW
 
         $this->dttBirthDate->RemoveMinStartDate();
         $this->dttBirthDate->DateOnly();
         $this->dttBirthDate->SetValue(MLCDateTime::Now('- 10 years'));
         $this->intIdOrg = new OrgSelectPanel($this);
     }
+
     public function btnSave_click() {
         if (is_null($this->objAthelete)) {
             //Create a new one

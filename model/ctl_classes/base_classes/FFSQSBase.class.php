@@ -26,6 +26,7 @@ class FFSQSBase {
     const Athelete_PsData = 'PsData';
     const Athelete_CreDate = 'creDate';
     const Athelete_Level = 'level';
+    const Athelete_Event_default = 'event_default';
     const IdCompetition = 'idCompetition';
     const Competition_IdCompetition = 'idCompetition';
     const Competition_Name = 'name';
@@ -38,6 +39,7 @@ class FFSQSBase {
     const Competition_SignupCutOffDate = 'signupCutOffDate';
     const Competition_ClubType = 'clubType';
     const Competition_Data = 'data';
+    const Competition_Sanctioned = 'sanctioned';
     const IdDevice = 'idDevice';
     const Device_IdDevice = 'idDevice';
     const Device_Name = 'name';
@@ -102,6 +104,10 @@ class FFSQSBase {
     const Result_CreDate = 'creDate';
     const Result_Event = 'event';
     const Result_DispDate = 'dispDate';
+    const Result_Sanctioned = 'sanctioned';
+    const Result_Notes = 'notes';
+    const Result_StartValue = 'startValue';
+    const Result_Data = 'data';
     const IdSession = 'idSession';
     const Session_IdSession = 'idSession';
     const Session_StartDate = 'startDate';

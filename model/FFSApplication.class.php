@@ -26,6 +26,17 @@ abstract class FFSApplication{
         return array_values($arrReturn);
 
     }
+    public static function GetAtheletesByParent(AuthUser $objUser = null){
+        if(is_null($objUser)){
+            $objUser = MLCAuthDriver::User();
+        }
+        $arrRolls = MLCAuthDriver::GetRolls(FFSRoll::PARENT, $objUser);
+        $arrAtheletes = array();
+        foreach($arrRolls as $objRoll){
+            $arrAtheletes[] = $objRoll->GetEntity();
+        }
+        return $arrAtheletes;
+    }
     public static function GetEnrollmentsBySession($objSession, $strSearch = null){
 
     }
@@ -60,14 +71,15 @@ abstract class FFSApplication{
 
         return $arrReturn;
     }
-    public static function GetResultsBySessionGroupByAthelete($objSession){
+    public static function GetResultsBySessionGroupByAthelete($objSession, $blnSanctioned = true){
         $arrResults = Result::Query(
             sprintf(
-                'WHERE Result.idSession = %s ORDER BY CreDate DESC',
-                $objSession->IdSession
+                'WHERE Result.idSession = %s AND Result.sanctioned = %s ORDER BY CreDate DESC',
+                $objSession->IdSession,
+                ($blnSanctioned?'1':'0')
             )
         );
-        //die("fuck");
+
         $arrAtheleteResults = array();
         foreach($arrResults as $intIndex => $objResult){
             if(!array_key_exists($objResult->IdAthelete, $arrAtheleteResults)){

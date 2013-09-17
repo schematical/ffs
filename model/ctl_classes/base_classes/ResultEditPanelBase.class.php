@@ -5,6 +5,7 @@
 * - __construct()
 * - CreateContentControls()
 * - CreateFieldControls()
+* - GetResult()
 * - SetResult()
 * - CreateReferenceControls()
 * - btnSave_click()
@@ -16,6 +17,7 @@
 * - InitScoreAutocomplete()
 * - InitJudgeAutocomplete()
 * - InitEventAutocomplete()
+* - InitStartValueAutocomplete()
 * Classes list:
 * - ResultEditPanelBase extends MJaxPanel
 */
@@ -30,6 +32,10 @@ class ResultEditPanelBase extends MJaxPanel {
     public $dttCreDate = null;
     public $strEvent = null;
     public $dttDispDate = null;
+    public $intSanctioned = null;
+    public $strNotes = null;
+    public $strStartValue = null;
+    public $strData = null;
     public $lnkViewParentIdSession = null;
     public $lnkViewParentIdAthelete = null;
     //Regular controls
@@ -77,9 +83,26 @@ class ResultEditPanelBase extends MJaxPanel {
         //varchar(64)
         //Is special field!!!!!
         $this->dttDispDate = new MJaxBSDateTimePicker($this);
+        $this->intSanctioned = new MJaxTextBox($this);
+        $this->intSanctioned->Name = 'sanctioned';
+        $this->intSanctioned->AddCssClass('input-large');
+        //tinyint(4)
+        $this->strNotes = new MJaxTextBox($this);
+        $this->strNotes->Name = 'notes';
+        $this->strNotes->AddCssClass('input-large');
+        //longtext
+        $this->strNotes->TextMode = MJaxTextMode::MultiLine;
+        $this->strStartValue = new MJaxTextBox($this);
+        $this->strStartValue->Name = 'startValue';
+        $this->strStartValue->AddCssClass('input-large');
+        //varchar(64)
+        //Is special field!!!!!
         if (!is_null($this->objResult)) {
             $this->SetResult($this->objResult);
         }
+    }
+    public function GetResult() {
+        return $this->objResult;
     }
     public function SetResult($objResult) {
         $this->objResult = $objResult;
@@ -99,6 +122,11 @@ class ResultEditPanelBase extends MJaxPanel {
             $this->strEvent->Text = $this->objResult->event;
             //Is special field!!!!!
             $this->dttDispDate->Value = $this->objResult->dispDate;
+            $this->intSanctioned->Text = $this->objResult->sanctioned;
+            $this->strNotes->Text = $this->objResult->notes;
+            $this->strStartValue->Text = $this->objResult->startValue;
+            //Is special field!!!!!
+            
         } else {
             $this->strScore->Text = '';
             $this->strJudge->Text = '';
@@ -108,6 +136,10 @@ class ResultEditPanelBase extends MJaxPanel {
             $this->strEvent->Text = '';
             //Is special field!!!!!
             $this->dttDispDate->Value = MLCDateTime::Now();
+            $this->intSanctioned->Text = '';
+            $this->strNotes->Text = '';
+            $this->strStartValue->Text = '';
+            //Is special field!!!!!
             $this->btnDelete->Style->Display = 'none';
         }
     }
@@ -170,6 +202,34 @@ class ResultEditPanelBase extends MJaxPanel {
         }
         //Is special field!!!!!
         $this->objResult->dispDate = $this->dttDispDate->GetValue();
+        if (get_class($this->intSanctioned) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->intSanctioned->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('sanctioned');
+            }
+            $this->objResult->sanctioned = $mixEntity;
+        } else {
+            $this->objResult->sanctioned = $this->intSanctioned->Text;
+        }
+        if (get_class($this->strNotes) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strNotes->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('notes');
+            }
+            $this->objResult->notes = $mixEntity;
+        } else {
+            $this->objResult->notes = $this->strNotes->Text;
+        }
+        if (get_class($this->strStartValue) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strStartValue->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('startValue');
+            }
+            $this->objResult->startValue = $mixEntity;
+        } else {
+            $this->objResult->startValue = $this->strStartValue->Text;
+        }
+        //Is special field!!!!!
         $this->objResult->Save();
         //Experimental save event trigger
         $this->ActionParameter = $this->objResult;
@@ -216,6 +276,12 @@ class ResultEditPanelBase extends MJaxPanel {
         $this->strEvent->SetSearchEntity('result', 'event');
         $this->strEvent->Name = 'event';
         $this->strEvent->AddCssClass('input-large');
+    }
+    public function InitStartValueAutocomplete() {
+        $this->strStartValue = new MJaxBSAutocompleteTextBox($this);
+        $this->strStartValue->SetSearchEntity('result', 'startValue');
+        $this->strStartValue->Name = 'startValue';
+        $this->strStartValue->AddCssClass('input-large');
     }
 }
 ?>

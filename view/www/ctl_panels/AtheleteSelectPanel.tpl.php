@@ -137,6 +137,19 @@ $_CONTROL->txtSearch->Render(); ?>
                             
                         </div>
                     
+                        <div class='span3'>
+                            
+                                <?php if (!is_null($_CONTROL->strEvent_default)) { ?>
+                                    <div class='controls'>
+                                        <!--label> Event _default</label-->
+                                        <?php $_CONTROL->strEvent_default->Render(); ?>
+                                     </div>
+                                 <?php
+    } ?>
+                            
+                            
+                        </div>
+                    
                 </div>
             </div>
         </div>

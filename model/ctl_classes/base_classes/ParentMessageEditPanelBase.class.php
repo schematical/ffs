@@ -5,6 +5,7 @@
 * - __construct()
 * - CreateContentControls()
 * - CreateFieldControls()
+* - GetParentMessage()
 * - SetParentMessage()
 * - CreateReferenceControls()
 * - btnSave_click()
@@ -103,6 +104,9 @@ class ParentMessageEditPanelBase extends MJaxPanel {
         if (!is_null($this->objParentMessage)) {
             $this->SetParentMessage($this->objParentMessage);
         }
+    }
+    public function GetParentMessage() {
+        return $this->objParentMessage;
     }
     public function SetParentMessage($objParentMessage) {
         $this->objParentMessage = $objParentMessage;

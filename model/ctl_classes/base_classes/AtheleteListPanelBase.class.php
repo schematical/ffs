@@ -53,6 +53,7 @@ class AtheleteListPanelBase extends MJaxTable {
         $this->AddColumn('memType', ' Mem Type', null, null, 'MJaxTextBox');
         $this->AddColumn('memId', ' Mem Id', null, null, 'MJaxTextBox');
         $this->AddColumn('level', ' Level', null, null, 'MJaxTextBox');
+        $this->AddColumn('event_default', ' Event _default', null, null, 'MJaxTextBox');
         $this->InitRowControl('view_Enrollments', 'View Enrollments', $this, 'lnkViewEnrollments_click', 'btn btn-small');
         $this->InitRowControl('view_ParentMessages', 'View ParentMessages', $this, 'lnkViewParentMessages_click', 'btn btn-small');
         $this->InitRowControl('view_Results', 'View Results', $this, 'lnkViewResults_click', 'btn btn-small');

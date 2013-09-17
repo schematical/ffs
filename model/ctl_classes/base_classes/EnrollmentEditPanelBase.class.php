@@ -5,6 +5,7 @@
 * - __construct()
 * - CreateContentControls()
 * - CreateFieldControls()
+* - GetEnrollment()
 * - SetEnrollment()
 * - CreateReferenceControls()
 * - btnSave_click()
@@ -111,6 +112,9 @@ class EnrollmentEditPanelBase extends MJaxPanel {
         if (!is_null($this->objEnrollment)) {
             $this->SetEnrollment($this->objEnrollment);
         }
+    }
+    public function GetEnrollment() {
+        return $this->objEnrollment;
     }
     public function SetEnrollment($objEnrollment) {
         $this->objEnrollment = $objEnrollment;

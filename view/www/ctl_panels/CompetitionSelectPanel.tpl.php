@@ -152,6 +152,19 @@ $_CONTROL->txtSearch->Render(); ?>
                             
                         </div>
                     
+                        <div class='span3'>
+                            
+                                <?php if (!is_null($_CONTROL->intSanctioned)) { ?>
+                                    <div class='controls'>
+                                        <!--label> Sanctioned</label-->
+                                        <?php $_CONTROL->intSanctioned->Render(); ?>
+                                     </div>
+                                 <?php
+    } ?>
+                            
+                            
+                        </div>
+                    
                 </div>
             </div>
         </div>

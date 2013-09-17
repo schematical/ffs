@@ -2,6 +2,7 @@
 abstract class FFSRoll{
     const ORG_MANAGER = 'org_manager';
     const FOLLOW = 'follow';
+    const PARENT = 'parent';
 }
 abstract class FFSInviteType{
     const EMAIL = 'EMAIL';

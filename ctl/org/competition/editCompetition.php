@@ -22,6 +22,10 @@ class editCompetition extends FFSForm{
         }
     }
     public function pnlCompetition_success($strFormId, $strControlId, $objCompetition){
+        if(FFSForm::Org()->IdOrg == $objCompetition->IdOrg){
+            $objCompetition->sanctioned = true;
+            $objCompetition->Save();
+        }
         $this->Redirect(
             '/' . $objCompetition->Namespace . '/org/competition/index'
         );

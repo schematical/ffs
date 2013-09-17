@@ -22,7 +22,7 @@ class FFSSharePanel extends MJaxPanel{
 
         $this->lnkTwitter = new MJaxTwitterShareLink($this);
         $this->lnkTwitter->AddCssClass('btn');
-        $this->lnkTwitter->Url = $this->strUrl;
+
         $this->lnkTwitter->Text = '<i class="icon-twitter icon-2x"></i>';
 
         $this->lnkEmail = new MJaxLinkButton($this);
@@ -55,7 +55,10 @@ class FFSSharePanel extends MJaxPanel{
 
         $this->objForm->HideAlerts();
     }
-
+    public function UpdateUrl($mixValue){
+        $this->strUrl = $mixValue;
+        $this->lnkTwitter->Url = $this->strUrl;
+    }
     /////////////////////////
     // Public Properties: GET
     /////////////////////////
@@ -81,7 +84,9 @@ class FFSSharePanel extends MJaxPanel{
     {
         switch ($strName) {
             case "Url":
-                return $this->strUrl = $mixValue;
+
+                $this->UpdateUrl($mixValue);
+                return;
             case "EmailTemplate":
                 return $this->strEmailTemplate = $mixValue;
             case "EmailData":

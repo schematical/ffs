@@ -73,8 +73,13 @@ class FFSForm extends MJaxWAdminForm{
                 $arrCompetitions = FFSApplication::GetActiveCompetitions();
                 foreach($arrCompetitions as $objCompetition){
                     //_dv($lnkManageSessions);
+                    if($objCompetition->IdOrg == FFSForm::Org()->IdOrg){
+                        $strIcon = '<i class=" icon-trophy"></i>';
+                    }else{
+                        $strIcon = '<i class=" icon-calendar-empty"></i>';
+                    }
                     $lnkManageCompetitions->AddSubNavLink(
-                        $objCompetition->Name,
+                        $strIcon . $objCompetition->Name,
                         '/' . $objCompetition->Namespace . '/org/competition/index'
                     );
                 }
@@ -82,11 +87,15 @@ class FFSForm extends MJaxWAdminForm{
                 if(is_null(FFSForm::Competition())){
 
                     $lnkManageCompetitions->AddSubNavLink(
-                        '<i class="icon-plus-sign"></i>Add New Competition',
+                        '<i class="icon-plus-sign"></i>Host a Competition',
                         '/org/competition/editCompetition'
                     );
-                    $lnkManageCompetitions = $this->AddHeaderNav('Your Athletes', 'icon-user');
-                    $lnkManageCompetitions->Href = '/org/manageAthletes';
+                    $lnkManageAtheletes= $this->AddHeaderNav('Your Athletes', 'icon-group');
+                    $lnkManageAtheletes->Href = '/org/manageAthletes';
+
+                    $lnkUpcomingCompetitions = $this->AddHeaderNav('Upcoming Competitions', 'icon-flag')->Href = '/org/myCompetitions';
+                    $lnkTeamStats = $this->AddHeaderNav('Team Stats', 'icon-list')->Href = '/parent/results';
+
                 }else{
                     $lnkManageCompetitions->Href  = '/' . FFSForm::Competition()->Namespace . '/org/competition/index';
 
@@ -111,6 +120,21 @@ class FFSForm extends MJaxWAdminForm{
             break;
             case(FFSSection::PARENT):
                 //TODO - Add invite/share functionality
+                if(!is_null(MLCAuthDriver::User())){
+                    $this->AddHeaderNav('My Competitions', 'icon-flag')->Href = '/parent/myCompetitions';
+                    $arrAtheletes = FFSApplication::GetAtheletesByParent();
+                    if(count($arrAtheletes < 3)){
+                        foreach($arrAtheletes as $objAthelete){
+                            $this->AddHeaderNav($objAthelete->FirstName, 'icon-smile')->Href = '/parent/athleteDetails?' . FFSQS::Athelete_IdAthelete . '=' . $objAthelete->IdAthelete;
+                        }
+                    }else{
+                        $lnkMyTeam = $this->AddHeaderNav('My Team', 'icon-flag');
+                        foreach($arrAtheletes as $objAthelete){
+                            $lnkMyTeam->AddSubNavLink($objAthelete->__toString(), 'icon-smile')->Href = '/parent/athleteDetails?' . FFSQS::Athelete_IdAthelete . '=' . $objAthelete->IdAthelete;
+                        }
+                    }
+                    $this->AddHeaderNav('Share', 'icon-bullhorn')->Href = '/parent/share';
+                }
 
             break;
             default:

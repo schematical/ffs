@@ -5,6 +5,7 @@
 * - __construct()
 * - CreateContentControls()
 * - CreateFieldControls()
+* - GetAthelete()
 * - SetAthelete()
 * - CreateReferenceControls()
 * - btnSave_click()
@@ -17,6 +18,7 @@
 * - InitMemTypeAutocomplete()
 * - InitMemIdAutocomplete()
 * - InitLevelAutocomplete()
+* - InitEvent_defaultAutocomplete()
 * Classes list:
 * - AtheleteEditPanelBase extends MJaxPanel
 */
@@ -32,6 +34,7 @@ class AtheleteEditPanelBase extends MJaxPanel {
     public $strPsData = null;
     public $dttCreDate = null;
     public $strLevel = null;
+    public $strEvent_default = null;
     public $lnkViewParentIdOrg = null;
     public $lnkViewChildEnrollment = null;
     public $lnkViewChildParentMessage = null;
@@ -86,9 +89,16 @@ class AtheleteEditPanelBase extends MJaxPanel {
         $this->strLevel->Name = 'level';
         $this->strLevel->AddCssClass('input-large');
         //varchar(32)
+        $this->strEvent_default = new MJaxTextBox($this);
+        $this->strEvent_default->Name = 'event_default';
+        $this->strEvent_default->AddCssClass('input-large');
+        //varchar(45)
         if (!is_null($this->objAthelete)) {
             $this->SetAthelete($this->objAthelete);
         }
+    }
+    public function GetAthelete() {
+        return $this->objAthelete;
     }
     public function SetAthelete($objAthelete) {
         $this->objAthelete = $objAthelete;
@@ -110,6 +120,7 @@ class AtheleteEditPanelBase extends MJaxPanel {
             //Is special field!!!!!
             //Do nothing this is a creDate
             $this->strLevel->Text = $this->objAthelete->level;
+            $this->strEvent_default->Text = $this->objAthelete->event_default;
         } else {
             $this->strFirstName->Text = '';
             $this->strLastName->Text = '';
@@ -121,6 +132,7 @@ class AtheleteEditPanelBase extends MJaxPanel {
             //Is special field!!!!!
             //Do nothing this is a creDate
             $this->strLevel->Text = '';
+            $this->strEvent_default->Text = '';
             $this->btnDelete->Style->Display = 'none';
         }
     }
@@ -201,6 +213,15 @@ class AtheleteEditPanelBase extends MJaxPanel {
         } else {
             $this->objAthelete->level = $this->strLevel->Text;
         }
+        if (get_class($this->strEvent_default) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strEvent_default->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('event_default');
+            }
+            $this->objAthelete->event_default = $mixEntity;
+        } else {
+            $this->objAthelete->event_default = $this->strEvent_default->Text;
+        }
         $this->objAthelete->Save();
         //Experimental save event trigger
         $this->ActionParameter = $this->objAthelete;
@@ -253,6 +274,12 @@ class AtheleteEditPanelBase extends MJaxPanel {
         $this->strLevel->SetSearchEntity('athelete', 'level');
         $this->strLevel->Name = 'level';
         $this->strLevel->AddCssClass('input-large');
+    }
+    public function InitEvent_defaultAutocomplete() {
+        $this->strEvent_default = new MJaxBSAutocompleteTextBox($this);
+        $this->strEvent_default->SetSearchEntity('athelete', 'event_default');
+        $this->strEvent_default->Name = 'event_default';
+        $this->strEvent_default->AddCssClass('input-large');
     }
 }
 ?>

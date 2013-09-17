@@ -60,6 +60,10 @@ MLCApplicationBase::$arrClassFiles['FFSSessionEnrollmentPanel'] = __CTL_FFS_APP_
 MLCApplicationBase::$arrClassFiles['FFSMobileScoreInputPanel'] = __CTL_FFS_APP_DIR__ . '/_panels/FFSMobileScoreInputPanel.class.php';
 
 
+//CTL PARENT/
+MLCApplicationBase::$arrClassFiles['FFSParentCompSearchPanel'] = __CTL_FFS_APP_DIR__ . '/_panels/parent/FFSParentCompSearchPanel.class.php';
+
+
 
 
 //Proscore stuff
@@ -96,7 +100,7 @@ MLCApplication::InitPackage('MJaxWAdminTheme');
 //MLCApplication::InitPackage('MJaxJQueryUI');
 MLCApplication::InitPackage('MLCSalesTools');
 //MLCApplication::InitPackage('MLCEntityModel');
-//MLCApplication::InitPackage('MLCTwitter');
+MLCApplication::InitPackage('MLCTwitter');
 require_once(__CTL_FFS_APP_DIR__ . '/_events.inc.php');
 
 //_dv(MLCApplicationBase::$arrClassFiles['MLCApiFFSPackage']);
