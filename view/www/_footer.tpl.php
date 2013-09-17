@@ -1,7 +1,7 @@
 
 
-<script src="//local.ffs.com/assets/MJaxBootstrap/js/bootstrap-tooltip.js"></script>
-<script src="//local.ffs.com/assets/MJaxBootstrap/js/bootstrap-popover.js"></script>
+<script src="<?php echo __MJAX_BS_ASSETS_JS__; ?>/bootstrap-tooltip.js"></script>
+<script src="<?php echo __MJAX_BS_ASSETS_JS__; ?>/bootstrap-popover.js"></script>
 <script type="text/javascript">
     setTimeout(function(){var a=document.createElement("script");
         var b=document.getElementsByTagName("script")[0];

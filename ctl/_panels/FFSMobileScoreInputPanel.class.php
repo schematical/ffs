@@ -248,7 +248,7 @@ class FFSMobileScoreInputPanel extends MJaxPanel{
         }
         if(!is_null($this->objSelAthelete)){
             $strEventDef = $this->objSelAthelete->Event_default;
-            if(is_null($strEventDef)){
+            if(is_null($strEventDef) || strlen($strEventDef) < 1){
                 $strEventDef = 'WOMENS_ARTISTIC_GYMNASTICS';
             }
             $arrEventData = FFSEventData::$$strEventDef;

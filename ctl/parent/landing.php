@@ -91,6 +91,8 @@ class landing extends FFSForm{
             $this->pnlAtheleteEdit = new AtheleteEditPanel($this);
             $this->pnlAtheleteEdit->intIdOrg->Remove();
             $this->pnlAtheleteEdit->intIdOrg = null;
+            $this->pnlAtheleteEdit->btnSave->Remove();
+            $this->pnlAtheleteEdit->btnSave = null;
             $this->pnlAtheleteEdit->strFirstName->Text = $arrNameParts[0];
             if(count($arrNameParts) > 1){
                 $this->pnlAtheleteEdit->strLastName->Text = $arrNameParts[1];
