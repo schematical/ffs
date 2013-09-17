@@ -1,6 +1,8 @@
 <?php
 class FFSMobileScoreInputPanel extends MJaxPanel{
 
+    public $strAllAroundScore = null;
+
     public $lstSpecialNotes = null;
     public $lstAtheletes = null;
     public $objSelAthelete = null;
@@ -14,8 +16,11 @@ class FFSMobileScoreInputPanel extends MJaxPanel{
     public $lstPlace = null;
     public $chkTied = null;
 
+    public $arrNumberKeys = array();
+
     public $objResult = null;
     protected $objSelCompetition = null;
+
 
 
     public function __construct($objParentControl, $strControlId = null, $objCompetition){
@@ -121,8 +126,59 @@ class FFSMobileScoreInputPanel extends MJaxPanel{
             )
         );
 
+        $this->InitDialPad();
 
+    }
+    public function InitDialPad(){
+        for($i = -2; $i < 10; $i++){
+            $this->arrNumberKeys[$i] = new MJaxLinkButton($this);
+            $this->arrNumberKeys[$i]->AddCssClass('btn btn-large');
+            switch($i){
+                case(-2):
+                    $strAP = 'del';
+                    $strText = "<i class=' icon-arrow-lef'></i><i class=' icon-remove'></i>";
+                break;
+                case(-1):
+                    $strAP = '.';
+                    $strText = '.';
+                break;
+                default:
+                    $strText = $i;
+                    $strAP = $i;
+            }
+            $this->arrNumberKeys[$i]->Text = $strText;
+            $this->arrNumberKeys[$i]->ActionParameter = $strAP;
+            $this->arrNumberKeys[$i]->AddAction(
+                $this,
+                'lnkKeyPad_click'
+            );
+        }
+    }
 
+    public function lnkKeyPad_click($f, $c,$strActionParam){
+        $strActionParam = (string) $strActionParam;
+        switch($strActionParam){
+            case('del'):
+
+                $strScore  = $this->txtScore->Text;
+                if(strlen($strScore) > 0){
+                    $this->txtScore->Text = substr($strScore, 0, strlen($strScore)-1);
+                    $this->SaveState();
+                }
+            break;
+            case('.'):
+                if(strpos($this->txtScore->Text,'.') !== false){
+                    return $this->txtScore->Alert('Invalid number entered');
+                }
+            default:
+                $strScore  = $this->txtScore->Text;
+               /* if($strActionParam == 0){
+                    _dv((string)$strScore . (string)$strActionParam);
+                }*/
+                $this->txtScore->Text = (string)$strScore . (string)$strActionParam;
+                $this->SaveState();
+
+        }
     }
     public function SaveState(){
         //Save Score
@@ -146,12 +202,19 @@ class FFSMobileScoreInputPanel extends MJaxPanel{
         $this->objResult->Save();
     }
     public function UpdateResult(){
-        $this->objResult = FFSApplication::GeResultByCompetitionEventAthelete(
+        $arrResults = FFSApplication::GeResultByCompetitionAthelete(
             $this->objSelCompetition,
-            $this->strSelEvent,
             $this->objSelAthelete,
             false
         );
+
+        $this->objResult = null;
+        foreach($arrResults as $objResult){
+            if($objResult->Event == $this->strSelEvent){
+                $this->objResult = $objResult;//$arrResults[$this->strSelEvent];
+            }
+        }
+
         if(is_null($this->objResult)){
             $this->objResult = new Result();
             $this->objResult->sanctioned = false;
@@ -163,8 +226,17 @@ class FFSMobileScoreInputPanel extends MJaxPanel{
         $this->txtStartValue->Text = $this->objResult->NSStartValue;
         $this->txtNotes->Text = $this->objResult->Notes;
         $this->lstPlace->SetValue($this->objResult->NSPlace);
-        $this->chkTied->Checked = $this->objResult->NSTied;
+        if(is_null($this->objResult->NSTied)){
+            $this->chkTied->Checked = false;
+        }else{
+            $this->chkTied->Checked = $this->objResult->NSTied;
+        }
         $this->lstSpecialNotes->SetValue($this->objResult->NSSpecialNotes);
+        $intTotal = 0;
+        foreach($arrResults as $objResult){
+            $intTotal += (double)$objResult->Score;
+        }
+        $this->strAllAroundScore = $intTotal;
     }
     public function SetAtheletes($arrAtheletes){
         $this->objSelAthelete = $arrAtheletes[0];

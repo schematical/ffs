@@ -48,7 +48,7 @@
                 <div class='pull-right'>
                     <h3>AA</h3>
                     <div style='font-size:30Pt'>
-                        33.525
+                        <?php echo $_CONTROL->strAllAroundScore; ?>
                     </div>
                 </div>
                 <div style='clear:both'></div>
@@ -84,19 +84,13 @@
                                 <div class='span12'>
                                     <div class='width:90%'>
                                         <div class='ffs-number-pad'>
-                                            <a class='btn btn-large' href='#'>
-                                                1
-                                            </a>
+                                            <?php $_CONTROL->arrNumberKeys[1]->Render(); ?>
                                         </div>
                                         <div class='ffs-number-pad'>
-                                            <a class='btn btn-large'  href='#'>
-                                                2
-                                            </a>
+                                                <?php $_CONTROL->arrNumberKeys[2]->Render(); ?>
                                         </div>
                                         <div class='ffs-number-pad'>
-                                            <a class='btn btn-large' href='#'>
-                                                3
-                                            </a>
+                                                <?php $_CONTROL->arrNumberKeys[3]->Render(); ?>
                                         </div>
                                     </div>
                                 </div>
@@ -105,19 +99,13 @@
                                 <div class='span12'>
                                     <div class='width:90%'>
                                         <div class='ffs-number-pad'>
-                                            <a class='btn btn-large' href='#'>
-                                                4
-                                            </a>
+                                                <?php $_CONTROL->arrNumberKeys[4]->Render(); ?>
                                         </div>
                                         <div class='ffs-number-pad'>
-                                            <a class='btn btn-large'  href='#'>
-                                                5
-                                            </a>
+                                                <?php $_CONTROL->arrNumberKeys[5]->Render(); ?>
                                         </div>
                                         <div class='ffs-number-pad'>
-                                            <a class='btn btn-large' href='#'>
-                                                6
-                                            </a>
+                                                <?php $_CONTROL->arrNumberKeys[6]->Render(); ?>
                                         </div>
                                     </div>
                                 </div>
@@ -126,19 +114,13 @@
                                 <div class='span12'>
                                     <div class='width:90%'>
                                         <div class='ffs-number-pad'>
-                                            <a class='btn btn-large' href='#'>
-                                                7
-                                            </a>
+                                                <?php $_CONTROL->arrNumberKeys[7]->Render(); ?>
                                         </div>
                                         <div class='ffs-number-pad'>
-                                            <a class='btn btn-large'  href='#'>
-                                                8
-                                            </a>
+                                                <?php $_CONTROL->arrNumberKeys[8]->Render(); ?>
                                         </div>
                                         <div class='ffs-number-pad'>
-                                            <a class='btn btn-large' href='#'>
-                                                9
-                                            </a>
+                                                <?php $_CONTROL->arrNumberKeys[9]->Render(); ?>
                                         </div>
                                     </div>
                                 </div>
@@ -147,20 +129,13 @@
                                 <div class='span12'>
                                     <div class='width:90%'>
                                         <div class='ffs-number-pad'>
-                                            <a class='btn btn-large' href='#'>
-                                                <i class=' icon-arrow-lef'></i>
-                                                <i class=' icon-remove'></i>
-                                            </a>
+                                            <?php $_CONTROL->arrNumberKeys[-2]->Render(); ?>
                                         </div>
                                         <div class='ffs-number-pad'>
-                                            <a class='btn btn-large'  href='#'>
-                                                0
-                                            </a>
+                                            <?php $_CONTROL->arrNumberKeys[0]->Render(); ?>
                                         </div>
                                         <div class='ffs-number-pad'>
-                                            <a class='btn btn-large' href='#'>
-                                                Enter
-                                            </a>
+                                            <?php $_CONTROL->arrNumberKeys[-1]->Render(); ?>
                                         </div>
                                     </div>
                                 </div>

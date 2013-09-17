@@ -236,7 +236,7 @@
     <file path="/FFSRewriteHandeler_bkup.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379347717344" ignored="false" />
     <file path="/scores.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379439760037" ignored="false" />
     <file path="/scores.tpl.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379349849632" ignored="false" />
-    <file path="/FFSMobileScoreInputPanel.tpl.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379444248612" ignored="false" />
+    <file path="/FFSMobileScoreInputPanel.tpl.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379447423067" ignored="false" />
     <file path="$PROJECT_DIR$/../MLCOfficial/mde_codebase/apps/ffs/ctl/_panels/FFSSharePanel.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379359448941" ignored="false" />
     <file path="/MJaxTwitterShareLink.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379359238173" ignored="false" />
     <file path="/FFSSharePanel.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379359305676" ignored="false" />
@@ -265,11 +265,14 @@
     <file path="/FFSParentCompSearchPanel.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379434111542" ignored="false" />
     <file path="/FFSParentCompSearchPanel.tpl.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379369935642" ignored="false" />
     <file path="/editCompetition.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379433238513" ignored="false" />
-    <file path="/FFSMobileScoreInputPanel.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379444310917" ignored="false" />
+    <file path="/FFSMobileScoreInputPanel.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379447797455" ignored="false" />
     <file path="/MJaxBSListBox.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379444196441" ignored="false" />
     <file path="$PROJECT_DIR$/../MLCPackages/mlc_packages/MJaxBootstrap/_core/view/MJaxBSListBox.tpl.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379437456321" ignored="false" />
     <file path="/MJaxBSListBox.tpl.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379434915515" ignored="false" />
     <file path="/Result.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379443614280" ignored="false" />
+    <file path="/MJaxListBox.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379447735166" ignored="false" />
+    <file path="$PROJECT_DIR$/../MLCPackages/mlc_packages/MJax/_core/assets/js/MJax.js" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379448266188" ignored="false" />
+    <file path="/MJax.js" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379448264405" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -292,34 +295,34 @@
       <file leaf-file-name="FFSMobileScoreInputPanel.tpl.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/view/www/_panels/FFSMobileScoreInputPanel.tpl.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="180" column="40" selection-start="8099" selection-end="8099" vertical-scroll-proportion="-13.083333">
+            <state line="50" column="46" selection-start="1264" selection-end="1264" vertical-scroll-proportion="-6.8333335">
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#2;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#2;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#!!top" expanded="true" />
-                <marker date="1379444279881" expanded="true" signature="2123:2230" placeholder="..." />
-                <marker date="1379444279881" expanded="true" signature="2175:2230" placeholder="..." />
-                <marker date="1379444279881" expanded="true" signature="2228:2230" placeholder="..." />
-                <marker date="1379444279881" expanded="true" signature="2292:2333" placeholder="..." />
+                <marker date="1379447429921" expanded="true" signature="2160:2267" placeholder="..." />
+                <marker date="1379447429921" expanded="true" signature="2212:2267" placeholder="..." />
+                <marker date="1379447429921" expanded="true" signature="2265:2267" placeholder="..." />
+                <marker date="1379447429921" expanded="true" signature="2329:2370" placeholder="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FFSMobileScoreInputPanel.class.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="FFSMobileScoreInputPanel.class.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ctl/_panels/FFSMobileScoreInputPanel.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="108" column="48" selection-start="3354" selection-end="3354" vertical-scroll-proportion="0.63137996">
+            <state line="119" column="38" selection-start="3568" selection-end="3568" vertical-scroll-proportion="-12.041667">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FFSApplication.class.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/model/FFSApplication.class.php">
+      <file leaf-file-name="MJaxCheckBox.class.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/../MLCPackages/mlc_packages/MJax/_core/MJaxCheckBox.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="443" column="16" selection-start="17093" selection-end="17093" vertical-scroll-proportion="-16.916666">
+            <state line="4" column="6" selection-start="85" selection-end="85" vertical-scroll-proportion="-0.025878003">
               <folding />
             </state>
           </provider>
@@ -374,7 +377,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/ctl/parent/index.php" />
         <option value="$PROJECT_DIR$/app.inc.php" />
         <option value="$PROJECT_DIR$/view/www/_panels/FFSParentCompSearchPanel.tpl.php" />
         <option value="$PROJECT_DIR$/ctl/parent/home.php" />
@@ -385,10 +387,11 @@
         <option value="$PROJECT_DIR$/ctl/_panels/parent/FFSParentCompSearchPanel.class.php" />
         <option value="$PROJECT_DIR$/model/_enum.inc.php" />
         <option value="$PROJECT_DIR$/ctl/parent/scores.php" />
-        <option value="$PROJECT_DIR$/model/FFSApplication.class.php" />
         <option value="$PROJECT_DIR$/cli/_deploy.sql" />
         <option value="$PROJECT_DIR$/model/data_classes/Result.class.php" />
+        <option value="$PROJECT_DIR$/model/FFSApplication.class.php" />
         <option value="$PROJECT_DIR$/view/www/_panels/FFSMobileScoreInputPanel.tpl.php" />
+        <option value="$PROJECT_DIR$/../MLCPackages/mlc_packages/MJax/_core/MJaxListBox.class.php" />
         <option value="$PROJECT_DIR$/ctl/_panels/FFSMobileScoreInputPanel.class.php" />
       </list>
     </option>
@@ -662,20 +665,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/ctl/org/competition/landing.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="65" column="27" selection-start="2268" selection-end="2268" vertical-scroll-proportion="0.4731978">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ctl/org/competition/editCompetition.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="12" selection-start="872" selection-end="944" vertical-scroll-proportion="0.6768953">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/view/www/parent/landing.tpl.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="15" column="48" selection-start="526" selection-end="526" vertical-scroll-proportion="0.35120147">
@@ -747,33 +736,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/model/FFSApplication.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="443" column="16" selection-start="17093" selection-end="17093" vertical-scroll-proportion="-16.916666">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../MLCPackages/mlc_packages/MJaxBootstrap/_core/ctl/MJaxBSListBox.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="51" column="20" selection-start="1715" selection-end="1715" vertical-scroll-proportion="0.3465704">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/www/_panels/FFSMobileScoreInputPanel.tpl.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="180" column="40" selection-start="8099" selection-end="8099" vertical-scroll-proportion="-13.083333">
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#2;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#!!top" expanded="true" />
-            <marker date="1379444279881" expanded="true" signature="2123:2230" placeholder="..." />
-            <marker date="1379444279881" expanded="true" signature="2175:2230" placeholder="..." />
-            <marker date="1379444279881" expanded="true" signature="2228:2230" placeholder="..." />
-            <marker date="1379444279881" expanded="true" signature="2292:2333" placeholder="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -784,9 +750,46 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/view/www/_panels/FFSMobileScoreInputPanel.tpl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="50" column="46" selection-start="1264" selection-end="1264" vertical-scroll-proportion="-6.8333335">
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#2;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#!!top" expanded="true" />
+            <marker date="1379447429921" expanded="true" signature="2160:2267" placeholder="..." />
+            <marker date="1379447429921" expanded="true" signature="2212:2267" placeholder="..." />
+            <marker date="1379447429921" expanded="true" signature="2265:2267" placeholder="..." />
+            <marker date="1379447429921" expanded="true" signature="2329:2370" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/FFSApplication.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="434" column="27" selection-start="16592" selection-end="16592" vertical-scroll-proportion="0.52865064">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../MLCPackages/mlc_packages/MJax/_core/MJaxListBox.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="127" column="34" selection-start="4479" selection-end="4479" vertical-scroll-proportion="0.7116451">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ctl/_panels/FFSMobileScoreInputPanel.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="108" column="48" selection-start="3354" selection-end="3354" vertical-scroll-proportion="0.63137996">
+        <state line="119" column="38" selection-start="3568" selection-end="3568" vertical-scroll-proportion="-12.041667">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../MLCPackages/mlc_packages/MJax/_core/MJaxCheckBox.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="6" selection-start="85" selection-end="85" vertical-scroll-proportion="-0.025878003">
           <folding />
         </state>
       </provider>

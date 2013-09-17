@@ -432,16 +432,14 @@ abstract class FFSApplication{
         }
         return $arrReturn;
     }
-    public static function GeResultByCompetitionEventAthelete(Competition $objCompetition,  $strEvent, Athelete $objAthelete, $blnSanctioned = false){
+    public static function GeResultByCompetitionAthelete(Competition $objCompetition, Athelete $objAthelete, $blnSanctioned = false){
         $collResutls = Result::Query(
             sprintf(
-                'WHERE Result.idCompetition = %s AND Result.event = "%s" AND Result.idAthelete = %s AND Result.sanctioned = %s',
+                'WHERE Result.idCompetition = %s AND Result.idAthelete = %s AND Result.sanctioned = %s',
                 $objCompetition->IdCompetition,
-                $strEvent,
                 $objAthelete->IdAthelete,
                 ($blnSanctioned?'1':'0')
-            ),
-            true
+            )
         );
         return $collResutls;
     }
