@@ -62,7 +62,7 @@ class AssignmentBase extends MLCBaseEntity {
         return self::Query('WHERE Assignment_rel.idAssignment = ' . $intId, true);
     }
     public static function LoadAll() {
-        $coll = new BaseEntityCollection(self::Query(''));
+        $coll = self::Query('');
         return $coll;
     }
     public function ToXml($blnReclusive = false) {
@@ -230,25 +230,13 @@ class AssignmentBase extends MLCBaseEntity {
     //Get children
     //Load by foregin key
     public static function LoadCollByIdDevice($intIdDevice) {
-        $strSql = sprintf("SELECT Assignment_rel.* FROM Assignment_rel WHERE idDevice = %s;", $intIdDevice);
-        $result = MLCDBDriver::Query($strSql, self::DB_CONN);
-        $coll = new BaseEntityCollection();
-        while ($data = mysql_fetch_assoc($result)) {
-            $objAssignment = new Assignment();
-            $objAssignment->materilize($data);
-            $coll->addItem($objAssignment);
-        }
+        $strSql = sprintf(" WHERE idDevice = %s;", $intIdDevice);
+        $coll = self::Query($strSql);
         return $coll;
     }
     public static function LoadCollByIdSession($intIdSession) {
-        $strSql = sprintf("SELECT Assignment_rel.* FROM Assignment_rel WHERE idSession = %s;", $intIdSession);
-        $result = MLCDBDriver::Query($strSql, self::DB_CONN);
-        $coll = new BaseEntityCollection();
-        while ($data = mysql_fetch_assoc($result)) {
-            $objAssignment = new Assignment();
-            $objAssignment->materilize($data);
-            $coll->addItem($objAssignment);
-        }
+        $strSql = sprintf(" WHERE idSession = %s;", $intIdSession);
+        $coll = self::Query($strSql);
         return $coll;
     }
     public function LoadByTag($strTag) {

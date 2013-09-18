@@ -68,7 +68,7 @@ class SessionBase extends MLCBaseEntity {
         return self::Query('WHERE Session.idSession = ' . $intId, true);
     }
     public static function LoadAll() {
-        $coll = new BaseEntityCollection(self::Query(''));
+        $coll = self::Query('');
         return $coll;
     }
     public function ToXml($blnReclusive = false) {
@@ -270,14 +270,8 @@ class SessionBase extends MLCBaseEntity {
     }
     //Load by foregin key
     public static function LoadCollByIdCompetition($intIdCompetition) {
-        $strSql = sprintf("SELECT Session.* FROM Session WHERE idCompetition = %s;", $intIdCompetition);
-        $result = MLCDBDriver::Query($strSql, self::DB_CONN);
-        $coll = new BaseEntityCollection();
-        while ($data = mysql_fetch_assoc($result)) {
-            $objSession = new Session();
-            $objSession->materilize($data);
-            $coll->addItem($objSession);
-        }
+        $strSql = sprintf(" WHERE idCompetition = %s;", $intIdCompetition);
+        $coll = self::Query($strSql);
         return $coll;
     }
     public function LoadByTag($strTag) {

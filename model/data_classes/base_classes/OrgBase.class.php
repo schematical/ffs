@@ -61,7 +61,7 @@ class OrgBase extends MLCBaseEntity {
         return self::Query('WHERE Org.idOrg = ' . $intId, true);
     }
     public static function LoadAll() {
-        $coll = new BaseEntityCollection(self::Query(''));
+        $coll = self::Query('');
         return $coll;
     }
     public function ToXml($blnReclusive = false) {

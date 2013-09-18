@@ -6,17 +6,26 @@
  * Time: 2:57 PM
  * To change this template use File | Settings | File Templates.
  */
-class FFSResultCollection extends BaseEntityCollection{
+class FFSResultCollection extends MLCBaseEntityCollection{
+    protected $strToStringField = 'Athelete';
     protected $objSession = null;
     protected $objCompetition = null;
     protected $objAthelete = null;
     public function GetMaxDate($strField = 'CreDate'){
         $arrOrder = FFSApplication::SortChronologically($this->arrCollection, $strField);
-        return $arrOrder[0];
+        if(count($arrOrder) == 0){
+            return null;
+        }
+        $arrKeys = array_keys($arrOrder);
+        return $arrOrder[$arrKeys[0]];
     }
     public function GetMinDate($strField = 'CreDate'){
         $arrOrder = FFSApplication::SortChronologically($this->arrCollection, $strField);
-        return $arrOrder[count($arrOrder) - 1];
+        if(count($arrOrder) == 0){
+            return null;
+        }
+        $arrKeys = array_keys($arrOrder);
+        return $arrOrder[$arrKeys[count($arrOrder) - 1]];
     }
     public function GetAtheletes(){
         //Should return null if none
@@ -87,6 +96,8 @@ class FFSResultCollection extends BaseEntityCollection{
                 return $this->IsSanctioned();
             case "Total":
                 return $this->GetTotal();
+            case "CreDate":
+                return $this->GetMaxDate()->__get('CreDate');
                 //return $this->GetAtheletes();
             default:
                 $fltResult = $this->GetScoreByEvent($strName);
@@ -104,7 +115,8 @@ class FFSResultCollection extends BaseEntityCollection{
     public function __set($strName, $mixValue)
     {
         switch ($strName) {
-
+            case "ToStringField":
+                return $this->strToStringField = $mixValue;
             case "Athelete":
                 return $this->objAthelete = $mixValue;
             case "Session":
@@ -116,6 +128,12 @@ class FFSResultCollection extends BaseEntityCollection{
                 //return parent::__set($strName, $mixValue);
                 throw new MLCMissingPropertyException( $this, $strName);
         }
+    }
+    public function __toString(){
+        $strReturn = $this->__get(
+            $this->strToStringField
+        )->__toString();
+        return $strReturn;
     }
 
 }

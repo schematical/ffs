@@ -1,3 +1,12 @@
+<meta property="fb:app_id" content="<?php echo FB_APP_ID; ?>" />
+<meta property="og:title" content="<?php echo $this->strTitle; ?>" />
+<meta property="og:type" content="music.playlist" />
+<meta property="og:image" content="<?php echo __ASSETS_IMG__; ?>/org2.png" />
+<meta property="og:url" content="//<?php echo $_SERVER['SERVER_NAME'] . '/' . $_SERVER['REQUEST_URI']; ?>" />
+<!--<link rel="opengraph" href="http://www.exampleapp.com/playlist/ID/metadata" />-->
+
+<title><?php echo $this->strTitle; ?></title>
+
 <?php if($this instanceof MJaxWAdminForm){ ?>
     <?php require(__MJAX_WADMIN_THEME_CORE_VIEW__ . '/_meta.tpl.php'); ?>
     <link href="<?php echo __MJAX_WADMIN_THEME_ASSET_URL__ . '/css'; ?>/pages/pricing.css" rel="stylesheet">

@@ -56,7 +56,7 @@ class OrgCompetitionBase extends MLCBaseEntity {
         return self::Query('WHERE OrgCompetition_rel.idOrgCompetition = ' . $intId, true);
     }
     public static function LoadAll() {
-        $coll = new BaseEntityCollection(self::Query(''));
+        $coll = self::Query('');
         return $coll;
     }
     public function ToXml($blnReclusive = false) {
@@ -209,25 +209,13 @@ class OrgCompetitionBase extends MLCBaseEntity {
     //Get children
     //Load by foregin key
     public static function LoadCollByIdOrg($intIdOrg) {
-        $strSql = sprintf("SELECT OrgCompetition_rel.* FROM OrgCompetition_rel WHERE idOrg = %s;", $intIdOrg);
-        $result = MLCDBDriver::Query($strSql, self::DB_CONN);
-        $coll = new BaseEntityCollection();
-        while ($data = mysql_fetch_assoc($result)) {
-            $objOrgCompetition = new OrgCompetition();
-            $objOrgCompetition->materilize($data);
-            $coll->addItem($objOrgCompetition);
-        }
+        $strSql = sprintf(" WHERE idOrg = %s;", $intIdOrg);
+        $coll = self::Query($strSql);
         return $coll;
     }
     public static function LoadCollByIdCompetition($intIdCompetition) {
-        $strSql = sprintf("SELECT OrgCompetition_rel.* FROM OrgCompetition_rel WHERE idCompetition = %s;", $intIdCompetition);
-        $result = MLCDBDriver::Query($strSql, self::DB_CONN);
-        $coll = new BaseEntityCollection();
-        while ($data = mysql_fetch_assoc($result)) {
-            $objOrgCompetition = new OrgCompetition();
-            $objOrgCompetition->materilize($data);
-            $coll->addItem($objOrgCompetition);
-        }
+        $strSql = sprintf(" WHERE idCompetition = %s;", $intIdCompetition);
+        $coll = self::Query($strSql);
         return $coll;
     }
     public function LoadByTag($strTag) {

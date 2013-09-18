@@ -28,6 +28,7 @@ class Result extends ResultBase {
             if(!array_key_exists($objResult->IdAthelete, $arrReturn)){
                 $arrReturn[$objResult->IdAthelete] = new FFSResultCollection();
                 $arrReturn[$objResult->IdAthelete]->Athelete = $objResult->IdAtheleteObject;
+                $arrReturn[$objResult->IdAthelete]->ToStringField = 'Athelete';
             }
             $arrReturn[$objResult->IdAthelete][$objResult->Event] = $objResult;
         }
@@ -40,6 +41,7 @@ class Result extends ResultBase {
                 $arrReturn[$objResult->IdCompetition] = new FFSResultCollection();
                 $arrReturn[$objResult->IdCompetition]->Athelete = $objResult->IdAtheleteObject;
                 $arrReturn[$objResult->IdCompetition]->Competition = $objResult->IdCompetitionObject;
+                $arrReturn[$objResult->IdCompetition]->ToStringField = 'Competition';
             }
             $arrReturn[$objResult->IdCompetition][$objResult->Event] = $objResult;
         }

@@ -28,7 +28,8 @@ class FFSMobileScoreInputPanel extends MJaxPanel{
         $this->objSelCompetition = $objCompetition;
         $this->strTemplate = __VIEW_ACTIVE_APP_DIR__ . '/www/_panels/' . get_class($this) . '.tpl.php';
         $this->lstAtheletes = new MJaxBSListBox($this);
-        $this->lstAtheletes->Text = 'Your Athletes';
+        $this->lstAtheletes->Text = 'Change Athletes';
+        $this->lstAtheletes->AddCssClass('btn-large');
         $this->lstAtheletes->AddAction(
             new MJaxChangeEvent(),
             new MJaxServerControlAction(
@@ -221,6 +222,7 @@ class FFSMobileScoreInputPanel extends MJaxPanel{
             $this->objResult->Event = $this->strSelEvent;
             $this->objResult->IdAthelete = $this->objSelAthelete->IdAthelete;
             $this->objResult->IdCompetition = $this->objSelCompetition->IdCompetition;
+            $this->objResult->CreDate = MLCDateTime::Now();
         }
         $this->txtScore->Text = $this->objResult->Score;
         $this->txtStartValue->Text = $this->objResult->NSStartValue;

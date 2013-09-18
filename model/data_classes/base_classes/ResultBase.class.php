@@ -84,7 +84,7 @@ class ResultBase extends MLCBaseEntity {
         return self::Query('WHERE Result.idResult = ' . $intId, true);
     }
     public static function LoadAll() {
-        $coll = new BaseEntityCollection(self::Query(''));
+        $coll = self::Query('');
         return $coll;
     }
     public function ToXml($blnReclusive = false) {
@@ -312,36 +312,18 @@ class ResultBase extends MLCBaseEntity {
     //Get children
     //Load by foregin key
     public static function LoadCollByIdSession($intIdSession) {
-        $strSql = sprintf("SELECT Result.* FROM Result WHERE idSession = %s;", $intIdSession);
-        $result = MLCDBDriver::Query($strSql, self::DB_CONN);
-        $coll = new BaseEntityCollection();
-        while ($data = mysql_fetch_assoc($result)) {
-            $objResult = new Result();
-            $objResult->materilize($data);
-            $coll->addItem($objResult);
-        }
+        $strSql = sprintf(" WHERE idSession = %s;", $intIdSession);
+        $coll = self::Query($strSql);
         return $coll;
     }
     public static function LoadCollByIdAthelete($intIdAthelete) {
-        $strSql = sprintf("SELECT Result.* FROM Result WHERE idAthelete = %s;", $intIdAthelete);
-        $result = MLCDBDriver::Query($strSql, self::DB_CONN);
-        $coll = new BaseEntityCollection();
-        while ($data = mysql_fetch_assoc($result)) {
-            $objResult = new Result();
-            $objResult->materilize($data);
-            $coll->addItem($objResult);
-        }
+        $strSql = sprintf(" WHERE idAthelete = %s;", $intIdAthelete);
+        $coll = self::Query($strSql);
         return $coll;
     }
     public static function LoadCollByIdCompetition($intIdCompetition) {
-        $strSql = sprintf("SELECT Result.* FROM Result WHERE idCompetition = %s;", $intIdCompetition);
-        $result = MLCDBDriver::Query($strSql, self::DB_CONN);
-        $coll = new BaseEntityCollection();
-        while ($data = mysql_fetch_assoc($result)) {
-            $objResult = new Result();
-            $objResult->materilize($data);
-            $coll->addItem($objResult);
-        }
+        $strSql = sprintf(" WHERE idCompetition = %s;", $intIdCompetition);
+        $coll = self::Query($strSql);
         return $coll;
     }
     public function LoadByTag($strTag) {

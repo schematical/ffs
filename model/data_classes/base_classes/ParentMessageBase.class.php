@@ -76,7 +76,7 @@ class ParentMessageBase extends MLCBaseEntity {
         return self::Query('WHERE ParentMessage.idParentMessage = ' . $intId, true);
     }
     public static function LoadAll() {
-        $coll = new BaseEntityCollection(self::Query(''));
+        $coll = self::Query('');
         return $coll;
     }
     public function ToXml($blnReclusive = false) {
@@ -284,25 +284,13 @@ class ParentMessageBase extends MLCBaseEntity {
     //Get children
     //Load by foregin key
     public static function LoadCollByIdAthelete($intIdAthelete) {
-        $strSql = sprintf("SELECT ParentMessage.* FROM ParentMessage WHERE idAthelete = %s;", $intIdAthelete);
-        $result = MLCDBDriver::Query($strSql, self::DB_CONN);
-        $coll = new BaseEntityCollection();
-        while ($data = mysql_fetch_assoc($result)) {
-            $objParentMessage = new ParentMessage();
-            $objParentMessage->materilize($data);
-            $coll->addItem($objParentMessage);
-        }
+        $strSql = sprintf(" WHERE idAthelete = %s;", $intIdAthelete);
+        $coll = self::Query($strSql);
         return $coll;
     }
     public static function LoadCollByIdCompetition($intIdCompetition) {
-        $strSql = sprintf("SELECT ParentMessage.* FROM ParentMessage WHERE idCompetition = %s;", $intIdCompetition);
-        $result = MLCDBDriver::Query($strSql, self::DB_CONN);
-        $coll = new BaseEntityCollection();
-        while ($data = mysql_fetch_assoc($result)) {
-            $objParentMessage = new ParentMessage();
-            $objParentMessage->materilize($data);
-            $coll->addItem($objParentMessage);
-        }
+        $strSql = sprintf(" WHERE idCompetition = %s;", $intIdCompetition);
+        $coll = self::Query($strSql);
         return $coll;
     }
     public function LoadByTag($strTag) {

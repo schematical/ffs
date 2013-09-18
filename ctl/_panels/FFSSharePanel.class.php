@@ -9,6 +9,7 @@ class FFSSharePanel extends MJaxPanel{
     public $lnkTwitter = null;
     public $lnkEmail = null;
     public $txtEmail = null;
+    public $txtEmbed = null;
     public function __construct($objParentControl, $strControlId = null){
         parent::__construct($objParentControl, $strControlId);
         $this->strTemplate = __VIEW_ACTIVE_APP_DIR__ . '/www/_panels/' . get_class($this) . '.tpl.php';
@@ -20,15 +21,26 @@ class FFSSharePanel extends MJaxPanel{
         $this->txtEmail->Attr('placeholder', 'Email');
         $this->txtEmail->AddCssClass('input-large');
 
-        $this->lnkTwitter = new MJaxTwitterShareLink($this);
-        $this->lnkTwitter->AddCssClass('btn');
+        $this->lnkFacebook = new MJaxFBShareLink($this);
+        $this->lnkFacebook->AddCssClass('btn btn-large');
+        $this->lnkFacebook->Text = '<i class="icon-twitter icon-2x"></i> Facebook';
 
-        $this->lnkTwitter->Text = '<i class="icon-twitter icon-2x"></i>';
+        $this->lnkTwitter = new MJaxTwitterShareLink($this);
+        $this->lnkTwitter->AddCssClass('btn btn-large');
+
+        $this->lnkTwitter->Text = '<i class="icon-twitter icon-2x"></i> Twitter';
 
         $this->lnkEmail = new MJaxLinkButton($this);
-        $this->lnkEmail->AddCssClass('btn');
+        $this->lnkEmail->AddCssClass('btn btn-large');
         $this->lnkEmail->Text = "Email";
         $this->lnkEmail->AddAction($this, 'lnkEmail_click');
+
+        $this->txtEmbed = new MJaxTextBox($this);
+        $this->txtEmbed->TextMode = MJaxTextMode::MultiLine;
+        $this->txtEmbed->CrossScripting = MJaxTextBox::Allow;
+        $this->txtEmbed->ReadOnly = true;
+        $this->txtEmbed->AddCssClass("span8");
+
     }
 
     public function lnkEmail_click()
@@ -58,6 +70,13 @@ class FFSSharePanel extends MJaxPanel{
     public function UpdateUrl($mixValue){
         $this->strUrl = $mixValue;
         $this->lnkTwitter->Url = $this->strUrl;
+        $this->lnkFacebook->Link = $this->strUrl;
+        $this->txtEmbed->Text =
+            sprintf(
+                "<iframe src='%s&embed=1' height='550Px' width='500Px' frameborder='0'></iframe>",
+                $this->strUrl
+            )
+        ;
     }
     /////////////////////////
     // Public Properties: GET

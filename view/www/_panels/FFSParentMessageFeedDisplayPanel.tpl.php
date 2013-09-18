@@ -6,4 +6,4 @@
     <?php echo $_CONTROL->objEntity->Message; ?>
 </p>
 <hr/>
-<?php require(__VIEW_ACTIVE_APP_DIR__ . '/www/_panels/_FFSFeedDisplayPanel_footer.tpl.php'); ?>
+<?php require(__MJAX_FEED_CORE_VIEW__ . '/_MJaxFeedDisplayPanel_footer.tpl.php'); ?>

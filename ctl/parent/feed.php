@@ -1,67 +1,26 @@
 <?php
 //die(header('location:' . FFSForm::Competition()->Namespace . '/parent/message.php'));
 
-class index extends FFSFeedForm
+class index extends FFSForm
 {
 
-    protected $intLastUpdated = 0;
+    public $pnlFeed = null;
     public function Form_Create()
     {
         parent::Form_Create();
-        if(is_null(FFSForm::Competition())){
-            $this->Redirect('/index.php');
-        }
+        $this->strTemplate = __VIEW_ACTIVE_APP_DIR__ . '/www/parent/feed.tpl.php';
+
 
         $this->InitFeed();
-        krsort($this->arrFeedEntities, SORT_NUMERIC);
-        if(count($this->arrFeedEntities)){
-            $arrKeys = array_keys($this->arrFeedEntities);
-
-            $this->intLastUpdated = $arrKeys[0];
-        }
-        $arrActiveSessions = FFSApplication::GetActiveSessions();
-
-        if(count($arrActiveSessions) == 0){
-            $pnlAnounce = new MJaxPanel($this);
-            $pnlAnounce->Text = sprintf(
-                '<h3>There are no active sessions at the moment</h3> Thanks for checking out <b>%s</b>',
-                FFSForm::Competition()->Name
-            );
-            $this->arrFeedEntities[$this->intLastUpdated + 1] = $pnlAnounce;
-        }
-
-
-
-        $this->pxyMainWindow->AddAction(
-            new MJaxTimeoutEvent(5000),
-            new MJaxServerControlAction($this, 'Update')
-        );
 
 
     }
     public function Update(){
         //$this->Alert("Updated :)");
     }
-    public function GetFeedEntityCtl($objFeedEntity, $mixOrigData = null){
-        switch(get_class($objFeedEntity)){
-            case('ParentMessage'):
-                $pnlReturn = new FFSParentMessageFeedDisplayPanel($this, $objFeedEntity);
-            break;
-            case('Result'):
-                if(count($mixOrigData) > 0){
-                    $mixOrigData = FFSApplication::SortChronologically($mixOrigData);
-                    $objFeedEntity = $mixOrigData[0];
-                }
 
-                $pnlReturn =  new FFSResultFeedDisplayPanel($this, $objFeedEntity);
-                $pnlReturn->ExtraData = $mixOrigData;
-            break;
-            default:
-                throw new Exception('No control defined for ' . get_class($objFeedEntity));
-        }
-        return $pnlReturn;
-    }
     public function InitFeed(){
+        $this->pnlFeed = new MJaxFeedPanel($this);
         $strExcludeParentMessage = '';
         $pnlSelectedEntity = null;
         $intIdParentMessage = MLCApplication::QS(FFSQS::IdParentMessage);
@@ -69,7 +28,7 @@ class index extends FFSFeedForm
         if(!is_null($intIdParentMessage)){
             $objParentMessage = ParentMessage::LoadById($intIdParentMessage);
             if(!is_null($objParentMessage)){
-                $pnlSelectedEntity = $this->AddFeedEntity(
+                $pnlSelectedEntity = $this->pnlFeed->AddFeedEntity(
                     $objParentMessage,
                     'QueDate'
                 );
@@ -82,7 +41,7 @@ class index extends FFSFeedForm
         if(!is_null($intIdResult)){
             $objResult = Result::LoadById($intIdResult);
             if(!is_null($objResult)){
-                $pnlSelectedEntity = $this->AddFeedEntity(
+                $pnlSelectedEntity = $this->pnlFeed->AddFeedEntity(
                     $objResult
                 );
 
@@ -98,10 +57,23 @@ class index extends FFSFeedForm
         //if user is not logged in load by competition
         //if(is_null(MLCAuthDriver::User())){
 
+        if(!is_null(FFSForm::Competition())){
+            //Init feed based on competition
 
             //Load All results by session
-            $arrSessions = FFSApplication::GetActiveSessions();
-            foreach($arrSessions as $objSession){
+            $arrActiveSessions = FFSApplication::GetActiveSessions();
+
+
+            if(count($arrActiveSessions) == 0){
+                $pnlAnounce = new MJaxPanel($this);
+                $pnlAnounce->Text = sprintf(
+                    '<h3>There are no active sessions at the moment</h3> Thanks for checking out <b>%s</b>',
+                    FFSForm::Competition()->Name
+                );
+                $this->arrFeedEntities[$this->intLastUpdated + 1] = $pnlAnounce;
+            }
+
+            foreach($arrActiveSessions as $objSession){
 
                 $arrResults = FFSApplication::GetResultsBySessionGroupByAthelete($objSession);
                 foreach($arrResults as $arrGroupedResults){
@@ -112,7 +84,7 @@ class index extends FFSFeedForm
 
                     }
                 }
-                $this->AddFeedEntity(
+                $this->pnlFeed->AddFeedEntity(
                     $arrResults
                 );
             }
@@ -127,17 +99,54 @@ class index extends FFSFeedForm
             );
 
 
-            $this->AddFeedEntity(
+            $this->pnlFeed->AddFeedEntity(
                 $collCompetition,
                 'QueDate'
             );
-        //}else{
-            //If user is logged in get their subscriptions(should be stored in rolls)
+        }else{
+            //Show results based on time line parameters
+            $intIdAthelete = MLCApplication::QS(FFSQS::Athelete_IdAthelete);
 
-        //}
+            if(!is_null($intIdAthelete)){
+                $arrResults = Result::LoadCollByIdAthelete($intIdAthelete);
+
+                $arrResults = Result::GroupByCompetition($arrResults);
+                //_dv($arrResults);
+                //_dv($arrResults[array_keys($arrResults)[0]]->Length());
+                $this->pnlFeed->AddFeedEntity(
+                    $arrResults
+                );
+            }
+        }
 
     }
+    public function GetShareUrl(){
+        $arrQS = array();
+        $intIdAthelete = MLCApplication::QS(FFSQS::Athelete_IdAthelete);
+        if(!is_null($intIdAthelete)){
+            $arrQS[FFSQS::Athelete_IdAthelete] = $intIdAthelete;
+        }
 
+        $intIdOrg = MLCApplication::QS(FFSQS::Org_IdOrg);
+        if(!is_null($intIdOrg)){
+            $arrQS[FFSQS::Org_IdOrg] = $intIdOrg;
+        }
+
+        $strNamespace = '';
+        if(!is_null(FFSForm::Competition())){
+            $strNamespace = FFSForm::Competition()->Namespace .'/';
+        }
+        $strUrl = sprintf(
+            '%s://%s/%s?%s',
+            (SERVER_ENV == 'local'?'http':'https'),
+            $_SERVER['SERVER_NAME'],
+            $strNamespace . 'parents/feed',
+            http_build_query(
+                $arrQS
+            )
+        );
+        return $strUrl;
+    }
 }
 
 index::Run('index');

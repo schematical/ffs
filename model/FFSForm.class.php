@@ -1,5 +1,6 @@
 <?php
 class FFSForm extends MJaxWAdminForm{
+    protected $strTitle = 'Tumble Score, Gymnastics Competition Management Software Done Right';
     public static $strSection = null;
     public static $objForm = null;
 
@@ -149,7 +150,9 @@ class FFSForm extends MJaxWAdminForm{
                     $arrAtheletes = FFSApplication::GetAtheletesByParent();
                     if(count($arrAtheletes < 3)){
                         foreach($arrAtheletes as $objAthelete){
-                            $this->AddHeaderNav($objAthelete->FirstName, 'icon-smile')->Href = '/parent/results?' . FFSQS::Athelete_IdAthelete . '=' . $objAthelete->IdAthelete;
+                            $lnkAthelete = $this->AddHeaderNav($objAthelete->FirstName, 'icon-smile');
+                            $lnkAthelete->AddSubNavLink('Stats','/parent/results?' . FFSQS::Athelete_IdAthelete . '=' . $objAthelete->IdAthelete);
+                            $lnkAthelete->AddSubNavLink('Timeline','/parent/feed?' . FFSQS::Athelete_IdAthelete . '=' . $objAthelete->IdAthelete);
                         }
                     }else{
                         $lnkMyTeam = $this->AddHeaderNav('My Team', 'icon-flag');
@@ -157,7 +160,6 @@ class FFSForm extends MJaxWAdminForm{
                             $lnkMyTeam->AddSubNavLink($objAthelete->__toString(), 'icon-smile')->Href = '/parent/athleteDetails?' . FFSQS::Athelete_IdAthelete . '=' . $objAthelete->IdAthelete;
                         }
                     }
-                    $this->AddHeaderNav('Share', 'icon-bullhorn')->Href = '/parent/share';
                     $this->AddHeaderNav('Pro-store', 'icon-star')->Href = '/parent/prostore';
 
                 }

@@ -99,8 +99,15 @@ MLCApplication::InitPackage('MJaxTracking');
 MLCApplication::InitPackage('MJaxWAdminTheme');
 //MLCApplication::InitPackage('MJaxJQueryUI');
 MLCApplication::InitPackage('MLCSalesTools');
-//MLCApplication::InitPackage('MLCEntityModel');
 MLCApplication::InitPackage('MLCTwitter');
+MLCApplication::InitPackage('MLCFB');
+MLCApplication::InitPackage('MJaxFeed');
+MJaxFeedPanel::SetFeedEntityCtl('Result', 'FFSResultFeedDisplayPanel');
+MJaxFeedPanel::SetFeedEntityCtl('FFSResultCollection', 'FFSResultFeedDisplayPanel');
+
+MJaxFeedPanel::SetFeedEntityCtl('ParentMessage', 'FFSParentMessageFeedDisplayPanel');
+
+
 require_once(__CTL_FFS_APP_DIR__ . '/_events.inc.php');
 
 //_dv(MLCApplicationBase::$arrClassFiles['MLCApiFFSPackage']);

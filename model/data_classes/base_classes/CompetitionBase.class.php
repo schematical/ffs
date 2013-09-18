@@ -77,7 +77,7 @@ class CompetitionBase extends MLCBaseEntity {
         return self::Query('WHERE Competition.idCompetition = ' . $intId, true);
     }
     public static function LoadAll() {
-        $coll = new BaseEntityCollection(self::Query(''));
+        $coll = self::Query('');
         return $coll;
     }
     public function ToXml($blnReclusive = false) {
@@ -300,14 +300,8 @@ class CompetitionBase extends MLCBaseEntity {
     }
     //Load by foregin key
     public static function LoadCollByIdOrg($intIdOrg) {
-        $strSql = sprintf("SELECT Competition.* FROM Competition WHERE idOrg = %s;", $intIdOrg);
-        $result = MLCDBDriver::Query($strSql, self::DB_CONN);
-        $coll = new BaseEntityCollection();
-        while ($data = mysql_fetch_assoc($result)) {
-            $objCompetition = new Competition();
-            $objCompetition->materilize($data);
-            $coll->addItem($objCompetition);
-        }
+        $strSql = sprintf(" WHERE idOrg = %s;", $intIdOrg);
+        $coll = self::Query($strSql);
         return $coll;
     }
     public function LoadByTag($strTag) {

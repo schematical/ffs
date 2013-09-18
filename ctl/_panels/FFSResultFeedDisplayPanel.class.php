@@ -3,21 +3,24 @@ class FFSResultFeedDisplayPanel extends FFSFeedDisplayPanel{
     public $strAtheleteName = null;
 
     public function __construct($objParentControl, $objResult){
+        if($objResult instanceof FFSResultCollection){
+            $this->mixExtraData = $objResult;
+            $objResult = $this->mixExtraData->GetMaxDate();
+
+        }
         parent::__construct($objParentControl, $objResult);
 
-        ;
+        $this->strTemplate = __VIEW_ACTIVE_APP_DIR__ . '/www/_panels/' . get_class($this) . '.tpl.php';
 
-        $objAthelete = $this->objEntity->IdAtheleteObject;
-        $this->strAtheleteName = $objAthelete->FirstName . ' ' . $objAthelete->LastName;
 
 
 
     }
     public function GetShareUrl(){
+        $strUrl = $this->objForm->GetShareUrl();
         return sprintf(
-            '%s/%s/parent/index?%s=%s',
-            $_SERVER['SERVER_NAME'],
-            FFSForm::Competition()->Namespace,
+            '%s?%s=%s',
+            $strUrl,
             FFSQS::IdResult,
             $this->objEntity->IdResult
         );

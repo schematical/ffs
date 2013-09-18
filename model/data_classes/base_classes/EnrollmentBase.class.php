@@ -77,7 +77,7 @@ class EnrollmentBase extends MLCBaseEntity {
         return self::Query('WHERE Enrollment_rel.idEnrollment = ' . $intId, true);
     }
     public static function LoadAll() {
-        $coll = new BaseEntityCollection(self::Query(''));
+        $coll = self::Query('');
         return $coll;
     }
     public function ToXml($blnReclusive = false) {
@@ -285,36 +285,18 @@ class EnrollmentBase extends MLCBaseEntity {
     //Get children
     //Load by foregin key
     public static function LoadCollByIdAthelete($intIdAthelete) {
-        $strSql = sprintf("SELECT Enrollment_rel.* FROM Enrollment_rel WHERE idAthelete = %s;", $intIdAthelete);
-        $result = MLCDBDriver::Query($strSql, self::DB_CONN);
-        $coll = new BaseEntityCollection();
-        while ($data = mysql_fetch_assoc($result)) {
-            $objEnrollment = new Enrollment();
-            $objEnrollment->materilize($data);
-            $coll->addItem($objEnrollment);
-        }
+        $strSql = sprintf(" WHERE idAthelete = %s;", $intIdAthelete);
+        $coll = self::Query($strSql);
         return $coll;
     }
     public static function LoadCollByIdCompetition($intIdCompetition) {
-        $strSql = sprintf("SELECT Enrollment_rel.* FROM Enrollment_rel WHERE idCompetition = %s;", $intIdCompetition);
-        $result = MLCDBDriver::Query($strSql, self::DB_CONN);
-        $coll = new BaseEntityCollection();
-        while ($data = mysql_fetch_assoc($result)) {
-            $objEnrollment = new Enrollment();
-            $objEnrollment->materilize($data);
-            $coll->addItem($objEnrollment);
-        }
+        $strSql = sprintf(" WHERE idCompetition = %s;", $intIdCompetition);
+        $coll = self::Query($strSql);
         return $coll;
     }
     public static function LoadCollByIdSession($intIdSession) {
-        $strSql = sprintf("SELECT Enrollment_rel.* FROM Enrollment_rel WHERE idSession = %s;", $intIdSession);
-        $result = MLCDBDriver::Query($strSql, self::DB_CONN);
-        $coll = new BaseEntityCollection();
-        while ($data = mysql_fetch_assoc($result)) {
-            $objEnrollment = new Enrollment();
-            $objEnrollment->materilize($data);
-            $coll->addItem($objEnrollment);
-        }
+        $strSql = sprintf(" WHERE idSession = %s;", $intIdSession);
+        $coll = self::Query($strSql);
         return $coll;
     }
     public function LoadByTag($strTag) {

@@ -58,7 +58,7 @@ class DeviceBase extends MLCBaseEntity {
         return self::Query('WHERE Device.idDevice = ' . $intId, true);
     }
     public static function LoadAll() {
-        $coll = new BaseEntityCollection(self::Query(''));
+        $coll = self::Query('');
         return $coll;
     }
     public function ToXml($blnReclusive = false) {
@@ -219,14 +219,8 @@ class DeviceBase extends MLCBaseEntity {
     }
     //Load by foregin key
     public static function LoadCollByIdOrg($intIdOrg) {
-        $strSql = sprintf("SELECT Device.* FROM Device WHERE idOrg = %s;", $intIdOrg);
-        $result = MLCDBDriver::Query($strSql, self::DB_CONN);
-        $coll = new BaseEntityCollection();
-        while ($data = mysql_fetch_assoc($result)) {
-            $objDevice = new Device();
-            $objDevice->materilize($data);
-            $coll->addItem($objDevice);
-        }
+        $strSql = sprintf(" WHERE idOrg = %s;", $intIdOrg);
+        $coll = self::Query($strSql);
         return $coll;
     }
     public function LoadByTag($strTag) {
