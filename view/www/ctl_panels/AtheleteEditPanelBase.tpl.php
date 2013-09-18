@@ -54,6 +54,9 @@ if (!is_null($_CONTROL->intIdOrg)) {  $_CONTROL->intIdOrg->Render();
                         <div class="control-group pull-left">
                           <label class="control-label" for="name">
                               Competitive Association:
+                              <a href="#" data-toggle="popover" title="" data-content="What body governs the competitions you attend? USAG? AAU? USTA? Let us know." data-original-title="Competitive Association">
+                                  <i class="icon-question-sign"></i>
+                              </a>
                           </label>
                           <div class="controls">
                              <?php $_CONTROL->strMemType->Render(); ?>
@@ -66,7 +69,12 @@ if (!is_null($_CONTROL->intIdOrg)) {  $_CONTROL->intIdOrg->Render();
                 
                     <?php if (!is_null($_CONTROL->strMemId)) { ?>
                         <div class="control-group pull-left">
-                          <label class="control-label" for="name"> Athlete Id:</label>
+                          <label class="control-label" for="name">
+                              Athlete Id:
+                              <a href="#" data-toggle="popover" title="" data-content="What is the ID that your Competitive Association has assigned you?" data-original-title="Athlete Id">
+                                  <i class="icon-question-sign"></i>
+                              </a>
+                          </label>
                           <div class="controls">
                              <?php $_CONTROL->strMemId->Render(); ?>
                           </div>

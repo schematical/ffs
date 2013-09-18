@@ -37,6 +37,25 @@ abstract class FFSApplication{
         }
         return $arrAtheletes;
     }
+    public static function GetAtheletesByOrgManager(AuthUser $objUser = null){
+        $arrOrgs = self::GetOrgsByOrgManager($objUser);
+        $arrAtheletes = new MLCBaseEntityCollection();
+        foreach($arrOrgs as $objOrg){
+            $arrAtheletes = $objOrg->GetAtheleteArr()->Combine($arrAtheletes);
+        }
+        return $arrAtheletes;
+    }
+    public static function GetOrgsByOrgManager(AuthUser $objUser = null){
+        if(is_null($objUser)){
+            $objUser = MLCAuthDriver::User();
+        }
+        $arrRolls = MLCAuthDriver::GetRolls(FFSRoll::ORG_MANAGER, $objUser);
+        $arrOrgs = array();
+        foreach($arrRolls as $objRoll){
+            $arrOrgs[] = $objRoll->GetEntity();
+        }
+        return $arrOrgs;
+    }
     public static function GetEnrollmentsBySession($objSession, $strSearch = null){
 
     }

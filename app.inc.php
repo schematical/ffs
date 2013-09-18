@@ -34,6 +34,13 @@ MLCApplicationBase::$arrClassFiles['FFSApplication'] = __MODEL_FFS_APP_DIR__ . '
 //Gymnastics scoring
 MLCApplicationBase::$arrClassFiles['FFSResultCollection'] = __MODEL_FFS_APP_DIR__ . '/gymnastics/FFSResultCollection.class.php';
 
+//Ctl/Forms
+MLCApplicationBase::$arrClassFiles['FFSFeedForm'] = __CTL_FFS_APP_DIR__ . '/_forms/FFSFeedForm.class.php';
+MLCApplicationBase::$arrClassFiles['FFSHomeForm'] = __CTL_FFS_APP_DIR__ . '/_forms/FFSHomeForm.class.php';
+MLCApplicationBase::$arrClassFiles['FFSParentCoachLandingForm'] = __CTL_FFS_APP_DIR__ . '/_forms/FFSParentCoachLandingForm.class.php';
+MLCApplicationBase::$arrClassFiles['FFSParentCoachMobileScoreForm'] = __CTL_FFS_APP_DIR__ . '/_forms/FFSParentCoachMobileScoreForm.class.php';
+//MLCApplicationBase::$arrClassFiles['FFSParentCoachMobileScoreForm'] = __CTL_FFS_APP_DIR__ . '/_forms/FFSParentCoachMobileScoreForm.class.php';
+
 
 //CTL
 MLCApplicationBase::$arrClassFiles['FFSGymLandingHeaderPanel'] = __CTL_FFS_APP_DIR__ . '/_panels/FFSGymLandingHeaderPanel.class.php';

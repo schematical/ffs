@@ -126,74 +126,6 @@ class ResultEditPanelBase extends MJaxPanel {
         }
     }
     public function GetResult() {
-        return $this->objResult;
-    }
-    public function SetResult($objResult) {
-        $this->objResult = $objResult;
-        $this->ActionParameter = $this->objResult;
-        $this->blnModified = true;
-        if (!is_null($this->objResult)) {
-            if (!is_null($this->btnDelete)) {
-                $this->btnDelete->Style->Display = 'inline';
-            }
-            //PKey
-            $this->intIdResult = $this->objResult->idResult;
-            $this->strScore->Text = $this->objResult->score;
-            $this->strJudge->Text = $this->objResult->judge;
-            $this->intFlag->Text = $this->objResult->flag;
-            //Is special field!!!!!
-            //Do nothing this is a creDate
-            $this->strEvent->Text = $this->objResult->event;
-            //Is special field!!!!!
-            $this->dttDispDate->Value = $this->objResult->dispDate;
-            $this->intSanctioned->Text = $this->objResult->sanctioned;
-            $this->strNotes->Text = $this->objResult->notes;
-            $this->strNSStartValue->Text = $this->objResult->NSStartValue;
-            //Is special field!!!!!
-            $this->strNSSpecialNotes->Text = $this->objResult->NSSpecialNotes;
-            $this->intNSTied->Text = $this->objResult->NSTied;
-            $this->intNSPlace->Text = $this->objResult->NSPlace;
-            $this->intIdInputUser->Text = $this->objResult->idInputUser;
-        } else {
-            $this->strScore->Text = '';
-            $this->strJudge->Text = '';
-            $this->intFlag->Text = '';
-            //Is special field!!!!!
-            //Do nothing this is a creDate
-            $this->strEvent->Text = '';
-            //Is special field!!!!!
-            $this->dttDispDate->Value = MLCDateTime::Now();
-            $this->intSanctioned->Text = '';
-            $this->strNotes->Text = '';
-            $this->strNSStartValue->Text = '';
-            //Is special field!!!!!
-            $this->strNSSpecialNotes->Text = '';
-            $this->intNSTied->Text = '';
-            $this->intNSPlace->Text = '';
-            $this->intIdInputUser->Text = '';
-            $this->btnDelete->Style->Display = 'none';
-        }
-    }
-    public function CreateReferenceControls() {
-        if (!is_null($this->objResult)) {
-            if (!is_null($this->objResult->idSession)) {
-                $this->lnkViewParentIdSession = new MJaxLinkButton($this);
-                $this->lnkViewParentIdSession->Text = 'View Session';
-                $this->lnkViewParentIdSession->Href = '/data/editResult?' . FFSQS::Result_IdSession . $this->objResult->idSession;
-            }
-            if (!is_null($this->objResult->idAthelete)) {
-                $this->lnkViewParentIdAthelete = new MJaxLinkButton($this);
-                $this->lnkViewParentIdAthelete->Text = 'View Athelete';
-                $this->lnkViewParentIdAthelete->Href = '/data/editResult?' . FFSQS::Result_IdAthelete . $this->objResult->idAthelete;
-            }
-            if (!is_null($this->objResult->idCompetition)) {
-                $this->lnkViewParentIdCompetition = new MJaxLinkButton($this);
-                $this->lnkViewParentIdCompetition->Text = 'View Competition';
-                $this->lnkViewParentIdCompetition->Href = '/data/editResult?' . FFSQS::Result_IdCompetition . $this->objResult->idCompetition;
-            }
-        }
-    }
-    public function btnSave_click() {
         if (is_null($this->objResult)) {
             //Create a new one
             $this->objResult = new Result();
@@ -302,7 +234,75 @@ class ResultEditPanelBase extends MJaxPanel {
         } else {
             $this->objResult->idInputUser = $this->intIdInputUser->Text;
         }
-        $this->objResult->Save();
+        return $this->objResult;
+    }
+    public function SetResult($objResult) {
+        $this->objResult = $objResult;
+        $this->ActionParameter = $this->objResult;
+        $this->blnModified = true;
+        if (!is_null($this->objResult)) {
+            if (!is_null($this->btnDelete)) {
+                $this->btnDelete->Style->Display = 'inline';
+            }
+            //PKey
+            $this->intIdResult = $this->objResult->idResult;
+            $this->strScore->Text = $this->objResult->score;
+            $this->strJudge->Text = $this->objResult->judge;
+            $this->intFlag->Text = $this->objResult->flag;
+            //Is special field!!!!!
+            //Do nothing this is a creDate
+            $this->strEvent->Text = $this->objResult->event;
+            //Is special field!!!!!
+            $this->dttDispDate->Value = $this->objResult->dispDate;
+            $this->intSanctioned->Text = $this->objResult->sanctioned;
+            $this->strNotes->Text = $this->objResult->notes;
+            $this->strNSStartValue->Text = $this->objResult->NSStartValue;
+            //Is special field!!!!!
+            $this->strNSSpecialNotes->Text = $this->objResult->NSSpecialNotes;
+            $this->intNSTied->Text = $this->objResult->NSTied;
+            $this->intNSPlace->Text = $this->objResult->NSPlace;
+            $this->intIdInputUser->Text = $this->objResult->idInputUser;
+        } else {
+            $this->strScore->Text = '';
+            $this->strJudge->Text = '';
+            $this->intFlag->Text = '';
+            //Is special field!!!!!
+            //Do nothing this is a creDate
+            $this->strEvent->Text = '';
+            //Is special field!!!!!
+            $this->dttDispDate->Value = MLCDateTime::Now();
+            $this->intSanctioned->Text = '';
+            $this->strNotes->Text = '';
+            $this->strNSStartValue->Text = '';
+            //Is special field!!!!!
+            $this->strNSSpecialNotes->Text = '';
+            $this->intNSTied->Text = '';
+            $this->intNSPlace->Text = '';
+            $this->intIdInputUser->Text = '';
+            $this->btnDelete->Style->Display = 'none';
+        }
+    }
+    public function CreateReferenceControls() {
+        if (!is_null($this->objResult)) {
+            if (!is_null($this->objResult->idSession)) {
+                $this->lnkViewParentIdSession = new MJaxLinkButton($this);
+                $this->lnkViewParentIdSession->Text = 'View Session';
+                $this->lnkViewParentIdSession->Href = '/data/editResult?' . FFSQS::Result_IdSession . $this->objResult->idSession;
+            }
+            if (!is_null($this->objResult->idAthelete)) {
+                $this->lnkViewParentIdAthelete = new MJaxLinkButton($this);
+                $this->lnkViewParentIdAthelete->Text = 'View Athelete';
+                $this->lnkViewParentIdAthelete->Href = '/data/editResult?' . FFSQS::Result_IdAthelete . $this->objResult->idAthelete;
+            }
+            if (!is_null($this->objResult->idCompetition)) {
+                $this->lnkViewParentIdCompetition = new MJaxLinkButton($this);
+                $this->lnkViewParentIdCompetition->Text = 'View Competition';
+                $this->lnkViewParentIdCompetition->Href = '/data/editResult?' . FFSQS::Result_IdCompetition . $this->objResult->idCompetition;
+            }
+        }
+    }
+    public function btnSave_click() {
+        $this->GetResult()->Save();
         //Experimental save event trigger
         $this->ActionParameter = $this->objResult;
         $this->objForm->TriggerControlEvent($this->strControlId, 'mjax-data-entity-save');

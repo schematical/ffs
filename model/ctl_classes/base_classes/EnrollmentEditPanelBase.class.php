@@ -114,64 +114,6 @@ class EnrollmentEditPanelBase extends MJaxPanel {
         }
     }
     public function GetEnrollment() {
-        return $this->objEnrollment;
-    }
-    public function SetEnrollment($objEnrollment) {
-        $this->objEnrollment = $objEnrollment;
-        $this->ActionParameter = $this->objEnrollment;
-        $this->blnModified = true;
-        if (!is_null($this->objEnrollment)) {
-            if (!is_null($this->btnDelete)) {
-                $this->btnDelete->Style->Display = 'inline';
-            }
-            //PKey
-            $this->intIdEnrollment = $this->objEnrollment->idEnrollment;
-            $this->strFlight->Text = $this->objEnrollment->flight;
-            $this->strDivision->Text = $this->objEnrollment->division;
-            $this->strAgeGroup->Text = $this->objEnrollment->ageGroup;
-            $this->strMisc1->Text = $this->objEnrollment->misc1;
-            $this->strMisc2->Text = $this->objEnrollment->misc2;
-            $this->strMisc3->Text = $this->objEnrollment->misc3;
-            $this->strMisc4->Text = $this->objEnrollment->misc4;
-            $this->strMisc5->Text = $this->objEnrollment->misc5;
-            //Is special field!!!!!
-            //Do nothing this is a creDate
-            $this->strLevel->Text = $this->objEnrollment->level;
-        } else {
-            $this->strFlight->Text = '';
-            $this->strDivision->Text = '';
-            $this->strAgeGroup->Text = '';
-            $this->strMisc1->Text = '';
-            $this->strMisc2->Text = '';
-            $this->strMisc3->Text = '';
-            $this->strMisc4->Text = '';
-            $this->strMisc5->Text = '';
-            //Is special field!!!!!
-            //Do nothing this is a creDate
-            $this->strLevel->Text = '';
-            $this->btnDelete->Style->Display = 'none';
-        }
-    }
-    public function CreateReferenceControls() {
-        if (!is_null($this->objEnrollment)) {
-            if (!is_null($this->objEnrollment->idAthelete)) {
-                $this->lnkViewParentIdAthelete = new MJaxLinkButton($this);
-                $this->lnkViewParentIdAthelete->Text = 'View Athelete';
-                $this->lnkViewParentIdAthelete->Href = '/data/editEnrollment?' . FFSQS::Enrollment_IdAthelete . $this->objEnrollment->idAthelete;
-            }
-            if (!is_null($this->objEnrollment->idCompetition)) {
-                $this->lnkViewParentIdCompetition = new MJaxLinkButton($this);
-                $this->lnkViewParentIdCompetition->Text = 'View Competition';
-                $this->lnkViewParentIdCompetition->Href = '/data/editEnrollment?' . FFSQS::Enrollment_IdCompetition . $this->objEnrollment->idCompetition;
-            }
-            if (!is_null($this->objEnrollment->idSession)) {
-                $this->lnkViewParentIdSession = new MJaxLinkButton($this);
-                $this->lnkViewParentIdSession->Text = 'View Session';
-                $this->lnkViewParentIdSession->Href = '/data/editEnrollment?' . FFSQS::Enrollment_IdSession . $this->objEnrollment->idSession;
-            }
-        }
-    }
-    public function btnSave_click() {
         if (is_null($this->objEnrollment)) {
             //Create a new one
             $this->objEnrollment = new Enrollment();
@@ -259,7 +201,65 @@ class EnrollmentEditPanelBase extends MJaxPanel {
         } else {
             $this->objEnrollment->level = $this->strLevel->Text;
         }
-        $this->objEnrollment->Save();
+        return $this->objEnrollment;
+    }
+    public function SetEnrollment($objEnrollment) {
+        $this->objEnrollment = $objEnrollment;
+        $this->ActionParameter = $this->objEnrollment;
+        $this->blnModified = true;
+        if (!is_null($this->objEnrollment)) {
+            if (!is_null($this->btnDelete)) {
+                $this->btnDelete->Style->Display = 'inline';
+            }
+            //PKey
+            $this->intIdEnrollment = $this->objEnrollment->idEnrollment;
+            $this->strFlight->Text = $this->objEnrollment->flight;
+            $this->strDivision->Text = $this->objEnrollment->division;
+            $this->strAgeGroup->Text = $this->objEnrollment->ageGroup;
+            $this->strMisc1->Text = $this->objEnrollment->misc1;
+            $this->strMisc2->Text = $this->objEnrollment->misc2;
+            $this->strMisc3->Text = $this->objEnrollment->misc3;
+            $this->strMisc4->Text = $this->objEnrollment->misc4;
+            $this->strMisc5->Text = $this->objEnrollment->misc5;
+            //Is special field!!!!!
+            //Do nothing this is a creDate
+            $this->strLevel->Text = $this->objEnrollment->level;
+        } else {
+            $this->strFlight->Text = '';
+            $this->strDivision->Text = '';
+            $this->strAgeGroup->Text = '';
+            $this->strMisc1->Text = '';
+            $this->strMisc2->Text = '';
+            $this->strMisc3->Text = '';
+            $this->strMisc4->Text = '';
+            $this->strMisc5->Text = '';
+            //Is special field!!!!!
+            //Do nothing this is a creDate
+            $this->strLevel->Text = '';
+            $this->btnDelete->Style->Display = 'none';
+        }
+    }
+    public function CreateReferenceControls() {
+        if (!is_null($this->objEnrollment)) {
+            if (!is_null($this->objEnrollment->idAthelete)) {
+                $this->lnkViewParentIdAthelete = new MJaxLinkButton($this);
+                $this->lnkViewParentIdAthelete->Text = 'View Athelete';
+                $this->lnkViewParentIdAthelete->Href = '/data/editEnrollment?' . FFSQS::Enrollment_IdAthelete . $this->objEnrollment->idAthelete;
+            }
+            if (!is_null($this->objEnrollment->idCompetition)) {
+                $this->lnkViewParentIdCompetition = new MJaxLinkButton($this);
+                $this->lnkViewParentIdCompetition->Text = 'View Competition';
+                $this->lnkViewParentIdCompetition->Href = '/data/editEnrollment?' . FFSQS::Enrollment_IdCompetition . $this->objEnrollment->idCompetition;
+            }
+            if (!is_null($this->objEnrollment->idSession)) {
+                $this->lnkViewParentIdSession = new MJaxLinkButton($this);
+                $this->lnkViewParentIdSession->Text = 'View Session';
+                $this->lnkViewParentIdSession->Href = '/data/editEnrollment?' . FFSQS::Enrollment_IdSession . $this->objEnrollment->idSession;
+            }
+        }
+    }
+    public function btnSave_click() {
+        $this->GetEnrollment()->Save();
         //Experimental save event trigger
         $this->ActionParameter = $this->objEnrollment;
         $this->objForm->TriggerControlEvent($this->strControlId, 'mjax-data-entity-save');

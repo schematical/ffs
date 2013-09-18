@@ -19,7 +19,7 @@
 
 
 
-    <a href="/<?php echo $_CONTROL->objCompetition->Namespace; ?>/org/deviceManager" class="shortcut">
+    <a href="javascript:MJax.BS.Alert('Coming Soon');" class="shortcut">
         <i class="shortcut-icon icon-tablet "></i>
         <span class="shortcut-label">Manage Devices</span>
     </a>
@@ -31,7 +31,7 @@
         <i class="shortcut-icon icon-bar-chart "></i>
         <span class="shortcut-label">Reports</span>
     </a>
-    <a href="/<?php echo $_CONTROL->objCompetition->Namespace; ?>/org/fullScreen.php" class="shortcut">
+    <a href="/<?php echo $_CONTROL->objCompetition->Namespace; ?>/org/competition/fullScreen.php" class="shortcut">
         <i class="shortcut-icon icon-fullscreen"></i>
         <span class="shortcut-label">Full Screen Mode</span>
     </a>

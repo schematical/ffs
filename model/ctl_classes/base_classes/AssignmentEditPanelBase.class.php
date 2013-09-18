@@ -74,6 +74,34 @@ class AssignmentEditPanelBase extends MJaxPanel {
         }
     }
     public function GetAssignment() {
+        if (is_null($this->objAssignment)) {
+            //Create a new one
+            $this->objAssignment = new Assignment();
+        }
+        if (get_class($this->strEvent) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strEvent->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('event');
+            }
+            $this->objAssignment->event = $mixEntity;
+        } else {
+            $this->objAssignment->event = $this->strEvent->Text;
+        }
+        if (get_class($this->strApartatus) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strApartatus->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('apartatus');
+            }
+            $this->objAssignment->apartatus = $mixEntity;
+        } else {
+            $this->objAssignment->apartatus = $this->strApartatus->Text;
+        }
+        //Is special field!!!!!
+        //Do nothing this is a creDate
+        //Is special field!!!!!
+        $this->objAssignment->idUser = MLCAuthDriver::IdUser();
+        //Is special field!!!!!
+        $this->objAssignment->revokeDate = $this->dttRevokeDate->GetValue();
         return $this->objAssignment;
     }
     public function SetAssignment($objAssignment) {
@@ -119,35 +147,7 @@ class AssignmentEditPanelBase extends MJaxPanel {
         }
     }
     public function btnSave_click() {
-        if (is_null($this->objAssignment)) {
-            //Create a new one
-            $this->objAssignment = new Assignment();
-        }
-        if (get_class($this->strEvent) == 'MJaxBSAutocompleteTextBox') {
-            $mixEntity = $this->strEvent->GetValue();
-            if (is_object($mixEntity)) {
-                $mixEntity = $mixEntity->__get('event');
-            }
-            $this->objAssignment->event = $mixEntity;
-        } else {
-            $this->objAssignment->event = $this->strEvent->Text;
-        }
-        if (get_class($this->strApartatus) == 'MJaxBSAutocompleteTextBox') {
-            $mixEntity = $this->strApartatus->GetValue();
-            if (is_object($mixEntity)) {
-                $mixEntity = $mixEntity->__get('apartatus');
-            }
-            $this->objAssignment->apartatus = $mixEntity;
-        } else {
-            $this->objAssignment->apartatus = $this->strApartatus->Text;
-        }
-        //Is special field!!!!!
-        //Do nothing this is a creDate
-        //Is special field!!!!!
-        $this->objAssignment->idUser = MLCAuthDriver::IdUser();
-        //Is special field!!!!!
-        $this->objAssignment->revokeDate = $this->dttRevokeDate->GetValue();
-        $this->objAssignment->Save();
+        $this->GetAssignment()->Save();
         //Experimental save event trigger
         $this->ActionParameter = $this->objAssignment;
         $this->objForm->TriggerControlEvent($this->strControlId, 'mjax-data-entity-save');

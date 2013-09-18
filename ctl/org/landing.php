@@ -1,83 +1,36 @@
 <?php
-class landing extends FFSForm {
-    public $pnlHeader = null;
-    public $pnlCompetition = null;
-    public $pnlSignup = null;
-    public $lnkImport = null;
+class landing extends FFSParentCoachLandingForm{
 
-    public $pnlImport = null;
     public function Form_Create(){
         parent::Form_Create();
-        /*if(!is_null(MDEAuthDriver::User())){
-            $this->Redirect('/home.php');
-       } */
+        $objUser = MLCAuthDriver::User();
+        if(!is_null($objUser)){
+
+            if($this->IsOrgManager($objUser)){
+                $this->Redirect('/org/index');
+            }elseif($this->IsParetn($objUser)){
+                $this->Redirect('/parent/index');
+            }
+        }
         $this->strTemplate = __VIEW_ACTIVE_APP_DIR__ . '/www/org/landing.tpl.php';
 
-        //$this->pnlHeader = new FFSGymLandingHeaderPanel($this);
-        //$this->AddWidget('','', $this->pnlHeader);
-        $this->lnkImport = new MJaxLinkButton($this);
-        $this->lnkImport->Text = '<i class="icon-info-sign"></i>&nbsp;&nbsp;To import your meet directly from ProScore click here';
-        $this->lnkImport->AddCssClass('alert alert-info span10 offset1');
-        $this->lnkImport->AddAction($this, 'lnkImport_click');
-        $this->arrRows[0][] = $this->lnkImport;
-        $this->pnlCompetition = new CompetitionEditPanel($this);
-        $this->pnlCompetition->AddCssClass("well");
-        $this->pnlCompetition->SetUpHomePage();
-        /*$this->pnlCompetition->AddAction(
-            new MJaxDataEntitySaveEvent(),
-            new MJaxServerControlAction(
-                $this, 'pnlCompetition_click'
-            )
-        );*/
+    }
+    public function pnlOrg_select(){
+        $objOrg = $this->pnlOrg->GetValue();
 
-        //$this->AddWidget('Setup your meet', '', $this->pnlCompetition);
-        $this->pnlSignup = new MLCShortSignUpPanel($this);
-        $this->pnlSignup->AddCssClass("well");
-        //$this->AddWidget('Create Account', '', $this->pnlSignup);
+        if(is_object($objOrg)){
+            $arrRolls = MLCAuthDriver::GetUsersByEntity($objOrg, FFSRoll::ORG_MANAGER);
+            if(count($arrRolls) > 0){
+                //There is already a account set up to manage this account
+                return $this->pnlOrg->Alert('There is already an account associated with this Gym. Please<a href"/contactUs">Contact Us</a> if you belive this is an error.');
+            }
 
-        $this->pnlSignup->AddAction(
-            new MJaxAuthSignupEvent(),
-            new MJaxServerControlAction(
-                $this,
-                'pnlSignup_signup'
-            )
-        );
-
-        $this->pnlImport =  new FFSPTFImportPanel($this);
-        $this->pnlImport->AddAction(
-            new FFSPTFImportEvent(),
-            new MJaxServerControlAction($this, 'pnlImport_import')
-        );
-        //$this->pnlCompetition->SetCompetition(Competition::LoadAll()->getCollection()[0]);
-
+        }else{
+            parent::pnlOrg_select();
+        }
     }
 
-    public function lnkImport_click(){
-        $this->Alert(
-           $this->pnlImport
-        );
-
-
-    }
-    public function pnlImport_import(){
-
-        $this->pnlCompetition->SetCompetition(FFSForm::Competition());
-        $this->pnlCompetition->objOrg = FFSForm::Org();
-        $this->HideAlert();
-        $this->ScrollTo($this->pnlCompetition);
-        $this->pnlCompetition->Alert('Import Successfull', 'success');
-    }
-    public function pnlSignup_signup(){
-        $this->pnlCompetition->btnSave_click();
-        $this->Alert("Success");
-
-        MLCAuthDriver::AddRoll(
-            FFSRoll::ORG_MANAGER,//Roll
-            $this->pnlCompetition->objOrg//Entity
-        );
-        $this->Redirect("/" . $this->pnlCompetition->GetCompetition()->Namespace . '/org/competition/index');
-    }
 
 }
+
 landing::Run('landing');
-?>

@@ -73,6 +73,39 @@ class DeviceEditPanelBase extends MJaxPanel {
         }
     }
     public function GetDevice() {
+        if (is_null($this->objDevice)) {
+            //Create a new one
+            $this->objDevice = new Device();
+        }
+        if (get_class($this->strName) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strName->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('name');
+            }
+            $this->objDevice->name = $mixEntity;
+        } else {
+            $this->objDevice->name = $this->strName->Text;
+        }
+        if (get_class($this->strToken) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strToken->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('token');
+            }
+            $this->objDevice->token = $mixEntity;
+        } else {
+            $this->objDevice->token = $this->strToken->Text;
+        }
+        //Is special field!!!!!
+        //Do nothing this is a creDate
+        if (get_class($this->strInviteEmail) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strInviteEmail->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('inviteEmail');
+            }
+            $this->objDevice->inviteEmail = $mixEntity;
+        } else {
+            $this->objDevice->inviteEmail = $this->strInviteEmail->Text;
+        }
         return $this->objDevice;
     }
     public function SetDevice($objDevice) {
@@ -114,40 +147,7 @@ class DeviceEditPanelBase extends MJaxPanel {
         
     }
     public function btnSave_click() {
-        if (is_null($this->objDevice)) {
-            //Create a new one
-            $this->objDevice = new Device();
-        }
-        if (get_class($this->strName) == 'MJaxBSAutocompleteTextBox') {
-            $mixEntity = $this->strName->GetValue();
-            if (is_object($mixEntity)) {
-                $mixEntity = $mixEntity->__get('name');
-            }
-            $this->objDevice->name = $mixEntity;
-        } else {
-            $this->objDevice->name = $this->strName->Text;
-        }
-        if (get_class($this->strToken) == 'MJaxBSAutocompleteTextBox') {
-            $mixEntity = $this->strToken->GetValue();
-            if (is_object($mixEntity)) {
-                $mixEntity = $mixEntity->__get('token');
-            }
-            $this->objDevice->token = $mixEntity;
-        } else {
-            $this->objDevice->token = $this->strToken->Text;
-        }
-        //Is special field!!!!!
-        //Do nothing this is a creDate
-        if (get_class($this->strInviteEmail) == 'MJaxBSAutocompleteTextBox') {
-            $mixEntity = $this->strInviteEmail->GetValue();
-            if (is_object($mixEntity)) {
-                $mixEntity = $mixEntity->__get('inviteEmail');
-            }
-            $this->objDevice->inviteEmail = $mixEntity;
-        } else {
-            $this->objDevice->inviteEmail = $this->strInviteEmail->Text;
-        }
-        $this->objDevice->Save();
+        $this->GetDevice()->Save();
         //Experimental save event trigger
         $this->ActionParameter = $this->objDevice;
         $this->objForm->TriggerControlEvent($this->strControlId, 'mjax-data-entity-save');

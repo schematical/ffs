@@ -82,6 +82,43 @@ class SessionEditPanelBase extends MJaxPanel {
         }
     }
     public function GetSession() {
+        if (is_null($this->objSession)) {
+            //Create a new one
+            $this->objSession = new Session();
+        }
+        //Is special field!!!!!
+        $this->objSession->startDate = $this->dttStartDate->GetValue();
+        //Is special field!!!!!
+        $this->objSession->endDate = $this->dttEndDate->GetValue();
+        if (get_class($this->strName) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strName->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('name');
+            }
+            $this->objSession->name = $mixEntity;
+        } else {
+            $this->objSession->name = $this->strName->Text;
+        }
+        if (get_class($this->strNotes) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strNotes->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('notes');
+            }
+            $this->objSession->notes = $mixEntity;
+        } else {
+            $this->objSession->notes = $this->strNotes->Text;
+        }
+        //Is special field!!!!!
+        if (get_class($this->strEquipmentSet) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strEquipmentSet->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('equipmentSet');
+            }
+            $this->objSession->equipmentSet = $mixEntity;
+        } else {
+            $this->objSession->equipmentSet = $this->strEquipmentSet->Text;
+        }
+        //Is special field!!!!!
         return $this->objSession;
     }
     public function SetSession($objSession) {
@@ -140,44 +177,7 @@ class SessionEditPanelBase extends MJaxPanel {
         
     }
     public function btnSave_click() {
-        if (is_null($this->objSession)) {
-            //Create a new one
-            $this->objSession = new Session();
-        }
-        //Is special field!!!!!
-        $this->objSession->startDate = $this->dttStartDate->GetValue();
-        //Is special field!!!!!
-        $this->objSession->endDate = $this->dttEndDate->GetValue();
-        if (get_class($this->strName) == 'MJaxBSAutocompleteTextBox') {
-            $mixEntity = $this->strName->GetValue();
-            if (is_object($mixEntity)) {
-                $mixEntity = $mixEntity->__get('name');
-            }
-            $this->objSession->name = $mixEntity;
-        } else {
-            $this->objSession->name = $this->strName->Text;
-        }
-        if (get_class($this->strNotes) == 'MJaxBSAutocompleteTextBox') {
-            $mixEntity = $this->strNotes->GetValue();
-            if (is_object($mixEntity)) {
-                $mixEntity = $mixEntity->__get('notes');
-            }
-            $this->objSession->notes = $mixEntity;
-        } else {
-            $this->objSession->notes = $this->strNotes->Text;
-        }
-        //Is special field!!!!!
-        if (get_class($this->strEquipmentSet) == 'MJaxBSAutocompleteTextBox') {
-            $mixEntity = $this->strEquipmentSet->GetValue();
-            if (is_object($mixEntity)) {
-                $mixEntity = $mixEntity->__get('equipmentSet');
-            }
-            $this->objSession->equipmentSet = $mixEntity;
-        } else {
-            $this->objSession->equipmentSet = $this->strEquipmentSet->Text;
-        }
-        //Is special field!!!!!
-        $this->objSession->Save();
+        $this->GetSession()->Save();
         //Experimental save event trigger
         $this->ActionParameter = $this->objSession;
         $this->objForm->TriggerControlEvent($this->strControlId, 'mjax-data-entity-save');

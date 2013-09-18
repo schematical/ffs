@@ -19,7 +19,7 @@ class FFSResultFeedDisplayPanel extends FFSFeedDisplayPanel{
     public function GetShareUrl(){
         $strUrl = $this->objForm->GetShareUrl();
         return sprintf(
-            '%s?%s=%s',
+            '%s&%s=%s',
             $strUrl,
             FFSQS::IdResult,
             $this->objEntity->IdResult

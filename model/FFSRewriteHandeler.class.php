@@ -65,7 +65,7 @@ class FFSRewriteHandeler extends MLCRewriteHandelerBase{
 
 
         }
-        parent::Handel($strUri);
+        return parent::Handel($strUri);
 
 
 

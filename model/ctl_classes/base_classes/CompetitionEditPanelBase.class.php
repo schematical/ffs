@@ -99,6 +99,64 @@ class CompetitionEditPanelBase extends MJaxPanel {
         }
     }
     public function GetCompetition() {
+        if (is_null($this->objCompetition)) {
+            //Create a new one
+            $this->objCompetition = new Competition();
+        }
+        if (get_class($this->strName) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strName->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('name');
+            }
+            $this->objCompetition->name = $mixEntity;
+        } else {
+            $this->objCompetition->name = $this->strName->Text;
+        }
+        if (get_class($this->strLongDesc) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strLongDesc->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('longDesc');
+            }
+            $this->objCompetition->longDesc = $mixEntity;
+        } else {
+            $this->objCompetition->longDesc = $this->strLongDesc->Text;
+        }
+        //Is special field!!!!!
+        //Do nothing this is a creDate
+        //Is special field!!!!!
+        $this->objCompetition->startDate = $this->dttStartDate->GetValue();
+        //Is special field!!!!!
+        $this->objCompetition->endDate = $this->dttEndDate->GetValue();
+        if (get_class($this->strNamespace) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strNamespace->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('namespace');
+            }
+            $this->objCompetition->namespace = $mixEntity;
+        } else {
+            $this->objCompetition->namespace = $this->strNamespace->Text;
+        }
+        //Is special field!!!!!
+        $this->objCompetition->signupCutOffDate = $this->dttSignupCutOffDate->GetValue();
+        if (get_class($this->strClubType) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strClubType->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('clubType');
+            }
+            $this->objCompetition->clubType = $mixEntity;
+        } else {
+            $this->objCompetition->clubType = $this->strClubType->Text;
+        }
+        //Is special field!!!!!
+        if (get_class($this->intSanctioned) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->intSanctioned->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('sanctioned');
+            }
+            $this->objCompetition->sanctioned = $mixEntity;
+        } else {
+            $this->objCompetition->sanctioned = $this->intSanctioned->Text;
+        }
         return $this->objCompetition;
     }
     public function SetCompetition($objCompetition) {
@@ -174,65 +232,7 @@ class CompetitionEditPanelBase extends MJaxPanel {
         
     }
     public function btnSave_click() {
-        if (is_null($this->objCompetition)) {
-            //Create a new one
-            $this->objCompetition = new Competition();
-        }
-        if (get_class($this->strName) == 'MJaxBSAutocompleteTextBox') {
-            $mixEntity = $this->strName->GetValue();
-            if (is_object($mixEntity)) {
-                $mixEntity = $mixEntity->__get('name');
-            }
-            $this->objCompetition->name = $mixEntity;
-        } else {
-            $this->objCompetition->name = $this->strName->Text;
-        }
-        if (get_class($this->strLongDesc) == 'MJaxBSAutocompleteTextBox') {
-            $mixEntity = $this->strLongDesc->GetValue();
-            if (is_object($mixEntity)) {
-                $mixEntity = $mixEntity->__get('longDesc');
-            }
-            $this->objCompetition->longDesc = $mixEntity;
-        } else {
-            $this->objCompetition->longDesc = $this->strLongDesc->Text;
-        }
-        //Is special field!!!!!
-        //Do nothing this is a creDate
-        //Is special field!!!!!
-        $this->objCompetition->startDate = $this->dttStartDate->GetValue();
-        //Is special field!!!!!
-        $this->objCompetition->endDate = $this->dttEndDate->GetValue();
-        if (get_class($this->strNamespace) == 'MJaxBSAutocompleteTextBox') {
-            $mixEntity = $this->strNamespace->GetValue();
-            if (is_object($mixEntity)) {
-                $mixEntity = $mixEntity->__get('namespace');
-            }
-            $this->objCompetition->namespace = $mixEntity;
-        } else {
-            $this->objCompetition->namespace = $this->strNamespace->Text;
-        }
-        //Is special field!!!!!
-        $this->objCompetition->signupCutOffDate = $this->dttSignupCutOffDate->GetValue();
-        if (get_class($this->strClubType) == 'MJaxBSAutocompleteTextBox') {
-            $mixEntity = $this->strClubType->GetValue();
-            if (is_object($mixEntity)) {
-                $mixEntity = $mixEntity->__get('clubType');
-            }
-            $this->objCompetition->clubType = $mixEntity;
-        } else {
-            $this->objCompetition->clubType = $this->strClubType->Text;
-        }
-        //Is special field!!!!!
-        if (get_class($this->intSanctioned) == 'MJaxBSAutocompleteTextBox') {
-            $mixEntity = $this->intSanctioned->GetValue();
-            if (is_object($mixEntity)) {
-                $mixEntity = $mixEntity->__get('sanctioned');
-            }
-            $this->objCompetition->sanctioned = $mixEntity;
-        } else {
-            $this->objCompetition->sanctioned = $this->intSanctioned->Text;
-        }
-        $this->objCompetition->Save();
+        $this->GetCompetition()->Save();
         //Experimental save event trigger
         $this->ActionParameter = $this->objCompetition;
         $this->objForm->TriggerControlEvent($this->strControlId, 'mjax-data-entity-save');

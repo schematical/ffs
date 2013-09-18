@@ -98,67 +98,6 @@ class AtheleteEditPanelBase extends MJaxPanel {
         }
     }
     public function GetAthelete() {
-        return $this->objAthelete;
-    }
-    public function SetAthelete($objAthelete) {
-        $this->objAthelete = $objAthelete;
-        $this->ActionParameter = $this->objAthelete;
-        $this->blnModified = true;
-        if (!is_null($this->objAthelete)) {
-            if (!is_null($this->btnDelete)) {
-                $this->btnDelete->Style->Display = 'inline';
-            }
-            //PKey
-            $this->intIdAthelete = $this->objAthelete->idAthelete;
-            $this->strFirstName->Text = $this->objAthelete->firstName;
-            $this->strLastName->Text = $this->objAthelete->lastName;
-            //Is special field!!!!!
-            $this->dttBirthDate->Value = $this->objAthelete->birthDate;
-            $this->strMemType->Text = $this->objAthelete->memType;
-            $this->strMemId->Text = $this->objAthelete->memId;
-            //Is special field!!!!!
-            //Is special field!!!!!
-            //Do nothing this is a creDate
-            $this->strLevel->Text = $this->objAthelete->level;
-            $this->strEvent_default->Text = $this->objAthelete->event_default;
-        } else {
-            $this->strFirstName->Text = '';
-            $this->strLastName->Text = '';
-            //Is special field!!!!!
-            $this->dttBirthDate->Value = MLCDateTime::Now();
-            $this->strMemType->Text = '';
-            $this->strMemId->Text = '';
-            //Is special field!!!!!
-            //Is special field!!!!!
-            //Do nothing this is a creDate
-            $this->strLevel->Text = '';
-            $this->strEvent_default->Text = '';
-            $this->btnDelete->Style->Display = 'none';
-        }
-    }
-    public function CreateReferenceControls() {
-        if (!is_null($this->objAthelete)) {
-            if (!is_null($this->objAthelete->idOrg)) {
-                $this->lnkViewParentIdOrg = new MJaxLinkButton($this);
-                $this->lnkViewParentIdOrg->Text = 'View Org';
-                $this->lnkViewParentIdOrg->Href = '/data/editAthelete?' . FFSQS::Athelete_IdOrg . $this->objAthelete->idOrg;
-            }
-        }
-        $this->lnkViewChildEnrollment = new MJaxLinkButton($this);
-        $this->lnkViewChildEnrollment->Text = 'View Enrollments';
-        //I should really fix this
-        //$this->lnkViewChildEnrollment->Href = __ENTITY_MODEL_DIR__ . '/Athelete/' . $this->objAthelete->idAthelete . '/Enrollments';
-        $this->lnkViewChildParentMessage = new MJaxLinkButton($this);
-        $this->lnkViewChildParentMessage->Text = 'View ParentMessages';
-        //I should really fix this
-        //$this->lnkViewChildParentMessage->Href = __ENTITY_MODEL_DIR__ . '/Athelete/' . $this->objAthelete->idAthelete . '/ParentMessages';
-        $this->lnkViewChildResult = new MJaxLinkButton($this);
-        $this->lnkViewChildResult->Text = 'View Results';
-        //I should really fix this
-        //$this->lnkViewChildResult->Href = __ENTITY_MODEL_DIR__ . '/Athelete/' . $this->objAthelete->idAthelete . '/Results';
-        
-    }
-    public function btnSave_click() {
         if (is_null($this->objAthelete)) {
             //Create a new one
             $this->objAthelete = new Athelete();
@@ -222,7 +161,68 @@ class AtheleteEditPanelBase extends MJaxPanel {
         } else {
             $this->objAthelete->event_default = $this->strEvent_default->Text;
         }
-        $this->objAthelete->Save();
+        return $this->objAthelete;
+    }
+    public function SetAthelete($objAthelete) {
+        $this->objAthelete = $objAthelete;
+        $this->ActionParameter = $this->objAthelete;
+        $this->blnModified = true;
+        if (!is_null($this->objAthelete)) {
+            if (!is_null($this->btnDelete)) {
+                $this->btnDelete->Style->Display = 'inline';
+            }
+            //PKey
+            $this->intIdAthelete = $this->objAthelete->idAthelete;
+            $this->strFirstName->Text = $this->objAthelete->firstName;
+            $this->strLastName->Text = $this->objAthelete->lastName;
+            //Is special field!!!!!
+            $this->dttBirthDate->Value = $this->objAthelete->birthDate;
+            $this->strMemType->Text = $this->objAthelete->memType;
+            $this->strMemId->Text = $this->objAthelete->memId;
+            //Is special field!!!!!
+            //Is special field!!!!!
+            //Do nothing this is a creDate
+            $this->strLevel->Text = $this->objAthelete->level;
+            $this->strEvent_default->Text = $this->objAthelete->event_default;
+        } else {
+            $this->strFirstName->Text = '';
+            $this->strLastName->Text = '';
+            //Is special field!!!!!
+            $this->dttBirthDate->Value = MLCDateTime::Now();
+            $this->strMemType->Text = '';
+            $this->strMemId->Text = '';
+            //Is special field!!!!!
+            //Is special field!!!!!
+            //Do nothing this is a creDate
+            $this->strLevel->Text = '';
+            $this->strEvent_default->Text = '';
+            $this->btnDelete->Style->Display = 'none';
+        }
+    }
+    public function CreateReferenceControls() {
+        if (!is_null($this->objAthelete)) {
+            if (!is_null($this->objAthelete->idOrg)) {
+                $this->lnkViewParentIdOrg = new MJaxLinkButton($this);
+                $this->lnkViewParentIdOrg->Text = 'View Org';
+                $this->lnkViewParentIdOrg->Href = '/data/editAthelete?' . FFSQS::Athelete_IdOrg . $this->objAthelete->idOrg;
+            }
+        }
+        $this->lnkViewChildEnrollment = new MJaxLinkButton($this);
+        $this->lnkViewChildEnrollment->Text = 'View Enrollments';
+        //I should really fix this
+        //$this->lnkViewChildEnrollment->Href = __ENTITY_MODEL_DIR__ . '/Athelete/' . $this->objAthelete->idAthelete . '/Enrollments';
+        $this->lnkViewChildParentMessage = new MJaxLinkButton($this);
+        $this->lnkViewChildParentMessage->Text = 'View ParentMessages';
+        //I should really fix this
+        //$this->lnkViewChildParentMessage->Href = __ENTITY_MODEL_DIR__ . '/Athelete/' . $this->objAthelete->idAthelete . '/ParentMessages';
+        $this->lnkViewChildResult = new MJaxLinkButton($this);
+        $this->lnkViewChildResult->Text = 'View Results';
+        //I should really fix this
+        //$this->lnkViewChildResult->Href = __ENTITY_MODEL_DIR__ . '/Athelete/' . $this->objAthelete->idAthelete . '/Results';
+        
+    }
+    public function btnSave_click() {
+        $this->GetAthelete()->Save();
         //Experimental save event trigger
         $this->ActionParameter = $this->objAthelete;
         $this->objForm->TriggerControlEvent($this->strControlId, 'mjax-data-entity-save');

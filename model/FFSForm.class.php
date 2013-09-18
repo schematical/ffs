@@ -169,6 +169,8 @@ class FFSForm extends MJaxWAdminForm{
                 $this->AddHeaderNav('FAQ', 'icon-question-sign')->Href = '/faq';
                 $this->AddHeaderNav('Competition Hosts', 'icon-trophy')->Href = '/org/competition/landing';
                 $this->AddHeaderNav('Parents', 'icon-female')->Href = '/parent/landing';
+                $this->AddHeaderNav('Team Coaches', 'icon-group')->Href = '/org/landing';
+
                 $this->AddHeaderNav('Contact Us', 'icon-phone')->Href = '/contactUs';
 
 
@@ -223,5 +225,21 @@ class FFSForm extends MJaxWAdminForm{
             return self::$objForm->objEntityManager->Competition($objCompetition);
         }
         return MLCApplication::$objRewriteHandeler->EntityManager->Competition($objCompetition);
+    }
+    public static function IsParent($objUser = null){
+        $arrAtheletes = FFSApplication::GetAtheletesByParent($objUser);
+        if(count($arrAtheletes) > 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public static function IsOrgManager($objUser = null){
+        $arrOrgs = FFSApplication::GetOrgsByOrgManager($objUser);
+        if(count($arrOrgs) > 0){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

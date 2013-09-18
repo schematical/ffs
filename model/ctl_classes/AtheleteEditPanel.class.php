@@ -4,7 +4,7 @@ class AtheleteEditPanel extends AtheleteEditPanelBase {
 
     public function CreateFieldControls(){
         parent::CreateFieldControls();
-        $this->dttBirthDate->DateOnly();
+
 
         //TODO: Remove following
         //$this->strMemType->Attr('readonly','readonly');
