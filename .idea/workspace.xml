@@ -280,13 +280,13 @@
     <file path="/MJaxFeedDisplayPanel.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379519002772" ignored="false" />
     <file path="/MJaxFeedPanel.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379524030412" ignored="false" />
     <file path="/app.inc.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379526797443" ignored="false" />
-    <file path="/feed.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379529820917" ignored="false" />
+    <file path="/feed.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379530407475" ignored="false" />
     <file path="/feed.tpl.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379522224809" ignored="false" />
     <file path="/MJaxFeedPanel.tpl.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379522342220" ignored="false" />
     <file path="$PROJECT_DIR$/../MLCPackages/mlc_packages/MJaxFeed/_core/view/MJaxFeedPanel.tpl.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379522342220" ignored="false" />
     <file path="/FFSResultFeedDisplayPanel.tpl.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379530220423" ignored="false" />
     <file path="$PROJECT_DIR$/../MLCPackages/mlc_packages/MJaxFeed/_core/ctl/MJaxFeedDisplayPanelBase.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379524606650" ignored="false" />
-    <file path="/FFSFeedDisplayPanel.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379524868883" ignored="false" />
+    <file path="/FFSFeedDisplayPanel.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379530505510" ignored="false" />
     <file path="/MJaxFeedDisplayPanelBase.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379524605642" ignored="false" />
     <file path="/FFSResultFeedDisplayPanel.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379529624939" ignored="false" />
     <file path="$PROJECT_DIR$/../MLCPackages/mlc_packages/MLCFB/_core/_enum.inc.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379525318331" ignored="false" />
@@ -315,13 +315,40 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="FFSResultFeedDisplayPanel.tpl.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="FFSResultFeedDisplayPanel.tpl.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/view/www/_panels/FFSResultFeedDisplayPanel.tpl.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="5" selection-start="1116" selection-end="1116" vertical-scroll-proportion="0.6">
+            <state line="35" column="5" selection-start="1116" selection-end="1116" vertical-scroll-proportion="-14.375">
               <folding>
                 <element signature="n#style#0;n#div#1;n#div#5;n#!!top" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="feed.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ctl/parent/feed.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="67" column="48" selection-start="2053" selection-end="2053" vertical-scroll-proportion="3.2133334">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FFSParentMessageFeedDisplayPanel.class.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ctl/_panels/FFSParentMessageFeedDisplayPanel.class.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="5" column="25" selection-start="165" selection-end="165" vertical-scroll-proportion="-3.125">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FFSFeedDisplayPanel.class.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ctl/_panels/FFSFeedDisplayPanel.class.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="10" column="58" selection-start="514" selection-end="514" vertical-scroll-proportion="0.26086956">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -339,7 +366,6 @@
         <option value="$PROJECT_DIR$/view/www/parent/feed.tpl.php" />
         <option value="$PROJECT_DIR$/model/data_classes/base_classes/CompetitionBase.class.php" />
         <option value="$PROJECT_DIR$/ctl/_panels/FFSParentMessageFeedDisplayPanel.class.php" />
-        <option value="$PROJECT_DIR$/ctl/_panels/FFSFeedDisplayPanel.class.php" />
         <option value="$PROJECT_DIR$/model/gymnastics/FFSResultCollection.class.php" />
         <option value="$PROJECT_DIR$/model/data_classes/Result.class.php" />
         <option value="$PROJECT_DIR$/app.inc.php" />
@@ -349,15 +375,16 @@
         <option value="$PROJECT_DIR$/view/www/_panels/FFSSharePanel.tpl.php" />
         <option value="$PROJECT_DIR$/ctl/_test/embed.html" />
         <option value="$PROJECT_DIR$/ctl/_panels/FFSResultFeedDisplayPanel.class.php" />
-        <option value="$PROJECT_DIR$/ctl/parent/feed.php" />
         <option value="$PROJECT_DIR$/model/FFSForm.class.php" />
         <option value="$PROJECT_DIR$/view/www/_panels/FFSResultFeedDisplayPanel.tpl.php" />
+        <option value="$PROJECT_DIR$/ctl/parent/feed.php" />
+        <option value="$PROJECT_DIR$/ctl/_panels/FFSFeedDisplayPanel.class.php" />
       </list>
     </option>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="-1302" />
+    <option name="x" value="64" />
     <option name="y" value="764" />
     <option name="width" value="1303" />
     <option name="height" value="773" />
@@ -496,6 +523,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FFS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FFS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ctl" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="_panels" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -584,7 +629,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1302" y="764" width="1303" height="773" extended-state="6" />
+    <frame x="64" y="764" width="1303" height="773" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -675,13 +720,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ctl/_panels/FFSFeedDisplayPanel.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="25" selection-start="626" selection-end="626" vertical-scroll-proportion="0.42533082">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/model/gymnastics/FFSResultCollection.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="117" column="31" selection-start="3912" selection-end="3912" vertical-scroll-proportion="-11.833333">
@@ -713,13 +751,6 @@
     <entry file="file://$PROJECT_DIR$/view/www/_meta.tpl.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="4" column="33" selection-start="299" selection-end="299" vertical-scroll-proportion="0.104347825">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ctl/_panels/FFSParentMessageFeedDisplayPanel.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="13" selection-start="438" selection-end="446" vertical-scroll-proportion="0.32490975">
           <folding />
         </state>
       </provider>
@@ -759,13 +790,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ctl/parent/feed.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="0" selection-start="337" selection-end="337" vertical-scroll-proportion="0.37906137">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/model/FFSForm.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="161" column="21" selection-start="7311" selection-end="7311" vertical-scroll-proportion="0.74861366">
@@ -775,10 +799,31 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/view/www/_panels/FFSResultFeedDisplayPanel.tpl.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="5" selection-start="1116" selection-end="1116" vertical-scroll-proportion="0.6">
+        <state line="35" column="5" selection-start="1116" selection-end="1116" vertical-scroll-proportion="-14.375">
           <folding>
             <element signature="n#style#0;n#div#1;n#div#5;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ctl/parent/feed.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="67" column="48" selection-start="2053" selection-end="2053" vertical-scroll-proportion="3.2133334">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ctl/_panels/FFSParentMessageFeedDisplayPanel.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="25" selection-start="165" selection-end="165" vertical-scroll-proportion="-3.125">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ctl/_panels/FFSFeedDisplayPanel.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="58" selection-start="514" selection-end="514" vertical-scroll-proportion="0.26086956">
+          <folding />
         </state>
       </provider>
     </entry>

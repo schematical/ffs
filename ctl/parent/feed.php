@@ -19,7 +19,7 @@ class index extends FFSForm
         //$this->Alert("Updated :)");
     }
 
-    public function InitFeed(){
+    public function InitFeed($initLastUpdated = 0){
         $this->pnlFeed = new MJaxFeedPanel($this);
         $strExcludeParentMessage = '';
         $pnlSelectedEntity = null;
@@ -70,7 +70,7 @@ class index extends FFSForm
                     '<h3>There are no active sessions at the moment</h3> Thanks for checking out <b>%s</b>',
                     FFSForm::Competition()->Name
                 );
-                $this->arrFeedEntities[$this->intLastUpdated + 1] = $pnlAnounce;
+                $this->arrFeedEntities[$initLastUpdated + 1] = $pnlAnounce;
             }
 
             foreach($arrActiveSessions as $objSession){
@@ -93,7 +93,7 @@ class index extends FFSForm
                 sprintf(
                     ' WHERE ParentMessage.idCompetition = %s AND QueDate > "%s" %s ORDER BY queDate DESC LIMIT 5',
                     FFSForm::Competition()->IdCompetition,
-                    date(MLCDateTime::MYSQL_FORMAT, $this->intLastUpdated),
+                    date(MLCDateTime::MYSQL_FORMAT, $initLastUpdated),
                     $strExcludeParentMessage
                 )
             );

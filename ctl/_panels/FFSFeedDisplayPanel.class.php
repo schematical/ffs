@@ -8,7 +8,9 @@ abstract class FFSFeedDisplayPanel extends MJaxFeedDisplayPanelBase{
         if($this->objEntity instanceof MLCBaseEntityCollection){
             $this->SetFollowEntity($this->objEntity->Athelete);
         }else{
-            $this->SetFollowEntity($this->objEntity->IdAtheleteObject);
+            if(!is_null($this->objEntity->IdAtheleteObject)){
+                $this->SetFollowEntity($this->objEntity->IdAtheleteObject);
+            }
         }
 
         if(
