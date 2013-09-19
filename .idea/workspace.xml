@@ -9,13 +9,13 @@
     <file path="/sessionDetails.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378929604638" ignored="false" />
     <file path="$PROJECT_DIR$/../MLCPackages/mlc_packages/private_packages/MJaxWAdminTheme/_core/view/_footer.tpl.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379025100193" ignored="false" />
     <file path="/_footer.tpl.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379456638984" ignored="false" />
-    <file path="/FFSForm.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379536343805" ignored="false" />
-    <file path="/a.dummy" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379531315087" ignored="false" />
+    <file path="/FFSForm.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379615912018" ignored="false" />
+    <file path="/a.dummy" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379608946159" ignored="false" />
     <file path="$PROJECT_DIR$/../MLCPackages/mlc_packages/private_packages/MJaxWAdminTheme/_core/view/MJaxWAdminSubNavItem.tpl.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378853020792" ignored="false" />
     <file path="/MJaxWAdminSubNavItem.tpl.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378853007374" ignored="false" />
     <file path="/MJaxWAdminSubNavItem.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378853055322" ignored="false" />
     <file path="/results.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379531321846" ignored="false" />
-    <file path="/_deploy.sql" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379440197892" ignored="false" />
+    <file path="/_deploy.sql" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379616332268" ignored="false" />
     <file path="/removeDuplicates.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378909428883" ignored="false" />
     <file path="/contactUs.tpl.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378910481479" ignored="false" />
     <file path="/env.inc.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379526936690" ignored="false" />
@@ -42,7 +42,7 @@
     <file path="/OrgEditPanel.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378932619846" ignored="false" />
     <file path="/OrgManageFormBase.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378928925017" ignored="false" />
     <file path="/_FFSFeedForm.tpl.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1378930682808" ignored="false" />
-    <file path="/landing.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379541201038" ignored="false" />
+    <file path="/landing.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379608257642" ignored="false" />
     <file path="$PROJECT_DIR$/../owens_game/js/OGame.js" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379292258835" ignored="false" />
     <file path="/OGame.js" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379292256327" ignored="false" />
     <file path="$PROJECT_DIR$/../owens_game/js/chars/Raptor.js" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379292337193" ignored="false" />
@@ -76,7 +76,7 @@
     <file path="$PROJECT_DIR$/../MLCPackages/mlc_packages/private_packages/MJaxWAdminTheme/_core/ctl/MJaxWAdminWidget.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379017224943" ignored="false" />
     <file path="/MJaxWAdminWidget.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379017221941" ignored="false" />
     <file path="/OrgSelectPanel.tpl.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379017282413" ignored="false" />
-    <file path="/_enum.inc.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379437256086" ignored="false" />
+    <file path="/_enum.inc.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379606972775" ignored="false" />
     <file path="/MLCDateTime.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379084662251" ignored="false" />
     <file path="/FFSOrgManagerSpecialPanel.tpl.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379021502411" ignored="false" />
     <file path="/_meta.tpl.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379527304471" ignored="false" />
@@ -102,7 +102,7 @@
     <file path="/MLCDataConnectionBase.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379083826435" ignored="false" />
     <file path="$PROJECT_DIR$/../MLCPackages/mlc_packages/MLCDataLayer/2.0/_core/MLCDBDriver.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379084593049" ignored="false" />
     <file path="/MLCDBDriver.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379084592690" ignored="false" />
-    <file path="/FFSApplication.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379536309266" ignored="false" />
+    <file path="/FFSApplication.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379612657680" ignored="false" />
     <file path="/entity.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379086642648" ignored="false" />
     <file path="/manageEnrollment.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379268117081" ignored="false" />
     <file path="/manageEnrollment.tpl.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379266906596" ignored="false" />
@@ -122,9 +122,8 @@
     <file path="/MJaxAdvSearchPanel.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379179835782" ignored="false" />
     <file path="$PROJECT_DIR$/../MLCPackages/mlc_packages/MLCDataLayer/2.0/_core/view/MJaxAdvSearchPanel.tpl.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379107515076" ignored="false" />
     <file path="/MJaxAdvSearchPanel.tpl.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379107378950" ignored="false" />
-    <file path="$PROJECT_DIR$/../MLCPackages/mlc_packages/MJax/_core/MJaxFormBase.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379107853205" ignored="false" />
-    <file path="/MJaxFormBase.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379107845887" ignored="false" />
-    <file path="$PROJECT_DIR$/../MLCPackages/mlc_packages/MJax/_core/MJaxControlBase.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379259638467" ignored="false" />
+    <file path="$PROJECT_DIR$/../MLCPackages/mlc_packages/MJax/_core/MJaxFormBase.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379606903232" ignored="false" />
+    <file path="/MJaxFormBase.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379606811176" ignored="false" />
     <file path="$PROJECT_DIR$/../MLCOfficial/mde_codebase/apps/ffs/model/data_classes/base_classes/EnrollmentBase.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379441434294" ignored="false" />
     <file path="$PROJECT_DIR$/../MLCOfficial/mde_codebase/apps/ffs/model/data_classes/base_classes/AssignmentBase.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379441434294" ignored="false" />
     <file path="$PROJECT_DIR$/../MLCOfficial/mde_codebase/apps/ffs/model/data_classes/base_classes/CompetitionBase.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379441434294" ignored="false" />
@@ -187,7 +186,7 @@
     <file path="/PumpkinWave.js" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379121029106" ignored="false" />
     <file path="$PROJECT_DIR$/../owens_game/php/_config.inc.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379292154746" ignored="false" />
     <file path="/_config.inc.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379292152073" ignored="false" />
-    <file path="/Dummy.txt" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379432061481" ignored="false" />
+    <file path="/Dummy.txt" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379606418615" ignored="false" />
     <file path="$PROJECT_DIR$/../owens_game/index.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379292168087" ignored="false" />
     <file path="$PROJECT_DIR$/../owens_game/js/tiles/Wood.js" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379128241837" ignored="false" />
     <file path="/Wood.js" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379128241837" ignored="false" />
@@ -232,9 +231,9 @@
     <file path="$PROJECT_DIR$/../owens_game/js/actions/Explore.js" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379292927933" ignored="false" />
     <file path="/Explore.js" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379292052893" ignored="false" />
     <file path="/FFSRewriteHandeler_bkup.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379347717344" ignored="false" />
-    <file path="/scores.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379531496387" ignored="false" />
+    <file path="/scores.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379612697127" ignored="false" />
     <file path="/scores.tpl.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379349849632" ignored="false" />
-    <file path="/FFSMobileScoreInputPanel.tpl.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379447423067" ignored="false" />
+    <file path="/FFSMobileScoreInputPanel.tpl.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379613778083" ignored="false" />
     <file path="$PROJECT_DIR$/../MLCOfficial/mde_codebase/apps/ffs/ctl/_panels/FFSSharePanel.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379359448941" ignored="false" />
     <file path="/MJaxTwitterShareLink.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379526964784" ignored="false" />
     <file path="/FFSSharePanel.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379529477284" ignored="false" />
@@ -259,11 +258,11 @@
     <file path="$PROJECT_DIR$/../MLCPackages/mlc_packages/MLCAuth/2.0/_core/model/data_layer/base_classes/AuthRollBase.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379369153211" ignored="false" />
     <file path="$PROJECT_DIR$/../MLCPackages/mlc_packages/MLCAuth/2.0/_core/model/data_layer/base_classes/AuthUserTypeCd_tpcdBase.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379369153211" ignored="false" />
     <file path="$PROJECT_DIR$/../MLCPackages/mlc_packages/MLCAuth/2.0/_core/model/data_layer/base_classes/AuthAccountTypeCd_tpcdBase.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379369153211" ignored="false" />
-    <file path="/home.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379531432551" ignored="false" />
-    <file path="/FFSParentCompSearchPanel.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379434111542" ignored="false" />
+    <file path="/home.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379614349596" ignored="false" />
+    <file path="/FFSParentCompSearchPanel.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379612823625" ignored="false" />
     <file path="/FFSParentCompSearchPanel.tpl.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379369935642" ignored="false" />
     <file path="/editCompetition.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379433238513" ignored="false" />
-    <file path="/FFSMobileScoreInputPanel.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379521827516" ignored="false" />
+    <file path="/FFSMobileScoreInputPanel.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379613694459" ignored="false" />
     <file path="/MJaxBSListBox.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379444196441" ignored="false" />
     <file path="$PROJECT_DIR$/../MLCPackages/mlc_packages/MJaxBootstrap/_core/view/MJaxBSListBox.tpl.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379437456321" ignored="false" />
     <file path="/MJaxBSListBox.tpl.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379434915515" ignored="false" />
@@ -297,7 +296,14 @@
     <file path="/MJaxWAdminForm.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379528687528" ignored="false" />
     <file path="/embed.html" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379528853296" ignored="false" />
     <file path="/FFSRewriteHandeler.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379532066980" ignored="false" />
-    <file path="/FFSParentCoachLandingForm.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379541144850" ignored="false" />
+    <file path="/FFSParentCoachLandingForm.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379616087330" ignored="false" />
+    <file path="/FFSParentCoachMobileScoreForm.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379615955513" ignored="false" />
+    <file path="/manageAthletes.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379610950615" ignored="false" />
+    <file path="/FFSAtheleteEditListPanel.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379611046264" ignored="false" />
+    <file path="/FFSEntityManager.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379615838625" ignored="false" />
+    <file path="/AuthUser.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379613498177" ignored="false" />
+    <file path="$PROJECT_DIR$/../MLCPackages/mlc_packages/MLCAuth/2.0/_core/ctl/MLCLoginPanel.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379614002251" ignored="false" />
+    <file path="/FFSHomeForm.class.php" changelist="417b8a49-1a63-4a6a-9067-bdeeb60e440b" time="1379614861918" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -317,19 +323,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="app.inc.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app.inc.php">
+      <file leaf-file-name="FFSMobileScoreInputPanel.class.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ctl/_panels/FFSMobileScoreInputPanel.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="41" column="2" selection-start="2688" selection-end="2688" vertical-scroll-proportion="-14.375">
+            <state line="31" column="41" selection-start="989" selection-end="989" vertical-scroll-proportion="-10.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="landing.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ctl/org/landing.php">
+      <file leaf-file-name="home.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ctl/parent/home.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="41" selection-start="47" selection-end="47" vertical-scroll-proportion="-0.625">
+            <state line="12" column="5" selection-start="356" selection-end="356" vertical-scroll-proportion="-7.5">
               <folding />
             </state>
           </provider>
@@ -338,25 +344,37 @@
       <file leaf-file-name="FFSParentCoachLandingForm.class.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ctl/_forms/FFSParentCoachLandingForm.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="0" selection-start="481" selection-end="481" vertical-scroll-proportion="-6.122449">
+            <state line="36" column="65" selection-start="1188" selection-end="1188" vertical-scroll-proportion="-9.416667">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="landing.php" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/ctl/parent/landing.php">
+      <file leaf-file-name="_deploy.sql" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/cli/_deploy.sql">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="0" selection-start="55" selection-end="55" vertical-scroll-proportion="0.054151624">
+            <state line="2" column="18" selection-start="20" selection-end="20" vertical-scroll-proportion="0.058252428">
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FFSEntityManager.class.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/model/ctl_classes/FFSEntityManager.class.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="49" column="9" selection-start="1650" selection-end="1650" vertical-scroll-proportion="-7.5">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AtheleteEditPanel.class.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/model/ctl_classes/AtheleteEditPanel.class.php">
+      <file leaf-file-name="home.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ctl/org/home.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="0" selection-start="232" selection-end="232" vertical-scroll-proportion="-0.5833333">
+            <state line="6" column="57" selection-start="205" selection-end="205" vertical-scroll-proportion="-3.75">
               <folding />
             </state>
           </provider>
@@ -365,16 +383,16 @@
       <file leaf-file-name="FFSHomeForm.class.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ctl/_forms/FFSHomeForm.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="73" column="0" selection-start="2343" selection-end="2343" vertical-scroll-proportion="-20.208334">
+            <state line="54" column="31" selection-start="2308" selection-end="2308" vertical-scroll-proportion="-23.958334">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="landing.tpl.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/view/www/org/landing.tpl.php">
+      <file leaf-file-name="FFSMobileScoreInputPanel.tpl.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/view/www/_panels/FFSMobileScoreInputPanel.tpl.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="34" selection-start="1014" selection-end="1014" vertical-scroll-proportion="-13.125">
+            <state line="30" column="0" selection-start="596" selection-end="596" vertical-scroll-proportion="-18.75">
               <folding />
             </state>
           </provider>
@@ -390,28 +408,28 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/ctl/org/index.php" />
-        <option value="$PROJECT_DIR$/app.inc.php" />
-        <option value="$PROJECT_DIR$/model/FFSRewriteHandeler.class.php" />
-        <option value="$PROJECT_DIR$/ctl/_forms/FFSHomeForm.class.php" />
-        <option value="$PROJECT_DIR$/ctl/_forms/FFSParentCoachMobileScoreForm.class.php" />
-        <option value="$PROJECT_DIR$/view/www/ctl_panels/AtheleteEditPanelBase.tpl.php" />
+        <option value="$PROJECT_DIR$/ctl/org/manageAthletes.php" />
+        <option value="$PROJECT_DIR$/ctl/_panels/FFSAtheleteEditListPanel.class.php" />
+        <option value="$PROJECT_DIR$/ctl/org/scores.php" />
+        <option value="$PROJECT_DIR$/ctl/_panels/parent/FFSParentCompSearchPanel.class.php" />
         <option value="$PROJECT_DIR$/model/FFSApplication.class.php" />
+        <option value="$PROJECT_DIR$/../MLCPackages/mlc_packages/MLCAuth/2.0/_core/model/data_layer/AuthUser.class.php" />
+        <option value="$PROJECT_DIR$/ctl/_panels/FFSMobileScoreInputPanel.class.php" />
+        <option value="$PROJECT_DIR$/ctl/parent/home.php" />
+        <option value="$PROJECT_DIR$/ctl/org/home.php" />
+        <option value="$PROJECT_DIR$/ctl/_forms/FFSHomeForm.class.php" />
+        <option value="$PROJECT_DIR$/view/www/_panels/FFSMobileScoreInputPanel.tpl.php" />
+        <option value="$PROJECT_DIR$/model/ctl_classes/FFSEntityManager.class.php" />
         <option value="$PROJECT_DIR$/model/FFSForm.class.php" />
-        <option value="$PROJECT_DIR$/ctl/org/landing.php" />
-        <option value="$PROJECT_DIR$/ctl/_forms/FFSFeedForm.class.php" />
-        <option value="$PROJECT_DIR$/ctl/_panels/FFSResultFeedDisplayPanel.class.php" />
-        <option value="$PROJECT_DIR$/ctl/_test/embed.html" />
-        <option value="$PROJECT_DIR$/view/www/org/landing.tpl.php" />
-        <option value="$PROJECT_DIR$/model/ctl_classes/AtheleteEditPanel.class.php" />
+        <option value="$PROJECT_DIR$/ctl/_forms/FFSParentCoachMobileScoreForm.class.php" />
         <option value="$PROJECT_DIR$/ctl/_forms/FFSParentCoachLandingForm.class.php" />
-        <option value="$PROJECT_DIR$/ctl/parent/landing.php" />
+        <option value="$PROJECT_DIR$/cli/_deploy.sql" />
       </list>
     </option>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="-2668" />
+    <option name="x" value="-1302" />
     <option name="y" value="764" />
     <option name="width" value="1303" />
     <option name="height" value="773" />
@@ -442,6 +460,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -496,7 +515,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="parent" />
+              <option name="myItemId" value="_panels" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -510,15 +529,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="view" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="www" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="org" />
+              <option name="myItemId" value="model" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -532,15 +543,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="view" />
+              <option name="myItemId" value="model" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="www" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ctl_panels" />
+              <option name="myItemId" value="ctl_classes" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -626,7 +633,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="_panels" />
+              <option name="myItemId" value="_forms" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -640,17 +647,12 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ctl" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="_forms" />
+              <option name="myItemId" value="cli" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -692,8 +694,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/view/www/org" />
       <recent name="$PROJECT_DIR$/ctl/org" />
+      <recent name="$PROJECT_DIR$/view/www/org" />
       <recent name="$PROJECT_DIR$/ctl/parent" />
       <recent name="$PROJECT_DIR$/ctl/_panels/forms" />
       <recent name="$PROJECT_DIR$/view/www/parent" />
@@ -738,16 +740,15 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-2668" y="764" width="1303" height="773" extended-state="6" />
+    <frame x="-1302" y="764" width="1303" height="773" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20956175" sideWeight="0.6704" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.212749" sideWeight="0.6704" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -756,6 +757,7 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -822,119 +824,119 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/model/FFSRewriteHandeler.class.php">
+    <entry file="file://$PROJECT_DIR$/model/FFSApplication.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="16" selection-start="1961" selection-end="1988" vertical-scroll-proportion="-10.625">
+        <state line="53" column="0" selection-start="1900" selection-end="1900" vertical-scroll-proportion="-9.083333">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../MLCPackages/mlc_packages/MLCAuth/2.0/_core/model/data_layer/AuthUser.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="75" column="70" selection-start="2193" selection-end="2193" vertical-scroll-proportion="0.18554688">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ctl/org/scores.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="39" selection-start="45" selection-end="45" vertical-scroll-proportion="-0.625">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ctl/org/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ctl/_panels/FFSWizzardPanel.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="20" selection-start="154" selection-end="154" vertical-scroll-proportion="0.15652174">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/www/_panels/FFSMobileScoreInputPanel.tpl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="0" selection-start="596" selection-end="596" vertical-scroll-proportion="-18.75">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ctl/data/search.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-1.9494585">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/ctl_classes/FFSEntityManager.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="49" column="9" selection-start="1650" selection-end="1650" vertical-scroll-proportion="-7.5">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ctl/_forms/FFSParentCoachMobileScoreForm.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="0" selection-start="1501" selection-end="1501" vertical-scroll-proportion="0.8336414">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model/FFSApplication.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="51" selection-start="1285" selection-end="1309" vertical-scroll-proportion="0.66543436">
+        <state line="9" column="38" selection-start="248" selection-end="248" vertical-scroll-proportion="0.11623246">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/model/FFSForm.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="238" column="25" selection-start="10140" selection-end="10140" vertical-scroll-proportion="0.7504621">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ctl/_forms/FFSFeedForm.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="142" column="35" selection-start="4850" selection-end="4850" vertical-scroll-proportion="-16.583334">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ctl/_panels/FFSParentMessageFeedDisplayPanel.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="40" selection-start="465" selection-end="465" vertical-scroll-proportion="0.32490975">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ctl/_panels/FFSResultFeedDisplayPanel.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="16" selection-start="639" selection-end="639" vertical-scroll-proportion="-13.125">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ctl/_test/embed.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="126" selection-start="140" selection-end="140" vertical-scroll-proportion="0.054151624">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ctl/_test/test.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/www/org/landing.tpl.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="34" selection-start="1014" selection-end="1014" vertical-scroll-proportion="-13.125">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/www/ctl_panels/AtheleteEditPanelBase.tpl.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="73" column="30" selection-start="2858" selection-end="3120" vertical-scroll-proportion="0.6691312">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model/ctl_classes/AtheleteEditPanel.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="0" selection-start="232" selection-end="232" vertical-scroll-proportion="-0.5833333">
+        <state line="113" column="0" selection-start="3687" selection-end="3746" vertical-scroll-proportion="-0.19408503">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ctl/_forms/FFSHomeForm.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="73" column="0" selection-start="2343" selection-end="2343" vertical-scroll-proportion="-20.208334">
+        <state line="54" column="31" selection-start="2308" selection-end="2308" vertical-scroll-proportion="-23.958334">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ctl/org/landing.php">
+    <entry file="file://$PROJECT_DIR$/ctl/org/home.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="41" selection-start="47" selection-end="47" vertical-scroll-proportion="-0.625">
+        <state line="6" column="57" selection-start="205" selection-end="205" vertical-scroll-proportion="-3.75">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ctl/_panels/FFSMobileScoreInputPanel.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="41" selection-start="989" selection-end="989" vertical-scroll-proportion="-10.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ctl/parent/home.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="5" selection-start="356" selection-end="356" vertical-scroll-proportion="-7.5">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ctl/_forms/FFSParentCoachLandingForm.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="0" selection-start="481" selection-end="481" vertical-scroll-proportion="-6.122449">
+        <state line="36" column="65" selection-start="1188" selection-end="1188" vertical-scroll-proportion="-9.416667">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ctl/parent/landing.php">
+    <entry file="file://$PROJECT_DIR$/cli/_deploy.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="0" selection-start="55" selection-end="55" vertical-scroll-proportion="0.054151624">
+        <state line="2" column="18" selection-start="20" selection-end="20" vertical-scroll-proportion="0.058252428">
           <folding />
         </state>
+      </provider>
+      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
       </provider>
     </entry>
   </component>

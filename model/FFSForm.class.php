@@ -88,13 +88,33 @@ class FFSForm extends MJaxWAdminForm{
     }
 
     public function SetUpNavMenu(){
+        $objOrg = FFSForm::Org();
+        if(is_null($objOrg)){
+            $arrOrgs = MLCAuthDriver::GetRolls(FFSRoll::ORG_MANAGER);
 
+            if(count($arrOrgs) == 0){
+                //Do nothing
+            }elseif(count($arrOrgs) == 1){
+                $this->Org($arrOrgs[0]->GetEntity());
+
+            }else{
+                $this->Org($arrOrgs[0]->GetEntity());
+            }
+        }
 
         switch(FFSForm::$strSection){
             case(FFSSection::ORG):
+
+
                 $this->AddHeaderNav('Home', 'icon-home')->Href = '/';
                 $lnkManageCompetitions = $this->AddHeaderNav('Competitions', 'icon-flag');
                 $arrCompetitions = FFSApplication::GetActiveCompetitions();
+                if(!is_null($this->Org())){
+                    $arrCompetitions = array_merge(
+                        $arrCompetitions->GetCollection(),
+                        FFSApplication::GetCompetitionsByOrgAtheleteResults($this->Org())->getCollection()
+                    );
+                }
                 foreach($arrCompetitions as $objCompetition){
                     //_dv($lnkManageSessions);
                     if($objCompetition->IdOrg == FFSForm::Org()->IdOrg){
@@ -108,19 +128,13 @@ class FFSForm extends MJaxWAdminForm{
                     );
                 }
 
-                if(is_null(FFSForm::Competition())){
+                if(
+                    (!is_null(FFSForm::Competition())) &&
+                    (!is_null(MLCAuthDriver::User())) &&
+                    (MLCAuthDriver::User()->HasRoll(FFSForm::Competition()->IdOrgObject, FFSRoll::ORG_MANAGER))
+                ){
 
-                    $lnkManageCompetitions->AddSubNavLink(
-                        '<i class="icon-plus-sign"></i>Host a Competition',
-                        '/org/competition/editCompetition'
-                    );
-                    $lnkManageAtheletes= $this->AddHeaderNav('Your Athletes', 'icon-group');
-                    $lnkManageAtheletes->Href = '/org/manageAthletes';
 
-                    $lnkUpcomingCompetitions = $this->AddHeaderNav('Upcoming Competitions', 'icon-flag')->Href = '/org/myCompetitions';
-                    $lnkTeamStats = $this->AddHeaderNav('Team Stats', 'icon-list')->Href = '/parent/results';
-
-                }else{
                     $lnkManageCompetitions->Href  = '/' . FFSForm::Competition()->Namespace . '/org/competition/index';
 
                     $lnkManageSessions = $this->AddHeaderNav('Manage Sessions', 'icon-calendar');
@@ -134,10 +148,25 @@ class FFSForm extends MJaxWAdminForm{
                         );
                     }
                     $this->AddHeaderNav('Invite Gyms', 'icon-building')->Href = '/' . FFSForm::Competition()->Namespace . '/org/competition/manageGyms';
-                    $this->AddHeaderNav('Manage Athletes', 'icon-user')->Href = '/' . FFSForm::Competition()->Namespace . '/org/competition/manageEnrollment';
+
+                    $arrAtheletes = FFSApplication::GetAtheletesByOrgManager();
+                    $lnkAthelete = $this->AddHeaderNav('Manage Athletes', 'icon-user');
+                    $lnkAthelete->Href = '/' . FFSForm::Competition()->Namespace . '/org/competition/manageEnrollment';
 
                     //Probablly don't allow untill meet starts
                     $this->AddHeaderNav('Results', 'icon-trophy')->Href = '/' . FFSForm::Competition()->Namespace . '/org/competition/results';
+
+                }else{
+                    $lnkManageCompetitions->AddSubNavLink(
+                        '<i class="icon-plus-sign"></i>Host a Competition',
+                        '/org/competition/editCompetition'
+                    );
+                    $lnkManageAtheletes= $this->AddHeaderNav('Your Athletes', 'icon-group');
+                    $lnkManageAtheletes->Href = '/org/manageAthletes';
+                    /*foreach($arrAtheletes as $objAthelete){
+                        $lnkAthelete->AddSubNavLink($objAthelete->__toString(),'/parent/results?' . FFSQS::Athelete_IdAthelete . '=' . $objAthelete->IdAthelete);
+                    }*/
+                    $lnkTeamStats = $this->AddHeaderNav('Team Stats', 'icon-list')->Href = '/parent/results';
 
                 }
 

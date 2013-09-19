@@ -26,6 +26,18 @@ abstract class FFSApplication{
         return array_values($arrReturn);
 
     }
+    public static function GetCompetitionsByOrgAtheleteResults(Org $objOrg){
+        //Crazy joins
+        $strSql = sprintf(
+            "RIGHT JOIN Result ON Competition.idCompetition = Result.idCompetition
+            RIGHT JOIN Athelete ON Athelete.idAthelete = Result.idAthelete
+            WHERE Athelete.idORg = 92
+            GROUP BY Competition.idCompetition;",
+            $objOrg->IdOrg
+        );
+        $collCompetitions = Competition::Query($strSql);
+        return $collCompetitions;
+    }
     public static function GetAtheletesByParent(AuthUser $objUser = null){
         if(is_null($objUser)){
             $objUser = MLCAuthDriver::User();
@@ -39,9 +51,11 @@ abstract class FFSApplication{
     }
     public static function GetAtheletesByOrgManager(AuthUser $objUser = null){
         $arrOrgs = self::GetOrgsByOrgManager($objUser);
-        $arrAtheletes = new MLCBaseEntityCollection();
+
+        $arrAtheletes = array();
         foreach($arrOrgs as $objOrg){
-            $arrAtheletes = $objOrg->GetAtheleteArr()->Combine($arrAtheletes);
+            //_dv($objOrg->GetAtheleteArr());
+            $arrAtheletes = array_merge($arrAtheletes, $objOrg->GetAtheleteArr());
         }
         return $arrAtheletes;
     }

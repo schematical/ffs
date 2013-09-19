@@ -51,7 +51,7 @@ class AtheleteListPanel extends AtheleteListPanelBase {
     public function render_name($strData, $objRow){
         $objAthelete = $objRow->GetData('_entity');
         if(is_null($objAthelete)){
-            return 'fail';
+            return '';
         }
         return $objAthelete->__toString();
     }

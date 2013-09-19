@@ -1,11 +1,14 @@
 <?php
-class FFSParentCoachMobileScoreForm extends FFSForm{
+abstract class FFSParentCoachMobileScoreForm extends FFSForm{
 
     public $pnlScore = null;
 
 
     public function Form_Create(){
         parent::Form_Create();
+        if(is_null(MLCAuthDriver::User())){
+            $this->Redirect('/index');
+        }
         $this->strTemplate = __VIEW_ACTIVE_APP_DIR__ . '/www/parent/scores.tpl.php';
         $objCompetition = null;
         $intIdCompetiton = MLCApplication::QS(FFSQS::Competition_IdCompetition);
@@ -26,8 +29,9 @@ class FFSParentCoachMobileScoreForm extends FFSForm{
             $this->pnlScore->Alert("The hosts of this competition are tracking the scores on tumble score so you may not input your own scores. You can follow along on the competition progress and view scores at <a href='/" .  $objCompetition->Namespace . "'>https://" . $_SERVER['SERVER_NAME'] . '/' . $objCompetition->Namespace . "</a>", 'info');
         }else{
             $this->pnlScore = new FFSMobileScoreInputPanel($this, null, $objCompetition);
-            $arrAtheletes = FFSApplication::GetAtheletesByParent();
+            $arrAtheletes = $this->QueryAtheletes();
             $this->pnlScore->SetAtheletes($arrAtheletes);
         }
     }
+    abstract public function QueryAtheletes();
 }

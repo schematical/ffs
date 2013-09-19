@@ -34,7 +34,8 @@ class FFSParentCoachLandingForm extends FFSForm{
         );
 
         $this->pnlAthelete = new MJaxBSAutocompleteTextBox($this);
-        $this->pnlAthelete->SetSearchEntity('Athelete');
+        $this->pnlAthelete->SetSearchEntity('Athelete', 'lastName');
+
         $this->pnlAthelete->AddAction(
             new MJaxBSAutocompleteSelectEvent(),
             new MJaxServerControlAction(
@@ -59,6 +60,7 @@ class FFSParentCoachLandingForm extends FFSForm{
 
         if(is_object($objOrg)){
             $this->objOrg = $objOrg;
+            MLCCookieDriver::SetCookie(FFSQS::Org_IdOrg, $this->objOrg->IdOrg);
             //Display Org Confirm screen
 
 
@@ -78,6 +80,7 @@ class FFSParentCoachLandingForm extends FFSForm{
             $this->pnlOrgEdit->btnSave = null;
             $this->Append("#ffs-org-select", '<div class="alert alert-info">We don\'t have your gym on file yet. If you know it would you mind entering in their info? If not that is okay.</a>');
             $this->Append("#ffs-org-select", $this->pnlOrgEdit);
+            MLCCookieDriver::SetCookie(FFSQS::Org_IdOrg, -1);
         }
     }
     public function pnlAthelete_select(){
@@ -130,6 +133,7 @@ class FFSParentCoachLandingForm extends FFSForm{
            $this->AppendAthelete($objAthelete);
            $this->pnlAtheleteEdit->SetAthelete(null);
            $this->ScrollTo($this->pnlAtheleteEdit->strFirstName);
+           $this->Focus($this->pnlAtheleteEdit->strFirstName);
            if(!is_null($this->objOrg)){
                 $this->pnlAtheleteEdit->strMemType->Text = $this->objOrg->ClubType;
            }
@@ -145,14 +149,9 @@ class FFSParentCoachLandingForm extends FFSForm{
         if(!is_null($this->pnlAtheleteEdit)){
             $this->btnAddAthelete_click();
         }
-        $objUser = MLCAuthDriver::User();
 
-        foreach($this->arrAtheletes as $objAthelete){
-            $objAthelete->IdOrg = $this->objOrg->IdOrg;
-            $objAthelete->Save();
-            $objUser->AddRoll(FFSRoll::PARENT, $objAthelete);
-        }
-        $this->Redirect('/parent/index');
+        MLCCookieDriver::RemoveCookie(FFSQS::Org_IdOrg);
+        $this->FinishSignup();
     }
 
     public function AppendAthelete(Athelete $objAthelete){

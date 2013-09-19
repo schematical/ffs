@@ -9,9 +9,10 @@ require_once (__MODEL_APP_CONTROL__ . "/base_classes/FFSEntityManagerBase.class.
 class FFSEntityManager extends FFSEntityManagerBase {
     public function Populate(){
         parent::Populate();
-        if(is_null($this->objCompetition)){
+        if(is_null($this->Org())){
 
             $arrOrgs = MLCAuthDriver::GetRolls(FFSRoll::ORG_MANAGER);
+
             if(count($arrOrgs) == 0){
                 //Do nothing
             }elseif(count($arrOrgs) == 1){
@@ -20,6 +21,7 @@ class FFSEntityManager extends FFSEntityManagerBase {
             }else{
                 $this->objOrg =$arrOrgs[0]->GetEntity();
             }
+            //_dv($this->objOrg);
         }
         if(!is_null($this->objCompetition)){
             $intIdSession = MLCApplication::QS(FFSQS::IdSession);
@@ -42,6 +44,12 @@ class FFSEntityManager extends FFSEntityManagerBase {
         }
     }
     public function GetAtheleteOwnerQuery(){
+        $intIdOrg = MLCCookieDriver::GetCookie(FFSQS::Org_IdOrg);
+        if($intIdOrg){
+            return 'AND Athelete.idOrg = ' . $intIdOrg . '';
+        }
+
+
        $intIdSession = MLCApplication::QS(FFSQS::Session_IdSession);
         $arrIdAtheletes = array();
        if(!is_null($intIdSession)){
@@ -61,6 +69,8 @@ class FFSEntityManager extends FFSEntityManagerBase {
                return ' AND 0';
            }
        }
+
+
        return '';
    }
     public function SearchEnrollment($strSearch, $strField = null){

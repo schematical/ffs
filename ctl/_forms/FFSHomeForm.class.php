@@ -1,5 +1,5 @@
 <?php
-class FFSHomeForm extends FFSForm{
+abstract class FFSHomeForm extends FFSForm{
 
     public $lstComps = null;
     public $pnlComp = null;
@@ -8,7 +8,7 @@ class FFSHomeForm extends FFSForm{
     public function Form_Create(){
         parent::Form_Create();
 
-        $arrAtheletes = FFSApplication::GetAtheletesByParent();
+        $arrAtheletes = $this->QueryAtheletes();
         $arrCompetition = array();
         foreach($arrAtheletes as $objAthelete){
             $arrResults = $objAthelete->GetResultArr();
@@ -36,18 +36,31 @@ class FFSHomeForm extends FFSForm{
             $wgtComp->AddCssClass('span6');
         }
 
+        if(count($arrAtheletes) > 0){
 
-        $this->pnlComp = new FFSParentCompSearchPanel($this);
-
-
-        /*-----------Create new COmpetiton Panel-------------*/
-        $this->pnlComp = new FFSParentCompSearchPanel($this);
-        $wgtComp = $this->AddWidget(
-            'Find  a competition',
-            'icon-flag',
-            $this->pnlComp
-        );
-        $wgtComp->AddCssClass('span6');
+            /*-----------Create new COmpetiton Panel-------------*/
+            $this->pnlComp = new FFSParentCompSearchPanel($this);
+            $wgtComp = $this->AddWidget(
+                'Find  a competition',
+                'icon-flag',
+                $this->pnlComp
+            );
+            $wgtComp->AddCssClass('span6');
+        }else{
+            /*-----------Wizzard panel-------------*/
+            $this->pnlComp = new FFSWizzardPanel(
+                $this,
+                'Start by adding your athletes',
+                'Before we can go much further you need to add your athletes into our system. This will allow you to track scores for your team and even enroll your team into meets that are using TumbleScore to host their meet.',
+                '/org/manageAthletes'
+            );
+            $wgtComp = $this->AddWidget(
+                'Find  a competition',
+                'icon-flag',
+                $this->pnlComp
+            );
+            $wgtComp->AddCssClass('span6');
+        }
     }
 
     public function colEditScores_click($f, $c, $strActionParameter)
@@ -68,6 +81,7 @@ class FFSHomeForm extends FFSForm{
             )
         );
     }
+    abstract public function QueryAtheletes();
 
 
 }

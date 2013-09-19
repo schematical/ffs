@@ -23,12 +23,7 @@ class FFSParentCompSearchPanel extends MJaxPanel{
         if(is_object($objComp)){
             //If an enrollment exists do nothing
             //IDK
-            $this->objForm->Redirect(
-                '/parent/scores',
-                array(
-                    FFSQS::Competition_IdCompetition => $objComp->IdCompetition
-                )
-            );
+            $this->RedirectToCompScore($objComp);
         }else{
 
             $this->objForm->Append(
@@ -85,8 +80,17 @@ class FFSParentCompSearchPanel extends MJaxPanel{
         $objComp->Name = $this->txtComp->GetValue();
         $objComp->IdOrg = $objOrg->IdOrg;
         $objComp->Save();
+        $this->RedirectToCompScore($objComp);
+    }
+    public function RedirectToCompScore($objComp){
+        if($this->objForm->IsOrgManager()){
+            $strUri = '/org/scores';
+        }else{
+            $strUri = '/parent/scores';
+        }
+
         $this->objForm->Redirect(
-            '/parent/scores',
+            $strUri,
             array(
                 FFSQS::Competition_IdCompetition => $objComp->IdCompetition
             )

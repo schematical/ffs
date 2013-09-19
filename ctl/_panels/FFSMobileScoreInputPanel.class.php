@@ -29,7 +29,7 @@ class FFSMobileScoreInputPanel extends MJaxPanel{
         $this->strTemplate = __VIEW_ACTIVE_APP_DIR__ . '/www/_panels/' . get_class($this) . '.tpl.php';
         $this->lstAtheletes = new MJaxBSListBox($this);
         $this->lstAtheletes->Text = 'Change Athletes';
-        $this->lstAtheletes->AddCssClass('btn-large');
+        $this->lstAtheletes->lnkPrimary->AddCssClass('btn-large');
         $this->lstAtheletes->AddAction(
             new MJaxChangeEvent(),
             new MJaxServerControlAction(
@@ -44,7 +44,7 @@ class FFSMobileScoreInputPanel extends MJaxPanel{
             new MJaxChangeEvent(),
             new MJaxServerControlAction(
                 $this,
-                'SaveState'
+                'lstSpecialNotes_change'
             )
         );
 
@@ -129,6 +129,11 @@ class FFSMobileScoreInputPanel extends MJaxPanel{
 
         $this->InitDialPad();
 
+    }
+    public function lstSpecialNotes_change(){
+        $this->SaveState();
+        $this->lstSpecialNotes->Text = $this->lstSpecialNotes->lnkSelOption->Text;
+        $this->lstSpecialNotes->lnkPrimary->AddCssClass('btn-success');
     }
     public function InitDialPad(){
         for($i = -2; $i < 10; $i++){
@@ -293,6 +298,13 @@ class FFSMobileScoreInputPanel extends MJaxPanel{
     }
     public function lstAtheletes_change(){
         $this->objSelAthelete = $this->lstAtheletes->GetValue();
+        $this->objForm->ReplaceWith(
+            '#ffs-athelete-name',
+            sprintf(
+                "<h3 id='ffs-athelete-name'>%s</h3>",
+                $this->objSelAthelete->__toString()
+            )
+        );
         $this->UpdateResult();
     }
     

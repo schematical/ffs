@@ -30,9 +30,9 @@ abstract class FFSSessionSettings{
 abstract class FFSEventData{
     public static $WOMENS_ARTISTIC_GYMNASTICS = array(
         'Vault' => 'Vault',
-        'Floor' => 'Floor',
+        'Bars' => 'Bars',
         'Beam' => 'Beam',
-        'Bars' => 'Bars'
+        'Floor' => 'Floor'
     );
     public static $MENS_ARTISTIC_GYMNASTICS = array(
         'Vault' => 'Vault',
@@ -41,6 +41,11 @@ abstract class FFSEventData{
         'Rings' => 'Rings',
         'Parallel Bars' => 'Parallel Bars',
         'PommelHorse' => 'Pommel Horse'
+    );
+    public static $TNT_GYMNASTICS = array(
+        'Trampoline' => 'Trampoline',
+        'Double Mini' => 'Double Mini',
+        'Tumbling' => 'Tumbling'
     );
 }
 abstract class FFSFlightData{

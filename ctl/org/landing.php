@@ -8,7 +8,7 @@ class landing extends FFSParentCoachLandingForm{
 
             if($this->IsOrgManager($objUser)){
                 $this->Redirect('/org/index');
-            }elseif($this->IsParetn($objUser)){
+            }elseif($this->IsParent($objUser)){
                 $this->Redirect('/parent/index');
             }
         }
@@ -28,6 +28,16 @@ class landing extends FFSParentCoachLandingForm{
         }else{
             parent::pnlOrg_select();
         }
+    }
+    public function FinishSignup(){
+        $objUser = MLCAuthDriver::User();
+        foreach($this->arrAtheletes as $objAthelete){
+            $objAthelete->IdOrg = $this->objOrg->IdOrg;
+            $objAthelete->Save();
+
+        }
+        $objUser->AddRoll(FFSRoll::ORG_MANAGER, $this->objOrg);
+        $this->Redirect('/parent/index');
     }
 
 

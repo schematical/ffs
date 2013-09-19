@@ -16,7 +16,7 @@
         padding-top:25Px;
     }
     #myTab >li>a{
-        font-size: 18Pt
+        font-size: 14Pt
     }
     .tab-pane .row-fluid{
         margin-bottom:10Px;
@@ -27,7 +27,8 @@
     #ffs-special-notes > .btn{
         padding-top: 10Px;
         padding-bottom: 10Px;
-        font-size: 13Pt;
+        font-size: 8Pt;
+
     }
 </style>
 <div class='container'>
@@ -42,7 +43,7 @@
         <div class='span12'>
             <div class='well'>
                 <div class='pull-left'>
-                    <h3><?php echo $_CONTROL->objSelAthelete->__toString(); ?></h3>
+                    <h3 id='ffs-athelete-name'><?php echo $_CONTROL->objSelAthelete->__toString(); ?></h3>
 
                 </div>
                 <div class='pull-right'>
