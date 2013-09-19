@@ -122,7 +122,7 @@ require_once(__CTL_FFS_APP_DIR__ . '/_events.inc.php');
 if(class_exists('MLCAuthDriver')){
     switch(SERVER_ENV){
         case('local'):
-            MLCAuthDriver::SetCookieDomain('ffs.com');
+            MLCAuthDriver::SetCookieDomain($_SERVER['SERVER_NAME']);
         break;
         case('beta'):
         case('prod'):

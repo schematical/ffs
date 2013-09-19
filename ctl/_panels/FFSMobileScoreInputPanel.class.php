@@ -30,6 +30,7 @@ class FFSMobileScoreInputPanel extends MJaxPanel{
         $this->lstAtheletes = new MJaxBSListBox($this);
         $this->lstAtheletes->Text = 'Change Athletes';
         $this->lstAtheletes->lnkPrimary->AddCssClass('btn-large');
+        $this->lstAtheletes->AddItem('Add more Athletes', -1);
         $this->lstAtheletes->AddAction(
             new MJaxChangeEvent(),
             new MJaxServerControlAction(
@@ -59,8 +60,8 @@ class FFSMobileScoreInputPanel extends MJaxPanel{
             FFSResultSpecialNotes::Solid
         );
         $this->lstSpecialNotes->AddItem(
-            FFSResultSpecialNotes::Averedge,
-            FFSResultSpecialNotes::Averedge
+            FFSResultSpecialNotes::Average,
+            FFSResultSpecialNotes::Average
         );
         $this->lstSpecialNotes->AddItem(
             FFSResultSpecialNotes::Wobbly,
@@ -105,6 +106,7 @@ class FFSMobileScoreInputPanel extends MJaxPanel{
         );
 
         $this->lstPlace = new MJaxListBox($this);
+        $this->lstPlace->AddCssClass('ffs-list-place');
         $this->lstPlace->AddAction(
             new MJaxChangeEvent(),
             new MJaxServerControlAction(
@@ -138,7 +140,7 @@ class FFSMobileScoreInputPanel extends MJaxPanel{
     public function InitDialPad(){
         for($i = -2; $i < 10; $i++){
             $this->arrNumberKeys[$i] = new MJaxLinkButton($this);
-            $this->arrNumberKeys[$i]->AddCssClass('btn btn-large');
+            $this->arrNumberKeys[$i]->AddCssClass('btn');
             switch($i){
                 case(-2):
                     $strAP = 'del';
@@ -216,6 +218,7 @@ class FFSMobileScoreInputPanel extends MJaxPanel{
 
         $this->objResult = null;
         foreach($arrResults as $objResult){
+            error_log($objResult->Event . '==' . $this->strSelEvent);
             if($objResult->Event == $this->strSelEvent){
                 $this->objResult = $objResult;//$arrResults[$this->strSelEvent];
             }
@@ -228,6 +231,7 @@ class FFSMobileScoreInputPanel extends MJaxPanel{
             $this->objResult->IdAthelete = $this->objSelAthelete->IdAthelete;
             $this->objResult->IdCompetition = $this->objSelCompetition->IdCompetition;
             $this->objResult->CreDate = MLCDateTime::Now();
+            $this->objResult->Save();
         }
         $this->txtScore->Text = $this->objResult->Score;
         $this->txtStartValue->Text = $this->objResult->NSStartValue;
@@ -244,6 +248,13 @@ class FFSMobileScoreInputPanel extends MJaxPanel{
             $intTotal += (double)$objResult->Score;
         }
         $this->strAllAroundScore = $intTotal;
+        $this->objForm->ReplaceWith(
+            '#ffs-athelete-aa-score',
+            sprintf(
+                "<div id='ffs-athelete-aa-score'>%s</div>",
+                $this->strAllAroundScore
+            )
+        );
     }
     public function SetAtheletes($arrAtheletes){
         $this->objSelAthelete = $arrAtheletes[0];
@@ -287,6 +298,7 @@ class FFSMobileScoreInputPanel extends MJaxPanel{
         $this->UpdateResult();
     }
     public function lnkTab_click($f, $c, $strEvent){
+        $this->SaveState();
         $this->strSelEvent = $strEvent;
         $this->objForm->AddJSCall(
             sprintf(
@@ -297,7 +309,16 @@ class FFSMobileScoreInputPanel extends MJaxPanel{
         $this->UpdateResult();
     }
     public function lstAtheletes_change(){
-        $this->objSelAthelete = $this->lstAtheletes->GetValue();
+        $objAthelete = $this->lstAtheletes->GetValue();
+        if(
+            (!is_object($objAthelete)) &&
+            ($objAthelete === -1)
+        ){
+
+            return $this->objForm->CPRedirect('/manageAthletes');
+
+        }
+        $this->objSelAthelete = $objAthelete;
         $this->objForm->ReplaceWith(
             '#ffs-athelete-name',
             sprintf(
@@ -305,6 +326,7 @@ class FFSMobileScoreInputPanel extends MJaxPanel{
                 $this->objSelAthelete->__toString()
             )
         );
+
         $this->UpdateResult();
     }
     

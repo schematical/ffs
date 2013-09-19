@@ -33,7 +33,7 @@
                 <div class="control-group pull-left">
                     <label class="control-label" for="name">
                         Club Type
-                        <a href='#' data-toggle="popover" title="" data-content="Don't see your club type here? Feel free to let us know and we will add it." data-original-title="Club Type">
+                        <a href='#' data-toggle="popover" title="Club Type" data-content="What is the organization is your club affiliated with when it competes?" data-original-title="Club Type">
                             <i class='icon-question-sign'></i>
                         </a>
                     </label>

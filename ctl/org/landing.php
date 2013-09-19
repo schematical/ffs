@@ -5,12 +5,7 @@ class landing extends FFSParentCoachLandingForm{
         parent::Form_Create();
         $objUser = MLCAuthDriver::User();
         if(!is_null($objUser)){
-
-            if($this->IsOrgManager($objUser)){
-                $this->Redirect('/org/index');
-            }elseif($this->IsParent($objUser)){
-                $this->Redirect('/parent/index');
-            }
+            $this->CPRedirect('/index');
         }
         $this->strTemplate = __VIEW_ACTIVE_APP_DIR__ . '/www/org/landing.tpl.php';
 

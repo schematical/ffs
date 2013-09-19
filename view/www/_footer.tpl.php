@@ -8,3 +8,6 @@
         a.src=document.location.protocol+"//dnn506yrbagrg.cloudfront.net/pages/scripts/0017/1061.js?"+Math.floor(new Date().getTime()/3600000);
         a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
 </script>
+<div id='ffs-loader' class="progress progress-striped">
+    <div class="bar" style="width: 5%;"></div>
+</div>

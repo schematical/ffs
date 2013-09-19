@@ -6,6 +6,7 @@ class FFSForm extends MJaxWAdminForm{
 
     public function Form_Create(){
         parent::Form_Create();
+
         self::$objForm = $this;
 
         $this->blnSkipMainWindowRender = true;
@@ -105,27 +106,49 @@ class FFSForm extends MJaxWAdminForm{
         switch(FFSForm::$strSection){
             case(FFSSection::ORG):
 
+                //_dv(FFSApplication::GetCompetitionsByOrgAtheleteResults($this->Org())->getCollection());
 
                 $this->AddHeaderNav('Home', 'icon-home')->Href = '/';
                 $lnkManageCompetitions = $this->AddHeaderNav('Competitions', 'icon-flag');
                 $arrCompetitions = FFSApplication::GetActiveCompetitions();
-                if(!is_null($this->Org())){
+                if(!is_null(MLCAuthDriver::User())){
                     $arrCompetitions = array_merge(
                         $arrCompetitions->GetCollection(),
                         FFSApplication::GetCompetitionsByOrgAtheleteResults($this->Org())->getCollection()
                     );
                 }
+
                 foreach($arrCompetitions as $objCompetition){
                     //_dv($lnkManageSessions);
                     if($objCompetition->IdOrg == FFSForm::Org()->IdOrg){
                         $strIcon = '<i class=" icon-trophy"></i>';
+                        $lnkManageCompetitions->AddSubNavLink(
+                            $strIcon . $objCompetition->Name,
+                            '/' . $objCompetition->Namespace . '/org/competition/index'
+                        );
+
                     }else{
-                        $strIcon = '<i class=" icon-calendar-empty"></i>';
+                        if($objCompetition->Sanctioned){
+                            $strIcon = '<i class=" icon-calendar"></i>';
+                            $lnkManageCompetitions->AddSubNavLink(
+                                $strIcon . $objCompetition->Name,
+                                '/' . $objCompetition->Namespace . '/org/competition/index'
+                            );
+                        }else{
+                            $strIcon = '<i class=" icon-calendar-empty"></i>';
+                            $lnkManageCompetitions->AddSubNavLink(
+                                $strIcon . $objCompetition->Name,
+                                $this->CPRedirect(
+                                '/results',
+                                    array(
+                                        FFSQS::Competition_IdCompetition => $objCompetition->IdCompetition
+                                    ),
+                                    true
+                                )
+                            );
+                        }
                     }
-                    $lnkManageCompetitions->AddSubNavLink(
-                        $strIcon . $objCompetition->Name,
-                        '/' . $objCompetition->Namespace . '/org/competition/index'
-                    );
+
                 }
 
                 if(
@@ -270,5 +293,16 @@ class FFSForm extends MJaxWAdminForm{
         }else{
             return false;
         }
+    }
+    public function CPRedirect($strUrl, $arrQS = array(), $blnReturnUrl = false){
+        if($this->IsOrgManager()){
+            $strUri = '/org' . $strUrl;
+        }else{
+            $strUri = '/parent' . $strUrl;
+        }
+        if($blnReturnUrl){
+            return $strUri .'?'. http_build_query($arrQS);
+        }
+        return $this->Redirect($strUri, $arrQS);
     }
 }

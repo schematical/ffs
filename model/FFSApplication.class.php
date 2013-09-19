@@ -31,7 +31,7 @@ abstract class FFSApplication{
         $strSql = sprintf(
             "RIGHT JOIN Result ON Competition.idCompetition = Result.idCompetition
             RIGHT JOIN Athelete ON Athelete.idAthelete = Result.idAthelete
-            WHERE Athelete.idORg = 92
+            WHERE Athelete.idOrg = %s
             GROUP BY Competition.idCompetition;",
             $objOrg->IdOrg
         );

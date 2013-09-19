@@ -65,8 +65,9 @@ abstract class FFSHomeForm extends FFSForm{
 
     public function colEditScores_click($f, $c, $strActionParameter)
     {
-        $this->Redirect(
-            '/parent/scores',
+
+        $this->CPRedirect(
+            '/scores',
             array(
                 FFSQS::Competition_IdCompetition => $strActionParameter
             )
@@ -74,8 +75,9 @@ abstract class FFSHomeForm extends FFSForm{
 
     }
     public function colViewResults_click($f, $c, $strAP){
-        $this->Redirect(
-            '/parent/results',
+
+        $this->CPRedirect(
+            '/results',
             array(
                 FFSQS::Competition_IdCompetition => $strAP
             )

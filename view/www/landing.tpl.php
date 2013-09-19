@@ -14,7 +14,7 @@
                 <div class="plan-header">
 
                     <div class="plan-title">
-                        For Teams and Clubs
+                        For Coaches and Teams
                     </div>
                     <!-- /plan-title -->
 

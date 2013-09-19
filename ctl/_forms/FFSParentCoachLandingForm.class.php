@@ -98,6 +98,16 @@ class FFSParentCoachLandingForm extends FFSForm{
                 $this->pnlAtheleteEdit = new AtheleteEditPanel($this);
                 $this->pnlAtheleteEdit->intIdOrg->Remove();
                 $this->pnlAtheleteEdit->intIdOrg = null;
+
+                $this->pnlAtheleteEdit->btnDelete->Remove();
+                $this->pnlAtheleteEdit->btnDelete = new MJaxLinkButton($this);
+                $this->pnlAtheleteEdit->btnDelete->AddCssClass('btn');
+                $this->pnlAtheleteEdit->btnDelete->Text = 'Continue';
+                $this->pnlAtheleteEdit->btnDelete->AddAction(
+                    $this,
+                    'btnContinue_click'
+                );
+
                 $this->pnlAtheleteEdit->btnSave->Remove();
                 $this->pnlAtheleteEdit->btnSave = new MJaxLinkButton($this);
                 $this->pnlAtheleteEdit->btnSave->AddCssClass('btn btn-primary');
@@ -139,6 +149,10 @@ class FFSParentCoachLandingForm extends FFSForm{
            }
        }
 
+    }
+    public function btnContinue_click(){
+        $this->ScrollTo($this->pnlSignup->txtEmail);
+        $this->Focus($this->pnlSignup->txtEmail);
     }
     public function pnlSignup_signup(){
         if(!is_null($this->pnlOrgEdit)){

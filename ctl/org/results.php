@@ -7,7 +7,7 @@ class results extends FFSForm{
     public function Form_Create(){
         parent::Form_Create();
 
-        $arrAtheletes = FFSApplication::GetAtheletesByParent();
+        $arrAtheletes = FFSApplication::GetAtheletesByOrgManager();
         $arrResults = array();
         $intIdAthelete = MLCApplication::QS(FFSQS::Athelete_IdAthelete);
         foreach($arrAtheletes as $objAthelete){

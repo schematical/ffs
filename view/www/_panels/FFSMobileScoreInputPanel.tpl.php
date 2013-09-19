@@ -1,3 +1,5 @@
+
+
 <style>
     #ffs-score-input{
         padding-top: 20Px;
@@ -11,9 +13,9 @@
     }
     .ffs-number-pad a{
         width:57%;
-        height:45Px;
+        height:25Px;
         font-size:22Pt;
-        padding-top:25Px;
+        padding-top:10Px;
     }
     #myTab >li>a{
         font-size: 14Pt
@@ -30,7 +32,16 @@
         font-size: 8Pt;
 
     }
+    #ffs-athelete-aa-score{
+        font-size:25Pt
+    }
+    .ffs-list-place{
+        width:100Px;
+    }
 </style>
+
+
+
 <div class='container'>
     <?php if(count($_CONTROL->lstAtheletes->arrOptions) > 0){ ?>
     <div class='row margin-bottom-25'>
@@ -48,7 +59,7 @@
                 </div>
                 <div class='pull-right'>
                     <h3>AA</h3>
-                    <div style='font-size:30Pt'>
+                    <div id='ffs-athelete-aa-score'>
                         <?php echo $_CONTROL->strAllAroundScore; ?>
                     </div>
                 </div>
@@ -147,8 +158,10 @@
                                     <?php $_CONTROL->txtStartValue->Render(); ?>
                                 </div>
                                 <div class='span4'>
+
                                     <label>Place:</label>
                                     <div class='alert alert-info'>
+
                                         <?php $_CONTROL->lstPlace->Render(); ?>
 &nbsp;&nbsp;&nbsp;
                                         <span>

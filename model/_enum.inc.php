@@ -85,7 +85,7 @@ abstract class FFSClubTypes{
 abstract class FFSResultSpecialNotes{
     const Stuck = 'Stuck';
     const Solid = 'Solid';
-    const Averedge = 'Averedge';
+    const Average = 'Average';
     const Wobbly = 'Wobbly';
     const Fall = 'Fall';
 }

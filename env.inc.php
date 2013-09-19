@@ -3,8 +3,10 @@
 if(!defined('SERVER_ENV')){
 
 	switch($_SERVER['SERVER_NAME']){
+
         case('local.tumblescore.com'):
         case('local.ffs.com'):
+        default://TODO Remove
 			define('SERVER_ENV', 'local');
 			define('MLC_APPLICATION_NAME', 'ffs');
 		break;
@@ -14,6 +16,7 @@ if(!defined('SERVER_ENV')){
         break;*/
         case('tumblescore.com'):
         case('www.tumblescore.com'):
+
             define('SERVER_ENV', 'beta');
             define('MLC_APPLICATION_NAME', 'ffs');
         break;

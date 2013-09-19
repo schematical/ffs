@@ -6,6 +6,22 @@
 <!--<link rel="opengraph" href="http://www.exampleapp.com/playlist/ID/metadata" />-->
 
 <title><?php echo $this->strTitle; ?></title>
+<style>
+    #ffs-loader{
+        display:none;
+        z-index: 9999;
+        position: fixed;
+        bottom:5Px;
+        width:90%;
+        left:5%;
+    }
+</style>
+<script>
+    $(function(){
+        FFS.InitCtlMemory();
+
+    });
+</script>
 
 <?php if($this instanceof MJaxWAdminForm){ ?>
     <?php require(__MJAX_WADMIN_THEME_CORE_VIEW__ . '/_meta.tpl.php'); ?>
