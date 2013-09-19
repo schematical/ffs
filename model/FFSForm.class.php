@@ -23,6 +23,14 @@ class FFSForm extends MJaxWAdminForm{
         }
         $this->SetUpBreadcrumbs();
     }
+    public function ForceLandscape(){
+        $this->AddJSCall(
+            '$(function(){
+                FFS.InitCtlMemory();
+                FFS.InitScreenRotation();
+            });'
+        );
+    }
     public function SecureCompetition(){
 
         if(is_null(MLCAuthDriver::User())){

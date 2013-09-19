@@ -66,6 +66,7 @@ MLCApplicationBase::$arrClassFiles['FFSOrgManagerSpecialPanel'] = __CTL_FFS_APP_
 MLCApplicationBase::$arrClassFiles['FFSSessionEnrollmentPanel'] = __CTL_FFS_APP_DIR__ . '/_panels/FFSSessionEnrollmentPanel.class.php';
 MLCApplicationBase::$arrClassFiles['FFSMobileScoreInputPanel'] = __CTL_FFS_APP_DIR__ . '/_panels/FFSMobileScoreInputPanel.class.php';
 MLCApplicationBase::$arrClassFiles['FFSAtheleteEditListPanel'] = __CTL_FFS_APP_DIR__ . '/_panels/FFSAtheleteEditListPanel.class.php';
+MLCApplicationBase::$arrClassFiles['FFSManageAtheletesMasterPanel'] = __CTL_FFS_APP_DIR__ . '/_panels/FFSManageAtheletesMasterPanel.class.php';
 
 
 //CTL PARENT/

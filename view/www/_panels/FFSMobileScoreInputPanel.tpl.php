@@ -1,4 +1,8 @@
-
+<script>
+    $(function(){
+        FFS.InitCtlMemory();
+    });
+</script>
 
 <style>
     #ffs-score-input{

@@ -6,7 +6,7 @@ class results extends FFSForm{
 
     public function Form_Create(){
         parent::Form_Create();
-
+        $this->ForceLandscape();
         $arrAtheletes = FFSApplication::GetAtheletesByOrgManager();
         $arrResults = array();
         $intIdAthelete = MLCApplication::QS(FFSQS::Athelete_IdAthelete);

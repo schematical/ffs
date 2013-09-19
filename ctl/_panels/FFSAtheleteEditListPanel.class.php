@@ -46,14 +46,23 @@ class FFSAtheleteEditListPanel extends AtheleteListPanelBase {
     }
     public function RenderEditDate($strData, $objRow, $objCol){
         if($objRow->IsSelected() && $objCol->IsSelected()){
-            $objRow->arrEditControls[$objCol->Key] = new MJaxBSDateTimePicker($this);
+            $objRow->arrEditControls[$objCol->Key] = new MJaxBSDateTimePicker($this->objForm);
             $objRow->arrEditControls[$objCol->Key]->DateOnly();
+            $objRow->arrEditControls[$objCol->Key]->RemoveMinStartDate();
             $objRow->arrEditControls[$objCol->Key]->SetValue($strData);
             return $objRow->arrEditControls[$objCol->Key]->Render(false);
 
         }else{
             return $this->RenderDate($strData, $objRow, $objCol);
         }
+    }
+    public function lnkViewResults_click($f, $c, $intIdAthelete){
+        $this->objForm->CPRedirect(
+            '/results',
+            array(
+                FFSQS::Athelete_IdAthelete => $intIdAthelete
+            )
+        );
     }
 
 

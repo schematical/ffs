@@ -11,7 +11,7 @@ class fullScreen extends MJaxGentaForm {
         if(is_null(MLCAuthDriver::User())){
             $this->Redirect('/index.php');
         }
-        $this->strTemplate = __VIEW_ACTIVE_APP_DIR__ . '/www/org/fullScreen.tpl.php';
+        $this->strTemplate = __VIEW_ACTIVE_APP_DIR__ . '/www/org/competition/fullScreen.tpl.php';
         $this->blnSkipMainWindowRender = true;
 
         $this->InitEventList();

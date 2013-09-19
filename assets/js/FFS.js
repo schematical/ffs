@@ -110,8 +110,19 @@
                 orientationEvent = supportsOrientationChange ? "orientationchange" : "resize";
 
             window.addEventListener(orientationEvent, function() {
-                alert('HOLY ROTATING SCREENS BATMAN:' + window.orientation + " " + screen.width);
+                FFS.TestScreenRotation();
             }, false);
+
+            FFS.TestScreenRotation();
+        },
+        TestScreenRotation:function(){
+            if(typeof(window.orientation) != 'undefined'){
+                if(window.orientation != 90){
+                    MJax.BS.Alert('This page is best viewed in the landscape orientation. Please rotate your mobile device 90 degrees');
+                }else{
+                    MJax.BS.HideAlert();
+                }
+            }
         }
     };
 
