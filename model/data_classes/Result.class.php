@@ -50,7 +50,7 @@ class Result extends ResultBase {
                 $arrReturn[$objResult->IdAthelete]->Athelete = $objResult->IdAtheleteObject;
                 $arrReturn[$objResult->IdAthelete]->ToStringField = 'Athelete';
             }
-            $arrReturn[$objResult->IdAthelete][$objResult->Event] = $objResult;
+            $arrReturn[$objResult->IdAthelete][] = $objResult;
         }
         return $arrReturn;
     }
@@ -63,7 +63,7 @@ class Result extends ResultBase {
                 $arrReturn[$objResult->IdCompetition]->Competition = $objResult->IdCompetitionObject;
                 $arrReturn[$objResult->IdCompetition]->ToStringField = 'Competition';
             }
-            $arrReturn[$objResult->IdCompetition][$objResult->Event] = $objResult;
+            $arrReturn[$objResult->IdCompetition][] = $objResult;
         }
         return $arrReturn;
     }

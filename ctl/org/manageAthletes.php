@@ -20,13 +20,17 @@ class AtheleteManageForm extends AtheleteManageFormBase {
 
         $arrAtheletes = $this->Query();
 
-
+        $this->InitMasterPanel();
+        
         $this->InitList($arrAtheletes);
 
+
+
+    }
+    public function InitMasterPanel(){
         $this->pnlMaster = new FFSManageAtheletesMasterPanel($this);
         $this->wgtMaster = $this->AddWidget('Manage Athletes', 'icon-group', $this->pnlMaster);
         $this->wgtMaster->AddCssClass('span6');
-
     }
     public function InitEditPanel($objAthelete = null) {
         $this->pnlEdit = new AtheleteEditPanel($this, $objAthelete);

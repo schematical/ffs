@@ -58,20 +58,32 @@ class FFSResultAdvList extends ResultListPanelBase {
             $colScore->RenderFunction = 'colScore_render';
         }
         $colScoreAA = $this->AddColumn(
-            'Total',
+            'aa',
             'Total'
         );
-       /* $colScoreAA->RenderObject = $this;
-        $colScoreAA->RenderFunction = 'colScoreAA_render';*/
+        $colScoreAA->RenderObject = $this;
+        $colScoreAA->RenderFunction = 'colScoreAA_render';
 
 
 
 
 
     }
+    public function colScoreAA_render($strData, $objRow, $objCol){
+        $collAtheleteResults =  $objRow->GetData('_entity');
+        $strNSPlace = null;
+        if(is_null($collAtheleteResults)){
+            return '';
+        }
+        //TODO: Figure out placing
+        return $collAtheleteResults->Total;
+    }
     public function colScore_render($strData, $objRow, $objCol){
         $collAtheleteResults =  $objRow->GetData('_entity');
         $strNSPlace = null;
+        if(is_null($collAtheleteResults)){
+            return '';
+        }
         foreach($collAtheleteResults as $strKey => $objResult){
             if(
                 ($objResult->Event == $objCol->Key) &&
@@ -114,6 +126,31 @@ class FFSResultAdvList extends ResultListPanelBase {
         $this->RefreshControls();
         $this->blnModified = true;
 
+    }
+    public function SetTeamResultsByCompetitionAndAthelete($arrResultsByCompetition){
+        if(!array_key_exists('Competition', $this->arrColumnTitles)){
+            $this->AddColumn('Competition', 'Competition');
+        }
+        foreach($arrResultsByCompetition as $intIdCompetition => $arrCompResults){
+
+            $arrAllAtheleteResults = Result::GroupByAthelete($arrCompResults);
+
+            foreach($arrAllAtheleteResults as $intIdAthelete => $arrAtheleteResults){
+
+                $arrAtheleteResults->Competition = $arrCompResults->Competition;
+                $objRow = $this->AddRow();
+                $objRow->SetData('Competition', $arrAtheleteResults->Competition);
+                $objRow->SetData('Athelete', $arrAtheleteResults->Athelete);
+                foreach($this->arrResultEvents as $strEventKey => $strName){
+                    $fltScore =  $arrAtheleteResults->GetScoreByEvent($strEventKey);
+                    //error_log($strEventKey . ' - '  . $arrAtheleteResults->Athelete->__toString() . ' - ' . $fltScore);
+                    $objRow->SetData($strEventKey,$fltScore);
+                }
+                $intTotal = $arrAtheleteResults->GetTotal();
+                $objRow->SetData('aa', $intTotal);
+                $objRow->SetData('_entity', $arrAtheleteResults);
+            }
+        }
     }
     public function _rowBlur(){
         if(
