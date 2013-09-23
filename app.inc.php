@@ -60,13 +60,18 @@ MLCApplicationBase::$arrClassFiles['FFSSharePanel'] = __CTL_FFS_APP_DIR__ . '/_p
 MLCApplicationBase::$arrClassFiles['FFSAtheleteSelectPanel'] = __CTL_FFS_APP_DIR__ . '/_panels/FFSAtheleteSelectPanel.class.php';
 MLCApplicationBase::$arrClassFiles['FFSWizzardPanel'] = __CTL_FFS_APP_DIR__ . '/_panels/FFSWizzardPanel.class.php';
 MLCApplicationBase::$arrClassFiles['FFSOrgInvitePanel'] = __CTL_FFS_APP_DIR__ . '/_panels/FFSOrgInvitePanel.class.php';
-MLCApplicationBase::$arrClassFiles['FFSResultAdvList'] = __CTL_FFS_APP_DIR__ . '/_panels/reports/FFSResultAdvList.class.php';
+
 MLCApplicationBase::$arrClassFiles['FFSSessionControlPanel'] = __CTL_FFS_APP_DIR__ . '/_panels/FFSSessionControlPanel.class.php';
 MLCApplicationBase::$arrClassFiles['FFSOrgManagerSpecialPanel'] = __CTL_FFS_APP_DIR__ . '/_panels/FFSOrgManagerSpecialPanel.class.php';
 MLCApplicationBase::$arrClassFiles['FFSSessionEnrollmentPanel'] = __CTL_FFS_APP_DIR__ . '/_panels/FFSSessionEnrollmentPanel.class.php';
 MLCApplicationBase::$arrClassFiles['FFSMobileScoreInputPanel'] = __CTL_FFS_APP_DIR__ . '/_panels/FFSMobileScoreInputPanel.class.php';
 MLCApplicationBase::$arrClassFiles['FFSAtheleteEditListPanel'] = __CTL_FFS_APP_DIR__ . '/_panels/FFSAtheleteEditListPanel.class.php';
 MLCApplicationBase::$arrClassFiles['FFSManageAtheletesMasterPanel'] = __CTL_FFS_APP_DIR__ . '/_panels/FFSManageAtheletesMasterPanel.class.php';
+
+//CTL Results
+MLCApplicationBase::$arrClassFiles['FFSResultAdvList'] = __CTL_FFS_APP_DIR__ . '/_panels/reports/FFSResultAdvList.class.php';
+MLCApplicationBase::$arrClassFiles['FFSResultTeamList'] = __CTL_FFS_APP_DIR__ . '/_panels/reports/FFSResultTeamList.class.php';
+
 
 
 //CTL PARENT/
@@ -123,7 +128,9 @@ require_once(__CTL_FFS_APP_DIR__ . '/_events.inc.php');
 if(class_exists('MLCAuthDriver')){
     switch(SERVER_ENV){
         case('local'):
-            MLCAuthDriver::SetCookieDomain($_SERVER['SERVER_NAME']);
+
+            //MLCAuthDriver::SetCookieDomain($_SERVER['SERVER_NAME']);
+            MLCAuthDriver::SetCookieDomain('local.ffs.com');
         break;
         case('beta'):
         case('prod'):

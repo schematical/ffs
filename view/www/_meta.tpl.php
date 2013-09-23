@@ -25,6 +25,19 @@
 
     <link rel='stylesheet' href="<?php echo  MLCApplication::GetAssetUrl('/css/pillbox.css', 'MJaxBootstrap'); ?>"></link>
     <style>
+        .ffs-report-place{
+            background-color: black;
+            color:white;
+            -webkit-border-radius: 25px;
+            -moz-border-radius: 25px;
+            border-radius: 25px;
+            width:20Px;
+            margin-left:10Px;
+            text-align: center;
+            display: inline-block;
+
+
+        }
         .margin-bottom-25{
             margin-bottom: 25Px;
         }

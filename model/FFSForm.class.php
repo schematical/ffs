@@ -119,7 +119,10 @@ class FFSForm extends MJaxWAdminForm{
                 $this->AddHeaderNav('Home', 'icon-home')->Href = '/';
                 $lnkManageCompetitions = $this->AddHeaderNav('Competitions', 'icon-flag');
                 $arrCompetitions = FFSApplication::GetActiveCompetitions();
-                if(!is_null(MLCAuthDriver::User())){
+                if(
+                    (!is_null(MLCAuthDriver::User())) &&
+                    (!is_null($this->Org()))
+                ){
                     $arrCompetitions = array_merge(
                         $arrCompetitions->GetCollection(),
                         FFSApplication::GetCompetitionsByOrgAtheleteResults($this->Org())->getCollection()
@@ -197,7 +200,11 @@ class FFSForm extends MJaxWAdminForm{
                     /*foreach($arrAtheletes as $objAthelete){
                         $lnkAthelete->AddSubNavLink($objAthelete->__toString(),'/parent/results?' . FFSQS::Athelete_IdAthelete . '=' . $objAthelete->IdAthelete);
                     }*/
-                    $lnkTeamStats = $this->AddHeaderNav('Team Stats', 'icon-list')->Href = '/parent/results';
+                    $lnkTeamStats = $this->AddHeaderNav('Team Stats', 'icon-list')->Href = $this->CPRedirect(
+                        '/results',
+                        array(),
+                        true
+                    );
 
                 }
 

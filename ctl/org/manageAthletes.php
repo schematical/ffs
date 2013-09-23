@@ -71,6 +71,7 @@ class AtheleteManageForm extends AtheleteManageFormBase {
             $objAthelete = new Athelete();
             $objAthelete->IdOrg = FFSForm::Org()->IdOrg;
             $this->lstAtheletes->RefreshControls();
+            $this->lstAtheletes->SelectedRow->SetData('_entity', $objAthelete);
         }
 
 

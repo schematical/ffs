@@ -7,9 +7,10 @@
 * - ResultListPanel extends ResultListPanelBase
 */
 require_once (__MODEL_APP_CONTROL__ . "/base_classes/ResultListPanelBase.class.php");
-class FFSResultAdvList extends ResultListPanelBase {
+class FFSResultTeamList extends ResultListPanelBase {
     protected $arrResultEvents = array();//TODO: Make this dynamic
     public function __construct($objParentControl, $arrResults = array()) {
+        $this->strEditMode = MJaxTableEditMode::NONE;
         //TODO: FIX This is hack
         $this->arrResultEvents = FFSEventData::$WOMENS_ARTISTIC_GYMNASTICS;
         parent::__construct($objParentControl, $arrResults);
@@ -34,18 +35,51 @@ class FFSResultAdvList extends ResultListPanelBase {
 
 
     }
+    public function SetTeamResultsByCompetitionAndLevel($arrResultsByCompetition){
+        if(!array_key_exists('Competition', $this->arrColumnTitles)){
+            $this->AddColumn('Competition', 'Competition');
+        }
+        foreach($arrResultsByCompetition as $intIdCompetition => $arrCompResults){
+            $arrAllLevelResults = Result::GroupByLevel($arrCompResults);
 
+            foreach($arrAllLevelResults as $strLevel => $arrLevelResults){
+                $arrLevelResults->Competition = $arrCompResults->Competition;
+                $objRow = $this->AddRow();
+                $objRow->SetData('Competition', $arrLevelResults->Competition);
+                $objRow->SetData('level', $strLevel);
+                foreach($this->arrResultEvents as $strEventKey => $strName){
+                    $intTotal = $arrLevelResults->TotalTopScoresByEvent($strEventKey);
+                    $objRow->SetData($strEventKey, $intTotal);
+                }
+                $intTotal = $arrLevelResults->GetTeamTotal();
+                $objRow->SetData('aa', $intTotal);
+            }
+        }
+    }
+    public function SetTeamResultsByLevel($arrResultsByLevel){
+        foreach($arrResultsByLevel as $strLevel => $arrLevelResults){
+            $objRow = $this->AddRow();
+            $objRow->SetData('level', $strLevel);
+            foreach($this->arrResultEvents as $strEventKey => $strName){
+                $intTotal = $arrLevelResults->TotalTopScoresByEvent($strEventKey);
+                $objRow->SetData($strEventKey, $intTotal);
+            }
+            $intTotal = $arrLevelResults->GetTeamTotal();
+            $objRow->SetData('aa', $intTotal);
+        }
+    }
     public function SetupCols(){
-        $colAthelete = new MJaxBSTableColumn(
+        $colLevel = new MJaxBSTableColumn(
             $this,
-            'Athelete',
-            'Athlete'
+            'level',
+            'Level'
         );
-        $colAthelete->SearchEntity = 'athelete';
+        $colLevel->SearchEntity = 'athelete';
+        $colLevel->SearchField = 'level';
 
         $this->AddColumn(
-            'Athelete',
-            $colAthelete
+            'Level',
+            $colLevel
         );
 
         foreach($this->arrResultEvents as  $strEventKey => $strEventName){
@@ -54,41 +88,14 @@ class FFSResultAdvList extends ResultListPanelBase {
                 $strEventName
             );
 
-            $colScore->RenderObject = $this;
-            $colScore->RenderFunction = 'colScore_render';
         }
-        $colScoreAA = $this->AddColumn(
-            'Total',
+        $colScore = $this->AddColumn(
+            'aa',
             'Total'
         );
-       /* $colScoreAA->RenderObject = $this;
-        $colScoreAA->RenderFunction = 'colScoreAA_render';*/
 
 
 
-
-
-    }
-    public function colScore_render($strData, $objRow, $objCol){
-        $collAtheleteResults =  $objRow->GetData('_entity');
-        $strNSPlace = null;
-        foreach($collAtheleteResults as $strKey => $objResult){
-            if(
-                ($objResult->Event == $objCol->Key) &&
-                (!is_null($objResult->NSPlace))
-            ){
-                $strNSPlace = $objResult->NSPlace;
-            }
-        }
-        if(!is_null($strNSPlace)){
-            return sprintf(
-                '%s<div class="ffs-report-place">%s</div>',
-                $strData,
-                $strNSPlace
-
-            );
-        }
-        return $strData;
 
     }
     public function SetDataEntites($arrDataEntites){
@@ -101,9 +108,7 @@ class FFSResultAdvList extends ResultListPanelBase {
 
                 try{
                     $arrColumnData[$strKey] = $objCollection->$strKey;
-                }catch(MLCMissingPropertyException $e) {
-
-                }
+                }catch(MLCMissingPropertyException $e) {}
 
             }
             $arrColumnData['_entity'] = $objCollection;
@@ -147,8 +152,10 @@ class FFSResultAdvList extends ResultListPanelBase {
             $this->rowSelected->UpdateEntity($objResult);
             $this->rowSelected->SetData('_saved', 'true');
         }
-    }
 
+
+
+    }
     /////////////////////////
     // Public Properties: GET
     /////////////////////////
@@ -176,6 +183,5 @@ class FFSResultAdvList extends ResultListPanelBase {
             //throw new Exception("Not porperty exists with name '" . $strName . "' in class " . __CLASS__);
         }
     }
-
 }
 ?>

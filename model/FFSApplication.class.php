@@ -57,6 +57,7 @@ abstract class FFSApplication{
             //_dv($objOrg->GetAtheleteArr());
             $arrAtheletes = array_merge($arrAtheletes, $objOrg->GetAtheleteArr());
         }
+
         return $arrAtheletes;
     }
     public static function GetOrgsByOrgManager(AuthUser $objUser = null){

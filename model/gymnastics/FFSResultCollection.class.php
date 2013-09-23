@@ -11,6 +11,7 @@ class FFSResultCollection extends MLCBaseEntityCollection{
     protected $objSession = null;
     protected $objCompetition = null;
     protected $objAthelete = null;
+    protected $strLevel = null;
     public function GetMaxDate($strField = 'CreDate'){
         $arrOrder = FFSApplication::SortChronologically($this->arrCollection, $strField);
         if(count($arrOrder) == 0){
@@ -26,6 +27,56 @@ class FFSResultCollection extends MLCBaseEntityCollection{
         }
         $arrKeys = array_keys($arrOrder);
         return $arrOrder[$arrKeys[count($arrOrder) - 1]];
+    }
+    public function GetTopScores($strEvent){
+        error_log('-------' . $strEvent);
+        $arrReturn = array();
+        foreach($this->arrCollection as $objResult){
+            if($objResult->Event == $strEvent){
+                error_log('XXX' . $objResult->Event . ' - ' . $objResult->IdAtheleteObject . ' - ' . $objResult->Score);
+            }
+        }
+        foreach($this->arrCollection as $intIndex => $objResult){
+            if($objResult->Event == $strEvent){
+                if(!array_key_exists($objResult->Score, $arrReturn)){
+                    $arrReturn[$objResult->Score] = array();
+                }
+                $arrReturn[$objResult->Score][] = $objResult;
+
+            }
+        }
+        krsort($arrReturn);
+        if($strEvent == 'Beam'){
+           // _dv($arrReturn);
+        }
+        return $arrReturn;
+    }
+    public function TotalTopScoresByEvent($strEvent, $intCount = 4){
+        $arrScores = $this->GetTopScores($strEvent, $intCount);
+        $fltTotal = 0;
+        $intCounted = 0;
+        foreach($arrScores as $strScore => $arrResults){
+            foreach($arrResults as $intIndex => $objResult){
+
+                $fltTotal += $objResult->Score;
+                error_log($strEvent . " Adding: " . $objResult->Score . ' - ' . $fltTotal . ' - ' . $objResult->IdAtheleteObject->__toString());
+                $intCounted += 1;
+                if($intCounted >= $intCount){
+                    return $fltTotal;
+                }
+            }
+        }
+        return $fltTotal;
+    }
+    public function GetTeamTotal($intCount = 4, $arrEvents = null){
+        if(is_null($arrEvents)){
+            $arrEvents = FFSEventData::$WOMENS_ARTISTIC_GYMNASTICS;
+        }
+        $intTotal = 0;
+        foreach($arrEvents as $strEventKey => $strEventName){
+            $intTotal += $this->TotalTopScoresByEvent($strEventKey, $intCount);
+        }
+        return $intTotal;
     }
     public function GetAtheletes(){
         //Should return null if none
@@ -92,6 +143,8 @@ class FFSResultCollection extends MLCBaseEntityCollection{
                 return $this->objSession;
             case "Competition":
                 return $this->objCompetition;
+            case "Level":
+                return $this->strLevel;
             case "Sanctioned":
                 return $this->IsSanctioned();
             case "Total":
@@ -123,7 +176,8 @@ class FFSResultCollection extends MLCBaseEntityCollection{
                 return $this->objSession = $mixValue;
             case "Competition":
                 return $this->objCompetition = $mixValue;
-           ;
+            case "Level":
+                return $this->strLevel = $mixValue;
             default:
                 //return parent::__set($strName, $mixValue);
                 throw new MLCMissingPropertyException( $this, $strName);

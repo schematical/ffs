@@ -22,6 +22,26 @@ class Result extends ResultBase {
         }
         return parent::Save();
     }
+    public static function LoadByAtheleteCollAndCompetition(MLCBaseEntityCollection $arrAtheletes, Competition $objComp){
+        $arrIdAtheletes = $arrAtheletes->GetIDsAsArray();
+
+        $strQuery = sprintf(
+            'WHERE Result.idAthelete IN(%s) AND Result.idCompetition = %s',
+            implode(',', $arrIdAtheletes),
+            $objComp->IdCompetition
+        );
+        return self::Query($strQuery);
+    }
+    public static function LoadByAtheleteColl(MLCBaseEntityCollection $arrAtheletes){
+        $arrIdAtheletes = $arrAtheletes->GetIDsAsArray();
+
+        $strQuery = sprintf(
+            'WHERE Result.idAthelete IN(%s)',
+            implode(',', $arrIdAtheletes)
+        );
+        return self::Query($strQuery);
+    }
+
     public static function GroupByAthelete($arrResults){
         $arrReturn = array();
         foreach($arrResults as $objResult){
@@ -44,6 +64,18 @@ class Result extends ResultBase {
                 $arrReturn[$objResult->IdCompetition]->ToStringField = 'Competition';
             }
             $arrReturn[$objResult->IdCompetition][$objResult->Event] = $objResult;
+        }
+        return $arrReturn;
+    }
+    public static function GroupByLevel($arrResults){
+        $arrReturn = array();
+        foreach($arrResults as $objResult){
+            if(!array_key_exists($objResult->IdAtheleteObject->Level, $arrReturn)){
+                $arrReturn[$objResult->IdAtheleteObject->Level] = new FFSResultCollection();
+                $arrReturn[$objResult->IdAtheleteObject->Level]->Level = $objResult->IdAtheleteObject->Level;
+                $arrReturn[$objResult->IdAtheleteObject->Level]->ToStringField = 'Competition';
+            }
+            $arrReturn[$objResult->IdAtheleteObject->Level][] = $objResult;
         }
         return $arrReturn;
     }
