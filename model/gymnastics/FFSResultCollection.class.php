@@ -29,13 +29,9 @@ class FFSResultCollection extends MLCBaseEntityCollection{
         return $arrOrder[$arrKeys[count($arrOrder) - 1]];
     }
     public function GetTopScores($strEvent){
-        error_log('-------' . $strEvent);
+
         $arrReturn = array();
-        foreach($this->arrCollection as $objResult){
-            if($objResult->Event == $strEvent){
-                error_log('XXX' . $objResult->Event . ' - ' . $objResult->IdAtheleteObject . ' - ' . $objResult->Score);
-            }
-        }
+
         foreach($this->arrCollection as $intIndex => $objResult){
             if($objResult->Event == $strEvent){
                 if(!array_key_exists($objResult->Score, $arrReturn)){
@@ -59,7 +55,7 @@ class FFSResultCollection extends MLCBaseEntityCollection{
             foreach($arrResults as $intIndex => $objResult){
 
                 $fltTotal += $objResult->Score;
-                error_log($strEvent . " Adding: " . $objResult->Score . ' - ' . $fltTotal . ' - ' . $objResult->IdAtheleteObject->__toString());
+
                 $intCounted += 1;
                 if($intCounted >= $intCount){
                     return $fltTotal;

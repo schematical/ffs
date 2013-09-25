@@ -112,7 +112,7 @@
         }
 
     </style>
-<?php }else{ ?>
+<?php }elseif($this instanceof MJaxGentaForm){ ?>
     <?php require(__MJAX_GENTA_THEME_CORE_VIEW__ . '/_meta.tpl.php'); ?>
     <style>
         #divMessage{

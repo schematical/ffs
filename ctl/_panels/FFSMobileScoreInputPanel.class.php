@@ -235,6 +235,11 @@ class FFSMobileScoreInputPanel extends MJaxPanel{
         }
         $this->txtScore->Text = $this->objResult->Score;
         $this->txtStartValue->Text = $this->objResult->NSStartValue;
+        if(strlen($this->objResult->NSSpecialNotes) > 2){
+            $this->lstSpecialNotes->Text = $this->objResult->NSSpecialNotes;
+        }else{
+            $this->lstSpecialNotes->Text = 'Special Notes';
+        }
         $this->txtNotes->Text = $this->objResult->Notes;
         $this->lstPlace->SetValue($this->objResult->NSPlace);
         if(is_null($this->objResult->NSTied)){

@@ -6,6 +6,8 @@
 * - LoadById()
 * - LoadAll()
 * - ToXml()
+* - Materilize()
+* - GetSQLSelectFieldsAsArr()
 * - Query()
 * - QueryCount()
 * - LoadCollByIdUser()
@@ -20,36 +22,39 @@
 * - __toJson()
 * - __get()
 * - __set()
+* - Data()
 * Classes list:
-* - MLCNotificationBase extends BaseEntity
+* - MLCNotificationBase extends MLCBaseEntity
 */
-class MLCNotificationBase extends BaseEntity {
+/**
+ * Class Competition
+ * @property-read mixed $IdNotification
+ * @property-write mixed $IdNotification
+ * @property-read mixed $IdUser
+ * @property-write mixed $IdUser
+ * @property-read mixed $CreDate
+ * @property-write mixed $CreDate
+ * @property-read mixed $ClassName
+ * @property-write mixed $ClassName
+ * @property-read mixed $Viewed
+ * @property-write mixed $Viewed
+ * @property-read MLCNotification $IdUserObject
+ */
+class MLCNotificationBase extends MLCBaseEntity {
     const DB_CONN = 'DB_1';
     const TABLE_NAME = 'MLCNotification';
     const P_KEY = 'idNotification';
+    protected $objIdUser = null;
     public function __construct() {
         $this->table = DB_PREFIX . self::TABLE_NAME;
         $this->pKey = self::P_KEY;
         $this->strDBConn = self::DB_CONN;
     }
     public static function LoadById($intId) {
-        $sql = sprintf("SELECT * FROM %s WHERE idNotification = %s;", self::TABLE_NAME, $intId);
-        $result = MLCDBDriver::Query($sql, self::DB_CONN);
-        while ($data = mysql_fetch_assoc($result)) {
-            $tObj = new MLCNotification();
-            $tObj->materilize($data);
-            return $tObj;
-        }
+        return self::Query('WHERE MLCNotification.idNotification = ' . $intId, true);
     }
     public static function LoadAll() {
-        $sql = sprintf("SELECT * FROM %s;", self::TABLE_NAME);
-        $result = MLCDBDriver::Query($sql, MLCNotification::DB_CONN);
-        $coll = new BaseEntityCollection();
-        while ($data = mysql_fetch_assoc($result)) {
-            $tObj = new MLCNotification();
-            $tObj->materilize($data);
-            $coll->addItem($tObj);
-        }
+        $coll = self::Query('');
         return $coll;
     }
     public function ToXml($blnReclusive = false) {
@@ -80,42 +85,125 @@ class MLCNotificationBase extends BaseEntity {
         $xmlStr.= "</MLCNotification>";
         return $xmlStr;
     }
-    public static function Query($strExtra, $blnReturnSingle = false) {
-        $sql = sprintf("SELECT * FROM %s %s;", self::TABLE_NAME, $strExtra);
-        $result = MLCDBDriver::Query($sql, self::DB_CONN);
-        $coll = new BaseEntityCollection();
-        while ($data = mysql_fetch_assoc($result)) {
-            $tObj = new MLCNotification();
-            $tObj->materilize($data);
-            $coll->addItem($tObj);
-        }
-        $arrReturn = $coll->getCollection();
-        if ($blnReturnSingle) {
-            if (count($arrReturn) == 0) {
-                return null;
+    public function Materilize($arrData) {
+        if (isset($arrData) && (sizeof($arrData) > 1)) {
+            if ((array_key_exists('MLCNotification.idNotification', $arrData))) {
+                //New Smart Way
+                $this->arrDBFields['idNotification'] = $arrData['MLCNotification.idNotification'];
+                $this->arrDBFields['idUser'] = $arrData['MLCNotification.idUser'];
+                $this->arrDBFields['creDate'] = $arrData['MLCNotification.creDate'];
+                $this->arrDBFields['className'] = $arrData['MLCNotification.className'];
+                $this->arrDBFields['data'] = $arrData['MLCNotification.data'];
+                $this->arrDBFields['viewed'] = $arrData['MLCNotification.viewed'];
+                //Foregin Key
+                if ((array_key_exists('AuthUser.idUser', $arrData)) && (!is_null($arrData['AuthUser.idUser']))) {
+                    $this->objIdUser = new AuthUser();
+                    $this->objIdUser->Materilize($arrData);
+                }
             } else {
-                return $arrReturn[0];
+                //Old ways
+                $this->arrDBFields = $arrData;
             }
-        } else {
-            return $arrReturn;
+            $this->loaded = true;
+            $this->setId($this->getField($this->getPKey()));
+        }
+        if (self::$blnUseCache) {
+            if (!array_key_exists(get_class($this) , self::$arrCachedData)) {
+                self::$arrCachedData[get_class($this) ] = array();
+            }
+            self::$arrCachedData[get_class($this) ][$this->getId() ] = $this;
         }
     }
-    public static function QueryCount($strExtra = '') {
-        $sql = sprintf("SELECT * FROM %s %s;", self::TABLE_NAME, $strExtra);
-        $result = MLCDBDriver::Query($sql, self::DB_CONN);
+    public static function GetSQLSelectFieldsAsArr($blnLongSelect = false) {
+        $arrFields = array();
+        $arrFields[] = 'MLCNotification.idNotification ' . (($blnLongSelect) ? ' as "MLCNotification.idNotification"' : '');
+        $arrFields[] = 'MLCNotification.idUser ' . (($blnLongSelect) ? ' as "MLCNotification.idUser"' : '');
+        $arrFields[] = 'MLCNotification.creDate ' . (($blnLongSelect) ? ' as "MLCNotification.creDate"' : '');
+        $arrFields[] = 'MLCNotification.className ' . (($blnLongSelect) ? ' as "MLCNotification.className"' : '');
+        $arrFields[] = 'MLCNotification.data ' . (($blnLongSelect) ? ' as "MLCNotification.data"' : '');
+        $arrFields[] = 'MLCNotification.viewed ' . (($blnLongSelect) ? ' as "MLCNotification.viewed"' : '');
+        return $arrFields;
+    }
+    public static function Query($strExtra = null, $mixReturnSingle = false, $arrJoins = null) {
+        $blnLongSelect = !is_null($arrJoins);
+        $arrFields = self::GetSQLSelectFieldsAsArr($blnLongSelect);
+        if ($blnLongSelect) {
+            foreach ($arrJoins as $strTable) {
+                if (class_exists($strTable)) {
+                    $arrFields = array_merge($arrFields, call_user_func($strTable . '::GetSQLSelectFieldsAsArr', true));
+                }
+            }
+        }
+        $strFields = implode(', ', $arrFields);
+        $strJoin = '';
+        if ($blnLongSelect) {
+            foreach ($arrJoins as $strTable) {
+                switch ($strTable) {
+                    case ('AuthUser'):
+                        $strJoin.= ' LEFT JOIN AuthUser ON MLCNotification.idUser = AuthUser.idUser';
+                    break;
+                }
+            }
+        }
+        if (!is_null($strExtra)) {
+            $strSql = sprintf("SELECT %s FROM MLCNotification %s %s;", $strFields, $strJoin, $strExtra);
+            $result = MLCDBDriver::Query($strSql, self::DB_CONN);
+        }
+        if ((is_object($mixReturnSingle)) && ($mixReturnSingle instanceof MLCBaseEntityCollection)) {
+            $collReturn = $mixReturnSingle;
+            $collReturn->RemoveAll();
+        } else {
+            $collReturn = new MLCBaseEntityCollection();
+            $collReturn->SetQueryEntity('MLCNotification');
+        }
+        if (!is_null($strExtra)) {
+            $collReturn->AddQueryToHistory($strSql);
+            while ($data = mysql_fetch_assoc($result)) {
+                $tObj = new MLCNotification();
+                $tObj->Materilize($data);
+                $collReturn[] = $tObj;
+            }
+        }
+        if ($mixReturnSingle !== false) {
+            if (count($collReturn) == 0) {
+                return null;
+            } else {
+                return $collReturn[0];
+            }
+        } else {
+            return $collReturn;
+        }
+    }
+    public static function QueryCount($strExtra = '', $arrJoins = array()) {
+        $blnLongSelect = !is_null($arrJoins);
+        $arrFields = self::GetSQLSelectFieldsAsArr($blnLongSelect);
+        if ($blnLongSelect) {
+            foreach ($arrJoins as $strTable) {
+                if (class_exists($strTable)) {
+                    $arrFields = array_merge($arrFields, call_user_func($strTable . '::GetSQLSelectFieldsAsArr', true));
+                }
+            }
+        }
+        $strFields = implode(', ', $arrFields);
+        $strJoin = '';
+        if ($blnLongSelect) {
+            foreach ($arrJoins as $strTable) {
+                switch ($strTable) {
+                    case ('AuthUser'):
+                        $strJoin.= ' LEFT JOIN AuthUser ON MLCNotification.idUser = AuthUser.idUser';
+                    break;
+                }
+            }
+        }
+        $strSql = sprintf("SELECT %s FROM MLCNotification %s %s;", $strFields, $strJoin, $strExtra);
+        $result = MLCDBDriver::Query($strSql, self::DB_CONN);
         return mysql_num_rows($result);
     }
     //Get children
     //Load by foregin key
     public static function LoadCollByIdUser($intIdUser) {
-        $sql = sprintf("SELECT * FROM MLCNotification WHERE idUser = %s;", $intIdUser);
-        $result = MLCDBDriver::Query($sql, self::DB_CONN);
-        $coll = new BaseEntityCollection();
-        while ($data = mysql_fetch_assoc($result)) {
-            $objMLCNotification = new MLCNotification();
-            $objMLCNotification->materilize($data);
-            $coll->addItem($objMLCNotification);
-        }
+        $strSql = sprintf(" WHERE idUser = %s;", $intIdUser);
+        $coll = self::Query($strSql);
         return $coll;
     }
     public function LoadByTag($strTag) {
@@ -147,11 +235,14 @@ class MLCNotificationBase extends BaseEntity {
         }
     }
     public static function LoadSingleByField($strField, $mixValue, $strCompairison = '=') {
-        $arrResults = self::LoadArrayByField($strField, $mixValue, $strCompairison);
-        if (count($arrResults)) {
-            return $arrResults[0];
+        if (is_numeric($mixValue)) {
+            $strValue = $mixValue;
+        } else {
+            $strValue = sprintf('"%s"', $mixValue);
         }
-        return null;
+        $strExtra = sprintf(' WHERE MLCNotification.%s %s %s', $strField, $strCompairison, $strValue);
+        $objEntity = self::Query($strExtra, true);
+        return $objEntity;
     }
     public static function LoadArrayByField($strField, $mixValue, $strCompairison = '=') {
         if (is_numeric($mixValue)) {
@@ -159,39 +250,30 @@ class MLCNotificationBase extends BaseEntity {
         } else {
             $strValue = sprintf('"%s"', $mixValue);
         }
-        $strExtra = sprintf(' WHERE %s %s %s', $strField, $strCompairison, $strValue);
-        $sql = sprintf("SELECT * FROM %s %s;", self::TABLE_NAME, $strExtra);
-        //die($sql);
-        $result = MLCDBDriver::query($sql, self::DB_CONN);
-        $coll = new BaseEntityCollection();
-        while ($data = mysql_fetch_assoc($result)) {
-            $tObj = new MLCNotification();
-            $tObj->materilize($data);
-            $coll->addItem($tObj);
-        }
-        $arrResults = $coll->getCollection();
+        $strExtra = sprintf(' WHERE MLCNotification.%s %s %s', $strField, $strCompairison, $strValue);
+        $arrResults = self::Query($strExtra);
         return $arrResults;
     }
     public function __toArray() {
-        $arrReturn = array();
-        $arrReturn['_ClassName'] = "MLCNotification %>";
-        $arrReturn['idNotification'] = $this->idNotification;
-        $arrReturn['idUser'] = $this->idUser;
-        $arrReturn['creDate'] = $this->creDate;
-        $arrReturn['className'] = $this->className;
-        $arrReturn['data'] = $this->data;
-        $arrReturn['viewed'] = $this->viewed;
-        return $arrReturn;
+        $collReturn = array();
+        $collReturn['_ClassName'] = "MLCNotification %>";
+        $collReturn['idNotification'] = $this->idNotification;
+        $collReturn['idUser'] = $this->idUser;
+        $collReturn['creDate'] = $this->creDate;
+        $collReturn['className'] = $this->className;
+        $collReturn['data'] = $this->data;
+        $collReturn['viewed'] = $this->viewed;
+        return $collReturn;
     }
     public function __toString() {
         return 'MLCNotification(' . $this->getId() . ')';
     }
     public function __toJson($blnPosponeEncode = false) {
-        $arrReturn = $this->__toArray();
+        $collReturn = $this->__toArray();
         if ($blnPosponeEncode) {
-            return json_encode($arrReturn);
+            return json_encode($collReturn);
         } else {
-            return $arrReturn;
+            return $collReturn;
         }
     }
     public function __get($strName) {
@@ -224,13 +306,6 @@ class MLCNotificationBase extends BaseEntity {
                 }
                 return null;
             break;
-            case ('Data'):
-            case ('data'):
-                if (array_key_exists('data', $this->arrDBFields)) {
-                    return $this->arrDBFields['data'];
-                }
-                return null;
-            break;
             case ('Viewed'):
             case ('viewed'):
                 if (array_key_exists('viewed', $this->arrDBFields)) {
@@ -239,9 +314,12 @@ class MLCNotificationBase extends BaseEntity {
                 return null;
             break;
             case ('IdUserObject'):
-            case ('idUserObject'):
+                if (!is_null($this->objIdUser)) {
+                    return $this->objIdUser;
+                }
                 if ((array_key_exists('idUser', $this->arrDBFields)) && (!is_null($this->arrDBFields['idUser']))) {
-                    return AuthUser::LoadById($this->arrDBFields['idUser']);
+                    $this->objIdUser = AuthUser::LoadById($this->arrDBFields['idUser']);
+                    return $this->objIdUser;
                 }
                 return null;
             break;
@@ -250,36 +328,74 @@ class MLCNotificationBase extends BaseEntity {
             break;
         }
     }
-    public function __set($strName, $strValue) {
+    public function __set($strName, $mixValue) {
         $this->modified = 1;
         switch ($strName) {
             case ('IdNotification'):
             case ('idNotification'):
-                $this->arrDBFields['idNotification'] = $strValue;
+                $this->arrDBFields['idNotification'] = $mixValue;
             break;
             case ('IdUser'):
             case ('idUser'):
-                $this->arrDBFields['idUser'] = $strValue;
+                $this->arrDBFields['idUser'] = $mixValue;
+                $this->objIdUser = null;
             break;
             case ('CreDate'):
             case ('creDate'):
-                $this->arrDBFields['creDate'] = $strValue;
+            case ('_CreDate'):
+                $this->arrDBFields['creDate'] = $mixValue;
             break;
             case ('ClassName'):
             case ('className'):
-                $this->arrDBFields['className'] = $strValue;
+            case ('_ClassName'):
+                $this->arrDBFields['className'] = $mixValue;
             break;
-            case ('Data'):
-            case ('data'):
-                $this->arrDBFields['data'] = $strValue;
+            case ('_Data'):
+                $this->arrDBFields['data'] = $mixValue;
             break;
             case ('Viewed'):
             case ('viewed'):
-                $this->arrDBFields['viewed'] = $strValue;
+            case ('_Viewed'):
+                $this->arrDBFields['viewed'] = $mixValue;
+            break;
+            case ('IdUserObject'):
+                if ((!is_null($mixValue)) && ((!is_object($mixValue)) || (!($mixValue instanceof AuthUser)))) {
+                    throw new MLCWrongTypeException('__set', $strName);
+                }
+                if (!is_null($mixValue)) {
+                    $this->arrDBFields['idUser'] = $mixValue->idUser;
+                } else {
+                    $this->arrDBFields['idUser'] = null;
+                }
+                $this->objIdUser = $mixValue;
             break;
             default:
                 throw new MLCMissingPropertyException($this, $strName);
             break;
+        }
+    }
+    public function Data($strKey, $mixData = null) {
+        if (is_null($mixData)) {
+            if ((!array_key_exists('data', $this->arrDBFields))) {
+                return null;
+            }
+            if ((strlen($this->arrDBFields['data']) < 1)) {
+                return null;
+            }
+            $arrData = json_decode($this->arrDBFields['data'], true);
+            if (!array_key_exists($strKey, $arrData)) {
+                return null;
+            }
+            return $arrData[$strKey];
+        } else {
+            if ((!array_key_exists('data', $this->arrDBFields)) || (strlen($this->arrDBFields['data']) < 1)) {
+                $arrData = array();
+            } else {
+                $arrData = json_decode($this->arrDBFields['data'], true);
+            }
+            $arrData[$strKey] = $mixData;
+            $this->arrDBFields['data'] = json_encode($arrData);
+            $this->Save();
         }
     }
 }

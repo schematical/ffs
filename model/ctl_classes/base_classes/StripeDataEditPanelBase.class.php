@@ -5,12 +5,16 @@
 * - __construct()
 * - CreateContentControls()
 * - CreateFieldControls()
+* - GetStripeData()
 * - SetStripeData()
 * - CreateReferenceControls()
 * - btnSave_click()
 * - btnDelete_click()
 * - btnDelete_confirm()
 * - IsNew()
+* - InitModeAutocomplete()
+* - InitInstance_urlAutocomplete()
+* - InitStripeIdAutocomplete()
 * Classes list:
 * - StripeDataEditPanelBase extends MJaxPanel
 */
@@ -79,6 +83,62 @@ class StripeDataEditPanelBase extends MJaxPanel {
             $this->SetStripeData($this->objStripeData);
         }
     }
+    public function GetStripeData() {
+        if (is_null($this->objStripeData)) {
+            //Create a new one
+            $this->objStripeData = new StripeData();
+        }
+        //Is special field!!!!!
+        if (get_class($this->strObject) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strObject->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('object');
+            }
+            $this->objStripeData->object = $mixEntity;
+        } else {
+            $this->objStripeData->object = $this->strObject->Text;
+        }
+        if (get_class($this->intIdAuthUser) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->intIdAuthUser->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('idAuthUser');
+            }
+            $this->objStripeData->idAuthUser = $mixEntity;
+        } else {
+            $this->objStripeData->idAuthUser = $this->intIdAuthUser->Text;
+        }
+        //Is special field!!!!!
+        //Do nothing this is a creDate
+        //Is special field!!!!!
+        if (get_class($this->strMode) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strMode->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('mode');
+            }
+            $this->objStripeData->mode = $mixEntity;
+        } else {
+            $this->objStripeData->mode = $this->strMode->Text;
+        }
+        if (get_class($this->strInstance_url) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strInstance_url->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('instance_url');
+            }
+            $this->objStripeData->instance_url = $mixEntity;
+        } else {
+            $this->objStripeData->instance_url = $this->strInstance_url->Text;
+        }
+        if (get_class($this->strStripeId) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strStripeId->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('stripeId');
+            }
+            $this->objStripeData->stripeId = $mixEntity;
+        } else {
+            $this->objStripeData->stripeId = $this->strStripeId->Text;
+        }
+        return $this->objStripeData;
+    }
     public function SetStripeData($objStripeData) {
         $this->objStripeData = $objStripeData;
         $this->ActionParameter = $this->objStripeData;
@@ -99,6 +159,15 @@ class StripeDataEditPanelBase extends MJaxPanel {
             $this->strInstance_url->Text = $this->objStripeData->instance_url;
             $this->strStripeId->Text = $this->objStripeData->stripeId;
         } else {
+            //Is special field!!!!!
+            $this->strObject->Text = '';
+            $this->intIdAuthUser->Text = '';
+            //Is special field!!!!!
+            //Do nothing this is a creDate
+            //Is special field!!!!!
+            $this->strMode->Text = '';
+            $this->strInstance_url->Text = '';
+            $this->strStripeId->Text = '';
             $this->btnDelete->Style->Display = 'none';
         }
     }
@@ -107,20 +176,7 @@ class StripeDataEditPanelBase extends MJaxPanel {
         }
     }
     public function btnSave_click() {
-        if (is_null($this->objStripeData)) {
-            //Create a new one
-            $this->objStripeData = new StripeData();
-        }
-        //Is special field!!!!!
-        $this->objStripeData->object = $this->strObject->Text;
-        $this->objStripeData->idAuthUser = $this->intIdAuthUser->Text;
-        //Is special field!!!!!
-        //Do nothing this is a creDate
-        //Is special field!!!!!
-        $this->objStripeData->mode = $this->strMode->Text;
-        $this->objStripeData->instance_url = $this->strInstance_url->Text;
-        $this->objStripeData->stripeId = $this->strStripeId->Text;
-        $this->objStripeData->Save();
+        $this->GetStripeData()->Save();
         //Experimental save event trigger
         $this->ActionParameter = $this->objStripeData;
         $this->objForm->TriggerControlEvent($this->strControlId, 'mjax-data-entity-save');
@@ -136,6 +192,24 @@ class StripeDataEditPanelBase extends MJaxPanel {
     }
     public function IsNew() {
         return is_null($this->objStripeData);
+    }
+    public function InitModeAutocomplete() {
+        $this->strMode = new MJaxBSAutocompleteTextBox($this);
+        $this->strMode->SetSearchEntity('stripedata', 'mode');
+        $this->strMode->Name = 'mode';
+        $this->strMode->AddCssClass('input-large');
+    }
+    public function InitInstance_urlAutocomplete() {
+        $this->strInstance_url = new MJaxBSAutocompleteTextBox($this);
+        $this->strInstance_url->SetSearchEntity('stripedata', 'instance_url');
+        $this->strInstance_url->Name = 'instance_url';
+        $this->strInstance_url->AddCssClass('input-large');
+    }
+    public function InitStripeIdAutocomplete() {
+        $this->strStripeId = new MJaxBSAutocompleteTextBox($this);
+        $this->strStripeId->SetSearchEntity('stripedata', 'stripeId');
+        $this->strStripeId->Name = 'stripeId';
+        $this->strStripeId->AddCssClass('input-large');
     }
 }
 ?>

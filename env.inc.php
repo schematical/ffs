@@ -34,7 +34,7 @@ if(defined('SERVER_ENV')){
 			)));
 			define('DB_0', serialize(array(
 				'host'=>'localhost',
-				'db_name'=>'ffs',
+				'db_name'=>'util',
 				'user'=>'root',
 				'pass'=>'learnlearn'
 			)));

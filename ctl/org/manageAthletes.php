@@ -15,13 +15,10 @@ class AtheleteManageForm extends AtheleteManageFormBase {
         $this->ForceLandscape();
 
 
-
-
-
         $arrAtheletes = $this->Query();
 
         $this->InitMasterPanel();
-        
+
         $this->InitList($arrAtheletes);
 
 

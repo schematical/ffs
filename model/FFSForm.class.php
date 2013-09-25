@@ -101,113 +101,113 @@ class FFSForm extends MJaxWAdminForm{
         if(is_null($objOrg)){
             $arrOrgs = MLCAuthDriver::GetRolls(FFSRoll::ORG_MANAGER);
 
-            if(count($arrOrgs) == 0){
+            if($arrOrgs->Length() == 0){
                 //Do nothing
-            }elseif(count($arrOrgs) == 1){
+            }elseif($arrOrgs->Length() == 1){
                 $this->Org($arrOrgs[0]->GetEntity());
 
             }else{
                 $this->Org($arrOrgs[0]->GetEntity());
             }
         }
+        if((FFSForm::$strSection == FFSSection::COMPETITION) || (FFSForm::$strSection == FFSSection::ORG)){
+            //_dv(FFSApplication::GetCompetitionsByOrgAtheleteResults($this->Org())->getCollection());
 
-        switch(FFSForm::$strSection){
-            case(FFSSection::ORG):
+            $this->AddHeaderNav('Home', 'icon-home')->Href = '/';
+            $lnkManageCompetitions = $this->AddHeaderNav('Competitions', 'icon-flag');
+            $lnkManageCompetitions->AddSubNavLink(
+                '<i class="icon-plus-sign"></i>Host a Competition',
+                '/org/competition/editCompetition'
+            );
+            $arrCompetitions = FFSApplication::GetActiveCompetitions();
+            if(
+                (!is_null(MLCAuthDriver::User())) &&
+                (!is_null($this->Org()))
+            ){
+                $arrCompetitions = array_merge(
+                    $arrCompetitions->GetCollection(),
+                    FFSApplication::GetCompetitionsByOrgAtheleteResults($this->Org())->getCollection()
+                );
+            }
 
-                //_dv(FFSApplication::GetCompetitionsByOrgAtheleteResults($this->Org())->getCollection());
-
-                $this->AddHeaderNav('Home', 'icon-home')->Href = '/';
-                $lnkManageCompetitions = $this->AddHeaderNav('Competitions', 'icon-flag');
-                $arrCompetitions = FFSApplication::GetActiveCompetitions();
-                if(
-                    (!is_null(MLCAuthDriver::User())) &&
-                    (!is_null($this->Org()))
-                ){
-                    $arrCompetitions = array_merge(
-                        $arrCompetitions->GetCollection(),
-                        FFSApplication::GetCompetitionsByOrgAtheleteResults($this->Org())->getCollection()
+            foreach($arrCompetitions as $objCompetition){
+                //_dv($lnkManageSessions);
+                if($objCompetition->IdOrg == FFSForm::Org()->IdOrg){
+                    $strIcon = '<i class=" icon-trophy"></i>';
+                    $lnkManageCompetitions->AddSubNavLink(
+                        $strIcon . $objCompetition->Name,
+                        '/' . $objCompetition->Namespace . '/org/competition/index'
                     );
-                }
 
-                foreach($arrCompetitions as $objCompetition){
-                    //_dv($lnkManageSessions);
-                    if($objCompetition->IdOrg == FFSForm::Org()->IdOrg){
-                        $strIcon = '<i class=" icon-trophy"></i>';
+                }else{
+                    if($objCompetition->Sanctioned){
+                        $strIcon = '<i class=" icon-calendar"></i>';
                         $lnkManageCompetitions->AddSubNavLink(
                             $strIcon . $objCompetition->Name,
                             '/' . $objCompetition->Namespace . '/org/competition/index'
                         );
-
                     }else{
-                        if($objCompetition->Sanctioned){
-                            $strIcon = '<i class=" icon-calendar"></i>';
-                            $lnkManageCompetitions->AddSubNavLink(
-                                $strIcon . $objCompetition->Name,
-                                '/' . $objCompetition->Namespace . '/org/competition/index'
-                            );
-                        }else{
-                            $strIcon = '<i class=" icon-calendar-empty"></i>';
-                            $lnkManageCompetitions->AddSubNavLink(
-                                $strIcon . $objCompetition->Name,
-                                $this->CPRedirect(
+                        $strIcon = '<i class=" icon-calendar-empty"></i>';
+                        $lnkManageCompetitions->AddSubNavLink(
+                            $strIcon . $objCompetition->Name,
+                            $this->CPRedirect(
                                 '/results',
-                                    array(
-                                        FFSQS::Competition_IdCompetition => $objCompetition->IdCompetition
-                                    ),
-                                    true
-                                )
-                            );
-                        }
-                    }
-
-                }
-
-                if(
-                    (!is_null(FFSForm::Competition())) &&
-                    (!is_null(MLCAuthDriver::User())) &&
-                    (MLCAuthDriver::User()->HasRoll(FFSForm::Competition()->IdOrgObject, FFSRoll::ORG_MANAGER))
-                ){
-
-
-                    $lnkManageCompetitions->Href  = '/' . FFSForm::Competition()->Namespace . '/org/competition/index';
-
-                    $lnkManageSessions = $this->AddHeaderNav('Manage Sessions', 'icon-calendar');
-                    $lnkManageSessions->Href = '/' . FFSForm::Competition()->Namespace . '/org/competition/manageEnrollment';
-                    $arrSessions = Session::LoadCollByIdCompetition(FFSForm::Competition()->IdCompetition)->getCollection();
-                    foreach($arrSessions as $objSession){
-                        //_dv($lnkManageSessions);
-                        $lnkManageSessions->AddSubNavLink(
-                            $objSession->Name,
-                            '/' . FFSForm::Competition()->Namespace . '/org/competition/sessionDetails?' . FFSQS::IdSession . '='. $objSession->IdSession
+                                array(
+                                    FFSQS::Competition_IdCompetition => $objCompetition->IdCompetition
+                                ),
+                                true
+                            )
                         );
                     }
-                    $this->AddHeaderNav('Invite Gyms', 'icon-building')->Href = '/' . FFSForm::Competition()->Namespace . '/org/competition/manageGyms';
-
-                    $arrAtheletes = FFSApplication::GetAtheletesByOrgManager();
-                    $lnkAthelete = $this->AddHeaderNav('Manage Athletes', 'icon-user');
-                    $lnkAthelete->Href = '/' . FFSForm::Competition()->Namespace . '/org/competition/manageEnrollment';
-
-                    //Probablly don't allow untill meet starts
-                    $this->AddHeaderNav('Results', 'icon-trophy')->Href = '/' . FFSForm::Competition()->Namespace . '/org/competition/results';
-
-                }else{
-                    $lnkManageCompetitions->AddSubNavLink(
-                        '<i class="icon-plus-sign"></i>Host a Competition',
-                        '/org/competition/editCompetition'
-                    );
-                    $lnkManageAtheletes= $this->AddHeaderNav('Your Athletes', 'icon-group');
-                    $lnkManageAtheletes->Href = '/org/manageAthletes';
-                    /*foreach($arrAtheletes as $objAthelete){
-                        $lnkAthelete->AddSubNavLink($objAthelete->__toString(),'/parent/results?' . FFSQS::Athelete_IdAthelete . '=' . $objAthelete->IdAthelete);
-                    }*/
-                    $lnkTeamStats = $this->AddHeaderNav('Team Stats', 'icon-list')->Href = $this->CPRedirect(
-                        '/results',
-                        array(),
-                        true
-                    );
-
                 }
 
+            }
+            //Invite staff
+            $this->AddHeaderNav('Your Staff', 'icon-home')->Href = '/org/manageStaff';
+
+
+        }
+
+        switch(FFSForm::$strSection){
+            case(FFSSection::COMPETITION):
+
+
+
+                $lnkManageCompetitions->Href  = '/' . FFSForm::Competition()->Namespace . '/org/competition/index';
+
+                $lnkManageSessions = $this->AddHeaderNav('Manage Sessions', 'icon-calendar');
+                $lnkManageSessions->Href = '/' . FFSForm::Competition()->Namespace . '/org/competition/manageEnrollment';
+                $arrSessions = Session::LoadCollByIdCompetition(FFSForm::Competition()->IdCompetition)->getCollection();
+                foreach($arrSessions as $objSession){
+                    //_dv($lnkManageSessions);
+                    $lnkManageSessions->AddSubNavLink(
+                        $objSession->Name,
+                        '/' . FFSForm::Competition()->Namespace . '/org/competition/sessionDetails?' . FFSQS::IdSession . '='. $objSession->IdSession
+                    );
+                }
+                $this->AddHeaderNav('Invite Gyms', 'icon-building')->Href = '/' . FFSForm::Competition()->Namespace . '/org/competition/manageGyms';
+
+                $arrAtheletes = FFSApplication::GetAtheletesByOrgManager();
+                $lnkAthelete = $this->AddHeaderNav('Manage Athletes', 'icon-user');
+                $lnkAthelete->Href = '/' . FFSForm::Competition()->Namespace . '/org/competition/manageEnrollment';
+
+                //Probablly don't allow untill meet starts
+                $this->AddHeaderNav('Results', 'icon-trophy')->Href = '/' . FFSForm::Competition()->Namespace . '/org/competition/results';
+
+                break;
+            case(FFSSection::ORG):
+
+
+                $lnkManageAtheletes= $this->AddHeaderNav('Your Athletes', 'icon-group');
+                $lnkManageAtheletes->Href = '/org/manageAthletes';
+                /*foreach($arrAtheletes as $objAthelete){
+                    $lnkAthelete->AddSubNavLink($objAthelete->__toString(),'/parent/results?' . FFSQS::Athelete_IdAthelete . '=' . $objAthelete->IdAthelete);
+                }*/
+                $lnkTeamStats = $this->AddHeaderNav('Team Stats', 'icon-list')->Href = $this->CPRedirect(
+                    '/results',
+                    array(),
+                    true
+                );
             break;
             case(FFSSection::PARENT):
                 //TODO - Add invite/share functionality

@@ -6,10 +6,13 @@
 * - txtSearch_change()
 * - GetExtQuery()
 * - GetValue()
+* - __get()
+* - __set()
 * Classes list:
 * - MLCBatchSelectPanelBase extends MJaxPanel
 */
 class MLCBatchSelectPanelBase extends MJaxPanel {
+    protected $blnDisplayAdvOptions = false;
     protected $arrSelectedMLCBatchs = array();
     public $txtSearch = null;
     //public $tblMLCBatchs = null;
@@ -20,7 +23,8 @@ class MLCBatchSelectPanelBase extends MJaxPanel {
     public function __construct($objParentControl, $strControlId = null) {
         parent::__construct($objParentControl, $strControlId);
         $this->strTemplate = __VIEW_ACTIVE_APP_DIR__ . '/www/ctl_panels/' . get_class($this) . '.tpl.php';
-        $this->txtSearch = new MJaxBSAutocompleteTextBox($this, $this->objForm->objJsonSearchDriver, '_searchMLCBatch');
+        $this->txtSearch = new MJaxBSAutocompleteTextBox($this);
+        $this->txtSearch->Url = '/data/search?mjax-route-ext=MLCBatch';
         $this->txtSearch->Name = 'idMLCBatch';
         $this->txtSearch->AddCssClass('input-large');
         $this->txtSearch->AddAction(new MJaxChangeEvent() , new MJaxServerControlAction($this, 'txtSearch_change'));
@@ -64,7 +68,7 @@ class MLCBatchSelectPanelBase extends MJaxPanel {
                 throw new Exception("Invalid entity type: " . get_class($objEntity));
         }
         $this->arrSelectedMLCBatchs = $arrMLCBatchs;
-        $this->TriggerEvent('change');
+        $this->TriggerEvent('mjax-bs-autocomplete-select');
     }
     public function GetExtQuery() {
         $arrAndConditions = array();
@@ -83,5 +87,31 @@ class MLCBatchSelectPanelBase extends MJaxPanel {
     }
     public function GetValue() {
         return $this->arrSelectedMLCBatchs;
+    }
+    /////////////////////////
+    // Public Properties: GET
+    /////////////////////////
+    public function __get($strName) {
+        switch ($strName) {
+            case "DisplayAdvOptions":
+                return $this->blnDisplayAdvOptions;
+            default:
+                return parent::__get($strName);
+                //throw new Exception("Not porperty exists with name '" . $strName . "' in class " . __CLASS__);
+                
+        }
+    }
+    /////////////////////////
+    // Public Properties: SET
+    /////////////////////////
+    public function __set($strName, $mixValue) {
+        switch ($strName) {
+            case "DisplayAdvOptions":
+                return $this->blnDisplayAdvOptions = $mixValue;
+            default:
+                return parent::__set($strName, $mixValue);
+                //throw new Exception("Not porperty exists with name '" . $strName . "' in class " . __CLASS__);
+                
+        }
     }
 }

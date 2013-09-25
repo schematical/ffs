@@ -29,19 +29,19 @@ class StripeDataManageFormBase extends FFSForm {
         $arrAndConditions = array();
         $intIdStripeData = MLCApplication::QS(FFSQS::StripeData_IdStripeData);
         if (!is_null($intIdStripeData)) {
-            $arrAndConditions[] = sprintf('idStripeData = %s', $intIdStripeData);
+            $arrAndConditions[] = sprintf('StripeData.idStripeData = %s', $intIdStripeData);
         }
         $strMode = MLCApplication::QS(FFSQS::StripeData_Mode);
         if (!is_null($strMode)) {
-            $arrAndConditions[] = sprintf('mode LIKE "%s%%"', $strMode);
+            $arrAndConditions[] = sprintf('StripeData.mode LIKE "%s%%"', $strMode);
         }
         $strInstance_url = MLCApplication::QS(FFSQS::StripeData_Instance_url);
         if (!is_null($strInstance_url)) {
-            $arrAndConditions[] = sprintf('instance_url LIKE "%s%%"', $strInstance_url);
+            $arrAndConditions[] = sprintf('StripeData.instance_url LIKE "%s%%"', $strInstance_url);
         }
         $strStripeId = MLCApplication::QS(FFSQS::StripeData_StripeId);
         if (!is_null($strStripeId)) {
-            $arrAndConditions[] = sprintf('stripeId LIKE "%s%%"', $strStripeId);
+            $arrAndConditions[] = sprintf('StripeData.stripeId LIKE "%s%%"', $strStripeId);
         }
         if (count($arrAndConditions) >= 1) {
             $arrStripeDatas = StripeData::Query('WHERE ' . implode(' AND ', $arrAndConditions));
@@ -52,7 +52,7 @@ class StripeDataManageFormBase extends FFSForm {
     }
     public function InitSelectPanel() {
         $this->pnlSelect = new StripeDataSelectPanel($this);
-        $this->pnlSelect->AddAction(new MJaxChangeEvent() , new MJaxServerControlAction($this, 'pnlSelect_change'));
+        $this->pnlSelect->AddAction(new MJaxBSAutocompleteSelectEvent() , new MJaxServerControlAction($this, 'pnlSelect_change'));
         $wgtStripeData = $this->AddWidget('Select StripeData', 'icon-select', $this->pnlSelect);
         $wgtStripeData->AddCssClass('span6');
         return $wgtStripeData;
@@ -66,10 +66,11 @@ class StripeDataManageFormBase extends FFSForm {
                     $this->lstStripeDatas->SelectedRow = $objRow;
                 }
             }
-            $this->ScrollTo($this->pnlEdit);
-        } else {
-            $this->ScrollTo($this->lstStripeDatas);
-        }
+            //$this->ScrollTo($this->pnlEdit);
+            
+        } //else{
+        $this->ScrollTo($this->lstStripeDatas);
+        //}
         $this->lstStripeDatas->RemoveAllChildControls();
         $this->lstStripeDatas->SetDataEntites($arrStripeDatas);
         //TODO: Remeber to add check lists for assoc or relationship tables
@@ -84,8 +85,9 @@ class StripeDataManageFormBase extends FFSForm {
         return $wgtStripeData;
     }
     public function pnlEdit_save($strFormId, $strControlId, $objStripeData) {
-        $this->UpdateTable($objStripeData);
-        $this->ScrollTo($this->lstStripeDatas->SelectedRow);
+        $pnlRow = $this->UpdateTable($objStripeData);
+        $this->ScrollTo($pnlRow);
+        $this->pnlEdit->SetStripeData(null);
     }
     public function pnlEdit_delete($strFormId, $strControlId, $objStripeData) {
         $this->lstStripeDatas->SelectedRow->Remove();
@@ -116,7 +118,7 @@ class StripeDataManageFormBase extends FFSForm {
         if (is_null($objStripeData)) {
             $objStripeData = new StripeData();
         }
-        $objStripeData->IdCompetition = FFSForm::Competition()->IdCompetition;
+        $objStripeData->IdCompetition = FFSForm::$objCompetition->IdCompetition;
         $this->lstStripeDatas->SelectedRow->UpdateEntity($objStripeData);
     }
     public function lnkEdit_click($strFormId, $strControlId, $strActionParameter) {
@@ -129,9 +131,12 @@ class StripeDataManageFormBase extends FFSForm {
         if (!is_null($this->lstStripeDatas->SelectedRow)) {
             //This already exists
             $this->lstStripeDatas->SelectedRow->UpdateEntity($objStripeData);
+            $objRow = $this->lstStripeDatas->SelectedRow;
             $this->lstStripeDatas->SelectedRow = null;
         } else {
             $objRow = $this->lstStripeDatas->AddRow($objStripeData);
         }
+        $this->lstStripeDatas->RefreshControls();
+        return $objRow;
     }
 }

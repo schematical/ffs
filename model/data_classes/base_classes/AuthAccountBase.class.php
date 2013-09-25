@@ -6,6 +6,8 @@
 * - LoadById()
 * - LoadAll()
 * - ToXml()
+* - Materilize()
+* - GetSQLSelectFieldsAsArr()
 * - Query()
 * - QueryCount()
 * - GetMLCLocationArr()
@@ -21,9 +23,22 @@
 * - __get()
 * - __set()
 * Classes list:
-* - AuthAccountBase extends BaseEntity
+* - AuthAccountBase extends MLCBaseEntity
 */
-class AuthAccountBase extends BaseEntity {
+/**
+ * Class Competition
+ * @property-read mixed $IdAccount
+ * @property-write mixed $IdAccount
+ * @property-read mixed $IdAccountTypeCd
+ * @property-write mixed $IdAccountTypeCd
+ * @property-read mixed $IdUser
+ * @property-write mixed $IdUser
+ * @property-read mixed $CreDate
+ * @property-write mixed $CreDate
+ * @property-read mixed $ShortDesc
+ * @property-write mixed $ShortDesc
+ */
+class AuthAccountBase extends MLCBaseEntity {
     const DB_CONN = 'DB_1';
     const TABLE_NAME = 'AuthAccount';
     const P_KEY = 'idAccount';
@@ -33,23 +48,10 @@ class AuthAccountBase extends BaseEntity {
         $this->strDBConn = self::DB_CONN;
     }
     public static function LoadById($intId) {
-        $sql = sprintf("SELECT * FROM %s WHERE idAccount = %s;", self::TABLE_NAME, $intId);
-        $result = MLCDBDriver::Query($sql, self::DB_CONN);
-        while ($data = mysql_fetch_assoc($result)) {
-            $tObj = new AuthAccount();
-            $tObj->materilize($data);
-            return $tObj;
-        }
+        return self::Query('WHERE AuthAccount.idAccount = ' . $intId, true);
     }
     public static function LoadAll() {
-        $sql = sprintf("SELECT * FROM %s;", self::TABLE_NAME);
-        $result = MLCDBDriver::Query($sql, AuthAccount::DB_CONN);
-        $coll = new BaseEntityCollection();
-        while ($data = mysql_fetch_assoc($result)) {
-            $tObj = new AuthAccount();
-            $tObj->materilize($data);
-            $coll->addItem($tObj);
-        }
+        $coll = self::Query('');
         return $coll;
     }
     public function ToXml($blnReclusive = false) {
@@ -77,34 +79,112 @@ class AuthAccountBase extends BaseEntity {
         $xmlStr.= "</AuthAccount>";
         return $xmlStr;
     }
-    public static function Query($strExtra, $blnReturnSingle = false) {
-        $sql = sprintf("SELECT * FROM %s %s;", self::TABLE_NAME, $strExtra);
-        $result = MLCDBDriver::Query($sql, self::DB_CONN);
-        $coll = new BaseEntityCollection();
-        while ($data = mysql_fetch_assoc($result)) {
-            $tObj = new AuthAccount();
-            $tObj->materilize($data);
-            $coll->addItem($tObj);
-        }
-        $arrReturn = $coll->getCollection();
-        if ($blnReturnSingle) {
-            if (count($arrReturn) == 0) {
-                return null;
+    public function Materilize($arrData) {
+        if (isset($arrData) && (sizeof($arrData) > 1)) {
+            if ((array_key_exists('AuthAccount.idAccount', $arrData))) {
+                //New Smart Way
+                $this->arrDBFields['idAccount'] = $arrData['AuthAccount.idAccount'];
+                $this->arrDBFields['idAccountTypeCd'] = $arrData['AuthAccount.idAccountTypeCd'];
+                $this->arrDBFields['idUser'] = $arrData['AuthAccount.idUser'];
+                $this->arrDBFields['creDate'] = $arrData['AuthAccount.creDate'];
+                $this->arrDBFields['shortDesc'] = $arrData['AuthAccount.shortDesc'];
+                //Foregin Key
+                
             } else {
-                return $arrReturn[0];
+                //Old ways
+                $this->arrDBFields = $arrData;
             }
-        } else {
-            return $arrReturn;
+            $this->loaded = true;
+            $this->setId($this->getField($this->getPKey()));
+        }
+        if (self::$blnUseCache) {
+            if (!array_key_exists(get_class($this) , self::$arrCachedData)) {
+                self::$arrCachedData[get_class($this) ] = array();
+            }
+            self::$arrCachedData[get_class($this) ][$this->getId() ] = $this;
         }
     }
-    public static function QueryCount($strExtra = '') {
-        $sql = sprintf("SELECT * FROM %s %s;", self::TABLE_NAME, $strExtra);
-        $result = MLCDBDriver::Query($sql, self::DB_CONN);
+    public static function GetSQLSelectFieldsAsArr($blnLongSelect = false) {
+        $arrFields = array();
+        $arrFields[] = 'AuthAccount.idAccount ' . (($blnLongSelect) ? ' as "AuthAccount.idAccount"' : '');
+        $arrFields[] = 'AuthAccount.idAccountTypeCd ' . (($blnLongSelect) ? ' as "AuthAccount.idAccountTypeCd"' : '');
+        $arrFields[] = 'AuthAccount.idUser ' . (($blnLongSelect) ? ' as "AuthAccount.idUser"' : '');
+        $arrFields[] = 'AuthAccount.creDate ' . (($blnLongSelect) ? ' as "AuthAccount.creDate"' : '');
+        $arrFields[] = 'AuthAccount.shortDesc ' . (($blnLongSelect) ? ' as "AuthAccount.shortDesc"' : '');
+        return $arrFields;
+    }
+    public static function Query($strExtra = null, $mixReturnSingle = false, $arrJoins = null) {
+        $blnLongSelect = !is_null($arrJoins);
+        $arrFields = self::GetSQLSelectFieldsAsArr($blnLongSelect);
+        if ($blnLongSelect) {
+            foreach ($arrJoins as $strTable) {
+                if (class_exists($strTable)) {
+                    $arrFields = array_merge($arrFields, call_user_func($strTable . '::GetSQLSelectFieldsAsArr', true));
+                }
+            }
+        }
+        $strFields = implode(', ', $arrFields);
+        $strJoin = '';
+        if ($blnLongSelect) {
+            foreach ($arrJoins as $strTable) {
+                switch ($strTable) {
+                }
+            }
+        }
+        if (!is_null($strExtra)) {
+            $strSql = sprintf("SELECT %s FROM AuthAccount %s %s;", $strFields, $strJoin, $strExtra);
+            $result = MLCDBDriver::Query($strSql, self::DB_CONN);
+        }
+        if ((is_object($mixReturnSingle)) && ($mixReturnSingle instanceof MLCBaseEntityCollection)) {
+            $collReturn = $mixReturnSingle;
+            $collReturn->RemoveAll();
+        } else {
+            $collReturn = new MLCBaseEntityCollection();
+            $collReturn->SetQueryEntity('AuthAccount');
+        }
+        if (!is_null($strExtra)) {
+            $collReturn->AddQueryToHistory($strSql);
+            while ($data = mysql_fetch_assoc($result)) {
+                $tObj = new AuthAccount();
+                $tObj->Materilize($data);
+                $collReturn[] = $tObj;
+            }
+        }
+        if ($mixReturnSingle !== false) {
+            if (count($collReturn) == 0) {
+                return null;
+            } else {
+                return $collReturn[0];
+            }
+        } else {
+            return $collReturn;
+        }
+    }
+    public static function QueryCount($strExtra = '', $arrJoins = array()) {
+        $blnLongSelect = !is_null($arrJoins);
+        $arrFields = self::GetSQLSelectFieldsAsArr($blnLongSelect);
+        if ($blnLongSelect) {
+            foreach ($arrJoins as $strTable) {
+                if (class_exists($strTable)) {
+                    $arrFields = array_merge($arrFields, call_user_func($strTable . '::GetSQLSelectFieldsAsArr', true));
+                }
+            }
+        }
+        $strFields = implode(', ', $arrFields);
+        $strJoin = '';
+        if ($blnLongSelect) {
+            foreach ($arrJoins as $strTable) {
+                switch ($strTable) {
+                }
+            }
+        }
+        $strSql = sprintf("SELECT %s FROM AuthAccount %s %s;", $strFields, $strJoin, $strExtra);
+        $result = MLCDBDriver::Query($strSql, self::DB_CONN);
         return mysql_num_rows($result);
     }
     //Get children
     public function GetMLCLocationArr() {
-        return MLCLocation::LoadCollByIdAccount($this->idAccount);
+        return MLCLocation::LoadCollByIdAccount($this->idAccount)->getCollection();
     }
     //Load by foregin key
     public function LoadByTag($strTag) {
@@ -139,11 +219,14 @@ class AuthAccountBase extends BaseEntity {
         }
     }
     public static function LoadSingleByField($strField, $mixValue, $strCompairison = '=') {
-        $arrResults = self::LoadArrayByField($strField, $mixValue, $strCompairison);
-        if (count($arrResults)) {
-            return $arrResults[0];
+        if (is_numeric($mixValue)) {
+            $strValue = $mixValue;
+        } else {
+            $strValue = sprintf('"%s"', $mixValue);
         }
-        return null;
+        $strExtra = sprintf(' WHERE AuthAccount.%s %s %s', $strField, $strCompairison, $strValue);
+        $objEntity = self::Query($strExtra, true);
+        return $objEntity;
     }
     public static function LoadArrayByField($strField, $mixValue, $strCompairison = '=') {
         if (is_numeric($mixValue)) {
@@ -151,38 +234,29 @@ class AuthAccountBase extends BaseEntity {
         } else {
             $strValue = sprintf('"%s"', $mixValue);
         }
-        $strExtra = sprintf(' WHERE %s %s %s', $strField, $strCompairison, $strValue);
-        $sql = sprintf("SELECT * FROM %s %s;", self::TABLE_NAME, $strExtra);
-        //die($sql);
-        $result = MLCDBDriver::query($sql, self::DB_CONN);
-        $coll = new BaseEntityCollection();
-        while ($data = mysql_fetch_assoc($result)) {
-            $tObj = new AuthAccount();
-            $tObj->materilize($data);
-            $coll->addItem($tObj);
-        }
-        $arrResults = $coll->getCollection();
+        $strExtra = sprintf(' WHERE AuthAccount.%s %s %s', $strField, $strCompairison, $strValue);
+        $arrResults = self::Query($strExtra);
         return $arrResults;
     }
     public function __toArray() {
-        $arrReturn = array();
-        $arrReturn['_ClassName'] = "AuthAccount %>";
-        $arrReturn['idAccount'] = $this->idAccount;
-        $arrReturn['idAccountTypeCd'] = $this->idAccountTypeCd;
-        $arrReturn['idUser'] = $this->idUser;
-        $arrReturn['creDate'] = $this->creDate;
-        $arrReturn['shortDesc'] = $this->shortDesc;
-        return $arrReturn;
+        $collReturn = array();
+        $collReturn['_ClassName'] = "AuthAccount %>";
+        $collReturn['idAccount'] = $this->idAccount;
+        $collReturn['idAccountTypeCd'] = $this->idAccountTypeCd;
+        $collReturn['idUser'] = $this->idUser;
+        $collReturn['creDate'] = $this->creDate;
+        $collReturn['shortDesc'] = $this->shortDesc;
+        return $collReturn;
     }
     public function __toString() {
         return 'AuthAccount(' . $this->getId() . ')';
     }
     public function __toJson($blnPosponeEncode = false) {
-        $arrReturn = $this->__toArray();
+        $collReturn = $this->__toArray();
         if ($blnPosponeEncode) {
-            return json_encode($arrReturn);
+            return json_encode($collReturn);
         } else {
-            return $arrReturn;
+            return $collReturn;
         }
     }
     public function __get($strName) {
@@ -227,28 +301,30 @@ class AuthAccountBase extends BaseEntity {
             break;
         }
     }
-    public function __set($strName, $strValue) {
+    public function __set($strName, $mixValue) {
         $this->modified = 1;
         switch ($strName) {
             case ('IdAccount'):
             case ('idAccount'):
-                $this->arrDBFields['idAccount'] = $strValue;
+                $this->arrDBFields['idAccount'] = $mixValue;
             break;
             case ('IdAccountTypeCd'):
             case ('idAccountTypeCd'):
-                $this->arrDBFields['idAccountTypeCd'] = $strValue;
+                $this->arrDBFields['idAccountTypeCd'] = $mixValue;
             break;
             case ('IdUser'):
             case ('idUser'):
-                $this->arrDBFields['idUser'] = $strValue;
+                $this->arrDBFields['idUser'] = $mixValue;
             break;
             case ('CreDate'):
             case ('creDate'):
-                $this->arrDBFields['creDate'] = $strValue;
+            case ('_CreDate'):
+                $this->arrDBFields['creDate'] = $mixValue;
             break;
             case ('ShortDesc'):
             case ('shortDesc'):
-                $this->arrDBFields['shortDesc'] = $strValue;
+            case ('_ShortDesc'):
+                $this->arrDBFields['shortDesc'] = $mixValue;
             break;
             default:
                 throw new MLCMissingPropertyException($this, $strName);

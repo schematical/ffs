@@ -44,7 +44,7 @@ class MLCNotificationListPanelBase extends MJaxTable {
     }
     public function SetupCols() {
         //$this->AddColumn('idNotification','idNotification');
-        $this->AddColumn('idUser', ' User', $this, 'render_idUser', 'MJaxTextBox');
+        $this->AddColumn('IdUserObject', ' User');
         $this->AddColumn('className', ' Class Name', null, null, 'MJaxTextBox');
         $this->AddColumn('viewed', ' Viewed', null, null, 'MJaxTextBox');
     }

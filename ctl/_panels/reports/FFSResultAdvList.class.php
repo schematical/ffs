@@ -90,13 +90,15 @@ class FFSResultAdvList extends ResultListPanelBase {
                 (!is_null($objResult->NSPlace))
             ){
                 $strNSPlace = $objResult->NSPlace;
+                $strNSTie = $objResult->NSTied;
             }
         }
         if(!is_null($strNSPlace)){
             return sprintf(
-                '%s<div class="ffs-report-place">%s</div>',
+                '%s<div class="ffs-report-place">%s%s</div>',
                 $strData,
-                $strNSPlace
+                $strNSPlace,
+                ($strNSTie?'t':'')
 
             );
         }

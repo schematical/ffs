@@ -49,7 +49,10 @@ class FFSRewriteHandeler extends MLCRewriteHandelerBase{
                     $strSubFolder = 'parent';
                 }
                 FFSForm::$strSection = $strSubFolder;
+                if(($strSubFolder == 'org') && ($arrParts[3] == 'competition')){
 
+                    FFSForm::$strSection = 'competition';
+                }
                 //Assume it is a parent
                 MLCApplication::$strCtlFile = __CTL_ACTIVE_APP_DIR__ . '/' . $strSubFolder . '/' . $strEndUri;
 
@@ -57,7 +60,7 @@ class FFSRewriteHandeler extends MLCRewriteHandelerBase{
                     return MLCApplication::$strCtlFile;
                 }
 
-                return FFSForm::$strSection = $arrParts[1];
+                return ;
             }else{
                 FFSForm::$strSection = $arrParts[1];
                 //_dv(FFSForm::$strSection);

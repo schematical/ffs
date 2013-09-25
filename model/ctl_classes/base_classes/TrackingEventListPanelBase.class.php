@@ -46,7 +46,7 @@ class TrackingEventListPanelBase extends MJaxTable {
         //$this->AddColumn('idTrackingEvent','idTrackingEvent');
         $this->AddColumn('name', ' Name', null, null, 'MJaxTextBox');
         $this->AddColumn('value', ' Value', null, null, 'MJaxTextBox');
-        $this->AddColumn('idSession', ' Session', $this, 'render_idSession', 'MJaxTextBox');
+        $this->AddColumn('IdSessionObject', ' Session');
         $this->AddColumn('idApplication', ' Application', null, null, 'MJaxTextBox');
         $this->AddColumn('app', ' App', null, null, 'MJaxTextBox');
     }

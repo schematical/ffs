@@ -6,7 +6,7 @@ class results extends FFSForm{
 
     public function Form_Create(){
         parent::Form_Create();
-
+        $this->SecureParent();
         $arrAtheletes = FFSApplication::GetAtheletesByParent();
         $arrResults = array();
         $intIdAthelete = MLCApplication::QS(FFSQS::Athelete_IdAthelete);

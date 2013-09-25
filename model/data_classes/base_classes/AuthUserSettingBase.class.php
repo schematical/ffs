@@ -6,10 +6,11 @@
 * - LoadById()
 * - LoadAll()
 * - ToXml()
+* - Materilize()
+* - GetSQLSelectFieldsAsArr()
 * - Query()
 * - QueryCount()
 * - LoadCollByIdUser()
-* - LoadCollByIdUserSettingTypeCd()
 * - LoadByTag()
 * - AddTag()
 * - ParseArray()
@@ -21,36 +22,37 @@
 * - __toJson()
 * - __get()
 * - __set()
+* - Data()
 * Classes list:
-* - AuthUserSettingBase extends BaseEntity
+* - AuthUserSettingBase extends MLCBaseEntity
 */
-class AuthUserSettingBase extends BaseEntity {
+/**
+ * Class Competition
+ * @property-read mixed $IdUserSetting
+ * @property-write mixed $IdUserSetting
+ * @property-read mixed $IdUser
+ * @property-write mixed $IdUser
+ * @property-read mixed $IdUserSettingTypeCd
+ * @property-write mixed $IdUserSettingTypeCd
+ * @property-read mixed $Namespace
+ * @property-write mixed $Namespace
+ * @property-read AuthUserSetting $IdUserObject
+ */
+class AuthUserSettingBase extends MLCBaseEntity {
     const DB_CONN = 'DB_1';
     const TABLE_NAME = 'AuthUserSetting';
     const P_KEY = 'idUserSetting';
+    protected $objIdUser = null;
     public function __construct() {
         $this->table = DB_PREFIX . self::TABLE_NAME;
         $this->pKey = self::P_KEY;
         $this->strDBConn = self::DB_CONN;
     }
     public static function LoadById($intId) {
-        $sql = sprintf("SELECT * FROM %s WHERE idUserSetting = %s;", self::TABLE_NAME, $intId);
-        $result = MLCDBDriver::Query($sql, self::DB_CONN);
-        while ($data = mysql_fetch_assoc($result)) {
-            $tObj = new AuthUserSetting();
-            $tObj->materilize($data);
-            return $tObj;
-        }
+        return self::Query('WHERE AuthUserSetting.idUserSetting = ' . $intId, true);
     }
     public static function LoadAll() {
-        $sql = sprintf("SELECT * FROM %s;", self::TABLE_NAME);
-        $result = MLCDBDriver::Query($sql, AuthUserSetting::DB_CONN);
-        $coll = new BaseEntityCollection();
-        while ($data = mysql_fetch_assoc($result)) {
-            $tObj = new AuthUserSetting();
-            $tObj->materilize($data);
-            $coll->addItem($tObj);
-        }
+        $coll = self::Query('');
         return $coll;
     }
     public function ToXml($blnReclusive = false) {
@@ -78,53 +80,123 @@ class AuthUserSettingBase extends BaseEntity {
         $xmlStr.= "</AuthUserSetting>";
         return $xmlStr;
     }
-    public static function Query($strExtra, $blnReturnSingle = false) {
-        $sql = sprintf("SELECT * FROM %s %s;", self::TABLE_NAME, $strExtra);
-        $result = MLCDBDriver::Query($sql, self::DB_CONN);
-        $coll = new BaseEntityCollection();
-        while ($data = mysql_fetch_assoc($result)) {
-            $tObj = new AuthUserSetting();
-            $tObj->materilize($data);
-            $coll->addItem($tObj);
-        }
-        $arrReturn = $coll->getCollection();
-        if ($blnReturnSingle) {
-            if (count($arrReturn) == 0) {
-                return null;
+    public function Materilize($arrData) {
+        if (isset($arrData) && (sizeof($arrData) > 1)) {
+            if ((array_key_exists('AuthUserSetting.idUserSetting', $arrData))) {
+                //New Smart Way
+                $this->arrDBFields['idUserSetting'] = $arrData['AuthUserSetting.idUserSetting'];
+                $this->arrDBFields['idUser'] = $arrData['AuthUserSetting.idUser'];
+                $this->arrDBFields['idUserSettingTypeCd'] = $arrData['AuthUserSetting.idUserSettingTypeCd'];
+                $this->arrDBFields['data'] = $arrData['AuthUserSetting.data'];
+                $this->arrDBFields['namespace'] = $arrData['AuthUserSetting.namespace'];
+                //Foregin Key
+                if ((array_key_exists('AuthUser.idUser', $arrData)) && (!is_null($arrData['AuthUser.idUser']))) {
+                    $this->objIdUser = new AuthUser();
+                    $this->objIdUser->Materilize($arrData);
+                }
             } else {
-                return $arrReturn[0];
+                //Old ways
+                $this->arrDBFields = $arrData;
             }
-        } else {
-            return $arrReturn;
+            $this->loaded = true;
+            $this->setId($this->getField($this->getPKey()));
+        }
+        if (self::$blnUseCache) {
+            if (!array_key_exists(get_class($this) , self::$arrCachedData)) {
+                self::$arrCachedData[get_class($this) ] = array();
+            }
+            self::$arrCachedData[get_class($this) ][$this->getId() ] = $this;
         }
     }
-    public static function QueryCount($strExtra = '') {
-        $sql = sprintf("SELECT * FROM %s %s;", self::TABLE_NAME, $strExtra);
-        $result = MLCDBDriver::Query($sql, self::DB_CONN);
+    public static function GetSQLSelectFieldsAsArr($blnLongSelect = false) {
+        $arrFields = array();
+        $arrFields[] = 'AuthUserSetting.idUserSetting ' . (($blnLongSelect) ? ' as "AuthUserSetting.idUserSetting"' : '');
+        $arrFields[] = 'AuthUserSetting.idUser ' . (($blnLongSelect) ? ' as "AuthUserSetting.idUser"' : '');
+        $arrFields[] = 'AuthUserSetting.idUserSettingTypeCd ' . (($blnLongSelect) ? ' as "AuthUserSetting.idUserSettingTypeCd"' : '');
+        $arrFields[] = 'AuthUserSetting.data ' . (($blnLongSelect) ? ' as "AuthUserSetting.data"' : '');
+        $arrFields[] = 'AuthUserSetting.namespace ' . (($blnLongSelect) ? ' as "AuthUserSetting.namespace"' : '');
+        return $arrFields;
+    }
+    public static function Query($strExtra = null, $mixReturnSingle = false, $arrJoins = null) {
+        $blnLongSelect = !is_null($arrJoins);
+        $arrFields = self::GetSQLSelectFieldsAsArr($blnLongSelect);
+        if ($blnLongSelect) {
+            foreach ($arrJoins as $strTable) {
+                if (class_exists($strTable)) {
+                    $arrFields = array_merge($arrFields, call_user_func($strTable . '::GetSQLSelectFieldsAsArr', true));
+                }
+            }
+        }
+        $strFields = implode(', ', $arrFields);
+        $strJoin = '';
+        if ($blnLongSelect) {
+            foreach ($arrJoins as $strTable) {
+                switch ($strTable) {
+                    case ('AuthUser'):
+                        $strJoin.= ' LEFT JOIN AuthUser ON AuthUserSetting.idUser = AuthUser.idUser';
+                    break;
+                }
+            }
+        }
+        if (!is_null($strExtra)) {
+            $strSql = sprintf("SELECT %s FROM AuthUserSetting %s %s;", $strFields, $strJoin, $strExtra);
+            $result = MLCDBDriver::Query($strSql, self::DB_CONN);
+        }
+        if ((is_object($mixReturnSingle)) && ($mixReturnSingle instanceof MLCBaseEntityCollection)) {
+            $collReturn = $mixReturnSingle;
+            $collReturn->RemoveAll();
+        } else {
+            $collReturn = new MLCBaseEntityCollection();
+            $collReturn->SetQueryEntity('AuthUserSetting');
+        }
+        if (!is_null($strExtra)) {
+            $collReturn->AddQueryToHistory($strSql);
+            while ($data = mysql_fetch_assoc($result)) {
+                $tObj = new AuthUserSetting();
+                $tObj->Materilize($data);
+                $collReturn[] = $tObj;
+            }
+        }
+        if ($mixReturnSingle !== false) {
+            if (count($collReturn) == 0) {
+                return null;
+            } else {
+                return $collReturn[0];
+            }
+        } else {
+            return $collReturn;
+        }
+    }
+    public static function QueryCount($strExtra = '', $arrJoins = array()) {
+        $blnLongSelect = !is_null($arrJoins);
+        $arrFields = self::GetSQLSelectFieldsAsArr($blnLongSelect);
+        if ($blnLongSelect) {
+            foreach ($arrJoins as $strTable) {
+                if (class_exists($strTable)) {
+                    $arrFields = array_merge($arrFields, call_user_func($strTable . '::GetSQLSelectFieldsAsArr', true));
+                }
+            }
+        }
+        $strFields = implode(', ', $arrFields);
+        $strJoin = '';
+        if ($blnLongSelect) {
+            foreach ($arrJoins as $strTable) {
+                switch ($strTable) {
+                    case ('AuthUser'):
+                        $strJoin.= ' LEFT JOIN AuthUser ON AuthUserSetting.idUser = AuthUser.idUser';
+                    break;
+                }
+            }
+        }
+        $strSql = sprintf("SELECT %s FROM AuthUserSetting %s %s;", $strFields, $strJoin, $strExtra);
+        $result = MLCDBDriver::Query($strSql, self::DB_CONN);
         return mysql_num_rows($result);
     }
     //Get children
     //Load by foregin key
     public static function LoadCollByIdUser($intIdUser) {
-        $sql = sprintf("SELECT * FROM AuthUserSetting WHERE idUser = %s;", $intIdUser);
-        $result = MLCDBDriver::Query($sql, self::DB_CONN);
-        $coll = new BaseEntityCollection();
-        while ($data = mysql_fetch_assoc($result)) {
-            $objAuthUserSetting = new AuthUserSetting();
-            $objAuthUserSetting->materilize($data);
-            $coll->addItem($objAuthUserSetting);
-        }
-        return $coll;
-    }
-    public static function LoadCollByIdUserSettingTypeCd($intIdUserSettingTypeCd) {
-        $sql = sprintf("SELECT * FROM AuthUserSetting WHERE idUserSettingTypeCd = %s;", $intIdUserSettingTypeCd);
-        $result = MLCDBDriver::Query($sql, self::DB_CONN);
-        $coll = new BaseEntityCollection();
-        while ($data = mysql_fetch_assoc($result)) {
-            $objAuthUserSetting = new AuthUserSetting();
-            $objAuthUserSetting->materilize($data);
-            $coll->addItem($objAuthUserSetting);
-        }
+        $strSql = sprintf(" WHERE idUser = %s;", $intIdUser);
+        $coll = self::Query($strSql);
         return $coll;
     }
     public function LoadByTag($strTag) {
@@ -156,11 +228,14 @@ class AuthUserSettingBase extends BaseEntity {
         }
     }
     public static function LoadSingleByField($strField, $mixValue, $strCompairison = '=') {
-        $arrResults = self::LoadArrayByField($strField, $mixValue, $strCompairison);
-        if (count($arrResults)) {
-            return $arrResults[0];
+        if (is_numeric($mixValue)) {
+            $strValue = $mixValue;
+        } else {
+            $strValue = sprintf('"%s"', $mixValue);
         }
-        return null;
+        $strExtra = sprintf(' WHERE AuthUserSetting.%s %s %s', $strField, $strCompairison, $strValue);
+        $objEntity = self::Query($strExtra, true);
+        return $objEntity;
     }
     public static function LoadArrayByField($strField, $mixValue, $strCompairison = '=') {
         if (is_numeric($mixValue)) {
@@ -168,38 +243,29 @@ class AuthUserSettingBase extends BaseEntity {
         } else {
             $strValue = sprintf('"%s"', $mixValue);
         }
-        $strExtra = sprintf(' WHERE %s %s %s', $strField, $strCompairison, $strValue);
-        $sql = sprintf("SELECT * FROM %s %s;", self::TABLE_NAME, $strExtra);
-        //die($sql);
-        $result = MLCDBDriver::query($sql, self::DB_CONN);
-        $coll = new BaseEntityCollection();
-        while ($data = mysql_fetch_assoc($result)) {
-            $tObj = new AuthUserSetting();
-            $tObj->materilize($data);
-            $coll->addItem($tObj);
-        }
-        $arrResults = $coll->getCollection();
+        $strExtra = sprintf(' WHERE AuthUserSetting.%s %s %s', $strField, $strCompairison, $strValue);
+        $arrResults = self::Query($strExtra);
         return $arrResults;
     }
     public function __toArray() {
-        $arrReturn = array();
-        $arrReturn['_ClassName'] = "AuthUserSetting %>";
-        $arrReturn['idUserSetting'] = $this->idUserSetting;
-        $arrReturn['idUser'] = $this->idUser;
-        $arrReturn['idUserSettingTypeCd'] = $this->idUserSettingTypeCd;
-        $arrReturn['data'] = $this->data;
-        $arrReturn['namespace'] = $this->namespace;
-        return $arrReturn;
+        $collReturn = array();
+        $collReturn['_ClassName'] = "AuthUserSetting %>";
+        $collReturn['idUserSetting'] = $this->idUserSetting;
+        $collReturn['idUser'] = $this->idUser;
+        $collReturn['idUserSettingTypeCd'] = $this->idUserSettingTypeCd;
+        $collReturn['data'] = $this->data;
+        $collReturn['namespace'] = $this->namespace;
+        return $collReturn;
     }
     public function __toString() {
         return 'AuthUserSetting(' . $this->getId() . ')';
     }
     public function __toJson($blnPosponeEncode = false) {
-        $arrReturn = $this->__toArray();
+        $collReturn = $this->__toArray();
         if ($blnPosponeEncode) {
-            return json_encode($arrReturn);
+            return json_encode($collReturn);
         } else {
-            return $arrReturn;
+            return $collReturn;
         }
     }
     public function __get($strName) {
@@ -225,13 +291,6 @@ class AuthUserSettingBase extends BaseEntity {
                 }
                 return null;
             break;
-            case ('Data'):
-            case ('data'):
-                if (array_key_exists('data', $this->arrDBFields)) {
-                    return $this->arrDBFields['data'];
-                }
-                return null;
-            break;
             case ('Namespace'):
             case ('namespace'):
                 if (array_key_exists('namespace', $this->arrDBFields)) {
@@ -240,16 +299,12 @@ class AuthUserSettingBase extends BaseEntity {
                 return null;
             break;
             case ('IdUserObject'):
-            case ('idUserSettingTypeCdObject'):
-                if ((array_key_exists('idUser', $this->arrDBFields)) && (!is_null($this->arrDBFields['idUser']))) {
-                    return AuthUser::LoadById($this->arrDBFields['idUser']);
+                if (!is_null($this->objIdUser)) {
+                    return $this->objIdUser;
                 }
-                return null;
-            break;
-            case ('IdUserSettingTypeCdObject'):
-            case ('idUserSettingTypeCdObject'):
-                if ((array_key_exists('idUserSettingTypeCd', $this->arrDBFields)) && (!is_null($this->arrDBFields['idUserSettingTypeCd']))) {
-                    return AuthUserSettingTypeCd_tpcd::LoadById($this->arrDBFields['idUserSettingTypeCd']);
+                if ((array_key_exists('idUser', $this->arrDBFields)) && (!is_null($this->arrDBFields['idUser']))) {
+                    $this->objIdUser = AuthUser::LoadById($this->arrDBFields['idUser']);
+                    return $this->objIdUser;
                 }
                 return null;
             break;
@@ -258,32 +313,68 @@ class AuthUserSettingBase extends BaseEntity {
             break;
         }
     }
-    public function __set($strName, $strValue) {
+    public function __set($strName, $mixValue) {
         $this->modified = 1;
         switch ($strName) {
             case ('IdUserSetting'):
             case ('idUserSetting'):
-                $this->arrDBFields['idUserSetting'] = $strValue;
+                $this->arrDBFields['idUserSetting'] = $mixValue;
             break;
             case ('IdUser'):
             case ('idUser'):
-                $this->arrDBFields['idUser'] = $strValue;
+                $this->arrDBFields['idUser'] = $mixValue;
+                $this->objIdUser = null;
             break;
             case ('IdUserSettingTypeCd'):
             case ('idUserSettingTypeCd'):
-                $this->arrDBFields['idUserSettingTypeCd'] = $strValue;
+                $this->arrDBFields['idUserSettingTypeCd'] = $mixValue;
             break;
-            case ('Data'):
-            case ('data'):
-                $this->arrDBFields['data'] = $strValue;
+            case ('_Data'):
+                $this->arrDBFields['data'] = $mixValue;
             break;
             case ('Namespace'):
             case ('namespace'):
-                $this->arrDBFields['namespace'] = $strValue;
+            case ('_Namespace'):
+                $this->arrDBFields['namespace'] = $mixValue;
+            break;
+            case ('IdUserObject'):
+                if ((!is_null($mixValue)) && ((!is_object($mixValue)) || (!($mixValue instanceof AuthUser)))) {
+                    throw new MLCWrongTypeException('__set', $strName);
+                }
+                if (!is_null($mixValue)) {
+                    $this->arrDBFields['idUser'] = $mixValue->idUser;
+                } else {
+                    $this->arrDBFields['idUser'] = null;
+                }
+                $this->objIdUser = $mixValue;
             break;
             default:
                 throw new MLCMissingPropertyException($this, $strName);
             break;
+        }
+    }
+    public function Data($strKey, $mixData = null) {
+        if (is_null($mixData)) {
+            if ((!array_key_exists('data', $this->arrDBFields))) {
+                return null;
+            }
+            if ((strlen($this->arrDBFields['data']) < 1)) {
+                return null;
+            }
+            $arrData = json_decode($this->arrDBFields['data'], true);
+            if (!array_key_exists($strKey, $arrData)) {
+                return null;
+            }
+            return $arrData[$strKey];
+        } else {
+            if ((!array_key_exists('data', $this->arrDBFields)) || (strlen($this->arrDBFields['data']) < 1)) {
+                $arrData = array();
+            } else {
+                $arrData = json_decode($this->arrDBFields['data'], true);
+            }
+            $arrData[$strKey] = $mixData;
+            $this->arrDBFields['data'] = json_encode($arrData);
+            $this->Save();
         }
     }
 }

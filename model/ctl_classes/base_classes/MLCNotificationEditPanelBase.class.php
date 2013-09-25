@@ -5,12 +5,15 @@
 * - __construct()
 * - CreateContentControls()
 * - CreateFieldControls()
+* - GetMLCNotification()
 * - SetMLCNotification()
 * - CreateReferenceControls()
 * - btnSave_click()
 * - btnDelete_click()
 * - btnDelete_confirm()
 * - IsNew()
+* - InitIdUserAutocomplete()
+* - InitClassNameAutocomplete()
 * Classes list:
 * - MLCNotificationEditPanelBase extends MJaxPanel
 */
@@ -64,6 +67,36 @@ class MLCNotificationEditPanelBase extends MJaxPanel {
             $this->SetMLCNotification($this->objMLCNotification);
         }
     }
+    public function GetMLCNotification() {
+        if (is_null($this->objMLCNotification)) {
+            //Create a new one
+            $this->objMLCNotification = new MLCNotification();
+        }
+        //Is special field!!!!!
+        $this->objMLCNotification->idUser = MLCAuthDriver::IdUser();
+        //Is special field!!!!!
+        //Do nothing this is a creDate
+        if (get_class($this->strClassName) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strClassName->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('className');
+            }
+            $this->objMLCNotification->className = $mixEntity;
+        } else {
+            $this->objMLCNotification->className = $this->strClassName->Text;
+        }
+        //Is special field!!!!!
+        if (get_class($this->intViewed) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->intViewed->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('viewed');
+            }
+            $this->objMLCNotification->viewed = $mixEntity;
+        } else {
+            $this->objMLCNotification->viewed = $this->intViewed->Text;
+        }
+        return $this->objMLCNotification;
+    }
     public function SetMLCNotification($objMLCNotification) {
         $this->objMLCNotification = $objMLCNotification;
         $this->ActionParameter = $this->objMLCNotification;
@@ -81,6 +114,12 @@ class MLCNotificationEditPanelBase extends MJaxPanel {
             //Is special field!!!!!
             $this->intViewed->Text = $this->objMLCNotification->viewed;
         } else {
+            //Is special field!!!!!
+            //Is special field!!!!!
+            //Do nothing this is a creDate
+            $this->strClassName->Text = '';
+            //Is special field!!!!!
+            $this->intViewed->Text = '';
             $this->btnDelete->Style->Display = 'none';
         }
     }
@@ -89,23 +128,12 @@ class MLCNotificationEditPanelBase extends MJaxPanel {
             if (!is_null($this->objMLCNotification->idUser)) {
                 $this->lnkViewParentIdUser = new MJaxLinkButton($this);
                 $this->lnkViewParentIdUser->Text = 'View AuthUser';
-                $this->lnkViewParentIdUser->Href = __ENTITY_MODEL_DIR__ . '/AuthUser/' . $this->objMLCNotification->idUser;
+                $this->lnkViewParentIdUser->Href = '/data/editMLCNotification?' . FFSQS::MLCNotification_IdUser . $this->objMLCNotification->idUser;
             }
         }
     }
     public function btnSave_click() {
-        if (is_null($this->objMLCNotification)) {
-            //Create a new one
-            $this->objMLCNotification = new MLCNotification();
-        }
-        //Is special field!!!!!
-        $this->objMLCNotification->idUser = MLCAuthDriver::IdUser();
-        //Is special field!!!!!
-        //Do nothing this is a creDate
-        $this->objMLCNotification->className = $this->strClassName->Text;
-        //Is special field!!!!!
-        $this->objMLCNotification->viewed = $this->intViewed->Text;
-        $this->objMLCNotification->Save();
+        $this->GetMLCNotification()->Save();
         //Experimental save event trigger
         $this->ActionParameter = $this->objMLCNotification;
         $this->objForm->TriggerControlEvent($this->strControlId, 'mjax-data-entity-save');
@@ -121,6 +149,18 @@ class MLCNotificationEditPanelBase extends MJaxPanel {
     }
     public function IsNew() {
         return is_null($this->objMLCNotification);
+    }
+    public function InitIdUserAutocomplete() {
+        $this->intIdUser = new MJaxBSAutocompleteTextBox($this);
+        $this->intIdUser->SetSearchEntity('authuser');
+        $this->intIdUser->Name = 'idUser';
+        $this->intIdUser->AddCssClass('input-large');
+    }
+    public function InitClassNameAutocomplete() {
+        $this->strClassName = new MJaxBSAutocompleteTextBox($this);
+        $this->strClassName->SetSearchEntity('mlcnotification', 'className');
+        $this->strClassName->Name = 'className';
+        $this->strClassName->AddCssClass('input-large');
     }
 }
 ?>

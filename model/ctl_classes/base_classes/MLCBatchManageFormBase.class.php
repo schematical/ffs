@@ -29,11 +29,11 @@ class MLCBatchManageFormBase extends FFSForm {
         $arrAndConditions = array();
         $intIdBatch = MLCApplication::QS(FFSQS::MLCBatch_IdBatch);
         if (!is_null($intIdBatch)) {
-            $arrAndConditions[] = sprintf('idBatch = %s', $intIdBatch);
+            $arrAndConditions[] = sprintf('MLCBatch.idBatch = %s', $intIdBatch);
         }
         $strJobName = MLCApplication::QS(FFSQS::MLCBatch_JobName);
         if (!is_null($strJobName)) {
-            $arrAndConditions[] = sprintf('jobName LIKE "%s%%"', $strJobName);
+            $arrAndConditions[] = sprintf('MLCBatch.jobName LIKE "%s%%"', $strJobName);
         }
         if (count($arrAndConditions) >= 1) {
             $arrMLCBatchs = MLCBatch::Query('WHERE ' . implode(' AND ', $arrAndConditions));
@@ -44,7 +44,7 @@ class MLCBatchManageFormBase extends FFSForm {
     }
     public function InitSelectPanel() {
         $this->pnlSelect = new MLCBatchSelectPanel($this);
-        $this->pnlSelect->AddAction(new MJaxChangeEvent() , new MJaxServerControlAction($this, 'pnlSelect_change'));
+        $this->pnlSelect->AddAction(new MJaxBSAutocompleteSelectEvent() , new MJaxServerControlAction($this, 'pnlSelect_change'));
         $wgtMLCBatch = $this->AddWidget('Select MLCBatch', 'icon-select', $this->pnlSelect);
         $wgtMLCBatch->AddCssClass('span6');
         return $wgtMLCBatch;
@@ -58,10 +58,11 @@ class MLCBatchManageFormBase extends FFSForm {
                     $this->lstMLCBatchs->SelectedRow = $objRow;
                 }
             }
-            $this->ScrollTo($this->pnlEdit);
-        } else {
-            $this->ScrollTo($this->lstMLCBatchs);
-        }
+            //$this->ScrollTo($this->pnlEdit);
+            
+        } //else{
+        $this->ScrollTo($this->lstMLCBatchs);
+        //}
         $this->lstMLCBatchs->RemoveAllChildControls();
         $this->lstMLCBatchs->SetDataEntites($arrMLCBatchs);
         //TODO: Remeber to add check lists for assoc or relationship tables
@@ -76,8 +77,9 @@ class MLCBatchManageFormBase extends FFSForm {
         return $wgtMLCBatch;
     }
     public function pnlEdit_save($strFormId, $strControlId, $objMLCBatch) {
-        $this->UpdateTable($objMLCBatch);
-        $this->ScrollTo($this->lstMLCBatchs->SelectedRow);
+        $pnlRow = $this->UpdateTable($objMLCBatch);
+        $this->ScrollTo($pnlRow);
+        $this->pnlEdit->SetMLCBatch(null);
     }
     public function pnlEdit_delete($strFormId, $strControlId, $objMLCBatch) {
         $this->lstMLCBatchs->SelectedRow->Remove();
@@ -108,7 +110,7 @@ class MLCBatchManageFormBase extends FFSForm {
         if (is_null($objMLCBatch)) {
             $objMLCBatch = new MLCBatch();
         }
-        $objMLCBatch->IdCompetition = FFSForm::Competition()->IdCompetition;
+        $objMLCBatch->IdCompetition = FFSForm::$objCompetition->IdCompetition;
         $this->lstMLCBatchs->SelectedRow->UpdateEntity($objMLCBatch);
     }
     public function lnkEdit_click($strFormId, $strControlId, $strActionParameter) {
@@ -121,9 +123,12 @@ class MLCBatchManageFormBase extends FFSForm {
         if (!is_null($this->lstMLCBatchs->SelectedRow)) {
             //This already exists
             $this->lstMLCBatchs->SelectedRow->UpdateEntity($objMLCBatch);
+            $objRow = $this->lstMLCBatchs->SelectedRow;
             $this->lstMLCBatchs->SelectedRow = null;
         } else {
             $objRow = $this->lstMLCBatchs->AddRow($objMLCBatch);
         }
+        $this->lstMLCBatchs->RefreshControls();
+        return $objRow;
     }
 }

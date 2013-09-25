@@ -6,6 +6,8 @@
 * - LoadById()
 * - LoadAll()
 * - ToXml()
+* - Materilize()
+* - GetSQLSelectFieldsAsArr()
 * - Query()
 * - QueryCount()
 * - LoadByTag()
@@ -19,10 +21,28 @@
 * - __toJson()
 * - __get()
 * - __set()
+* - IdStripeData()
+* - Data()
+* - IdParentStripeData()
 * Classes list:
-* - StripeDataBase extends BaseEntity
+* - StripeDataBase extends MLCBaseEntity
 */
-class StripeDataBase extends BaseEntity {
+/**
+ * Class Competition
+ * @property-read mixed $Object
+ * @property-write mixed $Object
+ * @property-read mixed $IdAuthUser
+ * @property-write mixed $IdAuthUser
+ * @property-read mixed $CreDate
+ * @property-write mixed $CreDate
+ * @property-read mixed $Mode
+ * @property-write mixed $Mode
+ * @property-read mixed $Instance_url
+ * @property-write mixed $Instance_url
+ * @property-read mixed $StripeId
+ * @property-write mixed $StripeId
+ */
+class StripeDataBase extends MLCBaseEntity {
     const DB_CONN = 'DB_1';
     const TABLE_NAME = 'StripeData';
     const P_KEY = 'idStripeData';
@@ -32,23 +52,10 @@ class StripeDataBase extends BaseEntity {
         $this->strDBConn = self::DB_CONN;
     }
     public static function LoadById($intId) {
-        $sql = sprintf("SELECT * FROM %s WHERE idStripeData = %s;", self::TABLE_NAME, $intId);
-        $result = MLCDBDriver::Query($sql, self::DB_CONN);
-        while ($data = mysql_fetch_assoc($result)) {
-            $tObj = new StripeData();
-            $tObj->materilize($data);
-            return $tObj;
-        }
+        return self::Query('WHERE StripeData.idStripeData = ' . $intId, true);
     }
     public static function LoadAll() {
-        $sql = sprintf("SELECT * FROM %s;", self::TABLE_NAME);
-        $result = MLCDBDriver::Query($sql, StripeData::DB_CONN);
-        $coll = new BaseEntityCollection();
-        while ($data = mysql_fetch_assoc($result)) {
-            $tObj = new StripeData();
-            $tObj->materilize($data);
-            $coll->addItem($tObj);
-        }
+        $coll = self::Query('');
         return $coll;
     }
     public function ToXml($blnReclusive = false) {
@@ -88,29 +95,115 @@ class StripeDataBase extends BaseEntity {
         $xmlStr.= "</StripeData>";
         return $xmlStr;
     }
-    public static function Query($strExtra, $blnReturnSingle = false) {
-        $sql = sprintf("SELECT * FROM %s %s;", self::TABLE_NAME, $strExtra);
-        $result = MLCDBDriver::Query($sql, self::DB_CONN);
-        $coll = new BaseEntityCollection();
-        while ($data = mysql_fetch_assoc($result)) {
-            $tObj = new StripeData();
-            $tObj->materilize($data);
-            $coll->addItem($tObj);
-        }
-        $arrReturn = $coll->getCollection();
-        if ($blnReturnSingle) {
-            if (count($arrReturn) == 0) {
-                return null;
+    public function Materilize($arrData) {
+        if (isset($arrData) && (sizeof($arrData) > 1)) {
+            if ((array_key_exists('StripeData.idStripeData', $arrData))) {
+                //New Smart Way
+                $this->arrDBFields['idStripeData'] = $arrData['StripeData.idStripeData'];
+                $this->arrDBFields['data'] = $arrData['StripeData.data'];
+                $this->arrDBFields['object'] = $arrData['StripeData.object'];
+                $this->arrDBFields['idAuthUser'] = $arrData['StripeData.idAuthUser'];
+                $this->arrDBFields['creDate'] = $arrData['StripeData.creDate'];
+                $this->arrDBFields['idParentStripeData'] = $arrData['StripeData.idParentStripeData'];
+                $this->arrDBFields['mode'] = $arrData['StripeData.mode'];
+                $this->arrDBFields['instance_url'] = $arrData['StripeData.instance_url'];
+                $this->arrDBFields['stripeId'] = $arrData['StripeData.stripeId'];
+                //Foregin Key
+                
             } else {
-                return $arrReturn[0];
+                //Old ways
+                $this->arrDBFields = $arrData;
             }
-        } else {
-            return $arrReturn;
+            $this->loaded = true;
+            $this->setId($this->getField($this->getPKey()));
+        }
+        if (self::$blnUseCache) {
+            if (!array_key_exists(get_class($this) , self::$arrCachedData)) {
+                self::$arrCachedData[get_class($this) ] = array();
+            }
+            self::$arrCachedData[get_class($this) ][$this->getId() ] = $this;
         }
     }
-    public static function QueryCount($strExtra = '') {
-        $sql = sprintf("SELECT * FROM %s %s;", self::TABLE_NAME, $strExtra);
-        $result = MLCDBDriver::Query($sql, self::DB_CONN);
+    public static function GetSQLSelectFieldsAsArr($blnLongSelect = false) {
+        $arrFields = array();
+        $arrFields[] = 'StripeData.idStripeData ' . (($blnLongSelect) ? ' as "StripeData.idStripeData"' : '');
+        $arrFields[] = 'StripeData.data ' . (($blnLongSelect) ? ' as "StripeData.data"' : '');
+        $arrFields[] = 'StripeData.object ' . (($blnLongSelect) ? ' as "StripeData.object"' : '');
+        $arrFields[] = 'StripeData.idAuthUser ' . (($blnLongSelect) ? ' as "StripeData.idAuthUser"' : '');
+        $arrFields[] = 'StripeData.creDate ' . (($blnLongSelect) ? ' as "StripeData.creDate"' : '');
+        $arrFields[] = 'StripeData.idParentStripeData ' . (($blnLongSelect) ? ' as "StripeData.idParentStripeData"' : '');
+        $arrFields[] = 'StripeData.mode ' . (($blnLongSelect) ? ' as "StripeData.mode"' : '');
+        $arrFields[] = 'StripeData.instance_url ' . (($blnLongSelect) ? ' as "StripeData.instance_url"' : '');
+        $arrFields[] = 'StripeData.stripeId ' . (($blnLongSelect) ? ' as "StripeData.stripeId"' : '');
+        return $arrFields;
+    }
+    public static function Query($strExtra = null, $mixReturnSingle = false, $arrJoins = null) {
+        $blnLongSelect = !is_null($arrJoins);
+        $arrFields = self::GetSQLSelectFieldsAsArr($blnLongSelect);
+        if ($blnLongSelect) {
+            foreach ($arrJoins as $strTable) {
+                if (class_exists($strTable)) {
+                    $arrFields = array_merge($arrFields, call_user_func($strTable . '::GetSQLSelectFieldsAsArr', true));
+                }
+            }
+        }
+        $strFields = implode(', ', $arrFields);
+        $strJoin = '';
+        if ($blnLongSelect) {
+            foreach ($arrJoins as $strTable) {
+                switch ($strTable) {
+                }
+            }
+        }
+        if (!is_null($strExtra)) {
+            $strSql = sprintf("SELECT %s FROM StripeData %s %s;", $strFields, $strJoin, $strExtra);
+            $result = MLCDBDriver::Query($strSql, self::DB_CONN);
+        }
+        if ((is_object($mixReturnSingle)) && ($mixReturnSingle instanceof MLCBaseEntityCollection)) {
+            $collReturn = $mixReturnSingle;
+            $collReturn->RemoveAll();
+        } else {
+            $collReturn = new MLCBaseEntityCollection();
+            $collReturn->SetQueryEntity('StripeData');
+        }
+        if (!is_null($strExtra)) {
+            $collReturn->AddQueryToHistory($strSql);
+            while ($data = mysql_fetch_assoc($result)) {
+                $tObj = new StripeData();
+                $tObj->Materilize($data);
+                $collReturn[] = $tObj;
+            }
+        }
+        if ($mixReturnSingle !== false) {
+            if (count($collReturn) == 0) {
+                return null;
+            } else {
+                return $collReturn[0];
+            }
+        } else {
+            return $collReturn;
+        }
+    }
+    public static function QueryCount($strExtra = '', $arrJoins = array()) {
+        $blnLongSelect = !is_null($arrJoins);
+        $arrFields = self::GetSQLSelectFieldsAsArr($blnLongSelect);
+        if ($blnLongSelect) {
+            foreach ($arrJoins as $strTable) {
+                if (class_exists($strTable)) {
+                    $arrFields = array_merge($arrFields, call_user_func($strTable . '::GetSQLSelectFieldsAsArr', true));
+                }
+            }
+        }
+        $strFields = implode(', ', $arrFields);
+        $strJoin = '';
+        if ($blnLongSelect) {
+            foreach ($arrJoins as $strTable) {
+                switch ($strTable) {
+                }
+            }
+        }
+        $strSql = sprintf("SELECT %s FROM StripeData %s %s;", $strFields, $strJoin, $strExtra);
+        $result = MLCDBDriver::Query($strSql, self::DB_CONN);
         return mysql_num_rows($result);
     }
     //Get children
@@ -144,11 +237,14 @@ class StripeDataBase extends BaseEntity {
         }
     }
     public static function LoadSingleByField($strField, $mixValue, $strCompairison = '=') {
-        $arrResults = self::LoadArrayByField($strField, $mixValue, $strCompairison);
-        if (count($arrResults)) {
-            return $arrResults[0];
+        if (is_numeric($mixValue)) {
+            $strValue = $mixValue;
+        } else {
+            $strValue = sprintf('"%s"', $mixValue);
         }
-        return null;
+        $strExtra = sprintf(' WHERE StripeData.%s %s %s', $strField, $strCompairison, $strValue);
+        $objEntity = self::Query($strExtra, true);
+        return $objEntity;
     }
     public static function LoadArrayByField($strField, $mixValue, $strCompairison = '=') {
         if (is_numeric($mixValue)) {
@@ -156,42 +252,33 @@ class StripeDataBase extends BaseEntity {
         } else {
             $strValue = sprintf('"%s"', $mixValue);
         }
-        $strExtra = sprintf(' WHERE %s %s %s', $strField, $strCompairison, $strValue);
-        $sql = sprintf("SELECT * FROM %s %s;", self::TABLE_NAME, $strExtra);
-        //die($sql);
-        $result = MLCDBDriver::query($sql, self::DB_CONN);
-        $coll = new BaseEntityCollection();
-        while ($data = mysql_fetch_assoc($result)) {
-            $tObj = new StripeData();
-            $tObj->materilize($data);
-            $coll->addItem($tObj);
-        }
-        $arrResults = $coll->getCollection();
+        $strExtra = sprintf(' WHERE StripeData.%s %s %s', $strField, $strCompairison, $strValue);
+        $arrResults = self::Query($strExtra);
         return $arrResults;
     }
     public function __toArray() {
-        $arrReturn = array();
-        $arrReturn['_ClassName'] = "StripeData %>";
-        $arrReturn['idStripeData'] = $this->idStripeData;
-        $arrReturn['data'] = $this->data;
-        $arrReturn['object'] = $this->object;
-        $arrReturn['idAuthUser'] = $this->idAuthUser;
-        $arrReturn['creDate'] = $this->creDate;
-        $arrReturn['idParentStripeData'] = $this->idParentStripeData;
-        $arrReturn['mode'] = $this->mode;
-        $arrReturn['instance_url'] = $this->instance_url;
-        $arrReturn['stripeId'] = $this->stripeId;
-        return $arrReturn;
+        $collReturn = array();
+        $collReturn['_ClassName'] = "StripeData %>";
+        $collReturn['idStripeData'] = $this->idStripeData;
+        $collReturn['data'] = $this->data;
+        $collReturn['object'] = $this->object;
+        $collReturn['idAuthUser'] = $this->idAuthUser;
+        $collReturn['creDate'] = $this->creDate;
+        $collReturn['idParentStripeData'] = $this->idParentStripeData;
+        $collReturn['mode'] = $this->mode;
+        $collReturn['instance_url'] = $this->instance_url;
+        $collReturn['stripeId'] = $this->stripeId;
+        return $collReturn;
     }
     public function __toString() {
         return 'StripeData(' . $this->getId() . ')';
     }
     public function __toJson($blnPosponeEncode = false) {
-        $arrReturn = $this->__toArray();
+        $collReturn = $this->__toArray();
         if ($blnPosponeEncode) {
-            return json_encode($arrReturn);
+            return json_encode($collReturn);
         } else {
-            return $arrReturn;
+            return $collReturn;
         }
     }
     public function __get($strName) {
@@ -200,13 +287,6 @@ class StripeDataBase extends BaseEntity {
             case ('idStripeData'):
                 if (array_key_exists('idStripeData', $this->arrDBFields)) {
                     return $this->arrDBFields['idStripeData'];
-                }
-                return null;
-            break;
-            case ('Data'):
-            case ('data'):
-                if (array_key_exists('data', $this->arrDBFields)) {
-                    return $this->arrDBFields['data'];
                 }
                 return null;
             break;
@@ -264,48 +344,126 @@ class StripeDataBase extends BaseEntity {
             break;
         }
     }
-    public function __set($strName, $strValue) {
+    public function __set($strName, $mixValue) {
         $this->modified = 1;
         switch ($strName) {
             case ('IdStripeData'):
             case ('idStripeData'):
-                $this->arrDBFields['idStripeData'] = $strValue;
+            case ('_IdStripeData'):
+                $this->arrDBFields['idStripeData'] = $mixValue;
             break;
-            case ('Data'):
-            case ('data'):
-                $this->arrDBFields['data'] = $strValue;
+            case ('_Data'):
+                $this->arrDBFields['data'] = $mixValue;
             break;
             case ('Object'):
             case ('object'):
-                $this->arrDBFields['object'] = $strValue;
+            case ('_Object'):
+                $this->arrDBFields['object'] = $mixValue;
             break;
             case ('IdAuthUser'):
             case ('idAuthUser'):
-                $this->arrDBFields['idAuthUser'] = $strValue;
+                $this->arrDBFields['idAuthUser'] = $mixValue;
             break;
             case ('CreDate'):
             case ('creDate'):
-                $this->arrDBFields['creDate'] = $strValue;
+            case ('_CreDate'):
+                $this->arrDBFields['creDate'] = $mixValue;
             break;
             case ('IdParentStripeData'):
             case ('idParentStripeData'):
-                $this->arrDBFields['idParentStripeData'] = $strValue;
+            case ('_IdParentStripeData'):
+                $this->arrDBFields['idParentStripeData'] = $mixValue;
             break;
             case ('Mode'):
             case ('mode'):
-                $this->arrDBFields['mode'] = $strValue;
+            case ('_Mode'):
+                $this->arrDBFields['mode'] = $mixValue;
             break;
             case ('Instance_url'):
             case ('instance_url'):
-                $this->arrDBFields['instance_url'] = $strValue;
+            case ('_Instance_url'):
+                $this->arrDBFields['instance_url'] = $mixValue;
             break;
             case ('StripeId'):
             case ('stripeId'):
-                $this->arrDBFields['stripeId'] = $strValue;
+            case ('_StripeId'):
+                $this->arrDBFields['stripeId'] = $mixValue;
             break;
             default:
                 throw new MLCMissingPropertyException($this, $strName);
             break;
+        }
+    }
+    public function IdStripeData($strKey, $mixData = null) {
+        if (is_null($mixData)) {
+            if ((!array_key_exists('idStripeData', $this->arrDBFields))) {
+                return null;
+            }
+            if ((strlen($this->arrDBFields['idStripeData']) < 1)) {
+                return null;
+            }
+            $arrData = json_decode($this->arrDBFields['idStripeData'], true);
+            if (!array_key_exists($strKey, $arrData)) {
+                return null;
+            }
+            return $arrData[$strKey];
+        } else {
+            if ((!array_key_exists('idStripeData', $this->arrDBFields)) || (strlen($this->arrDBFields['idStripeData']) < 1)) {
+                $arrData = array();
+            } else {
+                $arrData = json_decode($this->arrDBFields['idStripeData'], true);
+            }
+            $arrData[$strKey] = $mixData;
+            $this->arrDBFields['idStripeData'] = json_encode($arrData);
+            $this->Save();
+        }
+    }
+    public function Data($strKey, $mixData = null) {
+        if (is_null($mixData)) {
+            if ((!array_key_exists('data', $this->arrDBFields))) {
+                return null;
+            }
+            if ((strlen($this->arrDBFields['data']) < 1)) {
+                return null;
+            }
+            $arrData = json_decode($this->arrDBFields['data'], true);
+            if (!array_key_exists($strKey, $arrData)) {
+                return null;
+            }
+            return $arrData[$strKey];
+        } else {
+            if ((!array_key_exists('data', $this->arrDBFields)) || (strlen($this->arrDBFields['data']) < 1)) {
+                $arrData = array();
+            } else {
+                $arrData = json_decode($this->arrDBFields['data'], true);
+            }
+            $arrData[$strKey] = $mixData;
+            $this->arrDBFields['data'] = json_encode($arrData);
+            $this->Save();
+        }
+    }
+    public function IdParentStripeData($strKey, $mixData = null) {
+        if (is_null($mixData)) {
+            if ((!array_key_exists('idParentStripeData', $this->arrDBFields))) {
+                return null;
+            }
+            if ((strlen($this->arrDBFields['idParentStripeData']) < 1)) {
+                return null;
+            }
+            $arrData = json_decode($this->arrDBFields['idParentStripeData'], true);
+            if (!array_key_exists($strKey, $arrData)) {
+                return null;
+            }
+            return $arrData[$strKey];
+        } else {
+            if ((!array_key_exists('idParentStripeData', $this->arrDBFields)) || (strlen($this->arrDBFields['idParentStripeData']) < 1)) {
+                $arrData = array();
+            } else {
+                $arrData = json_decode($this->arrDBFields['idParentStripeData'], true);
+            }
+            $arrData[$strKey] = $mixData;
+            $this->arrDBFields['idParentStripeData'] = json_encode($arrData);
+            $this->Save();
         }
     }
 }

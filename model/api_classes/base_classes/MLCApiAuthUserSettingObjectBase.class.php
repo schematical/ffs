@@ -15,11 +15,6 @@ class MLCApiAuthUserSettingObjectBase extends MLCApiObjectBase {
                 $objAuthUser = $this->GetEntity()->IdUser;
                 return new MLCApiAuthUserObject($objIdUser);
             break;
-            case ('AuthUserSetting'):
-                //Load
-                $objAuthUserSettingTypeCd_tpcd = $this->GetEntity()->IdUserSettingTypeCd;
-                return new MLCApiAuthUserSettingTypeCd_tpcdObject($objIdUserSettingTypeCd);
-            break;
             default:
                 return parent::__call($strName, $arrArguments);
         }

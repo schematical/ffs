@@ -29,23 +29,23 @@ class TrackingEventManageFormBase extends FFSForm {
         $arrAndConditions = array();
         $intIdTrackingEvent = MLCApplication::QS(FFSQS::TrackingEvent_IdTrackingEvent);
         if (!is_null($intIdTrackingEvent)) {
-            $arrAndConditions[] = sprintf('idTrackingEvent = %s', $intIdTrackingEvent);
+            $arrAndConditions[] = sprintf('TrackingEvent.idTrackingEvent = %s', $intIdTrackingEvent);
         }
         $strName = MLCApplication::QS(FFSQS::TrackingEvent_Name);
         if (!is_null($strName)) {
-            $arrAndConditions[] = sprintf('name LIKE "%s%%"', $strName);
+            $arrAndConditions[] = sprintf('TrackingEvent.name LIKE "%s%%"', $strName);
         }
         $strValue = MLCApplication::QS(FFSQS::TrackingEvent_Value);
         if (!is_null($strValue)) {
-            $arrAndConditions[] = sprintf('value LIKE "%s%%"', $strValue);
+            $arrAndConditions[] = sprintf('TrackingEvent.value LIKE "%s%%"', $strValue);
         }
         $intIdSession = MLCApplication::QS(FFSQS::TrackingEvent_IdSession);
         if (!is_null($intIdSession)) {
-            $arrAndConditions[] = sprintf('idSession = %s', $intIdSession);
+            $arrAndConditions[] = sprintf('TrackingEvent.idSession = %s', $intIdSession);
         }
         $strApp = MLCApplication::QS(FFSQS::TrackingEvent_App);
         if (!is_null($strApp)) {
-            $arrAndConditions[] = sprintf('app LIKE "%s%%"', $strApp);
+            $arrAndConditions[] = sprintf('TrackingEvent.app LIKE "%s%%"', $strApp);
         }
         if (count($arrAndConditions) >= 1) {
             $arrTrackingEvents = TrackingEvent::Query('WHERE ' . implode(' AND ', $arrAndConditions));
@@ -56,7 +56,7 @@ class TrackingEventManageFormBase extends FFSForm {
     }
     public function InitSelectPanel() {
         $this->pnlSelect = new TrackingEventSelectPanel($this);
-        $this->pnlSelect->AddAction(new MJaxChangeEvent() , new MJaxServerControlAction($this, 'pnlSelect_change'));
+        $this->pnlSelect->AddAction(new MJaxBSAutocompleteSelectEvent() , new MJaxServerControlAction($this, 'pnlSelect_change'));
         $wgtTrackingEvent = $this->AddWidget('Select TrackingEvent', 'icon-select', $this->pnlSelect);
         $wgtTrackingEvent->AddCssClass('span6');
         return $wgtTrackingEvent;
@@ -70,10 +70,11 @@ class TrackingEventManageFormBase extends FFSForm {
                     $this->lstTrackingEvents->SelectedRow = $objRow;
                 }
             }
-            $this->ScrollTo($this->pnlEdit);
-        } else {
-            $this->ScrollTo($this->lstTrackingEvents);
-        }
+            //$this->ScrollTo($this->pnlEdit);
+            
+        } //else{
+        $this->ScrollTo($this->lstTrackingEvents);
+        //}
         $this->lstTrackingEvents->RemoveAllChildControls();
         $this->lstTrackingEvents->SetDataEntites($arrTrackingEvents);
         //TODO: Remeber to add check lists for assoc or relationship tables
@@ -88,8 +89,9 @@ class TrackingEventManageFormBase extends FFSForm {
         return $wgtTrackingEvent;
     }
     public function pnlEdit_save($strFormId, $strControlId, $objTrackingEvent) {
-        $this->UpdateTable($objTrackingEvent);
-        $this->ScrollTo($this->lstTrackingEvents->SelectedRow);
+        $pnlRow = $this->UpdateTable($objTrackingEvent);
+        $this->ScrollTo($pnlRow);
+        $this->pnlEdit->SetTrackingEvent(null);
     }
     public function pnlEdit_delete($strFormId, $strControlId, $objTrackingEvent) {
         $this->lstTrackingEvents->SelectedRow->Remove();
@@ -120,7 +122,7 @@ class TrackingEventManageFormBase extends FFSForm {
         if (is_null($objTrackingEvent)) {
             $objTrackingEvent = new TrackingEvent();
         }
-        $objTrackingEvent->IdCompetition = FFSForm::Competition()->IdCompetition;
+        $objTrackingEvent->IdCompetition = FFSForm::$objCompetition->IdCompetition;
         $this->lstTrackingEvents->SelectedRow->UpdateEntity($objTrackingEvent);
     }
     public function lnkEdit_click($strFormId, $strControlId, $strActionParameter) {
@@ -133,9 +135,12 @@ class TrackingEventManageFormBase extends FFSForm {
         if (!is_null($this->lstTrackingEvents->SelectedRow)) {
             //This already exists
             $this->lstTrackingEvents->SelectedRow->UpdateEntity($objTrackingEvent);
+            $objRow = $this->lstTrackingEvents->SelectedRow;
             $this->lstTrackingEvents->SelectedRow = null;
         } else {
             $objRow = $this->lstTrackingEvents->AddRow($objTrackingEvent);
         }
+        $this->lstTrackingEvents->RefreshControls();
+        return $objRow;
     }
 }

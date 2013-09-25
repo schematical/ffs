@@ -9,6 +9,7 @@ class landing extends FFSParentCoachLandingForm{
         }
         $this->strTemplate = __VIEW_ACTIVE_APP_DIR__ . '/www/org/landing.tpl.php';
 
+
     }
     public function pnlOrg_select(){
         $objOrg = $this->pnlOrg->GetValue();
@@ -17,6 +18,13 @@ class landing extends FFSParentCoachLandingForm{
             $arrRolls = MLCAuthDriver::GetUsersByEntity($objOrg, FFSRoll::ORG_MANAGER);
             if(count($arrRolls) > 0){
                 //There is already a account set up to manage this account
+                if(!is_null($this->pnlOrgEdit)){
+                    $this->pnlOrgEdit->Remove();
+                    $this->Detach($this->pnlOrgEdit);
+                    $this->Detach('.ffs-org-select-alert');
+                    $this->pnlOrgEdit = null;
+                }
+
                 return $this->pnlOrg->Alert('There is already an account associated with this Gym. Please<a href"/contactUs">Contact Us</a> if you belive this is an error.');
             }
 
@@ -32,7 +40,7 @@ class landing extends FFSParentCoachLandingForm{
 
         }
         $objUser->AddRoll(FFSRoll::ORG_MANAGER, $this->objOrg);
-        $this->Redirect('/parent/index');
+        $this->CPRedirect('/index');
     }
 
 

@@ -8,6 +8,7 @@ class results extends FFSForm{
 
     public function Form_Create(){
         parent::Form_Create();
+        $this->SecureOrg();
         $this->arrResultEvents = FFSEventData::$WOMENS_ARTISTIC_GYMNASTICS;//TMP HACK
         $this->ForceLandscape();
         $arrResults = $this->QueryAtheleteResults();

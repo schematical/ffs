@@ -1,7 +1,7 @@
 <?php
 require_once(__MODEL_APP_CONTROL__ . "/base_classes/AtheleteListPanelBase.class.php");
 class FFSAtheleteEditListPanel extends AtheleteListPanelBase {
-
+    protected $pnlInvite = null;
     public function __construct($objParentControl, $arrAtheletes = array()){
 
         parent::__construct($objParentControl, $arrAtheletes);
@@ -38,6 +38,7 @@ class FFSAtheleteEditListPanel extends AtheleteListPanelBase {
         $colLevel->EditControlClass = 'MJaxTextBox';
 
         $this->InitRowControl('view_Results', 'View Results', $this, 'lnkViewResults_click', 'btn btn-small');
+        //$this->InitRowControl('invite_parent', 'Invite Parent', $this, 'lnkInviteParent_click', 'btn btn-small');
     }
     public function AddEmptyRow(){
         $objRow = parent::AddEmptyRow();
@@ -63,6 +64,30 @@ class FFSAtheleteEditListPanel extends AtheleteListPanelBase {
                 FFSQS::Athelete_IdAthelete => $intIdAthelete
             )
         );
+    }
+    public function lnkInviteParent_click($f, $c, $ap){
+        $objEntity = $this->objForm->Controls[$c]->ParentControl->GetData('_entity');
+        $this->pnlInvite = new MLCInvitePanel($this->objForm, $objEntity, FFSRoll::PARENT);
+        $this->pnlInvite->AddAction(
+            new MJaxSuccessEvent(),
+            new MJaxServerControlAction(
+                $this,
+                'pnlInvite_success'
+            )
+        );
+        $this->objForm->Alert($this->pnlInvite);
+    }
+    public function pnlInvite_success($f, $c, $ap){
+        if(strlen($ap->inviteEmail) > 1){
+            FFSApplication::SendEmail(
+                FFSEmailType::ParentInvite,
+                $ap->inviteEmail,
+                FFSForm::Org()->Name . ' would like to welcome you to the team',
+                array(
+                    'AUTH_ROLL' => $ap
+                )
+            );
+        }
     }
 
 

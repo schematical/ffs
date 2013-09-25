@@ -53,7 +53,7 @@ class MLCLocationListPanelBase extends MJaxTable {
         $this->AddColumn('country', ' Country', null, null, 'MJaxTextBox');
         $this->AddColumn('lat', ' Lat', null, null, 'MJaxTextBox');
         $this->AddColumn('lng', ' Lng', null, null, 'MJaxTextBox');
-        $this->AddColumn('idAccount', ' Account', $this, 'render_idAccount', 'MJaxTextBox');
+        $this->AddColumn('IdAccountObject', ' Account');
     }
     public function render_idAccount($intIdIdAccount, $objRow, $objColumn) {
         if (is_null($intIdIdAccount)) {

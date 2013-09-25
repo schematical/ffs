@@ -14,6 +14,7 @@ abstract class FFSSection{
     const PARENT = 'parent';
     const ORG = 'org';
     const COACH = 'coach';
+    const COMPETITION = 'competition';
 }
 abstract class FFSQS extends FFSQSBase{
     const IdAthelete = 'a';
@@ -88,4 +89,11 @@ abstract class FFSResultSpecialNotes{
     const Average = 'Average';
     const Wobbly = 'Wobbly';
     const Fall = 'Fall';
+}
+abstract class FFSEmailType{
+    const OrgCompInvite = 'OrgCompInvite';
+    const Share = 'Share';
+    const AssignmentInvite = 'AssignmentInvite';
+    const StaffInvite = 'StaffInvite';
+    const ParentInvite = 'ParentInvite';
 }

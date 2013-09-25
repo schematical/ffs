@@ -5,12 +5,14 @@
 * - __construct()
 * - CreateContentControls()
 * - CreateFieldControls()
+* - GetMLCBatch()
 * - SetMLCBatch()
 * - CreateReferenceControls()
 * - btnSave_click()
 * - btnDelete_click()
 * - btnDelete_confirm()
 * - IsNew()
+* - InitJobNameAutocomplete()
 * Classes list:
 * - MLCBatchEditPanelBase extends MJaxPanel
 */
@@ -65,6 +67,42 @@ class MLCBatchEditPanelBase extends MJaxPanel {
             $this->SetMLCBatch($this->objMLCBatch);
         }
     }
+    public function GetMLCBatch() {
+        if (is_null($this->objMLCBatch)) {
+            //Create a new one
+            $this->objMLCBatch = new MLCBatch();
+        }
+        //Is special field!!!!!
+        //Do nothing this is a creDate
+        if (get_class($this->strJobName) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strJobName->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('jobName');
+            }
+            $this->objMLCBatch->jobName = $mixEntity;
+        } else {
+            $this->objMLCBatch->jobName = $this->strJobName->Text;
+        }
+        if (get_class($this->strReport) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->strReport->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('report');
+            }
+            $this->objMLCBatch->report = $mixEntity;
+        } else {
+            $this->objMLCBatch->report = $this->strReport->Text;
+        }
+        if (get_class($this->intIdBatchStatus) == 'MJaxBSAutocompleteTextBox') {
+            $mixEntity = $this->intIdBatchStatus->GetValue();
+            if (is_object($mixEntity)) {
+                $mixEntity = $mixEntity->__get('idBatchStatus');
+            }
+            $this->objMLCBatch->idBatchStatus = $mixEntity;
+        } else {
+            $this->objMLCBatch->idBatchStatus = $this->intIdBatchStatus->Text;
+        }
+        return $this->objMLCBatch;
+    }
     public function SetMLCBatch($objMLCBatch) {
         $this->objMLCBatch = $objMLCBatch;
         $this->ActionParameter = $this->objMLCBatch;
@@ -81,6 +119,11 @@ class MLCBatchEditPanelBase extends MJaxPanel {
             $this->strReport->Text = $this->objMLCBatch->report;
             $this->intIdBatchStatus->Text = $this->objMLCBatch->idBatchStatus;
         } else {
+            //Is special field!!!!!
+            //Do nothing this is a creDate
+            $this->strJobName->Text = '';
+            $this->strReport->Text = '';
+            $this->intIdBatchStatus->Text = '';
             $this->btnDelete->Style->Display = 'none';
         }
     }
@@ -89,16 +132,7 @@ class MLCBatchEditPanelBase extends MJaxPanel {
         }
     }
     public function btnSave_click() {
-        if (is_null($this->objMLCBatch)) {
-            //Create a new one
-            $this->objMLCBatch = new MLCBatch();
-        }
-        //Is special field!!!!!
-        //Do nothing this is a creDate
-        $this->objMLCBatch->jobName = $this->strJobName->Text;
-        $this->objMLCBatch->report = $this->strReport->Text;
-        $this->objMLCBatch->idBatchStatus = $this->intIdBatchStatus->Text;
-        $this->objMLCBatch->Save();
+        $this->GetMLCBatch()->Save();
         //Experimental save event trigger
         $this->ActionParameter = $this->objMLCBatch;
         $this->objForm->TriggerControlEvent($this->strControlId, 'mjax-data-entity-save');
@@ -114,6 +148,12 @@ class MLCBatchEditPanelBase extends MJaxPanel {
     }
     public function IsNew() {
         return is_null($this->objMLCBatch);
+    }
+    public function InitJobNameAutocomplete() {
+        $this->strJobName = new MJaxBSAutocompleteTextBox($this);
+        $this->strJobName->SetSearchEntity('mlcbatch', 'jobName');
+        $this->strJobName->Name = 'jobName';
+        $this->strJobName->AddCssClass('input-large');
     }
 }
 ?>

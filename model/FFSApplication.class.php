@@ -247,7 +247,7 @@ abstract class FFSApplication{
             default:
                 MLCApplication::InitPackage('MLCPostmark');
                 $objEmail = MLCPostmarkDriver::ComposeFromTemplate(
-                    __ASSETS_ACTIVE_APP_DIR__ . '/email/Invite.email.php',
+                    __ASSETS_ACTIVE_APP_DIR__ . '/email/OrgCompInvite.email.php',
                     array(
                         'PARENT_MESSAGE' => $objParentMessage
                     )
@@ -255,7 +255,7 @@ abstract class FFSApplication{
                 $objEmail->addTo(
                     $objParentMessage->InviteData
                 );
-                $objEmail->Subject('Cheer on ' . $objParentMessage->AtheleteName);
+                $objEmail->Subject('Help cheer on ' . $objParentMessage->AtheleteName);
                 $objEmail->Send();
             break;
         }
@@ -476,5 +476,18 @@ abstract class FFSApplication{
             )
         );
         return $collResutls;
+    }
+    public static function SendEmail($strEmailType, $strTo, $strSubject, $arrData = array()){
+        MLCApplication::InitPackage('MLCPostmark');
+        $arrData['SUBJECT'] = $strSubject;
+        $objEmail = MLCPostmarkDriver::ComposeFromTemplate(
+            __ASSETS_ACTIVE_APP_DIR__ . '/email/' . $strEmailType . '.email.php',
+            $arrData
+        );
+        $objEmail->addTo(
+            $strTo
+        );
+        $objEmail->Subject($strSubject);
+        $objEmail->Send();
     }
 }

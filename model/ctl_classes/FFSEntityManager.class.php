@@ -13,9 +13,11 @@ class FFSEntityManager extends FFSEntityManagerBase {
 
             $arrOrgs = MLCAuthDriver::GetRolls(FFSRoll::ORG_MANAGER);
 
-            if(count($arrOrgs) == 0){
+
+            if($arrOrgs->Length() == 0){
                 //Do nothing
-            }elseif(count($arrOrgs) == 1){
+
+            }elseif($arrOrgs->Length() == 1){
                 $this->objOrg = $arrOrgs[0]->GetEntity();
 
             }else{
@@ -74,7 +76,7 @@ class FFSEntityManager extends FFSEntityManagerBase {
        return '';
    }
     public function SearchEnrollment($strSearch, $strField = null){
-        //TODO Move this, i put it here becasuse I did not want it genned over
+        //TODO Move this, i put it here because I did not want it genned over
 
         //TODO: Move divisions from session to competition, etc
         //Competition: Divisions, Levels, etc

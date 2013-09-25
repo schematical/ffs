@@ -67,6 +67,7 @@ MLCApplicationBase::$arrClassFiles['FFSSessionEnrollmentPanel'] = __CTL_FFS_APP_
 MLCApplicationBase::$arrClassFiles['FFSMobileScoreInputPanel'] = __CTL_FFS_APP_DIR__ . '/_panels/FFSMobileScoreInputPanel.class.php';
 MLCApplicationBase::$arrClassFiles['FFSAtheleteEditListPanel'] = __CTL_FFS_APP_DIR__ . '/_panels/FFSAtheleteEditListPanel.class.php';
 MLCApplicationBase::$arrClassFiles['FFSManageAtheletesMasterPanel'] = __CTL_FFS_APP_DIR__ . '/_panels/FFSManageAtheletesMasterPanel.class.php';
+MLCApplicationBase::$arrClassFiles['FFSStaffListPanel'] = __CTL_FFS_APP_DIR__ . '/_panels/FFSStaffListPanel.class.php';
 
 //CTL Results
 MLCApplicationBase::$arrClassFiles['FFSResultAdvList'] = __CTL_FFS_APP_DIR__ . '/_panels/reports/FFSResultAdvList.class.php';
@@ -134,6 +135,9 @@ if(class_exists('MLCAuthDriver')){
         break;
         case('beta'):
         case('prod'):
+            define('SEND_NEW_USER_NOTIFICATION', true);
+            define('__SIGN_UP_EMAIL__','matt@mattleaconsulting.com');
+
             MLCAuthDriver::SetCookieDomain('tumblescore.com');
         break;
     }

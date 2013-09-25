@@ -15,6 +15,8 @@ class FFSParentCoachLandingForm extends FFSForm{
     public $lnkAddAnotherAthelete = null;
     public $arrAtheletes = array();
 
+    public $lnkRequestInvite = null;
+
 
     public function Form_Create(){
         parent::Form_Create();
@@ -22,6 +24,14 @@ class FFSParentCoachLandingForm extends FFSForm{
         $this->strTemplate = __VIEW_ACTIVE_APP_DIR__ . '/www/parent/landing.tpl.php';
         $this->pnlSignup = new MLCShortSignUpPanel($this);
         $this->pnlSignup->AddCssClass("well");
+
+        $this->lnkRequestInvite = new MJaxLinkButton($this);
+        $this->lnkRequestInvite->Text = "Request an invite from the manager of this gym's account";
+        $this->lnkRequestInvite->AddAction(
+            $this,
+            'lnkRequestInvite_click'
+        );
+
         //$this->AddWidget('Create Account', '', $this->pnlSignup);
         $this->pnlOrg = new MJaxBSAutocompleteTextBox($this);
         $this->pnlOrg->SetSearchEntity('Org');
@@ -32,6 +42,8 @@ class FFSParentCoachLandingForm extends FFSForm{
                 'pnlOrg_select'
             )
         );
+
+
 
         $this->pnlAthelete = new MJaxBSAutocompleteTextBox($this);
         $this->pnlAthelete->SetSearchEntity('Athelete', 'lastName');
@@ -45,6 +57,28 @@ class FFSParentCoachLandingForm extends FFSForm{
         );
 
 
+        $objAuthRoll = MLCAuthDriver::GetAuthRollFromQS();
+        if(!is_null($objAuthRoll)){
+            $objEntity = $objAuthRoll->GetEntity();
+            if($objEntity instanceof Athelete){
+                $this->objOrg = $objEntity->IdOrgObject;
+                $this->pnlOrg->SetValue($this->objOrg);
+                $this->pnlAthelete->SetValue($objEntity);
+
+            }else{
+                $this->objOrg = $objEntity;
+                $this->pnlOrg->SetValue($this->objOrg);
+            }
+        }
+
+        $this->pnlSignup->lnkSignup->Remove();
+        $this->pnlSignup->lnkSignup = new MJaxLinkButton($this);
+        $this->pnlSignup->lnkSignup->AddCssClass('btn');
+        $this->pnlSignup->lnkSignup->Text = 'Sign Up';
+        $this->pnlSignup->lnkSignup->AddAction(
+            $this,
+            'lnkSignup_click'
+        );
         $this->pnlSignup->AddAction(
             new MJaxAuthSignupEvent(),
             new MJaxServerControlAction(
@@ -54,6 +88,17 @@ class FFSParentCoachLandingForm extends FFSForm{
         );
 
 
+    }
+    public function lnkRequestInvite_click($f, $c, $strActionParameter){
+
+    }
+    public function lnkSignup_click($f, $c, $strActionParameter){
+        if(is_null($this->objOrg)){
+
+            $this->pnlOrg->Alert('Please select a valid Gym to be associated with');
+            return $this->ScrollTo('ffs-org-select');
+        }
+        $this->pnlSignup->lnkSignup_click($f, $c, $strActionParameter);
     }
     public function pnlOrg_select(){
         $objOrg = $this->pnlOrg->GetValue();
@@ -78,7 +123,7 @@ class FFSParentCoachLandingForm extends FFSForm{
             $this->pnlOrgEdit->strName->Text = $strGymName;
             $this->pnlOrgEdit->btnSave->Remove();
             $this->pnlOrgEdit->btnSave = null;
-            $this->Append("#ffs-org-select", '<div class="alert alert-info">We don\'t have your gym on file yet. If you know it would you mind entering in their info? If not that is okay.</a>');
+            $this->Append("#ffs-org-select", '<div class="ffs-org-select-alert alert alert-info">We don\'t have your gym on file yet. If you know it would you mind entering in their info? If not that is okay.</a>');
             $this->Append("#ffs-org-select", $this->pnlOrgEdit);
             MLCCookieDriver::SetCookie(FFSQS::Org_IdOrg, -1);
         }

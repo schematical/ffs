@@ -29,15 +29,15 @@ class MLCNotificationManageFormBase extends FFSForm {
         $arrAndConditions = array();
         $intIdNotification = MLCApplication::QS(FFSQS::MLCNotification_IdNotification);
         if (!is_null($intIdNotification)) {
-            $arrAndConditions[] = sprintf('idNotification = %s', $intIdNotification);
+            $arrAndConditions[] = sprintf('MLCNotification.idNotification = %s', $intIdNotification);
         }
         $intIdUser = MLCApplication::QS(FFSQS::MLCNotification_IdUser);
         if (!is_null($intIdUser)) {
-            $arrAndConditions[] = sprintf('idUser = %s', $intIdUser);
+            $arrAndConditions[] = sprintf('MLCNotification.idUser = %s', $intIdUser);
         }
         $strClassName = MLCApplication::QS(FFSQS::MLCNotification_ClassName);
         if (!is_null($strClassName)) {
-            $arrAndConditions[] = sprintf('className LIKE "%s%%"', $strClassName);
+            $arrAndConditions[] = sprintf('MLCNotification.className LIKE "%s%%"', $strClassName);
         }
         if (count($arrAndConditions) >= 1) {
             $arrMLCNotifications = MLCNotification::Query('WHERE ' . implode(' AND ', $arrAndConditions));
@@ -48,7 +48,7 @@ class MLCNotificationManageFormBase extends FFSForm {
     }
     public function InitSelectPanel() {
         $this->pnlSelect = new MLCNotificationSelectPanel($this);
-        $this->pnlSelect->AddAction(new MJaxChangeEvent() , new MJaxServerControlAction($this, 'pnlSelect_change'));
+        $this->pnlSelect->AddAction(new MJaxBSAutocompleteSelectEvent() , new MJaxServerControlAction($this, 'pnlSelect_change'));
         $wgtMLCNotification = $this->AddWidget('Select MLCNotification', 'icon-select', $this->pnlSelect);
         $wgtMLCNotification->AddCssClass('span6');
         return $wgtMLCNotification;
@@ -62,10 +62,11 @@ class MLCNotificationManageFormBase extends FFSForm {
                     $this->lstMLCNotifications->SelectedRow = $objRow;
                 }
             }
-            $this->ScrollTo($this->pnlEdit);
-        } else {
-            $this->ScrollTo($this->lstMLCNotifications);
-        }
+            //$this->ScrollTo($this->pnlEdit);
+            
+        } //else{
+        $this->ScrollTo($this->lstMLCNotifications);
+        //}
         $this->lstMLCNotifications->RemoveAllChildControls();
         $this->lstMLCNotifications->SetDataEntites($arrMLCNotifications);
         //TODO: Remeber to add check lists for assoc or relationship tables
@@ -80,8 +81,9 @@ class MLCNotificationManageFormBase extends FFSForm {
         return $wgtMLCNotification;
     }
     public function pnlEdit_save($strFormId, $strControlId, $objMLCNotification) {
-        $this->UpdateTable($objMLCNotification);
-        $this->ScrollTo($this->lstMLCNotifications->SelectedRow);
+        $pnlRow = $this->UpdateTable($objMLCNotification);
+        $this->ScrollTo($pnlRow);
+        $this->pnlEdit->SetMLCNotification(null);
     }
     public function pnlEdit_delete($strFormId, $strControlId, $objMLCNotification) {
         $this->lstMLCNotifications->SelectedRow->Remove();
@@ -112,7 +114,7 @@ class MLCNotificationManageFormBase extends FFSForm {
         if (is_null($objMLCNotification)) {
             $objMLCNotification = new MLCNotification();
         }
-        $objMLCNotification->IdCompetition = FFSForm::Competition()->IdCompetition;
+        $objMLCNotification->IdCompetition = FFSForm::$objCompetition->IdCompetition;
         $this->lstMLCNotifications->SelectedRow->UpdateEntity($objMLCNotification);
     }
     public function lnkEdit_click($strFormId, $strControlId, $strActionParameter) {
@@ -125,9 +127,12 @@ class MLCNotificationManageFormBase extends FFSForm {
         if (!is_null($this->lstMLCNotifications->SelectedRow)) {
             //This already exists
             $this->lstMLCNotifications->SelectedRow->UpdateEntity($objMLCNotification);
+            $objRow = $this->lstMLCNotifications->SelectedRow;
             $this->lstMLCNotifications->SelectedRow = null;
         } else {
             $objRow = $this->lstMLCNotifications->AddRow($objMLCNotification);
         }
+        $this->lstMLCNotifications->RefreshControls();
+        return $objRow;
     }
 }

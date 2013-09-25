@@ -29,39 +29,39 @@ class MLCLocationManageFormBase extends FFSForm {
         $arrAndConditions = array();
         $intIdLocation = MLCApplication::QS(FFSQS::MLCLocation_IdLocation);
         if (!is_null($intIdLocation)) {
-            $arrAndConditions[] = sprintf('idLocation = %s', $intIdLocation);
+            $arrAndConditions[] = sprintf('MLCLocation.idLocation = %s', $intIdLocation);
         }
         $strShortDesc = MLCApplication::QS(FFSQS::MLCLocation_ShortDesc);
         if (!is_null($strShortDesc)) {
-            $arrAndConditions[] = sprintf('shortDesc LIKE "%s%%"', $strShortDesc);
+            $arrAndConditions[] = sprintf('MLCLocation.shortDesc LIKE "%s%%"', $strShortDesc);
         }
         $strAddress1 = MLCApplication::QS(FFSQS::MLCLocation_Address1);
         if (!is_null($strAddress1)) {
-            $arrAndConditions[] = sprintf('address1 LIKE "%s%%"', $strAddress1);
+            $arrAndConditions[] = sprintf('MLCLocation.address1 LIKE "%s%%"', $strAddress1);
         }
         $strAddress2 = MLCApplication::QS(FFSQS::MLCLocation_Address2);
         if (!is_null($strAddress2)) {
-            $arrAndConditions[] = sprintf('address2 LIKE "%s%%"', $strAddress2);
+            $arrAndConditions[] = sprintf('MLCLocation.address2 LIKE "%s%%"', $strAddress2);
         }
         $strCity = MLCApplication::QS(FFSQS::MLCLocation_City);
         if (!is_null($strCity)) {
-            $arrAndConditions[] = sprintf('city LIKE "%s%%"', $strCity);
+            $arrAndConditions[] = sprintf('MLCLocation.city LIKE "%s%%"', $strCity);
         }
         $strState = MLCApplication::QS(FFSQS::MLCLocation_State);
         if (!is_null($strState)) {
-            $arrAndConditions[] = sprintf('state LIKE "%s%%"', $strState);
+            $arrAndConditions[] = sprintf('MLCLocation.state LIKE "%s%%"', $strState);
         }
         $strZip = MLCApplication::QS(FFSQS::MLCLocation_Zip);
         if (!is_null($strZip)) {
-            $arrAndConditions[] = sprintf('zip LIKE "%s%%"', $strZip);
+            $arrAndConditions[] = sprintf('MLCLocation.zip LIKE "%s%%"', $strZip);
         }
         $strCountry = MLCApplication::QS(FFSQS::MLCLocation_Country);
         if (!is_null($strCountry)) {
-            $arrAndConditions[] = sprintf('country LIKE "%s%%"', $strCountry);
+            $arrAndConditions[] = sprintf('MLCLocation.country LIKE "%s%%"', $strCountry);
         }
         $intIdAccount = MLCApplication::QS(FFSQS::MLCLocation_IdAccount);
         if (!is_null($intIdAccount)) {
-            $arrAndConditions[] = sprintf('idAccount = %s', $intIdAccount);
+            $arrAndConditions[] = sprintf('MLCLocation.idAccount = %s', $intIdAccount);
         }
         if (count($arrAndConditions) >= 1) {
             $arrMLCLocations = MLCLocation::Query('WHERE ' . implode(' AND ', $arrAndConditions));
@@ -72,7 +72,7 @@ class MLCLocationManageFormBase extends FFSForm {
     }
     public function InitSelectPanel() {
         $this->pnlSelect = new MLCLocationSelectPanel($this);
-        $this->pnlSelect->AddAction(new MJaxChangeEvent() , new MJaxServerControlAction($this, 'pnlSelect_change'));
+        $this->pnlSelect->AddAction(new MJaxBSAutocompleteSelectEvent() , new MJaxServerControlAction($this, 'pnlSelect_change'));
         $wgtMLCLocation = $this->AddWidget('Select MLCLocation', 'icon-select', $this->pnlSelect);
         $wgtMLCLocation->AddCssClass('span6');
         return $wgtMLCLocation;
@@ -86,10 +86,11 @@ class MLCLocationManageFormBase extends FFSForm {
                     $this->lstMLCLocations->SelectedRow = $objRow;
                 }
             }
-            $this->ScrollTo($this->pnlEdit);
-        } else {
-            $this->ScrollTo($this->lstMLCLocations);
-        }
+            //$this->ScrollTo($this->pnlEdit);
+            
+        } //else{
+        $this->ScrollTo($this->lstMLCLocations);
+        //}
         $this->lstMLCLocations->RemoveAllChildControls();
         $this->lstMLCLocations->SetDataEntites($arrMLCLocations);
         //TODO: Remeber to add check lists for assoc or relationship tables
@@ -104,8 +105,9 @@ class MLCLocationManageFormBase extends FFSForm {
         return $wgtMLCLocation;
     }
     public function pnlEdit_save($strFormId, $strControlId, $objMLCLocation) {
-        $this->UpdateTable($objMLCLocation);
-        $this->ScrollTo($this->lstMLCLocations->SelectedRow);
+        $pnlRow = $this->UpdateTable($objMLCLocation);
+        $this->ScrollTo($pnlRow);
+        $this->pnlEdit->SetMLCLocation(null);
     }
     public function pnlEdit_delete($strFormId, $strControlId, $objMLCLocation) {
         $this->lstMLCLocations->SelectedRow->Remove();
@@ -136,7 +138,7 @@ class MLCLocationManageFormBase extends FFSForm {
         if (is_null($objMLCLocation)) {
             $objMLCLocation = new MLCLocation();
         }
-        $objMLCLocation->IdCompetition = FFSForm::Competition()->IdCompetition;
+        $objMLCLocation->IdCompetition = FFSForm::$objCompetition->IdCompetition;
         $this->lstMLCLocations->SelectedRow->UpdateEntity($objMLCLocation);
     }
     public function lnkEdit_click($strFormId, $strControlId, $strActionParameter) {
@@ -149,9 +151,12 @@ class MLCLocationManageFormBase extends FFSForm {
         if (!is_null($this->lstMLCLocations->SelectedRow)) {
             //This already exists
             $this->lstMLCLocations->SelectedRow->UpdateEntity($objMLCLocation);
+            $objRow = $this->lstMLCLocations->SelectedRow;
             $this->lstMLCLocations->SelectedRow = null;
         } else {
             $objRow = $this->lstMLCLocations->AddRow($objMLCLocation);
         }
+        $this->lstMLCLocations->RefreshControls();
+        return $objRow;
     }
 }

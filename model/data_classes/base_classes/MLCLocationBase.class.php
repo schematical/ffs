@@ -6,6 +6,8 @@
 * - LoadById()
 * - LoadAll()
 * - ToXml()
+* - Materilize()
+* - GetSQLSelectFieldsAsArr()
 * - Query()
 * - QueryCount()
 * - LoadCollByIdAccount()
@@ -21,35 +23,49 @@
 * - __get()
 * - __set()
 * Classes list:
-* - MLCLocationBase extends BaseEntity
+* - MLCLocationBase extends MLCBaseEntity
 */
-class MLCLocationBase extends BaseEntity {
+/**
+ * Class Competition
+ * @property-read mixed $IdLocation
+ * @property-write mixed $IdLocation
+ * @property-read mixed $ShortDesc
+ * @property-write mixed $ShortDesc
+ * @property-read mixed $Address1
+ * @property-write mixed $Address1
+ * @property-read mixed $Address2
+ * @property-write mixed $Address2
+ * @property-read mixed $City
+ * @property-write mixed $City
+ * @property-read mixed $State
+ * @property-write mixed $State
+ * @property-read mixed $Zip
+ * @property-write mixed $Zip
+ * @property-read mixed $Country
+ * @property-write mixed $Country
+ * @property-read mixed $Lat
+ * @property-write mixed $Lat
+ * @property-read mixed $Lng
+ * @property-write mixed $Lng
+ * @property-read mixed $IdAccount
+ * @property-write mixed $IdAccount
+ * @property-read MLCLocation $IdAccountObject
+ */
+class MLCLocationBase extends MLCBaseEntity {
     const DB_CONN = 'DB_1';
     const TABLE_NAME = 'MLCLocation';
     const P_KEY = 'idLocation';
+    protected $objIdAccount = null;
     public function __construct() {
         $this->table = DB_PREFIX . self::TABLE_NAME;
         $this->pKey = self::P_KEY;
         $this->strDBConn = self::DB_CONN;
     }
     public static function LoadById($intId) {
-        $sql = sprintf("SELECT * FROM %s WHERE idLocation = %s;", self::TABLE_NAME, $intId);
-        $result = MLCDBDriver::Query($sql, self::DB_CONN);
-        while ($data = mysql_fetch_assoc($result)) {
-            $tObj = new MLCLocation();
-            $tObj->materilize($data);
-            return $tObj;
-        }
+        return self::Query('WHERE MLCLocation.idLocation = ' . $intId, true);
     }
     public static function LoadAll() {
-        $sql = sprintf("SELECT * FROM %s;", self::TABLE_NAME);
-        $result = MLCDBDriver::Query($sql, MLCLocation::DB_CONN);
-        $coll = new BaseEntityCollection();
-        while ($data = mysql_fetch_assoc($result)) {
-            $tObj = new MLCLocation();
-            $tObj->materilize($data);
-            $coll->addItem($tObj);
-        }
+        $coll = self::Query('');
         return $coll;
     }
     public function ToXml($blnReclusive = false) {
@@ -95,42 +111,135 @@ class MLCLocationBase extends BaseEntity {
         $xmlStr.= "</MLCLocation>";
         return $xmlStr;
     }
-    public static function Query($strExtra, $blnReturnSingle = false) {
-        $sql = sprintf("SELECT * FROM %s %s;", self::TABLE_NAME, $strExtra);
-        $result = MLCDBDriver::Query($sql, self::DB_CONN);
-        $coll = new BaseEntityCollection();
-        while ($data = mysql_fetch_assoc($result)) {
-            $tObj = new MLCLocation();
-            $tObj->materilize($data);
-            $coll->addItem($tObj);
-        }
-        $arrReturn = $coll->getCollection();
-        if ($blnReturnSingle) {
-            if (count($arrReturn) == 0) {
-                return null;
+    public function Materilize($arrData) {
+        if (isset($arrData) && (sizeof($arrData) > 1)) {
+            if ((array_key_exists('MLCLocation.idLocation', $arrData))) {
+                //New Smart Way
+                $this->arrDBFields['idLocation'] = $arrData['MLCLocation.idLocation'];
+                $this->arrDBFields['shortDesc'] = $arrData['MLCLocation.shortDesc'];
+                $this->arrDBFields['address1'] = $arrData['MLCLocation.address1'];
+                $this->arrDBFields['address2'] = $arrData['MLCLocation.address2'];
+                $this->arrDBFields['city'] = $arrData['MLCLocation.city'];
+                $this->arrDBFields['state'] = $arrData['MLCLocation.state'];
+                $this->arrDBFields['zip'] = $arrData['MLCLocation.zip'];
+                $this->arrDBFields['country'] = $arrData['MLCLocation.country'];
+                $this->arrDBFields['lat'] = $arrData['MLCLocation.lat'];
+                $this->arrDBFields['lng'] = $arrData['MLCLocation.lng'];
+                $this->arrDBFields['idAccount'] = $arrData['MLCLocation.idAccount'];
+                //Foregin Key
+                if ((array_key_exists('AuthAccount.idAccount', $arrData)) && (!is_null($arrData['AuthAccount.idAccount']))) {
+                    $this->objIdAccount = new AuthAccount();
+                    $this->objIdAccount->Materilize($arrData);
+                }
             } else {
-                return $arrReturn[0];
+                //Old ways
+                $this->arrDBFields = $arrData;
             }
-        } else {
-            return $arrReturn;
+            $this->loaded = true;
+            $this->setId($this->getField($this->getPKey()));
+        }
+        if (self::$blnUseCache) {
+            if (!array_key_exists(get_class($this) , self::$arrCachedData)) {
+                self::$arrCachedData[get_class($this) ] = array();
+            }
+            self::$arrCachedData[get_class($this) ][$this->getId() ] = $this;
         }
     }
-    public static function QueryCount($strExtra = '') {
-        $sql = sprintf("SELECT * FROM %s %s;", self::TABLE_NAME, $strExtra);
-        $result = MLCDBDriver::Query($sql, self::DB_CONN);
+    public static function GetSQLSelectFieldsAsArr($blnLongSelect = false) {
+        $arrFields = array();
+        $arrFields[] = 'MLCLocation.idLocation ' . (($blnLongSelect) ? ' as "MLCLocation.idLocation"' : '');
+        $arrFields[] = 'MLCLocation.shortDesc ' . (($blnLongSelect) ? ' as "MLCLocation.shortDesc"' : '');
+        $arrFields[] = 'MLCLocation.address1 ' . (($blnLongSelect) ? ' as "MLCLocation.address1"' : '');
+        $arrFields[] = 'MLCLocation.address2 ' . (($blnLongSelect) ? ' as "MLCLocation.address2"' : '');
+        $arrFields[] = 'MLCLocation.city ' . (($blnLongSelect) ? ' as "MLCLocation.city"' : '');
+        $arrFields[] = 'MLCLocation.state ' . (($blnLongSelect) ? ' as "MLCLocation.state"' : '');
+        $arrFields[] = 'MLCLocation.zip ' . (($blnLongSelect) ? ' as "MLCLocation.zip"' : '');
+        $arrFields[] = 'MLCLocation.country ' . (($blnLongSelect) ? ' as "MLCLocation.country"' : '');
+        $arrFields[] = 'MLCLocation.lat ' . (($blnLongSelect) ? ' as "MLCLocation.lat"' : '');
+        $arrFields[] = 'MLCLocation.lng ' . (($blnLongSelect) ? ' as "MLCLocation.lng"' : '');
+        $arrFields[] = 'MLCLocation.idAccount ' . (($blnLongSelect) ? ' as "MLCLocation.idAccount"' : '');
+        return $arrFields;
+    }
+    public static function Query($strExtra = null, $mixReturnSingle = false, $arrJoins = null) {
+        $blnLongSelect = !is_null($arrJoins);
+        $arrFields = self::GetSQLSelectFieldsAsArr($blnLongSelect);
+        if ($blnLongSelect) {
+            foreach ($arrJoins as $strTable) {
+                if (class_exists($strTable)) {
+                    $arrFields = array_merge($arrFields, call_user_func($strTable . '::GetSQLSelectFieldsAsArr', true));
+                }
+            }
+        }
+        $strFields = implode(', ', $arrFields);
+        $strJoin = '';
+        if ($blnLongSelect) {
+            foreach ($arrJoins as $strTable) {
+                switch ($strTable) {
+                    case ('AuthAccount'):
+                        $strJoin.= ' LEFT JOIN AuthAccount ON MLCLocation.idAccount = AuthAccount.idAccount';
+                    break;
+                }
+            }
+        }
+        if (!is_null($strExtra)) {
+            $strSql = sprintf("SELECT %s FROM MLCLocation %s %s;", $strFields, $strJoin, $strExtra);
+            $result = MLCDBDriver::Query($strSql, self::DB_CONN);
+        }
+        if ((is_object($mixReturnSingle)) && ($mixReturnSingle instanceof MLCBaseEntityCollection)) {
+            $collReturn = $mixReturnSingle;
+            $collReturn->RemoveAll();
+        } else {
+            $collReturn = new MLCBaseEntityCollection();
+            $collReturn->SetQueryEntity('MLCLocation');
+        }
+        if (!is_null($strExtra)) {
+            $collReturn->AddQueryToHistory($strSql);
+            while ($data = mysql_fetch_assoc($result)) {
+                $tObj = new MLCLocation();
+                $tObj->Materilize($data);
+                $collReturn[] = $tObj;
+            }
+        }
+        if ($mixReturnSingle !== false) {
+            if (count($collReturn) == 0) {
+                return null;
+            } else {
+                return $collReturn[0];
+            }
+        } else {
+            return $collReturn;
+        }
+    }
+    public static function QueryCount($strExtra = '', $arrJoins = array()) {
+        $blnLongSelect = !is_null($arrJoins);
+        $arrFields = self::GetSQLSelectFieldsAsArr($blnLongSelect);
+        if ($blnLongSelect) {
+            foreach ($arrJoins as $strTable) {
+                if (class_exists($strTable)) {
+                    $arrFields = array_merge($arrFields, call_user_func($strTable . '::GetSQLSelectFieldsAsArr', true));
+                }
+            }
+        }
+        $strFields = implode(', ', $arrFields);
+        $strJoin = '';
+        if ($blnLongSelect) {
+            foreach ($arrJoins as $strTable) {
+                switch ($strTable) {
+                    case ('AuthAccount'):
+                        $strJoin.= ' LEFT JOIN AuthAccount ON MLCLocation.idAccount = AuthAccount.idAccount';
+                    break;
+                }
+            }
+        }
+        $strSql = sprintf("SELECT %s FROM MLCLocation %s %s;", $strFields, $strJoin, $strExtra);
+        $result = MLCDBDriver::Query($strSql, self::DB_CONN);
         return mysql_num_rows($result);
     }
     //Get children
     //Load by foregin key
     public static function LoadCollByIdAccount($intIdAccount) {
-        $sql = sprintf("SELECT * FROM MLCLocation WHERE idAccount = %s;", $intIdAccount);
-        $result = MLCDBDriver::Query($sql, self::DB_CONN);
-        $coll = new BaseEntityCollection();
-        while ($data = mysql_fetch_assoc($result)) {
-            $objMLCLocation = new MLCLocation();
-            $objMLCLocation->materilize($data);
-            $coll->addItem($objMLCLocation);
-        }
+        $strSql = sprintf(" WHERE idAccount = %s;", $intIdAccount);
+        $coll = self::Query($strSql);
         return $coll;
     }
     public function LoadByTag($strTag) {
@@ -162,11 +271,14 @@ class MLCLocationBase extends BaseEntity {
         }
     }
     public static function LoadSingleByField($strField, $mixValue, $strCompairison = '=') {
-        $arrResults = self::LoadArrayByField($strField, $mixValue, $strCompairison);
-        if (count($arrResults)) {
-            return $arrResults[0];
+        if (is_numeric($mixValue)) {
+            $strValue = $mixValue;
+        } else {
+            $strValue = sprintf('"%s"', $mixValue);
         }
-        return null;
+        $strExtra = sprintf(' WHERE MLCLocation.%s %s %s', $strField, $strCompairison, $strValue);
+        $objEntity = self::Query($strExtra, true);
+        return $objEntity;
     }
     public static function LoadArrayByField($strField, $mixValue, $strCompairison = '=') {
         if (is_numeric($mixValue)) {
@@ -174,44 +286,35 @@ class MLCLocationBase extends BaseEntity {
         } else {
             $strValue = sprintf('"%s"', $mixValue);
         }
-        $strExtra = sprintf(' WHERE %s %s %s', $strField, $strCompairison, $strValue);
-        $sql = sprintf("SELECT * FROM %s %s;", self::TABLE_NAME, $strExtra);
-        //die($sql);
-        $result = MLCDBDriver::query($sql, self::DB_CONN);
-        $coll = new BaseEntityCollection();
-        while ($data = mysql_fetch_assoc($result)) {
-            $tObj = new MLCLocation();
-            $tObj->materilize($data);
-            $coll->addItem($tObj);
-        }
-        $arrResults = $coll->getCollection();
+        $strExtra = sprintf(' WHERE MLCLocation.%s %s %s', $strField, $strCompairison, $strValue);
+        $arrResults = self::Query($strExtra);
         return $arrResults;
     }
     public function __toArray() {
-        $arrReturn = array();
-        $arrReturn['_ClassName'] = "MLCLocation %>";
-        $arrReturn['idLocation'] = $this->idLocation;
-        $arrReturn['shortDesc'] = $this->shortDesc;
-        $arrReturn['address1'] = $this->address1;
-        $arrReturn['address2'] = $this->address2;
-        $arrReturn['city'] = $this->city;
-        $arrReturn['state'] = $this->state;
-        $arrReturn['zip'] = $this->zip;
-        $arrReturn['country'] = $this->country;
-        $arrReturn['lat'] = $this->lat;
-        $arrReturn['lng'] = $this->lng;
-        $arrReturn['idAccount'] = $this->idAccount;
-        return $arrReturn;
+        $collReturn = array();
+        $collReturn['_ClassName'] = "MLCLocation %>";
+        $collReturn['idLocation'] = $this->idLocation;
+        $collReturn['shortDesc'] = $this->shortDesc;
+        $collReturn['address1'] = $this->address1;
+        $collReturn['address2'] = $this->address2;
+        $collReturn['city'] = $this->city;
+        $collReturn['state'] = $this->state;
+        $collReturn['zip'] = $this->zip;
+        $collReturn['country'] = $this->country;
+        $collReturn['lat'] = $this->lat;
+        $collReturn['lng'] = $this->lng;
+        $collReturn['idAccount'] = $this->idAccount;
+        return $collReturn;
     }
     public function __toString() {
         return 'MLCLocation(' . $this->getId() . ')';
     }
     public function __toJson($blnPosponeEncode = false) {
-        $arrReturn = $this->__toArray();
+        $collReturn = $this->__toArray();
         if ($blnPosponeEncode) {
-            return json_encode($arrReturn);
+            return json_encode($collReturn);
         } else {
-            return $arrReturn;
+            return $collReturn;
         }
     }
     public function __get($strName) {
@@ -294,9 +397,12 @@ class MLCLocationBase extends BaseEntity {
                 return null;
             break;
             case ('IdAccountObject'):
-            case ('idAccountObject'):
+                if (!is_null($this->objIdAccount)) {
+                    return $this->objIdAccount;
+                }
                 if ((array_key_exists('idAccount', $this->arrDBFields)) && (!is_null($this->arrDBFields['idAccount']))) {
-                    return AuthAccount::LoadById($this->arrDBFields['idAccount']);
+                    $this->objIdAccount = AuthAccount::LoadById($this->arrDBFields['idAccount']);
+                    return $this->objIdAccount;
                 }
                 return null;
             break;
@@ -305,52 +411,73 @@ class MLCLocationBase extends BaseEntity {
             break;
         }
     }
-    public function __set($strName, $strValue) {
+    public function __set($strName, $mixValue) {
         $this->modified = 1;
         switch ($strName) {
             case ('IdLocation'):
             case ('idLocation'):
-                $this->arrDBFields['idLocation'] = $strValue;
+                $this->arrDBFields['idLocation'] = $mixValue;
             break;
             case ('ShortDesc'):
             case ('shortDesc'):
-                $this->arrDBFields['shortDesc'] = $strValue;
+            case ('_ShortDesc'):
+                $this->arrDBFields['shortDesc'] = $mixValue;
             break;
             case ('Address1'):
             case ('address1'):
-                $this->arrDBFields['address1'] = $strValue;
+            case ('_Address1'):
+                $this->arrDBFields['address1'] = $mixValue;
             break;
             case ('Address2'):
             case ('address2'):
-                $this->arrDBFields['address2'] = $strValue;
+            case ('_Address2'):
+                $this->arrDBFields['address2'] = $mixValue;
             break;
             case ('City'):
             case ('city'):
-                $this->arrDBFields['city'] = $strValue;
+            case ('_City'):
+                $this->arrDBFields['city'] = $mixValue;
             break;
             case ('State'):
             case ('state'):
-                $this->arrDBFields['state'] = $strValue;
+            case ('_State'):
+                $this->arrDBFields['state'] = $mixValue;
             break;
             case ('Zip'):
             case ('zip'):
-                $this->arrDBFields['zip'] = $strValue;
+            case ('_Zip'):
+                $this->arrDBFields['zip'] = $mixValue;
             break;
             case ('Country'):
             case ('country'):
-                $this->arrDBFields['country'] = $strValue;
+            case ('_Country'):
+                $this->arrDBFields['country'] = $mixValue;
             break;
             case ('Lat'):
             case ('lat'):
-                $this->arrDBFields['lat'] = $strValue;
+            case ('_Lat'):
+                $this->arrDBFields['lat'] = $mixValue;
             break;
             case ('Lng'):
             case ('lng'):
-                $this->arrDBFields['lng'] = $strValue;
+            case ('_Lng'):
+                $this->arrDBFields['lng'] = $mixValue;
             break;
             case ('IdAccount'):
             case ('idAccount'):
-                $this->arrDBFields['idAccount'] = $strValue;
+                $this->arrDBFields['idAccount'] = $mixValue;
+                $this->objIdAccount = null;
+            break;
+            case ('IdAccountObject'):
+                if ((!is_null($mixValue)) && ((!is_object($mixValue)) || (!($mixValue instanceof AuthAccount)))) {
+                    throw new MLCWrongTypeException('__set', $strName);
+                }
+                if (!is_null($mixValue)) {
+                    $this->arrDBFields['idAccount'] = $mixValue->idAccount;
+                } else {
+                    $this->arrDBFields['idAccount'] = null;
+                }
+                $this->objIdAccount = $mixValue;
             break;
             default:
                 throw new MLCMissingPropertyException($this, $strName);

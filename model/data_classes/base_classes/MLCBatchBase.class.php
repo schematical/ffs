@@ -6,6 +6,8 @@
 * - LoadById()
 * - LoadAll()
 * - ToXml()
+* - Materilize()
+* - GetSQLSelectFieldsAsArr()
 * - Query()
 * - QueryCount()
 * - LoadByTag()
@@ -20,9 +22,22 @@
 * - __get()
 * - __set()
 * Classes list:
-* - MLCBatchBase extends BaseEntity
+* - MLCBatchBase extends MLCBaseEntity
 */
-class MLCBatchBase extends BaseEntity {
+/**
+ * Class Competition
+ * @property-read mixed $IdBatch
+ * @property-write mixed $IdBatch
+ * @property-read mixed $CreDate
+ * @property-write mixed $CreDate
+ * @property-read mixed $JobName
+ * @property-write mixed $JobName
+ * @property-read mixed $Report
+ * @property-write mixed $Report
+ * @property-read mixed $IdBatchStatus
+ * @property-write mixed $IdBatchStatus
+ */
+class MLCBatchBase extends MLCBaseEntity {
     const DB_CONN = 'DB_1';
     const TABLE_NAME = 'MLCBatch';
     const P_KEY = 'idBatch';
@@ -32,23 +47,10 @@ class MLCBatchBase extends BaseEntity {
         $this->strDBConn = self::DB_CONN;
     }
     public static function LoadById($intId) {
-        $sql = sprintf("SELECT * FROM %s WHERE idBatch = %s;", self::TABLE_NAME, $intId);
-        $result = MLCDBDriver::Query($sql, self::DB_CONN);
-        while ($data = mysql_fetch_assoc($result)) {
-            $tObj = new MLCBatch();
-            $tObj->materilize($data);
-            return $tObj;
-        }
+        return self::Query('WHERE MLCBatch.idBatch = ' . $intId, true);
     }
     public static function LoadAll() {
-        $sql = sprintf("SELECT * FROM %s;", self::TABLE_NAME);
-        $result = MLCDBDriver::Query($sql, MLCBatch::DB_CONN);
-        $coll = new BaseEntityCollection();
-        while ($data = mysql_fetch_assoc($result)) {
-            $tObj = new MLCBatch();
-            $tObj->materilize($data);
-            $coll->addItem($tObj);
-        }
+        $coll = self::Query('');
         return $coll;
     }
     public function ToXml($blnReclusive = false) {
@@ -76,29 +78,107 @@ class MLCBatchBase extends BaseEntity {
         $xmlStr.= "</MLCBatch>";
         return $xmlStr;
     }
-    public static function Query($strExtra, $blnReturnSingle = false) {
-        $sql = sprintf("SELECT * FROM %s %s;", self::TABLE_NAME, $strExtra);
-        $result = MLCDBDriver::Query($sql, self::DB_CONN);
-        $coll = new BaseEntityCollection();
-        while ($data = mysql_fetch_assoc($result)) {
-            $tObj = new MLCBatch();
-            $tObj->materilize($data);
-            $coll->addItem($tObj);
-        }
-        $arrReturn = $coll->getCollection();
-        if ($blnReturnSingle) {
-            if (count($arrReturn) == 0) {
-                return null;
+    public function Materilize($arrData) {
+        if (isset($arrData) && (sizeof($arrData) > 1)) {
+            if ((array_key_exists('MLCBatch.idBatch', $arrData))) {
+                //New Smart Way
+                $this->arrDBFields['idBatch'] = $arrData['MLCBatch.idBatch'];
+                $this->arrDBFields['creDate'] = $arrData['MLCBatch.creDate'];
+                $this->arrDBFields['jobName'] = $arrData['MLCBatch.jobName'];
+                $this->arrDBFields['report'] = $arrData['MLCBatch.report'];
+                $this->arrDBFields['idBatchStatus'] = $arrData['MLCBatch.idBatchStatus'];
+                //Foregin Key
+                
             } else {
-                return $arrReturn[0];
+                //Old ways
+                $this->arrDBFields = $arrData;
             }
-        } else {
-            return $arrReturn;
+            $this->loaded = true;
+            $this->setId($this->getField($this->getPKey()));
+        }
+        if (self::$blnUseCache) {
+            if (!array_key_exists(get_class($this) , self::$arrCachedData)) {
+                self::$arrCachedData[get_class($this) ] = array();
+            }
+            self::$arrCachedData[get_class($this) ][$this->getId() ] = $this;
         }
     }
-    public static function QueryCount($strExtra = '') {
-        $sql = sprintf("SELECT * FROM %s %s;", self::TABLE_NAME, $strExtra);
-        $result = MLCDBDriver::Query($sql, self::DB_CONN);
+    public static function GetSQLSelectFieldsAsArr($blnLongSelect = false) {
+        $arrFields = array();
+        $arrFields[] = 'MLCBatch.idBatch ' . (($blnLongSelect) ? ' as "MLCBatch.idBatch"' : '');
+        $arrFields[] = 'MLCBatch.creDate ' . (($blnLongSelect) ? ' as "MLCBatch.creDate"' : '');
+        $arrFields[] = 'MLCBatch.jobName ' . (($blnLongSelect) ? ' as "MLCBatch.jobName"' : '');
+        $arrFields[] = 'MLCBatch.report ' . (($blnLongSelect) ? ' as "MLCBatch.report"' : '');
+        $arrFields[] = 'MLCBatch.idBatchStatus ' . (($blnLongSelect) ? ' as "MLCBatch.idBatchStatus"' : '');
+        return $arrFields;
+    }
+    public static function Query($strExtra = null, $mixReturnSingle = false, $arrJoins = null) {
+        $blnLongSelect = !is_null($arrJoins);
+        $arrFields = self::GetSQLSelectFieldsAsArr($blnLongSelect);
+        if ($blnLongSelect) {
+            foreach ($arrJoins as $strTable) {
+                if (class_exists($strTable)) {
+                    $arrFields = array_merge($arrFields, call_user_func($strTable . '::GetSQLSelectFieldsAsArr', true));
+                }
+            }
+        }
+        $strFields = implode(', ', $arrFields);
+        $strJoin = '';
+        if ($blnLongSelect) {
+            foreach ($arrJoins as $strTable) {
+                switch ($strTable) {
+                }
+            }
+        }
+        if (!is_null($strExtra)) {
+            $strSql = sprintf("SELECT %s FROM MLCBatch %s %s;", $strFields, $strJoin, $strExtra);
+            $result = MLCDBDriver::Query($strSql, self::DB_CONN);
+        }
+        if ((is_object($mixReturnSingle)) && ($mixReturnSingle instanceof MLCBaseEntityCollection)) {
+            $collReturn = $mixReturnSingle;
+            $collReturn->RemoveAll();
+        } else {
+            $collReturn = new MLCBaseEntityCollection();
+            $collReturn->SetQueryEntity('MLCBatch');
+        }
+        if (!is_null($strExtra)) {
+            $collReturn->AddQueryToHistory($strSql);
+            while ($data = mysql_fetch_assoc($result)) {
+                $tObj = new MLCBatch();
+                $tObj->Materilize($data);
+                $collReturn[] = $tObj;
+            }
+        }
+        if ($mixReturnSingle !== false) {
+            if (count($collReturn) == 0) {
+                return null;
+            } else {
+                return $collReturn[0];
+            }
+        } else {
+            return $collReturn;
+        }
+    }
+    public static function QueryCount($strExtra = '', $arrJoins = array()) {
+        $blnLongSelect = !is_null($arrJoins);
+        $arrFields = self::GetSQLSelectFieldsAsArr($blnLongSelect);
+        if ($blnLongSelect) {
+            foreach ($arrJoins as $strTable) {
+                if (class_exists($strTable)) {
+                    $arrFields = array_merge($arrFields, call_user_func($strTable . '::GetSQLSelectFieldsAsArr', true));
+                }
+            }
+        }
+        $strFields = implode(', ', $arrFields);
+        $strJoin = '';
+        if ($blnLongSelect) {
+            foreach ($arrJoins as $strTable) {
+                switch ($strTable) {
+                }
+            }
+        }
+        $strSql = sprintf("SELECT %s FROM MLCBatch %s %s;", $strFields, $strJoin, $strExtra);
+        $result = MLCDBDriver::Query($strSql, self::DB_CONN);
         return mysql_num_rows($result);
     }
     //Get children
@@ -132,11 +212,14 @@ class MLCBatchBase extends BaseEntity {
         }
     }
     public static function LoadSingleByField($strField, $mixValue, $strCompairison = '=') {
-        $arrResults = self::LoadArrayByField($strField, $mixValue, $strCompairison);
-        if (count($arrResults)) {
-            return $arrResults[0];
+        if (is_numeric($mixValue)) {
+            $strValue = $mixValue;
+        } else {
+            $strValue = sprintf('"%s"', $mixValue);
         }
-        return null;
+        $strExtra = sprintf(' WHERE MLCBatch.%s %s %s', $strField, $strCompairison, $strValue);
+        $objEntity = self::Query($strExtra, true);
+        return $objEntity;
     }
     public static function LoadArrayByField($strField, $mixValue, $strCompairison = '=') {
         if (is_numeric($mixValue)) {
@@ -144,38 +227,29 @@ class MLCBatchBase extends BaseEntity {
         } else {
             $strValue = sprintf('"%s"', $mixValue);
         }
-        $strExtra = sprintf(' WHERE %s %s %s', $strField, $strCompairison, $strValue);
-        $sql = sprintf("SELECT * FROM %s %s;", self::TABLE_NAME, $strExtra);
-        //die($sql);
-        $result = MLCDBDriver::query($sql, self::DB_CONN);
-        $coll = new BaseEntityCollection();
-        while ($data = mysql_fetch_assoc($result)) {
-            $tObj = new MLCBatch();
-            $tObj->materilize($data);
-            $coll->addItem($tObj);
-        }
-        $arrResults = $coll->getCollection();
+        $strExtra = sprintf(' WHERE MLCBatch.%s %s %s', $strField, $strCompairison, $strValue);
+        $arrResults = self::Query($strExtra);
         return $arrResults;
     }
     public function __toArray() {
-        $arrReturn = array();
-        $arrReturn['_ClassName'] = "MLCBatch %>";
-        $arrReturn['idBatch'] = $this->idBatch;
-        $arrReturn['creDate'] = $this->creDate;
-        $arrReturn['jobName'] = $this->jobName;
-        $arrReturn['report'] = $this->report;
-        $arrReturn['idBatchStatus'] = $this->idBatchStatus;
-        return $arrReturn;
+        $collReturn = array();
+        $collReturn['_ClassName'] = "MLCBatch %>";
+        $collReturn['idBatch'] = $this->idBatch;
+        $collReturn['creDate'] = $this->creDate;
+        $collReturn['jobName'] = $this->jobName;
+        $collReturn['report'] = $this->report;
+        $collReturn['idBatchStatus'] = $this->idBatchStatus;
+        return $collReturn;
     }
     public function __toString() {
         return 'MLCBatch(' . $this->getId() . ')';
     }
     public function __toJson($blnPosponeEncode = false) {
-        $arrReturn = $this->__toArray();
+        $collReturn = $this->__toArray();
         if ($blnPosponeEncode) {
-            return json_encode($arrReturn);
+            return json_encode($collReturn);
         } else {
-            return $arrReturn;
+            return $collReturn;
         }
     }
     public function __get($strName) {
@@ -220,28 +294,31 @@ class MLCBatchBase extends BaseEntity {
             break;
         }
     }
-    public function __set($strName, $strValue) {
+    public function __set($strName, $mixValue) {
         $this->modified = 1;
         switch ($strName) {
             case ('IdBatch'):
             case ('idBatch'):
-                $this->arrDBFields['idBatch'] = $strValue;
+                $this->arrDBFields['idBatch'] = $mixValue;
             break;
             case ('CreDate'):
             case ('creDate'):
-                $this->arrDBFields['creDate'] = $strValue;
+            case ('_CreDate'):
+                $this->arrDBFields['creDate'] = $mixValue;
             break;
             case ('JobName'):
             case ('jobName'):
-                $this->arrDBFields['jobName'] = $strValue;
+            case ('_JobName'):
+                $this->arrDBFields['jobName'] = $mixValue;
             break;
             case ('Report'):
             case ('report'):
-                $this->arrDBFields['report'] = $strValue;
+            case ('_Report'):
+                $this->arrDBFields['report'] = $mixValue;
             break;
             case ('IdBatchStatus'):
             case ('idBatchStatus'):
-                $this->arrDBFields['idBatchStatus'] = $strValue;
+                $this->arrDBFields['idBatchStatus'] = $mixValue;
             break;
             default:
                 throw new MLCMissingPropertyException($this, $strName);
