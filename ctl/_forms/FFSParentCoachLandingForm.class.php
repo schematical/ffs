@@ -42,7 +42,13 @@ class FFSParentCoachLandingForm extends FFSForm{
                 'pnlOrg_select'
             )
         );
-
+        /*$this->pnlOrg->AddAction(
+            new MJaxBlurEvent(),
+            new MJaxServerControlAction(
+                $this,
+                'pnlOrg_select'
+            )
+        );*/
 
 
         $this->pnlAthelete = new MJaxBSAutocompleteTextBox($this);
@@ -93,7 +99,10 @@ class FFSParentCoachLandingForm extends FFSForm{
 
     }
     public function lnkSignup_click($f, $c, $strActionParameter){
-        if(is_null($this->objOrg)){
+        if(
+            (is_null($this->objOrg)) &&
+            (is_null($this->pnlOrgEdit))
+        ){
 
             $this->pnlOrg->Alert('Please select a valid Gym to be associated with');
             return $this->ScrollTo('ffs-org-select');
