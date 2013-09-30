@@ -49,7 +49,7 @@
             <div class='well text-center'>
                 <h4>
                     <strong>Sales and Customer Service:</strong>
-                    <a href='mail-to:<?php echo SALES_SUPPORT_EMAIL; ?>'><?php echo SALES_SUPPORT_EMAIL; ?></a>
+                    <a href='mailto:<?php echo SALES_SUPPORT_EMAIL; ?>'><?php echo SALES_SUPPORT_EMAIL; ?></a>
                 </h4>
             </div>
         </div>
@@ -59,7 +59,7 @@
             <div class='well text-center'>
                 <h4>
                     <strong>Tech Support:</strong>
-                    <a href='mail-to:<?php echo TECH_SUPPORT_EMAIL; ?>'><?php echo TECH_SUPPORT_EMAIL; ?></a>
+                    <a href='mailto:<?php echo TECH_SUPPORT_EMAIL; ?>'><?php echo TECH_SUPPORT_EMAIL; ?></a>
                 </h4>
             </div>
         </div>
